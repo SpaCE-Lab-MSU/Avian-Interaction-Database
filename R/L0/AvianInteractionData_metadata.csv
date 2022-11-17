@@ -1,0 +1,25 @@
+Variable,Definition
+species1_scientific,genus species subspecies (if present) for species1
+species2_scientific,genus species subspecies (if present)  for species2
+effect_sp1_on_sp2,"the effect of species1 on species2: 1, -1 or 0"
+effect_sp2_on_sp1,"the effect of species2 on species1: 1, -1 or 0"
+interaction,"type of interaction: competition, predation, commensalism (where one species benefits and the other receives no effect), kleptoparasitism (e.g., steeling food or nest material), brood parasitism (where one species places its egg in another species' nest), other parasitism, nest takeover (where one species takes over the nest of another species), facilitation (e.g., where both species benefit, e.g., mixed flock), facilitation-comigration (where species migrate together), communal nesting (nesting together, usually during nonbreeding season), mobbing. Note that ""mobbing"" is usually indicative of predation, where the smaller bird mobs the bigger bird. If you come across ""mobbing"" the species doing the mobbing (usually potential prey) gets a 1 and the species receiving the mobbing gets a -1 (the potential predator). This is because mobbing is almost always deterring a predator, so the predator loses out. "
+BOW_evidence,"""weak"" or ""strong"" evidence of the interaction, gauged by qualitative description or quantitative "
+n_studies,* NEW COLUMN: how many studies are cited for the interaction
+OLDsourceA,"NO NEED TO ENTER THIS IF IT'S INCLUDED IN BOW_citation IN https://docs.google.com/spreadsheets/d/1gT4ljF1yH1_WweINnAW4JfQ1Ytr6OFoXUu24a__qCqM/edit#gid=60359881 (the DOI of the BNA source (for Species1): e.g., https://doi.org/10.2173/bna.47 )"
+OLDsourceB,"NO NEED TO ENTER THIS IF IT'S INCLUDED IN BOW_citation IN https://docs.google.com/spreadsheets/d/1gT4ljF1yH1_WweINnAW4JfQ1Ytr6OFoXUu24a__qCqM/edit#gid=60359881 (the DOI of the BNA source (for Species2): e.g., https://doi.org/10.2173/bna.47 )"
+sourceAupdatedURL,"the URL of the sourceA (copy-paste BOW URL for the specific page referring to this interaction (e.g., ""https://birdsoftheworld-org.proxy1.cl.msu.edu/bow/species/norgos/cur/introduction"")"
+sourceBupdatedURL,"the URL of the sourceB (copy-paste BOW URL for the specific page referring to this interaction (e.g., ""https://birdsoftheworld-org.proxy1.cl.msu.edu/bow/species/norgos/cur/introduction"")"
+sourceCupdatedURL,"the URL of the sourceC (copy-paste BOW URL for the specific page referring to this interaction (e.g., ""https://birdsoftheworld-org.proxy1.cl.msu.edu/bow/species/norgos/cur/introduction"")"
+sourceDupdatedURL,"the URL of the sourceD (copy-paste BOW URL for the specific page referring to this interaction (e.g., ""https://birdsoftheworld-org.proxy1.cl.msu.edu/bow/species/norgos/cur/introduction"")"
+notesA,"note column: indicate specific type of interaction plus any relevant text copied from BOW for sourceA. If there are multiple sections of text from the same page associated with sourceAupdatedURL, then include the section heading (e.g., ""Nonpredatory interactions"" ) followed by "":"" and separate the multiple sections of text with ""..."""
+notesB,"note column: indicate specific type of interaction plus any relevant text copied from BOW for sourceB. If there are multiple sections of text from the same page associated with sourceBupdatedURL, then include the section heading (e.g., ""Nonpredatory interactions"" ) followed by "":"" and separate the multiple sections of text with ""..."""
+notesC,"note column: indicate specific type of interaction plus any relevant text copied from BOW for sourceC. If there are multiple sections of text from the same page associated with sourceCupdatedURL, then include the section heading (e.g., ""Nonpredatory interactions"" ) followed by "":"" and separate the multiple sections of text with ""..."""
+notesD,"note column: indicate specific type of interaction plus any relevant text copied from BOW for sourceD. If there are multiple sections of text from the same page associated with sourceDupdatedURL, then include the section heading (e.g., ""Nonpredatory interactions"" ) followed by "":"" and separate the multiple sections of text with ""..."""
+nonbreedingseason,NEW COLUMN: PLEASE ENTER if the interaction occurs during the non-breeding (winter) season
+recorder,the name of the person entering the data
+entry_date,"the date the recorder entered the record; if you are adding to an existing record, add "";"" between dates (e.g., 3/3/2014; 2/2/2022)"
+uncertain_interaction,"""YES"" if the interaction itself is not certain or needs second opinion; after checking by PLZ/Emily, can add ""possible"" when the interaction is inferred or suggested"
+species1_common,IGNORE; we will fill in via R
+species2_common,IGNORE; we will fill in via R
+entry_changes,"For checking/updating: IF the original entry was changed indicate who changed the original entry, what was changed, and the date. for example: ""PLZ changed interaction from competition to predation on 4/3/2022""."

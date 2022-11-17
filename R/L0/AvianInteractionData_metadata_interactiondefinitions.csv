@@ -1,0 +1,12 @@
+type_of_interaction,definition,note
+competition,"competing over space, territory, food, etc. both species = -1",
+predation,predator eats prey. predator = 1; prey = -1,
+commensalism,"one species benefits and the other receives no effect (example: cavities are constructed by promary cavity nesting bird like a woodpecker, and later used by another bird for its own nest (without any conflict). species that benefits from the interaction = 1; species that provides the benefit = 0.",
+kleptoparasitism,one species steals food or nest material from another species. species that steals and benefits = 1; species that is stolen from = -1,
+brood parasitism (nest parasitism),one species places its egg in another species' nest so the nesting species has to raise a conspecific. species that lays egg in another species nest = 1; species that has to care for the conspecific young = -1.,"From: https://academic.oup.com/beheco/article/12/2/128/239797 ""Brood parasitism can take two forms in birds (Lack, 1968; Payne, 1977b; Yom-Tov, 1980; Rothstein, 1990): females lay in the nest of a conspecific (i.e., intraspecific parasitism), or in the nest of a female belonging to a different species (i.e., obligate interspecific parasitism). Intraspecific nest parasitism is much more common in birds that have self-feeding young (i.e., precocial species) (Rohwer and Freeman, 1989), whereas obligate interspecific parasitism essentially occurs in species where young need to be fed by parents (i.e., altricial species) (Lyon and Eadie, 1991)."""
+nest takeover,"where one species takes over (steals) the nest of another species, sometimes kicking out the existing eggs. species that takes over = 1; species whose nest is stolen = -1",
+facilitation,"where both species benefit, e.g., mixed flock. both species = 1",
+facilitation-comigration,special case of facilitation where species migrate together. both species = 1,
+communal nesting,"nesting together, usually during nonbreeding season (be sure to indicate in ""nonbreedingseason"" column also). both species = 1",
+mobbing,"usually indicative of predation, where the smaller bird mobs the bigger bird. The species doing the mobbing (usually potential prey) = 0; the species receiving the mobbing = -1 (the potential predator). This is because mobbing is almost always deterring a predator, so the predator loses out.",
+co-occur,occur together but not clear what the interaction is: each species = 0,
