@@ -155,7 +155,9 @@ dim(int.l1)
 #names(int.l1)[names(int.l1) == "bbs_sp1_common"] <-"sp1_common"
 
 ## EXPORT the cleaned interaction pairs data:
-write.csv(int.l1,file.path(L1_dir,"AvianInteractionData_L1.csv"), row.names=F)
+write.csv(int.raw,file.path(L1_dir,"AvianInteractionData_L1.csv"), row.names=F)
+
+#write.csv(int.l1,file.path(L1_dir,"AvianInteractionData_L1.csv"), row.names=F)
 
 ## EDIT Colaptes auratus subspecies
 # Here we should assign the same interactions for the subspecies as occur for the main species
