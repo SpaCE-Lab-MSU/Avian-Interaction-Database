@@ -4,9 +4,9 @@
 # DATA INPUT:     Data imported as csv https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database/blob/main/L0/AvianInteractionData_L0.csv
 # DATA OUTPUT:    L1 data: AvianInteractionData_L1.csv
 # PROJECT:        avian-meta-network
-# DATE:           27 Oct 2022; updated 20 Mar 2023  
+# DATE:           27 Oct 2022; updated 20 Mar 2023...  
 # NOTES:          Next script to run: 
-#                 This script is used to refine species name changes to align with BOW, and to create intxns_L1.csv. 
+#                 This script is used to refine species name changes to align with BOW, and to create AvianInteractionData_L1.csv 
 #                 L0 data are checked to assign BOW scientific and common names to the interaction pairs data (which were originally from BBS species list). 
 #               
 #               
@@ -41,7 +41,7 @@ L1_dir <- "/Users/phoebezarnetske/Documents/GitHub/Avian-Interaction-Database/L1
 # Read in csv with avian interactions from primary, secondary cavity nesting birds in North America.
 int.raw<-read.csv(file.path(L0_dir,"AvianInteractionData_L0.csv"))
 
-# Read in species list: all species in BBS
+# Read in species list: all species in BBS (as of 2022)
 splist<-read.csv(file.path(L0_dir,"bbs_splist.csv"))
 
 # make "genus species" columns able to merge
@@ -83,46 +83,62 @@ names(sp2list)[names(sp2list) == "species1_scientific"] <-"species2_scientific"
 # Merge into paired intxns by sp1
 intxns1<-merge(int.raw,splist,by=c("species1_scientific"),all.x=T, all.y=T)
 dim(int.raw)
-# 14700 rows
+# 16878 rows
 dim(intxns1)
-# 14943 rows
+# 17101 rows
 length(unique(int.raw$species1_scientific))
-# 642 species treated as species1 in original avian interaction data
+# 697 species treated as species1 in original avian interaction data
 length(unique(splist$species1_scientific))
 # 756 species in entire BBS dataset
 length(unique(intxns1$species1_scientific))
-# 885 species in the merged data
+# 920 species in the merged data
 length(unique(intxns1$species2_scientific))
-# 2060 species as species2 but these *may* include the scientific names without a match in sp1
+# 2228 species as species2 but these *may* include the scientific names without a match in sp1
 sum(is.na(intxns1$species2_scientific)) 
-# 244 - species that exist in the BBS Species List but are not entered yet in original avian interaction data as species2
+# 224 - species that exist in the BBS Species List but are not entered yet in original avian interaction data as species2
 length(unique(int.raw$species2_scientific))
-# 2060 species as species2 but 1 without a match in sp1?
+# 2228 species as species2 but 1 without a match in sp1?
 
 # Repeat above but now for sp2
 # Merge into paired intxns by sp1
 intxns2<-merge(int.raw,sp2list,by=c("species2_scientific"),all.x=T, all.y=T)
 dim(int.raw)
-# 14700 rows
+# 16878 rows
 dim(intxns2)
-# 14801 rows
+# 16970 rows
 length(unique(int.raw$species2_scientific))
-# 2060 species treated as species2 in original avian interaction data
+# 2228 species treated as species2 in original avian interaction data
 length(unique(splist$species1_scientific))
 # 756 species in entire BBS dataset
 length(unique(intxns2$species2_scientific))
-# 2161 species in the merged data 
+# 2320 species in the merged data 
 sum(is.na(intxns2$species1_scientific)) 
-# 101 NAs - species that exist in the BBS Species List but are not entered yet in original avian interaction data as species1
+# 92 NAs - species that exist in the BBS Species List but are not entered yet in original avian interaction data as species1
 length(unique(intxns2$species1_scientific))
-# 643 species as species1 but these *may* include the scientific names without a match in sp1
+# 698 species as species1 but these *may* include the scientific names without a match in sp1
 length(unique(int.raw$species1_scientific))
-# 642 species as species1 but these *may* include the scientific names without a match in sp1
+# 697 species as species1 but these *may* include the scientific names without a match in sp1
 
 # Export to check species names: if there are rows without a complete entry, they are 
 # species in BOW but not in BBS Species List.
 write.csv(intxns1, file.path(L1_dir,"intxns1_names.csv"), row.names=F) 
 write.csv(intxns2, file.path(L1_dir,"intxns2_names.csv"), row.names=F) 
+
+#intxns1 yields the following issues:
+
+## Missing effect_sp1_on_sp2 or effect_sp2_on_sp1 or both (issue # 108 on github)
+# species1_scientific	species1_common	species2_common	species2_scientific
+# Ardea alba	Great Egret	Brown Pelican	Pelecanus occidentalis
+# Cepphus columba	Pigeon Guillemot	unid. gull	Laridae sp.
+# Cepphus columba	Pigeon Guillemot	unid. gull	Laridae sp.
+# Cepphus columba	Pigeon Guillemot	unid. puffin	Fratercula sp. 
+# Cepphus columba	Pigeon Guillemot	Black Oystercatchers	Haematopus bachmani
+# Cepphus columba	Pigeon Guillemot	unid. Comorant	Phalacrocorax sp. 
+# Melanerpes erythrocephalus	Red-headed Woodpecker	Mountain Bluebird	Sialia currucoides
+# Myiarchus crinitus	Great-crested flycatcher	Eastern Bluebird	Sialia sialis
+# Turdus migratorius	American Robin	Common Grackles	Quiscalus quiscula
+# Turdus migratorius	American Robin	European Starlings 	Sturnus vulgaris
+
 
 ## END OF CHECKING ##
 
@@ -137,18 +153,19 @@ dim(int.l1)
 # Remove the NA rows
 int.l1<-int.l1[!is.na(int.l1$effect_sp1_on_sp2), ]
 dim(int.l1)
-# 14629
+# 16807
 # Assign common name columns with the scientific name
 int.l1<-merge(int.l1,splist,by=c("species1_scientific"),all.x=T, all.y=T)
 int.l1<-merge(int.l1,sp2list,by=c("species2_scientific"),all.x=T, all.y=T)
 dim(int.l1)
-# 14974
+# 17030
 # Remove the NA rows (there shouldn't be any; they are all situations where common names occur but are not in the database)
 dim(int.l1)
-# 14974
+# 17030
 int.l1<-int.l1[!is.na(int.l1$effect_sp1_on_sp2), ]
 dim(int.l1)
-#14629 - Seems like there are some afterall... *** need to check this EMILY
+#16807 - Seems like there are some afterall... *** need to check this EMILY
+write.csv(int.l1,file.path(L1_dir,"int.l1.csv"), row.names=F)
 
 # rename
 #names(int.l1)[names(int.l1) == "bbs_sp2_common"] <-"sp2_common"
