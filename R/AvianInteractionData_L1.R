@@ -80,7 +80,7 @@ names(sp2list)[names(sp2list) == "sp1_AOU"] <-"sp2_AOU"
 names(sp2list)[names(sp2list) == "bbs_sp1_common"] <-"bbs_sp2_common"
 names(sp2list)[names(sp2list) == "species1_scientific"] <-"species2_scientific"
 
-# Merge into paired intxns by sp1
+# Merge into paired intxns by sp1 - this is not updated for Nov 22, 2023
 intxns1<-merge(int.raw,splist,by=c("species1_scientific"),all.x=T, all.y=T)
 dim(int.raw)
 # 16878 rows
@@ -99,7 +99,7 @@ sum(is.na(intxns1$species2_scientific))
 length(unique(int.raw$species2_scientific))
 # 2228 species as species2 but 1 without a match in sp1?
 
-# Repeat above but now for sp2
+# Repeat above but now for sp2 - this is not updated for Nov 22, 2023
 # Merge into paired intxns by sp1
 intxns2<-merge(int.raw,sp2list,by=c("species2_scientific"),all.x=T, all.y=T)
 dim(int.raw)
@@ -150,7 +150,7 @@ int.l1$species1_common <-NULL
 int.l1$species2_common <-NULL
 dim(int.l1)
 
-# Remove the NA rows
+# Remove the NA rows - this is not updated for Nov 22, 2023
 int.l1<-int.l1[!is.na(int.l1$effect_sp1_on_sp2), ]
 dim(int.l1)
 # 16807
@@ -172,10 +172,14 @@ write.csv(int.l1,file.path(L1_dir,"int.l1.csv"), row.names=F)
 #names(int.l1)[names(int.l1) == "bbs_sp1_common"] <-"sp1_common"
 
 ## EXPORT the cleaned interaction pairs data:
+## - this is not updated for Nov 22, 2023
 write.csv(int.raw,file.path(L1_dir,"AvianInteractionData_L1.csv"), row.names=F)
 
 #write.csv(int.l1,file.path(L1_dir,"AvianInteractionData_L1.csv"), row.names=F)
 
+
+
+## Later work:
 ## EDIT Colaptes auratus subspecies
 # Here we should assign the same interactions for the subspecies as occur for the main species
 # Tricky- need to select all Colaptes auratus and replicate, but assigning the 3 subspecies.
