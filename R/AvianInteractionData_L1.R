@@ -1,9 +1,9 @@
-# TITLE:          Avian Interaction Pairs Data: L0 to L1
+# TITLE:          Avian Interaction Pairs Data: L0 to L1, including an option to subset species1 for only BBS species
 # AUTHORS:        Phoebe Zarnetske, Pat Bills
 # COLLABORATORS:  Vincent Miele, Stephane Dray, Sara Zonneveld, ...
 # DATA INPUT:     Data imported as csv https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database/blob/main/L0/AvianInteractionData_L0.csv
 # DATA OUTPUT:    L1 data: AvianInteractionData_L1.csv
-# PROJECT:        avian-meta-network
+# PROJECT:        Avian Interaction Database 
 # DATE:           27 Oct 2022; updated 20 Mar 2023...  
 # NOTES:          Next script to run: 
 #                 This script is used to refine species name changes to align with BOW, and to create AvianInteractionData_L1.csv 

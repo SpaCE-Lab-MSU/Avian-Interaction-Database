@@ -1,20 +1,18 @@
 # TITLE:          Avian Interaction Pairs L0 Data Stitching together CSVs into 1
 # AUTHORS:        Phoebe Zarnetske, Pat Bills, Emily Parker
-# COLLABORATORS:  Vincent Miele, Stephane Dray, Sara Zonneveld, ...
+# COLLABORATORS:  Vincent Miele, Stephane Dray, ...
 # DATA INPUT:     Data imported as csv https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database/blob/main/L0/species and ./species_in_review
 # DATA OUTPUT:    L1 data: AvianInteractionData_L0.csv
-# PROJECT:        avian-meta-network
+# PROJECT:        Avian Interaction Database & Avian Meta-Network
 # DATE:           20 Mar 2023 -
 # NOTES:          Next script to run: /L1/AvianInteractionData_L1.R
-#
-#
 
 
 library(readr, dplyr, magrittr)
 
-L0_dir <- "/Users/plz/DATA/git/Avian-Interaction-Database/L0"
-species_dir<- "/Users/plz/DATA/git/Avian-Interaction-Database/L0/species"
-species_review_dir<- "/Users/plz/DATA/git/Avian-Interaction-Database/L0/species_in_review"
+L0_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0"
+species_dir<- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0/species"
+species_review_dir<- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0/species_in_review"
 #' given a folder of Intxns CSV files, combine into one file
 #' assumes all the CSV files are the same format with the same headers!
 combine_by_species <- function(data_dir = file.path(species_dir)) {
@@ -89,7 +87,7 @@ intxnsL0sp<-combine_by_species()
 sp<-unique(intxnsL0sp$species1_scientific)
 sp<-as.list(sp)
 length(sp)
-# 589 species1 as of Nov 22, 2023 (all double checked)
+# 623 species1 as of Dec 5, 2023 (all double checked)
 intxnsL0spir<-combine_by_species_in_review()
 ## ERROR here - need to fix this so that all files can be combined [species1_common is sometimes coded logical and other times character...
 ## Error in `dplyr::bind_rows()`:
