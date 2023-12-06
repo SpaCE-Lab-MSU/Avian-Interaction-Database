@@ -100,7 +100,7 @@ intxnsL0spir<-combine_by_species_in_review()
 spir<-unique(intxnsL0spir$species1_common)
 spir<-as.list(spir)
 length(spir)
-# 495 species1 as of 10am Dec 6, 2023
+# 496 species1 as of 4pm Dec 6, 2023
 
 # Uncomment if you want to omit all species that haven't been checked by someone other than Emily;
 # for Dec 2023 we are just proceeding with all 'species' and 'species_in_review' because Emily is experienced and

@@ -2,6 +2,7 @@
 # AUTHORS:        Phoebe Zarnetske, Pat Bills
 # COLLABORATORS:  Vincent Miele, Stephane Dray, Emily Parker
 # DATA INPUT:     From AvianInteractionData_L0_stitch.R: Data imported as csv https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database/blob/main/L0/AvianInteractionData_L0.csv
+#                 From bbs_specieslist_L1.R: Data imported as csv https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database/blob/main/L0/bbs_splist_L0.csv
 # DATA OUTPUT:    L1 data: AvianInteractionData_L1.csv
 # PROJECT:        Avian Interaction Database 
 # DATE:           27 Oct 2022; updated 20 Mar 2023, Dec. 5, 2023  
@@ -34,12 +35,15 @@ L1_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L1"
 int.raw<-read.csv(file.path(L0_dir,"AvianInteractionData_L0.csv"))
 
 # Read in species list: all species in BBS (the 2023 release which includes all species as of 2022)
-splist<-read.csv(file.path(L0_dir,"bbs_splist.csv"))
+splist<-read.csv(file.path(L0_dir,"bbs_splist_L0.csv"))
+
+# Read in the look-up table with the different bbs & bow & old names for species
+namechg<-read.csv(file.path(L0_dir,"bbsbow_names.csv"))
 
 # make "genus species" columns able to merge
 splist$species1_scientific<- do.call(paste, c(splist[c("Genus", "Species")], sep = " "))
 
-# Consider using ITIS for species naming conventions
+# We are using the Birds of The World naming conventions for species. Some BBS names differ. Some old names are included.
 # Rename some columns and omit others; indicate that the common name is coming from BBS Species List
 names(splist)[names(splist) == "English_Common_Name"] <-"bbs_sp1_common"
 names(splist)[names(splist) == "Seq"] <-"sp1_Seq"
@@ -51,18 +55,163 @@ names(splist)[names(splist) == "AOU"] <-"sp1_AOU"
 #splist$Spanish_Common_Name <-NULL
 #splist$French_Common_Name <-NULL
 
-# Some interaction scientific names are still not matching Birds of the World 
-# See: ./L0/bbs_intxn_data/bbsbow_names.xlsx
-# Standardize based on BOW:
-# BBS: Falcipennis canadensis = BOW: Canachites canadensis
-# BBS: Phalacrocorax penicillatus	= BOW: Urile penicillatus
-# BBS: Phalacrocorax pelagicus = BOW:	Urile pelagicus
-# BBS: Poecile hudsonica = BOW: Poecile hudsonicus
+# Reference the bbsbow_names data to make initial changes to any "other_or_old_bow" names that might appear.
+# Apply changes only to the species1 and species2 columns.
+# First omit any rows with a blank in "other_or_old_bow"
+dim(namechg)
+namechg.orig <- namechg
+namechg<-namechg[!(is.na(namechg$other_or_old_bow) | namechg$other_or_old_bow==""), ]
+#namechg <- namechg[!is.na(namechg$other_or_old_bow), ]
+dim(namechg)
+# Save original copy of int.raw
+int.raw.orig <- int.raw
+dim(int.raw)
 
-splist$species1_scientific[splist$species1_scientific == "Falcipennis canadensis"] <- "Canachites canadensis"
+# Some misspellings:
+int.raw[int.raw=="Dryobates nutallii"] <- "Dryobates nuttallii"
+
+# Change names in species1_scientific and species2_scientific according to the look-up table
+# so that all species1 and species2 interactors have the up-to-date BOW name.
+int.raw$species1_scientific <- stringr::str_replace_all(int.raw$species1_scientific, 
+                                         setNames(namechg$bow, namechg$other_or_old_bow))
+int.raw$species2_scientific <- stringr::str_replace_all(int.raw$species2_scientific, 
+                                         setNames(namechg$bow, namechg$other_or_old_bow))
+
+
+# Some interaction scientific names are still not matching Birds of the World 
+# See: ./L0/bbsbow_names.csv
+# Find them by starting with the original look-up table
+#namechg.unmatch = na.omit(namechg.orig)
+namechg.unmatch = subset(namechg.orig, namechg.orig$bbs2022 != namechg.orig$bow)
+# remove the NAs in bbs2022 column
+namechg.unmatch <- namechg.unmatch[-which(namechg.unmatch$bbs2022 == ""), ]
+dim(namechg.unmatch) # 19 species on Dec 6, 2023
+namechg.unmatch[,1:2]
+
+# Standardize based on BOW 
+
+# RENAME: BBS: Phalacrocorax penicillatus	= BOW: Urile penicillatus
+dplyr::filter(splist, species1_scientific %in% c("Phalacrocorax penicillatus")) # not in BBS list
+dplyr::filter(int.raw, species1_scientific %in% c("Phalacrocorax penicillatus")) # in interactions
+dplyr::filter(int.raw, species2_scientific %in% c("Phalacrocorax penicillatus")) # in interactions
+dplyr::filter(splist, species1_scientific %in% c("Urile penicillatus")) # in BBS list
+dplyr::filter(int.raw, species1_scientific %in% c("Urile penicillatus")) # in interactions
+dplyr::filter(int.raw, species2_scientific %in% c("Urile penicillatus")) # in interactions
+# Update all to new species name
 splist$species1_scientific[splist$species1_scientific == "Phalacrocorax penicillatus"] <- "Urile penicillatus"
+int.raw$species1_scientific[int.raw$species1_scientific == "Phalacrocorax penicillatus"] <- "Urile penicillatus"
+int.raw$species2_scientific[int.raw$species2_scientific == "Phalacrocorax penicillatus"] <- "Urile penicillatus"
+
+# RENAME: BBS: Phalacrocorax pelagicus = BOW:	Urile pelagicus
+dplyr::filter(splist, species1_scientific %in% c("Phalacrocorax pelagicus")) # not in BBS list
+dplyr::filter(int.raw, species1_scientific %in% c("Phalacrocorax pelagicus")) # in interactions
+dplyr::filter(int.raw, species2_scientific %in% c("Phalacrocorax pelagicus")) # in interactions
+dplyr::filter(splist, species1_scientific %in% c("Urile pelagicus")) # in BBS list
+dplyr::filter(int.raw, species1_scientific %in% c("Urile pelagicus")) # not in interactions
+dplyr::filter(int.raw, species2_scientific %in% c("Urile pelagicus")) # in interactions
+# Update all to new species name
 splist$species1_scientific[splist$species1_scientific == "Phalacrocorax pelagicus"] <- "Urile pelagicus"
-splist$species1_scientific[splist$species1_scientific == "Poecile hudsonica"] <- "Poecile hudsonicus"
+int.raw$species1_scientific[int.raw$species1_scientific == "Phalacrocorax pelagicus"] <- "Urile pelagicus"
+int.raw$species2_scientific[int.raw$species2_scientific == "Phalacrocorax pelagicus"] <- "Urile pelagicus"
+
+# RENAME: BBS: Falcipennis canadensis = BOW: Canachites canadensis
+dplyr::filter(splist, species1_scientific %in% c("Falcipennis canadensis")) # not in BBS list
+dplyr::filter(int.raw, species1_scientific %in% c("Falcipennis canadensis")) # in interactions
+dplyr::filter(int.raw, species2_scientific %in% c("Falcipennis canadensis")) # in interactions
+dplyr::filter(splist, species1_scientific %in% c("Canachites canadensis")) # in BBS list
+dplyr::filter(int.raw, species1_scientific %in% c("Canachites canadensis")) # not in interactions
+dplyr::filter(int.raw, species2_scientific %in% c("Canachites canadensis")) # in interactions
+# Update all to new species name
+splist$species1_scientific[splist$species1_scientific == "Falcipennis canadensis"] <- "Canachites canadensis"
+int.raw$species1_scientific[int.raw$species1_scientific == "Falcipennis canadensis"] <- "Canachites canadensis"
+int.raw$species2_scientific[int.raw$species2_scientific == "Falcipennis canadensis"] <- "Canachites canadensis"
+
+# RENAME: BBS: Streptopelia chinensis = BOW: Spilopelia chinensis
+dplyr::filter(splist, species1_scientific %in% c("Streptopelia chinensis")) # in BBS list
+dplyr::filter(int.raw, species1_scientific %in% c("Streptopelia chinensis")) # in interactions
+dplyr::filter(int.raw, species2_scientific %in% c("Streptopelia chinensis")) # in interactions
+dplyr::filter(splist, species1_scientific %in% c("Spilopelia chinensis")) # not in BBS list
+dplyr::filter(int.raw, species1_scientific %in% c("Spilopelia chinensis")) # in interactions
+dplyr::filter(int.raw, species2_scientific %in% c("Spilopelia chinensis")) # in interactions
+# Update all to new species name
+splist$species1_scientific[splist$species1_scientific == "Streptopelia chinensis"] <- "Spilopelia chinensis"
+int.raw$species1_scientific[int.raw$species1_scientific == "Streptopelia chinensis"] <- "Spilopelia chinensis"
+int.raw$species2_scientific[int.raw$species2_scientific == "Streptopelia chinensis"] <- "Spilopelia chinensis"
+
+## Checked up to here 5pm Dec 6 2023
+# RENAME: BBS: Regulus calendula = BOW: Corthylio calendula
+dplyr::filter(splist, species1_scientific %in% c("Streptopelia chinensis")) # in BBS list
+dplyr::filter(int.raw, species1_scientific %in% c("Streptopelia chinensis")) # not in interactions
+dplyr::filter(int.raw, species2_scientific %in% c("Streptopelia chinensis")) # not in interactions
+dplyr::filter(splist, species1_scientific %in% c("Spilopelia chinensis")) # not in BBS list
+dplyr::filter(int.raw, species1_scientific %in% c("Spilopelia chinensis")) # not in interactions
+dplyr::filter(int.raw, species2_scientific %in% c("Spilopelia chinensis")) # not in interactions
+# No interaction data; no change needed to these data.
+
+##   RECENT SPLIT: Pica pica (Eurasia), P. hudsonia (North America), and P. nuttalli (North America); check common name for species info
+dplyr::filter(splist, species1_scientific %in% c("Pica pica")) # not in BBS list
+dplyr::filter(int.raw, species1_scientific %in% c("Pica pica")) # not in interactions 
+dplyr::filter(splist, species1_scientific %in% c("Pica hudsonia")) # in BBS list
+dplyr::filter(int.raw.orig, species1_scientific %in% c("Pica hudsonia")) # in interactions (seem to be all N. America)
+dplyr::filter(splist, species1_scientific %in% c("Pica nuttalli")) # in BBS list
+dplyr::filter(int.raw.orig, species1_scientific %in% c("Pica nuttalli")) # in interactions (seem to be all N. America)
+# For now, keep as is; the BBS observations will include P. hudsonia and P. nuttalli
+
+
+## American Crow Subspecies = Northwestern Crow: Corvus brachyrhynchos caurinus (instead of Corvus caurinus "Northwestern Crow")
+dplyr::filter(splist, species1_scientific %in% c("Corvus brachyrhynchos")) # in BBS list
+dplyr::filter(int.raw, species1_scientific %in% c("Corvus brachyrhynchos")) # in interactions 
+dplyr::filter(splist, species1_scientific %in% c("Corvus brachyrhynchos caurinus")) # not in BBS list
+dplyr::filter(int.raw, species1_scientific %in% c("Corvus brachyrhynchos caurinus")) # in interactions 
+dplyr::filter(splist, species1_scientific %in% c("Corvus caurinus")) # not in BBS list
+dplyr::filter(int.raw, species1_scientific %in% c("Corvus caurinus")) # not in interactions 
+dplyr::filter(int.raw, species2_scientific %in% c("Corvus caurinus")) # in interactions 
+# RENAME: BBS & BOW: change Corvus caurinus to Corvus brachyrhynchos caurinus 
+int.raw$species1_scientific[int.raw$species1_scientific == "Corvus caurinus"] <- "Corvus brachyrhynchos caurinus"
+int.raw$species1_scientific[int.raw$species2_scientific == "Corvus caurinus"] <- "Corvus brachyrhynchos caurinus"
+
+##  RECENT SPLIT: Larus brachyrhynchus split into L. brachyrhynchus (North America) and L. canus (Eurasia)
+##  https://birdsoftheworld.org/bow/species/mewgul/cur/introduction#sys
+# BBS: Larus brachyrhynchus (endemic to North America) = BOW: Larus canus (endemic to Eurasia) & Larus brachyrhynchus (endemic to North America)
+dplyr::filter(splist, species1_scientific %in% c("Larus canus")) # not in BBS list
+dplyr::filter(splist, species1_scientific %in% c("Larus brachyrhynchus")) # in BBS list
+dplyr::filter(int.raw, species1_scientific %in% c("Larus canus")) # in interactions
+dplyr::filter(int.raw, species1_scientific %in% c("Larus brachyrhynchus")) # not in interactions
+# L. brachyrhynchus interactions - these are entered as of Dec 6, 2023. 
+# Confirmed that L. canus interactions are only Eurasian interactions.
+# No change needed to these data.
+
+##   RECENT SPLIT: C. hudsonius (North America) and C. cyaneus (Eurasia); check common name for species info
+##  "The only representative in North America of the cosmopolitan genus Circus, 
+##  the Northern Harrier was until recently considered conspecific with the 
+##  Hen Harrier (Circus cyaneus) of Eurasia, but differs from that species in genetics and plumage." 
+##  https://birdsoftheworld.org/bow/species/norhar2/cur/introduction
+dplyr::filter(splist, species1_scientific %in% c("Circus cyaneus")) # not in BBS list
+dplyr::filter(int.raw, species1_scientific %in% c("Circus cyaneus")) # in interactions but N. America interaction
+dplyr::filter(splist, species1_scientific %in% c("Circus hudsonius")) # in BBS list
+dplyr::filter(int.raw, species1_scientific %in% c("Circus hudsonius")) # in interactions
+# Only C. hudsonius occurs in BBS list - change all interactions to C. hudsonius (North America)
+int.raw$species1_scientific[int.raw$species1_scientific == "Circus cyaneus"] <- "Circus hudsonius"
+int.raw$species2_scientific[int.raw$species2_scientific == "Circus cyaneus"] <- "Circus hudsonius"
+
+
+##  RENAME: Nannopterum auritum is new name for Phalacrocorax auritus
+dplyr::filter(splist, species1_scientific %in% c("Phalacrocorax auritus")) # not in BBS list
+dplyr::filter(int.raw, species1_scientific %in% c("Phalacrocorax auritus")) # in interactions
+dplyr::filter(splist, species1_scientific %in% c("Nannopterum auritum")) # in BBS list
+dplyr::filter(int.raw, species1_scientific %in% c("Nannopterum auritum")) # in interactions
+# Assign BBS & BOW: Nannopterum auritum; some old names exist in interactions
+int.raw$species1_scientific[int.raw$species1_scientific == "Phalacrocorax auritus"] <- "Nannopterum auritum"
+int.raw$species2_scientific[int.raw$species2_scientific == "Phalacrocorax auritus"] <- "Nannopterum auritum"
+
+##  RENAME: Nannopterum brasilianum is new name for Phalacrocorax brasilianus
+dplyr::filter(splist, species1_scientific %in% c("Phalacrocorax brasilianus")) # not in BBS list
+dplyr::filter(int.raw, species1_scientific %in% c("Phalacrocorax brasilianus")) # not in interactions
+dplyr::filter(splist, species1_scientific %in% c("Nannopterum brasilianum")) # in BBS list
+dplyr::filter(int.raw, species1_scientific %in% c("Nannopterum brasilianum")) # in interactions
+# no action necessary; name updated for species (also checked species2)
+
+
 
 # duplicate it for easier merging below
 sp2list<-splist
