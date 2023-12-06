@@ -138,15 +138,19 @@ splist$species1_scientific[splist$species1_scientific == "Streptopelia chinensis
 int.raw$species1_scientific[int.raw$species1_scientific == "Streptopelia chinensis"] <- "Spilopelia chinensis"
 int.raw$species2_scientific[int.raw$species2_scientific == "Streptopelia chinensis"] <- "Spilopelia chinensis"
 
-## Checked up to here 5pm Dec 6 2023
 # RENAME: BBS: Regulus calendula = BOW: Corthylio calendula
-dplyr::filter(splist, species1_scientific %in% c("Streptopelia chinensis")) # in BBS list
-dplyr::filter(int.raw, species1_scientific %in% c("Streptopelia chinensis")) # not in interactions
-dplyr::filter(int.raw, species2_scientific %in% c("Streptopelia chinensis")) # not in interactions
-dplyr::filter(splist, species1_scientific %in% c("Spilopelia chinensis")) # not in BBS list
-dplyr::filter(int.raw, species1_scientific %in% c("Spilopelia chinensis")) # not in interactions
-dplyr::filter(int.raw, species2_scientific %in% c("Spilopelia chinensis")) # not in interactions
-# No interaction data; no change needed to these data.
+dplyr::filter(splist, species1_scientific %in% c("Regulus calendula")) # not in BBS list
+dplyr::filter(int.raw, species1_scientific %in% c("Regulus calendula")) # in interactions
+dplyr::filter(int.raw, species2_scientific %in% c("Regulus calendula")) # in interactions
+dplyr::filter(splist, species1_scientific %in% c("Corthylio calendula")) # in BBS list
+dplyr::filter(int.raw, species1_scientific %in% c("Corthylio calendula")) # in interactions
+dplyr::filter(int.raw, species2_scientific %in% c("Corthylio calendula")) # in interactions
+# Update all to new species name
+splist$species1_scientific[splist$species1_scientific == "Regulus calendula"] <- "Corthylio calendula"
+int.raw$species1_scientific[int.raw$species1_scientific == "Regulus calendula"] <- "Corthylio calendula"
+int.raw$species2_scientific[int.raw$species2_scientific == "Regulus calendula"] <- "Corthylio calendula"
+
+## Checked up to here 5pm Dec 6 2023
 
 ##   RECENT SPLIT: Pica pica (Eurasia), P. hudsonia (North America), and P. nuttalli (North America); check common name for species info
 dplyr::filter(splist, species1_scientific %in% c("Pica pica")) # not in BBS list
