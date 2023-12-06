@@ -41,7 +41,11 @@ combine_by_species <- function(data_dir = file.path(species_dir)) {
 
     # use apply to read all files into a list
     intxns.list <- lapply(csv_files, read.csv)
-
+    #intxns.list <- lapply(csv_files, read_csv, col_types = cols(.default = col_guess()))
+    #tidy version:
+    #intxns<-csv_files %>%
+    #  map_df(~read_csv(.x, col_types = cols(.default = "c")))
+    
     # combine all in to a single df
     intxns <- dplyr::bind_rows(intxns.list)
 
@@ -75,6 +79,7 @@ combine_by_species_in_review <- function(data_dir = file.path(species_review_dir
   
   # use apply to read all files into a list
   intxns.list <- lapply(csv_files, read.csv)
+  #intxns.list <- lapply(csv_files, read_csv, col_types = cols(.default = col_guess()))
   
   # combine all in to a single df
   intxns <- dplyr::bind_rows(intxns.list)
@@ -83,25 +88,23 @@ combine_by_species_in_review <- function(data_dir = file.path(species_review_dir
   return(data.frame(intxns))
 }
 
+# Species Fully Checked
 intxnsL0sp<-combine_by_species()
-sp<-unique(intxnsL0sp$species1_scientific)
+sp<-unique(intxnsL0sp$species1_common)
 sp<-as.list(sp)
 length(sp)
-# 623 species1 as of Dec 5, 2023 (all double checked)
+# 650 species1 as of 10am Dec 6, 2023 (all double checked)
+
+## Species In Review (all BBS species originally entered by Emily Parker)
 intxnsL0spir<-combine_by_species_in_review()
-## ERROR here - need to fix this so that all files can be combined [species1_common is sometimes coded logical and other times character...
-## Error in `dplyr::bind_rows()`:
-#! Can't combine `..1$species1_common` <character> and `..144$species1_common` <logical>.
-#Run `rlang::last_trace()` to see where the error occurred.
-#Called from: signal_abort(cnd, .file)
-#spir<-unique(intxnsL0spir$species1_scientific)
-#length(spir)
-#
-# XXX species1 as of Nov 22, 2023
+spir<-unique(intxnsL0spir$species1_common)
+spir<-as.list(spir)
+length(spir)
+# 495 species1 as of 10am Dec 6, 2023
 
 # Uncomment if you want to omit all species that haven't been checked by someone other than Emily;
-# for Nov 2023 we are just proceeding with all 'species' and 'species_in_review' because Emily
-# entered the BBS birds in the review folder. So keep the below section commented out
+# for Dec 2023 we are just proceeding with all 'species' and 'species_in_review' because Emily is experienced and
+# entered the BBS birds in the review folder. So keep the below section commented out.
 # Only keep unique set of species; remove the "in review" species that have already been checked in updated in "species"
 # '%!in%'<- function(x,y)!('%in%'(x,y))
 # 
@@ -110,13 +113,11 @@ intxnsL0spir<-combine_by_species_in_review()
 # XXX unique species1 that are truly unchecked
 
 # Merge the species and species_in_review interaction data into 1 
-# (as of Nov 22, 2023, EP created all the "in_review" species, so they are less likely to include errors):
-# first add "other_species1" to intxnsL0sp
-intxnsL0sp$other_species1<-""
+# (as of Dec 5, 2023, EP created all the "in_review" species, so they are less likely to include errors):
 intxnsL0<-rbind(intxnsL0sp, intxnsL0spir)
 
 length(unique(intxnsL0$species1_scientific))
-# XXX unique species1 !
+# 944 unique species1 as of Dec 5, 2023 (these include some non-BBS species1)
 
 # export the data to become the current L0 interaction data:
 write.csv(intxnsL0, file.path(L0_dir, "AvianInteractionData_L0.csv"), row.names=FALSE)

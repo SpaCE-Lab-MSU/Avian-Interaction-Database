@@ -1,10 +1,10 @@
 # TITLE:          Avian Interaction Pairs Data: L0 to L1, including an option to subset species1 for only BBS species
 # AUTHORS:        Phoebe Zarnetske, Pat Bills
-# COLLABORATORS:  Vincent Miele, Stephane Dray, Sara Zonneveld, ...
-# DATA INPUT:     Data imported as csv https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database/blob/main/L0/AvianInteractionData_L0.csv
+# COLLABORATORS:  Vincent Miele, Stephane Dray, Emily Parker
+# DATA INPUT:     From AvianInteractionData_L0_stitch.R: Data imported as csv https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database/blob/main/L0/AvianInteractionData_L0.csv
 # DATA OUTPUT:    L1 data: AvianInteractionData_L1.csv
 # PROJECT:        Avian Interaction Database 
-# DATE:           27 Oct 2022; updated 20 Mar 2023...  
+# DATE:           27 Oct 2022; updated 20 Mar 2023, Dec. 5, 2023  
 # NOTES:          Next script to run: 
 #                 This script is used to refine species name changes to align with BOW, and to create AvianInteractionData_L1.csv 
 #                 L0 data are checked to assign BOW scientific and common names to the interaction pairs data (which were originally from BBS species list). 
@@ -13,14 +13,6 @@
 #         ******June 8, 2022: updated to copy Colaptes auratus interactions to all Colaptes auratus subspecies
 #               This assumes that they all have the same ranges (they don't), so a refined set of interactions should be edited to
 #               match the actual overlapping areas with interactors
-
-#               Name changes in the 2019 Species List affected these species (already edited in original Google Sheet here:
-#               "/Volumes/GoogleDrive/Shared drives/Avian_MetaNetwork/data/L0/avian_intxn_data"
-#               Circus cyaneus -> Circus hudsonius
-#               Oreothlypis celata -> Leiothlypis celata
-#               Oreothlypis luciae -> Leiothlypis luciae
-#               Oreothlypis ruficapilla -> Leiothlypis ruficapilla
-#               Picoides albolarvatus -> Dryobates albolarvatus
 #
 #               
 # Clear all existing data
@@ -35,13 +27,13 @@ L1_dir <- Sys.getenv("L1DIR")
 list.files(L1_dir)
 
 # Above .Renviron not working for PLZ; hard-coding in here
-L0_dir <- "/Users/phoebezarnetske/Documents/GitHub/Avian-Interaction-Database/L0"
-L1_dir <- "/Users/phoebezarnetske/Documents/GitHub/Avian-Interaction-Database/L1"
+L0_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0"
+L1_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L1"
 
 # Read in csv with avian interactions from primary, secondary cavity nesting birds in North America.
 int.raw<-read.csv(file.path(L0_dir,"AvianInteractionData_L0.csv"))
 
-# Read in species list: all species in BBS (as of 2022)
+# Read in species list: all species in BBS (the 2023 release which includes all species as of 2022)
 splist<-read.csv(file.path(L0_dir,"bbs_splist.csv"))
 
 # make "genus species" columns able to merge

@@ -119,6 +119,7 @@ return(bbs.splist)
 
 # Clean up the data with the validateSpecies modified function above.
 bbs.splist.2022 = validateSpecies()
+dim(bbs.splist.2022)
 
 # A few species have been recently combined or split but there may be entries in the interaction database
 # with the old name. Add them here:
@@ -136,10 +137,15 @@ bbs.splist.2022[nrow(bbs.splist.2022) + 1,] = list(Seq = "",
                                                     Genus = "Cistothorus",
                                                     Species = "platensis")
 
+dim(bbs.splist.2022)
+# 761 species in BBS with the split to 2 species: Sedge and Grass Wren
+
 # Export the cleaned data (note the encoding to maintain special characters)
 write.csv(bbs.splist.2022, file.path(L1_dir,"bbs_splist.csv"), fileEncoding="latin1", row.names=F) 
 
-#### END OF SCRIPT TO EXPORT CLEANED Species List; BELOW = notes from before Dec 2023####
+# Next script to run if combining with bbs_obs data: AvianInteractionData_L1.R
+
+#### END OF SCRIPT TO EXPORT CLEANED Species List; BELOW = notes from before Dec 2023 ####
 # Some of the species from interactions sourced from BOW are not in BBS data 
 # Some of these birds could be in the Mexico data: https://www.sciencebase.gov/catalog/item/5f32af1082cee144fb313837
 
