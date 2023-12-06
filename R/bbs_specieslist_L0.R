@@ -2,10 +2,10 @@
 #                 so it can be used in avian-meta-network (align with intxnpairs data before merging in L2) 
 # AUTHORS:        Phoebe Zarnetske
 # COLLABORATORS:  Vincent Miele, Stephane Dray, Emily Parker
-# DATA INPUT:     Imports L0 raw species list data from the USGS North American Breeding Bird Survey (SpeciesList.txt is is updated every year). 
+# DATA INPUT:     Imports L0 raw species list data from the USGS North American Breeding Bird Survey (SpeciesList.txt is updated every year). 
 # DATA OUTPUT:    L0 data: bbs_specieslist_L0.csv - this is a copy of the raw data, just omitting the top lines without data
 # PROJECT:        Avian Interaction Database & avian-meta-network
-# DATE:           17 January 2022 - 5 December 2023
+# DATE:           17 January 2022 - 6 December 2023
 # NOTES:          Adds a row for recent split of Sedge Wren to Sedge and Grass Wren. 
 #
 #               Next script to run: for avian-meta-network: 
