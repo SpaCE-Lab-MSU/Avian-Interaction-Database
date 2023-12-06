@@ -1,9 +1,9 @@
-# TITLE:          L1 BBS Species List Data: Pulls in raw BBS SpeciesList from 2023 release (up to 2022 BBS data), 
+# TITLE:          L0 BBS Species List Data: Pulls in raw BBS SpeciesList from 2023 release (up to 2022 BBS data), 
 #                 so it can be used in avian-meta-network (align with intxnpairs data before merging in L2) 
 # AUTHORS:        Phoebe Zarnetske
 # COLLABORATORS:  Vincent Miele, Stephane Dray, Emily Parker
-# DATA INPUT:     Imports L0 raw species list data from the USGS North American Breeding Bird Survey. 
-# DATA OUTPUT:    L1 data: bbs_specieslist.csv
+# DATA INPUT:     Imports L0 raw species list data from the USGS North American Breeding Bird Survey (SpeciesList.txt is is updated every year). 
+# DATA OUTPUT:    L0 data: bbs_specieslist_L0.csv - this is a copy of the raw data, just omitting the top lines without data
 # PROJECT:        Avian Interaction Database & avian-meta-network
 # DATE:           17 January 2022 - 5 December 2023
 # NOTES:          Adds a row for recent split of Sedge Wren to Sedge and Grass Wren. 
@@ -20,18 +20,15 @@ library(dplyr)
 
 # Set working directory
 L0_dir <- Sys.getenv("L0DIR")
-L1_dir <- Sys.getenv("L1DIR")
-list.files(L1_dir)
 
 # Above .Renviron not working for PLZ; hard-coding in here
 L0_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0"
-L1_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L1"
 
 # Below section is modified from: https://rdrr.io/github/davharris/mistnet/src/extras/BBS-analysis/data_extraction/species-handling.R
 # Read in the SpeciesList file: 
 
-# The original file SpeciesList.txt (from 2023 BBS release) exists here: https://www.sciencebase.gov/catalog/item/64ad9c3dd34e70357a292cee
-# Reading in a copy placed in the L0 directory on Dec. 5, 2023, and renamed SpeciesListL0.txt
+# The original file SpeciesList.txt (from 2023 BBS release) is here: https://www.sciencebase.gov/catalog/item/64ad9c3dd34e70357a292cee
+# Reading in a copy placed in the L0 directory on Dec. 5, 2023, and renamed BBS_SpeciesListL0.txt
 
 # This function determines if a species is "valid" by looking at its latin and
 # common names.  It is called below to read in the data. 
@@ -39,7 +36,7 @@ L1_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L1"
 validateSpecies = function(){
   
 # The first 10 lines do not contain data; read in first 12 lines which contain column names in 12th line
-skip = readLines(file.path(L0_dir,"SpeciesListL0.txt"), n = 12)
+skip = readLines(file.path(L0_dir,"BBS_SpeciesListL0.txt"), n = 12)
 
 # The 11th line has column names separated by lots of spaces
 column.names = grep(".$", strsplit(skip[11], " ")[[1]], value = TRUE)
@@ -49,7 +46,7 @@ dashes = skip[12]
 
 bbs.splist = na.omit(
   read.fwf(
-    file.path(L0_dir,"SpeciesListL0.txt"),
+    file.path(L0_dir,"BBS_SpeciesListL0.txt"),
     skip = 12, 
     widths = nchar(strsplit(dashes, " ")[[1]]) + 1,
     # below line ensures there are no errors with "invalid multibyte strings"
@@ -141,7 +138,7 @@ dim(bbs.splist.2022)
 # 761 species in BBS with the split to 2 species: Sedge and Grass Wren
 
 # Export the cleaned data (note the encoding to maintain special characters)
-write.csv(bbs.splist.2022, file.path(L1_dir,"bbs_splist.csv"), fileEncoding="latin1", row.names=F) 
+write.csv(bbs.splist.2022, file.path(L0_dir,"bbs_splist_L0.csv"), fileEncoding="latin1", row.names=F) 
 
 # Next script to run if combining with bbs_obs data: AvianInteractionData_L1.R
 
