@@ -75,6 +75,8 @@ int.raw[int.raw=="Vermivora chyrsoptera"] <- "Vermivora chrysoptera"
 int.raw[int.raw=="tyto alba"] <- "Tyto alba"
 int.raw[int.raw=="Tyrannus couchi"] <- "Tyrannus couchii"
 int.raw[int.raw=="Sternulla antillarum"] <- "Sternula antillarum"
+int.raw[int.raw=="Quisculus major"] <- "Quiscalus major"
+int.raw[int.raw=="Quisculus mexicanus"] <- "Quiscalus mexicanus"
 
 # stopped here Dec 6 late...
 int.raw[int.raw=="Dryobates nutallii"] <- "Dryobates nuttallii"
