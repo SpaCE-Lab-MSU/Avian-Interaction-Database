@@ -28,8 +28,8 @@ L1_dir <- Sys.getenv("L1DIR")
 list.files(L1_dir)
 
 # Above .Renviron not working for PLZ; hard-coding in here
-L0_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0"
-L1_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L1"
+L0_dir <- "/Users/phoebezarnetske/Documents/GitHub/Avian-Interaction-Database/L0"
+L1_dir <- "/Users/phoebezarnetske/Documents/GitHub/Avian-Interaction-Database/L1"
 
 # Read in csv with avian interactions from primary, secondary cavity nesting birds in North America.
 int.raw<-read.csv(file.path(L0_dir,"AvianInteractionData_L0.csv"))
@@ -67,8 +67,24 @@ dim(namechg)
 int.raw.orig <- int.raw
 dim(int.raw)
 
-# Some misspellings:
+sort(unique(int.raw$species1_scientific))
+
+# Remove extra end spaces:
+int.raw$species1_scientific<-trimws(int.raw$species1_scientific, "r")
+int.raw$species2_scientific<-trimws(int.raw$species2_scientific, "r")
+
+sort(unique(int.raw$species1_scientific))
+
+# Some misspellings/typos:
+int.raw[int.raw=="Vireo olivaceous"] <- "Vireo olivaceus"
+int.raw[int.raw=="Vermivora chyrsoptera"] <- "Vermivora chrysoptera"
+int.raw[int.raw=="tyto alba"] <- "Tyto alba"
+int.raw[int.raw=="Tyrannus couchi"] <- "Tyrannus couchii"
+int.raw[int.raw=="Sternulla antillarum"] <- "Sternula antillarum"
+
+# stopped here Dec 6 late...
 int.raw[int.raw=="Dryobates nutallii"] <- "Dryobates nuttallii"
+
 
 # Change names in species1_scientific and species2_scientific according to the look-up table
 # so that all species1 and species2 interactors have the up-to-date BOW name.
