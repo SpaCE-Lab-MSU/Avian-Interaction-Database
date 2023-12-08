@@ -28,8 +28,8 @@ L1_dir <- Sys.getenv("L1DIR")
 list.files(L1_dir)
 
 # Above .Renviron not working for PLZ; hard-coding in here
-L0_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0"
-L1_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L1"
+L0_dir <- "/Users/plz/DATA/git/Avian-Interaction-Database/L0"
+L1_dir <- "/Users/plz/DATA/git/Avian-Interaction-Database/L1"
 
 # Read in csv with avian interactions from primary, secondary cavity nesting birds in North America.
 int.raw<-read.csv(file.path(L0_dir,"AvianInteractionData_L0.csv"))
@@ -43,12 +43,13 @@ namechg<-read.csv(file.path(L0_dir,"bbsbow_names.csv"))
 # make "genus species" columns able to merge
 splist$species1_scientific<- do.call(paste, c(splist[c("Genus", "Species")], sep = " "))
 
-# We are using the Birds of The World naming conventions for species. Some BBS names differ. Some old names are included.
 # Rename some columns and omit others; indicate that the common name is coming from BBS Species List
 names(splist)[names(splist) == "English_Common_Name"] <-"bbs_sp1_common"
 names(splist)[names(splist) == "Seq"] <-"sp1_Seq"
 names(splist)[names(splist) == "AOU"] <-"sp1_AOU"
 
+##### START OF NAME CHANGES #####
+# We are using the Birds of The World naming conventions for species. Some BBS names differ. Some old names are included.
 # Reference the bbsbow_names data to make initial changes to any "other_or_old_bow" names that might appear.
 # Apply changes only to the species1 and species2 columns.
 # First omit any rows with a blank in "other_or_old_bow"
@@ -77,10 +78,18 @@ int.raw[int.raw=="Tyrannus couchi"] <- "Tyrannus couchii"
 int.raw[int.raw=="Sternulla antillarum"] <- "Sternula antillarum"
 int.raw[int.raw=="Quisculus major"] <- "Quiscalus major"
 int.raw[int.raw=="Quisculus mexicanus"] <- "Quiscalus mexicanus"
-
-# stopped here Dec 6 late...
-int.raw[int.raw=="Dryobates nutallii"] <- "Dryobates nuttallii"
-
+int.raw[int.raw=="Psaltriparus minimum"] <- "Psaltriparus minimus"
+int.raw[int.raw=="Poecila atricapillus"] <- "Poecile atricapillus"
+int.raw[int.raw=="Pitandus sulphuratus"] <- "Pitangus sulphuratus"
+int.raw[int.raw=="Passerina caerula"] <- "Passerina caerulea"
+int.raw[int.raw=="Moticilla alba"] <- "Motacilla alba"
+int.raw[int.raw=="Moticilla alba lugens"] <- "Motacilla alba lugens"
+int.raw[int.raw=="Moticilla alba leucopsis"] <- "Motacilla alba leucopsis"
+int.raw[int.raw=="Moticilla alba ocularis"] <- "Motacilla alba ocularis"
+int.raw[int.raw=="mergus merganser"] <- "Mergus merganser"
+int.raw[int.raw=="Icterus cuccullatus"] <- "Icterus cucullatus"
+int.raw[int.raw=="Helmitheros vermivora"] <- "Helmitheros vermivorum"
+int.raw[int.raw=="Cochlearius cohlearius"] <- "Cochlearius cochlearius"
 
 # Change names in species1_scientific and species2_scientific according to the look-up table
 # so that all species1 and species2 interactors have the up-to-date BOW name.
@@ -101,8 +110,8 @@ dim(namechg.unmatch) # 10 species on Dec 6, 2023
 namechg.unmatch[,1:2]
 
 # Standardize based on BOW 
-dplyr::filter(int.raw, species1_scientific %in% c("Pipilo fuscus")) # in interactions
-dplyr::filter(int.raw, species2_scientific %in% c("Pipilo fuscus")) # in interactions
+dplyr::filter(int.raw, species1_scientific %in% c("Anas rubripes")) # in interactions
+dplyr::filter(int.raw, species2_scientific %in% c("Anas rubripes")) # in interactions
 
 
 
@@ -254,6 +263,8 @@ splist$species1_scientific[splist$species1_scientific == "Empidonax occidentalis
 int.raw$species1_scientific[int.raw$species1_scientific == "Empidonax occidentalis"] <- "Empidonax difficilis"
 int.raw$species1_scientific[int.raw$species2_scientific == "Empidonax occidentalis"] <- "Empidonax difficilis"
 
+##### END OF NAME CHANGES #####
+
 # duplicate it for easier merging below
 sp2list<-splist
 # rename
@@ -262,48 +273,52 @@ names(sp2list)[names(sp2list) == "sp1_AOU"] <-"sp2_AOU"
 names(sp2list)[names(sp2list) == "bbs_sp1_common"] <-"bbs_sp2_common"
 names(sp2list)[names(sp2list) == "species1_scientific"] <-"species2_scientific"
 
-# Merge into paired intxns by sp1 - this is not updated for Nov 22, 2023
+# Merge into paired intxns by sp1 
 intxns1<-merge(int.raw,splist,by=c("species1_scientific"),all.x=T, all.y=T)
 dim(int.raw)
-# 16878 rows
+# 20859 rows
 dim(intxns1)
-# 17101 rows
+# 21018 rows
 length(unique(int.raw$species1_scientific))
-# 697 species treated as species1 in original avian interaction data
+# 891 species treated as species1 in original avian interaction data
 length(unique(splist$species1_scientific))
-# 756 species in entire BBS dataset
+# 760 species in entire BBS dataset
 length(unique(intxns1$species1_scientific))
-# 920 species in the merged data
+# 995 species in the merged data
 length(unique(intxns1$species2_scientific))
-# 2228 species as species2 but these *may* include the scientific names without a match in sp1
+# 2647 species as species2 but these *may* include the scientific names without a match in sp1
 sum(is.na(intxns1$species2_scientific)) 
-# 224 - species that exist in the BBS Species List but are not entered yet in original avian interaction data as species2
+# 105 - species that exist in the BBS Species List but are not entered yet in original avian interaction data as species2
 length(unique(int.raw$species2_scientific))
-# 2228 species as species2 but 1 without a match in sp1?
+# 2647 species as species2 
 
-# Repeat above but now for sp2 - this is not updated for Nov 22, 2023
+# Repeat above but now for sp2 
 # Merge into paired intxns by sp1
 intxns2<-merge(int.raw,sp2list,by=c("species2_scientific"),all.x=T, all.y=T)
 dim(int.raw)
-# 16878 rows
+# 20859 rows
 dim(intxns2)
-# 16970 rows
+# 20952 rows
 length(unique(int.raw$species2_scientific))
-# 2228 species treated as species2 in original avian interaction data
+# 2647 species treated as species2 in original avian interaction data
 length(unique(splist$species1_scientific))
-# 756 species in entire BBS dataset
+# 760 species in entire BBS dataset
 length(unique(intxns2$species2_scientific))
-# 2320 species in the merged data 
+# 2726 species in the merged data 
 sum(is.na(intxns2$species1_scientific)) 
-# 92 NAs - species that exist in the BBS Species List but are not entered yet in original avian interaction data as species1
+# 79 NAs - species that exist in the BBS Species List but are not entered yet in original avian interaction data as species1
 length(unique(intxns2$species1_scientific))
-# 698 species as species1 but these *may* include the scientific names without a match in sp1
+# 892 species as species1 but these *may* include the scientific names without a match in sp1
 length(unique(int.raw$species1_scientific))
-# 697 species as species1 but these *may* include the scientific names without a match in sp1
+# 891 species as species1 but these *may* include the scientific names without a match in sp1
 
-# Export to check species names: if there are rows without a complete entry, they are 
-# species in BOW but not in BBS Species List.
+# Export to check species names: if the row has an AOU associated with species1, 
+# it is in BBS; if those rows are without a complete entry, they are missing entries for those species
 write.csv(intxns1, file.path(L1_dir,"intxns1_names.csv"), row.names=F) 
+# Subsetted the above and saved as BBS_species1_without_complete_entry7Dec2023.csv - these need to be checked 
+# and entered if they have not been (check first for species name change that might mean the species was already entered;
+# if name change, update the bbsbow_names.csv).
+
 write.csv(intxns2, file.path(L1_dir,"intxns2_names.csv"), row.names=F) 
 
 #intxns1 yields the following issues:
