@@ -28,8 +28,8 @@ L1_dir <- Sys.getenv("L1DIR")
 list.files(L1_dir)
 
 # Above .Renviron not working for PLZ; hard-coding in here
-L0_dir <- "/Users/plz/DATA/git/Avian-Interaction-Database/L0"
-L1_dir <- "/Users/plz/DATA/git/Avian-Interaction-Database/L1"
+L0_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0"
+L1_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L1"
 
 # Read in csv with avian interactions from primary, secondary cavity nesting birds in North America.
 int.raw<-read.csv(file.path(L0_dir,"AvianInteractionData_L0.csv"))
@@ -110,10 +110,6 @@ dim(namechg.unmatch) # 10 species on Dec 6, 2023
 namechg.unmatch[,1:2]
 
 # Standardize based on BOW 
-dplyr::filter(int.raw, species1_scientific %in% c("Anas rubripes")) # in interactions
-dplyr::filter(int.raw, species2_scientific %in% c("Anas rubripes")) # in interactions
-
-
 
 # RENAME: BBS: Streptopelia chinensis = BOW: Spilopelia chinensis
 dplyr::filter(splist, species1_scientific %in% c("Streptopelia chinensis")) # in BBS list
@@ -315,9 +311,31 @@ length(unique(int.raw$species1_scientific))
 # Export to check species names: if the row has an AOU associated with species1, 
 # it is in BBS; if those rows are without a complete entry, they are missing entries for those species
 write.csv(intxns1, file.path(L1_dir,"intxns1_names.csv"), row.names=F) 
-# Subsetted the above and saved as BBS_species1_without_complete_entry7Dec2023.csv - these need to be checked 
+intxns1.8dec23<-merge(int.raw,splist,by=c("species1_scientific"),all.x=T, all.y=T)
+# Subset out to just include the species1 in BBS without complete entries (i.e., missing species2)
+intxns1.8dec23<-intxns1.7dec23[!is.na(intxns1.8dec23$sp1_AOU),] # only species with an AOU
+intxns1.8dec23<-intxns1.7dec23[(is.na(intxns1.8dec23$species2_scientific) | intxns1.8dec23$species2_scientific==""),] 
+write.csv(intxns1.8dec23, file.path(L1_dir,"BBS_species1_without_complete_entry8Dec2023.csv"), row.names=F) 
+
+sort(intxns1.8dec23$species1_scientific)
+# Some are "Xxx sp." and probably not useful / worth checking
+
+# Checking the missing BBS species entries in the original data:
+dplyr::filter(int.raw, species1_scientific %in% c("Acanthis hornemanni")) # in interactions
+dplyr::filter(int.raw, species2_scientific %in% c("Acanthis hornemanni")) # in interactions
+# Jaeger missing species2_scientific name- but exists in original data...
+dplyr::filter(int.raw.orig, species1_scientific %in% c("Acanthis hornemanni")) # in interactions
+dplyr::filter(int.raw.orig, species2_scientific %in% c("Acanthis hornemanni")) # in interactions
+
+
+# Subsetted the above and saved as BBS_species1_without_complete_entry8Dec2023.csv - these need to be checked 
 # and entered if they have not been (check first for species name change that might mean the species was already entered;
 # if name change, update the bbsbow_names.csv).
+
+
+
+
+
 
 write.csv(intxns2, file.path(L1_dir,"intxns2_names.csv"), row.names=F) 
 
