@@ -4,14 +4,18 @@
 # DATA INPUT:     Data imported as csv L0/AvianInteractionData_raw.csv
 # DATA OUTPUT:    L0 data: many per-species files in L0
 # PROJECT:        avian-meta-network
-# DATE:           2022-12-05
+# DATE:           2022-12-05 - re-run to different subdirectory on 8 Dec 2023 to check
 # NOTES:          This is a temporary script run once to facilitate new data entry procedures.
 #
 
+L0 <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database"
 
 library(readr, dplyr, magrittr)
 
-#' convert a species binomial for use as a linux filename, no punction or spaces
+# Below can be run with:
+split_by_species()
+
+#' convert a species binomial for use as a linux filename, no punctuation or spaces
 #'
 
 species2filename <- function(species_binomial, delimiter = "_"){
@@ -23,16 +27,16 @@ species2filename <- function(species_binomial, delimiter = "_"){
 #'
 #'  Do not run this function, it's already been run but saved here for documentation.   Originally
 #' the main data CSV was a single file which proved difficult to use git.  This function was written to split
-#' that main file up along species 1 sci names.   This function is not smart, if there is a problem when
+#' that main file up along species 1 sci names. This function is not smart, if there is a problem when
 #' writing one of the files, it will simply crash, and leave the files it was able to write in the folder.
 #'  However if a file with the same name exists in the target directory, it will not over write it.
 #'
 #' params
 #'   intxns.file : relative path to the CSV file with interaction data, with minimally a column species1_scientific
-#'   save_dir : the folder where the split CSVs are saved.  if there is data, it will automatically be overwriten
+#'   save_dir : the folder where the split CSVs are saved. If there is data, it will automatically be overwritten
 
-split_by_species <- function( intxns.file = file.path("L0","AvianInteractionData_raw.csv"),
-                              save_dir = NULL) {
+split_by_species <- function( intxns.file = file.path("L0","AvianInteractionData_raw_Dec2022_gsheetBBS_InteractionPairs.csv"),
+                              save_dir = file.path("L0","orig_split_sp")) {
 
 
     if(! file.exists(intxns.file)) {
