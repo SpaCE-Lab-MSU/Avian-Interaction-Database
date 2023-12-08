@@ -341,18 +341,6 @@ write.csv(intxns2, file.path(L1_dir,"intxns2_names.csv"), row.names=F)
 
 #intxns1 yields the following issues:
 
-## Missing effect_sp1_on_sp2 or effect_sp2_on_sp1 or both (issue # 108 on github)
-# species1_scientific	species1_common	species2_common	species2_scientific
-# Ardea alba	Great Egret	Brown Pelican	Pelecanus occidentalis
-# Cepphus columba	Pigeon Guillemot	unid. gull	Laridae sp.
-# Cepphus columba	Pigeon Guillemot	unid. gull	Laridae sp.
-# Cepphus columba	Pigeon Guillemot	unid. puffin	Fratercula sp. 
-# Cepphus columba	Pigeon Guillemot	Black Oystercatchers	Haematopus bachmani
-# Cepphus columba	Pigeon Guillemot	unid. Comorant	Phalacrocorax sp. 
-# Melanerpes erythrocephalus	Red-headed Woodpecker	Mountain Bluebird	Sialia currucoides
-# Myiarchus crinitus	Great-crested flycatcher	Eastern Bluebird	Sialia sialis
-# Turdus migratorius	American Robin	Common Grackles	Quiscalus quiscula
-# Turdus migratorius	American Robin	European Starlings 	Sturnus vulgaris
 
 
 ## END OF CHECKING ##
@@ -392,7 +380,21 @@ write.csv(int.raw,file.path(L1_dir,"AvianInteractionData_L1.csv"), row.names=F)
 
 #write.csv(int.l1,file.path(L1_dir,"AvianInteractionData_L1.csv"), row.names=F)
 
+# keep just essential columns
+intxns.raw<-subset(int.raw,select=c("species1_common",
+                                       "species2_common",
+                                       "species1_scientific",
+                                       "species2_scientific",
+                                       "effect_sp1_on_sp2",
+                                       "effect_sp2_on_sp1",
+                                       "interaction",
+                                       "BOW_evidence",
+                                       "n_studies",
+                                       "recorder",
+                                       "entry_date"))
 
+# Save as intxns.raw; work on merging w species list in L1
+write.csv(intxns.raw, file.path(L1_dir,"intxns_L1.csv"), row.names=F) 
 
 ## Later work:
 ## EDIT Colaptes auratus subspecies
