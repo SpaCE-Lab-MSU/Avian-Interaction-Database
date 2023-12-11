@@ -171,21 +171,6 @@ dplyr::filter(int.raw, species2_scientific %in% c("Larus brachyrhynchus")) # in 
 # Confirmed that L. canus interactions are only Eurasian interactions.
 # No change needed to these data.
 
-##   RECENT SPLIT: C. hudsonius (North America) and C. cyaneus (Eurasia); check common name for species info
-##  "The only representative in North America of the cosmopolitan genus Circus, 
-##  the Northern Harrier was until recently considered conspecific with the 
-##  Hen Harrier (Circus cyaneus) of Eurasia, but differs from that species in genetics and plumage." 
-##  https://birdsoftheworld.org/bow/species/norhar2/cur/introduction
-dplyr::filter(splist, species1_scientific %in% c("Circus cyaneus")) # not in BBS list
-dplyr::filter(int.raw, species1_scientific %in% c("Circus cyaneus")) # in interactions but N. America interaction
-dplyr::filter(splist, species1_scientific %in% c("Circus hudsonius")) # in BBS list
-dplyr::filter(int.raw, species1_scientific %in% c("Circus hudsonius")) # in interactions
-dplyr::filter(int.raw, species2_scientific %in% c("Circus cyaneus")) # not in interactions
-dplyr::filter(int.raw, species2_scientific %in% c("Circus hudsonius")) # in interactions
-# Only C. hudsonius occurs in BBS list - change all interactions to C. hudsonius (North America)
-int.raw$species1_scientific[int.raw$species1_scientific == "Circus cyaneus"] <- "Circus hudsonius"
-int.raw$species2_scientific[int.raw$species2_scientific == "Circus cyaneus"] <- "Circus hudsonius"
-
 ## Spelling difference: BBS: Porphyrio martinicus = BOW: Porphyrio martinica
 dplyr::filter(splist, species1_scientific %in% c("Porphyrio martinicus")) # in BBS list
 dplyr::filter(int.raw, species1_scientific %in% c("Porphyrio martinicus")) # not in interactions 
