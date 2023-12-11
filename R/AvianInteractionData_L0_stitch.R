@@ -8,7 +8,7 @@
 # NOTES:          Next script to run: /L1/AvianInteractionData_L1.R
 
 
-library(readr, dplyr, magrittr)
+library(readr, dplyr)
 
 L0_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0"
 species_dir<- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0/species"
