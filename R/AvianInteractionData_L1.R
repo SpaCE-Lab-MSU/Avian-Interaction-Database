@@ -331,6 +331,16 @@ write.csv(intxns2, file.path(L1_dir,"intxns2_names.csv"), row.names=F)
 
 ## Emily is checking these on Dec 12.
 
+### SUBSPECIES Considerations - either lump them as species or keep as subspecies...
+## EDIT Colaptes auratus subspecies
+# Here we Colaptes auratus (AOU = 4123) subspecies to the main species
+# Colaptes auratus auratus (AOU = 4120) 
+# Colaptes auratus auratus x auratus cafer (AOU = 4125)
+# Colaptes auratus cafer (AOU = 4130)
+
+# bbs.allobsRPID$AOU[bbs.allobsRPID$AOU == 4120] <- 4123
+# bbs.allobsRPID$AOU[bbs.allobsRPID$AOU == 4125] <- 4123
+# bbs.allobsRPID$AOU[bbs.allobsRPID$AOU == 4130] <- 4123
 
 ## END OF CHECKING ##
 
