@@ -5,7 +5,7 @@
 #                 From bbs_specieslist_L1.R: Data imported as csv https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database/blob/main/L0/bbs_splist_L0.csv
 # DATA OUTPUT:    L1 data: AvianInteractionData_L1.csv
 # PROJECT:        Avian Interaction Database 
-# DATE:           27 Oct 2022; updated 20 Mar 2023, Dec. 5, 2023  
+# DATE:           27 Oct 2022; updated 20 Mar 2023, Dec. 15, 2023  
 # NOTES:          Next script to run: 
 #                 This script is used to refine species name changes to align with BOW, and to create AvianInteractionData_L1.csv 
 #                 L0 data are checked to assign BOW scientific and common names to the interaction pairs data (which were originally from BBS species list). 
@@ -253,114 +253,153 @@ names(sp2list)[names(sp2list) == "sp1_Seq"] <-"sp2_Seq"
 names(sp2list)[names(sp2list) == "sp1_AOU"] <-"sp2_AOU"
 names(sp2list)[names(sp2list) == "bbs_sp1_common"] <-"bbs_sp2_common"
 names(sp2list)[names(sp2list) == "species1_scientific"] <-"species2_scientific"
+names(sp2list)[names(sp2list) == "Genus"] <-"Genus2"
+names(sp2list)[names(sp2list) == "Species"] <-"Species2"
+sp2list$French_Common_Name<-NULL
+sp2list$Spanish_Common_Name<-NULL
+sp2list$ORDER<-NULL
+sp2list$Family<-NULL
 
-# Merge into paired intxns by sp1 
+
+# Merge into paired intxns by sp1 (numbers below as of Dec 15, 2023)
 intxns1<-merge(int.raw,splist,by=c("species1_scientific"),all.x=T, all.y=T)
 dim(int.raw)
-# 21387 rows
+# 21775 rows
 dim(intxns1)
-# 21522 rows
+# 21904 rows
 length(unique(int.raw$species1_scientific))
-# 919 species treated as species1 in original avian interaction data
+# 929 species treated as species1 in original avian interaction data
 length(unique(splist$species1_scientific))
 # 760 species in entire BBS dataset (Grass and Sedge Wren are same spp?)
 length(unique(intxns1$species1_scientific))
-# 999 species in the merged data
+# 1003 species in the merged data
 length(unique(intxns1$species2_scientific))
-# 2667 species as species2 but these *may* include the scientific names without a match in sp1
+# 2885 species as species2 but these *may* include the scientific names without a match in sp1
 sum(is.na(intxns1$species2_scientific)) 
-# 81 - species that exist in the BBS Species List but are not entered yet in original avian interaction data as species2
+# 74 - species that exist in the BBS Species List but are not entered yet in original avian interaction data as species2
 length(unique(int.raw$species2_scientific))
-# 2667 species as species2 
+# 2884 species as species2 
 
 # Repeat above but now for sp2 
 # Merge into paired intxns by sp1
 intxns2<-merge(int.raw,sp2list,by=c("species2_scientific"),all.x=T, all.y=T)
 dim(int.raw)
-# 21387 rows
+# 21775 rows
 dim(intxns2)
-# 21480 rows
+# 21867 rows
 length(unique(int.raw$species2_scientific))
-# 2667 species treated as species2 in original avian interaction data
+# 2884 species treated as species2 in original avian interaction data
 length(unique(splist$species1_scientific))
 # 760 species in entire BBS dataset
 length(unique(intxns2$species2_scientific))
-# 2746 species in the merged data 
+# 2962 species in the merged data 
 sum(is.na(intxns2$species1_scientific)) 
-# 79 NAs - species that exist in the BBS Species List but are not entered yet in original avian interaction data as species1
+# 78 NAs - species that exist in the BBS Species List but are not entered yet in original avian interaction data as species1
 length(unique(intxns2$species1_scientific))
-# 920 species as species1 but these *may* include the scientific names without a match in sp1
+# 930 species as species1 but these *may* include the scientific names without a match in sp1
 length(unique(int.raw$species1_scientific))
-# 919 species as species1 but these *may* include the scientific names without a match in sp1
+# 929 species as species1 but these *may* include the scientific names without a match in sp1
 
-# Export to check species names: if the row has an AOU associated with species1, 
-# it is in BBS; if those rows are without a complete entry, they are missing entries for those species
+# Export to check species names: if the row has an AOU associated with species1,
+# it is in BBS; if those rows are without a complete entry, they are missing
+# entries for those species There are 74 here as of Dec. 15, 2023. All are
+# either rare subspecies (without a BOW acct), or they are species which the
+# observer could not distinguish, or they are just the Genus level.
 write.csv(intxns1, file.path(L1_dir,"intxns1_names.csv"), row.names=F) 
-intxns1.11dec23<-merge(int.raw,splist,by=c("species1_scientific"),all.x=T, all.y=T)
+intxns1.15dec23<-merge(int.raw,splist,by=c("species1_scientific"),all.x=T, all.y=T)
 # Subset out to just include the species1 in BBS without complete entries (i.e., missing species2)
-intxns1.11dec23<-intxns1.11dec23[!is.na(intxns1.11dec23$sp1_AOU),] # only species with an AOU
-intxns1.11dec23<-intxns1.11dec23[(is.na(intxns1.11dec23$species2_scientific) | intxns1.11dec23$species2_scientific==""),] 
-write.csv(intxns1.11dec23, file.path(L1_dir,"BBS_species1_without_complete_entry11Dec2023.csv"), row.names=F) 
-
-sort(intxns1.11dec23$species1_scientific)
-# Some are "Xxx sp." and probably not useful / worth checking.
-
-# Checking the missing BBS species entries in the original data:
-dplyr::filter(int.raw, species1_scientific %in% c("Vidua macroura")) # in interactions
-dplyr::filter(int.raw, species2_scientific %in% c("Vidua macroura")) # in interactions
-dplyr::filter(int.raw, species2_scientific %in% c("Aechmophorus occidentalis / clarkii")) # in interactions
-# Jaeger missing species2_scientific name- but exists in original data...
-dplyr::filter(int.raw.orig, species1_scientific %in% c("Aechmophorus occidentalis / clarkii")) # in interactions
-dplyr::filter(int.raw.orig, species2_scientific %in% c("Aechmophorus occidentalis / clarkii")) # in interactions
+intxns1.15dec23<-intxns1.15dec23[!is.na(intxns1.15dec23$sp1_AOU),] # only species with an AOU
+intxns1.15dec23<-intxns1.15dec23[(is.na(intxns1.15dec23$species2_scientific) | intxns1.15dec23$species2_scientific==""),] 
+sort(intxns1.15dec23$species1_scientific)
 
 write.csv(intxns2, file.path(L1_dir,"intxns2_names.csv"), row.names=F) 
+intxns2.15dec23<-merge(int.raw,sp2list,by=c("species2_scientific"),all.x=T, all.y=T)
+# Subset out to just include the species2 in BBS without complete entries (i.e., missing species1)
+intxns2.15dec23<-intxns2.15dec23[!is.na(intxns2.15dec23$sp2_AOU),] # only species with an AOU
+intxns2.15dec23<-intxns2.15dec23[(is.na(intxns2.15dec23$species1_scientific) | intxns2.15dec23$species1_scientific==""),] 
+sort(intxns2.15dec23$species2_scientific)
 
-#intxns1 yields the following issues:
-# Anas diazi
-# Buteo jamaicensis harlani
-# Calonectris diomedea
-# Colaptes auratus cafer
-# Corvus corax
-# Dryocopus pileatus
-# Ixoreus naevius
-# Junco hyemalis aikeni
-# Leptotila verreauxi
-# Meleagris gallopavo
-# Perisoreus canadensis
-# Setophaga coronata audoboni
-
-## Emily is checking these on Dec 12.
+# The species above just have occurrence as species1. That's ok.
 
 ### SUBSPECIES Considerations - either lump them as species or keep as subspecies...
-## EDIT Colaptes auratus subspecies
-# Here we Colaptes auratus (AOU = 4123) subspecies to the main species
-# Colaptes auratus auratus (AOU = 4120) 
-# Colaptes auratus auratus x auratus cafer (AOU = 4125)
-# Colaptes auratus cafer (AOU = 4130)
+
+#For now we decide to keep as is; any subspecies will occur if they are
+#explicitly called out as having an interaction. Otherwise, they don't occur in
+#the interaction database. In the future we may decide to lump to species and
+#remove all subspecies. 
+
+# EDIT Colaptes auratus subspecies Here we Colaptes
+#auratus (AOU = 4123) subspecies to the main species Colaptes auratus auratus
+#(AOU = 4120) Colaptes auratus auratus x auratus cafer (AOU = 4125) Colaptes
+#auratus cafer (AOU = 4130)
 
 # bbs.allobsRPID$AOU[bbs.allobsRPID$AOU == 4120] <- 4123
 # bbs.allobsRPID$AOU[bbs.allobsRPID$AOU == 4125] <- 4123
 # bbs.allobsRPID$AOU[bbs.allobsRPID$AOU == 4130] <- 4123
 
-## END OF CHECKING ##
+## END OF CHECKING Species Scientific Names ##
 
-# Omit common names from int.raw ahead of merging with BBS Species List (we will replace them with the official BBS names)
-# Note that this removes X rows where there is no species2_scientific in int.raw, but there are interactions recorded
+## Fixing Species Common Names ##
+
+# For Now we are not doing this - it is too cumbersome. Just rely on scientific
+# names. Omit common names from int.raw ahead of merging with BBS Species List
+# (we will replace them with the official BBS names) Note that this removes X
+# rows where there is no species2_scientific in int.raw, but there are
+# interactions recorded
+
 # make a copy of int.raw
-int.l1<-int.raw
-int.l1$species1_common <-NULL
-int.l1$species2_common <-NULL
-dim(int.l1)
+#int.l1<-int.raw
+#int.l1$species1_common <-NULL
+#int.l1$species2_common <-NULL
 
-# Remove the NA rows - this is not updated for Nov 22, 2023
+# Assign common name columns with the scientific name (this will only apply to
+# BBS list species). Change names in species1_common and species2_common
+# according to the look-up table so that all species1 and species2 interactors
+# have the up-to-date BOW common name.
+
+#int.l1<-merge(int.l1,splist,by=c("species1_scientific"),all.x=T, all.y=T)
+#int.l2<-merge(int.l1,sp2list,by=c("species2_scientific"),all.x=T, all.y=T)
+#dim(int.l2)
+# 21998
+
+
+### Editing the interaction columns to standardize names ###
+
+# Unique interaction types:
+sort(unique(int.raw$interaction))
+# Remove extra end spaces:
+int.raw$interaction<-trimws(int.raw$interaction, "r")
+# Make all lowercase
+int.raw$interaction<-tolower(int.raw$interaction)
+sort(unique(int.raw$interaction))
+
+# Some misspellings/typos:
+int.raw[int.raw=="amenslism"] <- "amensalism"
+int.raw[int.raw=="brood parasitism"] <- "Brood Parasitism"
+int.raw[int.raw=="brood parasitism"] <- "brood"
+int.raw[int.raw=="Tyrannus couchi"] <- "Tyrannus couchii"
+int.raw[int.raw=="Sternulla antillarum"] <- "Sternula antillarum"
+int.raw[int.raw=="Quisculus major"] <- "Quiscalus major"
+int.raw[int.raw=="Quisculus mexicanus"] <- "Quiscalus mexicanus"
+int.raw[int.raw=="Psaltriparus minimum"] <- "Psaltriparus minimus"
+int.raw[int.raw=="Poecila atricapillus"] <- "Poecile atricapillus"
+int.raw[int.raw=="Pitandus sulphuratus"] <- "Pitangus sulphuratus"
+int.raw[int.raw=="Passerina caerula"] <- "Passerina caerulea"
+int.raw[int.raw=="Moticilla alba"] <- "Motacilla alba"
+int.raw[int.raw=="Moticilla alba lugens"] <- "Motacilla alba lugens"
+int.raw[int.raw=="Moticilla alba leucopsis"] <- "Motacilla alba leucopsis"
+int.raw[int.raw=="Moticilla alba ocularis"] <- "Motacilla alba ocularis"
+int.raw[int.raw=="mergus merganser"] <- "Mergus merganser"
+int.raw[int.raw=="Icterus cuccullatus"] <- "Icterus cucullatus"
+int.raw[int.raw=="Helmitheros vermivora"] <- "Helmitheros vermivorum"
+int.raw[int.raw=="Cochlearius cohlearius"] <- "Cochlearius cochlearius"
+
+# Remove the NA rows - these are all the rows for "hybridization" which does not have a determined effect
 int.l1<-int.l1[!is.na(int.l1$effect_sp1_on_sp2), ]
 dim(int.l1)
-# 16807
-# Assign common name columns with the scientific name
-int.l1<-merge(int.l1,splist,by=c("species1_scientific"),all.x=T, all.y=T)
-int.l1<-merge(int.l1,sp2list,by=c("species2_scientific"),all.x=T, all.y=T)
-dim(int.l1)
-# 17030
+# 21706
+
+
 # Remove the NA rows (there shouldn't be any; they are all situations where common names occur but are not in the database)
 dim(int.l1)
 # 17030
@@ -378,6 +417,8 @@ write.csv(int.l1,file.path(L1_dir,"int.l1.csv"), row.names=F)
 write.csv(int.raw,file.path(L1_dir,"AvianInteractionData_L1.csv"), row.names=F)
 
 #write.csv(int.l1,file.path(L1_dir,"AvianInteractionData_L1.csv"), row.names=F)
+
+## Remove non-breeding season interactions from the BBS subset of data. 
 
 # keep just essential columns
 intxns.raw<-subset(int.raw,select=c("species1_common",
