@@ -93,14 +93,14 @@ intxnsL0sp<-combine_by_species()
 sp<-unique(intxnsL0sp$species1_common)
 sp<-as.list(sp)
 length(sp)
-# 674 species1 as of Dec 15, 2023 (all double checked)
+# 676 species1 as of Dec 18, 2023 (all double checked)
 
 ## Species In Review (all BBS species originally entered by Emily Parker)
 intxnsL0spir<-combine_by_species_in_review()
 spir<-unique(intxnsL0spir$species1_common)
 spir<-as.list(spir)
 length(spir)
-# 506 species1 as of Dec 15, 2023
+# 503 species1 as of Dec 18, 2023
 
 # Uncomment if you want to omit all species that haven't been checked by someone other than Emily;
 # for Dec 2023 we are just proceeding with all 'species' and 'species_in_review' because Emily is experienced and
@@ -113,11 +113,11 @@ length(spir)
 # XXX unique species1 that are truly unchecked
 
 # Merge the species and species_in_review interaction data into 1 
-# (as of Dec 11, 2023, EP created all the "in_review" species, so they are less likely to include errors):
+# (as of Dec 18, 2023, EP created all the "in_review" species, so they are less likely to include errors):
 intxnsL0<-rbind(intxnsL0sp, intxnsL0spir)
 
 length(unique(intxnsL0$species1_scientific))
-# 985 unique species1 as of Dec 15, 2023 (these include some non-BBS species1)
+# 984 unique species1 as of Dec 18, 2023 (these include some non-BBS species1)
 
 # export the data to become the current L0 interaction data:
 write.csv(intxnsL0, file.path(L0_dir, "AvianInteractionData_L0.csv"), row.names=FALSE)
