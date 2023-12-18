@@ -375,37 +375,37 @@ int.raw$interaction<-tolower(int.raw$interaction)
 sort(unique(int.raw$interaction))
 
 # Some misspellings/typos:
-int.raw[int.raw=="amenslism"] <- "amensalism"
-int.raw[int.raw=="brood"] <- "brood parasitism"
-int.raw[int.raw=="brood-parasitism"] <- "brood parasitism"
-int.raw[int.raw=="comensalism"] <- "commensalism"
-int.raw[int.raw=="commenalism"] <- "commensalism"
-int.raw[int.raw=="commesalism"] <- "commensalism"
-int.raw[int.raw=="commensalism -call mimicry"] <- "commensalism-call mimicry"
-int.raw[int.raw=="commensalism-chick adoptio"] <- "commensalism-chick adoption"
-int.raw[int.raw=="comeptition"] <- "competition"
-int.raw[int.raw=="competiton"] <- "competition"
-int.raw[int.raw=="competition - nest site"] <- "competition-nest site"
-int.raw[int.raw=="courting"] <- "courtship"
-int.raw[int.raw=="faciliation - comigration"] <- "facilitation-comigration"
-int.raw[int.raw=="facilitation-comigrate"] <- "facilitation-comigration"
-int.raw[int.raw=="facilitation-comigratio"] <- "facilitation-comigration"
-int.raw[int.raw=="facilitaion-comigration"] <- "facilitation-comigration"
-int.raw[int.raw=="faciltiation-mixed flocking"] <- "facilitation-mixed flocking"
-int.raw[int.raw=="facillitation"] <- "facilitation"
-int.raw[int.raw=="faciliation - mixed flocking"] <- "facilitation-mixed flocking"
-int.raw[int.raw=="faciltation-mixed flocking"] <- "facilitation-mixed flocking"
-int.raw[int.raw=="facilitation-mixed flock"] <- "facilitation-mixed flocking"
-int.raw[int.raw=="faciltation-feeding"] <- "facilitation-feeding"
-int.raw[int.raw=="faciltiation-feeding"] <- "facilitation-feeding"
-int.raw[int.raw=="faciltiation"] <- "facilitation"
-int.raw[int.raw=="hybrization"] <- "hybridization"
-int.raw[int.raw=="kleptoparasitsim"] <- "kleptoparasitism"
-int.raw[int.raw=="kleptoparasitsm"] <- "kleptoparasitism"
-int.raw[int.raw=="kleptoparisitism"] <- "kleptoparasitism"
+int.raw$interaction[int.raw$interaction=="amenslism"] <- "amensalism"
+int.raw$interaction[int.raw$interaction=="brood"] <- "brood parasitism"
+int.raw$interaction[int.raw$interaction=="brood-parasitism"] <- "brood parasitism"
+int.raw$interaction[int.raw$interaction=="comensalism"] <- "commensalism"
+int.raw$interaction[int.raw$interaction=="commenalism"] <- "commensalism"
+int.raw$interaction[int.raw$interaction=="commesalism"] <- "commensalism"
+int.raw$interaction[int.raw$interaction=="commensalism -call mimicry"] <- "commensalism-call mimicry"
+int.raw$interaction[int.raw$interaction=="commensalism-chick adoptio"] <- "commensalism-chick adoption"
+int.raw$interaction[int.raw$interaction=="comeptition"] <- "competition"
+int.raw$interaction[int.raw$interaction=="competiton"] <- "competition"
+int.raw$interaction[int.raw$interaction=="competition - nest site"] <- "competition-nest site"
+int.raw$interaction[int.raw$interaction=="courting"] <- "courtship"
+int.raw$interaction[int.raw$interaction=="faciliation - comigration"] <- "facilitation-comigration"
+int.raw$interaction[int.raw$interaction=="facilitation-comigrate"] <- "facilitation-comigration"
+int.raw$interaction[int.raw$interaction=="facilitation-comigratio"] <- "facilitation-comigration"
+int.raw$interaction[int.raw$interaction=="facilitaion-comigration"] <- "facilitation-comigration"
+int.raw$interaction[int.raw$interaction=="faciltiation-mixed flocking"] <- "facilitation-mixed flocking"
+int.raw$interaction[int.raw$interaction=="facillitation"] <- "facilitation"
+int.raw$interaction[int.raw$interaction=="faciliation - mixed flocking"] <- "facilitation-mixed flocking"
+int.raw$interaction[int.raw$interaction=="faciltation-mixed flocking"] <- "facilitation-mixed flocking"
+int.raw$interaction[int.raw$interaction=="facilitation-mixed flock"] <- "facilitation-mixed flocking"
+int.raw$interaction[int.raw$interaction=="faciltation-feeding"] <- "facilitation-feeding"
+int.raw$interaction[int.raw$interaction=="faciltiation-feeding"] <- "facilitation-feeding"
+int.raw$interaction[int.raw$interaction=="faciltiation"] <- "facilitation"
+int.raw$interaction[int.raw$interaction=="hybrization"] <- "hybridization"
+int.raw$interaction[int.raw$interaction=="kleptoparasitsim"] <- "kleptoparasitism"
+int.raw$interaction[int.raw$interaction=="kleptoparasitsm"] <- "kleptoparasitism"
+int.raw$interaction[int.raw$interaction=="kleptoparisitism"] <- "kleptoparasitism"
 # Checked and all of these are brood parasitism as of Dec 18, 2023
-int.raw[int.raw=="parasitism"] <- "brood parasitism"
-int.raw[int.raw=="predation-scavenger"] <- "predation-scavenging"
+int.raw$interaction[int.raw$interaction=="parasitism"] <- "brood parasitism"
+int.raw$interaction[int.raw$interaction=="predation-scavenger"] <- "predation-scavenging"
 
 sort(unique(int.raw$interaction))
 
@@ -441,6 +441,12 @@ write.csv(int.raw,file.path(L1_dir,"AvianInteractionData_L1.csv"), row.names=F)
 
 ## prep for BBS work: 
 ## Remove non-breeding season interactions from the BBS subset of data. 
+sort(unique(int.raw$nonbreedingseason))
+
+int.raw$nonbreedingseason[int.raw$nonbreedingseason == "Yes"] <- "yes"
+int.raw$nonbreedingseason[int.raw$nonbreedingseason == "YES"] <- "yes"
+int.raw$nonbreedingseason[int.raw$nonbreedingseason == "YSE"] <- "yes"
+int.raw$nonbreedingseason[int.raw$nonbreedingseason == "yes "] <- "yes"
 
 # keep just essential columns
 intxns.raw<-subset(int.raw,select=c("species1_common",
