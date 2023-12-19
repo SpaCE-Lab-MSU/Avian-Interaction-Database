@@ -7,6 +7,8 @@
 # DATE:           20 Mar 2023 -
 # NOTES:          Next script to run: /L1/AvianInteractionData_L1.R
 
+# Clear all existing data
+rm(list=ls())
 
 library(readr, dplyr)
 
@@ -121,3 +123,4 @@ length(unique(intxnsL0$species1_scientific))
 
 # export the data to become the current L0 interaction data:
 write.csv(intxnsL0, file.path(L0_dir, "AvianInteractionData_L0.csv"), row.names=FALSE)
+
