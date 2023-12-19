@@ -306,20 +306,17 @@ length(unique(int.raw$species1_scientific))
 # entries for those species There are 74 here as of Dec. 18, 2023. All are
 # either rare subspecies (without a BOW acct), or they are species which the
 # observer could not distinguish, or they are just the Genus level.
-write.csv(intxns1, file.path(L1_dir,"intxns1_names.csv"), row.names=F) 
 intxns1.18dec23<-merge(int.raw,splist,by=c("species1_scientific"),all.x=T, all.y=T)
 # Subset out to just include the species1 in BBS without complete entries (i.e., missing species2)
 intxns1.18dec23<-intxns1.18dec23[!is.na(intxns1.18dec23$sp1_AOU),] # only species with an AOU
 intxns1.18dec23<-intxns1.18dec23[(is.na(intxns1.18dec23$species2_scientific) | intxns1.18dec23$species2_scientific==""),] 
 sort(intxns1.18dec23$species1_scientific)
 
-write.csv(intxns2, file.path(L1_dir,"intxns2_names.csv"), row.names=F) 
 intxns2.18dec23<-merge(int.raw,sp2list,by=c("species2_scientific"),all.x=T, all.y=T)
 # Subset out to just include the species2 in BBS without complete entries (i.e., missing species1)
 intxns2.18dec23<-intxns2.18dec23[!is.na(intxns2.18dec23$sp2_AOU),] # only species with an AOU
 intxns2.18dec23<-intxns2.18dec23[(is.na(intxns2.18dec23$species1_scientific) | intxns2.18dec23$species1_scientific==""),] 
 sort(intxns2.18dec23$species2_scientific)
-
 # The species2 above just have occurrence as species1. That's ok.
 
 ### SUBSPECIES Considerations - either lump them as species or keep as subspecies...
@@ -327,7 +324,7 @@ sort(intxns2.18dec23$species2_scientific)
 #For now we decide to keep as is; any subspecies will occur if they are
 #explicitly called out as having an interaction. Otherwise, they don't occur in
 #the interaction database. In the future we may decide to lump to species and
-#remove all subspecies. 
+#remove all subspecies. Depends on how many are observed in BBS...
 
 # EDIT Colaptes auratus subspecies Here we Colaptes
 #auratus (AOU = 4123) subspecies to the main species Colaptes auratus auratus
@@ -445,7 +442,7 @@ write.csv(int.raw, file.path(L1_dir,"intxns_types_check.csv"), row.names=F)
 dim(int.raw)
 int.raw <- int.raw[-which(int.raw$interaction == ""), ]
 dim(int.raw)
-# Removed 4 rows
+# Removed 6 rows
 
 # Clean up other columns.
 
@@ -479,7 +476,7 @@ sort(unique(int.raw$BOW_evidence))
 sort(unique(int.raw$n_studies))
 
 ## EXPORT the cleaned interaction pairs data:
-## Run for Dec 18, 2023
+## Run for Dec 19, 2023
 write.csv(int.raw,file.path(L1_dir,"AvianInteractionData_L1.csv"), row.names=F)
 
 ## prep for BBS work: 
