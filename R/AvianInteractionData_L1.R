@@ -49,15 +49,16 @@ names(splist)[names(splist) == "English_Common_Name"] <-"bbs_sp1_common"
 names(splist)[names(splist) == "Seq"] <-"sp1_Seq"
 names(splist)[names(splist) == "AOU"] <-"sp1_AOU"
 
-##### START OF NAME CHANGES #####
-# We are using the Birds of The World naming conventions for species. Some BBS names differ. Some old names are included.
-# Reference the bbsbow_names data to make initial changes to any "other_or_old_bow" names that might appear.
-# Apply changes only to the species1 and species2 columns.
+#### Scientific Name Changes ####
+# We are using the Birds of The World naming conventions for species. 
+# Some BBS names differ. Some old names are included.
+# Reference the bbsbow_names data to make initial changes to any 
+# "other_or_old_bow" names that might appear.
+# Apply changes only to the species1_scientific and species2_scientific columns.
 # First omit any rows with a blank in "other_or_old_bow"
 dim(namechg)
 namechg.orig <- namechg
 namechg<-namechg[!(is.na(namechg$other_or_old_bow) | namechg$other_or_old_bow==""), ]
-#namechg <- namechg[!is.na(namechg$other_or_old_bow), ]
 dim(namechg)
 # Save original copy of int.raw
 int.raw.orig <- int.raw
@@ -248,9 +249,40 @@ splist$species1_scientific[splist$species1_scientific == "Empidonax occidentalis
 int.raw$species1_scientific[int.raw$species1_scientific == "Empidonax occidentalis"] <- "Empidonax difficilis"
 int.raw$species1_scientific[int.raw$species2_scientific == "Empidonax occidentalis"] <- "Empidonax difficilis"
 
-##### END OF NAME CHANGES #####
+## SUBSPECIES Considerations ##
+# Either lump them as species or keep as subspecies...
 
-# duplicate it for easier merging below
+#For now we decide to keep as is; any subspecies will occur if they are
+#explicitly called out as having an interaction. Otherwise, they don't occur in
+#the interaction database. In the future we may decide to lump to species and
+#remove all subspecies. Depends on how many are observed in BBS...
+
+# Example: Colaptes auratus subspecies
+# Colaptes auratus (AOU = 4123) 
+# subspecies to the main species Colaptes auratus auratus (AOU = 4120) 
+# Colaptes auratus auratus x auratus cafer (AOU = 4125) 
+# Colaptes auratus cafer (AOU = 4130)
+
+# int.raw$AOU[int.raw$AOU == 4120] <- 4123
+# int.raw$AOU[int.raw$AOU == 4125] <- 4123
+# int.raw$AOU[int.raw$AOU == 4130] <- 4123
+
+## Remove blank species scientific names
+# If there is no entry for species1_scientific or species2_scientific, omit row
+dim(int.raw)
+# 21841
+int.raw<-int.raw %>% drop_na(species1_scientific)
+int.raw <- int.raw %>% filter(!(species1_scientific==""))
+dim(int.raw)
+# 21823: 18 removed: Dec 20, 2023
+int.raw <- int.raw %>% filter(!(species2_scientific==""))
+dim(int.raw)
+# 21817: 6 more removed: Dec 20, 2023
+
+## End of Species' Scientific name changes ##
+
+#### Checking numbers of species & BBS List ####
+# duplicate it for species2 assessment
 sp2list<-splist
 # rename
 names(sp2list)[names(sp2list) == "sp1_Seq"] <-"sp2_Seq"
@@ -264,45 +296,45 @@ sp2list$Spanish_Common_Name<-NULL
 sp2list$ORDER<-NULL
 sp2list$Family<-NULL
 
-
-# Merge into paired intxns by sp1 (numbers below as of Dec 15, 2023)
+# Merge into paired intxns by sp1 (numbers below as of Dec 19, 2023)
 intxns1<-merge(int.raw,splist,by=c("species1_scientific"),all.x=T, all.y=T)
 dim(int.raw)
-# 21841 rows
+# 21817 rows
 dim(intxns1)
-# 21970 rows
+# 21946 rows
 length(unique(int.raw$species1_scientific))
-# 929 species treated as species1 in original avian interaction data
+# 928 species treated as species1 in original avian interaction data
 length(unique(splist$species1_scientific))
 # 760 species in entire BBS dataset (Grass and Sedge Wren are same spp?)
 length(unique(intxns1$species1_scientific))
-# 1003 species in the merged data
+# 1002 species in the merged data
 length(unique(intxns1$species2_scientific))
-# 2884 species as species2 but these *may* include the scientific names without a match in sp1
+# 2883 species as species2 but these *may* include the scientific names without a match in sp1
 sum(is.na(intxns1$species2_scientific)) 
-# 74 - species that exist in the BBS Species List but are not entered yet in original avian interaction data as species2
+# 74 - species that exist in the BBS Species List but are not entered yet in 
+# original avian interaction data as species2 - these are subspecies and unidentified
 length(unique(int.raw$species2_scientific))
-# 2883 species as species2 
+# 2882 species as species2 
 
 # Repeat above but now for sp2 
 # Merge into paired intxns by sp1
 intxns2<-merge(int.raw,sp2list,by=c("species2_scientific"),all.x=T, all.y=T)
 dim(int.raw)
-# 21841 rows
+# 21817 rows
 dim(intxns2)
-# 21934 rows
+# 21910 rows
 length(unique(int.raw$species2_scientific))
-# 2883 species treated as species2 in original avian interaction data
+# 2882 species treated as species2 in original avian interaction data
 length(unique(splist$species1_scientific))
 # 760 species in entire BBS dataset
 length(unique(intxns2$species2_scientific))
-# 2961 species in the merged data 
+# 2960 species in the merged data 
 sum(is.na(intxns2$species1_scientific)) 
 # 78 NAs - species that exist in the BBS Species List but are not entered yet in original avian interaction data as species1
 length(unique(intxns2$species1_scientific))
-# 930 species as species1 but these *may* include the scientific names without a match in sp1
-length(unique(int.raw$species1_scientific))
 # 929 species as species1 but these *may* include the scientific names without a match in sp1
+length(unique(int.raw$species1_scientific))
+# 928 species as species1 but these *may* include the scientific names without a match in sp1
 
 # Export to check species names: if the row has an AOU associated with species1,
 # it is in BBS; if those rows are without a complete entry, they are missing
@@ -313,144 +345,152 @@ length(unique(int.raw$species1_scientific))
 intxns1a<-intxns1[!is.na(intxns1$sp1_AOU),] # only species with an AOU
 intxns1a<-intxns1a[(is.na(intxns1a$species2_scientific) | intxns1a$species2_scientific==""),] 
 sort(intxns1a$species1_scientific)
+length(intxns1a$species1_scientific)
 
 # Subset out to just include the species2 in BBS without complete entries (i.e., missing species1)
 intxns2a<-intxns2[!is.na(intxns2$sp2_AOU),] # only species with an AOU
 intxns2a<-intxns2a[(is.na(intxns2a$species1_scientific) | intxns2a$species1_scientific==""),] 
 sort(intxns2a$species2_scientific)
+length(intxns2a$species2_scientific)
 # The species2 above just have occurrence as species1. That's ok.
 
-### SUBSPECIES Considerations - either lump them as species or keep as subspecies...
-
-#For now we decide to keep as is; any subspecies will occur if they are
-#explicitly called out as having an interaction. Otherwise, they don't occur in
-#the interaction database. In the future we may decide to lump to species and
-#remove all subspecies. Depends on how many are observed in BBS...
-
-# EDIT Colaptes auratus subspecies Here we Colaptes
-#auratus (AOU = 4123) subspecies to the main species Colaptes auratus auratus
-#(AOU = 4120) Colaptes auratus auratus x auratus cafer (AOU = 4125) Colaptes
-#auratus cafer (AOU = 4130)
-
-# bbs.allobsRPID$AOU[bbs.allobsRPID$AOU == 4120] <- 4123
-# bbs.allobsRPID$AOU[bbs.allobsRPID$AOU == 4125] <- 4123
-# bbs.allobsRPID$AOU[bbs.allobsRPID$AOU == 4130] <- 4123
-
-## END OF CHECKING Species Scientific Names ##
-
-## Fixing Species Common Names - this is done for BBS look-up; need to replace
-#with global names later, e.g., BirdNet ## Create intxns12 which merges splist
-#and species1_scientific, then sp2list and species2_scientific, by only keeps
-#interaction data.
+#### Fixing Species' Common Names ####
+# This is done for BBS look-up; need to replace with global names later, e.g., BirdNet 
+# Create intxns12 which merges splist and species1_scientific, then sp2list and 
+# species2_scientific, by only keeps interaction data.
 intxns12<-merge(int.raw,splist,by=c("species1_scientific"),all.x=T)
-intxns12<-merge(intxns12,sp2list,by=c("species2_scientific"),all.x=T)
-write.csv(intxns12, file.path(L1_dir,"intxns12.csv"), row.names=F) 
+dim(int.raw)
+# 21817
+dim(intxns12)
+# 21872
+#write.csv(intxns12, file.path(L1_dir, "intxns12.csv"), row.names=F) 
 
-# Create an extra species1 column to test mutate below
-intxns12$species1_common1<-intxns12$species1_common
+intxns12<-merge(intxns12,sp2list,by=c("species2_scientific"),all.x=T)
+dim(intxns12)
+# 21889
+
+# Create an extra species1 column to test mutate & re-assignment below
+intxns12$species1_common_orig<-intxns12$species1_common
 
 # If a species has a AOU, assign the common name based on the BBS splist
 intxns12 <- intxns12 %>% 
   mutate(species1_common = ifelse(!is.na(sp1_AOU), bbs_sp1_common, species1_common))
-write.csv(intxns12, file.path(L1_dir,"intxns1.csv"), row.names=F) 
+dim(intxns12)
+# 21889
+#write.csv(intxns12, file.path(L1_dir,"intxns12.csv"), row.names=F) 
 
-intxns2$species2_common1<-intxns2$species2_common
+intxns12$species2_common_orig<-intxns12$species2_common
 # If a species has a AOU, assign the common name based on the BBS splist
-intxns2 <- intxns2 %>% 
+intxns12 <- intxns12 %>% 
   mutate(species2_common = ifelse(!is.na(sp2_AOU), bbs_sp2_common, species2_common))
-write.csv(intxns2, file.path(L1_dir,"intxns2.csv"), row.names=F) 
+#write.csv(intxns12, file.path(L1_dir,"intxns12.csv"), row.names=F) 
+dim(intxns12)
+# 21889
 
-
-# For now we are not doing this - it is too cumbersome. Just rely on scientific
-# names. If decide to do it: Omit common names from int.raw ahead of merging with BBS Species List
-# (we will replace them with the official BBS names) Note that this removes X
-# rows where there is no species2_scientific in int.raw, but there are
-# interactions recorded
-
-# make a copy of int.raw
-#int.l1<-int.raw
-#int.l1$species1_common <-NULL
-#int.l1$species2_common <-NULL
-
-# Assign common name columns with the scientific name (this will only apply to
-# BBS list species). Change names in species1_common and species2_common
-# according to the look-up table so that all species1 and species2 interactors
-# have the up-to-date BOW common name.
-
-#int.l1<-merge(int.l1,splist,by=c("species1_scientific"),all.x=T, all.y=T)
-#int.l2<-merge(int.l1,sp2list,by=c("species2_scientific"),all.x=T, all.y=T)
-#dim(int.l2)
-# 21998
-
+# These all worked for replacements. Now remove extra columns
+intxns12$species1_common_orig<-NULL
+intxns12$species2_common_orig<-NULL
+intxns12$bbs_sp1_common<-NULL
+intxns12$bbs_sp2_common<-NULL
+intxns12$French_Common_Name<-NULL
+intxns12$Spanish_Common_Name<-NULL
+intxns12$Spanish_Common_Name<-NULL
+intxns12$ORDER<-NULL
+intxns12$Family<-NULL
+intxns12$Genus<-NULL
+intxns12$Genus2<-NULL
+intxns12$Species<-NULL
+intxns12$Species2<-NULL
+intxns12$sp1_Seq<-NULL
+intxns12$sp2_Seq<-NULL
 
 ### Editing the interaction columns to standardize names ###
 
 # Unique interaction types:
-sort(unique(int.raw$interaction))
+sort(unique(intxns12$interaction))
 # Remove extra end spaces:
-int.raw$interaction<-trimws(int.raw$interaction, "r")
+intxns12$interaction<-trimws(intxns12$interaction, "r")
 # Make all lowercase
-int.raw$interaction<-tolower(int.raw$interaction)
-sort(unique(int.raw$interaction))
+intxns12$interaction<-tolower(intxns12$interaction)
+sort(unique(intxns12$interaction))
 
 # Some misspellings/typos:
-int.raw$interaction[int.raw$interaction=="amenslism"] <- "amensalism"
-int.raw$interaction[int.raw$interaction=="brood"] <- "brood parasitism"
-int.raw$interaction[int.raw$interaction=="brood-parasitism"] <- "brood parasitism"
-int.raw$interaction[int.raw$interaction=="call mimicking"] <- "call mimicry"
-int.raw$interaction[int.raw$interaction=="comensalism"] <- "commensalism"
-int.raw$interaction[int.raw$interaction=="commenalism"] <- "commensalism"
-int.raw$interaction[int.raw$interaction=="commesalism"] <- "commensalism"
-int.raw$interaction[int.raw$interaction=="commensalism -call mimicry"] <- "commensalism-call mimicry"
-int.raw$interaction[int.raw$interaction=="commensalism-chick adoptio"] <- "commensalism-chick adoption"
-int.raw$interaction[int.raw$interaction=="comeptition"] <- "competition"
-int.raw$interaction[int.raw$interaction=="competiton"] <- "competition"
-int.raw$interaction[int.raw$interaction=="competition - nest site"] <- "competition-nest site"
-int.raw$interaction[int.raw$interaction=="courting"] <- "courtship"
-int.raw$interaction[int.raw$interaction=="faciliation - comigration"] <- "facilitation-comigration"
-int.raw$interaction[int.raw$interaction=="facilitation-comigrate"] <- "facilitation-comigration"
-int.raw$interaction[int.raw$interaction=="facilitation-comigratio"] <- "facilitation-comigration"
-int.raw$interaction[int.raw$interaction=="facilitaion-comigration"] <- "facilitation-comigration"
-int.raw$interaction[int.raw$interaction=="faciltiation-mixed flocking"] <- "facilitation-mixed flocking"
-int.raw$interaction[int.raw$interaction=="facillitation"] <- "facilitation"
-int.raw$interaction[int.raw$interaction=="faciliation - mixed flocking"] <- "facilitation-mixed flocking"
-int.raw$interaction[int.raw$interaction=="faciltation-mixed flocking"] <- "facilitation-mixed flocking"
-int.raw$interaction[int.raw$interaction=="facilitation-mixed flock"] <- "facilitation-mixed flocking"
-int.raw$interaction[int.raw$interaction=="faciltation-feeding"] <- "facilitation-feeding"
-int.raw$interaction[int.raw$interaction=="faciltiation-feeding"] <- "facilitation-feeding"
-int.raw$interaction[int.raw$interaction=="faciltiation"] <- "facilitation"
-int.raw$interaction[int.raw$interaction=="hybrization"] <- "hybridization"
-int.raw$interaction[int.raw$interaction=="kleptoparasitsim"] <- "kleptoparasitism"
-int.raw$interaction[int.raw$interaction=="kleptoparasitsm"] <- "kleptoparasitism"
-int.raw$interaction[int.raw$interaction=="kleptoparisitism"] <- "kleptoparasitism"
-int.raw$interaction[int.raw$interaction=="kleptoparasitism of nest material"] <- "kleptoparasitism-nest material"
+intxns12$interaction[intxns12$interaction=="amenslism"] <- "amensalism"
+intxns12$interaction[intxns12$interaction=="brood"] <- "brood parasitism"
+intxns12$interaction[intxns12$interaction=="brood-parasitism"] <- "brood parasitism"
+intxns12$interaction[intxns12$interaction=="call mimicking"] <- "call mimicry"
+intxns12$interaction[intxns12$interaction=="call mimickry"] <- "call mimicry"
+intxns12$interaction[intxns12$interaction=="comensalism"] <- "commensalism"
+intxns12$interaction[intxns12$interaction=="commenalism"] <- "commensalism"
+intxns12$interaction[intxns12$interaction=="commesalism"] <- "commensalism"
+intxns12$interaction[intxns12$interaction=="commensalism -call mimicry"] <- "commensalism-call mimicry"
+intxns12$interaction[intxns12$interaction=="commensalism-chick adoptio"] <- "commensalism-chick adoption"
+intxns12$interaction[intxns12$interaction=="comeptition"] <- "competition"
+intxns12$interaction[intxns12$interaction=="competiton"] <- "competition"
+intxns12$interaction[intxns12$interaction=="competition - nest site"] <- "competition-nest site"
+intxns12$interaction[intxns12$interaction=="courting"] <- "courtship"
+intxns12$interaction[intxns12$interaction=="faciliation - comigration"] <- "facilitation-comigration"
+intxns12$interaction[intxns12$interaction=="faciliation - comigration"] <- "facilitation-comigration"
+intxns12$interaction[intxns12$interaction=="facilitation-comigrate"] <- "facilitation-comigration"
+intxns12$interaction[intxns12$interaction=="facilitation-comigratio"] <- "facilitation-comigration"
+intxns12$interaction[intxns12$interaction=="facilitaion-comigration"] <- "facilitation-comigration"
+intxns12$interaction[intxns12$interaction=="faciltiation-mixed flocking"] <- "facilitation-mixed flocking"
+intxns12$interaction[intxns12$interaction=="facillitation"] <- "facilitation"
+intxns12$interaction[intxns12$interaction=="faciliation - mixed flocking"] <- "facilitation-mixed flocking"
+intxns12$interaction[intxns12$interaction=="faciltation-mixed flocking"] <- "facilitation-mixed flocking"
+intxns12$interaction[intxns12$interaction=="faciliation - mixed flocking"] <- "facilitation-mixed flocking"
+intxns12$interaction[intxns12$interaction=="facilitation-mixed flock"] <- "facilitation-mixed flocking"
+intxns12$interaction[intxns12$interaction=="faciltation-feeding"] <- "facilitation-feeding"
+intxns12$interaction[intxns12$interaction=="faciltiation-feeding"] <- "facilitation-feeding"
+intxns12$interaction[intxns12$interaction=="faciltiation"] <- "facilitation"
+intxns12$interaction[intxns12$interaction=="hybrization"] <- "hybridization"
+intxns12$interaction[intxns12$interaction=="kleptoparasitsim"] <- "kleptoparasitism"
+intxns12$interaction[intxns12$interaction=="kleptoparasitsm"] <- "kleptoparasitism"
+intxns12$interaction[intxns12$interaction=="kleptoparisitism"] <- "kleptoparasitism"
+intxns12$interaction[intxns12$interaction=="kleptoparasitism of nest material"] <- "kleptoparasitism-nest material"
 # Checked and all of these are brood parasitism as of Dec 18, 2023
-int.raw$interaction[int.raw$interaction=="parasitism"] <- "brood parasitism"
-int.raw$interaction[int.raw$interaction=="predation-scavenger"] <- "predation-scavenging"
+intxns12$interaction[intxns12$interaction=="parasitism"] <- "brood parasitism"
+intxns12$interaction[intxns12$interaction=="predation-scavenger"] <- "predation-scavenging"
 
-sort(unique(int.raw$interaction))
+sort(unique(intxns12$interaction))
 
-# Ignore: 
+# Ignore these interactions for now: 
 # "combined species"
 # "copulation?" - for 2 swallows
 
 # Check the codings for interaction types
 # 0 if "hybridization"
-int.entries<-int.raw %>% distinct(interaction, effect_sp1_on_sp2, effect_sp2_on_sp1)
+int.entries<-intxns12 %>% distinct(interaction, effect_sp1_on_sp2, effect_sp2_on_sp1)
 arrange(int.entries, by=interaction)
 
 # If a row is "hybridization" make it 0,0
-int.raw$effect_sp1_on_sp2[int.raw$interaction == "hybridization"] <- 0
-int.raw$effect_sp2_on_sp1[int.raw$interaction == "hybridization"] <- 0
+intxns12$effect_sp1_on_sp2[intxns12$interaction == "hybridization"] <- 0
+intxns12$effect_sp2_on_sp1[intxns12$interaction == "hybridization"] <- 0
 
 # If a row is "co-occur" make it 0,0
-int.raw$effect_sp1_on_sp2[int.raw$interaction == "co-occur"] <- 0
-int.raw$effect_sp2_on_sp1[int.raw$interaction == "co-occur"] <- 0
+intxns12$effect_sp1_on_sp2[intxns12$interaction == "co-occur"] <- 0
+intxns12$effect_sp2_on_sp1[intxns12$interaction == "co-occur"] <- 0
 
-int.entries<-int.raw %>% distinct(interaction, effect_sp1_on_sp2, effect_sp2_on_sp1)
+# If a row is "play" make it 0,0
+intxns12$effect_sp1_on_sp2[intxns12$interaction == "play"] <- 0
+intxns12$effect_sp2_on_sp1[intxns12$interaction == "play"] <- 0
+
+# If a row is "courtship" make it 0,0
+intxns12$effect_sp1_on_sp2[intxns12$interaction == "courtship"] <- 0
+intxns12$effect_sp2_on_sp1[intxns12$interaction == "courtship"] <- 0
+
+# If a row is "copulation" or "copulation?" or "breeding" make it 0,0
+intxns12$effect_sp1_on_sp2[intxns12$interaction == "copulation"] <- 0
+intxns12$effect_sp2_on_sp1[intxns12$interaction == "copulation"] <- 0
+intxns12$effect_sp1_on_sp2[intxns12$interaction == "copulation?"] <- 0
+intxns12$effect_sp2_on_sp1[intxns12$interaction == "copulation?"] <- 0
+intxns12$effect_sp1_on_sp2[intxns12$interaction == "breeding"] <- 0
+intxns12$effect_sp2_on_sp1[intxns12$interaction == "breeding"] <- 0
+
+int.entries<-intxns12 %>% distinct(interaction, effect_sp1_on_sp2, effect_sp2_on_sp1)
 arrange(int.entries, by=interaction)
 
-write.csv(int.raw, file.path(L1_dir,"intxns_types_check.csv"), row.names=F) 
+#write.csv(intxns12, file.path(L1_dir,"intxns_types_check.csv"), row.names=F) 
 # Check if brood parasitism is coded correctly for Brown Headed Cowbird. Did
 # this by filtering out these species in exported csv... for next iteration, do
 # this in code. As of Dec. 19, 2023, all are correct. There are a few funny ones
@@ -460,66 +500,73 @@ write.csv(int.raw, file.path(L1_dir,"intxns_types_check.csv"), row.names=F)
 #Verdin	Brown-headed Cowbird	Auriparus flaviceps	Molothrus ater	-1	1	brood parasitism
 #Verdin	Bronzed Cowbird	Auriparus flaviceps	Molothrus aeneus	-1	1	brood parasitism
 
-# Remove the NA rows for interaction type - these are all the rows for "hybridization" which does not have a determined effect
-dim(int.raw)
-int.raw <- int.raw[-which(int.raw$interaction == ""), ]
-dim(int.raw)
-# Removed 6 rows
+# Remove the blank entries for interaction type if they exist 
+dim(intxns12)
+intxns12 <- intxns12 %>% filter(!(interaction==""))
+dim(intxns12)
+# no blanks exist
 
 # Clean up other columns.
 
 ## nonbreeding season
-sort(unique(int.raw$nonbreedingseason))
-int.raw$nonbreedingseason[int.raw$nonbreedingseason == "Yes"] <- "yes"
-int.raw$nonbreedingseason[int.raw$nonbreedingseason == "YES"] <- "yes"
-int.raw$nonbreedingseason[int.raw$nonbreedingseason == "YSE"] <- "yes"
-int.raw$nonbreedingseason[int.raw$nonbreedingseason == "yes "] <- "yes"
-int.raw$nonbreedingseason[int.raw$nonbreedingseason == "potential"] <- "possibly"
-sort(unique(int.raw$nonbreedingseason))
+sort(unique(intxns12$nonbreedingseason))
+intxns12$nonbreedingseason[intxns12$nonbreedingseason == "Yes"] <- "yes"
+intxns12$nonbreedingseason[intxns12$nonbreedingseason == "YES"] <- "yes"
+intxns12$nonbreedingseason[intxns12$nonbreedingseason == "YSE"] <- "yes"
+intxns12$nonbreedingseason[intxns12$nonbreedingseason == "yes "] <- "yes"
+intxns12$nonbreedingseason[intxns12$nonbreedingseason == "potential"] <- "possibly"
+# nonbreeding season: if there is a blank or NA, make it "no"
+intxns12$nonbreedingseason[intxns12$nonbreedingseason==""] <- "no"
+intxns12$nonbreedingseason[is.na(intxns12$nonbreedingseason)] <- "no"
+sort(unique(intxns12$nonbreedingseason))
 
 ## BOW_evidence
-sort(unique(int.raw$BOW_evidence))
 # Remove extra end spaces:
-int.raw$BOW_evidence<-trimws(int.raw$BOW_evidence, "r")
+intxns12$BOW_evidence<-trimws(intxns12$BOW_evidence, "r")
 # Make all lowercase
-int.raw$BOW_evidence<-tolower(int.raw$BOW_evidence)
+intxns12$BOW_evidence<-tolower(intxns12$BOW_evidence)
 
-int.raw$BOW_evidence[int.raw$BOW_evidence == "1ref"] <- "1 ref"
-int.raw$BOW_evidence[int.raw$BOW_evidence == "one ref"] <- "1 ref"
-int.raw$BOW_evidence[int.raw$BOW_evidence == "possible"] <- "potential"
-int.raw$BOW_evidence[int.raw$BOW_evidence == "stong"] <- "strong"
-int.raw$BOW_evidence[int.raw$BOW_evidence == "strong very strong!"] <- "strong"
-int.raw$BOW_evidence[int.raw$BOW_evidence == "weak (circumstantial evidence)"] <- "weak"
-int.raw$BOW_evidence[int.raw$BOW_evidence == "circumstantial"] <- "weak"
-int.raw$BOW_evidence[int.raw$BOW_evidence == "weal"] <- "weak"
-sort(unique(int.raw$BOW_evidence))
+intxns12$BOW_evidence[intxns12$BOW_evidence == "1ref"] <- "1 ref"
+intxns12$BOW_evidence[intxns12$BOW_evidence == "one ref"] <- "1 ref"
+intxns12$BOW_evidence[intxns12$BOW_evidence == "possible"] <- "potential"
+intxns12$BOW_evidence[intxns12$BOW_evidence == "stong"] <- "strong"
+intxns12$BOW_evidence[intxns12$BOW_evidence == "strong very strong!"] <- "strong"
+intxns12$BOW_evidence[intxns12$BOW_evidence == "weak (circumstantial evidence)"] <- "weak"
+intxns12$BOW_evidence[intxns12$BOW_evidence == "circumstantial"] <- "weak"
+intxns12$BOW_evidence[intxns12$BOW_evidence == "weal"] <- "weak"
+sort(unique(intxns12$BOW_evidence))
 
 ## n_studies
-sort(unique(int.raw$n_studies))
+sort(unique(intxns12$n_studies))
 
-## uncertain_interaction
-sort(unique(int.raw$uncertain_interaction))
+## uncertain_interaction - lots here; @Emily we need to work through these to check them.
+sort(unique(intxns12$uncertain_interaction))
 # 580 entries with some kind of note
 
 ## EXPORT the cleaned interaction pairs data:
-## Run for Dec 19, 2023
-write.csv(int.raw,file.path(L1_dir,"AvianInteractionData_L1.csv"), row.names=F)
+# Order the data by species1_scientific
+intxns12 <- intxns12 %>% relocate(species2_scientific, .after = species1_common)
+## Ran for Dec 20, 2023 - but, need to update common names based on BirdNet in future
+write.csv(intxns12,file.path(L1_dir,"AvianInteractionData_L1.csv"), row.names=F)
 
 ## prep for BBS work: 
-## Remove non-breeding season interactions from the BBS subset of data. 
-int.bbs<-int.raw
-sort(unique(int.bbs$nonbreedingseason))
+## Remove non-breeding season interactions from the BBS subset of data because
+# BBS observations are only during breeding season.
+int.bbs<-intxns12
+table(int.bbs$nonbreedingseason)
+
 # Remove the "yes" for nonbreedingseason 
+int.bbs <- int.bbs %>% filter(nonbreedingseason!="yes")
 dim(int.bbs)
-int.bbs <- int.bbs[-which(int.bbs$nonbreedingseason == "yes"), ]
-dim(int.bbs)
-# 2450 cases where interaction is outside breeding season
+# 2446 cases where interaction is "yes" for nonbreeding season
+
+# Decide whetehr to drop the entries with uncertain interactions; these need to be updated & checked.
 
 # keep just essential columns
-int.bbs<-subset(int.bbs,select=c("species1_common",
-                                       "species2_common",
-                                       "species1_scientific",
+int.bbs<-subset(int.bbs,select=c("species1_scientific",
+                                       "species1_common",
                                        "species2_scientific",
+                                       "species2_common",
                                        "effect_sp1_on_sp2",
                                        "effect_sp2_on_sp1",
                                        "interaction",
@@ -530,11 +577,6 @@ int.bbs<-subset(int.bbs,select=c("species1_common",
                                        "entry_date",
                                        "uncertain_interaction"))
 
-int.bbs1<-full_join(int.bbs, splist, by="species1_scientific",keep = TRUE)
-
-int.bbs1 <-int.bbs %>% 
-  full_join(splist, by = c("species1_scientific" = "species1_scientific"), relationship = "many-to-many") %>%
-  mutate(species1_common = bbs_sp1_common) %>%
-  select(.)
+write.csv(int.bbs,file.path(L1_dir,"AvianInteractionData_BBS_L1.csv"), row.names=F)
 
 
