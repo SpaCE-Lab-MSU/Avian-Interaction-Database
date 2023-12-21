@@ -30,7 +30,7 @@ L1_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L1"
 int.raw<-read.csv(file.path(L0_dir,"AvianInteractionData_L0.csv"))
 
 # Read in species list: all species in BBS (the 2023 release which includes all species as of 2022)
-splist<-read.csv(file.path(L0_dir,"bbs_splist_L0.csv"))
+splist<-read.csv(file.path(L1_dir,"bbs_splist_2022.csv"))
 
 # Read in the look-up table with the different bbs & bow & old names for species
 namechg<-read.csv(file.path(L0_dir,"bbsbow_names.csv"))
@@ -293,6 +293,7 @@ names(sp2list)[names(sp2list) == "bbs_sp1_common"] <-"bbs_sp2_common"
 names(sp2list)[names(sp2list) == "species1_scientific"] <-"species2_scientific"
 names(sp2list)[names(sp2list) == "Genus"] <-"Genus2"
 names(sp2list)[names(sp2list) == "Species"] <-"Species2"
+names(sp2list)[names(sp2list) == "genus_species"] <-"genus_species2"
 sp2list$French_Common_Name<-NULL
 sp2list$Spanish_Common_Name<-NULL
 sp2list$ORDER<-NULL
@@ -407,6 +408,8 @@ intxns12$Species<-NULL
 intxns12$Species2<-NULL
 intxns12$sp1_Seq<-NULL
 intxns12$sp2_Seq<-NULL
+intxns12$genus_species<-NULL
+intxns12$genus_species2<-NULL
 
 #*******************************#
 #### Editing the interaction columns to standardize names ####
@@ -556,7 +559,10 @@ intxns12 <- intxns12 %>% relocate(species2_scientific, .after = species1_common)
 ## Ran for Dec 21, 2023 - but, need to update common names based on BirdNet in future
 write.csv(intxns12,file.path(L1_dir,"AvianInteractionData_L1.csv"), row.names=F)
 
-## prep for BBS work: 
+#*******************************#
+## BBS work: 
+#*******************************#
+
 ## Remove non-breeding season interactions from the BBS subset of data because
 # BBS observations are only during breeding season.
 int.bbs<-intxns12
@@ -582,7 +588,19 @@ int.bbs<-subset(int.bbs,select=c("species1_scientific",
                                        "nonbreedingseason",
                                        "recorder",
                                        "entry_date",
-                                       "uncertain_interaction"))
+                                       "uncertain_interaction",
+                                       "sp1_AOU",
+                                       "sp2_AOU"))
+
+#*******************************#
+# Omit the non-BBS rows (rows that do not contain one of the BBS species)
+#*******************************#
+
+# Remove rows that do not have a AOU associated with them 
+int.bbs1<-int.bbs %>% 
+  filter(!is.na(sp1_AOU) | !is.na(sp2_AOU))
+dim(int.bbs)-dim(int.bbs1)
+# 1173 rows that do not contain a BBS species
 
 write.csv(int.bbs,file.path(L1_dir,"AvianInteractionData_BBS_L1.csv"), row.names=F)
 
