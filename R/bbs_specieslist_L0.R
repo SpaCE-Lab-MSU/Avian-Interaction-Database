@@ -23,6 +23,7 @@ L0_dir <- Sys.getenv("L0DIR")
 
 # Above .Renviron not working for PLZ; hard-coding in here
 L0_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0"
+L1_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L1"
 
 # Below section is modified from: https://rdrr.io/github/davharris/mistnet/src/extras/BBS-analysis/data_extraction/species-handling.R
 # Read in the SpeciesList file: 
@@ -134,6 +135,8 @@ bbs.splist.2022[nrow(bbs.splist.2022) + 1,] = list(Seq = "",
                                                     Genus = "Cistothorus",
                                                     Species = "platensis")
 
+# Make a column for genus_species
+bbs.splist.2022$genus_species<- do.call(paste, c(bbs.splist.2022[c("Genus", "Species")], sep = " "))
 dim(bbs.splist.2022)
 # 761 species in BBS with the split to 2 species: Sedge and Grass Wren
 
