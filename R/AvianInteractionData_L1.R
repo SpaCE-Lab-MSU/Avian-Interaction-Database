@@ -308,7 +308,7 @@ dim(intxns1)
 length(unique(int.raw$species1_scientific))
 # 928 species treated as species1 in original avian interaction data
 length(unique(splist$species1_scientific))
-# 760 species in entire BBS dataset (Grass and Sedge Wren are same spp?)
+# 759 species in entire BBS dataset (Grass and Sedge Wren are same spp?)
 length(unique(intxns1$species1_scientific))
 # 1002 species in the merged data
 length(unique(intxns1$species2_scientific))
@@ -329,7 +329,7 @@ dim(intxns2)
 length(unique(int.raw$species2_scientific))
 # 2883 species treated as species2 in original avian interaction data
 length(unique(splist$species1_scientific))
-# 760 species in entire BBS dataset
+# 759 species in entire BBS dataset
 length(unique(intxns2$species2_scientific))
 # 2961 species in the merged data 
 sum(is.na(intxns2$species1_scientific)) 
@@ -562,10 +562,23 @@ write.csv(intxns12,file.path(L1_dir,"AvianInteractionData_L1.csv"), row.names=F)
 #*******************************#
 ## BBS work: 
 #*******************************#
+int.bbs<-intxns12
+# Sedge Wren & Grass Wren - rename to match BBS 2022 list (not BOW) for easier merging later
+# Sedge Wren (Cistothorus	stellaris) and Grass Wren (Cistothorus	platensis) are 2 different species,
+# Previously Sedge Wren (Cistothorus	platensis).
+dplyr::filter(int.bbs, species1_scientific %in% c("Cistothorus stellaris")) # in interactions 
+dplyr::filter(int.bbs, species2_scientific %in% c("Cistothorus stellaris")) # in interactions 
+dplyr::filter(splist, species1_scientific %in% c("Cistothorus stellaris")) # in BBS list 
+dplyr::filter(int.bbs, species1_scientific %in% c("Cistothorus platensis")) # in interactions 
+dplyr::filter(int.bbs, species2_scientific %in% c("Cistothorus platensis")) # in interactions 
+dplyr::filter(splist, species1_scientific %in% c("Cistothorus	platensis")) # not in splist 
+# RENAME: BBS & BOW: change Cistothorus platensis to Cistothorus stellaris
+#splist$species1_scientific[splist$species1_scientific == "Cistothorus platensis"] <- "Cistothorus stellaris"
+int.bbs$species1_scientific[int.bbs$species1_scientific == "Cistothorus platensis"] <- "Cistothorus stellaris"
+int.bbs$species1_scientific[int.bbs$species2_scientific == "Cistothorus platensis"] <- "Cistothorus stellaris"
 
 ## Remove non-breeding season interactions from the BBS subset of data because
 # BBS observations are only during breeding season.
-int.bbs<-intxns12
 table(int.bbs$nonbreedingseason)
 
 # Remove the "yes" for nonbreedingseason 
@@ -600,7 +613,7 @@ int.bbs<-subset(int.bbs,select=c("species1_scientific",
 int.bbs1<-int.bbs %>% 
   filter(!is.na(sp1_AOU) | !is.na(sp2_AOU))
 dim(int.bbs)-dim(int.bbs1)
-# 1173 rows that do not contain a BBS species
+# 1174 rows that do not contain a BBS species
 
 write.csv(int.bbs,file.path(L1_dir,"AvianInteractionData_BBS_L1.csv"), row.names=F)
 

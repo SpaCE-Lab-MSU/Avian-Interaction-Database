@@ -119,22 +119,6 @@ return(bbs.splist)
 bbs.splist.2022 = validateSpecies()
 dim(bbs.splist.2022)
 
-# A few species have been recently combined or split but there may be entries in the interaction database
-# with the old name. Add them here:
-
-# Sedge Wren (Cistothorus	stellaris) and Grass Wren (Cistothorus	platensis) are 2 different species,
-# Previously Sedge Wren (Cistothorus	platensis).
-
-bbs.splist.2022[nrow(bbs.splist.2022) + 1,] = list(Seq = "",
-                                                    AOU = "07240", 
-                                                    English_Common_Name = "Grass Wren",
-                                                    French_Common_Name = "Troglodyte bec court",
-                                                    Spanish_Common_Name = "Cistothorus platensis",
-                                                    ORDER = "Passeriformes",
-                                                    Family = "Troglodytidae",
-                                                    Genus = "Cistothorus",
-                                                    Species = "platensis")
-
 # Make a column for genus_species
 bbs.splist.2022$genus_species<- do.call(paste, c(bbs.splist.2022[c("Genus", "Species")], sep = " "))
 dim(bbs.splist.2022)
