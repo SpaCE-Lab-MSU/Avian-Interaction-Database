@@ -62,6 +62,7 @@ intxns12u <- intxns12u[!grepl("recently split", intxns12u$uncertain_interaction,
 intxns12u <- intxns12u[!grepl("previously",intxns12u$uncertain_interaction, ignore.case = TRUE),]
 intxns12u <- intxns12u[!grepl("?",intxns12u$uncertain_interaction, fixed = TRUE),]
 intxns12u <- intxns12u[!grepl("yes",intxns12u$uncertain_interaction,ignore.case = TRUE),]
+intxns12u <- intxns12u[!grepl("unsubstantiated",intxns12u$uncertain_interaction,ignore.case = TRUE),]
 
 #check list for additional intxns to remove
 sort(unique(intxns12u$uncertain_interaction))
