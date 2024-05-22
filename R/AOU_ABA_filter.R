@@ -1,5 +1,3 @@
-#this took ~1 hour :)
-
 
 # Clear all existing data
 rm(list=ls())
@@ -21,6 +19,8 @@ Clements <- read.csv(file.path(dir, "Clements-v2023-October-2023.csv"))
 
 #Clements - merge species codes 
 ## this is really messy - way to simplify?
+## also does not work perfectly - would be best if we could search by species name
+
 Clements_sp <- Clements
 
 #filters characters only (removes digits)
