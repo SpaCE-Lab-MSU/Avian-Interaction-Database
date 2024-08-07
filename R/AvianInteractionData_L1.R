@@ -36,8 +36,56 @@ int.raw<-read.csv(file.path(L0_dir,"AvianInteractionData_L0.csv"))
 
 # Read in species list: all species in BBS (the 2023 release which includes all species as of 2022)
 splist<-read.csv(file.path(L0_dir,"bbs_splist_2022_L0.csv"))
+# Modified version with 12 extra entries for combined species (from Jeff
+# Hostetler @ BBS: August 7, 2024; this version contains some different genus
+# species as well, making 12 additions for combined species and 16 that are
+# actually old outdated names as far as I can tell. We will only use the 12
+# combined species)
+splist2<-read.csv(file.path(L0_dir,"SpeciesList2.csv"))
+splist$Seq<-NULL
+splist2$Seq<-NULL
+splist3<-merge(splist2,splist, by=c("AOU","English_Common_Name","French_Common_Name","Spanish_Common_Name","ORDER","Family","Genus","Species"),all.x=T, all.y=T)
 
-# Read in the look-up table with the different bbs & bow & old names for species
+# Differences in SpeciesList2:
+splist3a<-splist3[!complete.cases(splist3), ]
+splist3a
+#       AOU                              English_Common_Name
+# 44    550                                         Mew Gull
+# 82   1206 unid. Double-crested Cormorant / Great Cormorant
+# 83   1207                       unid. west coast cormorant
+# 86   1220                               Brandt's Cormorant
+# 88   1230                                Pelagic Cormorant
+# 90   1240                              Red-faced Cormorant
+# 99   1326 hybrid Mallard x Mexican, Black, or Mottled Duck
+# 254  2980                                    Spruce Grouse
+# 316  3620                                 Crested Caracara
+# 409  4391                       Violet-crowned Hummingbird
+# 474  4882          unid. American Crow / Northwestern Crow
+# 475  4890                (Northwestern Crow) American Crow
+# 491  5012    unid. Eastern Meadowlark / Western Meadowlark
+# 714  7240                                       Sedge Wren
+# 741  7430                                          Bushtit
+# 747  7490                             Ruby-crowned Kinglet
+# 775 30010                          Western & Clark's Grebe
+# 776 31320                              Mallard (all forms)
+# 777 31940                     Great Blue Heron (all forms)
+# 778 33370                      Red-tailed Hawk (all forms)
+# 779 34120                     Northern Flicker (all forms)
+# 780 34641           Cordilleran & Pacific-slope Flycatcher
+# 781 34660                        Alder & Willow Flycatcher
+# 782 34810               California & Woodhouse's Scrub-Jay
+# 783 34880                                    American Crow
+# 784 35670                      Dark-eyed Junco (all forms)
+# 785 35740                       Sagebrush & Bell's Sparrow
+# 786 36550                Yellow-rumped Warbler (all forms)
+
+combinedAOUs<-splist2[c(763:774),]
+combinedAOUs$genus_species <- do.call(paste, c(combinedAOUs[c("Genus", "Species")], sep = " "))
+
+# Add the combined AOUs to the end of the current bbs species list:
+splist<-rbind(splist, combinedAOUs)
+
+# Read in our look-up table with the different bbs & bow & old names for species
 namechg<-read.csv(file.path(L0_dir,"bbsbow_names.csv"))
 
 # make "genus species" columns able to merge
@@ -72,6 +120,9 @@ int.raw$species1_scientific<-trimws(int.raw$species1_scientific, "r")
 int.raw$species1_scientific<-trimws(int.raw$species1_scientific, "l")
 int.raw$species2_scientific<-trimws(int.raw$species2_scientific, "r")
 int.raw$species2_scientific<-trimws(int.raw$species2_scientific, "l")
+# Standardize "sp."
+int.raw$species1_scientific<-gsub(" spp."," sp.",int.raw$species1_scientific)
+int.raw$species2_scientific<-gsub(" spp."," sp.",int.raw$species2_scientific)
 
 sort(unique(int.raw$species1_scientific))
 
@@ -96,6 +147,12 @@ int.raw[int.raw=="Icterus cuccullatus"] <- "Icterus cucullatus"
 int.raw[int.raw=="Helmitheros vermivora"] <- "Helmitheros vermivorum"
 int.raw[int.raw=="Cochlearius cohlearius"] <- "Cochlearius cochlearius"
 int.raw[int.raw=="Accipiter cooperi"] <- "Accipiter cooperii"
+sort(unique(int.raw$species1_scientific))
+
+sort(unique(int.raw$species2_scientific))
+int.raw[int.raw=="Accipiter getilis"] <- "Accipiter gentilis"
+int.raw[int.raw=="Accipitiridae sp."] <- "Accipitridae sp."
+int.raw[int.raw=="Accipitrid sp."] <- "Accipitridae sp."
 
 # Change names in species1_scientific and species2_scientific according to the look-up table
 # so that all species1 and species2 interactors have the up-to-date BOW name.
@@ -1102,11 +1159,11 @@ dim(int.bbs)
 
 #### End of subspecies edits. Export L1 interaction data for BBS analysis
 
-write.csv(int.bbs,file.path(L1_dir,"AvianInteractionData_BBS_L1.csv"), row.names=F)
+## Note to check this before using new version:
+write.csv(int.bbs,file.path(L1_dir,"AvianInteractionData_BBS_L1_7Aug2024.csv"), row.names=F)
 
 # Export updated bbs species names list
 names(bbs.splist)[names(bbs.splist) == "bbs_sp1_common"] <-"English_Common_Name"
-names(bbs.splist)[names(bbs.splist) == "sp1_Seq"] <-"Seq"
 names(bbs.splist)[names(bbs.splist) == "sp1_AOU"] <-"AOU"
 
 write.csv(bbs.splist,file.path(L1_dir,"bbs_splist_2022_L1.csv"), row.names=F)
