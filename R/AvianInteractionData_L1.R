@@ -4,8 +4,8 @@
 # COLLABORATORS:  Vincent Miele, Stephane Dray, Emily Parker
 # DATA INPUT:     From AvianInteractionData_L0_stitch.R: Data imported as csv 
 #                   https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database/blob/main/L0/AvianInteractionData_L0.csv
-#                 From bbs_specieslist_L0.R: Data imported as csv 
-#                   https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database/blob/main/L0/bbs_splist_2022_L0.csv
+#                 From bbs_specieslist_L1.R: Data imported as csv 
+#                   https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database/blob/main/L1/bbs_splist_2022_L1.csv
 #                 For BBS subset: bbs_allobs_runtype1 produced in 
 #                   https://github.com/SpaCE-Lab-MSU/avian-meta-network/blob/main/R/L1/bbs_obs_L1.R: 
 #                   Data imported as csv: /Google Drive/Shared drives/Avian_MetaNetwork/data/L1/bbs_obs/bbs_allobs_runtype1.csv
@@ -34,66 +34,14 @@ L1_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L1"
 # Read in csv with avian interactions from primary, secondary cavity nesting birds in North America.
 int.raw<-read.csv(file.path(L0_dir,"AvianInteractionData_L0.csv"))
 
-# Read in species list: all species in BBS (the 2023 release which includes all species as of 2022)
-splist<-read.csv(file.path(L0_dir,"bbs_splist_2022_L0.csv"))
-# Modified version with 12 extra entries for combined species (from Jeff
-# Hostetler @ BBS: August 7, 2024; this version contains some different genus
-# species as well, making 12 additions for combined species and 16 that are
-# actually old outdated names as far as I can tell. We will only use the 12
-# combined species)
-splist2<-read.csv(file.path(L0_dir,"SpeciesList2.csv"))
-splist$Seq<-NULL
-splist2$Seq<-NULL
-splist3<-merge(splist2,splist, by=c("AOU","English_Common_Name","French_Common_Name","Spanish_Common_Name","ORDER","Family","Genus","Species"),all.x=T, all.y=T)
-
-# Differences in SpeciesList2:
-splist3a<-splist3[!complete.cases(splist3), ]
-splist3a
-#       AOU                              English_Common_Name
-# 44    550                                         Mew Gull
-# 82   1206 unid. Double-crested Cormorant / Great Cormorant
-# 83   1207                       unid. west coast cormorant
-# 86   1220                               Brandt's Cormorant
-# 88   1230                                Pelagic Cormorant
-# 90   1240                              Red-faced Cormorant
-# 99   1326 hybrid Mallard x Mexican, Black, or Mottled Duck
-# 254  2980                                    Spruce Grouse
-# 316  3620                                 Crested Caracara
-# 409  4391                       Violet-crowned Hummingbird
-# 474  4882          unid. American Crow / Northwestern Crow
-# 475  4890                (Northwestern Crow) American Crow
-# 491  5012    unid. Eastern Meadowlark / Western Meadowlark
-# 714  7240                                       Sedge Wren
-# 741  7430                                          Bushtit
-# 747  7490                             Ruby-crowned Kinglet
-# 775 30010                          Western & Clark's Grebe
-# 776 31320                              Mallard (all forms)
-# 777 31940                     Great Blue Heron (all forms)
-# 778 33370                      Red-tailed Hawk (all forms)
-# 779 34120                     Northern Flicker (all forms)
-# 780 34641           Cordilleran & Pacific-slope Flycatcher
-# 781 34660                        Alder & Willow Flycatcher
-# 782 34810               California & Woodhouse's Scrub-Jay
-# 783 34880                                    American Crow
-# 784 35670                      Dark-eyed Junco (all forms)
-# 785 35740                       Sagebrush & Bell's Sparrow
-# 786 36550                Yellow-rumped Warbler (all forms)
-
-combinedAOUs<-splist2[c(763:774),]
-combinedAOUs$genus_species <- do.call(paste, c(combinedAOUs[c("Genus", "Species")], sep = " "))
-
-# Add the combined AOUs to the end of the current bbs species list:
-splist<-rbind(splist, combinedAOUs)
+# Read in species list: all species in BBS (the 2023 release which includes all species as of 2022, plus the additional AOUcombo.index column for use w BBS index)
+splist<-read.csv(file.path(L0_dir,"bbs_splist_2022_L1.csv"))
 
 # Read in our look-up table with the different bbs & bow & old names for species
 namechg<-read.csv(file.path(L0_dir,"bbsbow_names.csv"))
 
-# make "genus species" columns able to merge
-splist$species1_scientific<- do.call(paste, c(splist[c("Genus", "Species")], sep = " "))
-
 # Rename some columns and omit others; indicate that the common name is coming from BBS Species List
 names(splist)[names(splist) == "English_Common_Name"] <-"bbs_sp1_common"
-names(splist)[names(splist) == "Seq"] <-"sp1_Seq"
 names(splist)[names(splist) == "AOU"] <-"sp1_AOU"
 
 #*******************************#
