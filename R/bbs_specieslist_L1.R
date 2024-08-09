@@ -97,18 +97,25 @@ splist$AOUcombo.index<-splist$AOU
 # Update the splist AOUcombo.index for each subspecies species (assign it to the
 # combo AOU). Make a selection for each subspecies group:
 
+# Mallard (all forms)
 # 2 31320
 # 01320 01331
 splist$AOUcombo.index[splist$AOU == 1320] <- 31320
 splist$AOUcombo.index[splist$AOU == 1331] <- 31320
+
+# Great Blue Heron (all forms)
 # 2 31940    
 # 01920 01940
 splist$AOUcombo.index[splist$AOU == 1320] <- 31320
 splist$AOUcombo.index[splist$AOU == 1331] <- 31320
+
+# Red-tailed Hawk (all forms)
 # 2 33370
 # 03370 03380
 splist$AOUcombo.index[splist$AOU == 3370] <- 33370
 splist$AOUcombo.index[splist$AOU == 3380] <- 33370
+
+# Northern Flicker (all forms)
 # 4 34120
 # 04120 04130 04123 04125
 splist$AOUcombo.index[splist$AOU == 4120] <- 34120
@@ -128,6 +135,7 @@ splist$AOUcombo.index[splist$AOU == 5677] <- 35670
 splist$AOUcombo.index[splist$AOU == 6550] <- 36550
 splist$AOUcombo.index[splist$AOU == 6560] <- 36550
 splist$AOUcombo.index[splist$AOU == 6556] <- 36550
+# Western & Clark's Grebe
 # 3 30010
 # 00010 00011 00012
 splist$AOUcombo.index[splist$AOU == 10] <- 30010

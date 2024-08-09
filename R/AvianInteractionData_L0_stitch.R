@@ -95,17 +95,17 @@ intxnsL0sp<-combine_by_species()
 sp<-unique(intxnsL0sp$species1_common)
 sp<-as.list(sp)
 length(sp)
-# 923 species1 as of May 28, 2024 (all double checked)
+# 997 species1 as of Aug 8, 2024 (all double checked)
 
 ## Species In Review (all BBS species originally entered by Emily Parker)
 intxnsL0spir<-combine_by_species_in_review()
 spir<-unique(intxnsL0spir$species1_common)
 spir<-as.list(spir)
 length(spir)
-# 452 species1 as of May 28, 2024
+# 389 species1 as of Aug 8, 2024
 
 # Uncomment if you want to omit all species that haven't been checked by someone
-# other than Emily; for Dec 2023 we are just proceeding with all 'species' and
+# other than Emily, India; for Aug 2024 we are just proceeding with all 'species' and
 # 'species_in_review' because Emily is experienced and entered the BBS birds in
 # the review folder. So keep the below section commented out. Only keep unique
 # set of species; remove the "in review" species that have already been checked
@@ -121,7 +121,7 @@ length(spir)
 intxnsL0<-rbind(intxnsL0sp, intxnsL0spir)
 
 length(unique(intxnsL0$species1_scientific))
-# 1193 unique species1 as of May 28, 2024 (these include some non-BBS species1).
+# 1198 unique species1 as of Aug 8, 2024 (these include some non-BBS species1).
 # Note that some species1 in a given species1 csv could also be other species
 # because of entering many pair-wise interactions in, for example, mixed flock
 # entry. Any duplicates will be omitted later.
