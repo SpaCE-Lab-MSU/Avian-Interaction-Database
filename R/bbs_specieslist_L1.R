@@ -9,12 +9,12 @@
 #                 without data.  
 #                 SpeciesList2.csv from Jeff Hostetler @ BBS contains combo AOUs 
 #                 for subspecies.
-# DATA OUTPUT:    L1 data: bbs_specieslist_2022_L1.csv  
+# DATA OUTPUT:    L1 data: bbs_specieslist_2022_L1.csv 
 # PROJECT:        Avian Interaction Database & avian-meta-network
-# DATE:           17 January 2022 - 8 August 2024
-# NOTES:          adds new column AOUcombo.index for use with BBS abundance index. 
-#
-#               Next script to run: for avian-meta-network: 
+# DATE:           17 January 2022 - 9 August 2024
+# NOTES:          Adds new column AOU.combo for use with BBS abundance index. 
+#                 
+#                 Next script to run: AvianInteractionData_L1.R
 
 # Clear all existing data
 rm(list=ls())
@@ -91,88 +91,125 @@ splist<-rbind(splist, combinedAOUs)
 dim(splist)
 # Now create a new column for AOUs to be used in the BBS index analysis. This
 # will contain re-assignments to the 12 combined AOUs, for their subspecies:
-splist$AOUcombo.index<-splist$AOU
+splist$AOU.combo<-splist$AOU
 
 # Grouping Rules provided by Jeff Hostetler @ BBS. 
-# Update the splist AOUcombo.index for each subspecies species (assign it to the
+# Update the splist AOU.combo for each subspecies species (assign it to the
 # combo AOU). Make a selection for each subspecies group:
 
 # Mallard (all forms)
 # 2 31320
 # 01320 01331
-splist$AOUcombo.index[splist$AOU == 1320] <- 31320
-splist$AOUcombo.index[splist$AOU == 1331] <- 31320
+splist$AOU.combo[splist$AOU == 1320] <- 31320
+splist$AOU.combo[splist$AOU == 1331] <- 31320
 
 # Great Blue Heron (all forms)
 # 2 31940    
 # 01920 01940
-splist$AOUcombo.index[splist$AOU == 1320] <- 31320
-splist$AOUcombo.index[splist$AOU == 1331] <- 31320
+splist$AOU.combo[splist$AOU == 1920] <- 31940
+splist$AOU.combo[splist$AOU == 1940] <- 31940
 
 # Red-tailed Hawk (all forms)
 # 2 33370
 # 03370 03380
-splist$AOUcombo.index[splist$AOU == 3370] <- 33370
-splist$AOUcombo.index[splist$AOU == 3380] <- 33370
+splist$AOU.combo[splist$AOU == 3370] <- 33370
+splist$AOU.combo[splist$AOU == 3380] <- 33370
 
 # Northern Flicker (all forms)
 # 4 34120
 # 04120 04130 04123 04125
-splist$AOUcombo.index[splist$AOU == 4120] <- 34120
-splist$AOUcombo.index[splist$AOU == 4130] <- 34120
-splist$AOUcombo.index[splist$AOU == 4123] <- 34120
-splist$AOUcombo.index[splist$AOU == 4125] <- 34120
+splist$AOU.combo[splist$AOU == 4120] <- 34120
+splist$AOU.combo[splist$AOU == 4130] <- 34120
+splist$AOU.combo[splist$AOU == 4123] <- 34120
+splist$AOU.combo[splist$AOU == 4125] <- 34120
 # 6 35670
 # 05660 05670 05671 05680 05690 05677
-splist$AOUcombo.index[splist$AOU == 5660] <- 35670
-splist$AOUcombo.index[splist$AOU == 5670] <- 35670
-splist$AOUcombo.index[splist$AOU == 5671] <- 35670
-splist$AOUcombo.index[splist$AOU == 5680] <- 35670
-splist$AOUcombo.index[splist$AOU == 5690] <- 35670
-splist$AOUcombo.index[splist$AOU == 5677] <- 35670
+splist$AOU.combo[splist$AOU == 5660] <- 35670
+splist$AOU.combo[splist$AOU == 5670] <- 35670
+splist$AOU.combo[splist$AOU == 5671] <- 35670
+splist$AOU.combo[splist$AOU == 5680] <- 35670
+splist$AOU.combo[splist$AOU == 5690] <- 35670
+splist$AOU.combo[splist$AOU == 5677] <- 35670
 # 3 36550
 # 06550 06560 06556
-splist$AOUcombo.index[splist$AOU == 6550] <- 36550
-splist$AOUcombo.index[splist$AOU == 6560] <- 36550
-splist$AOUcombo.index[splist$AOU == 6556] <- 36550
+splist$AOU.combo[splist$AOU == 6550] <- 36550
+splist$AOU.combo[splist$AOU == 6560] <- 36550
+splist$AOU.combo[splist$AOU == 6556] <- 36550
 # Western & Clark's Grebe
 # 3 30010
 # 00010 00011 00012
-splist$AOUcombo.index[splist$AOU == 10] <- 30010
-splist$AOUcombo.index[splist$AOU == 11] <- 30010
-splist$AOUcombo.index[splist$AOU == 12] <- 30010
+splist$AOU.combo[splist$AOU == 10] <- 30010
+splist$AOU.combo[splist$AOU == 11] <- 30010
+splist$AOU.combo[splist$AOU == 12] <- 30010
 # 3 34641
 # 04640 04641 04642
-splist$AOUcombo.index[splist$AOU == 4640] <- 34641
-splist$AOUcombo.index[splist$AOU == 4641] <- 34641
-splist$AOUcombo.index[splist$AOU == 4642] <- 34641
+splist$AOU.combo[splist$AOU == 4640] <- 34641
+splist$AOU.combo[splist$AOU == 4641] <- 34641
+splist$AOU.combo[splist$AOU == 4642] <- 34641
 # 3 34660
 # 04660 04661 04665
-splist$AOUcombo.index[splist$AOU == 4660] <- 34660
-splist$AOUcombo.index[splist$AOU == 4661] <- 34660
-splist$AOUcombo.index[splist$AOU == 4665] <- 34660
+splist$AOU.combo[splist$AOU == 4660] <- 34660
+splist$AOU.combo[splist$AOU == 4661] <- 34660
+splist$AOU.combo[splist$AOU == 4665] <- 34660
 # 3 34810
 # 04812 04813 04810
-splist$AOUcombo.index[splist$AOU == 4812] <- 34810
-splist$AOUcombo.index[splist$AOU == 4813] <- 34810
-splist$AOUcombo.index[splist$AOU == 4810] <- 34810
+splist$AOU.combo[splist$AOU == 4812] <- 34810
+splist$AOU.combo[splist$AOU == 4813] <- 34810
+splist$AOU.combo[splist$AOU == 4810] <- 34810
 # 3 35740
 # 05738 05739 05740
-splist$AOUcombo.index[splist$AOU == 5738] <- 35740
-splist$AOUcombo.index[splist$AOU == 5739] <- 35740
-splist$AOUcombo.index[splist$AOU == 5740] <- 35740
+splist$AOU.combo[splist$AOU == 5738] <- 35740
+splist$AOU.combo[splist$AOU == 5739] <- 35740
+splist$AOU.combo[splist$AOU == 5740] <- 35740
 # 3 34880
 # 04880 04880 04882
-splist$AOUcombo.index[splist$AOU == 4880] <- 34880
-splist$AOUcombo.index[splist$AOU == 4880] <- 34880
-splist$AOUcombo.index[splist$AOU == 4882] <- 34880
+splist$AOU.combo[splist$AOU == 4880] <- 34880
+splist$AOU.combo[splist$AOU == 4880] <- 34880
+splist$AOU.combo[splist$AOU == 4882] <- 34880
 # 2 35010
 # 05010 05010
-splist$AOUcombo.index[splist$AOU == 5010] <- 35010
-splist$AOUcombo.index[splist$AOU == 5010] <- 35010
+splist$AOU.combo[splist$AOU == 5010] <- 35010
+splist$AOU.combo[splist$AOU == 5010] <- 35010
 
-# Export the cleaned data (note the encoding to maintain special characters)
-write.csv(splist,file.path(L1_dir,"bbs_splist_2022_L1.csv"), row.names=F)
+## Create a new column which contains Genus species for the combined species above.
+splist$genus_species.combo<-splist$genus_species
+# Probably a more beautiful way to code this but this works:
+# Assign all to new species combo name
+splist$genus_species.combo[splist$AOU.combo == 31320] <- "Anas platyrhynchos"
+splist$genus_species.combo[splist$AOU.combo == 31940] <- "Ardea herodias"
+splist$genus_species.combo[splist$AOU.combo == 33370] <- "Buteo jamaicensis"
+splist$genus_species.combo[splist$AOU.combo == 34120] <- "Colaptes auratus auratus"
+splist$genus_species.combo[splist$AOU.combo == 35670] <- "Junco hyemalis"
+splist$genus_species.combo[splist$AOU.combo == 36550] <- "Setophaga coronata coronata"
+splist$genus_species.combo[splist$AOU.combo == 30010] <- "Aechmophorus occidentalis / clarkii"
+splist$genus_species.combo[splist$AOU.combo == 34641] <- "Empidonax difficilis / occidentalis"
+splist$genus_species.combo[splist$AOU.combo == 34660] <- "Empidonax alnorum / traillii"
+splist$genus_species.combo[splist$AOU.combo == 34810] <- "Aphelocoma californica / woodhouseii"
+splist$genus_species.combo[splist$AOU.combo == 35740] <- "Artemisiospiza nevadensis / belli"
+splist$genus_species.combo[splist$AOU.combo == 34880] <- "Corvus brachyrhynchos"
 
-# Next script to run if combining with bbs_obs data: AvianInteractionData_L1.R
+# Note that after exporting this, there are additional changes to the BBS
+# species with name changes in AvianInteractionData_L1.R: starting at Line 183.
+# This then updates (and over-writes) bbs_splist_2022_L1.csv. They are summarized below:
+
+# RENAME: BBS: Streptopelia chinensis to Spilopelia chinensis
+# RENAME: BBS: change Corvus caurinus and Corvus brachyrhynchos caurinus to Corvus brachyrhynchos
+# RENAME: BBS: change Porphyrio martinicus to Porphyrio martinica 
+# RENAME: BBS: change Cyanecula svecica to Luscinia svecica
+# RENAME: BBS: change Charadrius nivosus to Anarhynchus nivosus
+# RENAME: BBS: change Charadrius wilsonia to Anarhynchus wilsonia
+# RENAME: BBS: change Charadrius montanus to Anarhynchus montanus
+# RENAME: BBS: change Empidonax occidentalis to Empidonax difficilis
+
+# Move the useful columns to the left
+splist <- splist %>% relocate(genus_species, .after = AOU)
+splist <- splist %>% relocate(AOU.combo, .after = genus_species)
+splist <- splist %>% relocate(genus_species.combo, .after = AOU.combo)
+
+# Export the cleaned data. 
+write.csv(splist,file.path(L1_dir,"bbs_splist_2022_L1.v1.csv"), row.names=F)
+
+# Next script to run if combining with bbs_obs data: AvianInteractionData_L1.R.
+# In that script, the Genus species associated with the AOU.combo will be
+# assigned in 2 new columns (one for species1 and another for species2).
 

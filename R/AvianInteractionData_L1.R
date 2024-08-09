@@ -3,23 +3,32 @@
 # AUTHORS:        Phoebe Zarnetske, Pat Bills
 # COLLABORATORS:  Vincent Miele, Stephane Dray, Emily Parker
 # DATA INPUT:     From AvianInteractionData_L0_stitch.R: Data imported as csv 
-#                   https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database/blob/main/L0/AvianInteractionData_L0.csv
+#                   https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database
+#                   /blob/main/L0/AvianInteractionData_L0.csv
 #                 From bbs_specieslist_L1.R: Data imported as csv 
-#                   https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database/blob/main/L1/bbs_splist_2022_L1.csv
+#                   https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database
+#                   /blob/main/L1/bbs_splist_2022_L1.v1.csv
 #                 For BBS subset: bbs_allobs_runtype1 produced in 
-#                   https://github.com/SpaCE-Lab-MSU/avian-meta-network/blob/main/R/L1/bbs_obs_L1.R: 
-#                   Data imported as csv: /Google Drive/Shared drives/Avian_MetaNetwork/data/L1/bbs_obs/bbs_allobs_runtype1.csv
+#                   https://github.com/SpaCE-Lab-MSU/avian-meta-network
+#                   /blob/main/R/L1/bbs_obs_L1.R: 
+#                   Data imported as csv: /Google Drive/Shared drives/
+#                   Avian_MetaNetwork/data/L1/bbs_obs/bbs_allobs_runtype1.csv
 #
 # DATA OUTPUT:    L1 data: AvianInteractionData_L1.csv
 #                 L1 data: AvianInteractionData_L1_BBS.csv for BBS analysis
-#                 L1 data: bbs_splist_2022_L1.csv for BBS analysis
+#                 L1 data: bbs_splist_2022_L1.csv for BBS analysis (species name changes)
 # PROJECT:        Avian Interaction Database 
-# DATE:           27 Oct 2022; updated 20 Mar 2023, Dec. 22, 2023, 8 Aug 2024  
+# DATE:           27 Oct 2022; updated through 9 Aug 2024  
 # NOTES:          Next script to run: 
 #                 This script is used to refine species name changes to align with BOW, 
 #                 and to create AvianInteractionData_L1.csv 
 #                 L0 data are checked to assign BOW scientific and common names 
-#                 to the interaction pairs data (which were originally from BBS species list). 
+#                 to the interaction pairs data (which were originally from BBS species list).
+#                 
+#                 Makes a new column that also includes scientific name 
+#                 changes associated with the AOUcombo.index for merging with 
+#                 those names in the AvianInteractionData_AOUindex_L1.csv
+# 
 #               
 # Clear all existing data
 rm(list=ls())
@@ -32,11 +41,14 @@ library(taxize)
 L0_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0"
 L1_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L1"
 
-# Read in csv with avian interactions from primary, secondary cavity nesting birds in North America.
+# Read in csv with avian interactions from primary, secondary cavity nesting
+# birds in North America.
 int.raw<-read.csv(file.path(L0_dir,"AvianInteractionData_L0.csv"))
 
-# Read in species list: all species in BBS (the 2023 release which includes all species as of 2022, plus the additional AOUcombo.index column for use w BBS index)
-splist<-read.csv(file.path(L1_dir,"bbs_splist_2022_L1.csv"))
+# Read in species list: all species in BBS (the 2023 release which includes all
+# species as of 2022, plus the additional AOUcombo.index column for use w BBS
+# index)
+splist<-read.csv(file.path(L1_dir,"bbs_splist_2022_L1.v1.csv"))
 
 # Read in our look-up table with the different bbs & bow & old names for species
 namechg<-read.csv(file.path(L0_dir,"bbsbow_names.csv"))
@@ -46,7 +58,8 @@ namechg<-read.csv(file.path(L0_dir,"bbsbow_names.csv"))
 names(splist)[names(splist) == "genus_species"] <-"species1_scientific"
 names(splist)[names(splist) == "English_Common_Name"] <-"bbs_sp1_common"
 names(splist)[names(splist) == "AOU"] <-"sp1_AOU"
-names(splist)[names(splist) == "AOUcombo.index"] <-"sp1_AOUcombo.index"
+names(splist)[names(splist) == "AOU.combo"] <-"sp1AOU.combo"
+names(splist)[names(splist) == "genus_species.combo"] <-"sp1sci.combo"
 
 #*******************************#
 #### Scientific Name Changes ####
@@ -76,11 +89,13 @@ int.raw$species2_scientific<-trimws(int.raw$species2_scientific, "l")
 int.raw$species1_scientific<-gsub(" spp."," sp.",int.raw$species1_scientific)
 int.raw$species2_scientific<-gsub(" spp."," sp.",int.raw$species2_scientific)
 
-# Try taxize to identify misspellings
+# Try taxize to identify misspellings:
 int.raw.sp1<-unique(int.raw$species1_scientific)
 int.raw.sp2<-unique(int.raw$species2_scientific)
 int.raw.sp<-append(int.raw.sp1,int.raw.sp2)
 int.raw.sp<-unique(int.raw.sp)
+
+# The section below, using taxize, was last run on Aug 9, 2024.
 tax <-gnr_datasources()
 # GBIF taxonomy ID = 11
 tax[tax$title=="GBIF Backbone Taxonomy","id"]
@@ -90,7 +105,7 @@ tax[tax$title=="BirdLife International","id"]
 gbif.bl.tax.bbsbow <- namechg$bow %>%
   gnr_resolve(data_source_ids = c(11,175), 
               with_canonical_ranks=T)
-gbif.bl.tax.bbsbow<-subset(gbif.bl.tax.bbsbow, gbif.bl.tax.bbsbow$score<0.988,)
+gbif.bl.tax.bbsbow<-subset(gbif.bl.tax.bbsbow, gbif.bl.tax.bbsbow$score<0.9,)
 # Omit replacements without at least genus species (omit those that don't have a space)
 gbif.bl.tax.bbsbow<-gbif.bl.tax.bbsbow[grepl(" ", gbif.bl.tax.bbsbow$matched_name2), ]
 # They look ok. Assign the fixed spellings to 'bow'
@@ -104,10 +119,12 @@ gbif.bl.tax <- int.raw.sp %>%
   gnr_resolve(data_source_ids = c(11,175), 
               with_canonical_ranks=T)
 dim(gbif.bl.tax)
+# 6478
 
 # GBIF and BirdLife identified misspellings:
-tax.fix<-subset(gbif.bl.tax, gbif.bl.tax$score<0.988,)
+tax.fix<-subset(gbif.bl.tax, gbif.bl.tax$score<0.9,)
 dim(tax.fix)
+# 903
 
 #Not perfect; Remove non-avian species or abbreviated sp. name or incorrect assignments
 tax.fix <-tax.fix %>% filter(str_detect(user_supplied_name,' sp.', negate = T))
@@ -130,6 +147,9 @@ tax.fix1<-merge(tax.fix,tax.fix.BL,by=c("user_supplied_name"),all.x=T,all.y=T)
 
 # Look at these species to make sure they are birds
 tax.fix1<-tax.fix1 %>% filter(if_any(everything(), is.na))
+dim(tax.fix1)
+tax.fix1
+# 34 species to manually check
 
 # Final changes (a few that were incorrect in BirdLife/GBIF)
 tax.fix <- tax.fix[!tax.fix$matched_name2 %in% c("Anabarhynchus montanus", # not a bird
@@ -144,7 +164,7 @@ matching <- tax.fix$matched_name2[match(int.raw$species1_scientific, tax.fix$use
 int.raw$species1_scientific <- ifelse(is.na(matching),
                                        int.raw$species1_scientific,
                                 matching)
-# checking "Anarhynchus montanus"
+# checking that it changed to "Aneurhynchus montanus"
 int.raw[825:835,1:4]
 # Yes it works.
 
@@ -153,6 +173,11 @@ matching <- tax.fix$matched_name2[match(int.raw$species2_scientific, tax.fix$use
 int.raw$species2_scientific <- ifelse(is.na(matching),
                                       int.raw$species2_scientific,
                                       matching)
+
+# Save the relevant files here to avoid re-running:
+save.image(file.path(L1_dir,"taxize.results.9Aug2024.RData"))
+
+### *** END OF TAXIZE CHECKING *** ###
 
 # This section below relies on an up to date list of current names. 
 # Could just decide to use the code above and call it good.
@@ -180,7 +205,7 @@ namechg.unmatch[,1:2]
 
 # Standardize based on BOW 
 
-# RENAME: BBS: Streptopelia chinensis = BOW: Spilopelia chinensis
+# RENAME: BBS: Streptopelia chinensis to BOW: Spilopelia chinensis
 dplyr::filter(splist, species1_scientific %in% c("Streptopelia chinensis")) # in BBS list
 dplyr::filter(int.raw, species1_scientific %in% c("Streptopelia chinensis")) # not in interactions
 dplyr::filter(int.raw, species2_scientific %in% c("Streptopelia chinensis")) # in interactions
@@ -189,6 +214,7 @@ dplyr::filter(int.raw, species1_scientific %in% c("Spilopelia chinensis")) # in 
 dplyr::filter(int.raw, species2_scientific %in% c("Spilopelia chinensis")) # in interactions
 # Update all to new species name
 splist$species1_scientific[splist$species1_scientific == "Streptopelia chinensis"] <- "Spilopelia chinensis"
+splist$sp1sci.combo[splist$sp1sci.combo == "Streptopelia chinensis"] <- "Spilopelia chinensis"
 int.raw$species1_scientific[int.raw$species1_scientific == "Streptopelia chinensis"] <- "Spilopelia chinensis"
 int.raw$species2_scientific[int.raw$species2_scientific == "Streptopelia chinensis"] <- "Spilopelia chinensis"
 
@@ -211,10 +237,12 @@ dplyr::filter(int.raw, species1_scientific %in% c("Circus cyaneus")) # not in in
 dplyr::filter(int.raw, species2_scientific %in% c("Circus cyaneus")) # in interactions - as Hen and Northern
 # Update all N Harrier to new species name
 int.raw$species1_scientific[int.raw$species1_scientific == "Circus cyaneus" & int.raw$species1_common == "Northern Harrier"] <- "Circus hudsonius"
+int.raw$species1_scientific[int.raw$species1_scientific == "Circus cyaneus" & int.raw$species1_common == "Northern Harrier"] <- "Circus hudsonius"
 int.raw$species1_scientific[int.raw$species1_scientific == "Circus cyaneus" & int.raw$species1_common == "northern harrier"] <- "Circus hudsonius"
 int.raw$species2_scientific[int.raw$species2_scientific == "Circus cyaneus" & int.raw$species2_common == "Northern Harrier"] <- "Circus hudsonius"
 int.raw$species2_scientific[int.raw$species2_scientific == "Circus cyaneus" & int.raw$species2_common == "northern harrier"] <- "Circus hudsonius"
 
+## This is an AOU combo species:
 ## American Crow Subspecies = Northwestern Crow: Corvus brachyrhynchos caurinus (instead of Corvus caurinus "Northwestern Crow"); but Audubon absorbs it into American Crow. Rename to American Crow.
 dplyr::filter(splist, species1_scientific %in% c("Corvus brachyrhynchos")) # in BBS list
 dplyr::filter(int.raw, species1_scientific %in% c("Corvus brachyrhynchos")) # in interactions 
@@ -245,14 +273,15 @@ dplyr::filter(int.raw, species2_scientific %in% c("Larus brachyrhynchus")) # in 
 # No change needed to these data.
 namechg.unmatch[,1:2]
 ## Spelling difference: BBS: Porphyrio martinicus = BOW: Porphyrio martinica
-dplyr::filter(splist, species1_scientific %in% c("Porphyrio martinicus")) # in BBS list
+dplyr::filter(splist, species1_scientific %in% c("Porphyrio martinicus")) # not in BBS list
 dplyr::filter(int.raw, species1_scientific %in% c("Porphyrio martinicus")) # not in interactions 
-dplyr::filter(int.raw, species2_scientific %in% c("Porphyrio martinicus")) # not in interactions 
+dplyr::filter(int.raw, species2_scientific %in% c("Porphyrio martinicus")) # in interactions 
 dplyr::filter(splist, species1_scientific %in% c("Porphyrio martinica")) # not in BBS list
 dplyr::filter(int.raw, species1_scientific %in% c("Porphyrio martinica")) # in interactions 
 dplyr::filter(int.raw, species2_scientific %in% c("Porphyrio martinica")) # in interactions 
-# RENAME: BBS & BOW: change Corvus caurinus to Corvus brachyrhynchos caurinus 
+# RENAME: BBS & BOW: change Porphyrio martinicus to Porphyrio martinica 
 splist$species1_scientific[splist$species1_scientific == "Porphyrio martinicus"] <- "Porphyrio martinica"
+splist$sp1sci.combo[splist$sp1sci.combo == "Porphyrio martinicus"] <- "Porphyrio martinica"
 int.raw$species1_scientific[int.raw$species1_scientific == "Porphyrio martinicus"] <- "Porphyrio martinica"
 int.raw$species2_scientific[int.raw$species2_scientific == "Porphyrio martinicus"] <- "Porphyrio martinica"
 
@@ -266,6 +295,7 @@ dplyr::filter(int.raw, species1_scientific %in% c("Luscinia svecica")) # in inte
 dplyr::filter(int.raw, species2_scientific %in% c("Luscinia svecica")) # in interactions 
 # RENAME: BBS & BOW: change Cyanecula svecica to Luscinia svecica
 splist$species1_scientific[splist$species1_scientific == "Cyanecula svecica"] <- "Luscinia svecica"
+splist$sp1sci.combo[splist$sp1sci.combo == "Cyanecula svecica"] <- "Luscinia svecica"
 int.raw$species1_scientific[int.raw$species1_scientific == "Cyanecula svecica"] <- "Luscinia svecica"
 int.raw$species2_scientific[int.raw$species2_scientific == "Cyanecula svecica"] <- "Luscinia svecica"
 
@@ -279,6 +309,7 @@ dplyr::filter(int.raw, species1_scientific %in% c("Anarhynchus nivosus")) # not 
 dplyr::filter(int.raw, species2_scientific %in% c("Anarhynchus nivosus")) # in interactions 
 # RENAME: BBS & BOW: change Charadrius nivosus to Anarhynchus nivosus
 splist$species1_scientific[splist$species1_scientific == "Charadrius nivosus"] <- "Anarhynchus nivosus"
+splist$sp1sci.combo[splist$sp1sci.combo == "Charadrius nivosus"] <- "Anarhynchus nivosus"
 int.raw$species1_scientific[int.raw$species1_scientific == "Charadrius nivosus"] <- "Anarhynchus nivosus"
 int.raw$species2_scientific[int.raw$species2_scientific == "Charadrius nivosus"] <- "Anarhynchus nivosus"
 
@@ -292,6 +323,7 @@ dplyr::filter(int.raw, species1_scientific %in% c("Anarhynchus wilsonia")) # not
 dplyr::filter(int.raw, species2_scientific %in% c("Anarhynchus wilsonia")) # in interactions 
 # RENAME: BBS & BOW: change Charadrius wilsonia to Anarhynchus wilsonia
 splist$species1_scientific[splist$species1_scientific == "Charadrius wilsonia"] <- "Anarhynchus wilsonia"
+splist$sp1sci.combo[splist$sp1sci.combo == "Charadrius wilsonia"] <- "Anarhynchus wilsonia"
 int.raw$species1_scientific[int.raw$species1_scientific == "Charadrius wilsonia"] <- "Anarhynchus wilsonia"
 int.raw$species2_scientific[int.raw$species2_scientific == "Charadrius wilsonia"] <- "Anarhynchus wilsonia"
 
@@ -305,6 +337,7 @@ dplyr::filter(int.raw, species1_scientific %in% c("Anarhynchus montanus")) # not
 dplyr::filter(int.raw, species2_scientific %in% c("Anarhynchus montanus")) # not in interactions 
 # RENAME: BBS & BOW: change Charadrius montanus to Anarhynchus montanus
 splist$species1_scientific[splist$species1_scientific == "Charadrius montanus"] <- "Anarhynchus montanus"
+splist$sp1sci.combo[splist$sp1sci.combo == "Charadrius montanus"] <- "Anarhynchus montanus"
 int.raw$species1_scientific[int.raw$species1_scientific == "Charadrius montanus"] <- "Anarhynchus montanus"
 int.raw$species2_scientific[int.raw$species2_scientific == "Charadrius montanus"] <- "Anarhynchus montanus"
 
@@ -318,6 +351,7 @@ dplyr::filter(splist, species1_scientific %in% c("Empidonax difficilis")) # in B
 dplyr::filter(int.raw, species1_scientific %in% c("Empidonax difficilis")) # in interactions 
 dplyr::filter(int.raw, species2_scientific %in% c("Empidonax difficilis")) # in interactions 
 # RENAME: BBS & BOW: change Empidonax occidentalis to Empidonax difficilis
+# # ** DO NOT CHANGE THE sp1sci.combo bc this is an AOU combined species
 splist$species1_scientific[splist$species1_scientific == "Empidonax occidentalis"] <- "Empidonax difficilis"
 int.raw$species1_scientific[int.raw$species1_scientific == "Empidonax occidentalis"] <- "Empidonax difficilis"
 int.raw$species2_scientific[int.raw$species2_scientific == "Empidonax occidentalis"] <- "Empidonax difficilis"
@@ -334,9 +368,6 @@ int.raw <- int.raw %>% filter(!(species2_scientific==""))
 dim(int.raw)
 # 24533: 1 more removed: Aug 8, 2024
 
-# Update genus_species column with name changes
-splist$genus_species<-splist$species1_scientific
-
 ## End of Species' Scientific name changes ##
 
 
@@ -346,13 +377,14 @@ splist$genus_species<-splist$species1_scientific
 # duplicate BBS species list with the changes to names for species2 assessment
 sp2list<-splist
 # rename
-names(sp2list)[names(sp2list) == "sp1_AOUcombo.index"] <-"sp2_AOUcombo.index"
 names(sp2list)[names(sp2list) == "sp1_AOU"] <-"sp2_AOU"
-names(sp2list)[names(sp2list) == "bbs_sp1_common"] <-"bbs_sp2_common"
 names(sp2list)[names(sp2list) == "species1_scientific"] <-"species2_scientific"
+names(sp2list)[names(sp2list) == "sp1AOU.combo"] <-"sp2AOU.combo"
+names(sp2list)[names(sp2list) == "sp1sci.combo"] <-"sp2sci.combo"
+names(sp2list)[names(sp2list) == "bbs_sp1_common"] <-"bbs_sp2_common"
 names(sp2list)[names(sp2list) == "Genus"] <-"Genus2"
 names(sp2list)[names(sp2list) == "Species"] <-"Species2"
-names(sp2list)[names(sp2list) == "genus_species"] <-"genus_species2"
+
 sp2list$French_Common_Name<-NULL
 sp2list$Spanish_Common_Name<-NULL
 sp2list$ORDER<-NULL
@@ -376,7 +408,7 @@ sum(is.na(intxns1$species2_scientific))
 # 79 - species that exist in the BBS Species List but are not entered yet in 
 # original avian interaction data as species2 - these are subspecies and unidentified
 length(unique(int.raw$species2_scientific))
-# 3388 species as species2 
+# 3389 species as species2 
 
 # Repeat above but now for sp2 
 # Merge into paired intxns by sp1
@@ -386,17 +418,17 @@ dim(int.raw)
 dim(intxns2)
 # 25343 rows
 length(unique(int.raw$species2_scientific))
-# 3388 species treated as species2 in original avian interaction data
+# 3389 species treated as species2 in original avian interaction data
 length(unique(splist$species1_scientific))
 # 759 species in entire BBS dataset
 length(unique(intxns2$species2_scientific))
-# 3462 species in the merged data 
+# 3463 species in the merged data 
 sum(is.na(intxns2$species1_scientific)) 
 # 79 NAs - species that exist in the BBS Species List but are not entered yet in original avian interaction data as species1
 length(unique(intxns2$species1_scientific))
-# 1131 species as species1 but these *may* include the scientific names without a match in sp1
+# 1132 species as species1 but these *may* include the scientific names without a match in sp1
 length(unique(int.raw$species1_scientific))
-# 1130 species as species1 but these *may* include the scientific names without a match in sp1
+# 1131 species as species1 but these *may* include the scientific names without a match in sp1
 
 # Export to check species names: if the row has an AOU associated with species1,
 # it is in BBS; if those rows are without a complete entry, they are missing
@@ -468,10 +500,6 @@ intxns12$Genus<-NULL
 intxns12$Genus2<-NULL
 intxns12$Species<-NULL
 intxns12$Species2<-NULL
-intxns12$sp1_Seq<-NULL
-intxns12$sp2_Seq<-NULL
-intxns12$genus_species<-NULL
-intxns12$genus_species2<-NULL
 
 #*******************************#
 #### Editing the interaction columns to standardize names ####
@@ -650,6 +678,8 @@ dplyr::filter(bbs.splist, species1_scientific %in% c("Cistothorus	platensis")) #
 #splist$species1_scientific[splist$species1_scientific == "Cistothorus platensis"] <- "Cistothorus stellaris"
 int.bbs$species1_scientific[int.bbs$species1_scientific == "Cistothorus platensis"] <- "Cistothorus stellaris"
 int.bbs$species2_scientific[int.bbs$species2_scientific == "Cistothorus platensis"] <- "Cistothorus stellaris"
+int.bbs$sp1sci.combo[int.bbs$sp1sci.combo == "Cistothorus platensis"] <- "Cistothorus stellaris"
+int.bbs$sp2sci.combo[int.bbs$sp2sci.combo == "Cistothorus platensis"] <- "Cistothorus stellaris"
 # Update the AOU for this species (assign 7240 which is the Sedge Wren)
 # Make a selection for the species
 cisste1<-int.bbs$species1_scientific == "Cistothorus stellaris"
@@ -658,8 +688,8 @@ cisste2<-int.bbs$species2_scientific == "Cistothorus stellaris"
 # Assign AOU to species level:
 int.bbs$sp1_AOU[cisste1] <- 7240
 int.bbs$sp2_AOU[cisste2] <- 7240
-int.bbs$sp1_AOUcombo.index[cisste1] <- 7240
-int.bbs$sp2_AOUcombo.index[cisste2] <- 7240
+int.bbs$sp1AOU.combo[cisste1] <- 7240
+int.bbs$sp2AOU.combo[cisste2] <- 7240
 
 ## Remove non-breeding season interactions from the BBS subset of data because
 # BBS observations are only during breeding season.
@@ -688,9 +718,11 @@ int.bbs<-subset(int.bbs,select=c("species1_scientific",
                                        "entry_date",
                                        "uncertain_interaction",
                                        "sp1_AOU",
+                                       "sp1AOU.combo",
+                                       "sp1sci.combo",
                                        "sp2_AOU",
-                                 "sp1_AOUcombo.index",
-                                 "sp2_AOUcombo.index"))
+                                       "sp2AOU.combo",
+                                       "sp2sci.combo"))
 
 #*******************************#
 # Omit the non-BBS rows (rows that do not contain one of the BBS species)
@@ -701,7 +733,7 @@ int.bbs<-subset(int.bbs,select=c("species1_scientific",
 int.bbs1<-int.bbs %>% 
   filter(!is.na(sp1_AOU) | !is.na(sp2_AOU))
 dim(int.bbs)-dim(int.bbs1)
-# 3468 rows that do not contain a BBS species
+# 3477 rows that do not contain a BBS species
 int.bbs.noAOU<-int.bbs %>% 
   filter(is.na(sp1_AOU) & is.na(sp2_AOU))
 
@@ -784,8 +816,8 @@ int.bbs$sp2_subspecies_status<-""
 
 #### SNOW GOOSE Anser caerulescens and its subspecies in interactions & BBS obs... ####
 # View the AOU for the genus species
-subset(bbs.splist, genus_species=="Anser caerulescens")
-subset(bbs.splist, genus_species=="Anser caerulescens (blue form)")
+subset(bbs.splist, species1_scientific=="Anser caerulescens")
+subset(bbs.splist, species1_scientific=="Anser caerulescens (blue form)")
 dplyr::filter(bbs_allobs_rpid101, AOU %in% c(1690)) # Anser caerulescens 35 times 
 dplyr::filter(bbs_allobs_rpid101, AOU %in% c(1691)) # Anser caerulescens (blue form) 0 times
 dplyr::filter(int.bbs, species1_scientific %in% c("Anser caerulescens")) # Anser caerulescens 16 times 
@@ -797,8 +829,8 @@ dplyr::filter(int.bbs, species2_scientific %in% c("Anser caerulescens (blue form
 
 #### BRANT GOOSE Branta bernicla and its subspecies in interactions & BBS obs... ####
 # View the AOU for the genus species
-subset(bbs.splist, genus_species=="Branta bernicla")
-subset(bbs.splist, genus_species=="Branta bernicla nigricans")
+subset(bbs.splist, species1_scientific=="Branta bernicla")
+subset(bbs.splist, species1_scientific=="Branta bernicla nigricans")
 dplyr::filter(bbs_allobs_rpid101, AOU %in% c(1730)) # Branta bernicla 0 times 
 dplyr::filter(bbs_allobs_rpid101, AOU %in% c(1740)) # Branta bernicla nigricans 23 times
 dplyr::filter(int.bbs, species1_scientific %in% c("Branta bernicla")) # species 32 times 
@@ -812,26 +844,33 @@ dplyr::filter(int.bbs, species2_scientific %in% c("Branta bernicla nigricans")) 
 braber1<-int.bbs$species1_scientific == "Branta bernicla"
 braber2<-int.bbs$species2_scientific == "Branta bernicla"
 
-# Assign AOU to species level:
+# Assign AOU to subspecies level:
 int.bbs$sp1_AOU[braber1] <- 1740
+int.bbs$sp1AOU.combo[braber1] <- 1740
 int.bbs$sp1_subspecies_status[braber1]<-"sp1 and AOU originally species Branta bernicla; changed to subspecies bc only BBS obs of Branta bernicla nigricans; see sp1_orig"
 int.bbs$sp2_AOU[braber2] <- 1740
+int.bbs$sp2AOU.combo[braber2] <- 1740
 int.bbs$sp2_subspecies_status[braber2]<-"sp2 and AOU originally species Branta bernicla; changed to subspecies bc only BBS obs of Branta bernicla nigricans; see sp2_orig"
 # Assign species to subspecies
 int.bbs$species1_scientific[braber1] <- "Branta bernicla nigricans"
+int.bbs$sp1sci.combo[braber1] <- "Branta bernicla nigricans"
 int.bbs$species2_scientific[braber2] <- "Branta bernicla nigricans"
+int.bbs$sp2sci.combo[braber2] <- "Branta bernicla nigricans"
 int.bbs$species1_common[braber1] <- "(Black Brant) Brant"
 int.bbs$species2_common[braber2] <- "(Black Brant) Brant"
 
 dplyr::filter(int.bbs, species1_scientific %in% c("Branta bernicla")) # species 0 times 
 dplyr::filter(int.bbs, species2_scientific %in% c("Branta bernicla")) # species 0 times 
+dplyr::filter(int.bbs, sp1sci.combo %in% c("Branta bernicla")) # species 0 times 
+dplyr::filter(int.bbs, sp2sci.combo %in% c("Branta bernicla")) # species 0 times 
 dplyr::filter(int.bbs, species1_scientific %in% c("Branta bernicla nigricans")) # subspecies 32 times
 dplyr::filter(int.bbs, species2_scientific %in% c("Branta bernicla nigricans")) # subspecies 23 times 
 
 #### GREAT BLUE HERON Ardea herodias and its subspecies in interactions & BBS obs... ####
+# *** This one has a AOUcombo, so only make changes to the non-combo columns.
 # View the AOU for the genus species
-subset(bbs.splist, genus_species=="Ardea herodias")
-subset(bbs.splist, genus_species=="Ardea herodias occidentalis")
+subset(bbs.splist, species1_scientific=="Ardea herodias")
+subset(bbs.splist, species1_scientific=="Ardea herodias occidentalis")
 dplyr::filter(bbs_allobs_rpid101, AOU %in% c(1940)) # Ardea herodias 45376 times 
 dplyr::filter(bbs_allobs_rpid101, AOU %in% c(1920)) # Ardea herodias occidentalis 61 times
 dplyr::filter(int.bbs, species1_scientific %in% c("Ardea herodias")) # species 162 times 
@@ -875,9 +914,10 @@ dim(int.bbs)
 #23495
 
 #### RED TAILED HAWK Buteo jamaicensis and its subspecies in interactions & BBS obs... ####
+# *** This one has a AOUcombo, so only make changes to the non-combo columns.
 # View the AOU for the genus species
-subset(bbs.splist, genus_species=="Buteo jamaicensis")
-subset(bbs.splist, genus_species=="Buteo jamaicensis harlani")
+subset(bbs.splist, species1_scientific=="Buteo jamaicensis")
+subset(bbs.splist, species1_scientific=="Buteo jamaicensis harlani")
 dplyr::filter(bbs_allobs_rpid101, AOU %in% c(3370)) # Buteo jamaicensis 60,777 times 
 dplyr::filter(bbs_allobs_rpid101, AOU %in% c(3380)) # Buteo jamaicensis harlani 78 times
 dim(dplyr::filter(int.bbs, species1_scientific %in% c("Buteo jamaicensis"))) # species 164 times 
@@ -920,11 +960,12 @@ dim(int.bbs)
 #24089
 
 #### NORTHERN FLICKER Colaptes auratus and its subspecies in interactions & BBS obs... ####
+# *** This one has a AOUcombo, so only make changes to the non-combo columns.
 # View the AOU for the genus species
-subset(bbs.splist, genus_species=="Colaptes auratus")
-subset(bbs.splist, genus_species=="Colaptes auratus auratus")
-subset(bbs.splist, genus_species=="Colaptes auratus cafer")
-subset(bbs.splist, genus_species=="Colaptes auratus auratus x auratus cafer")
+subset(bbs.splist, species1_scientific=="Colaptes auratus")
+subset(bbs.splist, species1_scientific=="Colaptes auratus auratus")
+subset(bbs.splist, species1_scientific=="Colaptes auratus cafer")
+subset(bbs.splist, species1_scientific=="Colaptes auratus auratus x auratus cafer")
 dplyr::filter(bbs_allobs_rpid101, AOU %in% c(4123)) # Colaptes auratus 1299 times 
 dplyr::filter(bbs_allobs_rpid101, AOU %in% c(4120)) # Colaptes auratus auratus 68195 times
 dplyr::filter(bbs_allobs_rpid101, AOU %in% c(4130)) # Colaptes auratus cafer 21912 times
@@ -1003,13 +1044,14 @@ dim(int.bbs)
 #24677
 
 #### JUNCOS Junco hyemalis and its subspecies in interactions & BBS obs... ####
+# *** This one has a AOUcombo, so only make changes to the non-combo columns.
 # View the AOU for the genus species
-subset(bbs.splist, genus_species=="Junco hyemalis")
-subset(bbs.splist, genus_species=="Junco hyemalis hyemalis")
-subset(bbs.splist, genus_species=="Junco hyemalis oreganus")
-subset(bbs.splist, genus_species=="Junco hyemalis mearnsi")
-subset(bbs.splist, genus_species=="Junco hyemalis aikeni")
-subset(bbs.splist, genus_species=="Junco hyemalis caniceps")
+subset(bbs.splist, species1_scientific=="Junco hyemalis")
+subset(bbs.splist, species1_scientific=="Junco hyemalis hyemalis")
+subset(bbs.splist, species1_scientific=="Junco hyemalis oreganus")
+subset(bbs.splist, species1_scientific=="Junco hyemalis mearnsi")
+subset(bbs.splist, species1_scientific=="Junco hyemalis aikeni")
+subset(bbs.splist, species1_scientific=="Junco hyemalis caniceps")
 dplyr::filter(bbs_allobs_rpid101, AOU %in% c(5677)) # Junco hyemalis 755 times 
 dplyr::filter(bbs_allobs_rpid101, AOU %in% c(5670)) # Junco hyemalis hyemalis 15846 times
 dplyr::filter(bbs_allobs_rpid101, AOU %in% c(5671)) # Junco hyemalis oreganus 12297 times
@@ -1122,10 +1164,11 @@ dim(int.bbs)
 #25553
 
 #### YELLOW-RUMPED WARBLER Setophaga coronata and its subspecies in interactions & BBS obs... ####
+# *** This one has a AOUcombo, so only make changes to the non-combo columns.
 # View the AOU for the genus species
-subset(bbs.splist, genus_species=="Setophaga coronata")
-subset(bbs.splist, genus_species=="Setophaga coronata coronata")
-subset(bbs.splist, genus_species=="Setophaga coronata audoboni")
+subset(bbs.splist, species1_scientific=="Setophaga coronata")
+subset(bbs.splist, species1_scientific=="Setophaga coronata coronata")
+subset(bbs.splist, species1_scientific=="Setophaga coronata audoboni")
 dplyr::filter(bbs_allobs_rpid101, AOU %in% c(6556)) # Setophaga coronata 634 times 
 dplyr::filter(bbs_allobs_rpid101, AOU %in% c(6550)) # Setophaga coronata coronata 18871 times
 dplyr::filter(bbs_allobs_rpid101, AOU %in% c(6560)) # Setophaga coronata audoboni 12809 times
@@ -1188,21 +1231,59 @@ dim(int.bbs)
 
 #### End of subspecies edits. Export L1 interaction data for BBS analysis# 
 #### Check how above changes affected AOUs:
-int.bbs$diff1<-int.bbs$sp1_AOUcombo.index-int.bbs$sp1_AOU
-int.bbs$diff2<-int.bbs$sp2_AOUcombo.index-int.bbs$sp2_AOU
+int.bbs$diff1<-int.bbs$sp1AOU.combo-int.bbs$sp1_AOU
+int.bbs$diff2<-int.bbs$sp2AOU.combo-int.bbs$sp2_AOU
 unique(int.bbs$diff1)
 unique(int.bbs$diff2)
 # Looks ok.
 int.bbs$diff1<-NULL
 int.bbs$diff2<-NULL
 
+## Make sure the Genus species for to combined species via Jeff Hostetler @ BBS:
+# Probably a more beautiful way to code this but this works:
+int.bbs$sp1sci.combo[int.bbs$sp1AOU.combo == 31320] <- "Anas platyrhynchos"
+int.bbs$sp2sci.combo[int.bbs$sp2AOU.combo == 31320] <- "Anas platyrhynchos"
+int.bbs$sp1sci.combo[int.bbs$sp1AOU.combo == 31940] <- "Ardea herodias"
+int.bbs$sp2sci.combo[int.bbs$sp2AOU.combo == 31940] <- "Ardea herodias"
+int.bbs$sp1sci.combo[int.bbs$sp1AOU.combo == 33370] <- "Buteo jamaicensis"
+int.bbs$sp2sci.combo[int.bbs$sp2AOU.combo == 33370] <- "Buteo jamaicensis"
+int.bbs$sp1sci.combo[int.bbs$sp1AOU.combo == 34120] <- "Colaptes auratus auratus"
+int.bbs$sp2sci.combo[int.bbs$sp2AOU.combo == 34120] <- "Colaptes auratus auratus"
+int.bbs$sp1sci.combo[int.bbs$sp1AOU.combo == 35670] <- "Junco hyemalis"
+int.bbs$sp2sci.combo[int.bbs$sp2AOU.combo == 35670] <- "Junco hyemalis"
+int.bbs$sp1sci.combo[int.bbs$sp1AOU.combo == 36550] <- "Setophaga coronata coronata"
+int.bbs$sp2sci.combo[int.bbs$sp2AOU.combo == 36550] <- "Setophaga coronata coronata"
+int.bbs$sp1sci.combo[int.bbs$sp1AOU.combo == 30010] <- "Aechmophorus occidentalis / clarkii"
+int.bbs$sp2sci.combo[int.bbs$sp2AOU.combo == 30010] <- "Aechmophorus occidentalis / clarkii"
+int.bbs$sp1sci.combo[int.bbs$sp1AOU.combo == 34641] <- "Empidonax difficilis / occidentalis"
+int.bbs$sp2sci.combo[int.bbs$sp2AOU.combo == 34641] <- "Empidonax difficilis / occidentalis"
+int.bbs$sp1sci.combo[int.bbs$sp1AOU.combo == 34660] <- "Empidonax alnorum / traillii"
+int.bbs$sp2sci.combo[int.bbs$sp2AOU.combo == 34660] <- "Empidonax alnorum / traillii"
+int.bbs$sp1sci.combo[int.bbs$sp1AOU.combo == 34810] <- "Aphelocoma californica / woodhouseii"
+int.bbs$sp2sci.combo[int.bbs$sp2AOU.combo == 34810] <- "Aphelocoma californica / woodhouseii"
+int.bbs$sp1sci.combo[int.bbs$sp1AOU.combo == 35740] <- "Artemisiospiza nevadensis / belli"
+int.bbs$sp2sci.combo[int.bbs$sp2AOU.combo == 35740] <- "Artemisiospiza nevadensis / belli"
+int.bbs$sp1sci.combo[int.bbs$sp1AOU.combo == 34880] <- "Corvus brachyrhynchos"
+int.bbs$sp2sci.combo[int.bbs$sp2AOU.combo == 34880] <- "Corvus brachyrhynchos"
+
+# Move the useful columns to the left
+int.bbs <- int.bbs %>% relocate(sp1_AOU, .after = interaction)
+int.bbs <- int.bbs %>% relocate(sp2_AOU, .after = sp1_AOU)
+int.bbs <- int.bbs %>% relocate(sp1sci.combo, .after = sp2_AOU)
+int.bbs <- int.bbs %>% relocate(sp2sci.combo, .after = sp1sci.combo)
+int.bbs <- int.bbs %>% relocate(sp1AOU.combo, .after = sp2sci.combo)
+int.bbs <- int.bbs %>% relocate(sp2AOU.combo, .after = sp1AOU.combo)
+
 ## Note to check this before using new version:
 write.csv(int.bbs,file.path(L1_dir,"AvianInteractionData_BBS_L1.csv"), row.names=F)
 
-# Export updated bbs species names list
+# Export updated bbs species names list (the only changes are the column headers 
+# and a few species name updates)
 names(bbs.splist)[names(bbs.splist) == "bbs_sp1_common"] <-"English_Common_Name"
 names(bbs.splist)[names(bbs.splist) == "sp1_AOU"] <-"AOU"
-names(bbs.splist)[names(bbs.splist) == "sp1_AOUcombo.index"] <-"AOUcombo.index"
+names(bbs.splist)[names(bbs.splist) == "sp1AOU.combo"] <-"AOU.combo"
+names(bbs.splist)[names(bbs.splist) == "sp1sci.combo"] <-"sp_scientific.combo"
+names(bbs.splist)[names(bbs.splist) == "species1_scientific"] <-"species_scientific"
 
 write.csv(bbs.splist,file.path(L1_dir,"bbs_splist_2022_L1.csv"), row.names=F)
 
