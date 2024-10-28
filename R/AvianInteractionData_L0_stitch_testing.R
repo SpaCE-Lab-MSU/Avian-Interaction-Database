@@ -10,102 +10,15 @@
 # Clear all existing data
 rm(list=ls())
 
-library(readr, dplyr)
+library(readr, dplyr, purrr)
 
 L0_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0"
 species_dir<- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0/species"
 species_review_dir<- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0/species_in_review"
 # Given a folder of Intxns CSV files, combine into one file
 # This version can handle CSV files with some extra or different column names.
-combine_by_species <- function(data_dir = file.path(species_dir)) {
-  # Validate data directory
-  if (is.null(data_dir)) {
-    data_dir <- tempdir()
-    warning(paste('No data_dir param, using temp folder:', data_dir))
-  } else {
-    if (!file.exists(data_dir)) {
-      warning(paste("Directory unreachable:", data_dir))
-      return(NULL)
-    }
-  }
-  
-  # Get list of CSV file paths in the directory
-  csv_files <- list.files(path = data_dir, pattern = '.*\\.csv$', full.names = TRUE)
-  
-  # Define the standard column names
-  standard_columns <- c(
-    "species1_common", "species2_common", "species1_scientific", "species2_scientific",
-    "effect_sp1_on_sp2", "effect_sp2_on_sp1", "interaction", "BOW_evidence", "n_studies",
-    "sourceA_URL", "sourceB_URL", "sourceC_URL", "sourceD_URL", "nonbreedingseason",
-    "notesA", "notesB", "notesC", "notesD", "recorder", "entry_date", "uncertain_interaction",
-    "entry_changes", "name_changes", "other_species1", "DatabaseSearchURL"
-  )
-  
-  # FUNCTION TO READ, RENAME COLUMNS, ADD MISSING COLUMNS, AND SELECT STANDARD COLUMNS
-  read_and_process <- function(file) {
-    # TRY TO READ THE CSV, CATCH ERRORS
-    df <- tryCatch(
-      {
-        read.csv(file, stringsAsFactors = FALSE, na.strings = "")  # **SET stringsAsFactors = FALSE TO PREVENT ISSUES WITH FACTORS**
-      },
-      error = function(e) {
-        warning(paste("Failed to read file:", file, "| Error:", e$message))
-        return(data.frame(matrix(ncol = length(standard_columns), nrow = 0)))  # **RETURN EMPTY DATA FRAME ON ERROR**
-      }
-    )
-    
-    # CHECK IF DATA FRAME IS EMPTY
-    if (nrow(df) == 0) {
-      warning(paste("File is empty or could not be read:", file))  # **WARN IF FILE IS EMPTY OR NOT READABLE**
-      return(data.frame(matrix(ncol = length(standard_columns), nrow = 0)))  # **RETURN EMPTY DATA FRAME WITH STANDARD COLUMNS**
-    }
-    
-    # CHECK IF THE COLUMNS THAT NEED RENAMING EXIST AND RENAME THEM
-    if ("sourceAupdatedURL" %in% names(df)) {
-      names(df)[names(df) == "sourceAupdatedURL"] <- "sourceA_URL"  # **RENAME COLUMN IF EXISTS**
-    }
-    if ("sourceBupdatedURL" %in% names(df)) {
-      names(df)[names(df) == "sourceBupdatedURL"] <- "sourceB_URL"  # **RENAME COLUMN IF EXISTS**
-    }
-    if ("sourceCupdatedURL" %in% names(df)) {
-      names(df)[names(df) == "sourceCupdatedURL"] <- "sourceC_URL"  # **RENAME COLUMN IF EXISTS**
-    }
-    if ("sourceDupdatedURL" %in% names(df)) {
-      names(df)[names(df) == "sourceDupdatedURL"] <- "sourceD_URL"  # **RENAME COLUMN IF EXISTS**
-    }
-    
-    # ADD ANY MISSING STANDARD COLUMNS WITH NA VALUES
-    missing_cols <- setdiff(standard_columns, names(df))  # **IDENTIFY MISSING COLUMNS**
-    if (length(missing_cols) > 0) {
-      df[missing_cols] <- NA  # **ADD MISSING COLUMNS AS NA**
-    }
-    
-    # SELECT AND ORDER ONLY THE STANDARD COLUMNS
-    df <- df %>% select(all_of(standard_columns))  # **SELECT STANDARD COLUMNS**
-    
-    return(df)
-  }
-  
-  # Read and process all CSV files
-  intxns.list <- lapply(csv_files, read_and_process)
-  
-  # Combine all into a single data frame
-  intxns <- dplyr::bind_rows(intxns.list)  # **COMBINE DATA FRAMES**
-  
-  # Check unique values of n_studies
-  unique_n_studies <- unique(intxns$n_studies)  # **GET UNIQUE VALUES OF n_studies**
-  cat("Unique values of n_studies across all files:\n")
-  print(unique_n_studies)  # **PRINT UNIQUE VALUES**
-  
-  # Convert n_studies to numeric
-  intxns$n_studies <- as.numeric(intxns$n_studies)  # **CONVERT TO NUMERIC TYPE**
-  
-  # Return as a data frame
-  return(data.frame(intxns))  # **RETURN FINAL DATA FRAME**
-}
-
-
-## VERSION FROM CHATGPT TO CHECK THE merging across the files:
+library(dplyr)
+library(purrr)
 
 library(dplyr)
 
@@ -258,7 +171,7 @@ combine_by_species <- function(data_dir = file.path(species_dir)) {
   }
   
   # Print unique values only for specified columns
-  for (col in c("n_studies", "effect_sp1_on_sp2", "effect_sp2_on_sp1")) {
+  for (col in c("n_studies", "effect_sp1_on_sp2", "effect_sp2_on_sp1","species1_common")) {
     if (col %in% names(intxns.list[[1]])) {
       unique_values <- unique(unlist(lapply(intxns.list, function(df) {
         if (col %in% names(df)) {
@@ -286,6 +199,13 @@ combine_by_species <- function(data_dir = file.path(species_dir)) {
 # Usage Example
 intxnsL0sp <- combine_by_species()
 
+
+# Species Fully Checked
+intxnsL0sp<-combine_by_species()
+sp<-unique(intxnsL0sp$species1_common)
+sp<-as.list(sp)
+length(sp)
+# 997 species1 as of Aug 8, 2024 (all double checked)
 
 
 combine_by_species_in_review <- function(data_dir = file.path(species_review_dir)) {
@@ -323,12 +243,6 @@ combine_by_species_in_review <- function(data_dir = file.path(species_review_dir
   return(data.frame(intxns))
 }
 
-# Species Fully Checked
-intxnsL0sp<-combine_by_species()
-sp<-unique(intxnsL0sp$species1_common)
-sp<-as.list(sp)
-length(sp)
-# 997 species1 as of Aug 8, 2024 (all double checked)
 
 ## Species In Review (all BBS species originally entered by Emily Parker)
 intxnsL0spir<-combine_by_species_in_review()
