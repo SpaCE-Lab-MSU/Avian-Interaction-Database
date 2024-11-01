@@ -6,9 +6,9 @@
 # DATA OUTPUT:    L0 data: bbs_specieslist_2023_L0.csv - this is a copy of the raw data, just omitting the top lines without data
 # PROJECT:        Avian Interaction Database & avian-meta-network
 # DATE:           17 January 2022 - 30 October 2024
-# NOTES:          bbs_specieslist_2023_L1.csv is produced in AvianInteractionData_L1.R 
+# NOTES:          bbs_specieslist_2024_L1.csv is produced in bbs_specieslist_L1.R 
 #
-#               Next script to run: for avian-meta-network: 
+#               Next script to run: bbs_specieslist_L1.R
 #               NOTES: check out this site for code w BBS: https://rdrr.io/github/davharris/mistnet/src/extras/BBS-analysis/data_extraction/data-extraction.R               
     
 
@@ -108,9 +108,10 @@ write.csv(clean_differences,file.path(L0_dir,"BBS_specieslist_diffs2023-2024.csv
 
 # The species re-assignment checking will occur in the next script. 
 # Export the cleaned data (note the encoding to maintain special characters)
-write.csv(bbs.splist.2024, file.path(L1_dir,"bbs_splist_2024_L0.csv"), fileEncoding="UTF-8", row.names=F) 
+write.csv(bbs.splist.2024, file.path(L0_dir,"bbs_splist_2024_L0.csv"), fileEncoding="UTF-8", row.names=F) 
 
-# Next script to run if combining with bbs_obs data: AvianInteractionData_L1.R
+# Next script to run: bbs_specieslist_L1.R 
+# Then, if combining with bbs_obs data: AvianInteractionData_L1.R
 
 # ************************* #
 # Older code when the file read in was in .txt. format and had many lines in the beginning to ignore:

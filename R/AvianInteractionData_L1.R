@@ -1,5 +1,5 @@
 # TITLE:          Avian Interaction Pairs Data: L0 to L1, including an option to 
-#                   subset species1 for only BBS species
+#                   subset species1 for (1) only BBS species, or for (2) BBS & other North America species
 # AUTHORS:        Phoebe Zarnetske, Pat Bills
 # COLLABORATORS:  Vincent Miele, Stephane Dray, Emily Parker
 # DATA INPUT:     From AvianInteractionData_L0_stitch.R: Data imported as csv 
