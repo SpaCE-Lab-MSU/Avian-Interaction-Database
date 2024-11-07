@@ -20,8 +20,11 @@ rm(list=ls())
 
 #Load packages
 #library(dplyr)
-#library(readr)
-library(tidyr)
+library(tidyverse)
+library(devtools)
+#install_github("ropensci/bold")
+#install_github("ropensci/taxize")
+library(taxize)
 
 # Above .Renviron not working for PLZ; hard-coding in here
 L0_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0"
@@ -117,9 +120,11 @@ combined_differences <- bind_rows(
 # Print only the first 6 columns of the combined differences
 print(combined_differences %>% select(1:6), n = Inf)
 
-# Unique rows in 2024 data that do not exist in 2023 data
+# Unique rows in 2024 data that do not exist in 2023 data: new species in BBS. 
 unique_2024_only
 # These are 4 new species observed in the BBS in 2024 release
+### ***** RESULT: OK TO ACCEPT AND KEEP THE 2024 VERSION
+
 # AOU   English_Common_Name    French_Common_Name           Order       Family     Genus  Species      genus_species
 # 1  390            Ivory Gull       Mouette blanche Charadriiformes      Laridae Pagophila  eburnea  Pagophila eburnea
 # 2 7421   Swinhoe’s White-eye  Zostérops de Swinhoe   Passeriformes Zosteropidae Zosterops  simplex  Zosterops simplex
@@ -128,12 +133,14 @@ unique_2024_only
 
 # Unique rows in 2023 data that do not exist in 2024 data
 unique_2023_only
-# The 3 species at the top may have had name changes?
+### ***** RESULT: KEEP AND ADD TO THE 2024 VERSION
+
+# The 3 species at the top may have had name changes? Check. Notes added below.
 # The other 12 species are species combined from subspecies.
 # AOU                     English_Common_Name          Genus                   Species
-# 1   1240                     Red-faced Cormorant          Urile                     urile
-# 2   4890       (Northwestern Crow) American Crow         Corvus                  caurinus
-# 3   4882 unid. American Crow / Northwestern Crow         Corvus brachyrhynchos / caurinus
+# 1   1240                     Red-faced Cormorant          Urile                     urile # Keep; newly observed in BBS
+# 2   4890       (Northwestern Crow) American Crow         Corvus                  caurinus # Should be lumped w 34880 Corvus brachyrhynchos
+# 3   4882 unid. American Crow / Northwestern Crow         Corvus brachyrhynchos / caurinus # Should be lumped w 34880 Corvus brachyrhynchos
 # 4  31320                     Mallard (all forms)           Anas             platyrhynchos
 # 5  31940            Great Blue Heron (all forms)          Ardea                  herodias
 # 6  33370             Red-tailed Hawk (all forms)          Buteo               jamaicensis
@@ -159,6 +166,8 @@ combined_differences[] <- lapply(combined_differences, function(x) {
 
 print(combined_differences %>% select(1:3), n = Inf)
 # Name Changes (diffs between 2023 and 2024 release)
+### ******* RESULT: OK TO ACCEPT AND KEEP THE 2024 VERSION
+
 # AOU23 AOU24 differing_values_diffEnglish_Common_Name
 # 1326	1326	hybrid Mallard x Mexican, Black, or Mottled Duck -> hybrid Mallard x Black / Mexican / Mottled Duck
 # 550	  550	  Mew Gull -> Short-billed Gull
@@ -172,6 +181,9 @@ print(combined_differences %>% select(1:3), n = Inf)
 # 6556	6556	(unid. Myrtle/Audubon's) Yellow-rumped Warbler -> (unid. Myrtle / Audubon's) Yellow-rumped Warbler
 
 print(combined_differences %>% select(1,4,5), n = Inf)
+# Name Changes (diffs between 2023 and 2024 release)
+### ******* RESULT: OK TO ACCEPT AND KEEP THE 2024 VERSION
+
 # AOU differing_values_diffGenus   differing_values_diffSpecies                                                                 
 # <int> <chr>                        <chr>                                                                                        
 # 1  1326 NA                           platyrhynchos x diazi x rubripes or fulvigula -> platyrhynchos x rubripes / diazi / fulvigula
@@ -196,24 +208,8 @@ print(combined_differences %>% select(1,4,5), n = Inf)
 # Excel does not render the encodings correctly so don't preview it in Excel.
 write.csv(combined_differences,file.path(L1_dir,"BBS_specieslist_diffs2023-2024.csv"), fileEncoding="UTF-8", row.names=F)
 
-# Merge the 2 lists to ensure we have a comprehensive list; keep duplicate AOUs
-splist<-merge(bbs.splist23,bbs.splist24, all.x=T ,all.y=T)
-
-# Modify above to add a column that tracks which object the row comes from, and
-# then, if there are English_Common_Name differences, chooses to delete the row
-# that contains the 2023 common name.
-
-# Fix the name changes listed above
-splist %>% filter_at(vars(AOU), any_vars(. %in% 1326))   
-#splist<-splist[!(splist$English_Common_Name %in% "hybrid Mallard x Mexican, Black, or Mottled Duck"),]
-splist <- splist %>% filter(!(AOU == 1326 & English_Common_Name == "hybrid Mallard x Mexican, Black, or Mottled Duck"))
-splist %>% filter_at(vars(AOU), any_vars(. %in% 1326))   
-
-splist %>% filter_at(vars(AOU), any_vars(. %in% 2980))   
-#splist<-splist[!(splist$English_Common_Name %in% "hybrid Mallard x Mexican, Black, or Mottled Duck"),]
-splist <- splist %>% filter(!(AOU == 2980 & English_Common_Name == "hybrid Mallard x Mexican, Black, or Mottled Duck"))
-splist %>% filter_at(vars(AOU), any_vars(. %in% 2980))   
-
+# row-bind the 2024 list with the unique values in 2023 to ensure we have a comprehensive list
+splist<-rbind(bbs.splist24,unique_2023_only)
 
 # Now create a new column for AOUs to be used in the BBS index analysis. This
 # will contain re-assignments to the 12 combined AOUs, for their subspecies:
@@ -292,13 +288,15 @@ splist$AOU.combo[splist$AOU == 5739] <- 35740
 splist$AOU.combo[splist$AOU == 5740] <- 35740
 
 # 15 34880                           American Crow
-# 04880 04880 04882
+# 04880 04880 04882 04890
 splist$AOU.combo[splist$AOU == 4880] <- 34880
 splist$AOU.combo[splist$AOU == 4880] <- 34880
 splist$AOU.combo[splist$AOU == 4882] <- 34880
+splist$AOU.combo[splist$AOU == 4890] <- 34880
 
 ## Create a new column which contains Genus species for the combined species above.
 splist$genus_species.combo<-splist$genus_species
+
 # Probably a more beautiful way to code this but this works:
 # Assign all to new species combo name
 splist$genus_species.combo[splist$AOU.combo == 31320] <- "Anas platyrhynchos"
@@ -314,61 +312,22 @@ splist$genus_species.combo[splist$AOU.combo == 34810] <- "Aphelocoma californica
 splist$genus_species.combo[splist$AOU.combo == 35740] <- "Artemisiospiza nevadensis / belli"
 splist$genus_species.combo[splist$AOU.combo == 34880] <- "Corvus brachyrhynchos"
 
-# Now join the updated BBS list with the official eBird/Clements 2024 checklist 
-# to check for name changes that haven't been updated in the BBS list:
+# Try taxize to catch any other name changes:
+# The section below, using taxize, was last run on Aug 9, 2024.
+tax <-gnr_datasources()
+# GBIF taxonomy ID = 11
+tax[tax$title=="GBIF Backbone Taxonomy","id"]
+tax[tax$title=="BirdLife International","id"]
 
-splist.gs<-subset(splist,select=c("genus_species","English_Common_Name"))
-splist.gs$genus_species1<-splist.gs$genus_species
+# Detecting name misspellings in our BBS list:
+gbif.bl.tax.splist <- splist$genus_species %>%
+  gnr_resolve(data_source_ids = c(11,175), 
+              with_canonical_ranks=T)
+gbif.bl.tax.splist<-subset(gbif.bl.tax.splist, gbif.bl.tax.splist$score<0.9,)
 
-# Full join on "genus_species" to ensure all rows are kept and find differing columns
-# Step 1: Full join on genus_species and keep English_Common_Name with suffixes
-combined_data <- splist.gs %>%
-  full_join(checklist, by = "genus_species", suffix = c(".BBS", ".checklist"))
+### Nov 7, 2024: Not working bc taxize is having issues connecting to https://resolver.globalnames.org??
 
-# Step 2: Identify rows where English_Common_Name does not match or is missing
-combined_differences <- combined_data %>%
-  mutate(
-    English_Common_Name_diff = if_else(
-      is.na(English_Common_Name.BBS) | is.na(English_Common_Name.checklist) | 
-        English_Common_Name.BBS != English_Common_Name.checklist,
-      TRUE,
-      FALSE
-    )
-  ) %>%
-  # Step 3: Filter rows where there are differences in English_Common_Name or unique genus_species
-  filter(English_Common_Name_diff | is.na(English_Common_Name.BBS) | is.na(English_Common_Name.checklist)) %>%
-  # Select relevant columns for output
-  select(genus_species, English_Common_Name.BBS, English_Common_Name.checklist)
-
-# Optional: Export to CSV if needed
-#write.csv(combined_differences, "genus_species_name_differences.csv", row.names = FALSE, fileEncoding = "UTF-8")
-
-# Unnest the differing values for readability
-non_blank_differences <- differences %>%
-  unnest_wider(differing_values, names_sep = "_diff")
-
-# Identify unique rows in 2023 data that do not exist in 2024
-unique_2023_only <- bbs.splist23 %>%
-  anti_join(bbs.splist24, by = "AOU")
-
-# Identify unique rows in 2024 data that do not exist in 2023
-unique_2024_only <- bbs.splist24 %>%
-  anti_join(bbs.splist23, by = "AOU")
-
-# Combine the unique rows from both years with non-blank differences
-combined_differences <- bind_rows(
-  non_blank_differences,
-  unique_2023_only %>% mutate(note = "Only in 2023"),
-  unique_2024_only %>% mutate(note = "Only in 2024")
-)
-
-# Print only the first 6 columns of the combined differences
-print(combined_differences %>% select(1:3), n = Inf)
-
-
-
-
-# Note that after exporting this, there are additional changes to the BBS
+# Note that after exporting this, there are additional changes to
 # species with name changes in AvianInteractionData_L1.R: starting at Line 183.
 # This then updates (and over-writes) bbs_splist_2022_L1.csv. They are summarized below:
 
@@ -387,7 +346,7 @@ splist <- splist %>% relocate(AOU.combo, .after = genus_species)
 splist <- splist %>% relocate(genus_species.combo, .after = AOU.combo)
 
 # Export the cleaned data. 
-write.csv(splist,file.path(L1_dir,"bbs_splist_2022_L1.v1.csv"), row.names=F)
+write.csv(splist,file.path(L1_dir,"bbs_splist_2024_L1.csv"), row.names=F)
 
 # Next script to run if combining with bbs_obs data: AvianInteractionData_L1.R.
 # In that script, the Genus species associated with the AOU.combo will be
