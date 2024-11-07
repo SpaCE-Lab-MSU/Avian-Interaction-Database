@@ -7,7 +7,7 @@
 #                   /blob/main/L0/AvianInteractionData_L0.csv
 #                 From bbs_specieslist_L1.R: Data imported as csv 
 #                   https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database
-#                   /blob/main/L1/bbs_splist_2022_L1.v1.csv
+#                   /blob/main/L1/bbs_splist_2024_L1.csv
 #                 For BBS subset: bbs_allobs_runtype1 produced in 
 #                   https://github.com/SpaCE-Lab-MSU/avian-meta-network
 #                   /blob/main/R/L1/bbs_obs_L1.R: 
@@ -16,7 +16,7 @@
 #
 # DATA OUTPUT:    L1 data: AvianInteractionData_L1.csv
 #                 L1 data: AvianInteractionData_L1_BBS.csv for BBS analysis
-#                 L1 data: bbs_splist_2022_L1.csv for BBS analysis (species name changes)
+#                 L1 data: bbs_splist_2024_L1.csv for BBS analysis (species name changes)
 # PROJECT:        Avian Interaction Database 
 # DATE:           27 Oct 2022; updated through 9 Aug 2024  
 # NOTES:          Next script to run: 
@@ -45,10 +45,10 @@ L1_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L1"
 # birds in North America.
 int.raw<-read.csv(file.path(L0_dir,"AvianInteractionData_L0.csv"))
 
-# Read in species list: all species in BBS (the 2023 release which includes all
-# species as of 2022, plus the additional AOUcombo.index column for use w BBS
+# Read in species list: all species in BBS (the 2024 release which includes all
+# species as of 2023, plus the additional AOUcombo.index column for use w BBS
 # index)
-splist<-read.csv(file.path(L1_dir,"bbs_splist_2022_L1.v1.csv"))
+splist<-read.csv(file.path(L1_dir,"bbs_splist_2024_L1.csv"))
 
 # Read in our look-up table with the different bbs & bow & old names for species
 namechg<-read.csv(file.path(L0_dir,"bbsbow_names.csv"))
@@ -64,8 +64,11 @@ names(splist)[names(splist) == "genus_species.combo"] <-"sp1sci.combo"
 #*******************************#
 #### Scientific Name Changes ####
 #*******************************#
-# We are using the Birds of The World naming conventions for species. 
+# We are using the eBird/Clements checklist via Birds of The World naming conventions for species. 
 # Some BBS names differ. Some old names are included.
+
+
+
 # Reference the bbsbow_names data to make initial changes to any 
 # "other_or_old_bow" names that might appear.
 # Apply changes only to the species1_scientific and species2_scientific columns.
@@ -100,6 +103,11 @@ tax <-gnr_datasources()
 # GBIF taxonomy ID = 11
 tax[tax$title=="GBIF Backbone Taxonomy","id"]
 tax[tax$title=="BirdLife International","id"]
+
+# Detecting name misspellings in our BBSvsBOW lookup:
+gbif.bl.tax.bbsbow <- namechg$bow %>%
+  gnr_resolve(data_source_ids = c(11,175), 
+              with_canonical_ranks=T)
 
 # Detecting name misspellings in our BBSvsBOW lookup:
 gbif.bl.tax.bbsbow <- namechg$bow %>%
