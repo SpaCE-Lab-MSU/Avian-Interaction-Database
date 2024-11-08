@@ -316,13 +316,13 @@ splist$genus_species.combo[splist$AOU.combo == 34880] <- "Corvus brachyrhynchos"
 # The section below, using taxize, was last run on Aug 9, 2024.
 tax <-gnr_datasources()
 # GBIF taxonomy ID = 11
-tax[tax$title=="GBIF Backbone Taxonomy","id"]
+#tax[tax$title=="GBIF Backbone Taxonomy","id"]
 tax[tax$title=="BirdLife International","id"]
 
 # Detecting name misspellings in our BBS list:
 gbif.bl.tax.splist <- splist$genus_species %>%
-  gnr_resolve(data_source_ids = c(11,175), 
-              with_canonical_ranks=T)
+  gnr_resolve(data_source_ids = c(175), 
+              with_canonical_ranks=T,http = "get")
 gbif.bl.tax.splist<-subset(gbif.bl.tax.splist, gbif.bl.tax.splist$score<0.9,)
 
 ### Nov 7, 2024: Not working bc taxize is having issues connecting to https://resolver.globalnames.org??

@@ -1,5 +1,6 @@
 # TITLE:          Avian Interaction Pairs Data: L0 to L1, including an option to 
-#                   subset species1 for (1) only BBS species, or for (2) BBS & other North America species
+#                   subset species1 for: (1) only BBS species, or 
+#                                       (2) BBS & other North America species
 # AUTHORS:        Phoebe Zarnetske, Pat Bills
 # COLLABORATORS:  Vincent Miele, Stephane Dray, Emily Parker
 # DATA INPUT:     From AvianInteractionData_L0_stitch.R: Data imported as csv 
@@ -8,7 +9,7 @@
 #                 From bbs_specieslist_L1.R: Data imported as csv 
 #                   https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database
 #                   /blob/main/L1/bbs_splist_2024_L1.csv
-#                 For BBS subset: bbs_allobs_runtype1 produced in 
+#                 For BBS observation subset: bbs_allobs_runtype1 produced in 
 #                   https://github.com/SpaCE-Lab-MSU/avian-meta-network
 #                   /blob/main/R/L1/bbs_obs_L1.R: 
 #                   Data imported as csv: /Google Drive/Shared drives/
@@ -35,7 +36,8 @@ rm(list=ls())
 
 #Load packages
 library(tidyverse)
-library(taxize)
+#library(taxize)
+library(taxadb)
 
 # .Renviron not working for PLZ; hard-coding in here
 L0_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0"
@@ -67,8 +69,6 @@ names(splist)[names(splist) == "genus_species.combo"] <-"sp1sci.combo"
 # We are using the eBird/Clements checklist via Birds of The World naming conventions for species. 
 # Some BBS names differ. Some old names are included.
 
-
-
 # Reference the bbsbow_names data to make initial changes to any 
 # "other_or_old_bow" names that might appear.
 # Apply changes only to the species1_scientific and species2_scientific columns.
@@ -92,11 +92,49 @@ int.raw$species2_scientific<-trimws(int.raw$species2_scientific, "l")
 int.raw$species1_scientific<-gsub(" spp."," sp.",int.raw$species1_scientific)
 int.raw$species2_scientific<-gsub(" spp."," sp.",int.raw$species2_scientific)
 
-# Try taxize to identify misspellings:
-int.raw.sp1<-unique(int.raw$species1_scientific)
-int.raw.sp2<-unique(int.raw$species2_scientific)
-int.raw.sp<-append(int.raw.sp1,int.raw.sp2)
-int.raw.sp<-unique(int.raw.sp)
+# Try taxadb to identify misspellings:
+bird_names1<-unique(int.raw$species1_scientific)
+bird_names2<-unique(int.raw$species2_scientific)
+bird_names<-append(bird_names1,bird_names2)
+bird_names<-unique(bird_names)
+bird_names<-data.frame(bird_names)
+names(bird_names)[names(bird_names) == "bird_names"] <-"genus_species"
+
+
+# taxadb package: Modifying this code: https://docs.ropensci.org/taxadb/articles/intro.html
+# Create a local copy of the GBIF 
+td_create("gbif")
+
+# View the GBIF ID that is assigned to each species
+birds <- bird_names %>% 
+  select(genus_species) %>% 
+  mutate(id = get_ids(genus_species, "gbif"))
+
+head(birds, 10)
+
+# View the GBIF accepted name that is assigned to each species
+bird_name_lookup<-birds %>% 
+  mutate(accepted_name = get_names(id, "gbif"))  
+head(bird_name_lookup, 10)
+# genus_species           id        accepted_name
+# 1      Acanthis flammea GBIF:5231630     Acanthis flammea
+# 2   Acanthis hornemanni GBIF:5231646  Acanthis hornemanni
+# 3    Accipiter cooperii GBIF:2480621   Accipiter cooperii
+# 4    Accipiter gentilis GBIF:2480589   Accipiter gentilis
+# 5       Accipiter nisus GBIF:2480637      Accipiter nisus
+# 6    Accipiter striatus GBIF:9740253   Accipiter striatus
+# 7  Acridotheres tristis GBIF:2489005 Acridotheres tristis
+# 8     Paroaria coronata GBIF:2492081    Paroaria coronata
+# 9      Geopelia striata GBIF:2495486     Geopelia striata
+# 10 Spilopelia chinensis GBIF:6101224 Spilopelia chinensis
+
+# Fill in the missing values
+# Look at these species to make sure they are birds
+bird_name_lookup.na<-bird_name_lookup %>% filter(if_any(everything(), is.na))
+head(bird_name_lookup.na)
+
+# Remove NA rows
+
 
 # The section below, using taxize, was last run on Aug 9, 2024.
 tax <-gnr_datasources()
