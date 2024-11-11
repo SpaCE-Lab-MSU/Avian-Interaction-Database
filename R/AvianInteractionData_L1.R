@@ -55,6 +55,13 @@ splist<-read.csv(file.path(L1_dir,"bbs_splist_2024_L1.csv"))
 # Read in our look-up table with the different bbs & bow & old names for species
 namechg<-read.csv(file.path(L0_dir,"bbsbow_names.csv"))
 
+# Read in the official eBird/Clements checklist 2024 version
+checklist <- read_csv(file.path(L0_dir,"eBird-Clements-v2024-integrated-checklist-October-2024-rev.csv"))
+# Rename the columns for merging later
+names(checklist)[names(checklist) == "scientific name"] <-"genus_species"
+#checklist$English_Common_Name<-checklist$English.name
+#checklist<-subset(checklist, select=c("genus_species","English_Common_Name"))
+
 # Rename some columns and omit others; indicate that the common name is coming
 # from BBS Species List
 names(splist)[names(splist) == "genus_species"] <-"species1_scientific"
@@ -100,22 +107,22 @@ bird_names<-unique(bird_names)
 bird_names<-data.frame(bird_names)
 names(bird_names)[names(bird_names) == "bird_names"] <-"genus_species"
 
-
 # taxadb package: Modifying this code: https://docs.ropensci.org/taxadb/articles/intro.html
-# Create a local copy of the GBIF 
+# Create a local copy of the GBIF database
 td_create("gbif")
 
 # View the GBIF ID that is assigned to each species
-birds <- bird_names %>% 
+birds.gbif <- bird_names %>% 
   select(genus_species) %>% 
   mutate(id = get_ids(genus_species, "gbif"))
 
-head(birds, 10)
+head(birds.gbif, 10)
 
 # View the GBIF accepted name that is assigned to each species
-bird_name_lookup<-birds %>% 
+birds.gbif<-birds.gbif %>% 
   mutate(accepted_name = get_names(id, "gbif"))  
-head(bird_name_lookup, 10)
+head(birds.gbif, 10)
+
 # genus_species           id        accepted_name
 # 1      Acanthis flammea GBIF:5231630     Acanthis flammea
 # 2   Acanthis hornemanni GBIF:5231646  Acanthis hornemanni
@@ -127,14 +134,202 @@ head(bird_name_lookup, 10)
 # 8     Paroaria coronata GBIF:2492081    Paroaria coronata
 # 9      Geopelia striata GBIF:2495486     Geopelia striata
 # 10 Spilopelia chinensis GBIF:6101224 Spilopelia chinensis
+names(birds.gbif)[names(birds.gbif) == "id"] <-"gbif.id"
+names(birds.gbif)[names(birds.gbif) == "accepted_name"] <-"gbif.accepted_name"
 
-# Fill in the missing values
-# Look at these species to make sure they are birds
-bird_name_lookup.na<-bird_name_lookup %>% filter(if_any(everything(), is.na))
-head(bird_name_lookup.na)
+# **** ITIS Database 
+# Create a local copy of the ITIS database
+td_create("itis")
 
-# Remove NA rows
+# View the GBIF ID that is assigned to each species
+birds.itis <- bird_names %>% 
+  select(genus_species) %>% 
+  mutate(id = get_ids(genus_species, "itis"))
 
+head(birds.itis, 10)
+
+# View the GBIF accepted name that is assigned to each species
+birds.itis<-birds.itis %>% 
+  mutate(accepted_name = get_names(id, "itis"))  
+head(birds.itis, 10)
+# genus_species           id        accepted_name
+# 1      Acanthis flammea  ITIS:179241     Acanthis flammea
+# 2   Acanthis hornemanni  ITIS:179238  Acanthis hornemanni
+# 3    Accipiter cooperii  ITIS:175309   Accipiter cooperii
+# 4    Accipiter gentilis  ITIS:175300   Accipiter gentilis
+# 5       Accipiter nisus  ITIS:175333      Accipiter nisus
+# 6    Accipiter striatus  ITIS:175304   Accipiter striatus
+# 7  Acridotheres tristis  ITIS:554025 Acridotheres tristis
+# 8     Paroaria coronata  ITIS:179554    Paroaria coronata
+# 9      Geopelia striata  ITIS:177196     Geopelia striata
+# 10 Spilopelia chinensis ITIS:1125210 Spilopelia chinensis
+names(birds.itis)[names(birds.itis) == "id"] <-"itis.id"
+names(birds.itis)[names(birds.itis) == "accepted_name"] <-"itis.accepted_name"
+
+# **** Catalog of Life Database 
+# Create a local copy of the ITIS database
+td_create("col")
+
+# View the GBIF ID that is assigned to each species
+birds.col <- bird_names %>% 
+  select(genus_species) %>% 
+  mutate(id = get_ids(genus_species, "col"))
+
+head(birds.col, 10)
+
+# View the GBIF accepted name that is assigned to each species
+birds.col<-birds.col %>% 
+  mutate(accepted_name = get_names(id, "col"))  
+head(birds.col, 10)
+# genus_species        id        accepted_name
+# 1      Acanthis flammea  COL:8TTP     Acanthis flammea
+# 2   Acanthis hornemanni  COL:8TTQ  Acanthis hornemanni
+# 3    Accipiter cooperii COL:64FV9   Accipiter cooperii
+# 4    Accipiter gentilis  COL:93V5   Accipiter gentilis
+# 5       Accipiter nisus  COL:93VP      Accipiter nisus
+# 6    Accipiter striatus  COL:93VZ   Accipiter striatus
+# 7  Acridotheres tristis  COL:9KHT Acridotheres tristis
+# 8     Paroaria coronata COL:4DQDH    Paroaria coronata
+# 9      Geopelia striata COL:3FQSJ     Geopelia striata
+# 10 Spilopelia chinensis COL:4Z4BP Spilopelia chinensis
+names(birds.col)[names(birds.col) == "id"] <-"col.id"
+names(birds.col)[names(birds.col) == "accepted_name"] <-"col.accepted_name"
+
+# Merge these data together, then filter and fix the unidentified species
+birds <- merge(birds.gbif, birds.itis) %>%
+  merge(birds.col)
+
+# Where are the NAs? GBIF has the fewest (683) so stick with it.
+birds %>%
+  select(everything()) %>%  
+  summarise_all(funs(sum(is.na(.)))) 
+# genus_species gbif.id gbif.accepted_name itis.id itis.accepted_name col.id col.accepted_name
+# 1             1     683                683     905                905   1187              1187
+
+# Get all the Aves records from GBIF to make sure all of these are birds
+gbif.aves<-filter_rank(name = "Aves", rank = "class", provider = "gbif")
+names(gbif.aves)[names(gbif.aves) == "taxonID"] <-"gbif.id"
+
+# Merge with the species list, keeping all rows from our species list
+birds.gbif.id<-merge(birds.gbif, gbif.aves, all.x=T) 
+
+# Determine if any NAs for genus_species
+birds.gbif.id %>%
+  select(everything()) %>%  
+  summarise_all(funs(sum(is.na(.)))) 
+# There are 683 missing values, so they are the same as the ones above (all Aves)
+# gbif.id genus_species gbif.accepted_name scientificName taxonRank
+# taxonomicStatus acceptedNameUsageID 1     683             1                683
+# 683       683             683                 683 kingdom phylum class order
+# family genus specificEpithet infraspecificEpithet parentNameUsageID 1     683
+# 683   683   683    683   683             683                 3178
+# 683 originalNameUsageID scientificNameAuthorship vernacularName 1
+# 2179                      696            860
+
+
+# Work with the birds.gbif data; save the no-NA data to merge later
+birds.gbif.no.na<-birds.gbif %>% filter(!if_any(everything(), is.na))
+  
+# Subset rows that contain NA
+birds.gbif.na<-birds.gbif %>% filter(if_any(everything(), is.na))
+
+# Identify and fix incomplete "Genus sp" entries in the genus_species column because they lack the period after "sp"
+birds.gbif.na1 <- birds.gbif.na %>%
+  mutate(
+    genus_species = str_replace(genus_species, "\\bsp(?=\\s|$)", "sp.")
+  )
+
+# Subset the NA rows that contain " sp." in the genus_species column
+birds.sp <- birds.gbif.na1 %>% filter(str_detect(genus_species, ' sp\\.'))
+
+# Subset rows that contain NA and also DO NOT contain " sp." in the genus_species column
+birds.fix <- birds.gbif.na1 %>% filter(!str_detect(genus_species, ' sp\\.'))
+
+# Work with birds.fix to try and determine what misspellings exist, and what they should be.
+# Load necessary libraries
+library(dplyr)
+library(stringdist)
+
+# Reference list of scientific names eBird Clements checklist 2024
+reference_names <- checklist$genus_species 
+
+# Use fuzzy logic function to find closest match from the reference list
+# Function to find closest match and return both the match and the similarity score
+find_closest_match_with_score <- function(name, reference_list) {
+  # Calculate string distances
+  distances <- stringdist::stringdist(name, reference_list, method = "jw")  # Jaro-Winkler distance
+  closest_match_index <- which.min(distances)
+  closest_match <- reference_list[closest_match_index]
+  similarity_score <- 1 - distances[closest_match_index]  # Convert distance to similarity (1 = exact match)
+  
+  return(list(match = closest_match, score = similarity_score))
+}
+
+# Check spelling in the genus_species column and suggest corrections with similarity score
+misspelled_species <- birds.fix %>%
+  filter(!genus_species %in% reference_names) %>%
+  distinct(genus_species) %>%
+  rowwise() %>%
+  mutate(
+    closest_match = find_closest_match_with_score(genus_species, reference_names)$match,
+    match_score = find_closest_match_with_score(genus_species, reference_names)$score
+  ) %>%
+  ungroup()
+
+# Extract misspelled_species with high confidence (match_score > 0.90)
+high_confidence_matches <- misspelled_species %>%
+  filter(match_score > 0.90)
+
+# Extract misspelled_species with lower confidence (match_score <= 0.90) for further checking
+low_confidence_matches <- misspelled_species %>%
+  filter(match_score <= 0.90)
+
+# Display high and low confidence matches
+print("High Confidence Matches (> 0.90):")
+print(high_confidence_matches$match_score<0.91)
+
+print("Low Confidence Matches (<= 0.90, needs further checking):")
+print(low_confidence_matches)
+
+# Define range for printing in increments of 0.005
+score_start <- 0.90
+score_end <- 1.00
+increment <- 0.005
+
+# Loop through each score range and print the matches within that range
+for (i in seq(score_start, score_end - increment, by = increment)) {
+  current_range <- high_confidence_matches %>%
+    filter(match_score > i & match_score <= i + increment)
+  
+  # Print the current range if it has any entries
+  if (nrow(current_range) > 0) {
+    cat("\nMatch Score Range:", sprintf("%.2f", i), "to", sprintf("%.2f", i + increment), "\n")
+    print(current_range, n=50)
+  }
+}
+
+# Scroll through these 161 High Confidence Matches. All look okay except:
+# Zosterops lateralis gouldi          Zosterops lateralis              0.910
+# Lanius schach erythronotus/tricolor Lanius schach erythronotus       0.914
+# Aphelocoma woodhouseii suttoni   Aphelocoma woodhouseii cyanotis       0.916
+
+# Change these, then check the Low Confidence Matches:
+# Define range for printing in increments of 0.005
+score_start <- min(low_confidence_matches$match_score)
+score_end <- max(low_confidence_matches$match_score)
+increment <- 0.05
+
+# Loop through each score range and print the matches within that range
+for (i in seq(score_start, score_end - increment, by = increment)) {
+  current_range <- low_confidence_matches %>%
+    filter(match_score > i & match_score <= i + increment)
+  
+  # Print the current range if it has any entries
+  if (nrow(current_range) > 0) {
+    cat("\nMatch Score Range:", sprintf("%.2f", i), "to", sprintf("%.2f", i + increment), "\n")
+    print(current_range, n=60)
+  }
+}
 
 # The section below, using taxize, was last run on Aug 9, 2024.
 tax <-gnr_datasources()
