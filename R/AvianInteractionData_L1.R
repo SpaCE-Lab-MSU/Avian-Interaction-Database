@@ -38,6 +38,8 @@ rm(list=ls())
 library(tidyverse)
 #library(taxize)
 library(taxadb)
+library(dplyr)
+library(stringr)
 
 # .Renviron not working for PLZ; hard-coding in here
 L0_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0"
@@ -57,10 +59,18 @@ namechg<-read.csv(file.path(L0_dir,"bbsbow_names.csv"))
 
 # Read in the official eBird/Clements checklist 2024 version
 checklist <- read_csv(file.path(L0_dir,"eBird-Clements-v2024-integrated-checklist-October-2024-rev.csv"))
+
+# We are using the GBIF list (via taxadb) to resolve scientific names and the
+# eBird/Clements checklist via Birds of The World naming conventions for
+# species. Some BBS names differ from these lists so they have to be resolved
+# manually.
+
+#*******************************************#
+#### Scientific Name Checking: Data Prep ####
+#*******************************************#
 # Rename the columns for merging later
 names(checklist)[names(checklist) == "scientific name"] <-"genus_species"
-#checklist$English_Common_Name<-checklist$English.name
-#checklist<-subset(checklist, select=c("genus_species","English_Common_Name"))
+names(checklist)[names(checklist) == "English name"] <-"common_name"
 
 # Rename some columns and omit others; indicate that the common name is coming
 # from BBS Species List
@@ -70,12 +80,6 @@ names(splist)[names(splist) == "AOU"] <-"sp1_AOU"
 names(splist)[names(splist) == "AOU.combo"] <-"sp1AOU.combo"
 names(splist)[names(splist) == "genus_species.combo"] <-"sp1sci.combo"
 
-#*******************************#
-#### Scientific Name Changes ####
-#*******************************#
-# We are using the eBird/Clements checklist via Birds of The World naming conventions for species. 
-# Some BBS names differ. Some old names are included.
-
 # Reference the bbsbow_names data to make initial changes to any 
 # "other_or_old_bow" names that might appear.
 # Apply changes only to the species1_scientific and species2_scientific columns.
@@ -84,148 +88,86 @@ dim(namechg)
 namechg.orig <- namechg
 namechg<-namechg[!(is.na(namechg$other_or_old_bow) | namechg$other_or_old_bow==""), ]
 dim(namechg)
-# Save original copy of int.raw
-int.raw.orig <- int.raw
-dim(int.raw)
 
-sort(unique(int.raw$species1_scientific))
+# Create unique genus_species and common_name pairs with formatting adjustments.
+# This code removes blank spaces, capitalizes, and keeps unique rows.
+bird_names <- int.raw %>%
+  # Select and stack the relevant species columns
+  select(species1_scientific, species1_common, species2_scientific, species2_common) %>%
+  transmute(
+    genus_species = species1_scientific,
+    common_name = species1_common
+  ) %>%
+  bind_rows(
+    int.raw %>%
+      transmute(
+        genus_species = species2_scientific,
+        common_name = species2_common
+      )
+  ) %>%
+  # Remove duplicates and clean up formatting
+  distinct() %>%
+  mutate(
+    # Remove extra beginning and end spaces from both columns
+    genus_species = str_trim(genus_species),
+    common_name = str_trim(common_name),
+    
+    # Format genus_species: capitalize first word, lowercase subsequent words
+    genus_species = ifelse(
+      str_starts(genus_species, "unid."),  # Exception case
+      str_replace(genus_species, "(unid\\.)\\s*(\\w+)", "\\1 \\U\\2"),
+      str_to_sentence(genus_species)       # Regular case
+    ),
+    
+    # Replace "spp." with "sp."
+    genus_species = str_replace(genus_species, "\\bspp\\.\\b", "sp."),
+    
+    # Capitalize each word in common_name
+    common_name = str_to_title(common_name),
+    
+    # Replace "unid" with "unid." if found without a period
+    common_name = str_replace_all(common_name, "\\bunid\\b", "unid.")
+  ) %>%
+# Remove rows where genus_species is <NA>
+filter(!(is.na(genus_species)))
 
-# Remove extra beginning and end spaces:
-int.raw$species1_scientific<-trimws(int.raw$species1_scientific, "r")
-int.raw$species1_scientific<-trimws(int.raw$species1_scientific, "l")
-int.raw$species2_scientific<-trimws(int.raw$species2_scientific, "r")
-int.raw$species2_scientific<-trimws(int.raw$species2_scientific, "l")
-# Standardize "sp."
-int.raw$species1_scientific<-gsub(" spp."," sp.",int.raw$species1_scientific)
-int.raw$species2_scientific<-gsub(" spp."," sp.",int.raw$species2_scientific)
+# Display the resulting cleaned dataframe
+head(bird_names)
+#         genus_species      common_name
+# 1    Acanthis flammea   Common Redpoll
+# 2 Acanthis hornemanni    Hoary Redpoll
+# 3  Accipiter cooperii    Cooper's Hawk
+# 4  Accipiter gentilis Northern Goshawk
+# 5  Accipiter gentilis Northern Goshawk
+# 6  Accipiter gentilis          Goshawk
+#**************************************************#
+#### Scientific Name Checking: taxadb with GBIF ####
+#**************************************************#
 
-# Try taxadb to identify misspellings:
-bird_names1<-unique(int.raw$species1_scientific)
-bird_names2<-unique(int.raw$species2_scientific)
-bird_names<-append(bird_names1,bird_names2)
-bird_names<-unique(bird_names)
-bird_names<-data.frame(bird_names)
-names(bird_names)[names(bird_names) == "bird_names"] <-"genus_species"
+# taxadb package: Modified from this code: https://docs.ropensci.org/taxadb/articles/intro.html
+# In previous code, tried ITIS and COL to see if they were better than GBIF.
+# GBIF has the fewest NA values, so we are sticking with it (it is the most comprehensive).
 
-# taxadb package: Modifying this code: https://docs.ropensci.org/taxadb/articles/intro.html
-# Create a local copy of the GBIF database
+# Create a local GBIF database 
 td_create("gbif")
 
-# View the GBIF ID that is assigned to each species
-birds.gbif <- bird_names %>% 
-  select(genus_species) %>% 
-  mutate(id = get_ids(genus_species, "gbif"))
+# Resolve scientific names
+bird_names <- bird_names %>%
+  mutate(
+    scientific_id = get_ids(genus_species, "gbif"),
+    accepted_scientific_name = get_names(scientific_id, "gbif")
+  ) 
 
-head(birds.gbif, 10)
+# Separate resolved and unresolved names based on specified criteria
+resolved_names <- bird_names %>%
+  filter(!is.na(scientific_id) | grepl(" sp\\.$", genus_species))
 
-# View the GBIF accepted name that is assigned to each species
-birds.gbif<-birds.gbif %>% 
-  mutate(accepted_name = get_names(id, "gbif"))  
-head(birds.gbif, 10)
+unresolved_names <- bird_names %>%
+  filter(is.na(scientific_id) & !grepl(" sp\\.$", genus_species))
 
-# genus_species           id        accepted_name
-# 1      Acanthis flammea GBIF:5231630     Acanthis flammea
-# 2   Acanthis hornemanni GBIF:5231646  Acanthis hornemanni
-# 3    Accipiter cooperii GBIF:2480621   Accipiter cooperii
-# 4    Accipiter gentilis GBIF:2480589   Accipiter gentilis
-# 5       Accipiter nisus GBIF:2480637      Accipiter nisus
-# 6    Accipiter striatus GBIF:9740253   Accipiter striatus
-# 7  Acridotheres tristis GBIF:2489005 Acridotheres tristis
-# 8     Paroaria coronata GBIF:2492081    Paroaria coronata
-# 9      Geopelia striata GBIF:2495486     Geopelia striata
-# 10 Spilopelia chinensis GBIF:6101224 Spilopelia chinensis
-names(birds.gbif)[names(birds.gbif) == "id"] <-"gbif.id"
-names(birds.gbif)[names(birds.gbif) == "accepted_name"] <-"gbif.accepted_name"
-
-# **** ITIS Database 
-# Create a local copy of the ITIS database
-td_create("itis")
-
-# View the GBIF ID that is assigned to each species
-birds.itis <- bird_names %>% 
-  select(genus_species) %>% 
-  mutate(id = get_ids(genus_species, "itis"))
-
-head(birds.itis, 10)
-
-# View the GBIF accepted name that is assigned to each species
-birds.itis<-birds.itis %>% 
-  mutate(accepted_name = get_names(id, "itis"))  
-head(birds.itis, 10)
-# genus_species           id        accepted_name
-# 1      Acanthis flammea  ITIS:179241     Acanthis flammea
-# 2   Acanthis hornemanni  ITIS:179238  Acanthis hornemanni
-# 3    Accipiter cooperii  ITIS:175309   Accipiter cooperii
-# 4    Accipiter gentilis  ITIS:175300   Accipiter gentilis
-# 5       Accipiter nisus  ITIS:175333      Accipiter nisus
-# 6    Accipiter striatus  ITIS:175304   Accipiter striatus
-# 7  Acridotheres tristis  ITIS:554025 Acridotheres tristis
-# 8     Paroaria coronata  ITIS:179554    Paroaria coronata
-# 9      Geopelia striata  ITIS:177196     Geopelia striata
-# 10 Spilopelia chinensis ITIS:1125210 Spilopelia chinensis
-names(birds.itis)[names(birds.itis) == "id"] <-"itis.id"
-names(birds.itis)[names(birds.itis) == "accepted_name"] <-"itis.accepted_name"
-
-# **** Catalog of Life Database 
-# Create a local copy of the ITIS database
-td_create("col")
-
-# View the GBIF ID that is assigned to each species
-birds.col <- bird_names %>% 
-  select(genus_species) %>% 
-  mutate(id = get_ids(genus_species, "col"))
-
-head(birds.col, 10)
-
-# View the GBIF accepted name that is assigned to each species
-birds.col<-birds.col %>% 
-  mutate(accepted_name = get_names(id, "col"))  
-head(birds.col, 10)
-# genus_species        id        accepted_name
-# 1      Acanthis flammea  COL:8TTP     Acanthis flammea
-# 2   Acanthis hornemanni  COL:8TTQ  Acanthis hornemanni
-# 3    Accipiter cooperii COL:64FV9   Accipiter cooperii
-# 4    Accipiter gentilis  COL:93V5   Accipiter gentilis
-# 5       Accipiter nisus  COL:93VP      Accipiter nisus
-# 6    Accipiter striatus  COL:93VZ   Accipiter striatus
-# 7  Acridotheres tristis  COL:9KHT Acridotheres tristis
-# 8     Paroaria coronata COL:4DQDH    Paroaria coronata
-# 9      Geopelia striata COL:3FQSJ     Geopelia striata
-# 10 Spilopelia chinensis COL:4Z4BP Spilopelia chinensis
-names(birds.col)[names(birds.col) == "id"] <-"col.id"
-names(birds.col)[names(birds.col) == "accepted_name"] <-"col.accepted_name"
-
-# Merge these data together, then filter and fix the unidentified species
-birds <- merge(birds.gbif, birds.itis) %>%
-  merge(birds.col)
-
-# Where are the NAs? GBIF has the fewest (683) so stick with it.
-birds %>%
-  select(everything()) %>%  
-  summarise_all(funs(sum(is.na(.)))) 
-# genus_species gbif.id gbif.accepted_name itis.id itis.accepted_name col.id col.accepted_name
-# 1             1     683                683     905                905   1187              1187
-
-# Get all the Aves records from GBIF to make sure all of these are birds
-gbif.aves<-filter_rank(name = "Aves", rank = "class", provider = "gbif")
-names(gbif.aves)[names(gbif.aves) == "taxonID"] <-"gbif.id"
-
-# Merge with the species list, keeping all rows from our species list
-birds.gbif.id<-merge(birds.gbif, gbif.aves, all.x=T) 
-
-# Determine if any NAs for genus_species
-birds.gbif.id %>%
-  select(everything()) %>%  
-  summarise_all(funs(sum(is.na(.)))) 
-# There are 683 missing values, so they are the same as the ones above (all Aves)
-# gbif.id genus_species gbif.accepted_name scientificName taxonRank
-# taxonomicStatus acceptedNameUsageID 1     683             1                683
-# 683       683             683                 683 kingdom phylum class order
-# family genus specificEpithet infraspecificEpithet parentNameUsageID 1     683
-# 683   683   683    683   683             683                 3178
-# 683 originalNameUsageID scientificNameAuthorship vernacularName 1
-# 2179                      696            860
-
+# Display both results
+head(resolved_names)
+head(unresolved_names)
 
 # Work with the birds.gbif data; save the no-NA data to merge later
 birds.gbif.no.na<-birds.gbif %>% filter(!if_any(everything(), is.na))
@@ -330,6 +272,20 @@ for (i in seq(score_start, score_end - increment, by = increment)) {
     print(current_range, n=60)
   }
 }
+
+
+# All look okay except for these: Ask R to return the common name associated with them to help with ID:
+# 1 unid. Accipiter hawl Yuhina occipitalis       0.728 
+# = unid. Accipiter hawk
+
+# 1 Lophortyx californicus              Lophornis ornatus                       0.788 # 
+# = Callipepla californica californica
+
+# 2 Pyrrhuloxia sinuata                 Pyrrhula owstoni                        0.799
+# = Cardinalis sinuatus
+
+# 3 Isterus pustulatus                  Icterus pustulatus                      0.806
+# streak-backed oriole
 
 # The section below, using taxize, was last run on Aug 9, 2024.
 tax <-gnr_datasources()
