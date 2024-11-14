@@ -169,25 +169,7 @@ unresolved_names <- bird_names %>%
 head(resolved_names)
 head(unresolved_names)
 
-# Work with the birds.gbif data; save the no-NA data to merge later
-birds.gbif.no.na<-birds.gbif %>% filter(!if_any(everything(), is.na))
-  
-# Subset rows that contain NA
-birds.gbif.na<-birds.gbif %>% filter(if_any(everything(), is.na))
-
-# Identify and fix incomplete "Genus sp" entries in the genus_species column because they lack the period after "sp"
-birds.gbif.na1 <- birds.gbif.na %>%
-  mutate(
-    genus_species = str_replace(genus_species, "\\bsp(?=\\s|$)", "sp.")
-  )
-
-# Subset the NA rows that contain " sp." in the genus_species column
-birds.sp <- birds.gbif.na1 %>% filter(str_detect(genus_species, ' sp\\.'))
-
-# Subset rows that contain NA and also DO NOT contain " sp." in the genus_species column
-birds.fix <- birds.gbif.na1 %>% filter(!str_detect(genus_species, ' sp\\.'))
-
-# Work with birds.fix to try and determine what misspellings exist, and what they should be.
+# Work with unresolved_names to try and determine what misspellings exist, and what they should be.
 # Load necessary libraries
 library(dplyr)
 library(stringdist)
@@ -208,7 +190,7 @@ find_closest_match_with_score <- function(name, reference_list) {
 }
 
 # Check spelling in the genus_species column and suggest corrections with similarity score
-misspelled_species <- birds.fix %>%
+misspelled_species <- unresolved_names %>%
   filter(!genus_species %in% reference_names) %>%
   distinct(genus_species) %>%
   rowwise() %>%
@@ -225,13 +207,6 @@ high_confidence_matches <- misspelled_species %>%
 # Extract misspelled_species with lower confidence (match_score <= 0.90) for further checking
 low_confidence_matches <- misspelled_species %>%
   filter(match_score <= 0.90)
-
-# Display high and low confidence matches
-print("High Confidence Matches (> 0.90):")
-print(high_confidence_matches$match_score<0.91)
-
-print("Low Confidence Matches (<= 0.90, needs further checking):")
-print(low_confidence_matches)
 
 # Define range for printing in increments of 0.005
 score_start <- 0.90
@@ -250,12 +225,31 @@ for (i in seq(score_start, score_end - increment, by = increment)) {
   }
 }
 
-# Scroll through these 161 High Confidence Matches. All look okay except:
-# Zosterops lateralis gouldi          Zosterops lateralis              0.910
-# Lanius schach erythronotus/tricolor Lanius schach erythronotus       0.914
-# Aphelocoma woodhouseii suttoni   Aphelocoma woodhouseii cyanotis       0.916
+# Scroll through these 175 High Confidence Matches. All look okay except:
+# A tibble: 8 × 3
+# genus_species                    closest_match                 match_score
+# <chr>                            <chr>                               <dbl>
+# 1 Branta leucopsis x anser indicus Branta leucopsis x canadensis       0.905
+# 2 Cuculus canorus telephonus       Cuculus canorus subtelephonus       0.908
+# 3 Parkesia noveboracensis limnaeus Parkesia noveboracensis             0.906
+# 4 Zosterops lateralis gouldi          Zosterops lateralis              0.910
+# 5 Lanius schach erythronotus/tricolor Lanius schach erythronotus       0.914
+# 1 Aphelocoma woodhouseii suttoni   Aphelocoma woodhouseii cyanotis       0.916
+# 4 Strigidae sp                     Strigidae                             0.917
 
-# Change these, then check the Low Confidence Matches:
+# Change these (assign them the closest match), then edit the few above that did not match.
+fixed_names<-merge(unresolved_names,high_confidence_matches, by=c("genus_species"))
+# Make closest_match into the accepted genus_species 
+# Rename the current genus_species
+names(fixed_names)[names(fixed_names) == "genus_species"] <-"genus_species.orig"
+
+# Change the listed misnamed species above back to their genus_species
+fixed_names$genus_species.fix[fixed_names$genus_species.fix == "Branta leucopsis x canadensis"] <- "Branta leucopsis x anser indicus"
+fixed_names$genus_species.fix[fixed_names$genus_species.fix == "Cuculus canorus subtelephonus"] <- "Branta leucopsis x anser indicus"
+fixed_names$genus_species.fix[fixed_names$genus_species.fix == "Branta leucopsis x canadensis"] <- "Branta leucopsis x anser indicus"
+fixed_names$genus_species.fix[fixed_names$genus_species.fix == "Branta leucopsis x canadensis"] <- "Branta leucopsis x anser indicus"
+
+# Then check the Low Confidence Matches:
 # Define range for printing in increments of 0.005
 score_start <- min(low_confidence_matches$match_score)
 score_end <- max(low_confidence_matches$match_score)
@@ -272,20 +266,6 @@ for (i in seq(score_start, score_end - increment, by = increment)) {
     print(current_range, n=60)
   }
 }
-
-
-# All look okay except for these: Ask R to return the common name associated with them to help with ID:
-# 1 unid. Accipiter hawl Yuhina occipitalis       0.728 
-# = unid. Accipiter hawk
-
-# 1 Lophortyx californicus              Lophornis ornatus                       0.788 # 
-# = Callipepla californica californica
-
-# 2 Pyrrhuloxia sinuata                 Pyrrhula owstoni                        0.799
-# = Cardinalis sinuatus
-
-# 3 Isterus pustulatus                  Icterus pustulatus                      0.806
-# streak-backed oriole
 
 # The section below, using taxize, was last run on Aug 9, 2024.
 tax <-gnr_datasources()
