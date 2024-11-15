@@ -240,20 +240,24 @@ for (i in seq(score_start, score_end - increment, by = increment)) {
 # Change these (assign them the closest match), then edit the few above that did not match.
 fixed_names<-merge(unresolved_names,high_confidence_matches, by=c("genus_species"))
 # Make closest_match into the accepted genus_species 
-# Rename the current genus_species
+# Rename the current genus_species, and assign genus_species to the closest_match
 names(fixed_names)[names(fixed_names) == "genus_species"] <-"genus_species.orig"
+names(fixed_names)[names(fixed_names) == "closest_match"] <-"genus_species"
 
-# Change the listed misnamed species above back to their genus_species
-fixed_names$genus_species.fix[fixed_names$genus_species.fix == "Branta leucopsis x canadensis"] <- "Branta leucopsis x anser indicus"
-fixed_names$genus_species.fix[fixed_names$genus_species.fix == "Cuculus canorus subtelephonus"] <- "Branta leucopsis x anser indicus"
-fixed_names$genus_species.fix[fixed_names$genus_species.fix == "Branta leucopsis x canadensis"] <- "Branta leucopsis x anser indicus"
-fixed_names$genus_species.fix[fixed_names$genus_species.fix == "Branta leucopsis x canadensis"] <- "Branta leucopsis x anser indicus"
+# Change the listed misnamed species above back to their original genus_species with a few typo edits
+fixed_names$genus_species[fixed_names$genus_species.orig == "Branta leucopsis x anser indicus"] <- "Branta leucopsis x anser indicus"
+fixed_names$genus_species[fixed_names$genus_species.orig == "Cuculus canorus telephonus"] <- "Cuculus canorus telephonus"
+fixed_names$genus_species[fixed_names$genus_species.orig == "Parkesia noveboracensis limnaeus"] <- "Parkesia noveboracensis limnaeus"
+fixed_names$genus_species[fixed_names$genus_species.orig == "Zosterops lateralis gouldi"] <- "Zosterops lateralis gouldi"
+fixed_names$genus_species[fixed_names$genus_species.orig == "Lanius schach erythronotus/tricolor"] <- "Lanius schach erythronotus / tricolor"
+fixed_names$genus_species[fixed_names$genus_species.orig == "Aphelocoma woodhouseii suttoni"] <- "Aphelocoma woodhouseii suttoni"
+fixed_names$genus_species[fixed_names$genus_species.orig == "Strigidae sp"] <- "Strigidae sp."
 
 # Then check the Low Confidence Matches:
 # Define range for printing in increments of 0.005
 score_start <- min(low_confidence_matches$match_score)
 score_end <- max(low_confidence_matches$match_score)
-increment <- 0.05
+increment <- 0.01
 
 # Loop through each score range and print the matches within that range
 for (i in seq(score_start, score_end - increment, by = increment)) {
@@ -266,6 +270,8 @@ for (i in seq(score_start, score_end - increment, by = increment)) {
     print(current_range, n=60)
   }
 }
+
+# ******* doesn't seem to print out all of them - some rows in low_confidence_matches don't show up
 
 # The section below, using taxize, was last run on Aug 9, 2024.
 tax <-gnr_datasources()
