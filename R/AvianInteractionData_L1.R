@@ -91,7 +91,7 @@ dim(namechg)
 
 # Create unique genus_species and common_name pairs with formatting adjustments.
 # This code removes blank spaces, capitalizes, and keeps unique rows.
-bird_names <- int.raw %>%
+intbird.names <- int.raw %>%
   # Select and stack the relevant species columns
   select(species1_scientific, species1_common, species2_scientific, species2_common) %>%
   transmute(
@@ -131,8 +131,8 @@ bird_names <- int.raw %>%
 # Remove rows where genus_species is <NA>
 filter(!(is.na(genus_species)))
 
-# Display the resulting cleaned dataframe
-head(bird_names)
+# Display the resulting cleaned dataframe of the species from interaction data
+head(intbird.names)
 #         genus_species      common_name
 # 1    Acanthis flammea   Common Redpoll
 # 2 Acanthis hornemanni    Hoary Redpoll
@@ -152,22 +152,26 @@ head(bird_names)
 td_create("gbif")
 
 # Resolve scientific names
-bird_names <- bird_names %>%
+intbird.names <- intbird.names %>%
   mutate(
     scientific_id = get_ids(genus_species, "gbif"),
     accepted_scientific_name = get_names(scientific_id, "gbif")
   ) 
 
 # Separate resolved and unresolved names based on specified criteria
-resolved_names <- bird_names %>%
+resolved_names <- intbird.names %>%
   filter(!is.na(scientific_id) | grepl(" sp\\.$", genus_species))
 
-unresolved_names <- bird_names %>%
+unresolved_names <- intbird.names %>%
   filter(is.na(scientific_id) & !grepl(" sp\\.$", genus_species))
 
 # Display both results
 head(resolved_names)
+dim(resolved_names)
+# 5295 resolved as of Nov. 21, 2024
 head(unresolved_names)
+dim(unresolved_names)
+# 310 unresolved as of Nov. 21, 2024
 
 # Work with unresolved_names to try and determine what misspellings exist, and what they should be.
 # Load necessary libraries
@@ -209,14 +213,14 @@ low_confidence_matches <- misspelled_species %>%
   filter(match_score <= 0.90)
 
 # Define range for printing in increments of 0.005
-score_start <- 0.90
-score_end <- 1.00
+score_start <- min(high_confidence_matches$match_score)
+score_end <- max(high_confidence_matches$match_score)
 increment <- 0.005
 
 # Loop through each score range and print the matches within that range
-for (i in seq(score_start, score_end - increment, by = increment)) {
+for (i in seq(score_start, score_end, by = increment)) {
   current_range <- high_confidence_matches %>%
-    filter(match_score > i & match_score <= i + increment)
+    filter(match_score >= i & match_score <= i + increment)
   
   # Print the current range if it has any entries
   if (nrow(current_range) > 0) {
@@ -225,44 +229,58 @@ for (i in seq(score_start, score_end - increment, by = increment)) {
   }
 }
 
-# Scroll through these 175 High Confidence Matches. All look okay except:
+# Scroll through these 180 High Confidence Matches. All look okay except:
 # A tibble: 8 × 3
 # genus_species                    closest_match                 match_score
-# <chr>                            <chr>                               <dbl>
+
+# KEEP ORIGINAL- BOW says the hybrid exists but is rare
 # 1 Branta leucopsis x anser indicus Branta leucopsis x canadensis       0.905
+
+# KEEP ORIGINAL - BOW says "sometimes separated subspecifically as telephonus on basis of
+# size (smaller than subtelephonus) and pale plumage (like subtelephonus), but
+# birds in this area are not constant in these characters and overlap with other
+# races occurs"
 # 2 Cuculus canorus telephonus       Cuculus canorus subtelephonus       0.908
+
+# CHANGE TO MATCH: BOW says No subspecies, following Eaton (1957a) and Molina et
+# al. (2000). Hence, P. n. notabilis (Ridgway, 1880), P. n. limnaeus (McCabe and
+# Miller, 1933), and P. n. uliginosus (Burleigh and Peters, 1948) are junior
+# synonyms of P. noveboracensis (Gmelin, 1788).
 # 3 Parkesia noveboracensis limnaeus Parkesia noveboracensis             0.906
+
 # 4 Zosterops lateralis gouldi          Zosterops lateralis              0.910
 # 5 Lanius schach erythronotus/tricolor Lanius schach erythronotus       0.914
 # 1 Aphelocoma woodhouseii suttoni   Aphelocoma woodhouseii cyanotis       0.916
 # 4 Strigidae sp                     Strigidae                             0.917
 
 # Change these (assign them the closest match), then edit the few above that did not match.
-fixed_names<-merge(unresolved_names,high_confidence_matches, by=c("genus_species"))
+fixed_names1<-merge(unresolved_names,high_confidence_matches, by=c("genus_species"))
 # Make closest_match into the accepted genus_species 
 # Rename the current genus_species, and assign genus_species to the closest_match
-names(fixed_names)[names(fixed_names) == "genus_species"] <-"genus_species.orig"
-names(fixed_names)[names(fixed_names) == "closest_match"] <-"genus_species"
+names(fixed_names1)[names(fixed_names1) == "genus_species"] <-"genus_species.orig"
+names(fixed_names1)[names(fixed_names1) == "closest_match"] <-"genus_species"
 
 # Change the listed misnamed species above back to their original genus_species with a few typo edits
-fixed_names$genus_species[fixed_names$genus_species.orig == "Branta leucopsis x anser indicus"] <- "Branta leucopsis x anser indicus"
-fixed_names$genus_species[fixed_names$genus_species.orig == "Cuculus canorus telephonus"] <- "Cuculus canorus telephonus"
-fixed_names$genus_species[fixed_names$genus_species.orig == "Parkesia noveboracensis limnaeus"] <- "Parkesia noveboracensis limnaeus"
-fixed_names$genus_species[fixed_names$genus_species.orig == "Zosterops lateralis gouldi"] <- "Zosterops lateralis gouldi"
-fixed_names$genus_species[fixed_names$genus_species.orig == "Lanius schach erythronotus/tricolor"] <- "Lanius schach erythronotus / tricolor"
-fixed_names$genus_species[fixed_names$genus_species.orig == "Aphelocoma woodhouseii suttoni"] <- "Aphelocoma woodhouseii suttoni"
-fixed_names$genus_species[fixed_names$genus_species.orig == "Strigidae sp"] <- "Strigidae sp."
+fixed_names1$genus_species[fixed_names1$genus_species.orig == "Branta leucopsis x anser indicus"] <- "Branta leucopsis x anser indicus"
+fixed_names1$genus_species[fixed_names1$genus_species.orig == "Cuculus canorus telephonus"] <- "Cuculus canorus telephonus"
+fixed_names1$genus_species[fixed_names1$genus_species.orig == "Parkesia noveboracensis limnaeus"] <- "Parkesia noveboracensis limnaeus"
+fixed_names1$genus_species[fixed_names1$genus_species.orig == "Zosterops lateralis gouldi"] <- "Zosterops lateralis gouldi"
+fixed_names1$genus_species[fixed_names1$genus_species.orig == "Lanius schach erythronotus/tricolor"] <- "Lanius schach erythronotus / tricolor"
+fixed_names1$genus_species[fixed_names1$genus_species.orig == "Aphelocoma woodhouseii suttoni"] <- "Aphelocoma woodhouseii suttoni"
+fixed_names1$genus_species[fixed_names1$genus_species.orig == "Strigidae sp"] <- "Strigidae sp."
+
+# ************** Add these fixed_names to the resolved_names
 
 # Then check the Low Confidence Matches:
 # Define range for printing in increments of 0.005
 score_start <- min(low_confidence_matches$match_score)
 score_end <- max(low_confidence_matches$match_score)
-increment <- 0.01
+increment <- 0.005
 
 # Loop through each score range and print the matches within that range
-for (i in seq(score_start, score_end - increment, by = increment)) {
+for (i in seq(score_start, score_end, by = increment)) {
   current_range <- low_confidence_matches %>%
-    filter(match_score > i & match_score <= i + increment)
+    filter(match_score >= i & match_score <= i + increment)
   
   # Print the current range if it has any entries
   if (nrow(current_range) > 0) {
@@ -270,8 +288,31 @@ for (i in seq(score_start, score_end - increment, by = increment)) {
     print(current_range, n=60)
   }
 }
+dim(low_confidence_matches)
 
-# ******* doesn't seem to print out all of them - some rows in low_confidence_matches don't show up
+# Scroll through these 55 Low Confidence Matches in reverse order. 
+# All look okay except check these:
+# genus_species closest_match    match_score
+
+# genus_species                     closest_match           match_score
+
+# OK - there are no subspecies in this species
+# 1 Parkesia noveboracensis notabilis Parkesia noveboracensis       0.899
+
+# This is "Rock Dove" which is also known as Rock Pigeon. Should be Columba livia.
+# 3 Columbina livia              Columbina inca                      0.886
+
+# OK - because there is no hybrid according to BOW
+# 1 Setophaga striata / tigrina Setophaga striata       0.877
+
+# Change these (assign them the closest match), then edit the few above that did not match.
+fixed_names2<-merge(unresolved_names,low_confidence_matches, by=c("genus_species"))
+# Make closest_match into the accepted genus_species 
+# Rename the current genus_species, and assign genus_species to the closest_match
+names(fixed_names2)[names(fixed_names2) == "genus_species"] <-"genus_species.orig"
+names(fixed_names2)[names(fixed_names2) == "closest_match"] <-"genus_species"
+
+
 
 # The section below, using taxize, was last run on Aug 9, 2024.
 tax <-gnr_datasources()

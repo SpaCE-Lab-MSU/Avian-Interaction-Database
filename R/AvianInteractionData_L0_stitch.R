@@ -149,13 +149,13 @@ intxnsL0spir <- combine_by_species("species_in_review_dir")
 sp<-unique(intxnsL0sp$species1_common)
 sp<-as.list(sp)
 length(sp)
-# 1194 species1 as of Nov. 7, 2024 (all double checked)
+# 1222 species1 as of Nov. 21, 2024 (all double checked)
 
 ## Species In Review 
 spir<-unique(intxnsL0spir$species1_common)
 spir<-as.list(spir)
 length(spir)
-# 680 species1 as of Nov. 7, 2024
+# 761 species1 as of Nov. 7, 2024
 
 # Use only the Species Fully Checked:
 intxnsL0<-intxnsL0sp
