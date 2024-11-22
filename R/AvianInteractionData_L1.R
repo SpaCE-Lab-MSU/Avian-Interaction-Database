@@ -44,10 +44,10 @@ library(stringdist)
 
 # .Renviron not working for PLZ; hard-coding in here
 L0_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0"
-L0_dir <- "/Users/phoebezarnetske/Documents/GitHub/Avian-Interaction-Database/L0"
+#L0_dir <- "/Users/phoebezarnetske/Documents/GitHub/Avian-Interaction-Database/L0"
 
 L1_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L1"
-L1_dir <- "/Users/phoebezarnetske/Documents/GitHub/Avian-Interaction-Database/L1"
+#L1_dir <- "/Users/phoebezarnetske/Documents/GitHub/Avian-Interaction-Database/L1"
 
 # Read in csv with avian interactions from primary, secondary cavity nesting
 # birds in North America.
@@ -230,17 +230,27 @@ for (i in seq(score_start, score_end, by = increment)) {
   }
 }
 
+# For most of the names, assign them the closest match, then edit the few below noted "KEEP ORIGINAL".
+fixed_names1<-merge(unresolved_names,high_confidence_matches, by=c("genus_species"))
+
+# Rename the current genus_species, and assign genus_species to the closest_match
+names(fixed_names1)[names(fixed_names1) == "genus_species"] <-"genus_species.orig"
+names(fixed_names1)[names(fixed_names1) == "closest_match"] <-"genus_species"
+names(fixed_names1)[names(fixed_names1) == "common_name"] <-"common_name.orig"
+
 # Scroll through these 180 High Confidence Matches. All look okay except:
 # genus_species                    closest_match                 match_score
 
 # KEEP ORIGINAL- BOW says the hybrid exists but is rare
 # 1 Branta leucopsis x anser indicus Branta leucopsis x canadensis       0.905
+fixed_names1$genus_species[fixed_names1$genus_species.orig == "Branta leucopsis x anser indicus"] <- "Branta leucopsis x anser indicus"
 
 # KEEP ORIGINAL - BOW says "sometimes separated subspecifically as telephonus on basis of
 # size (smaller than subtelephonus) and pale plumage (like subtelephonus), but
 # birds in this area are not constant in these characters and overlap with other
 # races occurs"
 # 2 Cuculus canorus telephonus       Cuculus canorus subtelephonus       0.908
+fixed_names1$genus_species[fixed_names1$genus_species.orig == "Cuculus canorus telephonus"] <- "Cuculus canorus telephonus"
 
 # CHANGE TO CLOSEST MATCH: BOW says No subspecies, following Eaton (1957a) and Molina et
 # al. (2000). Hence, P. n. notabilis (Ridgway, 1880), P. n. limnaeus (McCabe and
@@ -259,31 +269,21 @@ for (i in seq(score_start, score_end, by = increment)) {
 # (3).
 # 5 Lanius schach erythronotus/tricolor Lanius schach erythronotus       0.914
 
-# KEEP ORIGINAL bc subspecies: BOW: A. w. suttoni Phillips, 1965. Includes A. w.
-# mesolega Oberholser, 1974 (see Browning 1990). Breeds in foothills of Rocky
-# Mountains from northern and eastern Utah (east of the Great Salt Lake Basin;
-# Behle 1985) and southern Wyoming south through northeasternmost Arizona,
-# northern Arizona, Colorado, central New Mexico, and westernmost Oklahoma to
-# northern Chihuahua and western Texas (Pitelka 1945a, Pitelka 1951d) [type
-# locality = Pueblo, Colorado]; some individuals wander in winter to lowlands
-# south of the breeding range, such as the Colorado Desert (Phillips et al.
-# 1964a, Patten et al. 2003) and Texas Panhandle (Seyffert 1985).
+# KEEP ORIGINAL because it is a subspecies: BOW: A. w. suttoni Phillips, 1965.
+# Includes A. w. mesolega Oberholser, 1974 (see Browning 1990). Breeds in
+# foothills of Rocky Mountains from northern and eastern Utah (east of the Great
+# Salt Lake Basin; Behle 1985) and southern Wyoming south through
+# northeasternmost Arizona, northern Arizona, Colorado, central New Mexico, and
+# westernmost Oklahoma to northern Chihuahua and western Texas (Pitelka 1945a,
+# Pitelka 1951d) [type locality = Pueblo, Colorado]; some individuals wander in
+# winter to lowlands south of the breeding range, such as the Colorado Desert
+# (Phillips et al. 1964a, Patten et al. 2003) and Texas Panhandle (Seyffert
+# 1985).
 # 1 Aphelocoma woodhouseii suttoni   Aphelocoma woodhouseii cyanotis       0.916
+fixed_names1$genus_species[fixed_names1$genus_species.orig == "Aphelocoma woodhouseii suttoni"] <- "Aphelocoma woodhouseii suttoni"
 
 # KEEP ORIGINAL and add period after sp
 # 4 Strigidae sp                     Strigidae                             0.917
-
-# For most of the names, assign them the closest match, then edit the few above noted "KEEP ORIGINAL".
-fixed_names1<-merge(unresolved_names,high_confidence_matches, by=c("genus_species"))
-# Make closest_match into the accepted genus_species 
-# Rename the current genus_species, and assign genus_species to the closest_match
-names(fixed_names1)[names(fixed_names1) == "genus_species"] <-"genus_species.orig"
-names(fixed_names1)[names(fixed_names1) == "closest_match"] <-"genus_species"
-
-# Change the listed "KEEP ORIGINAL" misnamed species above back to their original genus_species with a few typo edits
-fixed_names1$genus_species[fixed_names1$genus_species.orig == "Branta leucopsis x anser indicus"] <- "Branta leucopsis x anser indicus"
-fixed_names1$genus_species[fixed_names1$genus_species.orig == "Cuculus canorus telephonus"] <- "Cuculus canorus telephonus"
-fixed_names1$genus_species[fixed_names1$genus_species.orig == "Aphelocoma woodhouseii suttoni"] <- "Aphelocoma woodhouseii suttoni"
 fixed_names1$genus_species[fixed_names1$genus_species.orig == "Strigidae sp"] <- "Strigidae sp."
 
 # ************** Add these fixed_names to the resolved_names
@@ -309,12 +309,11 @@ dim(low_confidence_matches)
 
 # For most of the names, assign them the closest match, then edit the few above noted "KEEP ORIGINAL".
 fixed_names2<-merge(unresolved_names,low_confidence_matches, by=c("genus_species"))
-# Make closest_match into the accepted genus_species 
+
 # Rename the current genus_species, and assign genus_species to the closest_match
 names(fixed_names2)[names(fixed_names2) == "genus_species"] <-"genus_species.orig"
 names(fixed_names2)[names(fixed_names2) == "closest_match"] <-"genus_species"
-
-# Change the listed "KEEP ORIGINAL" misnamed species above back to their original genus_species with a few typo edits
+names(fixed_names2)[names(fixed_names2) == "common_name"] <-"common_name.orig"
 
 # Scroll through these 55 Low Confidence Matches in order from highest to lowest
 # match score. Many look okay except check these:
@@ -322,11 +321,16 @@ names(fixed_names2)[names(fixed_names2) == "closest_match"] <-"genus_species"
 # genus_species                     closest_match           match_score
 
 # CHANGE TO CLOSEST MATCH because BOW states "No subspecies, following Eaton
-# (1957a) and Molina et al. (2000)."
+# (1957a) and Molina et al. (2000).". Common name in int.raw is Northern Waterthrush.
 # 1 Parkesia noveboracensis notabilis Parkesia noveboracensis       0.899
+int.raw[which(int.raw$species1_scientific == "Parkesia noveboracensis notabilis"), ]
+int.raw[which(int.raw$species2_scientific == "Parkesia noveboracensis notabilis"), ]
 
-# This is "Rock Dove" which is also known as Rock Pigeon. Should be Columba livia.
+# KEEP ORIGINAL but edit it. This is "Rock Dove" which is also known as Rock
+# Pigeon. Should be Columba livia.
 # 3 Columbina livia              Columbina inca                      0.886
+int.raw[which(int.raw$species1_scientific == "Columbina livia"), ]
+int.raw[which(int.raw$species2_scientific == "Columbina livia"), ]
 fixed_names2$genus_species[fixed_names2$genus_species.orig == "Columbina livia"] <- "Columba livia"
 
 # CHANGE TO CLOSEST MATCH: BOW states no subspecies: "No subspecies, following
@@ -335,24 +339,34 @@ fixed_names2$genus_species[fixed_names2$genus_species.orig == "Columbina livia"]
 # Peters, 1948)."
 # 1 Setophaga striata / tigrina Setophaga striata       0.877
 
-# KEEP ORIGINAL and Edit: Common name is Hairy Woodpecker, so genus is off. Dryobates villosus
+# KEEP ORIGINAL and edit: Common name in int.raw is Hairy Woodpecker, so
+# genus is off. Dryobates villosus
 # 3 Leucophaeus villosus                   Leucophaeus modestus          0.867
+int.raw[which(int.raw$species1_scientific == "Leucophaeus villosus"), ]
+int.raw[which(int.raw$species2_scientific == "Leucophaeus villosus"), ]
 fixed_names2$genus_species[fixed_names2$genus_species.orig == "Leucophaeus villosus"] <- "Dryobates villosus"
 
-# KEEP ORIGINAL, it is the White Wagtail. 
+# KEEP ORIGINAL, Common name in int.raw is the White Wagtail. 
 # 1 Moticilla alba            Motacilla citreola             0.858
 fixed_names2$genus_species[fixed_names2$genus_species.orig == "Moticilla alba"] <- "Moticilla alba"
+int.raw[which(int.raw$species1_scientific == "Moticilla alba"), ]
+int.raw[which(int.raw$species2_scientific == "Moticilla alba"), ]
 
-# KEEP ORIGINAL and edit according to BOW and checklist
+# KEEP ORIGINAL and edit: According to BOW there is no Anas flavirostris / anas
+# andium. Common name in int.raw is Speckled Teal but checklist is Andean/Yellow-billed Teal. 
 # 3 Anas flavirostris / anas andium Anas flavirostris           0.849
-fixed_names2$genus_species[fixed_names2$genus_species.orig == "Anas flavirostris / anas andium"] <- "Anas andium/flavirostris"
-fixed_names2$common_name[fixed_names2$common_name == "Speckled Teal"] <- "Andean/Yellow-billed Teal"
+int.raw[which(int.raw$species1_scientific == "Anas flavirostris / Anas andium"), ]
+int.raw[which(int.raw$species2_scientific == "Anas flavirostris / Anas andium"), ]
+fixed_names2$genus_species[fixed_names2$genus_species.orig == "Anas flavirostris / Anas andium"] <- "Anas andium/flavirostris"
+fixed_names2$common_name[fixed_names2$common_name.orig == "Speckled Teal"] <- "Andean/Yellow-billed Teal"
 
-# KEEP ORIGINAL and edit - it is House Finch (Haemorhous mexicanus)
+# KEEP ORIGINAL and edit. Common name in int.raw is House Finch (Haemorhous mexicanus).
 # 2 Hirundo mexicanus               Todus mexicanus             0.851
+int.raw[which(int.raw$species1_scientific == "Hirundo mexicanus"), ]
+int.raw[which(int.raw$species2_scientific == "Hirundo mexicanus"), ]
 fixed_names2$genus_species[fixed_names2$genus_species.orig == "Hirundo mexicanus "] <- "Haemorhous mexicanus"
 
-# KEEP ORIGINAL and edit - genus moved to Astur and cooperii.
+# KEEP ORIGINAL and edit. Checklist shows genus moved to Astur. Also species is cooperii.
 # 1 Accipiter cooperi               Accipiter poliogaster       0.849
 fixed_names2$genus_species[fixed_names2$genus_species.orig == "Accipiter cooperi"] <- "Astur cooperii"
 # 3 Accipiter spp.            Accipiter nisus                   0.840
@@ -360,6 +374,76 @@ fixed_names2$genus_species[fixed_names2$genus_species.orig == "Accipiter spp."] 
 # Listed as American Goshawk; KEEP ORIGINAL and edit to Astur
 # 2 Accipiter atricapillus    Astur cooperii/atricapillus       0.839
 fixed_names2$genus_species[fixed_names2$genus_species.orig == "Accipiter atricapillus"] <- "Astur atricapillus"
+
+# KEEP ORIGINAL and edit: BOW and checklist: "Black-winged Babbler" is most likely Jungle
+# Babbler (Black-winged) Argya striata somervillei 
+# 1 Argya affinis somervillei  Argya affinis                     0.84
+int.raw[which(int.raw$species1_scientific == "Argya affinis somervillei"), ]
+int.raw[which(int.raw$species2_scientific == "Argya affinis somervillei"), ]
+fixed_names2$genus_species[fixed_names2$genus_species.orig == "Argya affinis somervillei"] <- "Argya striata somervillei"
+fixed_names2$common_name[fixed_names2$common_name.orig == "Black-winged Babbler"] <- "Jungle Babbler (Black-winged)"
+
+# KEEP ORIGINAL and edit. Checklist shows genus moved to Astur atricapillus. 
+# 1 Accipiter getilis Accipiter poliogaster       0.839
+int.raw[which(int.raw$species1_scientific == "Accipiter getilis"), ]
+int.raw[which(int.raw$species2_scientific == "Accipiter getilis"), ]
+fixed_names2$genus_species[fixed_names2$genus_species.orig == "Accipiter getilis"] <- "Astur atricapillus"
+# **** Do common name changes below for entire Astur group
+
+# CHANGE TO CLOSEST MATCH: original common name: Rufous-and-white Wren;
+# checklist confirms the suggested genus_species change.
+# 2 Thyrothorus rufalbus Thryophilus rufalbus       0.831 
+int.raw[which(int.raw$species1_scientific == "Thyrothorus rufalbus"), ]
+int.raw[which(int.raw$species2_scientific == "Thyrothorus rufalbus"), ]
+
+# KEEP ORIGINAL and edit. Common name in int.raw = White-eared Bronze-Cuckoo.
+# Checklist states: Move from Chrysococcyx into Chalcites to become Chalcites
+# meyerii.
+# 1 Chrysococcyx meyerii Chrysococcyx caprius       0.833
+int.raw[which(int.raw$species1_scientific == "Chrysococcyx meyerii"), ]
+int.raw[which(int.raw$species2_scientific == "Chrysococcyx meyerii"), ]
+fixed_names2$genus_species[fixed_names2$genus_species.orig == "Chrysococcyx meyerii"] <- "Chalcites meyerii"
+
+# KEEP ORIGINAL and edit to remove p in spp.
+# 2 Molothrus spp.   Myioborus sp.          0.828
+fixed_names2$genus_species[fixed_names2$genus_species.orig == "Molothrus spp."] <- "Molothrus sp."
+
+# KEEP ORIGINAL and edit. This is the Eurasian Goshawk: was Accipter atricapillus and is now Astur 
+# 1 Accipter atricapillus Accipiter striatus       0.821
+int.raw[which(int.raw$species2_scientific == "Accipter atricapillus"), ]
+fixed_names2$genus_species[fixed_names2$genus_species.orig == "Accipter atricapillus"] <- "Astur gentilis"
+
+# KEEP ORIGINAL and edit: int.raw shows common name is White-throated Swifts.
+# checklist and BOW: Aeronautes saxatalis and this species has interactions
+# documented in int.raw with Violet-green swallows (competition).
+# 3 Panyptila saxatilis  Pachyptila salvini       0.814
+int.raw[which(int.raw$species2_scientific == "Panyptila saxatilis"), ]
+fixed_names2$genus_species[fixed_names2$genus_species.orig == "Panyptila saxatilis"] <- "Aeronautes saxatalis"
+
+# CHANGE TO CLOSEST MATCH: int.raw common name = Eurasian Magpie; 
+# BOW states it is in revision so assign to main species for now.
+# 1 Pica pica anderssoni Pica pica                0.817
+int.raw[which(int.raw$species2_scientific == "Pica pica anderssoni"), ]
+int.raw[which(int.raw$species1_scientific == "Pica pica anderssoni"), ]
+
+# KEEP ORIGINGAL and edit: int.raw common name is Cliff Swallow, Checklist and
+# BOW: changed to Petrochelidon pyrrhonota.
+# 2 Hirundo pyrrhonta    Hirundo nigrorufa        0.817
+int.raw[which(int.raw$species2_scientific == "Hirundo pyrrhonta"), ]
+int.raw[which(int.raw$species1_scientific == "Hirundo pyrrhonta"), ]
+fixed_names2$genus_species[fixed_names2$genus_species.orig == "Hirundo pyrrhonta"] <- "Petrochelidon pyrrhonota"
+
+#1 Oceanodroma spp.                    Cyanoderma sp.                          0.800
+int.raw[which(int.raw$species2_scientific == "Oceanodroma spp."), ]
+
+2 Pyrrhuloxia sinuata                 Pyrrhula owstoni                        0.799
+3 Dendroica petechia (erithachordies) Setophaga petechia erithachorides       0.801
+4 Dendroica pinus                     Dendrocincla sp.                        0.803
+1 Accipiter cirrhocephalus Accipiter striatus       0.797
+1 Lophortyx californicus Lophornis ornatus       0.788
+1 Roseate spoonbill Cormobates placens meridionalis       0.736
+1 Mountain bluebird Montecincla jerdoni       0.727
+1 unid. 2 hawl  Turdus hauxwelli       0.674
 
 
 # The section below, using taxize, was last run on Aug 9, 2024.
