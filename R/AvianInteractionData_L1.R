@@ -40,10 +40,14 @@ library(tidyverse)
 library(taxadb)
 library(dplyr)
 library(stringr)
+library(stringdist)
 
 # .Renviron not working for PLZ; hard-coding in here
 L0_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0"
+L0_dir <- "/Users/phoebezarnetske/Documents/GitHub/Avian-Interaction-Database/L0"
+
 L1_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L1"
+L1_dir <- "/Users/phoebezarnetske/Documents/GitHub/Avian-Interaction-Database/L1"
 
 # Read in csv with avian interactions from primary, secondary cavity nesting
 # birds in North America.
@@ -174,9 +178,6 @@ dim(unresolved_names)
 # 310 unresolved as of Nov. 21, 2024
 
 # Work with unresolved_names to try and determine what misspellings exist, and what they should be.
-# Load necessary libraries
-library(dplyr)
-library(stringdist)
 
 # Reference list of scientific names eBird Clements checklist 2024
 reference_names <- checklist$genus_species 
@@ -230,7 +231,6 @@ for (i in seq(score_start, score_end, by = increment)) {
 }
 
 # Scroll through these 180 High Confidence Matches. All look okay except:
-# A tibble: 8 × 3
 # genus_species                    closest_match                 match_score
 
 # KEEP ORIGINAL- BOW says the hybrid exists but is rare
@@ -242,30 +242,47 @@ for (i in seq(score_start, score_end, by = increment)) {
 # races occurs"
 # 2 Cuculus canorus telephonus       Cuculus canorus subtelephonus       0.908
 
-# CHANGE TO MATCH: BOW says No subspecies, following Eaton (1957a) and Molina et
+# CHANGE TO CLOSEST MATCH: BOW says No subspecies, following Eaton (1957a) and Molina et
 # al. (2000). Hence, P. n. notabilis (Ridgway, 1880), P. n. limnaeus (McCabe and
 # Miller, 1933), and P. n. uliginosus (Burleigh and Peters, 1948) are junior
 # synonyms of P. noveboracensis (Gmelin, 1788).
 # 3 Parkesia noveboracensis limnaeus Parkesia noveboracensis             0.906
 
+# CHANGE TO CLOSEST MATCH bc unresolved: BOW says: In Australia, birds in W
+# previously known as race gouldi, but chloronotus has priority and not
+# preoccupied by “chloronothos”.
 # 4 Zosterops lateralis gouldi          Zosterops lateralis              0.910
+
+# CHANGE TO CLOSEST MATCH bc unclear: BOW: Mainland races tend to intergrade;
+# intermediates between erythronotus and tricolor sometimes referred to as
+# “nigriceps”, a name better applied to a “swarm of intergrades” in NC India
+# (3).
 # 5 Lanius schach erythronotus/tricolor Lanius schach erythronotus       0.914
+
+# KEEP ORIGINAL bc subspecies: BOW: A. w. suttoni Phillips, 1965. Includes A. w.
+# mesolega Oberholser, 1974 (see Browning 1990). Breeds in foothills of Rocky
+# Mountains from northern and eastern Utah (east of the Great Salt Lake Basin;
+# Behle 1985) and southern Wyoming south through northeasternmost Arizona,
+# northern Arizona, Colorado, central New Mexico, and westernmost Oklahoma to
+# northern Chihuahua and western Texas (Pitelka 1945a, Pitelka 1951d) [type
+# locality = Pueblo, Colorado]; some individuals wander in winter to lowlands
+# south of the breeding range, such as the Colorado Desert (Phillips et al.
+# 1964a, Patten et al. 2003) and Texas Panhandle (Seyffert 1985).
 # 1 Aphelocoma woodhouseii suttoni   Aphelocoma woodhouseii cyanotis       0.916
+
+# KEEP ORIGINAL and add period after sp
 # 4 Strigidae sp                     Strigidae                             0.917
 
-# Change these (assign them the closest match), then edit the few above that did not match.
+# For most of the names, assign them the closest match, then edit the few above noted "KEEP ORIGINAL".
 fixed_names1<-merge(unresolved_names,high_confidence_matches, by=c("genus_species"))
 # Make closest_match into the accepted genus_species 
 # Rename the current genus_species, and assign genus_species to the closest_match
 names(fixed_names1)[names(fixed_names1) == "genus_species"] <-"genus_species.orig"
 names(fixed_names1)[names(fixed_names1) == "closest_match"] <-"genus_species"
 
-# Change the listed misnamed species above back to their original genus_species with a few typo edits
+# Change the listed "KEEP ORIGINAL" misnamed species above back to their original genus_species with a few typo edits
 fixed_names1$genus_species[fixed_names1$genus_species.orig == "Branta leucopsis x anser indicus"] <- "Branta leucopsis x anser indicus"
 fixed_names1$genus_species[fixed_names1$genus_species.orig == "Cuculus canorus telephonus"] <- "Cuculus canorus telephonus"
-fixed_names1$genus_species[fixed_names1$genus_species.orig == "Parkesia noveboracensis limnaeus"] <- "Parkesia noveboracensis limnaeus"
-fixed_names1$genus_species[fixed_names1$genus_species.orig == "Zosterops lateralis gouldi"] <- "Zosterops lateralis gouldi"
-fixed_names1$genus_species[fixed_names1$genus_species.orig == "Lanius schach erythronotus/tricolor"] <- "Lanius schach erythronotus / tricolor"
 fixed_names1$genus_species[fixed_names1$genus_species.orig == "Aphelocoma woodhouseii suttoni"] <- "Aphelocoma woodhouseii suttoni"
 fixed_names1$genus_species[fixed_names1$genus_species.orig == "Strigidae sp"] <- "Strigidae sp."
 
@@ -290,28 +307,59 @@ for (i in seq(score_start, score_end, by = increment)) {
 }
 dim(low_confidence_matches)
 
-# Scroll through these 55 Low Confidence Matches in reverse order. 
-# All look okay except check these:
-# genus_species closest_match    match_score
-
-# genus_species                     closest_match           match_score
-
-# OK - there are no subspecies in this species
-# 1 Parkesia noveboracensis notabilis Parkesia noveboracensis       0.899
-
-# This is "Rock Dove" which is also known as Rock Pigeon. Should be Columba livia.
-# 3 Columbina livia              Columbina inca                      0.886
-
-# OK - because there is no hybrid according to BOW
-# 1 Setophaga striata / tigrina Setophaga striata       0.877
-
-# Change these (assign them the closest match), then edit the few above that did not match.
+# For most of the names, assign them the closest match, then edit the few above noted "KEEP ORIGINAL".
 fixed_names2<-merge(unresolved_names,low_confidence_matches, by=c("genus_species"))
 # Make closest_match into the accepted genus_species 
 # Rename the current genus_species, and assign genus_species to the closest_match
 names(fixed_names2)[names(fixed_names2) == "genus_species"] <-"genus_species.orig"
 names(fixed_names2)[names(fixed_names2) == "closest_match"] <-"genus_species"
 
+# Change the listed "KEEP ORIGINAL" misnamed species above back to their original genus_species with a few typo edits
+
+# Scroll through these 55 Low Confidence Matches in order from highest to lowest
+# match score. Many look okay except check these:
+
+# genus_species                     closest_match           match_score
+
+# CHANGE TO CLOSEST MATCH because BOW states "No subspecies, following Eaton
+# (1957a) and Molina et al. (2000)."
+# 1 Parkesia noveboracensis notabilis Parkesia noveboracensis       0.899
+
+# This is "Rock Dove" which is also known as Rock Pigeon. Should be Columba livia.
+# 3 Columbina livia              Columbina inca                      0.886
+fixed_names2$genus_species[fixed_names2$genus_species.orig == "Columbina livia"] <- "Columba livia"
+
+# CHANGE TO CLOSEST MATCH: BOW states no subspecies: "No subspecies, following
+# Parkes (1954), who could not diagnose a difference between northeastern
+# breeders and those farther west, which were named S. s. lurida (Burleigh and
+# Peters, 1948)."
+# 1 Setophaga striata / tigrina Setophaga striata       0.877
+
+# KEEP ORIGINAL and Edit: Common name is Hairy Woodpecker, so genus is off. Dryobates villosus
+# 3 Leucophaeus villosus                   Leucophaeus modestus          0.867
+fixed_names2$genus_species[fixed_names2$genus_species.orig == "Leucophaeus villosus"] <- "Dryobates villosus"
+
+# KEEP ORIGINAL, it is the White Wagtail. 
+# 1 Moticilla alba            Motacilla citreola             0.858
+fixed_names2$genus_species[fixed_names2$genus_species.orig == "Moticilla alba"] <- "Moticilla alba"
+
+# KEEP ORIGINAL and edit according to BOW and checklist
+# 3 Anas flavirostris / anas andium Anas flavirostris           0.849
+fixed_names2$genus_species[fixed_names2$genus_species.orig == "Anas flavirostris / anas andium"] <- "Anas andium/flavirostris"
+fixed_names2$common_name[fixed_names2$common_name == "Speckled Teal"] <- "Andean/Yellow-billed Teal"
+
+# KEEP ORIGINAL and edit - it is House Finch (Haemorhous mexicanus)
+# 2 Hirundo mexicanus               Todus mexicanus             0.851
+fixed_names2$genus_species[fixed_names2$genus_species.orig == "Hirundo mexicanus "] <- "Haemorhous mexicanus"
+
+# KEEP ORIGINAL and edit - genus moved to Astur and cooperii.
+# 1 Accipiter cooperi               Accipiter poliogaster       0.849
+fixed_names2$genus_species[fixed_names2$genus_species.orig == "Accipiter cooperi"] <- "Astur cooperii"
+# 3 Accipiter spp.            Accipiter nisus                   0.840
+fixed_names2$genus_species[fixed_names2$genus_species.orig == "Accipiter spp."] <- "Accipiter sp."
+# Listed as American Goshawk; KEEP ORIGINAL and edit to Astur
+# 2 Accipiter atricapillus    Astur cooperii/atricapillus       0.839
+fixed_names2$genus_species[fixed_names2$genus_species.orig == "Accipiter atricapillus"] <- "Astur atricapillus"
 
 
 # The section below, using taxize, was last run on Aug 9, 2024.
