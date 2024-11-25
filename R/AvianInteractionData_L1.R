@@ -95,7 +95,7 @@ dim(namechg)
 
 # Create unique genus_species and common_name pairs with formatting adjustments.
 # This code removes blank spaces, capitalizes, and keeps unique rows.
-intbird.names <- int.raw %>%
+int.raw.names <- int.raw %>%
   # Select and stack the relevant species columns
   select(species1_scientific, species1_common, species2_scientific, species2_common) %>%
   transmute(
@@ -136,7 +136,7 @@ intbird.names <- int.raw %>%
 filter(!(is.na(genus_species)))
 
 # Display the resulting cleaned dataframe of the species from interaction data
-head(intbird.names)
+head(int.raw.names)
 #         genus_species      common_name
 # 1    Acanthis flammea   Common Redpoll
 # 2 Acanthis hornemanni    Hoary Redpoll
@@ -156,11 +156,74 @@ head(intbird.names)
 td_create("gbif")
 
 # Resolve scientific names
-intbird.names <- intbird.names %>%
+intbird.names <- int.raw.names %>%
   mutate(
     scientific_id = get_ids(genus_species, "gbif"),
     accepted_scientific_name = get_names(scientific_id, "gbif")
   ) 
+
+# These species have >1 identifier and need to be resolved w BOW info:
+options(tibble.width = 200) # allow tibble columns to not be truncated
+
+# KEEP ORIGINAL- Anser anser anser - European Graylag Goose; checklist common_name: Graylag Goose (European)
+# Common name change will be fixed later, below, with merging. 
+int.raw[which(int.raw$species1_scientific == "Anser anser anser"), ]
+int.raw[which(int.raw$species2_scientific == "Anser anser anser"), ]
+checklist[which(checklist$genus_species == "Anser anser anser"), ]
+
+# KEEP ORIGINAL - Eudynamys orientalis - Pacific Koel; same as checklist common_name
+head(int.raw[which(int.raw$species1_scientific == "Eudynamys orientalis"), ])
+head(int.raw[which(int.raw$species2_scientific == "Eudynamys orientalis"), ])
+checklist[which(checklist$genus_species == "Eudynamys orientalis"), ]
+
+# KEEP ORIGINAL - Larus fuscus fuscus - Lesser Black-backed Gull 
+# checklist common_name: Lesser Black-backed Gull (fuscus) 	
+head(int.raw[which(int.raw$species1_scientific == "Larus fuscus fuscus"), ])
+head(int.raw[which(int.raw$species2_scientific == "Larus fuscus fuscus"), ])
+checklist[which(checklist$genus_species == "Larus fuscus fuscus"), ]
+
+# KEEP ORIGINAL - Psittacula eques - Echo Parakeet
+# checklist common_name: Echo Parakeet
+head(int.raw[which(int.raw$species1_scientific == "Psittacula eques"), ])
+head(int.raw[which(int.raw$species2_scientific == "Psittacula eques"), ])
+checklist[which(checklist$genus_species == "Psittacula eques"), ]
+
+# KEEP ORIGINAL - Anas poecilorhyncha - Indian Spot-billed Duck
+# checklist common_name: Indian Spot-billed Duck
+head(int.raw[which(int.raw$species1_scientific == "Anas poecilorhyncha"), ])
+head(int.raw[which(int.raw$species2_scientific == "Anas poecilorhyncha"), ])
+checklist[which(checklist$genus_species == "Anas poecilorhyncha"), ]
+
+# KEEP ORIGINAL - Batis molitor - Chinspot Batis
+# checklist common_name: Chinspot Batis
+head(int.raw[which(int.raw$species1_scientific == "Batis molitor"), ])
+head(int.raw[which(int.raw$species2_scientific == "Batis molitor"), ])
+checklist[which(checklist$genus_species == "Batis molitor"), ]
+
+# KEEP ORIGINAL - Heteromyias armiti - Black-capped Robin
+# checklist common_name: Black-capped Robin
+head(int.raw[which(int.raw$species1_scientific == "Heteromyias armiti"), ])
+head(int.raw[which(int.raw$species2_scientific == "Heteromyias armiti"), ])
+checklist[which(checklist$genus_species == "Heteromyias armiti"), ]
+
+# KEEP ORIGINAL - Chloris sinica - Oriental Greenfinch
+# checklist common_name: Oriental Greenfinch
+head(int.raw[which(int.raw$species1_scientific == "Chloris sinica"), ])
+head(int.raw[which(int.raw$species2_scientific == "Chloris sinica"), ])
+checklist[which(checklist$genus_species == "Chloris sinica"), ]
+
+# KEEP ORIGINAL - Passer cinnamomeus - Russet Sparrow
+# checklist common_name: Russet Sparrow
+head(int.raw[which(int.raw$species1_scientific == "Passer cinnamomeus"), ])
+head(int.raw[which(int.raw$species2_scientific == "Passer cinnamomeus"), ])
+checklist[which(checklist$genus_species == "Passer cinnamomeus"), ]
+
+# CHANGE TO NEW NAME below: Dendroica pinus - Pine Warbler 
+# checklist common_name: Pine Warbler; genus_species = Setophaga pinus
+head(int.raw[which(int.raw$species1_scientific == "Dendroica pinus"), ])
+head(int.raw[which(int.raw$species2_scientific == "Dendroica pinus"), ])
+checklist[which(checklist$genus_species == "Dendroica pinus"), ]
+checklist[which(checklist$genus_species == "Setophaga pinus"), ]
 
 # Separate resolved and unresolved names based on specified criteria
 resolved_names <- intbird.names %>%
@@ -241,15 +304,25 @@ names(fixed_names1)[names(fixed_names1) == "common_name"] <-"common_name.orig"
 # Scroll through these 180 High Confidence Matches. All look okay except:
 # genus_species                    closest_match                 match_score
 
-# KEEP ORIGINAL- BOW says the hybrid exists but is rare
+# KEEP ORIGINAL and change to species later when lumping subspecies
+# checklist: Parkesia noveboracensis; 
+# int.raw and uncresolved_names: common_name = hybrid Barnacle x Bar-headed Goose
+# BOW says the hybrid exists but is rare
 # 1 Branta leucopsis x anser indicus Branta leucopsis x canadensis       0.905
-fixed_names1$genus_species[fixed_names1$genus_species.orig == "Branta leucopsis x anser indicus"] <- "Branta leucopsis x anser indicus"
+int.raw[which(int.raw$species1_scientific == "Branta leucopsis x anser indicus"), ]
+int.raw[which(int.raw$species2_scientific == "Branta leucopsis x anser indicus"), ]
+unresolved_names[which(unresolved_names$genus_species == "Branta leucopsis x anser indicus"), ]
+fixed_names1$genus_species[fixed_names1$genus_species.orig == "Branta leucopsis x anser indicus"] <- "Branta leucopsis x Anser indicus"
 
-# KEEP ORIGINAL - BOW says "sometimes separated subspecifically as telephonus on basis of
+# KEEP ORIGINAL and change to species later when lumping subspecies
+# checklist: Cuculus canorus; common_name = Common Cuckoo
+# BOW says "sometimes separated subspecifically as telephonus on basis of
 # size (smaller than subtelephonus) and pale plumage (like subtelephonus), but
 # birds in this area are not constant in these characters and overlap with other
 # races occurs"
 # 2 Cuculus canorus telephonus       Cuculus canorus subtelephonus       0.908
+int.raw[which(int.raw$species1_scientific == "Cuculus canorus telephonus"), ]
+int.raw[which(int.raw$species2_scientific == "Cuculus canorus telephonus"), ]
 fixed_names1$genus_species[fixed_names1$genus_species.orig == "Cuculus canorus telephonus"] <- "Cuculus canorus telephonus"
 
 # CHANGE TO CLOSEST MATCH: BOW says No subspecies, following Eaton (1957a) and Molina et
@@ -257,19 +330,25 @@ fixed_names1$genus_species[fixed_names1$genus_species.orig == "Cuculus canorus t
 # Miller, 1933), and P. n. uliginosus (Burleigh and Peters, 1948) are junior
 # synonyms of P. noveboracensis (Gmelin, 1788).
 # 3 Parkesia noveboracensis limnaeus Parkesia noveboracensis             0.906
+int.raw[which(int.raw$species1_scientific == "Parkesia noveboracensis limnaeus"), ]
+int.raw[which(int.raw$species2_scientific == "Parkesia noveboracensis limnaeus"), ]
 
 # CHANGE TO CLOSEST MATCH bc unresolved: BOW says: In Australia, birds in W
 # previously known as race gouldi, but chloronotus has priority and not
 # preoccupied by “chloronothos”.
 # 4 Zosterops lateralis gouldi          Zosterops lateralis              0.910
+int.raw[which(int.raw$species1_scientific == "Zosterops lateralis gouldi"), ]
+int.raw[which(int.raw$species2_scientific == "Zosterops lateralis gouldi"), ]
 
 # CHANGE TO CLOSEST MATCH bc unclear: BOW: Mainland races tend to intergrade;
 # intermediates between erythronotus and tricolor sometimes referred to as
 # “nigriceps”, a name better applied to a “swarm of intergrades” in NC India
 # (3).
 # 5 Lanius schach erythronotus/tricolor Lanius schach erythronotus       0.914
+int.raw[which(int.raw$species1_scientific == "Lanius schach erythronotus/tricolor"), ]
+int.raw[which(int.raw$species2_scientific == "Lanius schach erythronotus/tricolor"), ]
 
-# KEEP ORIGINAL because it is a subspecies: BOW: A. w. suttoni Phillips, 1965.
+# KEEP ORIGINAL for now because it is a subspecies: BOW: A. w. suttoni Phillips, 1965.
 # Includes A. w. mesolega Oberholser, 1974 (see Browning 1990). Breeds in
 # foothills of Rocky Mountains from northern and eastern Utah (east of the Great
 # Salt Lake Basin; Behle 1985) and southern Wyoming south through
@@ -280,13 +359,13 @@ fixed_names1$genus_species[fixed_names1$genus_species.orig == "Cuculus canorus t
 # (Phillips et al. 1964a, Patten et al. 2003) and Texas Panhandle (Seyffert
 # 1985).
 # 1 Aphelocoma woodhouseii suttoni   Aphelocoma woodhouseii cyanotis       0.916
+int.raw[which(int.raw$species1_scientific == "Aphelocoma woodhouseii suttoni"), ]
+int.raw[which(int.raw$species2_scientific == "Aphelocoma woodhouseii suttoni"), ]
 fixed_names1$genus_species[fixed_names1$genus_species.orig == "Aphelocoma woodhouseii suttoni"] <- "Aphelocoma woodhouseii suttoni"
 
 # KEEP ORIGINAL and add period after sp
 # 4 Strigidae sp                     Strigidae                             0.917
 fixed_names1$genus_species[fixed_names1$genus_species.orig == "Strigidae sp"] <- "Strigidae sp."
-
-# ************** Add these fixed_names to the resolved_names
 
 # Then check the Low Confidence Matches:
 # Define range for printing in increments of 0.005
@@ -433,13 +512,42 @@ int.raw[which(int.raw$species2_scientific == "Hirundo pyrrhonta"), ]
 int.raw[which(int.raw$species1_scientific == "Hirundo pyrrhonta"), ]
 fixed_names2$genus_species[fixed_names2$genus_species.orig == "Hirundo pyrrhonta"] <- "Petrochelidon pyrrhonota"
 
+# KEEP ORIGINGAL and edit: Unid. Storm Petrel 
+# BOW: now Genus is Hydrobates instead of Oceanodrama
 #1 Oceanodroma spp.                    Cyanoderma sp.                          0.800
+int.raw[which(int.raw$species1_scientific == "Oceanodroma spp."), ]
 int.raw[which(int.raw$species2_scientific == "Oceanodroma spp."), ]
+fixed_names2$genus_species[fixed_names2$genus_species.orig == "Oceanodroma spp."] <- "Hydrobates sp."
 
-2 Pyrrhuloxia sinuata                 Pyrrhula owstoni                        0.799
-3 Dendroica petechia (erithachordies) Setophaga petechia erithachorides       0.801
-4 Dendroica pinus                     Dendrocincla sp.                        0.803
-1 Accipiter cirrhocephalus Accipiter striatus       0.797
+# KEEP ORIGINAL and edit: Pyrrhuloxia
+# BOW and checklist is Cardinalis sinuatus
+# int.raw Common name = Pyrrhuloxia
+#2 Pyrrhuloxia sinuata                 Pyrrhula owstoni                        0.799
+int.raw[which(int.raw$species1_scientific == "Pyrrhuloxia sinuata"), ]
+int.raw[which(int.raw$species2_scientific == "Pyrrhuloxia sinuata"), ]
+fixed_names2$genus_species[fixed_names2$genus_species.orig == "Pyrrhuloxia sinuata"] <- "Cardinalis sinuatus"
+
+# KEEP ORIGINAL and edit: Yellow Warbler (Mangrove) 
+# BOW and checklist: Setophaga petechia [erithachorides Group]
+#3 Dendroica petechia (erithachordies) Setophaga petechia erithachorides       0.801
+int.raw[which(int.raw$species1_scientific == "Dendroica petechia (erithachordies)"), ]
+int.raw[which(int.raw$species2_scientific == "Dendroica petechia (erithachordies)"), ]
+fixed_names2$genus_species[fixed_names2$genus_species.orig == "Dendroica petechia (erithachordies)"] <- "Setophaga petechia [erithachorides Group]"
+
+# KEEP ORIGINAL and edit: Pine Warbler
+# BOW and checklist: Setophaga pinus
+# 4 Dendroica pinus                     Dendrocincla sp.                        0.803 
+int.raw[which(int.raw$species1_scientific == "Dendroica pinus"), ]
+int.raw[which(int.raw$species2_scientific == "Dendroica pinus"), ]
+fixed_names2$genus_species[fixed_names2$genus_species.orig == "Dendroica pinus"] <- "Setophaga pinus"
+
+# KEEP ORIGINAL and edit: Collared Sparrowhawk
+# BOW and checklist: 
+# 1 Accipiter cirrhocephalus Accipiter striatus       0.797
+int.raw[which(int.raw$species1_scientific == "Accipiter cirrhocephalus"), ]
+int.raw[which(int.raw$species2_scientific == "Accipiter cirrhocephalus"), ]
+
+
 1 Lophortyx californicus Lophornis ornatus       0.788
 1 Roseate spoonbill Cormobates placens meridionalis       0.736
 1 Mountain bluebird Montecincla jerdoni       0.727
