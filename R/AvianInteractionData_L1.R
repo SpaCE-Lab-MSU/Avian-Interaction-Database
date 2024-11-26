@@ -225,6 +225,10 @@ head(int.raw[which(int.raw$species2_scientific == "Dendroica pinus"), ])
 checklist[which(checklist$genus_species == "Dendroica pinus"), ]
 checklist[which(checklist$genus_species == "Setophaga pinus"), ]
 
+#************************************************************#
+#### Scientific Name Changes: Resolved & Unresolved Names ####
+#************************************************************#
+
 # Separate resolved and unresolved names based on specified criteria
 resolved_names <- intbird.names %>%
   filter(!is.na(scientific_id) | grepl(" sp\\.$", genus_species))
@@ -234,11 +238,18 @@ unresolved_names <- intbird.names %>%
 
 # Display both results
 head(resolved_names)
-dim(resolved_names)
-# 5295 resolved as of Nov. 21, 2024
 head(unresolved_names)
+
+# Remove any duplicates
+resolved_names <- resolved_names %>% 
+  distinct()
+dim(resolved_names)
+# 3836 unique resolved as of Nov. 26, 2024
+
+unresolved_names <- unresolved_names %>% 
+  distinct()
 dim(unresolved_names)
-# 310 unresolved as of Nov. 21, 2024
+# 295 unique unresolved as of Nov. 26, 2024
 
 # Work with unresolved_names to try and determine what misspellings exist, and what they should be.
 
@@ -267,6 +278,10 @@ misspelled_species <- unresolved_names %>%
     match_score = find_closest_match_with_score(genus_species, reference_names)$score
   ) %>%
   ungroup()
+
+#************************************************************#
+#### Scientific Name Changes: High Confidence Matches ####
+#************************************************************#
 
 # Extract misspelled_species with high confidence (match_score > 0.90)
 high_confidence_matches <- misspelled_species %>%
@@ -369,6 +384,10 @@ fixed_names1$genus_species[fixed_names1$genus_species.orig == "Aphelocoma woodho
 # 4 Strigidae sp                     Strigidae                             0.917
 fixed_names1$genus_species[fixed_names1$genus_species.orig == "Strigidae sp"] <- "Strigidae sp."
 
+#************************************************************#
+#### Scientific Name Changes: Low Confidence Matches ####
+#************************************************************#
+
 # Then check the Low Confidence Matches:
 # Define range for printing in increments of 0.005
 score_start <- min(low_confidence_matches$match_score)
@@ -439,7 +458,8 @@ int.raw[which(int.raw$species2_scientific == "Moticilla alba"), ]
 int.raw[which(int.raw$species1_scientific == "Anas flavirostris / Anas andium"), ]
 int.raw[which(int.raw$species2_scientific == "Anas flavirostris / Anas andium"), ]
 fixed_names2$genus_species[fixed_names2$genus_species.orig == "Anas flavirostris / Anas andium"] <- "Anas andium/flavirostris"
-fixed_names2$common_name[fixed_names2$common_name.orig == "Speckled Teal"] <- "Andean/Yellow-billed Teal"
+# Common name will be changed later
+#fixed_names2$common_name[fixed_names2$common_name.orig == "Speckled Teal"] <- "Andean/Yellow-billed Teal"
 
 # KEEP ORIGINAL and edit. Common name in int.raw is House Finch (Haemorhous mexicanus).
 # 2 Hirundo mexicanus               Todus mexicanus             0.851
@@ -462,7 +482,8 @@ fixed_names2$genus_species[fixed_names2$genus_species.orig == "Accipiter atricap
 int.raw[which(int.raw$species1_scientific == "Argya affinis somervillei"), ]
 int.raw[which(int.raw$species2_scientific == "Argya affinis somervillei"), ]
 fixed_names2$genus_species[fixed_names2$genus_species.orig == "Argya affinis somervillei"] <- "Argya striata somervillei"
-fixed_names2$common_name[fixed_names2$common_name.orig == "Black-winged Babbler"] <- "Jungle Babbler (Black-winged)"
+# Common name will be changed later
+#fixed_names2$common_name[fixed_names2$common_name.orig == "Black-winged Babbler"] <- "Jungle Babbler (Black-winged)"
 
 # KEEP ORIGINAL and edit. Checklist shows genus moved to Astur atricapillus. 
 # 1 Accipiter getilis Accipiter poliogaster       0.839
@@ -514,7 +535,7 @@ int.raw[which(int.raw$species2_scientific == "Hirundo pyrrhonta"), ]
 int.raw[which(int.raw$species1_scientific == "Hirundo pyrrhonta"), ]
 fixed_names2$genus_species[fixed_names2$genus_species.orig == "Hirundo pyrrhonta"] <- "Petrochelidon pyrrhonota"
 
-# KEEP ORIGINGAL and edit: Unid. Storm Petrel 
+# KEEP ORIGINAL and edit: Unid. Storm Petrel 
 # BOW: now Genus is Hydrobates instead of Oceanodrama
 #1 Oceanodroma spp.                    Cyanoderma sp.                          0.800
 int.raw[which(int.raw$species1_scientific == "Oceanodroma spp."), ]
@@ -566,7 +587,8 @@ int.raw[which(int.raw$species1_scientific == "Roseate Spoonbill"), ]
 int.raw[which(int.raw$species2_scientific == "Roseate Spoonbill"), ]
 checklist[which(checklist$common_name == "Roseate Spoonbill"), ]
 fixed_names2$genus_species[fixed_names2$genus_species.orig == "Roseate spoonbill"] <- "Platalea ajaja"
-fixed_names2$common_name[fixed_names2$genus_species.orig == "Roseate spoonbill"] <- "Roseate Spoonbill"
+# Common name will be changed later
+#fixed_names2$common_name[fixed_names2$genus_species.orig == "Roseate spoonbill"] <- "Roseate Spoonbill"
 
 # Typos 
 # 1 unid. 2 hawl  Turdus hauxwelli       0.674
@@ -578,13 +600,53 @@ fixed_names2$genus_species[fixed_names2$genus_species.orig == "unid. Accipiter h
 
 save.image(file.path(L1_dir,"AvianInteractionData_L1.RData"))
 
+#************************************************************#
+#*#### Scientific Name Changes: Merging Fixed Data into Interaction Data ####
+#************************************************************#
+
 # Remove duplicate rows
 fixed_names1 <- fixed_names1 %>% 
                   distinct()
 fixed_names2 <- fixed_names2 %>% 
-  distinct()
+                  distinct()
 
-fixed_names<-rbind(fixed_names1,fixed_names2)
+fixed_names3<-rbind(fixed_names1,fixed_names2)
+dim(fixed_names3)
+# 239 names
+fixed_names3$scientific_id<-NULL
+fixed_names3$accepted_scientific_name<-NULL
+
+# The genus_species column in resolved_names and in fixed_names3 is the corrected genus_species.
+# Row-bind these together as our 
+# Merge the resolved_names and the fixed_names to get a complete list of names of species in the interaction data so far.
+fixed_names<-merge(resolved_names,fixed_names3,by=c("genus_species"))
+
+# resolved_names work
+# See whether the resolved_names have any further issues among the columns
+# common_name has some NAs - check these; they seem to be duplicates but missing common_name
+test<-resolved_names %>% 
+  mutate(comparison = if_else(
+    as.character(genus_species) == as.character(accepted_scientific_name), "equal", "different"))
+
+# I checked these, and all have another row with a complete genus_species and common_name of the same genus_species
+resolved_names[which(is.na(resolved_names$common_name)), ]
+
+# Remove any rows with NA in common_name
+resolved_names1 <- resolved_names %>%
+  filter(!is.na(common_name))
+
+# Take the genus_species in resolved_names and in fixed_names and rbind them -
+# then merge with checklist to get common name... figure out how to keep
+# reference of the genus_species.orig bc need to merge back into the int.raw
+# data. can I assign genus_species.orig to resolved_names$genus_species because
+# the other column is "accepted_scientific_name" and should be the fixed name?
+n_occur <- data.frame(table(resolved_names1$genus_species))
+
+
+
+
+
+
 
 # The section below, using taxize, was last run on Aug 9, 2024.
 tax <-gnr_datasources()
