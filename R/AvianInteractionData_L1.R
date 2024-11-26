@@ -301,12 +301,14 @@ names(fixed_names1)[names(fixed_names1) == "genus_species"] <-"genus_species.ori
 names(fixed_names1)[names(fixed_names1) == "closest_match"] <-"genus_species"
 names(fixed_names1)[names(fixed_names1) == "common_name"] <-"common_name.orig"
 
+save.image(file.path(L1_dir,"AvianInteractionData_L1.RData"))
+
 # Scroll through these 180 High Confidence Matches. All look okay except:
 # genus_species                    closest_match                 match_score
 
 # KEEP ORIGINAL and change to species later when lumping subspecies
 # checklist: Parkesia noveboracensis; 
-# int.raw and uncresolved_names: common_name = hybrid Barnacle x Bar-headed Goose
+# int.raw and unresolved_names: common_name = hybrid Barnacle x Bar-headed Goose
 # BOW says the hybrid exists but is rare
 # 1 Branta leucopsis x anser indicus Branta leucopsis x canadensis       0.905
 int.raw[which(int.raw$species1_scientific == "Branta leucopsis x anser indicus"), ]
@@ -449,7 +451,7 @@ fixed_names2$genus_species[fixed_names2$genus_species.orig == "Hirundo mexicanus
 # 1 Accipiter cooperi               Accipiter poliogaster       0.849
 fixed_names2$genus_species[fixed_names2$genus_species.orig == "Accipiter cooperi"] <- "Astur cooperii"
 # 3 Accipiter spp.            Accipiter nisus                   0.840
-fixed_names2$genus_species[fixed_names2$genus_species.orig == "Accipiter spp."] <- "Accipiter sp."
+fixed_names2$genus_species[fixed_names2$genus_species.orig == "Accipiter spp."] <- "Aerospiza/Tachyspiza/Accipiter/Astur sp."
 # Listed as American Goshawk; KEEP ORIGINAL and edit to Astur
 # 2 Accipiter atricapillus    Astur cooperii/atricapillus       0.839
 fixed_names2$genus_species[fixed_names2$genus_species.orig == "Accipiter atricapillus"] <- "Astur atricapillus"
@@ -542,17 +544,47 @@ int.raw[which(int.raw$species2_scientific == "Dendroica pinus"), ]
 fixed_names2$genus_species[fixed_names2$genus_species.orig == "Dendroica pinus"] <- "Setophaga pinus"
 
 # KEEP ORIGINAL and edit: Collared Sparrowhawk
-# BOW and checklist: 
+# BOW and checklist: Genus changed to Tachyspiza cirrocephala
 # 1 Accipiter cirrhocephalus Accipiter striatus       0.797
 int.raw[which(int.raw$species1_scientific == "Accipiter cirrhocephalus"), ]
 int.raw[which(int.raw$species2_scientific == "Accipiter cirrhocephalus"), ]
+checklist[which(checklist$common_name == "Collared Sparrowhawk"), ]
+fixed_names2$genus_species[fixed_names2$genus_species.orig == "Accipiter cirrhocephalus"] <- "Tachyspiza cirrocephala"
 
+# KEEP ORIGINAL and edit: California Quail
+# BOW and checklist: California Quail; Genus changed to Callipepla californica
+# 1 Lophortyx californicus Lophornis ornatus       0.788
+int.raw[which(int.raw$species1_scientific == "Lophortyx californicus"), ]
+int.raw[which(int.raw$species2_scientific == "Lophortyx californicus"), ]
+checklist[which(checklist$common_name == "California Quail"), ]
+fixed_names2$genus_species[fixed_names2$genus_species.orig == "Lophortyx californicus"] <- "Callipepla californica"
 
-1 Lophortyx californicus Lophornis ornatus       0.788
-1 Roseate spoonbill Cormobates placens meridionalis       0.736
-1 Mountain bluebird Montecincla jerdoni       0.727
-1 unid. 2 hawl  Turdus hauxwelli       0.674
+# KEEP ORIGINAL and edit; this entry has multiple columns off for scientific and common
+# BOW and checklist: genus_species = Platalea ajaja
+# 1 Roseate spoonbill Cormobates placens meridionalis       0.736
+int.raw[which(int.raw$species1_scientific == "Roseate Spoonbill"), ]
+int.raw[which(int.raw$species2_scientific == "Roseate Spoonbill"), ]
+checklist[which(checklist$common_name == "Roseate Spoonbill"), ]
+fixed_names2$genus_species[fixed_names2$genus_species.orig == "Roseate spoonbill"] <- "Platalea ajaja"
+fixed_names2$common_name[fixed_names2$genus_species.orig == "Roseate spoonbill"] <- "Roseate Spoonbill"
 
+# Typos 
+# 1 unid. 2 hawl  Turdus hauxwelli       0.674
+# Also missing: unid. Accipiter hawl
+int.raw[which(int.raw$species1_scientific == "unid. 2 hawl"), ]
+int.raw[which(int.raw$species2_scientific == "unid. 2 hawl"), ]
+int.raw[which(int.raw$species2_scientific == "unid. Accipiter hawl"), ]
+fixed_names2$genus_species[fixed_names2$genus_species.orig == "unid. Accipiter hawl"] <- "Aerospiza/Tachyspiza/Accipiter/Astur sp."
+
+save.image(file.path(L1_dir,"AvianInteractionData_L1.RData"))
+
+# Remove duplicate rows
+fixed_names1 <- fixed_names1 %>% 
+                  distinct()
+fixed_names2 <- fixed_names2 %>% 
+  distinct()
+
+fixed_names<-rbind(fixed_names1,fixed_names2)
 
 # The section below, using taxize, was last run on Aug 9, 2024.
 tax <-gnr_datasources()
