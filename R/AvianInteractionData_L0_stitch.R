@@ -13,9 +13,57 @@ rm(list=ls())
 #library(readr, dplyr, purrr)
 library(dplyr)
 
+google_drive_folder <- "~/Google Drive/Shared drives/Avian_MetaNetwork/data/L0/avian_intxn_data/species_entry/EP"
 L0_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0"
 species_dir<- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0/species"
+# Directory with species that are in BBS but currently being checked by India (11/27/2024)
+species_temp_dir<-"/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0/species_temp"
 species_in_review_dir<- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0/species_in_review"
+
+# 11/27/2024: EP gsheets still need checking but contain useful data. We don't want
+# to miss any in /species/ that are only in gsheet form.
+
+# Set the directory paths for the Google Drive and Git repository folders
+git_repo_folder <- species_dir
+
+# List all filenames in both folders
+google_drive_files <- list.files(google_drive_folder, full.names = FALSE)
+git_repo_files <- list.files(git_repo_folder, full.names = FALSE)
+
+# Function to extract the main portion of filenames
+# Extract up to the second underscore (if present) or use the entire name
+get_main_name <- function(filename) {
+  filename %>%
+    tools::file_path_sans_ext() %>%  # Remove file extension
+    tolower() %>%                    # Convert to lowercase
+    str_extract("^[^_]+_[^_]+")      # Extract up to the second underscore
+}
+
+# Extract main names from filenames
+google_drive_main_names <- sapply(google_drive_files, get_main_name)
+git_repo_main_names <- sapply(git_repo_files, get_main_name)
+
+# Find common names (intersection) and unique names (differences)
+common_main_names <- intersect(google_drive_main_names, git_repo_main_names)
+google_only_main_names <- setdiff(google_drive_main_names, git_repo_main_names)
+git_only_main_names <- setdiff(git_repo_main_names, google_drive_main_names)
+
+# Print results
+cat("Files with matching main names in both Google Drive and Git repository:\n")
+print(common_main_names)
+# [1] "molothrus_aeneus"   "molothrus_ater"     "picoides_dorsalis"  "setophaga_coronata"
+
+cat("\nFiles only in Google Drive:\n")
+print(google_only_main_names)
+
+cat("\nFiles only in Git repository:\n")
+print(git_only_main_names)
+
+# 35 records that still need the 2nd checking and placing into /species/. Of
+# these, only 4 already exist in /species/. So use the temp species directory
+# also (contains CSVs that were exported on Nov 27, 2024 from the Google Sheets)
+
+####*****COMBINE INDIVIDUAL CSVs *****####
 # Given a folder of Intxns CSV files, combine into one file
 # This version can handle CSV files with some extra or different column names.
 
@@ -25,11 +73,14 @@ combine_by_species <- function(data_dir = "species_dir") {
   if (data_dir == "species_dir") {
     csv_dir <- file.path(species_dir)
     output_name <- "intxnsL0sp"  # output for species_dir
-  } else if (data_dir == "species_in_review_dir") {
+  } else if (data_dir == "species_temp_dir") {
+    csv_dir <- file.path(species_temp_dir)
+    output_name <- "intxnsL0sptemp"  # output for species_temp_dir
+    } else if (data_dir == "species_in_review_dir") {
     csv_dir <- file.path(species_in_review_dir)
     output_name <- "intxnsL0spir"  # output for species_in_review_dir
   } else {
-    stop("Invalid data_dir specified. Use either 'species_dir' or 'species_in_review_dir'.")
+    stop("Invalid data_dir specified. Use either 'species_dir' or 'species_temp_dir' or 'species_in_review_dir'.")
   }
   
   # Validate the csv_dir path
@@ -110,6 +161,8 @@ combine_by_species <- function(data_dir = "species_dir") {
   # Assign the output to the respective global variable based on input directory
   if (data_dir == "species_dir") {
     assign("intxnsL0sp", intxns, envir = .GlobalEnv)
+  } else if (data_dir == "species_temp_dir") {
+    assign("intxnsL0sptemp", intxns, envir = .GlobalEnv)
   } else if (data_dir == "species_in_review_dir") {
     assign("intxnsL0spir", intxns, envir = .GlobalEnv)
   }
@@ -142,6 +195,9 @@ combine_by_species <- function(data_dir = "species_dir") {
 # Option 1: For `species_dir` - the Fully Checked Species
 intxnsL0sp <- combine_by_species("species_dir")
 
+# Option 1a: For `species_temp` - the not fully Checked Species in BBS
+intxnsL0sptemp <- combine_by_species("species_temp_dir")
+
 # Option 2: For `species_in_review_dir`
 intxnsL0spir <- combine_by_species("species_in_review_dir")
 
@@ -149,16 +205,29 @@ intxnsL0spir <- combine_by_species("species_in_review_dir")
 sp<-unique(intxnsL0sp$species1_common)
 sp<-as.list(sp)
 length(sp)
-# 1222 species1 as of Nov. 21, 2024 (all double checked)
+# 1240 species1 as of Nov. 27, 2024 (all double checked)
+
+# Species Temp: Not Fully Checked BBS species
+sptemp<-unique(intxnsL0sptemp$species1_common)
+sptemp<-as.list(sptemp)
+length(sptemp)
+# 170 species1 as of Nov. 27, 2024 (not all double checked)
 
 ## Species In Review 
 spir<-unique(intxnsL0spir$species1_common)
 spir<-as.list(spir)
 length(spir)
-# 761 species1 as of Nov. 7, 2024
+# 786 species1 as of Nov. 27, 2024
 
 # Use only the Species Fully Checked:
-intxnsL0<-intxnsL0sp
+#intxnsL0<-intxnsL0sp
+
+# Uncomment to merge the species and species temp interaction data into 1 
+intxnsL0<-rbind(intxnsL0sp, intxnsL0sptemp)
+
+# Remove duplicate rows (these may be from the 4 species occurring in both the GSheets and /species/ folders)
+intxnsL0 <- intxnsL0 %>% 
+  distinct()
 
 # Uncomment to merge the species and species_in_review interaction data into 1 
 #intxnsL0<-rbind(intxnsL0sp, intxnsL0spir)
