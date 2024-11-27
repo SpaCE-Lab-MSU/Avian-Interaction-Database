@@ -21,10 +21,11 @@
 # PROJECT:        Avian Interaction Database 
 # DATE:           27 Oct 2022; updated through 9 Aug 2024  
 # NOTES:          Next script to run: 
-#                 This script is used to refine species name changes to align with BOW, 
+#                 This script is used to refine species name changes to align 
+#                 with BOW (Clements & eBird checklist), 
 #                 and to create AvianInteractionData_L1.csv 
-#                 L0 data are checked to assign BOW scientific and common names 
-#                 to the interaction pairs data (which were originally from BBS species list).
+#                 L0 data are checked to assign updated scientific and common names 
+#                 to the interaction pairs data.
 #                 
 #                 Makes a new column that also includes scientific name 
 #                 changes associated with the AOUcombo.index for merging with 
@@ -610,40 +611,67 @@ fixed_names1 <- fixed_names1 %>%
 fixed_names2 <- fixed_names2 %>% 
                   distinct()
 
-fixed_names3<-rbind(fixed_names1,fixed_names2)
-dim(fixed_names3)
+fixed_names<-rbind(fixed_names1,fixed_names2)
+dim(fixed_names)
 # 239 names
-fixed_names3$scientific_id<-NULL
-fixed_names3$accepted_scientific_name<-NULL
+# These are blank
+fixed_names$scientific_id<-NULL
+fixed_names$accepted_scientific_name<-NULL
+# Remove; no longer needed
+fixed_names$match_score<-NULL
 
-# The genus_species column in resolved_names and in fixed_names3 is the corrected genus_species.
-# Row-bind these together as our 
-# Merge the resolved_names and the fixed_names to get a complete list of names of species in the interaction data so far.
-fixed_names<-merge(resolved_names,fixed_names3,by=c("genus_species"))
+#************************************************************#
+#*#### Scientific Name Changes: GBIF Resolved Names work ####
+#************************************************************#
 
-# resolved_names work
 # See whether the resolved_names have any further issues among the columns
-# common_name has some NAs - check these; they seem to be duplicates but missing common_name
+# common_name has some NAs - check these; they seem to be duplicates but missing
+# common_name
 test<-resolved_names %>% 
   mutate(comparison = if_else(
     as.character(genus_species) == as.character(accepted_scientific_name), "equal", "different"))
 
-# I checked these, and all have another row with a complete genus_species and common_name of the same genus_species
+# Some have missing common_name. I checked these, and all have another row with
+# a complete genus_species and common_name of the same genus_species
 resolved_names[which(is.na(resolved_names$common_name)), ]
 
 # Remove any rows with NA in common_name
-resolved_names1 <- resolved_names %>%
+resolved_names.edit <- resolved_names %>%
   filter(!is.na(common_name))
 
-# Take the genus_species in resolved_names and in fixed_names and rbind them -
-# then merge with checklist to get common name... figure out how to keep
-# reference of the genus_species.orig bc need to merge back into the int.raw
-# data. can I assign genus_species.orig to resolved_names$genus_species because
-# the other column is "accepted_scientific_name" and should be the fixed name?
-n_occur <- data.frame(table(resolved_names1$genus_species))
+# Rename genus_species to genus_species.orig. Rename accepted_scientific_name to genus_species
+names(resolved_names.edit)[names(resolved_names.edit) == "genus_species"] <-"genus_species.orig"
+names(resolved_names.edit)[names(resolved_names.edit) == "accepted_scientific_name"] <-"genus_species"
+names(resolved_names.edit)[names(resolved_names.edit) == "common_name"] <-"common_name.orig"
+resolved_names.edit$scientific_id<-NULL
 
+# Take the genus_species in resolved_names and in fixed_names and rbind them,
+# remove duplicates, then merge with checklist to get common name. Keep
+# reference of the genus_species.orig and common_name.orig bc need to merge back
+# into the int.raw data.
+int.final.names<-rbind(resolved_names.edit,fixed_names)
+dim(int.final.names)
+# 4030 
 
+# Remove duplicate rows, if any exist
+int.final.names <- int.final.names %>% 
+  distinct()
 
+# *** FIX LATER *** Some of the int.final.names genus_species are blank. 
+# Most are because they are Genus sp. For now, leave these as is since we cannot 
+# get to species level on these interactions.
+int.final.names.Gsp<-int.final.names[which(is.na(int.final.names$genus_species)), ]
+dim(int.final.names.Gsp)
+# 580 Genus-level entries
+# If the NA exists in genus_species, assign it the genus_species.orig.
+int.final.names$genus_species1 <- ifelse(is.na(int.final.names$genus_species), 
+                                        int.final.names$genus_species.orig, 
+                                        int.final.names$genus_species)
+
+# Now merge the int.final.names$genus_species with the checklist to get final
+# common_name, then merge this back into int.raw to fix all the names. 
+
+# note to change resolved and unresolved into gbif.resolved and gbif.unresolved
 
 
 
