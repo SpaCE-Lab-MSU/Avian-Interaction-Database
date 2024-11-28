@@ -482,7 +482,7 @@ dim(low_confidence_matches)
 fixed_names2<-merge(unresolved.gbif,low_confidence_matches, by=c("genus_species", "common_name"))
 
 # Rename the current genus_species and common_name to ".orig", and assign
-# genus_species and common_name to the closest_matches
+# genus_species and common_name to the CHECKLIST's closest_matches
 names(fixed_names2)[names(fixed_names2) == "genus_species"] <-"genus_species.orig"
 names(fixed_names2)[names(fixed_names2) == "common_name"] <-"common_name.orig"
 names(fixed_names2)[names(fixed_names2) == "closest_genus_species_match"] <-"genus_species"
@@ -745,8 +745,9 @@ fixed_names1 <- fixed_names1 %>%
 fixed_names2 <- fixed_names2 %>% 
                   distinct()
 
-# Combine these together for the full set of fixed genus_species for the unresolved_gbif names
-# Remove extra columns that are not needed for combining w genus_species.
+# Combine these together for the full set of fixed genus_species for the
+# unresolved_gbif names which were fixed by referencing the CHECKLIST. Remove
+# extra columns that are not needed for combining w genus_species.
 fixed.unresolved.gs<-rbind(fixed_names1,fixed_names2)
 fixed.unresolved.gs$genus_species_match_score<-NULL
 fixed.unresolved.gs$common_name_match_score<-NULL
@@ -763,7 +764,7 @@ names(resolved.gbif)[names(resolved.gbif) == "common_name"] <-"common_name.orig"
 resolved.gbif$scientific_id<-NULL
 
 # Take the genus_species in resolved.gbif and fixed.unresolved.gs and rbind them,
-# remove duplicates, then merge with checklist to get common name assigned based. Keep
+# remove duplicates, then merge with checklist to get common name assigned. Keep
 # reference of the genus_species.orig bc need to merge back into the int.raw data.
 int.final.names<-rbind(resolved.gbif,fixed.unresolved.gs)
 dim(int.final.names)
@@ -785,27 +786,49 @@ dim(int.final.names.Gsp)
 int.final.names$genus_species1 <- ifelse(is.na(int.final.names$genus_species), 
                                         int.final.names$genus_species.orig, 
                                         int.final.names$genus_species)
-names(int.final.names)[names(int.final.names) == "genus_species"] <-"genus_species.gbif"
+names(int.final.names)[names(int.final.names) == "genus_species"] <-"genus_species.fixed"
 names(int.final.names)[names(int.final.names) == "genus_species1"] <-"genus_species"
 
-# Now merge the int.final.names$genus_species with the checklist to get final
-# common_name, then merge this back into int.raw to fix all the names. 
+# Now merge the GBIF & checked checklist-derived int.final.names$genus_species
+# with the checklist to get final checklist common_name.
 checklist.narrow<-subset(checklist, select=c("genus_species","common_name"))
 checklist.narrow<-data.frame(checklist.narrow)
-int.final.names.checklist<-merge(int.final.names,checklist.narrow, by=c("genus_species"))
+int.final.names.checklist<-merge(int.final.names,checklist.narrow, by=c("genus_species"),all.x=T)
 
 head(int.final.names.checklist)
 
-# Merge with int.raw
-int.raw.edit<-int.raw
-names(int.final.names)[names(int.final.names) == "genus_species"] <-"genus_species.gbif"
+# 937 missing common names - about 30% are "Genus sp." but others are just
+# missing?? For now we are just going to focus on fixing the BBS species. Later
+# this needs to be edited with a better workflow. Check above bc the checklist
+# should include all these species w genus_species and common_name... something is off
+int.final.names.checklist.NAcommon<-int.final.names.checklist[which(is.na(int.final.names.checklist$common_name)), ]
+dim(int.final.names.checklist.NAcommon)
 
-int.raw.edit$species1_scientific <- stringr::str_replace_all(int.raw.edit$species1_scientific, 
-                                                        setNames(int.final.names$genus_species, 
-                                                                 int.final.names$genus_species.orig))
-int.raw.edit$species2_scientific <- stringr::str_replace_all(int.raw.edit$species2_scientific, 
-                                                        setNames(int.final.names$genus_species, 
-                                                                 int.final.names$genus_species.orig))
+### *** BBS WORK *** ###
+splist$genus_species<-splist$species1_scientific
+splist$common_name<-splist$bbs_sp1_common
+checklist.narrow$genus_species.checklist<-checklist.narrow$genus_species
+checklist.narrow$common_name.checklist<-checklist.narrow$common_name
+
+# Merge with Clements Checklist, and fixed names from int.raw
+bbs.checklist<-merge(splist, checklist.narrow, by=c("genus_species","common_name"),all.x=T)
+bbs.checklist<-merge(bbs.checklist,int.final.names, by=c("genus_species"),all.x=T)
+                     
+# Merge with int.raw to update int.raw with Clements & eBird checklist names
+int.raw.bbs<-int.raw
+names(int.final.names.checklist)[names(int.final.names.checklist) == "genus_species"] <-"genus_species.gbif"
+
+int.raw.edit$species1_scientific <- 
+  stringr::str_replace_all(int.raw.update$species1_scientific, 
+  setNames(int.final.names$genus_species, 
+  int.final.names$genus_species.orig))
+
+int.raw.edit$species2_scientific <- 
+  stringr::str_replace_all(int.raw.update$species2_scientific, 
+  setNames(int.final.names$genus_species, 
+  int.final.names$genus_species.orig))
+
+save.image(file.path(L1_dir,"AvianInteractionData_L1.RData"))
 
 
 
