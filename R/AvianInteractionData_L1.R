@@ -203,26 +203,26 @@ checklist[which(checklist$genus_species == "Batis molitor"), ]
 
 # KEEP ORIGINAL - Heteromyias armiti - Black-capped Robin
 # checklist common_name: Black-capped Robin
-head(int.raw[which(int.raw$species1_scientific == "Heteromyias armiti"), ])
-head(int.raw[which(int.raw$species2_scientific == "Heteromyias armiti"), ])
+dplyr::filter(int.raw, species1_scientific %in% c("Heteromyias armiti"))
+dplyr::filter(int.raw, species2_scientific %in% c("Heteromyias armiti"))
 checklist[which(checklist$genus_species == "Heteromyias armiti"), ]
 
 # KEEP ORIGINAL - Chloris sinica - Oriental Greenfinch
 # checklist common_name: Oriental Greenfinch
-head(int.raw[which(int.raw$species1_scientific == "Chloris sinica"), ])
-head(int.raw[which(int.raw$species2_scientific == "Chloris sinica"), ])
+dplyr::filter(int.raw, species1_scientific %in% c("Chloris sinica"))
+dplyr::filter(int.raw, species2_scientific %in% c("Chloris sinica"))
 checklist[which(checklist$genus_species == "Chloris sinica"), ]
 
 # KEEP ORIGINAL - Passer cinnamomeus - Russet Sparrow
 # checklist common_name: Russet Sparrow
-head(int.raw[which(int.raw$species1_scientific == "Passer cinnamomeus"), ])
-head(int.raw[which(int.raw$species2_scientific == "Passer cinnamomeus"), ])
+dplyr::filter(int.raw, species1_scientific %in% c("Passer cinnamomeus"))
+dplyr::filter(int.raw, species2_scientific %in% c("Passer cinnamomeus"))
 checklist[which(checklist$genus_species == "Passer cinnamomeus"), ]
 
 # CHANGE TO NEW NAME below: Dendroica pinus - Pine Warbler 
 # checklist common_name: Pine Warbler; genus_species = Setophaga pinus
-head(int.raw[which(int.raw$species1_scientific == "Dendroica pinus"), ])
-head(int.raw[which(int.raw$species2_scientific == "Dendroica pinus"), ])
+dplyr::filter(int.raw, species1_scientific %in% c("Dendroica pinus"))
+dplyr::filter(int.raw, species2_scientific %in% c("Dendroica pinus"))
 checklist[which(checklist$genus_species == "Dendroica pinus"), ]
 checklist[which(checklist$genus_species == "Setophaga pinus"), ]
 
@@ -710,12 +710,14 @@ fixed_names2$genus_species[fixed_names2$genus_species.orig == "Oceanodroma leuco
 # 2 Duck sp 0.737 Anatidae sp. 
 fixed_names2$genus_species[fixed_names2$genus_species.orig == "Duck sp"] <- "Anatidae sp."
 
-# KEEP ORIGINAL and edit; this entry has multiple columns off for scientific and common
-# BOW and checklist: genus_species = Platalea ajaja
-# 1 Roseate spoonbill Cormobates placens meridionalis       0.736
+# KEEP ORIGINAL and edit int.raw; this entry has multiple columns off for
+# scientific and common BOW and checklist: genus_species of Roseate Spoonbill = Platalea ajaja 1
+# Roseate spoonbill Cormobates placens meridionalis       0.736
 int.raw[which(int.raw$species1_scientific == "Roseate Spoonbill"), ]
 int.raw[which(int.raw$species2_scientific == "Roseate Spoonbill"), ]
 checklist[which(checklist$common_name == "Roseate Spoonbill"), ]
+int.raw$species2_common[int.raw$species1_scientific == "Roseate Spoonbill"] <- "Roseate Spoonbill"
+int.raw$species1_scientific[int.raw$species1_scientific == "Roseate Spoonbill"] <- "Ardea herodias"
 fixed_names2$genus_species[fixed_names2$genus_species.orig == "Roseate spoonbill"] <- "Platalea ajaja"
 # Common name will be changed later
 #fixed_names2$common_name[fixed_names2$genus_species.orig == "Roseate spoonbill"] <- "Roseate Spoonbill"
@@ -782,16 +784,23 @@ int.final.names <- int.final.names %>%
 int.final.names.Gsp<-int.final.names[which(is.na(int.final.names$genus_species)), ]
 dim(int.final.names.Gsp)
 # 620 Genus-level entries
-# If the NA exists in genus_species, assign it the genus_species.orig.
+
+# All the NA in genus_species are "Genus sp.". If the NA exists in
+# genus_species, assign it the genus_species.orig which includes this
+# designation.
 int.final.names$genus_species1 <- ifelse(is.na(int.final.names$genus_species), 
                                         int.final.names$genus_species.orig, 
                                         int.final.names$genus_species)
-names(int.final.names)[names(int.final.names) == "genus_species"] <-"genus_species.fixed"
+names(int.final.names)[names(int.final.names) == "genus_species"] <-"genus_species.gbif.chklist"
 names(int.final.names)[names(int.final.names) == "genus_species1"] <-"genus_species"
 
-# Now merge the GBIF & checked checklist-derived int.final.names$genus_species
-# with the checklist to get final checklist common_name.
-checklist.narrow<-subset(checklist, select=c("genus_species","common_name"))
+# Now merge the GBIF & checked CHECKLIST-derived int.final.names$genus_species
+# with the CHECKLIST to get final checklist common_name.
+checklist.narrow<-subset(checklist, select=c("genus_species",
+                                             "common_name",
+                                             "category",
+                                             "order",
+                                             "family"))
 checklist.narrow<-data.frame(checklist.narrow)
 int.final.names.checklist<-merge(int.final.names,checklist.narrow, by=c("genus_species"),all.x=T)
 
@@ -803,6 +812,71 @@ head(int.final.names.checklist)
 # should include all these species w genus_species and common_name... something is off
 int.final.names.checklist.NAcommon<-int.final.names.checklist[which(is.na(int.final.names.checklist$common_name)), ]
 dim(int.final.names.checklist.NAcommon)
+# 937
+# 620 Genus-level entries from above but ~300 missing common name.
+
+# First fix the Accipiters
+
+# Fix these by assigning the appropriate genus_species based on CHECKLIST, then
+# merge with CHECKLIST to get common names; add common name from
+# common_name.orig when it doesn't exist in CHECKLIST
+int.final.names.checklist
+int.final.names.checklist$genus_species[int.final.names.checklist$genus_species.orig == "Acanthis flammea"] <- "Acanthis flammea hornemanni"
+int.final.names.checklist$common_name[int.final.names.checklist$genus_species.orig == "Acanthiza apicalis albiventris"] <- "Red-Tailed Thornbill"
+int.final.names.checklist$genus_species[int.final.names.checklist$genus_species.orig == "Accipiter bicolor"] <- "Astur bicolor"
+int.final.names.checklist$genus_species[int.final.names.checklist$genus_species.orig == "Accipiter cooperii"] <- "Astur cooperii"
+int.final.names.checklist$genus_species[int.final.names.checklist$genus_species.orig == "Accipiter gentilis"] <- "Astur atricapillus"
+int.final.names.checklist$genus_species[int.final.names.checklist$genus_species.orig == "Accipiter gentilis laingi"] <- "Astur atricapillus laingi"
+int.final.names.checklist$genus_species[int.final.names.checklist$genus_species.orig == "Accipiter melanoleucus"] <- "Astur melanoleucus"
+int.final.names.checklist$genus_species[int.final.names.checklist$genus_species.orig == "Accipiter sp."] <- "Aerospiza/Tachyspiza/Accipiter/Astur sp."
+int.final.names.checklist$common_name[int.final.names.checklist$genus_species.orig == "Accipiter striatus venator"] <- "Sharp-Shinned Hawk (Puerto Rican)"
+#? Acrocephalus scirpaceus baeticatus and Acrocephalus gracilirostris leptorhynchus without CHECKLIST common_name
+int.final.names.checklist$common_name[int.final.names.checklist$genus_species.orig == "Aechmophorus clarkii clarkii"] <- "Clark's Grebe (clarkii)"
+int.final.names.checklist$common_name[int.final.names.checklist$genus_species.orig == "Aechmophorus clarkii transitionalis"] <- "Clark's Grebe (transitionalis)"
+# no subspecies in CHECKLIST
+int.final.names.checklist$genus_species[int.final.names.checklist$genus_species.orig == "Aechmophorus occidentalis ephemeralis"] <- "Aechmophorus occidentalis"
+int.final.names.checklist$genus_species[int.final.names.checklist$genus_species.orig == "Aechmophorus occidentalis occidentalis"] <- "Aechmophorus occidentalis"
+# ? Aegolius funereus funereus:  Tengmalm's Owl - not in CHECKLIST
+# ? Agelaioides badius badius and Agelaioides badius bolivianus: Grayish Baywing subspecies but no common_name in CHECKLIST
+# ? Agelaioides badius fringillarius: Pale Baywing subspecies? only species in CHECKLIST 
+int.final.names.checklist$genus_species[int.final.names.checklist$genus_species.orig == "Agelaioides badius fringillarius"] <- "Agelaioides fringillarius"
+# Aimophila ruficeps eremoeca: Rufus-crowned sparrow; no common_name in CHECKLIST
+int.final.names.checklist$common_name[int.final.names.checklist$genus_species.orig == "Aimophila ruficeps eremoeca"] <- "Rufous-Crowned Sparrow (Eremoeca)"
+int.final.names.checklist$common_name[int.final.names.checklist$genus_species.orig == "Aimophila ruficeps scottii"] <- "Rufous-Crowned Sparrow (Scottii)"
+int.final.names.checklist$common_name[int.final.names.checklist$genus_species.orig == "Schoeniparus castaneceps"] <- "Rufous-winged Fulvetta"
+int.final.names.checklist$genus_species[int.final.names.checklist$genus_species.orig == "Schoeniparus castaneceps"] <- "Schoeniparus castaneceps"
+int.final.names.checklist$common_name[int.final.names.checklist$genus_species.orig == "Schoeniparus cinereus"] <- "Yellow-Throated Fulvetta"
+int.final.names.checklist$genus_species[int.final.names.checklist$genus_species.orig == "Schoeniparus cinereus"] <- "Schoeniparus cinereus"
+int.final.names.checklist$common_name[int.final.names.checklist$genus_species.orig == "Schoeniparus dubius"] <- "Rusty-Capped Fulvetta"
+int.final.names.checklist$genus_species[int.final.names.checklist$genus_species.orig == "Schoeniparus dubius"] <- "Schoeniparus dubius"
+# Alcippe poioicephala phayrei is a subspecies but no common_name in CHECKLIST
+# GBIF WAS INCORRECT:
+int.final.names.checklist$common_name[int.final.names.checklist$genus_species.orig == "Ammospiza caudacuta caudacuta"] <- "Saltmarsh Sparrow (Caudacuta)"
+int.final.names.checklist$genus_species[int.final.names.checklist$genus_species.orig == "Ammospiza caudacuta caudacuta"] <- "Ammospiza caudacuta caudacuta"
+int.final.names.checklist$common_name[int.final.names.checklist$genus_species.orig == "Ammospiza caudacuta diversa"] <- "Saltmarsh Sparrow (Diversa)"
+int.final.names.checklist$genus_species[int.final.names.checklist$genus_species.orig == "Ammospiza caudacuta diversa"] <- "Ammospiza caudacuta diversa"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
 
 ### *** BBS WORK *** ###
 splist$genus_species<-splist$species1_scientific
