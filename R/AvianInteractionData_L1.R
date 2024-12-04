@@ -609,7 +609,8 @@ for (i in seq(score_start, score_end, by = increment)) {
 dim(low_confidence_matches)
 # 74
 
-# For most of the names, assign them the closest match, then edit the few above noted "KEEP ORIGINAL".
+# For most of the names, assign them the closest match, then edit the few above
+# noted "KEEP ORIGINAL".
 fixed_names2<-low_confidence_matches
 # Test: Accipiter cooperi is misspelled - it is present here
 dplyr::filter(fixed_names2, genus_species.raw %in% c("Accipiter cooperi"))
@@ -975,10 +976,10 @@ dim(int.final.names.Gsp)
 # 734 Genus-level entries 
 
 # All the NA in genus_species are "Genus sp.". If the NA exists in
-# genus_species, assign it the genus_species.raw which includes this
+# genus_species, assign it the genus_species.edit which includes this
 # designation.
 int.final.names$genus_species1 <- ifelse(is.na(int.final.names$genus_species), 
-                                        int.final.names$genus_species.raw, 
+                                        int.final.names$genus_species.edit, 
                                         int.final.names$genus_species)
 names(int.final.names)[names(int.final.names) == "genus_species"] <-"genus_species.gbif.chklist"
 names(int.final.names)[names(int.final.names) == "genus_species1"] <-"genus_species"
@@ -992,20 +993,20 @@ checklist.narrow<-subset(checklist, select=c("genus_species",
                                              "order",
                                              "family"))
 checklist.narrow<-data.frame(checklist.narrow)
-int.final.names.checklist<-merge(int.final.names,checklist.narrow, by=c("genus_species"),all.x=T)
-length(unique(int.final.names.checklist$genus_species.raw))
+int.checklist<-merge(int.final.names,checklist.narrow, by=c("genus_species"),all.x=T)
+length(unique(int.checklist$genus_species.raw))
 # 4331 OK
-head(int.final.names.checklist)
-dim(int.final.names.checklist)
+head(int.checklist)
+dim(int.checklist)
 # 4987
 
 # 1142 missing common names - about 30% are "Genus sp." but others are just
 # missing?? For now we are just going to focus on fixing the BBS species. Later
 # this needs to be edited with a better workflow. 
-int.final.names.checklist.NAcommon<-int.final.names.checklist[which(is.na(int.final.names.checklist$common_name)), ]
-dim(int.final.names.checklist.NAcommon)
-# 1142
-# 734 Genus-level entries from above but ~500 missing common name! Some are
+int.checklist.NAcommon<-int.checklist[which(is.na(int.checklist$common_name)), ]
+dim(int.checklist.NAcommon)
+# 1008
+# 734 Genus-level entries from above but ~250 missing common name! Some are
 # duplicate rows from genus_species.raw. Also some of the GBIF species
 # assignments do not work (GBIF taxonomic backbone is not quite up to date for
 # these birds)
@@ -1020,187 +1021,199 @@ dim(int.final.names.checklist.NAcommon)
 # genus_species. This will update most of the BBS species, but not necessarily the ones
 # outside of BBS. "genus_species" = the names agreed upon by CHECKLIST and by
 # the GBIF-screened species. common_name = the CHECKLIST common_name.
-int.final.names.checklist.narrow <- subset(
-  int.final.names.checklist,
+int.checklist <- subset(
+  int.checklist,
   select = c("genus_species", "common_name", "genus_species.raw","genus_species.edit")
 )
-dim(int.final.names.checklist.narrow)
+dim(int.checklist)
 # 4987
-int.final.names.checklist.narrow <- int.final.names.checklist.narrow %>% 
+int.checklist <- int.checklist %>% 
   distinct()
-dim(int.final.names.checklist.narrow)
+dim(int.checklist)
 # 4331 OK
-length(unique(int.final.names.checklist.narrow$genus_species.raw))
+length(unique(int.checklist$genus_species.raw))
 # 4331 OK
 
 save.image(file.path(L1_dir,"AvianInteractionData_L1.RData"))
 
+# Make a new column in bbs.splist to maintain the BBS genus_species
+splist$genus_species.bbs2024<-splist$genus_species
+# Work on splist genus_species to remove spaces between "/" names (to match
+# names in CHECKLIST)
+splist$genus_species <- gsub("\\s*/\\s*", "/", splist$genus_species)
+
 # Merge bbs.splist and int.final.names.checklist.narrow to get the common_names
 # and the genus_species.raw to assign in the int.raw data
-bbs.splist<-merge(splist,int.final.names.checklist.narrow,by=c("genus_species"),all.x=T)
+splist$genus_species.edit<-splist$genus_species
+splist$genus_species<-NULL
+bbs.splist<-merge(splist,int.checklist,by=c("genus_species.edit"),all.x=T)
 dim(splist)
 # 778 species in BBS
 dim(bbs.splist)
-# 1160 species for the matched list (> 778 because because we are keeping track
+# 968 species for the matched list (> 778 because because we are keeping track
 # of the genus_species.raw entry). 
 length(unique(bbs.splist$genus_species.raw))
-# 1045 unique genus_species.raw
+# 891 unique genus_species.raw
 # Which are NA?
 bbs.splist.NA<-bbs.splist[which(is.na(bbs.splist$genus_species.raw)), ]
 dim(bbs.splist.NA)
-# 100 species without genus_species.raw, meaning they have no lookup match in
-# CHECKLIST. The reason is that these BBS names did not match the CHECKLIST
-# edits in 2024. Some of these are Accipiter issues. Make the changes that
-# reflect updates to species names in the CHECKLIST.
+# 67 Search for matches and summarize the columns where each genus_species.edit
+# is found
+bbs.splist.NA <- bbs.splist.NA %>%
+  rowwise() %>%
+  mutate(
+    found_in_columns = paste(
+      c(
+        if (genus_species.edit %in% int.checklist$genus_species) "genus_species",
+        if (genus_species.edit %in% int.checklist$genus_species.edit) "genus_species.edit"
+      ),
+      collapse = ", "
+    )
+  ) %>%
+  ungroup()
 
-# Make a new column in bbs.splist to maintain the BBS genus_species
-# First made an original column for BBS name.
-bbs.splist$genus_species.bbs2024<-bbs.splist$genus_species
+# Replace empty matches with "Not Found"
+bbs.splist.NA <- bbs.splist.NA %>%
+  mutate(found_in_columns = ifelse(found_in_columns == "", "Not Found", found_in_columns))
+
+# Print out any results that are not "Not Found"
+matches_found <- bbs.splist.NA %>%
+  filter(found_in_columns != "Not Found")
+
+print(matches_found)
+# Only 1 species and its grouping should be updated here
+# genus_species.edit                   AOU                                              
+# 1 Aphelocoma californica/woodhouseii 34810     
+# 2 Aphelocoma californica/woodhouseii  4810 
+bbs.splist[which(bbs.splist$genus_species.edit == "Aphelocoma californica/woodhouseii"), ]
+checklist[which(checklist$genus_species == "Aphelocoma californica/woodhouseii"), ]
+int.raw[which(int.raw$species1_scientific == "Aphelocoma californica/woodhouseii"), ]
+bbs.splist$genus_species[bbs.splist$genus_species.edit == "Aphelocoma californica/woodhouseii"] <- "Aphelocoma californica/woodhouseii"
+bbs.splist$genus_species.raw[bbs.splist$genus_species.edit == "Aphelocoma californica/woodhouseii"] <- "Aphelocoma californica / woodhouseii"
+bbs.splist$common_name[bbs.splist$genus_species.edit == "Aphelocoma californica/woodhouseii"] <- "California/Woodhouse's Scrub-Jay"
+
+# 67 BBS species without genus_species.raw, meaning they have no lookup match in
+# CHECKLIST. The reason is that these BBS names did not match the CHECKLIST
+# edits in 2024, or the species is not a species that exists in the int.raw
+# data. Make the changes that reflect updates to species names in the CHECKLIST.
 
 # Edit the genus_species column in bbs.splist (in the future, edit this to
 # create look-up table that is merged in instead):
 
 bbs.splist.NA[,1]
-# Goes to 100 instead of 119 as before... probably some duplicates bc of the
-# repeat species with different genus_species.raw that we now keep in the dataframe.
+# 67 - check these later to update all; only changed ones that appear in int.raw
+# [1] "Aechmophorus occidentalis/clarkii"            
+# [2] "Aechmophorus occidentalis/clarkii"            
+# [3] "Anas platyrhynchos x rubripes/diazi/fulvigula"
+# [4] "Anser caerulescens (blue form)"               
+# [5] "Aphelocoma californica/woodhouseii"           
+# [6] "Aphelocoma californica/woodhouseii"           
+# [7] "Archilochus colubris/alexandri"               
+# [8] "Ardeid sp."                                   
+# [9] "Artemisiospiza nevadensis/belli"              
+# [10] "Artemisiospiza nevadensis/belli"              
+# [11] "Baeolophus bicolor/atricristatus"             
+# [12] "Baeolophus inornatus/ridgwayi"                
+# [13] "Bombycilla garrulus/cedrorum"                 
+# [14] "Brotogeris versicolurus/chiriri"              
+# [15] "Bucephala clangula/islandica"                 
+# [16] "Cardinalis cardinalis/sinuatus"               
+# [17] "Carduelis flammea/hornemanni"                 
+# [18] "Carpodacus purpureus/cassinii/mexicanus"      
+# [19] "Chordeiles acutipennis/minor"                 
+# [20] "Chordeiles minor/gundlachii"                  
+# [21] "Coccyzus americanus/erythropthalmus"          
+# [22] "Colaptes auratus auratus x auratus cafer"     
+# [23] "Coragyps/Cathartes atratus/aura"              
+# [24] "Corvus brachyrhynchos/caurinus"               
+# [25] "Corvus brachyrhynchos/ossifragus"             
+# [26] "Corvus cryptoleucus/corax"                    
+# [27] "Cyanecula svecica"                            
+# [28] "Dendragapus obscurus/fuliginosus"             
+# [29] "Empidonax alnorum/traillii"                   
+# [30] "Empidonax alnorum/traillii"                   
+# [31] "Empidonax difficilis/occidentalis"            
+# [32] "Empidonax hammondii/oberholseri"              
+# [33] "Icterus bullockii/galbula"                    
+# [34] "Limnodromus griseus/scolopaceus"              
+# [35] "Loxia curvirostra/leucoptera"                 
+# [36] "Loxia sinesciuris/curvirostra"                
+# [37] "Molothrus aeneus/ater"                        
+# [38] "Nannopterum auritus/carbo"                    
+# [39] "Nannopterum brasilianum/auritum"              
+# [40] "Nycticorax/Nyctanassa nycticorax/violacea"    
+# [41] "Passerina amoena x cyanea"                    
+# [42] "Petrochelidon pyrrhonota/fulva"               
+# [43] "Pipilo maculatus/erythrophthalmus"            
+# [44] "Plegadis falcinellus/chihi"                   
+# [45] "Poecile atricapillus/gambeli"                 
+# [46] "Poecile atricapillus/hudsonicus"              
+# [47] "Poecile carolinensis/atricapillus"            
+# [48] "Polioptila caerulea/melanura"                 
+# [49] "Porphyrio martinicus"                         
+# [50] "Quiscalus major/mexicanus"                    
+# [51] "Rallus crepitans/elegans"                     
+# [52] "Selasphorus rufus/sasin"                      
+# [53] "Setophaga coronata audoboni"                  
+# [54] "Setophaga townsendi x occidentalis"           
+# [55] "Setophaga townsendi/occidentalis"             
+# [56] "Tringa melanoleuca/flavipes"                  
+# [57] "Trochilid sp."                                
+# [58] "Troglodytes pacificus/hiemalis"               
+# [59] "Turdus eunomus"                               
+# [60] "Tyrannus melancholicus/couchii"               
+# [61] "Tyrannus vociferans/verticalis"               
+# [62] "Uria aalge/lomvia"                            
+# [63] "Urile sp."                                    
+# [64] "Vermivora chrysoptera x cyanoptera"           
+# [65] "Vermivora cyanoptera x chrysoptera"           
+# [66] "Vireo cassinii/solitarius"                    
+# [67] "Vireo plumbeus/cassinii" 
 
 # Now look each of these up in the CHECKLIST object - if it doesn't exist it
-# needs a different genus_species (because GBIF got it wrong). If it exists and doesn't have a common_name,
-# that's fine; we will use the BBS2024.common_name.
+# could need a different genus_species (to match CHECKLIST). If it exists and
+# doesn't have a common_name, that's fine; we will use the BBS2024.common_name.
 
-# Hoary Redpoll lumped into Redpoll, but not sure this is the case in the BBS...
-# bbs.splist$genus_species[bbs.splist$genus_species.bbs2024 == "Acanthis
-# flammea"] <- "Acanthis flammea hornemanni"
-# [1] "Accipiter atricapillus" 
-bbs.splist$genus_species[bbs.splist$genus_species.bbs2024 == "Accipiter atricapillus"] <- "Astur atricapillus"
-bbs.splist$genus_species.combo[bbs.splist$genus_species.bbs2024 == "Accipiter atricapillus"] <- "Astur atricapillus"
-# OK to accept BBS common_name & current genus_species:
-[2] "Aechmophorus occidentalis / clarkii"              
-[3] "Aechmophorus occidentalis / clarkii"              
-[4] "Ammospiza leconteii"                              
-[5] "Ammospiza maritima"                               
-[6] "Anas diazi"
-# OK to accept BBS common_name & current genus_species:
-# [11] "Anser caerulescens"                               
-# [14] "Antigone canadensis"                              
-# [15] "Aphelocoma californica / woodhouseii"             
-# [16] "Aphelocoma californica / woodhouseii"             
-# [17] "Aratinga nenday"                                  
-# [18] "Archilochus colubris / alexandri"                 
-# [19] "Ardeid sp."                                       
-# [20] "Artemisiospiza nevadensis / belli"                
-# [21] "Artemisiospiza nevadensis / belli"                
-# [22] "Aythya marila / affinis"                          
-# [23] "Baeolophus bicolor / atricristatus"               
-# [24] "Baeolophus inornatus / ridgwayi"                  
-# [25] "Bombycilla garrulus / cedrorum"                   
-# [26] "Brotogeris versicolurus / chiriri"                
-# [28] "Bucephala clangula / islandica"                   
-# [29] "Buteo plagiatus"                                  
-# [30] "Calidris pugnax"                                  
-# [31] "Calidris subruficollis"                           
-# [32] "Calidris virgata"                                 
-# [33] "Canachites canadensis"                            
-# [34] "Cardinalis cardinalis / sinuatus"                 
-# [40] "Chordeiles acutipennis / minor"                   
-# [41] "Chordeiles minor / gundlachii"                    
-# [42] "Cistothorus stellaris"                            
-# [43] "Coccyzus americanus / erythropthalmus"            
-# [49] "Corthylio calendula"                              
-# [51] "Corvus brachyrhynchos / ossifragus"               
-# [55] "Dendragapus obscurus / fuliginosus"               
-# [56] "Dryobates albolarvatus"                           
-# [57] "Dryobates arizonae"                               
-# [58] "Dryobates borealis"                               
-# [59] "Empidonax alnorum / traillii"                     
-# [60] "Empidonax alnorum / traillii"                     
-# [61] "Empidonax difficilis / occidentalis"              
-# [62] "Empidonax difficilis difficilis"                  
-# [63] "Empidonax difficilis occidentalis"                
-# [64] "Empidonax hammondii / oberholseri"                
-# [65] "Gallinula galeata"                                
-# [66] "Geranoaetus albicaudatus"                         
-# [68] "Icterus bullockii / galbula"
-# [72] "Limnodromus griseus / scolopaceus"                
-# [73] "Loxia curvirostra / leucoptera"                   
-# [74] "Loxia sinesciuris / curvirostra"                  
-# [75] "Mareca americana"                                 
-# [76] "Mareca penelope"                                  
-# [77] "Melanitta americana"                              
-# [78] "Melanitta deglandi"                               
-# [79] "Molothrus aeneus / ater"                          
-# [83] "Passerina amoena x cyanea"   
-# [95] "Setophaga coronata audoboni"                      
-# [96] "Setophaga coronata coronata"                      
-# [97] "Setophaga coronata coronata"                      
-# [99] "Setophaga townsendi x occidentalis"               
-# [100] "Spatula clypeata"                                 
-# [101] "Spatula cyanoptera"                               
-# [102] "Spatula discors"                                  
-# [108] "Turdus eunomus"                                   
-# [112] "Urile pelagicus"                                  
-# [114] "Urile urile"                                      
-
-# Not in checklist; often unidentified between 2 known species (or might not
-# exist but keep for now) 
-# [10] "Anas platyrhynchos x rubripes / diazi / fulvigula" 
-# [12] "Anser caerulescens (blue form)" 
-# [13] "Anser rossii" 
-# [48] "Coragyps / Cathartes atratus / aura" 
-# [50] "Corvus brachyrhynchos / caurinus"
-# [53] "Corvus cryptoleucus / corax"
-# [67] "Gull sp."         # as "Larinae sp."                                
-# [88] "Poecile atricapillus / hudsonicus"                
-# [89] "Poecile carolinensis / atricapillus"              
-# [90] "Polioptila caerulea / melanura"                   
-# [93] "Rallus crepitans / elegans"                       
-# [104] "Tern sp."       # as "Sterninae sp."                                  
-# [105] "Tringa melanoleuca / flavipes"                    
-# [106] "Trochilid sp."     # as "Colibri sp."                               
-# [111] "Uria aalge / lomvia"                              
-# [113] "Urile sp." 
-# [119] "Woodpecker sp."
-
-# According to checklist: move to Ardea genus
-# [27] "Bubulcus ibis"                                    
-bbs.splist$genus_species[bbs.splist$genus_species.bbs2024 == "Bubulcus ibis"] <- "Ardea ibis"
-
+# [1] "Aechmophorus occidentalis/clarkii"            
+# [2] "Aechmophorus occidentalis/clarkii"            
+bbs.splist$genus_species[bbs.splist$genus_species.bbs2024 == "Aechmophorus occidentalis / clarkii"] <- "Aechmophorus occidentalis/clarkii"
+bbs.splist$common_name[bbs.splist$genus_species.bbs2024 == "Aechmophorus occidentalis / clarkii"] <- "Western/Clark's Grebe"
 # According to checklist: move to Acanthis genus
-# [35] "Carduelis flammea / hornemanni"                   
+# [17] "Carduelis flammea/hornemanni"           
 bbs.splist$genus_species[bbs.splist$genus_species.bbs2024 == "Carduelis flammea / hornemanni"] <- "Acanthis flammea [flammea Group/hornemanni/exilipes]"
 
 # Checklist says: House and Cassin's and Purple finch moved to Haemorhous Genus
 # [36] "Carpodacus purpureus / cassinii / mexicanus"      
 bbs.splist$genus_species[bbs.splist$genus_species.bbs2024 == "Carpodacus purpureus / cassinii / mexicanus"] <- "Haemorhous purpureus / cassinii / mexicanus"
 
-# Checklist says: these plovers moved to Anarhynchus montanus
-# [37] "Charadrius montanus"                              
-# [38] "Charadrius nivosus"                               
-# [39] "Charadrius wilsonia"                              
-bbs.splist$genus_species[bbs.splist$genus_species.bbs2024 == "Charadrius montanus"] <- "Anarhynchus montanus"
-bbs.splist$genus_species[bbs.splist$genus_species.bbs2024 == "Charadrius nivosus"] <- "Anarhynchus nivosus"
-bbs.splist$genus_species[bbs.splist$genus_species.bbs2024 == "Charadrius wilsonia"] <- "Anarhynchus wilsonia"
-
+# # Checklist says: these plovers moved to Anarhynchus montanus
+# # [37] "Charadrius montanus"                              
+# # [38] "Charadrius nivosus"                               
+# # [39] "Charadrius wilsonia"                              
+# bbs.splist$genus_species[bbs.splist$genus_species.bbs2024 == "Charadrius montanus"] <- "Anarhynchus montanus"
+# bbs.splist$genus_species[bbs.splist$genus_species.bbs2024 == "Charadrius nivosus"] <- "Anarhynchus nivosus"
+# bbs.splist$genus_species[bbs.splist$genus_species.bbs2024 == "Charadrius wilsonia"] <- "Anarhynchus wilsonia"
+# 
 # Checklist changes are made below:
 # [44] "Colaptes auratus auratus"                         
 # [45] "Colaptes auratus auratus" All Flickers or Yellow                        
-bbs.splist$genus_species[bbs.splist$genus_species.bbs2024 == "Colaptes auratus auratus"] <- "Colaptes auratus"
+# bbs.splist$genus_species[bbs.splist$genus_species.bbs2024 == "Colaptes auratus auratus"] <- "Colaptes auratus"
 # [46] "Colaptes auratus auratus x auratus cafer"    Yellow x Red     
 bbs.splist$genus_species[bbs.splist$genus_species.bbs2024 == "Colaptes auratus auratus x auratus cafer"] <- "Colaptes auratus luteus x cafer"
 # [47] "Colaptes auratus cafer"       Red-shafted                    
-bbs.splist$genus_species[bbs.splist$genus_species.bbs2024 == "Colaptes auratus cafer"] <- "Colaptes auratus [cafer Group]"
+# bbs.splist$genus_species[bbs.splist$genus_species.bbs2024 == "Colaptes auratus cafer"] <- "Colaptes auratus [cafer Group]"
 
 # Checklist says: Corvus brachyrhynchos caurinus
 # [52] "Corvus caurinus"                                  
-bbs.splist$genus_species[bbs.splist$genus_species.bbs2024 == "Corvus caurinus"] <- "Corvus brachyrhynchos caurinus"
+#bbs.splist$genus_species[bbs.splist$genus_species.bbs2024 == "Corvus caurinus"] <- "Corvus brachyrhynchos caurinus"
 
 # Checklist says: Luscinia svecica cyanecula
 # [54] "Cyanecula svecica"                                
-bbs.splist$genus_species[bbs.splist$genus_species.bbs2024 == "Cyanecula svecica"] <- "Luscinia svecica cyanecula"
+# bbs.splist$genus_species[bbs.splist$genus_species.bbs2024 == "Cyanecula svecica"] <- "Luscinia svecica cyanecula"
 
 # Checklist says moved Ixobrychus into Genus Botaurus
 # [69] "Ixobrychus exilis"                                
-bbs.splist$genus_species[bbs.splist$genus_species.bbs2024 == "Ixobrychus exilis"] <- "Botaurus exilis"
+# bbs.splist$genus_species[bbs.splist$genus_species.bbs2024 == "Ixobrychus exilis"] <- "Botaurus exilis"
 
 # Checklist says Junco hyemalis hyemalis/carolinensis but also exists in Checklist as Junco hyemalis hyemalis without common_name so keep as is. Same with Junco hyemalis [oreganus Group].
 # [70] "Junco hyemalis hyemalis"                          
@@ -1208,14 +1221,14 @@ bbs.splist$genus_species[bbs.splist$genus_species.bbs2024 == "Ixobrychus exilis"
 
 # Checklist says Phalacrocorax carbo/Nannopterum auritum
 # [80] "Nannopterum auritus / carbo"                      
-bbs.splist$genus_species[bbs.splist$genus_species.bbs2024 == "Nannopterum auritus / carbo"] <- "Phalacrocorax carbo/Nannopterum auritum"
+#bbs.splist$genus_species[bbs.splist$genus_species.bbs2024 == "Nannopterum auritus / carbo"] <- "Phalacrocorax carbo/Nannopterum auritum"
 
 # Checklist switched order: Nannopterum auritum/brasilianum
 # [81] "Nannopterum brasilianum / auritum"                
 
 # Checklist says Nycticorax nycticorax/Nyctanassa violacea
 # [82] "Nycticorax / Nyctanassa nycticorax / violacea"    
-bbs.splist$genus_species[bbs.splist$genus_species.bbs2024 == "Nycticorax / Nyctanassa nycticorax / violacea"] <- "Nycticorax nycticorax/Nyctanassa violacea"
+#bbs.splist$genus_species[bbs.splist$genus_species.bbs2024 == "Nycticorax / Nyctanassa nycticorax / violacea"] <- "Nycticorax nycticorax/Nyctanassa violacea"
 
 # Checklist says: Petrochelidon pyrrhonota/fulva  (remove space)     
 # [84] "Petrochelidon pyrrhonota / fulva"                 
@@ -1273,7 +1286,7 @@ bbs.splist$genus_species[bbs.splist$genus_species.bbs2024 == "Vermivora cyanopte
 # Checklist says: Vireo plumbeus/cassinii (remove space)
 # [118] "Vireo plumbeus / cassinii"                        
 
-# Accept the bbs.splist common_name 
+# Accept the bbs.splist$bbs_common_name 
 names(bbs.splist)[names(bbs.splist) == "common_name"] <-"gbif.chklist.common_name"
 names(bbs.splist)[names(bbs.splist) == "bbs_common_name"] <-"common_name"
 
@@ -1284,23 +1297,16 @@ bbs.splist.final<-subset(bbs.splist,select=c("genus_species","AOU","AOU.combo",
 
 # Remove duplicate rows
 dim(bbs.splist.final)
-# 1159 rows
+# 968 rows
 bbs.splist.final <- bbs.splist.final %>% 
   distinct()
 dim(bbs.splist.final)
-# 1159 rows - none lost; still probably have slightly different genus_species.raw
+# 968 rows - none lost; retains different genus_species.raw
 length(unique(bbs.splist.final$genus_species.raw))
-# 1044 rows
-
-# Later could merge in the checklist for those names as long as you change all
-# the exact spacing on "/" above and are ok with blanks for some common names;
-# if so, uncomment below for easier merging).
- 
-#checklist.narrow$genus_species.checklist<-checklist.narrow$genus_species
-#checklist.narrow$common_name.checklist<-checklist.narrow$common_name
-## Merge with Clements CHECKLIST, and fixed names from int.raw
-#bbs.checklist<-merge(splist, checklist.narrow, by=c("genus_species","common_name"),all.x=T)
-#bbs.checklist<-merge(bbs.splist,int.final.names, by=c("genus_species"),all.x=T)
+# 892 rows - some are NA bc they do not appear in int.raw data.
+bbs.splist.final.NA<-bbs.splist.final[which(is.na(bbs.splist.final$genus_species.raw)), ]
+dim(bbs.splist.final.NA)
+# 65
 
 # BBS: Use bbs.splist as a lookup table to update int.raw with BBS/Clements/eBird
 # names for all species1_scientific and species2_scientific. 
@@ -1327,6 +1333,27 @@ save.image(file.path(L1_dir,"AvianInteractionData_L1.RData"))
 
 
 # PARKING LOT FOR CONTINUED CLEANING...
+
+# Perform a left join to match and update `genus_species`
+bbs.splist <- bbs.splist %>%
+  left_join(
+    int.final.names.checklist.narrow %>%
+      select(genus_species.edit, genus_species.checklist = genus_species),
+    by = c("genus_species.2024bbs" = "genus_species.edit")
+  ) %>%
+  mutate(
+    genus_species = ifelse(
+      !is.na(genus_species.checklist),
+      genus_species.checklist,
+      genus_species
+    )
+  ) %>%
+  select(-genus_species.checklist)
+
+# Hoary Redpoll lumped into Redpoll, but not sure this is the case in the BBS...
+# bbs.splist$genus_species[bbs.splist$genus_species.bbs2024 == "Acanthis
+# flammea"] <- "Acanthis flammea hornemanni"
+
 
 # # Find genus_species in bbs.splist and match it to genus_species.raw in int.final.names.checklist.narrow in order to  to ensure that CHECKLIST name changes are included in the BBS splist
 # # Add a new column `genus_species.update` to bbs.splist
