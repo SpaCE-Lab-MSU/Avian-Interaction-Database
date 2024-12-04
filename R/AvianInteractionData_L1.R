@@ -1314,9 +1314,16 @@ int.raw.bbs <- int.raw.bbs %>%
   select(-genus_species, -common_name)
 
 int.raw.bbs[c(53:60),c(1:4)]
+
 # STOPPED HERE - need to check that it worked - got error
 
-
+# Warning message:
+#   In left_join(., bbs.splist.final %>% select(genus_species.raw, genus_species,  :
+#                                                 Detected an unexpected many-to-many relationship between `x` and `y`.
+#                                               ℹ Row 666 of `x` matches multiple rows in `y`.
+#                                               ℹ Row 1 of `y` matches multiple rows in `x`.
+#                                               ℹ If a many-to-many relationship is expected, set `relationship = "many-to-many"` to silence
+#                                               this warning.
 
 
 
