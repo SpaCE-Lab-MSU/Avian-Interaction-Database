@@ -951,6 +951,13 @@ names(resolved.gbif)[names(resolved.gbif) == "accepted_scientific_name"] <-"genu
 resolved.gbif$common_name.raw<-NULL
 resolved.gbif$scientific_id<-NULL
 
+# Check recent changes:
+# See if the resolved.gbif contain Accipiter gentilis or Accipiter atricapillus
+# as genus_species ... Yes, so need to update these
+resolved.gbif[which(resolved.gbif$genus_species.edit == "Accipiter gentilis"), ]
+resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Accipiter gentilis"] <- "Astur atricapillus"
+
+
 # Take the genus_species in resolved.gbif and fixed.unresolved.gs and rbind them,
 # remove duplicates, then merge with CHECKLIST to get common name assigned. Keep
 # reference of the genus_species.raw bc need to merge back into the int.raw data.
@@ -1014,12 +1021,53 @@ dim(int.checklist.NAcommon)-dim(int.final.names.Gsp)
 # assignments do not work (GBIF taxonomic backbone is not quite up to date for
 # these birds)
 
+# Fix these by assigning the appropriate genus_species based on CHECKLIST, then
+# merge with CHECKLIST to get common names; add common name from
+# common_name.orig when it doesn't exist in CHECKLIST
+
+int.checklist$genus_species[int.checklist$genus_species.edit == "Acanthis flammea"] <- "Acanthis flammea hornemanni"
+int.checklist$common_name[int.checklist$genus_species.edit == "Acanthiza apicalis albiventris"] <- "Red-Tailed Thornbill"
+int.checklist$genus_species[int.checklist$genus_species.edit == "Accipiter bicolor"] <- "Astur bicolor"
+int.checklist$genus_species[int.checklist$genus_species.edit == "Accipiter cooperii"] <- "Astur cooperii"
+int.checklist$genus_species[int.checklist$genus_species.edit == "Accipiter gentilis"] <- "Astur atricapillus"
+int.checklist$genus_species[int.checklist$genus_species.edit == "Accipiter gentilis laingi"] <- "Astur atricapillus laingi"
+int.checklist$genus_species[int.checklist$genus_species.edit == "Accipiter melanoleucus"] <- "Astur melanoleucus"
+int.checklist$genus_species[int.checklist$genus_species.edit == "Accipiter sp."] <- "Aerospiza/Tachyspiza/Accipiter/Astur sp."
+int.checklist$common_name[int.checklist$genus_species.edit == "Accipiter striatus venator"] <- "Sharp-Shinned Hawk (Puerto Rican)"
+#? Acrocephalus scirpaceus baeticatus and Acrocephalus gracilirostris leptorhynchus without CHECKLIST common_name
+int.checklist$common_name[int.checklist$genus_species.edit == "Aechmophorus clarkii clarkii"] <- "Clark's Grebe (clarkii)"
+int.checklist$common_name[int.checklist$genus_species.edit == "Aechmophorus clarkii transitionalis"] <- "Clark's Grebe (transitionalis)"
+# no subspecies in CHECKLIST
+int.checklist$genus_species[int.checklist$genus_species.edit == "Aechmophorus occidentalis ephemeralis"] <- "Aechmophorus occidentalis"
+int.checklist$genus_species[int.checklist$genus_species.edit == "Aechmophorus occidentalis occidentalis"] <- "Aechmophorus occidentalis"
+# ? Aegolius funereus funereus:  Tengmalm's Owl - not in CHECKLIST
+# ? Agelaioides badius badius and Agelaioides badius bolivianus: Grayish Baywing subspecies but no common_name in CHECKLIST
+# ? Agelaioides badius fringillarius: Pale Baywing subspecies? only species in CHECKLIST 
+int.checklist$genus_species[int.checklist$genus_species.edit == "Agelaioides badius fringillarius"] <- "Agelaioides fringillarius"
+# Aimophila ruficeps eremoeca: Rufus-crowned sparrow; no common_name in CHECKLIST
+int.checklist$common_name[int.checklist$genus_species.edit == "Aimophila ruficeps eremoeca"] <- "Rufous-Crowned Sparrow (Eremoeca)"
+int.checklist$common_name[int.checklist$genus_species.edit == "Aimophila ruficeps scottii"] <- "Rufous-Crowned Sparrow (Scottii)"
+int.checklist$common_name[int.checklist$genus_species.edit == "Schoeniparus castaneceps"] <- "Rufous-winged Fulvetta"
+int.checklist$genus_species[int.checklist$genus_species.edit == "Schoeniparus castaneceps"] <- "Schoeniparus castaneceps"
+int.checklist$common_name[int.checklist$genus_species.edit == "Schoeniparus cinereus"] <- "Yellow-Throated Fulvetta"
+int.checklist$genus_species[int.checklist$genus_species.edit == "Schoeniparus cinereus"] <- "Schoeniparus cinereus"
+int.checklist$common_name[int.checklist$genus_species.edit == "Schoeniparus dubius"] <- "Rusty-Capped Fulvetta"
+int.checklist$genus_species[int.checklist$genus_species.edit == "Schoeniparus dubius"] <- "Schoeniparus dubius"
+# Alcippe poioicephala phayrei is a subspecies but no common_name in CHECKLIST
+# GBIF WAS INCORRECT:
+int.checklist$common_name[int.checklist$genus_species.edit == "Ammospiza caudacuta caudacuta"] <- "Saltmarsh Sparrow (Caudacuta)"
+int.checklist$genus_species[int.checklist$genus_species.edit == "Ammospiza caudacuta caudacuta"] <- "Ammospiza caudacuta caudacuta"
+int.checklist$common_name[int.checklist$genus_species.edit == "Ammospiza caudacuta diversa"] <- "Saltmarsh Sparrow (Diversa)"
+int.checklist$genus_species[int.checklist$genus_species.edit == "Ammospiza caudacuta diversa"] <- "Ammospiza caudacuta diversa"
+
+# ... 
+
 # For now, focus on BBS splist because need to get these data cleaned and
 # aligned for merging with bbs.obs for network modeling. Return to the cleaning
 # below after this is completed...
 
 #******** BBS WORK **********# 
-# Merge genus_species in splist with genus_species in int.final.names.checklist
+# Merge genus_species in splist with genus_species in int.checklist
 # to check current common_name list and identify gaps and updates to
 # genus_species. This will update most of the BBS species, but not necessarily the ones
 # outside of BBS. "genus_species" = the names agreed upon by CHECKLIST and by
@@ -1039,6 +1087,7 @@ length(unique(int.checklist$genus_species.raw))
 
 save.image(file.path(L1_RData_dir,"AvianInteractionData_L1.RData"))
 
+##****BBS SPECIES LIST WORK****##
 # Make a new column in bbs.splist to maintain the BBS genus_species
 splist$genus_species.bbs2024<-splist$genus_species
 # Work on splist genus_species to remove spaces between "/" names (to match
@@ -1289,7 +1338,22 @@ dim(bbs.splist.final.NA)
 # names for all species1_scientific and species2_scientific. 
 # Make a version just for this BBS work. 
 int.raw.bbs<-int.raw
-int.raw.bbs[c(1:20),c(1:4)]
+
+# Make a few changes directly for easier merging.
+# Accipiter gentilis changes:
+int.raw.bbs$species1_scientific[int.raw.bbs$species1_scientific == "Accipiter gentilis"] <- "Astur atricapillus"
+int.raw.bbs$species2_scientific[int.raw.bbs$species2_scientific == "Accipiter gentilis"] <- "Astur atricapillus"
+int.raw.bbs$species1_scientific[int.raw.bbs$species1_scientific == "Accipiter gentilis "] <- "Astur atricapillus"
+int.raw.bbs$species2_scientific[int.raw.bbs$species2_scientific == "Accipiter gentilis "] <- "Astur atricapillus"
+int.raw.bbs$species1_scientific[int.raw.bbs$species1_scientific == "Accipiter gentilis laingi"] <- "Astur atricapillus laingi"
+int.raw.bbs$species2_scientific[int.raw.bbs$species2_scientific == "Accipiter gentilis laingi"] <- "Astur atricapillus laingi"
+
+# int.raw.bbs$species1_scientific[int.raw.bbs$genus_species.edit == "Accipiter bicolor"] <- "Astur bicolor"
+# int.checklist$genus_species[int.checklist$genus_species.edit == "Accipiter cooperii"] <- "Astur cooperii"
+# int.checklist$genus_species[int.checklist$genus_species.edit == "Accipiter gentilis laingi"] <- "Astur atricapillus laingi"
+# int.checklist$genus_species[int.checklist$genus_species.edit == "Accipiter melanoleucus"] <- "Astur melanoleucus"
+# int.checklist$genus_species[int.checklist$genus_species.edit == "Accipiter sp."] <- "Aerospiza/Tachyspiza/Accipiter/Astur sp."
+# int.checklist$common_name[int.checklist$genus_species.edit == "Accipiter striatus venator"] <- "Sharp-Shinned Hawk (Puerto Rican)"
 
 # Make new copy columns to maintain raw entries: species1_scientific.raw,
 # species2_scientific.raw, species1_common.raw, species2_common.raw
@@ -1297,6 +1361,29 @@ int.raw.bbs$species1_scientific.raw<-int.raw.bbs$species1_scientific
 int.raw.bbs$species2_scientific.raw<-int.raw.bbs$species2_scientific
 int.raw.bbs$species1_common.raw<-int.raw.bbs$species1_common
 int.raw.bbs$species2_common.raw<-int.raw.bbs$species2_common
+# Check a section that has species name changes. 
+int.raw.bbs[c(53:60),c(1:4,26:29)]
+
+# Identify duplicates in the join keys
+duplicates <- int.raw.bbs %>%
+  inner_join(
+    bbs.splist %>% count(genus_species.raw) %>% filter(n > 1),
+    by = c("species1_scientific.raw" = "genus_species.raw")
+  ) %>%
+  distinct(species1_scientific.raw)
+
+# Display the duplicates
+print("Duplicate matches detected in the join:")
+print(duplicates)
+#       species1_scientific.raw
+# 1          Anas platyrhynchos
+# 2         Anas platyrhynchos 
+# 3              Ardea herodias
+# 4              Junco hyemalis
+# 5           Buteo jamaicensis
+# 6    Colaptes auratus auratus
+# 7       Corvus brachyrhynchos
+# 8 Setophaga coronata coronata
 
 # Perform the update for species1_scientific and species1_common
 int.raw.bbs <- int.raw.bbs %>%
@@ -1313,21 +1400,14 @@ int.raw.bbs <- int.raw.bbs %>%
   # Remove temporary join columns
   select(-genus_species, -common_name)
 
-int.raw.bbs[c(53:60),c(1:4)]
+int.raw.bbs[c(53:60),c(1:4,26:29)]
 
-# STOPPED HERE - need to check that it worked - got error
-
-# Warning message:
-#   In left_join(., bbs.splist.final %>% select(genus_species.raw, genus_species,  :
-#                                                 Detected an unexpected many-to-many relationship between `x` and `y`.
-#                                               ℹ Row 666 of `x` matches multiple rows in `y`.
-#                                               ℹ Row 1 of `y` matches multiple rows in `x`.
-#                                               ℹ If a many-to-many relationship is expected, set `relationship = "many-to-many"` to silence
-#                                               this warning.
+# STOPPED HERE -- need to check the resulting changes
 
 
 
-save.image(file.path(L1_RData_dir,"AvianInteractionData_L1.RData"))
+
+save.image(file.path(L1_dir,"AvianInteractionData_L1.RData"))
 
 
 # PARKING LOT FOR CONTINUED CLEANING...
@@ -1335,7 +1415,7 @@ save.image(file.path(L1_RData_dir,"AvianInteractionData_L1.RData"))
 # Perform a left join to match and update `genus_species`
 bbs.splist <- bbs.splist %>%
   left_join(
-    int.final.names.checklist.narrow %>%
+    int.checklist.narrow %>%
       select(genus_species.edit, genus_species.checklist = genus_species),
     by = c("genus_species.2024bbs" = "genus_species.edit")
   ) %>%
@@ -1353,7 +1433,7 @@ bbs.splist <- bbs.splist %>%
 # flammea"] <- "Acanthis flammea hornemanni"
 
 
-# # Find genus_species in bbs.splist and match it to genus_species.raw in int.final.names.checklist.narrow in order to  to ensure that CHECKLIST name changes are included in the BBS splist
+# # Find genus_species in bbs.splist and match it to genus_species.raw in int.checklist.narrow in order to  to ensure that CHECKLIST name changes are included in the BBS splist
 # # Add a new column `genus_species.update` to bbs.splist
 # # Update bbs.splist with genus_species.update
 # bbs.splist <- bbs.splist %>%
@@ -1366,45 +1446,6 @@ bbs.splist <- bbs.splist %>%
 
 
 # First fix the Accipiters
-
-# Fix these by assigning the appropriate genus_species based on CHECKLIST, then
-# merge with CHECKLIST to get common names; add common name from
-# common_name.orig when it doesn't exist in CHECKLIST
-int.final.names.checklist
-int.final.names.checklist$genus_species[int.final.names.checklist$genus_species.raw == "Acanthis flammea"] <- "Acanthis flammea hornemanni"
-int.final.names.checklist$common_name[int.final.names.checklist$genus_species.raw == "Acanthiza apicalis albiventris"] <- "Red-Tailed Thornbill"
-int.final.names.checklist$genus_species[int.final.names.checklist$genus_species.raw == "Accipiter bicolor"] <- "Astur bicolor"
-int.final.names.checklist$genus_species[int.final.names.checklist$genus_species.raw == "Accipiter cooperii"] <- "Astur cooperii"
-int.final.names.checklist$genus_species[int.final.names.checklist$genus_species.raw == "Accipiter gentilis"] <- "Astur atricapillus"
-int.final.names.checklist$genus_species[int.final.names.checklist$genus_species.raw == "Accipiter gentilis laingi"] <- "Astur atricapillus laingi"
-int.final.names.checklist$genus_species[int.final.names.checklist$genus_species.raw == "Accipiter melanoleucus"] <- "Astur melanoleucus"
-int.final.names.checklist$genus_species[int.final.names.checklist$genus_species.raw == "Accipiter sp."] <- "Aerospiza/Tachyspiza/Accipiter/Astur sp."
-int.final.names.checklist$common_name[int.final.names.checklist$genus_species.raw == "Accipiter striatus venator"] <- "Sharp-Shinned Hawk (Puerto Rican)"
-#? Acrocephalus scirpaceus baeticatus and Acrocephalus gracilirostris leptorhynchus without CHECKLIST common_name
-int.final.names.checklist$common_name[int.final.names.checklist$genus_species.raw == "Aechmophorus clarkii clarkii"] <- "Clark's Grebe (clarkii)"
-int.final.names.checklist$common_name[int.final.names.checklist$genus_species.raw == "Aechmophorus clarkii transitionalis"] <- "Clark's Grebe (transitionalis)"
-# no subspecies in CHECKLIST
-int.final.names.checklist$genus_species[int.final.names.checklist$genus_species.raw == "Aechmophorus occidentalis ephemeralis"] <- "Aechmophorus occidentalis"
-int.final.names.checklist$genus_species[int.final.names.checklist$genus_species.raw == "Aechmophorus occidentalis occidentalis"] <- "Aechmophorus occidentalis"
-# ? Aegolius funereus funereus:  Tengmalm's Owl - not in CHECKLIST
-# ? Agelaioides badius badius and Agelaioides badius bolivianus: Grayish Baywing subspecies but no common_name in CHECKLIST
-# ? Agelaioides badius fringillarius: Pale Baywing subspecies? only species in CHECKLIST 
-int.final.names.checklist$genus_species[int.final.names.checklist$genus_species.raw == "Agelaioides badius fringillarius"] <- "Agelaioides fringillarius"
-# Aimophila ruficeps eremoeca: Rufus-crowned sparrow; no common_name in CHECKLIST
-int.final.names.checklist$common_name[int.final.names.checklist$genus_species.raw == "Aimophila ruficeps eremoeca"] <- "Rufous-Crowned Sparrow (Eremoeca)"
-int.final.names.checklist$common_name[int.final.names.checklist$genus_species.raw == "Aimophila ruficeps scottii"] <- "Rufous-Crowned Sparrow (Scottii)"
-int.final.names.checklist$common_name[int.final.names.checklist$genus_species.raw == "Schoeniparus castaneceps"] <- "Rufous-winged Fulvetta"
-int.final.names.checklist$genus_species[int.final.names.checklist$genus_species.raw == "Schoeniparus castaneceps"] <- "Schoeniparus castaneceps"
-int.final.names.checklist$common_name[int.final.names.checklist$genus_species.raw == "Schoeniparus cinereus"] <- "Yellow-Throated Fulvetta"
-int.final.names.checklist$genus_species[int.final.names.checklist$genus_species.raw == "Schoeniparus cinereus"] <- "Schoeniparus cinereus"
-int.final.names.checklist$common_name[int.final.names.checklist$genus_species.raw == "Schoeniparus dubius"] <- "Rusty-Capped Fulvetta"
-int.final.names.checklist$genus_species[int.final.names.checklist$genus_species.raw == "Schoeniparus dubius"] <- "Schoeniparus dubius"
-# Alcippe poioicephala phayrei is a subspecies but no common_name in CHECKLIST
-# GBIF WAS INCORRECT:
-int.final.names.checklist$common_name[int.final.names.checklist$genus_species.raw == "Ammospiza caudacuta caudacuta"] <- "Saltmarsh Sparrow (Caudacuta)"
-int.final.names.checklist$genus_species[int.final.names.checklist$genus_species.raw == "Ammospiza caudacuta caudacuta"] <- "Ammospiza caudacuta caudacuta"
-int.final.names.checklist$common_name[int.final.names.checklist$genus_species.raw == "Ammospiza caudacuta diversa"] <- "Saltmarsh Sparrow (Diversa)"
-int.final.names.checklist$genus_species[int.final.names.checklist$genus_species.raw == "Ammospiza caudacuta diversa"] <- "Ammospiza caudacuta diversa"
 
 save.image(file.path(L1_RData_dir,"AvianInteractionData_L1.RData"))
 
