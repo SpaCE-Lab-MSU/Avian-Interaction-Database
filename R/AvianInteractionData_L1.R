@@ -61,7 +61,10 @@ int.raw<-read.csv(file.path(L0_dir,"AvianInteractionData_L0.csv"))
 # Read in species list: all species in BBS (the 2024 release which includes all
 # species as of 2023, plus the additional AOUcombo.index column for use w BBS
 # index)
-splist<-read.csv(file.path(L1_dir,"bbs_splist_2024_L1.csv"))
+splist2024<-read.csv(file.path(L1_dir,"bbs_splist_2024_L1.csv"))
+# Rename some columns and omit others; indicate that the common name is coming
+# from BBS Species List
+names(splist2024)[names(splist2024) == "English_Common_Name"] <-"bbs_common_name"
 
 # Read in our look-up table with the different bbs & bow & old names for species
 #namechg<-read.csv(file.path(L0_dir,"bbsbow_names.csv"))
@@ -80,10 +83,6 @@ checklist <- read_csv(file.path(L0_dir,"eBird-Clements-v2024-integrated-checklis
 # Rename the columns for merging later
 names(checklist)[names(checklist) == "scientific name"] <-"genus_species"
 names(checklist)[names(checklist) == "English name"] <-"common_name"
-
-# Rename some columns and omit others; indicate that the common name is coming
-# from BBS Species List
-names(splist)[names(splist) == "English_Common_Name"] <-"bbs_common_name"
 
 # Reference the bbsbow_names data to make initial changes to any 
 # "other_or_old_bow" names that might appear.
@@ -1087,27 +1086,81 @@ length(unique(int.checklist$genus_species.raw))
 
 save.image(file.path(L1_RData_dir,"AvianInteractionData_L1.RData"))
 
-##****BBS SPECIES LIST WORK****##
-# Make a new column in bbs.splist to maintain the BBS genus_species
+##****BBS SPECIES LIST WORK****## 
+## Make a new column in bbs.splist to maintain the BBS genus_species. First make
+#a copy of splist to save.
+splist<-splist2024
 splist$genus_species.bbs2024<-splist$genus_species
 # Work on splist genus_species to remove spaces between "/" names (to match
 # names in CHECKLIST)
 splist$genus_species <- gsub("\\s*/\\s*", "/", splist$genus_species)
 
+# Some species need to be added to bbs.splist (Accipiter gentilis)
+# Add common_name
+int.checklist$common_name[int.checklist$genus_species.edit == "Accipiter gentilis"] <- "American Goshawk"
+int.checklist$common_name[int.checklist$genus_species.edit == "Accipiter getilis"] <- "American Goshawk"
+int.checklist$common_name[int.checklist$genus_species.edit == "Accipiter gentilis laingi"] <- "Queen Charlotte Goshawk"
+
+accip.ge <- int.checklist %>%
+  filter(str_starts(genus_species.raw, "Accipiter ge"))
+
+# View the result
+print(accip.ge)
+
 # Merge splist and int.checklist to get the common_names and the
 # genus_species.raw that we will use to assign the correct common_names in the
 # int.raw data later. First rename the BBS to merge-by column to match
-# int.checklist$genus_species.edit.
+# int.checklist$genus_species.edit. 
 splist$genus_species.edit<-splist$genus_species
 splist$genus_species<-NULL
+
+# Merge in the Accipiter gentilis rows from above
+splist<-merge(splist,accip.ge,by=c("genus_species.edit"),all.x=T,all.y=T)
+# Assign these missing data based on Astur atricapillus
+# Identify the rows to fill and the reference row
+rows_to_fill <- splist %>% filter(genus_species == "Astur atricapillus")
+reference_row <- splist %>% filter(genus_species.edit == "Accipiter atricapillus")
+
+# Fill missing values in the matching rows with values from the reference row
+splist <- splist %>%
+  mutate(across(
+    everything(),
+    ~ if_else(
+      genus_species == "Astur atricapillus" & is.na(.),
+      reference_row[[cur_column()]],
+      .
+    )
+  ))
+
+splist$genus_species<-NULL
+splist$common_name<-NULL
+splist$genus_species.raw<-NULL
 bbs.splist<-merge(splist,int.checklist,by=c("genus_species.edit"),all.x=T)
 dim(splist)
-# 778 species in BBS
+# 782 species in BBS (778 + Accipiter gentilis)
 dim(bbs.splist)
-# 968 species for the matched list (> 778 because because we are keeping track
-# of the genus_species.raw entry). 
+# 974 (968 + Accipiter gentilis) species for the matched list (> 778 because because we are keeping track of the genus_species.raw entry). 
 length(unique(bbs.splist$genus_species.raw))
 # 891 unique genus_species.raw
+# Fill in Astur atricapillus laingi info which didn't carry over
+# Identify the rows to fill and the reference row. We're using Accipiter getilis
+# to get just 1 row (because otherwise there are multiple matches)
+rows_to_fill <- bbs.splist %>% filter(genus_species == "Astur atricapillus laingi")
+reference_row <- bbs.splist %>% filter(genus_species.raw == "Accipiter getilis")
+
+# Fill missing values in the matching rows with values from the reference row
+bbs.splist <- bbs.splist %>%
+  mutate(across(
+    everything(),
+    ~ if_else(
+      genus_species == "Astur atricapillus laingi" & is.na(.),
+      reference_row[[cur_column()]],
+      .
+    )
+  ))
+# Fix common_name
+bbs.splist$bbs_common_name[bbs.splist$genus_species == "Astur atricapillus laingi"] <- "Queen Charlotte Goshawk"
+
 # Which are NA?
 bbs.splist.NA<-bbs.splist[which(is.na(bbs.splist$genus_species.raw)), ]
 dim(bbs.splist.NA)
@@ -1323,32 +1376,30 @@ bbs.splist.final<-subset(bbs.splist,select=c("genus_species","AOU","AOU.combo",
 
 # Remove duplicate rows
 dim(bbs.splist.final)
-# 968 rows
+# 974 rows
 bbs.splist.final <- bbs.splist.final %>% 
   distinct()
 dim(bbs.splist.final)
-# 968 rows - none lost; retains different genus_species.raw
+# 972 rows - none lost; retains different genus_species.raw
 length(unique(bbs.splist.final$genus_species.raw))
-# 892 rows - some are NA bc they are BBS species that do not appear in int.raw
+# 896 rows - some are NA bc they are BBS species that do not appear in int.raw
 bbs.splist.final.NA<-bbs.splist.final[which(is.na(bbs.splist.final$genus_species.raw)), ]
 dim(bbs.splist.final.NA)
 # 65
+
+#*** CLEAN UP genus_species.combo ***#
+# For each row, if AOU < 5 digits, copy the genus_species and paste it into 
+# genus_species.combo.
+bbs.splist.final <- bbs.splist.final %>%
+  mutate(
+    genus_species.combo = ifelse(nchar(AOU.combo) < 5, genus_species, genus_species.combo)
+  )
 
 # BBS: Use bbs.splist as a lookup table to update int.raw with BBS/Clements/eBird
 # names for all species1_scientific and species2_scientific. 
 # Make a version just for this BBS work. 
 int.raw.bbs<-int.raw
 
-# Make a few changes directly for easier merging.
-# Accipiter gentilis changes:
-int.raw.bbs$species1_scientific[int.raw.bbs$species1_scientific == "Accipiter gentilis"] <- "Astur atricapillus"
-int.raw.bbs$species2_scientific[int.raw.bbs$species2_scientific == "Accipiter gentilis"] <- "Astur atricapillus"
-int.raw.bbs$species1_scientific[int.raw.bbs$species1_scientific == "Accipiter gentilis "] <- "Astur atricapillus"
-int.raw.bbs$species2_scientific[int.raw.bbs$species2_scientific == "Accipiter gentilis "] <- "Astur atricapillus"
-int.raw.bbs$species1_scientific[int.raw.bbs$species1_scientific == "Accipiter gentilis laingi"] <- "Astur atricapillus laingi"
-int.raw.bbs$species2_scientific[int.raw.bbs$species2_scientific == "Accipiter gentilis laingi"] <- "Astur atricapillus laingi"
-
-# int.raw.bbs$species1_scientific[int.raw.bbs$genus_species.edit == "Accipiter bicolor"] <- "Astur bicolor"
 # int.checklist$genus_species[int.checklist$genus_species.edit == "Accipiter cooperii"] <- "Astur cooperii"
 # int.checklist$genus_species[int.checklist$genus_species.edit == "Accipiter gentilis laingi"] <- "Astur atricapillus laingi"
 # int.checklist$genus_species[int.checklist$genus_species.edit == "Accipiter melanoleucus"] <- "Astur melanoleucus"
@@ -1367,7 +1418,7 @@ int.raw.bbs[c(53:60),c(1:4,26:29)]
 # Identify duplicates in the join keys
 duplicates <- int.raw.bbs %>%
   inner_join(
-    bbs.splist %>% count(genus_species.raw) %>% filter(n > 1),
+    bbs.splist.final %>% count(genus_species.raw) %>% filter(n > 1),
     by = c("species1_scientific.raw" = "genus_species.raw")
   ) %>%
   distinct(species1_scientific.raw)
@@ -1375,7 +1426,9 @@ duplicates <- int.raw.bbs %>%
 # Display the duplicates
 print("Duplicate matches detected in the join:")
 print(duplicates)
-#       species1_scientific.raw
+# [1] "Duplicate matches detected in the join:"
+# > print(duplicates)
+# species1_scientific.raw
 # 1          Anas platyrhynchos
 # 2         Anas platyrhynchos 
 # 3              Ardea herodias
@@ -1385,28 +1438,95 @@ print(duplicates)
 # 7       Corvus brachyrhynchos
 # 8 Setophaga coronata coronata
 
-# Perform the update for species1_scientific and species1_common
+# Assign the correct genus_species and common_name for all species1_scientific.
+# First resolve duplicate matches by selecting rows with AOU < 5 digits
+bbs.splist.final_no_duplicates <- bbs.splist.final %>%
+  group_by(genus_species.raw) %>%
+  filter(n() == 1 | (nchar(AOU) < 5 & n() > 1)) %>%
+  ungroup()
+
+# Also pull in the AOU, AOU.combo, and genus_species.combo to ensure that these
+# data are in the same dataset (renamed for sp1). Track which changes were made
+# and which species1_scientific were left as is:
+
+# Join with int.raw.bbs and create the requested columns
 int.raw.bbs <- int.raw.bbs %>%
   left_join(
-    bbs.splist.final %>%
-      select(genus_species.raw, genus_species, common_name),
+    bbs.splist.final_no_duplicates %>%
+      select(genus_species.raw, genus_species, AOU, AOU.combo, genus_species.combo, common_name),
     by = c("species1_scientific.raw" = "genus_species.raw")
   ) %>%
   mutate(
-    # Overwrite species1_scientific and species1_common if a match is found
+    # Overwrite species1_scientific if a match is found
     species1_scientific = ifelse(!is.na(genus_species), genus_species, species1_scientific),
-    species1_common = ifelse(!is.na(common_name), common_name, species1_common)
+    # Overwrite species1_common if a match is found
+    species1_common = ifelse(!is.na(common_name), common_name, species1_common),
+    
+    # Create new columns for associated data
+    AOU.sp1 = ifelse(!is.na(genus_species), AOU, NA),
+    AOU.combo.sp1 = ifelse(!is.na(genus_species), AOU.combo, NA),
+    genus_species.combo.sp1 = ifelse(!is.na(genus_species), genus_species.combo, NA),
+    
+    # Create a column to indicate if a match was made
+    sp1sci.replaced = ifelse(!is.na(genus_species), "yes", "no")
   ) %>%
   # Remove temporary join columns
-  select(-genus_species, -common_name)
+  select(-genus_species, -AOU, -AOU.combo, -genus_species.combo, -common_name)
+
+# Assign the correct genus_species and common_name for all species2_scientific.
+# Also pull in the AOU, AOU.combo, and genus_species.combo to ensure that these
+# data are in the same dataset (renamed for sp2). Track which changes were made
+# and which species2_scientific were left as is:
+
+# Join with int.raw.bbs and create the requested columns
+int.raw.bbs <- int.raw.bbs %>%
+  left_join(
+    bbs.splist.final_no_duplicates %>%
+      select(genus_species.raw, genus_species, AOU, AOU.combo, genus_species.combo, common_name),
+    by = c("species2_scientific.raw" = "genus_species.raw")
+  ) %>%
+  mutate(
+    # Overwrite species2_scientific if a match is found
+    species2_scientific = ifelse(!is.na(genus_species), genus_species, species2_scientific),
+    # Overwrite species2_common if a match is found
+    species2_common = ifelse(!is.na(common_name), common_name, species2_common),
+    
+    # Create new columns for associated data
+    AOU.sp2 = ifelse(!is.na(genus_species), AOU, NA),
+    AOU.combo.sp2 = ifelse(!is.na(genus_species), AOU.combo, NA),
+    genus_species.combo.sp2 = ifelse(!is.na(genus_species), genus_species.combo, NA),
+    
+    # Create a column to indicate if a match was made
+    sp2sci.replaced = ifelse(!is.na(genus_species), "yes", "no")
+  ) %>%
+  # Remove temporary join columns
+  select(-genus_species, -AOU, -AOU.combo, -genus_species.combo, -common_name)
+
+# Optionally, view rows with multiple matches
+# int.raw.bbs %>% filter(!is.na(replacement_report))
 
 int.raw.bbs[c(53:60),c(1:4,26:29)]
 
-# STOPPED HERE -- need to check the resulting changes
+# Save subset that has no AOU match and check for BBS species:
+# Subset rows with missing AOU.sp1 or AOU.sp2
+int.raw.bbs_subset <- int.raw.bbs %>%
+  filter(is.na(AOU.sp1) | is.na(AOU.sp2))
 
+# Look at int.raw.bbs_subset - scroll through for any sp1 or sp2 that is
+# obviously North American... look at its interactor
+# Issues (need to edit these like we did above for Accipiter gentilis in the
+# bbs.splist before merging)
+# Spruce Grouse Dendragapus canadensis
+# American Three-toed Woodpecker Picoides tridactylus
+# pileated Woodpecker Drycopus pileatus
+# colima warbler Leiothlypis crissalis
+# 
 
+# Simplify the data back to fewer columns
+int.namefix.bbs<-int.raw.bbs
+int.namefix.bbs$species1_scientific.raw<-NULL
 
-
+  
 save.image(file.path(L1_dir,"AvianInteractionData_L1.RData"))
 
 
@@ -1447,7 +1567,6 @@ bbs.splist <- bbs.splist %>%
 
 # First fix the Accipiters
 
-save.image(file.path(L1_RData_dir,"AvianInteractionData_L1.RData"))
 
 
 
