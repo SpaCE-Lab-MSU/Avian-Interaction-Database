@@ -4,7 +4,7 @@
 # DATA INPUT:     Data imported as csv https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database/blob/main/L0/species and ./species_in_review
 # DATA OUTPUT:    L1 data: AvianInteractionData_L0.csv
 # PROJECT:        Avian Interaction Database & Avian Meta-Network
-# DATE:           20 Mar 2023 -
+# DATE:           20 Mar 2023 - 9 Dec 2024 (last run on this date)
 # NOTES:          Next script to run: /L1/AvianInteractionData_L1.R
 
 # Clear all existing data
@@ -12,6 +12,7 @@ rm(list=ls())
 
 #library(readr, dplyr, purrr)
 library(dplyr)
+library(tidyverse)
 
 google_drive_folder <- "~/Google Drive/Shared drives/Avian_MetaNetwork/data/L0/avian_intxn_data/species_entry/EP"
 L0_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0"
@@ -20,8 +21,8 @@ species_dir<- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0/species
 species_temp_dir<-"/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0/species_temp"
 species_in_review_dir<- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0/species_in_review"
 
-# 11/27/2024: EP gsheets still need checking but contain useful data. We don't want
-# to miss any in /species/ that are only in gsheet form.
+# 12/9/2024: some EP gsheets still need checking but contain useful data. We
+# don't want to miss any in /species/ that are only in gsheet form.
 
 # Set the directory paths for the Google Drive and Git repository folders
 git_repo_folder <- species_dir
@@ -59,9 +60,10 @@ print(google_only_main_names)
 cat("\nFiles only in Git repository:\n")
 print(git_only_main_names)
 
-# 35 records that still need the 2nd checking and placing into /species/. Of
-# these, only 4 already exist in /species/. So use the temp species directory
-# also (contains CSVs that were exported on Nov 27, 2024 from the Google Sheets)
+# As of Dec 9, 2024: 27 species' csvs that still need the 2nd checking and
+# placing into /species/. Of these, only 4 already exist in /species/. So use
+# the temp species directory also (contains CSVs that were exported on Nov 27,
+# 2024 from the Google Sheets)
 
 ####*****COMBINE INDIVIDUAL CSVs *****####
 # Given a folder of Intxns CSV files, combine into one file
@@ -205,19 +207,19 @@ intxnsL0spir <- combine_by_species("species_in_review_dir")
 sp<-unique(intxnsL0sp$species1_common)
 sp<-as.list(sp)
 length(sp)
-# 1240 species1 as of Nov. 27, 2024 (all double checked)
+# 1266 species1 as of Dec 9, 2024 (all double checked)
 
 # Species Temp: Not Fully Checked BBS species
 sptemp<-unique(intxnsL0sptemp$species1_common)
 sptemp<-as.list(sptemp)
 length(sptemp)
-# 170 species1 as of Nov. 27, 2024 (not all double checked)
+# 170 species1 as of Dec 9, 2024 (not all double checked)
 
 ## Species In Review 
 spir<-unique(intxnsL0spir$species1_common)
 spir<-as.list(spir)
 length(spir)
-# 786 species1 as of Nov. 27, 2024
+# 830 species1 as of Dec 9, 2024 (none double-checked)
 
 # Use only the Species Fully Checked:
 #intxnsL0<-intxnsL0sp
