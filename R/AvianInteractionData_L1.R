@@ -1512,21 +1512,23 @@ int.raw.bbs[c(53:60),c(1:4,26:29)]
 int.raw.bbs_subset <- int.raw.bbs %>%
   filter(is.na(AOU.sp1) | is.na(AOU.sp2))
 
+write.csv(int.raw.bbs_subset,file.path(L1_dir,"int.raw.bbs_subset.csv"),row.names=F)
+
 # Look at int.raw.bbs_subset - scroll through for any sp1 or sp2 that is
 # obviously North American... look at its interactor
 # Issues (need to edit these like we did above for Accipiter gentilis in the
 # bbs.splist before merging)
+
 # Spruce Grouse Dendragapus canadensis - raw is Canachites canadensis
 # American Three-toed Woodpecker Picoides tridactylus - raw/edit is Picoides dorsalis
 # pileated Woodpecker Drycopus pileatus - typo: Dryocopus pileatus
-
 # colima warbler Leiothlypis crissalis
 # Ruby-crowned Kinglet Regulus calendula
 # Clark's Grebe Aechmophorus clarkii transitionalis 
-#  Western Grebe Aechmophorus occidentalis occidentalis
-#  Northern Saw-whet Owl Aegolius acadicus
-#  Flammulated Owl Otus flammeolus
-#  Boreal Owl Aegolius funereus (no NA intxns)
+# Western Grebe Aechmophorus occidentalis occidentalis
+# Northern Saw-whet Owl Aegolius acadicus
+# Flammulated Owl Otus flammeolus
+# Boreal Owl Aegolius funereus (no NA intxns)
 # Crested Auklet Aethia cristatella (not in bbs.splist)
 # Least Auklet Aethia pusilla (not in bbs.splist)
 # Whiskered Auklet Aethia pygmaea (not in bbs.splist)
