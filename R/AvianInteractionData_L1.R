@@ -52,7 +52,7 @@ L0_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0"
 L1_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L1"
 #L1_dir <- "/Users/phoebezarnetske/Documents/GitHub/Avian-Interaction-Database/L1"
 
-L1_RData_dir <- "~/Google Drive/Shared drives/Avian_MetaNetwork/data/L1/AvianInteractionData_L1_RData"
+L1_RData_dir <- "~/Google Drive/Shared drives/Avian_MetaNetwork/data/L1"
 
 # Read in csv with avian interactions from primary, secondary cavity nesting
 # birds in North America.
@@ -1516,11 +1516,25 @@ int.raw.bbs_subset <- int.raw.bbs %>%
 # obviously North American... look at its interactor
 # Issues (need to edit these like we did above for Accipiter gentilis in the
 # bbs.splist before merging)
-# Spruce Grouse Dendragapus canadensis
-# American Three-toed Woodpecker Picoides tridactylus
-# pileated Woodpecker Drycopus pileatus
+# Spruce Grouse Dendragapus canadensis - raw is Canachites canadensis
+# American Three-toed Woodpecker Picoides tridactylus - raw/edit is Picoides dorsalis
+# pileated Woodpecker Drycopus pileatus - typo: Dryocopus pileatus
+
 # colima warbler Leiothlypis crissalis
-# 
+# Ruby-crowned Kinglet Regulus calendula
+# Clark's Grebe Aechmophorus clarkii transitionalis 
+#  Western Grebe Aechmophorus occidentalis occidentalis
+#  Northern Saw-whet Owl Aegolius acadicus
+#  Flammulated Owl Otus flammeolus
+#  Boreal Owl Aegolius funereus (no NA intxns)
+# Crested Auklet Aethia cristatella (not in bbs.splist)
+# Least Auklet Aethia pusilla (not in bbs.splist)
+# Whiskered Auklet Aethia pygmaea (not in bbs.splist)
+# Horned Puffin Fratercula corniculata
+# Glaucous-winged Gull Larus glaucescens
+# Glaucous Gull Larus hyperboreus
+# 	Peregrine Falcon 	Falco peregrinus 
+# 	
 
 # Simplify the data back to fewer columns
 int.namefix.bbs<-int.raw.bbs
