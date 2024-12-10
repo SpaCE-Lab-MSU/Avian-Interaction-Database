@@ -225,7 +225,7 @@ dplyr::filter(int.raw.names, genus_species.raw %in% c("Accipiter cooperi"))
 td_create("gbif")
 
 # Resolve scientific names for the scientific names, based on genus_species.edit
-# using GBIF (last run Dec. 2, 2024)
+# using GBIF (last run Dec. 9, 2024)
 int.gbif.names <- int.raw.names %>%
   mutate(
     scientific_id = get_ids(genus_species.edit, "gbif"),
@@ -941,10 +941,11 @@ resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Accipiter genti
 
 save.image(file.path(L1_RData_dir,"AvianInteractionData_L1.RData"))
 
-###********FIXING GBIF RESOLVED EARLIER******###
+###********FIXING INCORRECT GBIF RESOLVED EARLIER IN WORKFLOW******###
+# Some of the GBIF assignments or misspelling corrections did not work well.
 # Refer to the bbs.splist.NA and int.raw.bbs_subset (both created way below)-
 # they have missing species in .raw, that actually exist in int.raw. Need to
-# edit these here before merging in. 
+# edit these here by changing the before merging in. 
 
 # Spruce Grouse: raw is Canachites
 # canadensis, Dendragapus canadensis, Falcipennis canadensis - in fact it should
@@ -959,8 +960,9 @@ splist2024[which(splist2024$bbs_common_name == "American Three-toed Woodpecker")
 resolved.gbif[which(resolved.gbif$common_name == "American Three-Toed Woodpecker"), ]
 resolved.gbif$genus_species[resolved.gbif$common_name == "American Three-Toed Woodpecker"] <- "Picoides dorsalis"
 
-# pileated Woodpecker Drycopus pileatus - typo: Dryocopus pileatus
-resolved.gbif$genus_species[resolved.gbif$common_name == "American Three-Toed Woodpecker"] <- "Picoides dorsalis"
+# # pileated Woodpecker Drycopus pileatus - typo: Dryocopus pileatus
+# splist2024[which(splist2024$bbs_common_name == "Pileated Woodpecker"), ]
+# resolved.gbif$genus_species[resolved.gbif$common_name == "American Three-Toed Woodpecker"] <- "Picoides dorsalis"
 
 
 # colima warbler Leiothlypis crissalis
@@ -1035,9 +1037,9 @@ dim(int.checklist)
 # this needs to be edited with a better workflow. 
 int.checklist.NAcommon<-int.checklist[which(is.na(int.checklist$common_name)), ]
 dim(int.checklist.NAcommon)
-# 1005
+# 1002
 dim(int.checklist.NAcommon)-dim(int.final.names.Gsp)
-# 734 Genus-level entries from above but ~271 missing common name! Some are
+# 734 Genus-level entries from above but 268 missing common name! Some are
 # duplicate rows from genus_species.raw. Also some of the GBIF species
 # assignments do not work (GBIF taxonomic backbone is not quite up to date for
 # these birds)
@@ -1134,7 +1136,6 @@ print(accip.ge)
 # int.raw data later. First rename the BBS to merge-by column to match
 # int.checklist$genus_species.edit. 
 splist$genus_species.edit<-splist$genus_species
-#splist$genus_species<-NULL
 
 # Merge in the Accipiter gentilis rows from above
 splist<-merge(splist,accip.ge,by=c("genus_species.edit","genus_species"),all.x=T,all.y=T)
@@ -1170,32 +1171,36 @@ splist$Species<-NULL
 bbs.splist1<-merge(splist,int.checklist,by=c("genus_species.edit"),all.x=T)
 # Here the bbs.splist1$genus_species.x belongs to "splist" and the
 # genus_species.y belongs to int.checklist
-# Rename
+# Rename - assign the int.checklist$genus_species as the master
 names(bbs.splist1)[names(bbs.splist1) == "genus_species.x"] <-"genus_species.splist"
-names(bbs.splist1)[names(bbs.splist1) == "genus_species.y"] <-"genus_species.chklist"
+names(bbs.splist1)[names(bbs.splist1) == "genus_species.y"] <-"genus_species"
 # Here the bbs.splist2$genus_species.edit.x belongs to "splist" and the
-# genus_species.edit.y belongs to int.checklist
+# genus_species.edit.y belongs to int.checklist.
+# TEST CASE: Drycopus pileatus is in bbs.splist2
 bbs.splist2<-merge(splist,int.checklist,by=c("genus_species"),all.x=T)
-# Rename
+# Rename - assign the int.checklist$genus_species.edit as the master
 names(bbs.splist2)[names(bbs.splist2) == "genus_species.edit.x"] <-"genus_species.edit.splist"
-names(bbs.splist2)[names(bbs.splist2) == "genus_species.edit.y"] <-"genus_species.edit.chklist"
+names(bbs.splist2)[names(bbs.splist2) == "genus_species.edit.y"] <-"genus_species.edit"
 
-# Merge them together and remove any duplicate rows
-bbs.splist<-merge(bbs.splist1,bbs.splist2,by=c("AOU","AOU.combo",
-                                               "bbs_common_name","common_name",
-                                               "genus_species.bbs2024","genus_species.combo",
-                                               "genus_species.raw"),all.x=T,all.y=T)
+# Row bind them together and remove any duplicate rows. (Merging removes rows even with all.x=T and all.y=T; for example the bbs.splist2$genus_species.raw=="Drycopus pileatus" disappears).
+bbs.splist2$genus_species.splist<-""
+bbs.splist1$genus_species.edit.splist<-""
+
+bbs.splist<-rbind(bbs.splist1,bbs.splist2)
 dim(bbs.splist)
-# 1238
+# 2159
+# Remove the auxilliary columns just used in merging
+bbs.splist$genus_species.edit.splist<-NULL
+bbs.splist$genus_species.splist<-NULL
+
 # Remove any duplicate rows
 bbs.splist <- bbs.splist %>% 
   distinct()
 dim(bbs.splist)
-# 1227
-
+# 1289
 # > 778 because because we are keeping track of the genus_species.raw entry. 
 length(unique(bbs.splist$genus_species.raw))
-# 1103 unique genus_species.raw
+# 1106 unique genus_species.raw
 
 # ****** OMIT the spaces after the names in .raw and then get unique rows
 # DO THIS EARLIER IN REVISION - remember to do it also for bbs.int.raw data
@@ -1203,35 +1208,35 @@ bbs.splist$genus_species.raw<-trimws(bbs.splist$genus_species.raw,which=c("right
 bbs.splist <- bbs.splist %>% 
   distinct()
 dim(bbs.splist)
-# 1032 unique rows
+# 1096 unique rows
 length(unique(bbs.splist$genus_species.raw))
-# 915 unique genus_species.raw (without whitespace issues)
+# 918 unique genus_species.raw (without whitespace issues)
 ## STOPPED HERE - now need to remove duplicate .raw rows by some other column (omit what column??)
 
-## Fill in Astur atricapillus laingi info which didn't carry over
-# # Identify the rows to fill and the reference row. We're using Accipiter getilis
-# # to get just 1 row (because otherwise there are multiple matches)
-# # Fix common_name
-# bbs.splist$bbs_common_name[bbs.splist$genus_species == "Astur atricapillus laingi"] <- "Queen Charlotte Goshawk"
-# 
-# rows_to_fill <- bbs.splist %>% filter(genus_species == "Astur atricapillus laingi")
-# reference_row <- bbs.splist %>% filter(genus_species.raw == "Accipiter getilis")
-# 
-# # Fill missing values in the matching rows with values from the reference row
-# bbs.splist <- bbs.splist %>%
-#   mutate(across(
-#     everything(),
-#     ~ if_else(
-#       genus_species == "Astur atricapillus laingi" & is.na(.),
-#       reference_row[[cur_column()]],
-#       .
-#     )
-#   ))
+# Fill in Astur atricapillus laingi info which didn't carry over
+# Identify the rows to fill and the reference row. We're using Accipiter getilis
+# to get just 1 row (because otherwise there are multiple matches)
+# Fix common_name
+bbs.splist$bbs_common_name[bbs.splist$genus_species == "Astur atricapillus laingi"] <- "Queen Charlotte Goshawk"
+
+rows_to_fill <- bbs.splist %>% filter(genus_species == "Astur atricapillus laingi")
+reference_row <- bbs.splist %>% filter(genus_species.raw == "Accipiter getilis")
+
+# Fill missing values in the matching rows with values from the reference row
+bbs.splist <- bbs.splist %>%
+  mutate(across(
+    everything(),
+    ~ if_else(
+      genus_species == "Astur atricapillus laingi" & is.na(.),
+      reference_row[[cur_column()]],
+      .
+    )
+  ))
 
 # Which are NA?
 bbs.splist.NA<-bbs.splist[which(is.na(bbs.splist$genus_species.raw)), ]
 dim(bbs.splist.NA)
-# 101 
+# 165 
 # Search for matches and summarize the columns where each genus_species.edit
 # is found
 bbs.splist.NA <- bbs.splist.NA %>%
@@ -1269,10 +1274,10 @@ bbs.splist$genus_species[bbs.splist$genus_species.edit == "Aphelocoma californic
 bbs.splist$genus_species.raw[bbs.splist$genus_species.edit == "Aphelocoma californica/woodhouseii"] <- "Aphelocoma californica / woodhouseii"
 bbs.splist$common_name[bbs.splist$genus_species.edit == "Aphelocoma californica/woodhouseii"] <- "California/Woodhouse's Scrub-Jay"
 
-# 101 BBS species without genus_species.raw, meaning they have no lookup match in
+# 165 BBS species without genus_species.raw, meaning they have no lookup match in
 # CHECKLIST. The reason is that these BBS names did not match the CHECKLIST
 # edits in 2024, or the species is not a species that exists in the int.raw
-# data. Make the changes that reflect updates to species names in the CHECKLIST.
+# data (most of them). Make the changes that reflect updates to species names in the CHECKLIST.
 
 # Edit the genus_species column in bbs.splist (in the future, edit this to
 # create look-up table that is merged in instead):
