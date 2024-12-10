@@ -1155,6 +1155,45 @@ splist <- splist %>%
     )
   ))
 
+## START HERE with any changes based on findings in bbs.splist.NA
+# BBS List has Cyanecula svecica for Bluethroat but CHECKLIST= Luscinia svecica  
+# Replace genus
+splist$genus_species[splist$genus_species == "Cyanecula svecica"] <- "Luscinia svecica"
+splist$genus_species.combo[splist$genus_species.combo == "Cyanecula svecica"] <- "Luscinia svecica"
+
+# int.raw = Porphyrula martinica but this wasn't picked up on with GBIF or fuzzy coding
+# splist and CHECKLIST = Porphyrio martinicus. Fix in int.checklist ahead of merging below.
+int.checklist[which(int.checklist$common_name == "Purple Gallinule"), ]
+# #     genus_species      common_name    genus_species.raw   genus_species.edit
+#  Porphyrio martinica Purple Gallinule  Porphyrio martinica  Porphyrio martinica
+#  Porphyrio martinica Purple Gallinule Porphyrula martinica Porphyrula martinica
+int.checklist$genus_species[int.checklist$common_name == "Purple Gallinule"] <- "Porphyrio martinicus"
+
+# Setophaga coronata audoboni - not in CHECKLIST, but in BBS. From BOW:
+# "Formerly considered 2 species, the Myrtle Warbler in the East and Audubon's
+# Warbler in the West, the Yellow-rumped Warbler is one of the most common
+# warblers in North America."
+# Add to int.checklist
+int.raw[which(int.raw$species1_scientific == "Setophaga coronata audoboni"), ]
+int.raw[which(int.raw$species1_scientific == "Setophaga coronata audoboni"), ]
+
+names(int.checklist)
+# Create adubon mini dataframe
+audubon = data.frame(A = c(0, 0, 2), 
+                    B = c(1, 0, 1), 
+                    C = c(4, 0, 0), 
+                    D = c(2, 0, 0),
+                    row.names = c("Label1", "Label2", "Label3"))
+
+audubon<-data.frame("genus_species","common_name","genus_species.raw","genus_species.edit")
+names(audubon)<-c("Setophaga coronata audoboni",
+                  "(Audubon's Warbler) Yellow-rumped Warbler",
+                  "")
+
+int.checklist<-rbind(int.checklist,audubon)
+
+
+
 #splist$genus_species<-NULL
 splist$common_name<-NULL
 splist$genus_species.raw<-NULL
