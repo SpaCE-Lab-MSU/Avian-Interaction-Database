@@ -192,7 +192,7 @@ intxns12 <- intxns12 %>% filter(!(interaction==""))
 dim(intxns12)
 # no blanks exist
 
-save.image(file.path(L1_dir,"AvianInteractionData_L1_post_taxa_cleaning.RData"))
+save.image(file.path(L1_RData_dir,"AvianInteractionData_L1_post_taxa_cleaning.RData"))
 
 #*******************************#
 #### Clean up other columns ####
@@ -318,3 +318,4 @@ intxns12.bbs <- intxns12.bbs %>% relocate(AOU.combo.sp2, .after = AOU.combo.sp1)
 
 # Export it!
 write.csv(intxns12.bbs,file.path(L1_RData_dir,"AvianInteractionData_L1_BBS.csv"))
+save.image(file.path(L1_RData_dir,"AvianInteractionData_L1_post_taxa_cleaning.RData"))
