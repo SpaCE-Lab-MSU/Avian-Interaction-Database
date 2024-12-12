@@ -161,6 +161,15 @@ intxns12$effect_sp2_on_sp1[intxns12$interaction == "combined species"] <- 0
 int.entries<-intxns12 %>% distinct(interaction, effect_sp1_on_sp2, effect_sp2_on_sp1)
 arrange(int.entries, by=interaction)
 
+# At least one has competition as +1 - this is not in BBS so not worrying about it now
+# 21                    competition                -1                 1
+# 22                    competition                 1                -1
+
+# in BBS: commensalism as 0,0; ignore it for now
+# 6470	Altamira Oriole	Tyrannus melancholicus	Tropical Kingbird	Icterus gularis	0	0	commensalism
+
+# At least one has brood parasitism as 0,0 - this is not in BBS so not worrying about it now
+
 # One is a NA for brood parasitism but it's for NZ species so ignore for now.
 # Which are NA?
 intxns12.int.entries.NA<-intxns12[which(is.na(intxns12$effect_sp2_on_sp1)), ]
