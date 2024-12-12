@@ -33,7 +33,7 @@ L0_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0"
 L1_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L1"
 #L1_dir <- "/Users/phoebezarnetske/Documents/GitHub/Avian-Interaction-Database/L1"
 
-L1_RData_dir <- "~/Google Drive/Shared drives/Avian_MetaNetwork/data/L1"
+L1_RData_dir <- "~/Google Drive/Shared drives/Avian_MetaNetwork/data/L1/bbs_intxns"
 
 # Read in species list: all species in BBS (the 2024 release which includes all
 # species as of 2023, plus the additional AOUcombo.index column for use w BBS
