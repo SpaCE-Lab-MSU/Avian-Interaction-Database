@@ -1,6 +1,5 @@
-# TITLE:          Avian Interaction Pairs Data: L0 to L1, including an option to 
-#                   subset species1 for: (1) only BBS species, or 
-#                                       (2) BBS & other North America species
+# TITLE:          Avian Interaction Pairs Data: L0 to L1 taxonomic harmonization
+#                   As of Dec. 12, 2024, this is mainly cleaned for BBS species 
 # AUTHORS:        Phoebe Zarnetske, Pat Bills
 # COLLABORATORS:  Vincent Miele, Stephane Dray, Emily Parker
 # DATA INPUT:     From AvianInteractionData_L0_stitch.R: Data imported as csv 
@@ -15,24 +14,21 @@
 #                   Data imported as csv: /Google Drive/Shared drives/
 #                   Avian_MetaNetwork/data/L1/bbs_obs/bbs_allobs_runtype1.csv
 #
-# DATA OUTPUT:    L1 data: AvianInteractionData_L1.csv
-#                 L1 data: AvianInteractionData_L1_BBS.csv for BBS analysis
-#                 L1 data: bbs_splist_2024_L1.csv for BBS analysis (species name changes)
+# DATA OUTPUT:    L1 data: int.namefix.bbs.RData (taxonomic harmonization & BBS columns into interaction data)
+#                 
 # PROJECT:        Avian Interaction Database 
-# DATE:           27 Oct 2022; updated through 9 Dec 2024  
-# NOTES:          Next script to run: 
+# DATE:           27 Oct 2022; updated through 12 Dec 2024  
+# NOTES:          Next script to run: AvianInteractionData_L1_post_taxa_cleaning.R
 #                 This script is used to refine species name changes to align 
-#                 with BOW (Clements & eBird checklist), 
-#                 and to create AvianInteractionData_L1.csv.
+#                 with BOW (Clements & eBird checklist) to create int.namefix.bbs.RData.
 #                 ** Currently, the script is working for BBS species only; needs 
-#                           updating for the remainder.
+#                           updating for (most of) the remainder.
 #                 L0 data are checked to assign updated scientific and common names 
 #                 to the interaction pairs data.
 #                 
 #                 Makes a new column that also includes scientific name 
 #                 changes associated with the AOUcombo.index for merging with 
 #                 those names in the AvianInteractionData_AOUindex_L1.csv
-# 
 #               
 # Clear all existing data
 rm(list=ls())
