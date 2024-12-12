@@ -44,7 +44,7 @@ splist2024<-read.csv(file.path(L1_dir,"bbs_splist_2024_L1.csv"))
 names(splist2024)[names(splist2024) == "English_Common_Name"] <-"bbs_common_name"
 
 # Read in the current version of the database
-load(file.path(L1_dir,"int.namefix.bbs.RData"))
+load(file.path(L1_RData_dir,"int.namefix.bbs.RData"))
 
 #*******************************************#
 #### Scientific Name Checking: Data Prep ####
@@ -212,7 +212,7 @@ sort(unique(intxns12$nonbreedingseason))
 
 # NEXT TIME: Write code to search and summarize the notes columns for keywords
 # like "migrat" "winter" to make sure they occur outside breeding season
-write.csv(intxns12,file.path(L1_dir,"intxns12.inprogress.csv"))
+write.csv(intxns12,file.path(L1_RData_dir,"intxns12.inprogress.csv"))
 
 ##** BOW_evidence ***##
 # Remove extra end spaces:
@@ -245,7 +245,7 @@ sort(unique(intxns12$uncertain_interaction))
 # 630 entries with some kind of note
 
 ## EXPORT the cleaned interaction pairs data:
-write.csv(intxns12,file.path(L1_dir,"intxns12.inprogress.csv"))
+write.csv(intxns12,file.path(L1_RData_dir,"intxns12.inprogress.csv"))
 
 # Order the data by species1_scientific
 intxns12 <- intxns12 %>% relocate(species2_scientific, .after = species1_common)
@@ -297,7 +297,7 @@ dim(intxns12.bbs)
 # 15327 remain
 
 ## EXPORT the cleaned interaction pairs data:
-write.csv(intxns12.bbs,file.path(L1_dir,"bbs.intxns12.inprogress.csv"))
+write.csv(intxns12.bbs,file.path(L1_RData_dir,"bbs.intxns12.inprogress.csv"))
 
 #*******************************#
 # SUBSPECIES: combine into species for our analysis; check AOU.combo
@@ -317,4 +317,4 @@ intxns12.bbs <- intxns12.bbs %>% relocate(AOU.combo.sp1, .after = genus_species.
 intxns12.bbs <- intxns12.bbs %>% relocate(AOU.combo.sp2, .after = AOU.combo.sp1)
 
 # Export it!
-write.csv(intxns12.bbs,file.path(L1_dir,"AvianInteractionData_L1_BBS.csv"))
+write.csv(intxns12.bbs,file.path(L1_RData_dir,"AvianInteractionData_L1_BBS.csv"))
