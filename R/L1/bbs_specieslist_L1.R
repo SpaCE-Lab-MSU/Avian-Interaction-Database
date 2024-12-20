@@ -19,12 +19,7 @@
 rm(list=ls())
 
 #Load packages
-#library(dplyr)
 library(tidyverse)
-library(devtools)
-#install_github("ropensci/bold")
-#install_github("ropensci/taxize")
-library(taxize)
 
 # Above .Renviron not working for PLZ; hard-coding in here
 L0_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0"
@@ -294,6 +289,10 @@ splist$AOU.combo[splist$AOU == 4880] <- 34880
 splist$AOU.combo[splist$AOU == 4882] <- 34880
 splist$AOU.combo[splist$AOU == 4890] <- 34880
 
+# Snow Goose (Blue and regular form)
+splist$AOU.combo[splist$AOU == 1690] <- 31690
+splist$AOU.combo[splist$AOU == 1691] <- 31690
+
 ## Create a new column which contains Genus species for the combined species above.
 splist$genus_species.combo<-splist$genus_species
 
@@ -311,19 +310,20 @@ splist$genus_species.combo[splist$AOU.combo == 34660] <- "Empidonax alnorum / tr
 splist$genus_species.combo[splist$AOU.combo == 34810] <- "Aphelocoma californica / woodhouseii"
 splist$genus_species.combo[splist$AOU.combo == 35740] <- "Artemisiospiza nevadensis / belli"
 splist$genus_species.combo[splist$AOU.combo == 34880] <- "Corvus brachyrhynchos"
+splist$genus_species.combo[splist$AOU.combo == 31690] <- "Anser caerulescens"
 
-# Try taxize to catch any other name changes:
-# The section below, using taxize, was last run on Aug 9, 2024.
-tax <-gnr_datasources()
-# GBIF taxonomy ID = 11
-#tax[tax$title=="GBIF Backbone Taxonomy","id"]
-tax[tax$title=="BirdLife International","id"]
-
-# Detecting name misspellings in our BBS list:
-gbif.bl.tax.splist <- splist$genus_species %>%
-  gnr_resolve(data_source_ids = c(175), 
-              with_canonical_ranks=T,http = "get")
-gbif.bl.tax.splist<-subset(gbif.bl.tax.splist, gbif.bl.tax.splist$score<0.9,)
+# # Try taxize to catch any other name changes:
+# # The section below, using taxize, was last run on Aug 9, 2024.
+# tax <-gnr_datasources()
+# # GBIF taxonomy ID = 11
+# #tax[tax$title=="GBIF Backbone Taxonomy","id"]
+# tax[tax$title=="BirdLife International","id"]
+# 
+# # Detecting name misspellings in our BBS list:
+# gbif.bl.tax.splist <- splist$genus_species %>%
+#   gnr_resolve(data_source_ids = c(175), 
+#               with_canonical_ranks=T,http = "get")
+# gbif.bl.tax.splist<-subset(gbif.bl.tax.splist, gbif.bl.tax.splist$score<0.9,)
 
 ### Nov 7, 2024: Not working bc taxize is having issues connecting to https://resolver.globalnames.org??
 
