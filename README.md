@@ -1,14 +1,14 @@
 # Avian Interaction Database 
 
-This repository contains code and workflows for the The Avian Interaction Database project, initially focusing on North America. 
+This repository contains code and workflows for the The Avian Interaction Database project, initially focusing on North America (Canada and conterminous United States. 
 
-This is our public-facing repository for this project.  As we complete data review and near pubication, data will be published here.   
+This is our public-facing repository for this project. As we complete data review and related publications, data will be published here.   
 Our private, work-in-progress repository is https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database-Working (restricted, 
-access for lab students and staff only)
+access for SpaCE Lab students and staff only).
 
 ## About 
 
-Starting in 2019, a new protocol was established and the previous records were updated and further bird-bird interactions were added in by Zarnetske and MSU SpaCE Lab undergraduates (2019-present). The database is in preparation for publication as an open access data paper. From 2012-2014, Zarnetske and Zonneveld compiled bird-bird interactions among cavity nesting birds and their interacting bird species, based on species accounts in the Birds of North America (now Birds of the World). This led to an analysis of the influence of biotic interactions on North American cavity nesting bird species distributions ([Belmaker and Zarnetske et al. 2015 GEB](https://onlinelibrary.wiley.com/doi/full/10.1111/geb.12311)). 
+This project is overseen by PI Phoebe Zarnetske, [MSU Spatial and Community Ecology Lab (SpaCE Lab)](https://www.communityecologylab.com). Starting in 2019, a new protocol was established and the previous records were updated and further bird-bird interactions were added in by Zarnetske and MSU SpaCE Lab undergraduates (2019-present). The database is in preparation for publication as an open access data paper. A smaller version of these data were compiled from 2012-2014, by Zarnetske and Zonneveld, including bird-bird interactions among cavity nesting birds and their interacting bird species, based on species accounts in the Birds of North America (now Birds of the World). This led to an analysis of the influence of biotic interactions on North American cavity nesting bird species distributions ([Belmaker and Zarnetske et al. 2015 GEB](https://onlinelibrary.wiley.com/doi/full/10.1111/geb.12311)). Ongoing work involves entering and checking bird-bird interactions, based on [Birds of the World Online](http://birdsoftheworld.org/bow/home).  
 
 MSU Undergraduates led the presentation of a research poster at the 2024 [MSU Undergraduate University Research and Arts Forum](https://urca.msu.edu/uuraf):
 
@@ -52,8 +52,8 @@ Funding is provided by Michigan State University (to P.L. Zarnetske), and by a M
 * Phoebe L. Zarnetske, PI, [Spatial and Community Ecology Lab (SpaCE Lab)](https://www.communityecologylab.com)
 
 ## Collaborators
-* Emily Parker
 * Pat Bills
+* Emily Parker
 
 ## Student Research Assistants
 * 2024-
@@ -81,7 +81,7 @@ Funding is provided by Michigan State University (to P.L. Zarnetske), and by a M
 
 Belmaker, J., P. Zarnetske, M.-N. Tuanmu, S. Zonneveld, S. Record, A. Strecker, and L. Beaudrot. 2015. Empirical evidence for the scale dependence of biotic interactions. Global Ecology and Biogeography 24:750–761. https://doi.org/10.1111/geb.12311
 
-Birds of the World - Comprehensive life histories for all bird species and families. (Accessed January 13, 2022). http://birdsoftheworld.org/bow/home.
+Birds of the World - Comprehensive life histories for all bird species and families. (Accessed January 13, 2025). http://birdsoftheworld.org/bow/home.
 
 Hurlbert, A. H., A. M. Olsen, M. M. Sawyer, and P. M. Winner. 2021. The Avian Diet Database as a source of quantitative information on bird diets. Scientific Data 8:260. https://www.nature.com/articles/s41597-021-01049-9
 
