@@ -4,7 +4,7 @@
 # DATA INPUT:     Data imported as csv https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database/blob/main/L0/species and ./species_in_review
 # DATA OUTPUT:    L1 data: AvianInteractionData_L0.csv
 # PROJECT:        Avian Interaction Database & Avian Meta-Network
-# DATE:           20 Mar 2023 - 9 Dec 2024 (last run on this date)
+# DATE:           20 Mar 2023 - 9 Dec 2024 - 29 May 2025 (last run on this date)
 # NOTES:          Next script to run: /L1/AvianInteractionData_L1.R
 
 # Clear all existing data
@@ -15,11 +15,9 @@ library(dplyr)
 library(tidyverse)
 
 google_drive_folder <- "~/Google Drive/Shared drives/Avian_MetaNetwork/data/L0/avian_intxn_data/species_entry/EP"
-L0_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0"
-species_dir<- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0/species"
-# Directory with species that are in BBS but currently being checked by India (11/27/2024)
-species_temp_dir<-"/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0/species_temp"
-species_in_review_dir<- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0/species_in_review"
+L0_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database-Working/L0"
+species_dir<- "/Users/plz/Documents/GitHub/Avian-Interaction-Database-Working/L0/species"
+species_in_review_dir<- "/Users/plz/Documents/GitHub/Avian-Interaction-Database-Working/L0/species_in_review"
 
 # 12/9/2024: some EP gsheets still need checking but contain useful data. We
 # don't want to miss any in /species/ that are only in gsheet form.
@@ -28,7 +26,7 @@ species_in_review_dir<- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/
 git_repo_folder <- species_dir
 
 # List all filenames in both folders
-google_drive_files <- list.files(google_drive_folder, full.names = FALSE)
+#google_drive_files <- list.files(google_drive_folder, full.names = FALSE)
 git_repo_files <- list.files(git_repo_folder, full.names = FALSE)
 
 # Function to extract the main portion of filenames
@@ -49,7 +47,7 @@ common_main_names <- intersect(google_drive_main_names, git_repo_main_names)
 google_only_main_names <- setdiff(google_drive_main_names, git_repo_main_names)
 git_only_main_names <- setdiff(git_repo_main_names, google_drive_main_names)
 
-# Print results
+# Print results - not run May 29, 2025
 cat("Files with matching main names in both Google Drive and Git repository:\n")
 print(common_main_names)
 # [1] "molothrus_aeneus"   "molothrus_ater"     "picoides_dorsalis"  "setophaga_coronata"
@@ -197,9 +195,6 @@ combine_by_species <- function(data_dir = "species_dir") {
 # Option 1: For `species_dir` - the Fully Checked Species
 intxnsL0sp <- combine_by_species("species_dir")
 
-# Option 1a: For `species_temp` - the not fully Checked Species in BBS
-intxnsL0sptemp <- combine_by_species("species_temp_dir")
-
 # Option 2: For `species_in_review_dir`
 intxnsL0spir <- combine_by_species("species_in_review_dir")
 
@@ -208,24 +203,26 @@ sp<-unique(intxnsL0sp$species1_common)
 sp<-as.list(sp)
 length(sp)
 # 1266 species1 as of Dec 9, 2024 (all double checked)
+# 1305 species1 as of May 29, 2025 (almost all double checked)
 
 # Species Temp: Not Fully Checked BBS species
-sptemp<-unique(intxnsL0sptemp$species1_common)
-sptemp<-as.list(sptemp)
-length(sptemp)
-# 170 species1 as of Dec 9, 2024 (not all double checked)
+# sptemp<-unique(intxnsL0sptemp$species1_common)
+# sptemp<-as.list(sptemp)
+# length(sptemp)
+## 170 species1 as of Dec 9, 2024 (not all double checked)
 
 ## Species In Review 
 spir<-unique(intxnsL0spir$species1_common)
 spir<-as.list(spir)
 length(spir)
 # 830 species1 as of Dec 9, 2024 (none double-checked)
+# 873 species1 as of May 29, 2025 (none double-checked)
 
 # Use only the Species Fully Checked:
-#intxnsL0<-intxnsL0sp
+intxnsL0<-intxnsL0sp
 
 # Uncomment to merge the species and species temp interaction data into 1 
-intxnsL0<-rbind(intxnsL0sp, intxnsL0sptemp)
+#intxnsL0<-rbind(intxnsL0sp, intxnsL0sptemp)
 
 # Remove duplicate rows (these may be from the 4 species occurring in both the GSheets and /species/ folders)
 intxnsL0 <- intxnsL0 %>% 
@@ -239,5 +236,5 @@ intxnsL0 <- intxnsL0 %>%
 # entry. Any duplicates will be omitted later.
 
 # export the data to become the current L0 interaction data:
-write.csv(intxnsL0, file.path(L0_dir, "AvianInteractionData_L0.csv"), row.names=FALSE)
+write.csv(intxnsL0, file.path(L0_dir, "AvianInteractionData_L0_29May2025.csv"), row.names=FALSE)
 

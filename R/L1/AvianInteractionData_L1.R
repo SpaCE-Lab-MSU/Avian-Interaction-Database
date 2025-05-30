@@ -17,7 +17,7 @@
 # DATA OUTPUT:    L1 data: int.namefix.bbs.RData (taxonomic harmonization & BBS columns into interaction data)
 #                 
 # PROJECT:        Avian Interaction Database 
-# DATE:           27 Oct 2022; updated through 12 Dec 2024  
+# DATE:           27 Oct 2022; updated through 12 Dec 2024; May 29, 2025  
 # NOTES:          Next script to run: AvianInteractionData_L1_post_taxa_cleaning.R
 #                 This script is used to refine species name changes to align 
 #                 with BOW (Clements & eBird checklist) to create int.namefix.bbs.RData.
@@ -42,17 +42,17 @@ library(stringr)
 library(stringdist)
 
 # .Renviron not working for PLZ; hard-coding in here
-L0_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L0"
+L0_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database-Working/L0"
 #L0_dir <- "/Users/phoebezarnetske/Documents/GitHub/Avian-Interaction-Database/L0"
 
-L1_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database/L1"
+L1_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database-Working/L1"
 #L1_dir <- "/Users/phoebezarnetske/Documents/GitHub/Avian-Interaction-Database/L1"
 
 L1_RData_dir <- "~/Google Drive/Shared drives/Avian_MetaNetwork/data/L1/bbs_intxns"
 
 # Read in csv with avian interactions from primary, secondary cavity nesting
 # birds in North America.
-int.raw<-read.csv(file.path(L0_dir,"AvianInteractionData_L0.csv"))
+int.raw<-read.csv(file.path(L0_dir,"AvianInteractionData_L0_29May2025.csv"))
 
 # Read in species list: all species in BBS (the 2024 release which includes all
 # species as of 2023, plus the additional AOUcombo.index column for use w BBS
@@ -142,9 +142,9 @@ int.raw$species2_scientific[
 ] <- "Spatula cyanoptera"
 
 int.raw[is.na(int.raw$species2_scientific),] # Fixed; now delete the last row without data
-dim(int.raw) #26300
+dim(int.raw) #26300 # May 29, 2025: 26370
 int.raw<-int.raw[!with(int.raw,is.na(species2_scientific)),]
-dim(int.raw) #26299
+dim(int.raw) #26299 # May 29, 2025: 26369
 
 #*** Create EDITED names and assign RAW names***#
 # Determine how many unique entries are in int.raw$species1_scientific and
@@ -154,8 +154,8 @@ unique.sp.raw <- data.frame(genus_species.raw = with(int.raw, union(
   species1_scientific, species2_scientific
 )))
 
-dim(unique.sp.raw) #3913
-# 3913 unique genus_species.raw entries
+dim(unique.sp.raw) #3913 # May 29, 2025: 3889
+# 3889 unique genus_species.raw entries
 
 # Create unique genus_species.raw and common_name.raw pairs with formatting
 # adjustments. Also create genus_species.edit which is cleaned up
@@ -199,7 +199,7 @@ int.raw.names <- int.raw %>%
 int.raw[1:30,1:4]
 int.raw.names[1:10,]
 length(unique(int.raw.names$genus_species.raw))
-# 3913 - OK
+# 3889 - OK
 
 # Test case to track: Accipiter cooperi is misspelled - exists in int.raw.names
 dplyr::filter(int.raw.names, genus_species.raw %in% c("Accipiter cooperi"))
@@ -227,7 +227,7 @@ dplyr::filter(int.raw.names, genus_species.raw %in% c("Accipiter cooperi"))
 td_create("gbif")
 
 # Resolve scientific names for the scientific names, based on genus_species.edit
-# using GBIF (last run Dec. 9, 2024)
+# using GBIF (last run Dec. 9, 2024, 29 May 2025)
 int.gbif.names <- int.raw.names %>%
   mutate(
     scientific_id = get_ids(genus_species.edit, "gbif"),
@@ -314,22 +314,22 @@ checklist[which(checklist$genus_species == "Anas flavirostris"), ]
 #************************************************************#
 
 dim(int.gbif.names)
-# 5343
+# 5343; May 29, 2025: 5318
 length(unique(int.gbif.names$genus_species.raw))
-# 3913 OK       
+# 3913; May 29, 2025: 3889 OK       
 
 # Separate resolved and unresolved names based on specified criteria
 resolved.gbif <- int.gbif.names %>%
   filter(!is.na(scientific_id) | grepl(" sp\\.$", genus_species.edit))
 length(unique(resolved.gbif$genus_species.raw))
-# 3587
+# 3587; May 29, 2025: 3580
 
 unresolved.gbif <- int.gbif.names %>%
   filter(is.na(scientific_id) & !grepl(" sp\\.$", genus_species.edit))
 length(unique(unresolved.gbif$genus_species.raw))
-# 326
+# 326; May 29, 2025: 309
 length(unique(resolved.gbif$genus_species.raw))+length(unique(unresolved.gbif$genus_species.raw))
-# 3913 - OK
+# 3913 - OK; May 29, 2025: 3889 OK   
 
 # Display both results: GBIF resolved and GBIF unresolved 
 head(resolved.gbif)
@@ -418,6 +418,7 @@ dplyr::filter(genus_species_matches, genus_species.raw %in% c("Accipiter cooperi
 #************************************************************#
 length(unique(genus_species_matches$genus_species.raw))
 # 326 OK because it matches the unresolved.gbif number
+# May 29, 2025: 309 (unresolved.gbif =328)
 
 # Extract final_matches with high confidence (genus_species_match_score > 0.90)
 high_confidence_matches <- genus_species_matches %>%
@@ -425,7 +426,7 @@ high_confidence_matches <- genus_species_matches %>%
     genus_species_match_score >= 0.9 
   )
 length(unique(high_confidence_matches$genus_species.raw))
-# 257 out of 326
+# 257 out of 326; May 29, 2025: 244 out of 309
 # Define range for printing in increments of 0.005; use the genus_species match
 score_start <- min(high_confidence_matches$genus_species_match_score)
 score_end <- max(high_confidence_matches$genus_species_match_score)
@@ -447,7 +448,7 @@ for (i in seq(score_start, score_end, by = increment)) {
 # closest match, then edit the few below noted "KEEP ORIGINAL".
 fixed_names1<-high_confidence_matches
 length(unique(high_confidence_matches$genus_species.raw))
-# 257 out of 326
+# 257 out of 326; May 29, 2025: 244
 # Test: Accipiter cooperi is misspelled - it disappeared here... hopefully in
 # low_confidence_matches and final_names2
 dplyr::filter(fixed_names1, genus_species.raw %in% c("Accipiter cooperi"))
@@ -459,12 +460,12 @@ fixed_names1$common_name.raw<-NULL
 fixed_names1 <- fixed_names1 %>% 
   distinct()
 
-save.image(file.path(L1_RData_dir,"AvianInteractionData_L1.RData"))
+save.image(file.path(L1_RData_dir,"AvianInteractionData_L1_29May2025.RData"))
 
 length(unique(fixed_names1$genus_species.raw))
-# 257 out of 326
+# 257 out of 326; May 29, 2025: 244
 dim(fixed_names1)
-# 270
+# 270; May 29, 2025: 257
 # Scroll through these 270 High Confidence Genus Species Matches. Use
 # genus_species.edit to make changes given that it doesn't have extra spaces or
 # other issues. All look okay except:
@@ -571,7 +572,7 @@ low_confidence_matches <- genus_species_matches %>%
   )
 
 length(unique(low_confidence_matches$genus_species.raw))
-# 69 out of 326 - checks out OK
+# 69 out of 326 - checks out OK; May 29, 2025: 65
 
 # Then check the Low Confidence Matches, based on genus_species:
 # Define range for printing in increments of 0.005
@@ -591,7 +592,7 @@ for (i in seq(score_start, score_end, by = increment)) {
   }
 }
 dim(low_confidence_matches)
-# 70
+# 70; May 29, 2025: 66
 
 # For most of the names, assign them the closest match, then edit the few above
 # noted "KEEP ORIGINAL".
@@ -614,7 +615,7 @@ fixed_names2 <- fixed_names2 %>%
   distinct()
 
 length(unique(fixed_names2$genus_species.raw))
-# 69 out of 326 OK
+# 69 out of 326 OK; May 29, 2025: 65
 
 # Scroll through these 69 Low Confidence Matches in order from highest to lowest
 # match score. Many look okay except check these:
@@ -913,7 +914,7 @@ int.raw[which(int.raw$species2_scientific == "unid. Accipiter hawl"), ]
 fixed_names2$genus_species[fixed_names2$genus_species.edit == "unid. 2 hawl"] <- "Aerospiza/Tachyspiza/Accipiter/Astur sp."
 fixed_names2$genus_species[fixed_names2$genus_species.edit == "unid. Accipiter hawl"] <- "Aerospiza/Tachyspiza/Accipiter/Astur sp."
 
-save.image(file.path(L1_RData_dir,"AvianInteractionData_L1.RData"))
+save.image(file.path(L1_RData_dir,"AvianInteractionData_L1_29May2025.RData"))
 
 # Combine these together for the full set of fixed genus_species for the
 # unresolved_gbif names which were fixed by referencing the CHECKLIST. Remove
@@ -921,11 +922,11 @@ save.image(file.path(L1_RData_dir,"AvianInteractionData_L1.RData"))
 fixed.unresolved.gs<-rbind(fixed_names1,fixed_names2)
 fixed.unresolved.gs$genus_species_match_score<-NULL
 length(unique(fixed.unresolved.gs$genus_species.raw))
-# 326 OK
+# 326 OK; May 29, 2025: 309
 dim(fixed.unresolved.gs)
-# 339 fixed unresolved species names
+# 339 fixed unresolved species names; May 29, 2025: 322
 
-save.image(file.path(L1_RData_dir,"AvianInteractionData_L1.RData"))
+save.image(file.path(L1_RData_dir,"AvianInteractionData_L1_29May2025.RData"))
 
 # Assign genus_species.edit and common_name.edit to the closest_matches based on
 # fuzzy coding match. Dec. 9, 2024: only doing genus_species for now.
@@ -933,7 +934,7 @@ names(resolved.gbif)[names(resolved.gbif) == "accepted_scientific_name"] <-"genu
 resolved.gbif$common_name.raw<-NULL
 resolved.gbif$scientific_id<-NULL
 
-save.image(file.path(L1_RData_dir,"AvianInteractionData_L1.RData"))
+save.image(file.path(L1_RData_dir,"AvianInteractionData_L1_29May2025.RData"))
 
 #********FIXING INCORRECT GBIF RESOLVED: NOW HERE, EARLIER IN WORKFLOW******#
 # Some of the GBIF assignments or misspelling corrections did not work well.
@@ -1169,17 +1170,17 @@ resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Accipiter coope
 # reference of the genus_species.raw bc need to merge back into the int.raw data.
 int.final.names<-rbind(resolved.gbif,fixed.unresolved.gs)
 dim(int.final.names)
-# 5339 
+# 5339; May 29, 2025: 5312 
 length(unique(int.final.names$genus_species.raw))
-# 3913 OK
+# 3913 OK May 29, 2025: 3889
 
 # Remove duplicate rows, if any exist
 int.final.names <- int.final.names %>% 
   distinct()
 dim(int.final.names)
-# 4576
+# 4576; May 29, 2025: 4551
 length(unique(int.final.names$genus_species.raw))
-# 3913 OK
+# 3913 OK; May 29, 2025: 3889 OK
 
 # NOTE TO FIX THESE 4576 LATER; decide whether to assign Family level or Genus for
 # this instead of the genus_species.raw. Some have some typos (only a few). Some
@@ -1188,7 +1189,7 @@ length(unique(int.final.names$genus_species.raw))
 # these interactions.
 int.final.names.Gsp<-int.final.names[which(is.na(int.final.names$genus_species)), ]
 dim(int.final.names.Gsp)
-# 621 Genus-level entries 
+# 621 Genus-level entries ; May 29, 2025: 626
 
 # All the NA in genus_species are "Genus sp.". If the NA exists in
 # genus_species, assign it the genus_species.edit which includes this
@@ -1210,19 +1211,19 @@ checklist.narrow<-subset(checklist, select=c("genus_species",
 checklist.narrow<-data.frame(checklist.narrow)
 int.checklist<-merge(int.final.names,checklist.narrow, by=c("genus_species"),all.x=T)
 length(unique(int.checklist$genus_species.raw))
-# 3913 OK
+# 3913 OK; May 29, 2025: 3889 OK
 head(int.checklist)
 dim(int.checklist)
-# 4576
+# 4576; May 29, 2025: 4551
 
 # 933 missing common names - about 30% are "Genus sp." but others are just
 # missing?? For now we are just going to focus on fixing the BBS species. Later
 # this needs to be edited with a better workflow. 
 int.checklist.NAcommon<-int.checklist[which(is.na(int.checklist$common_name)), ]
 dim(int.checklist.NAcommon)
-# 898
+# 898; May 29, 2025: 894
 dim(int.checklist.NAcommon)-dim(int.final.names.Gsp)
-# 621 Genus-level entries from above but 277 missing common name! Some are
+# 621 Genus-level entries from above but 277 (May 29: 268) missing common name! Some are
 # duplicate rows from genus_species.raw. Also some of the GBIF species
 # assignments do not work (GBIF taxonomic backbone is not quite up to date for
 # these birds)
@@ -1283,16 +1284,17 @@ int.checklist <- subset(
   select = c("genus_species", "common_name", "genus_species.raw","genus_species.edit")
 )
 dim(int.checklist)
-# 4576
+# 4576; 29 May 2025: 4551
 int.checklist <- int.checklist %>% 
   distinct()
 dim(int.checklist)
-# 3915 OK
+# 3915 OK; May 29, 2025: 3891
 length(unique(int.checklist$genus_species.raw))
-# 3913 OK
+# 3913 OK; May 29, 2025: 3889
 
-save.image(file.path(L1_RData_dir,"AvianInteractionData_L1.RData"))
+save.image(file.path(L1_RData_dir,"AvianInteractionData_L1_29May2025.RData"))
 
+## May 29, 2025 STOPPED HERE
 ##****BBS SPECIES LIST WORK****## 
 ## Make a new column in bbs.splist to maintain the BBS genus_species. First make
 #a copy of splist to save.
