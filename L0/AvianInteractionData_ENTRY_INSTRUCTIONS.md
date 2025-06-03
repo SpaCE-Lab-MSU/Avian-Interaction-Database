@@ -8,18 +8,18 @@
 ## OVERVIEW: Data entry & checking on bird-bird interactions occurs within this L0 portion of the repository. The repository L0 folder contains the following files:
 
 ### [**AvianInteractionData_L0.csv**](https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database/blob/3736f34b9577716b0c7bb53d491f1ff67cc716e6/L0/AvianInteractionData_L0.csv) 
-= Entry of all records stitched together with [../R/AvianInteractionData_L0_stitch.R](https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database/blob/a059edeba78e888432fa36b74948d3a8ac4aa192/R/AvianInteractionData_L0_stitch.R). Each record in this csv file is a unique interaction between 2 species. Note that 2 species can interact in more than one way (equating to multiple rows), and there may be duplicate entries of interactions, each from different species accounts.
+= Entry of all records stitched together with [../R/AvianInteractionData_L0_stitch.R](,,/R/AvianInteractionData_L0_stitch.R). Each record in this csv file is a unique interaction between 2 species. Note that 2 species can interact in more than one way (equating to multiple rows), and there may be duplicate entries of interactions, each from different species accounts.
 
-### [**AvianInteractionData_metadata.csv**](https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database/blob/a059edeba78e888432fa36b74948d3a8ac4aa192/L0/AvianInteractionData_metadata.csv) 
+### [**AvianInteractionData_metadata.csv**](AvianInteractionData_metadata.csv) 
 = Metadata for columns in **AvianInteractionData_L0.csv**.
 
-### [**AvianInteractionData_SpeciesList.csv**](https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database/blob/53310f18e0f3a79d56ac9fd3c6931e4473f4cc80/L0/AvianInteractionData_SpeciesList.csv) 
+### [**AvianInteractionData_SpeciesList.csv**](AvianInteractionData_SpeciesList.csv) 
 = Species look-up table and assignments for data entry, periodically copied from the Google Drive sheet **AvianInteractionData_SpeciesList** which contains the live updates and assignments of species entry progress.
 
-### [**AvianInteractionData_metadata_interactiondefinitions.csv**](https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database/blob/53310f18e0f3a79d56ac9fd3c6931e4473f4cc80/L0/AvianInteractionData_metadata_interactiondefinitions.csv)
+### [**AvianInteractionData_metadata_interactiondefinitions.csv**](AvianInteractionData_metadata_interactiondefinitions.csv)
 = Metadata for interaction types.
 
-### [**AvianInteractionData_metadata_uncertain.csv**](https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database/blob/53310f18e0f3a79d56ac9fd3c6931e4473f4cc80/L0/AvianInteractionData_metadata_uncertain.csv)
+### [**AvianInteractionData_metadata_uncertain.csv**](AvianInteractionData_metadata_uncertain.csv)
 = Metadata for uncertain interaction keywords.
 
 
@@ -57,7 +57,7 @@ b) Go to Birds of the World Online (BOW, via the MSU Library electronic resource
 
 - In general, the best approach to entering the species' data is to open the BOW species account and just skim through it page by page (section by section, in order) for **capitalized species names (often Common Names)** and ***italicized species names (often Genus species)***; this should catch nearly all the entries and will add new ones we missed before. You may see other plain text terms like "passerines" or "corvids" and these refer to entire groups of species in an interaction - these are still important to record and should not be skipped.
 
-c) Enter interactions for the species you selected by designating the selected species in "species1_scientific" and "species1_common" in your file, and the species it interacts with in "species2_scientific" and "species2_common", based on evidence from Birds of the World Online. Refer to [**`AvianInteractionData_metadata.csv`**](https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database/blob/a059edeba78e888432fa36b74948d3a8ac4aa192/L0/AvianInteractionData_metadata.csv) for rules about how to enter each column, and the information below:
+c) Enter interactions for the species you selected by designating the selected species in "species1_scientific" and "species1_common" in your file, and the species it interacts with in "species2_scientific" and "species2_common", based on evidence from Birds of the World Online. Refer to [**`AvianInteractionData_metadata.csv`**](AvianInteractionData_metadata.csv) for rules about how to enter each column, and the information below:
 
 **URLs & Notes**
 - *Important:* you need to copy-paste the full URL for each URL page that has the source(s) of the interaction. Separate URLs are entered in “sourceA_URL”, “sourceB_URL” etc. if there are multiple BOW pages with information on the same interaction (e.g., “behavior” and “Introduction” pages for example). Then each text pertaining to the interaction is copied into the corresponding notes column: notesA for sourceA_URL, etc.
@@ -93,7 +93,7 @@ Enter “strong” if the interaction was observed, was strongly stated, and/or 
 - If the interaction occurs during the non-breeding season (typically winter), indicate in the "nonbreedingseason" column. If the article mentions a month, you can check if it occurs during species1 breeding season using the phenology diagram (usually on the Introduction or Breeding page), or reading the Breeding page. The middle ring in the diagram in the breeding period. If you are unsure of what timeframe the interaction occurs in, check with a reviewer (Phoebe or India). You will then enter a description of the timeframe in this column.
 
 **Uncertain Interactions**
-- If there is any uncertainty about the interaction, enter the appropriate uncertain interaction keyword from [**`AvianInteractionData_metadata_uncertain.csv`**](https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database/blob/0fd3416c20e453793847845ee60f8037938942bd/L0/AvianInteractionData_metadata_uncertain.csv). You may add additional information to the uncertain_interaction column, but make sure that the note includes an uncertain keyword that is spelled correctly (the R code will look for these keywords specifically in order to determine whether or not to keep the interaction in further analysis). If you are unsure which keyword to use, you can leave a comment and ping a reviewer, or make a note when you create an issue (Step 8).
+- If there is any uncertainty about the interaction, enter the appropriate uncertain interaction keyword from [**`AvianInteractionData_metadata_uncertain.csv`**](AvianInteractionData_metadata_uncertain.csv). You may add additional information to the uncertain_interaction column, but make sure that the note includes an uncertain keyword that is spelled correctly (the R code will look for these keywords specifically in order to determine whether or not to keep the interaction in further analysis). If you are unsure which keyword to use, you can leave a comment and ping a reviewer, or make a note when you create an issue (Step 8).
 
 - If there is an interaction that you are unsure of how to classify (confusing wording or it mentions multiple species and you aren't sure which it applies to), try and find the original source. BOW articles commonly include sources after every sentence, either as a in-text citation or a highlighted number you can click to get more information. Copy the citation (title, author, and year are typically enough) and search for it using MSU Library database or Google Scholar to see if the original text provides any clarity on the interaction. If you can't find the original or it does not help clarify, you can ping a reviewer or make a note when you create an issue (Step 8).
 
