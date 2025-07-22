@@ -79,8 +79,8 @@ c) Enter interactions for the species you selected by designating the selected s
 
 - If a specific subspecies is mentioned in reference, then include in species name (*Genus species subspecies*). If not, use *Genus species*.
 
-- - For each species mentioned, double check that the scientific and common names used are up to date with BOW. This can be done by searching for the species in the search bar at the top of the BOW page. If the name is out of date, update the species name in species1/species2 name column, and add a note in the "name_changes" column (e.g. "article uses scientific name Picoides pubescens for Downy Woodpecker; current BOW name is Dryobates pubescens").
-  - Please fill in the current Common and Scientific names at the time of data entry - the current name is checked by searching BOW for the species (which follows the Clement's Checklist, which is updated at least yearly). 
+- - IMPORTANT: For each species mentioned, enter into the spreadsheet the scientific and common names that are *as written* in the source you are reading. Sometimes this name differs from the current name for the species because of name changes. If you do determine that the name *as written* in the source is out of date, you can add a note in the "name_changes" column (e.g. "article uses scientific name Picoides pubescens for Downy Woodpecker; current BOW name is Dryobates pubescens").
+- Officially, we follow the Clement's Checklist, which is updated at least yearly, but this step is done in R code after the initial data entry.
   
 - If the article does not mention a specific species but does reference a group (e.g. "corvids", "gulls", etc.), then enter species2 as an unidentified species. For the common name, use "unid." + group mentioned, and for scientific name, use the smallest taxonomic group that captures all members of that group. For example, "corvids" would be entered as common name "unid. corvid", and scientific name "Corvidae sp.". Ask a reviewer (Phoebe or India) if you are unsure how to enter this.
 
