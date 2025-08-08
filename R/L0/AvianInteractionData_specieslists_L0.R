@@ -1,5 +1,5 @@
-# TITLE:          L0 Species List Data: Pulls in raw lists from sources and 
-#                   creates formatted versions of lists
+# TITLE:          L0 Species Checklist Data: Pulls in raw lists from sources and 
+#                   creates formatted versions of lists as L0 data
 
 # AUTHORS:        Phoebe Zarnetske
 # COLLABORATORS:  Vincent Miele, Stephane Dray, Emily Parker
