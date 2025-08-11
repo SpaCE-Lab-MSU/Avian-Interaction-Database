@@ -4,14 +4,17 @@
 # AUTHORS:        Phoebe Zarnetske
 # COLLABORATORS:  Vincent Miele, Stephane Dray, Emily Parker
 # DATA INPUT:     Imports L0 raw species list data from:
-#                 (1) the USGS North American Breeding Bird Survey (BBS) SpeciesList 
+#                 (1) Clements/eBird Cheklist v2024 (Cornell Lab of Ornithology)
+#                 (2) the USGS North American Breeding Bird Survey (BBS) SpeciesList 
 #                 from 2024 release (up to 2023 BBS data; SpeciesList.txt is updated yearly). 
-#                 (2) CA-CONUS List = AviBase Canada list + AviBase Lower 48 US + 
-#                 AviBase Alaska list (= CONUS List(taxonomy from Clements 2024 list)
-# DATA OUTPUT:    (1) BBS List L0 data: bbs_specieslist_2023_L0.csv - this is a 
+#                 (3) CA-CONUS List = AviBase Canada list + AviBase Lower 48 US + 
+#                 AviBase Alaska list (taxonomy from Clements 2024 list)
+# DATA OUTPUT:    (1) L0 Clements/eBird Cheklist v2024
+#                 (2) BBS List L0 data: bbs_specieslist_2023_L0.csv - this is a 
 #                     copy of the raw data, just omitting the top lines without data
-#                 (2) CACONUS list L0 data: caconus_specieslist_2024_L0.csv - this is 
-#                     data pulled from the AviBase species list website and formatted
+#                 (3) CA.CONUS list L0 data: avibase_ca.conus_splist_2024_L0.csv 
+#                   - this is data pulled from the AviBase species list website 
+#                   and formatted
 # PROJECT:        Avian Interaction Database & avian-meta-network
 # DATE:           17 January 2022 - 8 August 2025
 # NOTES:          bbs_specieslist_2024_L1.csv is produced in bbs_specieslist_L1.R 
@@ -33,9 +36,14 @@ library(stringr)
 L0_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database-Working/L0"
 L1_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database-Working/L1"
 
-#### (1) BBS List ####
+#### (1) Clements/eBird 2024 Checklist: Cornell Lab of Ornithology 
+
+Clements/eBird Cheklist v2024
+
+#### (2) BBS List ####
 # Below section is modified from: https://rdrr.io/github/davharris/mistnet/src/extras/BBS-analysis/data_extraction/species-handling.R
 # Read in the SpeciesList file: 
+clements2024<-read.csv("https://www.birds.cornell.edu/clementschecklist/wp-content/uploads/2024/10/eBird-Clements-v2024-integrated-checklist-October-2024-rev.csv")
 
 # The original file SpeciesList.csv (from 2024 BBS release) is here: https://www.sciencebase.gov/catalog/item/66d9ed16d34eef5af66d534b
 # Reading in a copy placed in the L0 directory on October 22, 2024, and renamed BBS2024_SpeciesListL0.txt
@@ -59,7 +67,7 @@ bbs.splist.2024$genus_species<- do.call(paste, c(bbs.splist.2024[c("Genus", "Spe
 dim(bbs.splist.2024)
 # 763 species
 
-# Compare the list from last year to this year to identify changes:
+# Compare the BBS list from last year to this year to identify changes:
 
 # Full join on "AOU" only, ignoring extra rows in the 2024 data
 differences <- bbs.splist.2023 %>%
@@ -125,8 +133,7 @@ write.csv(bbs.splist.2024, file.path(L0_dir,"./species_checklists/bbs_splist_202
 # Then, if combining with bbs_obs data: AvianInteractionData_L1.R
 
 
-
-#### (2) CA-CONUS List ####
+#### (3) CA-CONUS List ####
 # This list represents birds observed in Canada and the Continental United States
 # from AviBase, using Clements 2024 taxonomy.
 
@@ -234,16 +241,29 @@ region_priority <- c("US48", "CA", "AK")
 merged.table <- merged.table %>%
   mutate(region_factor = factor(region, levels = region_priority))
 
-# Select one row per scientific_name by priority region
-ca.conus <- merged.table %>%
+# Get the preferred record per species by priority region
+preferred_records <- merged.table %>%
   arrange(scientific_name, region_factor) %>%
   group_by(scientific_name) %>%
   slice(1) %>%
   ungroup() %>%
   select(-region_factor)
 
-cat("Number of species in final cleaned table:", n_distinct(ca.conus$scientific_name), "\n")
-cat("Number of rows in final cleaned table:", nrow(ca.conus), "\n")
+# Collect all unique regions per species as a concatenated string
+all_regions <- merged.table %>%
+  group_by(scientific_name) %>%
+  summarise(
+    region = paste(sort(unique(region)), collapse = "; "),
+    .groups = "drop"
+  )
+
+# Join the preferred records with the collected regions
+ca.conus <- preferred_records %>%
+  select(-region) %>%   # drop single-region column from preferred record
+  left_join(all_regions, by = "scientific_name")
+
+cat("Number of species in ca.conus:", n_distinct(ca.conus$scientific_name), "\n")
+cat("Number of rows in ca.conus:", nrow(ca.conus), "\n")
 
 ca.conus
 
