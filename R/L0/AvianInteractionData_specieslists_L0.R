@@ -32,24 +32,23 @@ library(tidyr)
 library(rvest) # for web scraping
 library(stringr)
 
-# Above .Renviron not working for PLZ; hard-coding in here
-L0_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database-Working/L0"
-L1_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database-Working/L1"
+# Define local directory
+L0_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database-Working/L0/species_checklists/"
 
 #### (1) Clements/eBird 2024 Checklist: Cornell Lab of Ornithology 
+clements2024<-read.csv("https://www.birds.cornell.edu/clementschecklist/wp-content/uploads/2024/10/eBird-Clements-v2024-integrated-checklist-October-2024-rev.csv")
 
-Clements/eBird Cheklist v2024
+# Export this as its original filename for final cleaning in L1 script.
+write.csv(clements2024, file.path(L0_dir,"eBird-Clements-v2024-integrated-checklist-October-2024-rev.csv"), fileEncoding="UTF-8", row.names=F) 
 
 #### (2) BBS List ####
 # Below section is modified from: https://rdrr.io/github/davharris/mistnet/src/extras/BBS-analysis/data_extraction/species-handling.R
 # Read in the SpeciesList file: 
-clements2024<-read.csv("https://www.birds.cornell.edu/clementschecklist/wp-content/uploads/2024/10/eBird-Clements-v2024-integrated-checklist-October-2024-rev.csv")
-
-# The original file SpeciesList.csv (from 2024 BBS release) is here: https://www.sciencebase.gov/catalog/item/66d9ed16d34eef5af66d534b
 # Reading in a copy placed in the L0 directory on October 22, 2024, and renamed BBS2024_SpeciesListL0.txt
 guess_encoding(file.path(L0_dir,"bbs_splist_2022_L0.csv"))
 #ISO-8859-1
 bbs.splist.2023<-read.csv(file.path(L0_dir,"bbs_splist_2022_L0.csv"),fileEncoding="ISO-8859-1")
+# The original file SpeciesList.csv (from 2024 BBS release) is here: https://www.sciencebase.gov/catalog/item/66d9ed16d34eef5af66d534b
 guess_encoding(file.path(L0_dir,"BBS2024_SpeciesListL0.csv"))
 #UTF-8
 bbs.splist.2024<-read.csv(file.path(L0_dir,"BBS2024_SpeciesListL0.csv"),fileEncoding="UTF-8")
@@ -127,7 +126,7 @@ write.csv(clean_differences,file.path(L0_dir,"BBS_specieslist_diffs2023-2024.csv
 
 # The species re-assignment checking will occur in the next script. 
 # Export the cleaned data (note the encoding to maintain special characters)
-write.csv(bbs.splist.2024, file.path(L0_dir,"./species_checklists/bbs_splist_2024_L0.csv"), fileEncoding="UTF-8", row.names=F) 
+write.csv(bbs.splist.2024, file.path(L0_dir,"bbs_splist_2024_L0.csv"), fileEncoding="UTF-8", row.names=F) 
 
 # Next script to run: bbs_specieslist_L1.R 
 # Then, if combining with bbs_obs data: AvianInteractionData_L1.R
@@ -267,8 +266,8 @@ cat("Number of rows in ca.conus:", nrow(ca.conus), "\n")
 
 ca.conus
 
-# Export this for final cleaning in L1 script where species are furthe subset.
-write.csv(ca.conus, file.path(L0_dir,"./species_checklists/avibase_ca.conus_splist_2024_L0.csv"), fileEncoding="UTF-8", row.names=F) 
+# Export this for final cleaning in L1 script where species are further subset.
+write.csv(ca.conus, file.path(L0_dir,"avibase_ca.conus_splist_2024_L0.csv"), fileEncoding="UTF-8", row.names=F) 
 
 
 
