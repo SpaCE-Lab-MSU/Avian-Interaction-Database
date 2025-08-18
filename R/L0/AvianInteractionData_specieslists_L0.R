@@ -9,18 +9,22 @@
 #                 from 2024 release (up to 2023 BBS data; SpeciesList.txt is updated yearly). 
 #                 (3) CA-CONUS List = AviBase Canada list + AviBase Lower 48 US + 
 #                 AviBase Alaska list (taxonomy from Clements 2024 list)
+#                 (4) American Birding Association (ABA) Version 8.17 Nov. 2024 list
 # DATA OUTPUT:    (1) L0 Clements/eBird Cheklist v2024
 #                 (2) BBS List L0 data: bbs_specieslist_2023_L0.csv - this is a 
 #                     copy of the raw data, just omitting the top lines without data
 #                 (3) CA.CONUS list L0 data: avibase_ca.conus_splist_2024_L0.csv 
 #                   - this is data pulled from the AviBase species list website 
 #                   and formatted
+#                 (4) American Birding Association (ABA) Version 8.17 Nov. 2024 list: formatted
 # PROJECT:        Avian Interaction Database & avian-meta-network
-# DATE:           17 January 2022 - 8 August 2025
+# DATE:           17 January 2022 - 12 August 2025
 # NOTES:          bbs_specieslist_2024_L1.csv is produced in bbs_specieslist_L1.R 
 #
 #               Next script to run: bbs_specieslist_L1.R
-#               NOTES: check out this site for code w BBS: https://rdrr.io/github/davharris/mistnet/src/extras/BBS-analysis/data_extraction/data-extraction.R               
+#               NOTES: check out this site for code w BBS: https://rdrr.io/github/davharris/mistnet/src/extras/BBS-analysis/data_extraction/data-extraction.R    
+#               For other types of lists check out: https://datazone.birdlife.org/search 
+#               which has data on migratory status, conservation status, etc.           
     
 
 # Clear all existing data
@@ -132,11 +136,12 @@ write.csv(bbs.splist.2024, file.path(L0_dir,"bbs_splist_2024_L0.csv"), fileEncod
 # Then, if combining with bbs_obs data: AvianInteractionData_L1.R
 
 
-#### (3) CA-CONUS List ####
+#### (3) AviBase 8.17 CA-CONUS List ####
 # This list represents birds observed in Canada and the Continental United States
 # from AviBase, using Clements 2024 taxonomy.
 
-# CANADA species: https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=US48&version=text&lifelist=&highlight=0
+####**** AviBase 8.17 CANADA species ****####
+# https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=US48&version=text&lifelist=&highlight=0
  
 ca<- "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=US48&version=text&lifelist=&highlight=0" 
 avi.ca.page <- read_html(ca)
@@ -161,7 +166,8 @@ ca.table <- ca.table %>%
   filter(!(common_name == paste(order, family, sep = ": ")))
 ca.table
 
-# US Lower 48 species: https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=US48&version=text&lifelist=&highlight=0
+####**** AviBase 8.17 US Lower 48 species ****####
+# https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=US48&version=text&lifelist=&highlight=0
 
 us48<-"https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=US48&version=text&lifelist=&highlight=0" 
 avi.us48.page <- read_html(us48)
@@ -186,7 +192,8 @@ us48.table <- us48.table %>%
   filter(!(common_name == paste(order, family, sep = ": ")))
 us48.table
 
-# Alaska species: https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=USak&version=text&lifelist=&highlight=0
+####**** AviBase 8.17 Alaska species ****####
+# https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=USak&version=text&lifelist=&highlight=0
 
 ak<-"https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=USak&version=text&lifelist=&highlight=0" 
 avi.ak.page <- read_html(ak)
@@ -269,7 +276,18 @@ ca.conus
 # Export this for final cleaning in L1 script where species are further subset.
 write.csv(ca.conus, file.path(L0_dir,"avibase_ca.conus_splist_2024_L0.csv"), fileEncoding="UTF-8", row.names=F) 
 
+#### (4) AviBase 8.17 Hawaii,  ####
+# This will obtain the entire region, including outlying islands
+# https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=NAM&version=text&lifelist=&highlight=0
 
+## Work on this next to pull in data from Islands in Northern & Western Hemisphere
+
+
+#### ABA Checklist Version 8.17 Nov. 2024 ####
+# The ABA Area (sometimes referred to as the ABA Checklist Area) is essentially 
+# North America north of Mexico plus the Hawaiian Islands.
+
+# https://www.aba.org/aba-checklist/#section-checklist-download
 
 # ************************* #
 # Older code when the file read in was in .txt. format and had many lines in the beginning to ignore:
