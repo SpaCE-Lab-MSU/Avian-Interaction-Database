@@ -758,7 +758,7 @@ ca.conus.splist <- df_bbs_or_avibase_no_rare %>%
   filter(is.na(ca.conus.rejection))
 dim(ca.conus.splist)
 # --- Export as CSVs
-write_csv(ca.conus.splist, file.path(L1_dir,"ca.conus.splist_L1.csv"))
+write_csv(ca.conus.splist, file.path(L1_dir,"canada.conus.splist_L1.csv"))
 write_csv(df_bbs_or_avibase, file.path(L1_dir,"bbs2024_or_avibase8.17.csv"))
 write_csv(df_bbs_or_avibase_no_rare,file.path(L1_dir, "bbs2024_or_avibase8.17_not_rare.csv"))
 write_csv(ca.conus.dataentered, file.path(L1_dir,"bbs2024_or_avibase8.17_not_rare_ca.conus_entered15Aug2025.csv"))
