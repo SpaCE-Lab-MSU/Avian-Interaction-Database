@@ -1,8 +1,9 @@
 # TITLE:          L1 Species Lists Version Check, with a focus on determining whether original
-#                   species list for Canada & Conterminous US aligns with AviBase / BBS / Clements
+#                   species list for Canada & Conterminous US aligns with AviBase 
+#                   / BBS / Clements
 #                 ** This code will not be included in final repo **
 #                 Species Checklist Data: 
-#                 Reads in lists and keeps track of which species are in which list.
+#                 Reads in L0 lists and keeps track of which species are in which list.
 #                 Also keeps track of name changes in diff columns.
 #                 Current goal is to create a list that can be used in the North 
 #                 American Avian Interaction data paper and avian-meta-network paper.
