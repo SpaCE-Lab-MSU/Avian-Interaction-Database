@@ -1,0 +1,337 @@
+---
+title: "Reading Clements Checklists"
+output: html_notebook
+editor_options:
+  chunk_output_type: inline
+---
+
+```{r}
+require(readr)
+require(dplyr)
+require(curl)
+# using colspecs without prefacing all the functions with readr::  to make them easier to read
+library(readr)
+require(here)
+```
+
+## Read source code and configuration
+
+```{r}
+# includes URLs to use 
+source(here::here('R/L0/L0_functions.R'))
+```
+
+# Reading in historical Clements Checklists
+
+Our goal is, given a species name (common scientific partial) show if it's current name, if it had a different name in the past, a new name in the future, and part of any splits. This notebook explores reading in different years of the Clements Check list fom https://www.birds.cornell.edu to combine them so we may walk across years. Each species/year combination will be unique but names will be repeated.
+
+One should not include external data (like other's checklists) in your repository
+since it's not your data.   The following code helps to download the files once
+and save them. 
+
+#################################### 
+
+## 2024
+
+Clements 2024 Overview page:
+
+https://www.birds.cornell.edu/clementschecklist/introduction/updateindex/october-2024/2024-citation-checklist-downloads/
+
+Clements-only, non-ebird URL:
+
+-   https://www.birds.cornell.edu/clementschecklist/wp-content/uploads/2024/10/Clements-v2024-October-2024-rev.csv
+
+ebird fields (not useful to us)
+
+-   https://www.birds.cornell.edu/clementschecklist/wp-content/uploads/2024/10/eBird_taxonomy_v2024.csv
+
+Clements with some ebird rows like 'family' and higher taxa
+
+-   https://www.birds.cornell.edu/clementschecklist/wp-content/uploads/2024/10/eBird-Clements-v2024-integrated-checklist-October-2024-rev.csv
+
+See functions for
+```{r}
+  
+clements2024.cols= readr::cols(
+  `sort v2024` = col_character(), 
+  `species_code` = col_character(),
+  `Clements v2024b change` = col_character(),
+  `text for website v2024b` = col_character(),
+  `category` = col_character(),
+  `English name` = col_character(),
+  `scientific name` = col_character(),
+  `range` = col_character(),
+  `order` = col_character(),
+  `family` = col_character(),
+  `extinct` = col_logical(), 
+  `extinct year` = col_character(), 
+  sort_v2023 = col_character()  
+)
+
+clements2024 <- read_or_download_csv(clements2024.url, col_types = clements2024.cols)
+
+print(problems(clements2024))
+print(spec(clements2024))
+
+```
+
+rename columns to be code-friendly and for consistency
+
+```{r}
+
+# not currently using this but saving for future
+# clements2024.names <- list(
+#   c('sort v2024', 'sort_v2024'),  
+#   c('species_code','species_code'),
+#   c('Clements v2024b change', 'change'), 
+#   c('text for website v2024b','website_text'),
+#   c('category', 'category'),
+#   c('English name', 'english_name'),
+#   c('scientific name', 'scientific_name'),
+#   c('range', 'range'),
+#   c('order', 'taxonomic_order'),
+#   c('family', 'taxonomic_family'),
+#   c('extinct', 'extinct'),
+#   c('extinct year', 'extinct year'), 
+#   c('sort_v2023', 'sort_v2023') 
+# )
+
+# requires names to be in this exact order
+
+clements2024.harmonized_names <- c(
+  'sort_v2024',  
+  'species_code',
+  'change', 
+  'website_text',
+  'category',
+  'english_name',
+  'scientific_name',
+  'range',
+  'taxonomic_order',
+  'taxonomic_family',
+  'extinct',
+  'extinct_year', 
+  'sort_v2023' 
+)
+
+names(clements2024) <- clements2024.harmonized_names
+```
+
+### 2024 Create new and modify columns for harmonization
+
+```{r}
+# Add columns to be able to combine other years data frames
+clements2024.df <- 
+    dplyr::mutate(clements2024,
+      version          = 'v2024', 
+      version_year     = as.integer(2024), 
+      previous_version = 'v2023',
+      sort             = paste0("2024_", sort_v2024), 
+      previous_sort    = ifelse(
+          is.na(sort_v2023), "", 
+          paste0("2023_", sort_v2023)
+          )
+    ) 
+
+
+# remove the first row which is a citation row, and columns with names specific for this year
+clements2024.df<- dplyr::filter(clements2024.df, ! is.na(species_code)) %>% dplyr::select( -c(sort_v2023, sort_v2024) )
+
+```
+
+#################################### 
+
+## 2023
+
+[2023 Clements Checklist Overview Page](https://www.birds.cornell.edu/clementschecklist/introduction/updateindex/december-2023/)
+
+Using 2023B for this process. Note on the website:
+
+> v2023b is a mid-year update that affects only range statements. There are no changes to taxonomy, names, or sequence in v2023b; these will be published in our v2024, expected in late October 2024. We are providing this mid-year update to improve consistency and format, make a small number of corrections, and incorporate many updates to range statements.
+
+Using the eBird + Clements list where possible as it has Avibase IDs in the field "taxon_concept_id" Note that this field does not appear in the 2024 lists
+
+```{r}
+
+clements2023.url <- 'https://www.birds.cornell.edu/clementschecklist/wp-content/uploads/2024/02/eBird-Clements-v2023b-integrated-checklist-December-2023.csv'
+
+clements2023.file <- 'eBird-Clements-v2023b-integrated-checklist-December-2023.csv'
+home_dir <- Sys.getenv('HOME')
+clements2023.file <- file.path(home_dir, 'Downloads', clements2023.file)
+
+#TODO if not clements2023.file, download with curl, then open
+print(clements2023.file)
+```
+
+```{r}
+clements2023.cols <- cols(
+  `sort v2023b` = col_character(),
+  `species_code` = col_character(),
+  `taxon_concept_id` = col_character(),
+  `Clements v2023b change` = col_character(),
+  `text for website v2023b` = col_character(),
+  `category` = col_character(),
+  `English name` = col_character(),
+  `scientific name` = col_character(),
+  `authority` = col_character(),
+  `name and authority` = col_character(),
+  `range` = col_character(),
+  `order` = col_character(),
+  `family` = col_character(),
+  `extinct` = col_logical(),
+  `extinct year` = col_character(),
+  `sort v2022` = col_character(),
+  `page 6.0` = col_character()
+)
+
+
+clements2023 <- read_or_download_csv(clements2023.url, col_types = clements2023.cols) 
+problems(clements2023)
+spec(clements2023 )
+
+```
+
+### 2023 harmonize names and add columns
+
+```{r}
+clements2023.harmonized_names <- c(
+  'sort_v2023',  
+  'species_code',
+  'taxon_concept_id', 
+  'change', 
+  'website_text',
+  'category',
+  'english_name',
+  'scientific_name',
+  'authority', 
+  'name_and_authority', 
+  'range',
+  'taxonomic_order',
+  'taxonomic_family',
+  'extinct',
+  'extinct_year', 
+  'sort_v2022',
+  'page_6'
+)
+
+names(clements2023) <- clements2023.harmonized_names
+```
+
+```{r}
+
+clements2023.df <- dplyr::mutate(
+    clements2023,
+    version          = 'v2023', 
+    version_year     = as.integer(2023), 
+    previous_version = 'v2022',
+    sort             = paste0("2023_", sort_v2023), 
+    previous_sort    = ifelse(
+        is.na(sort_v2022), "", paste0("2022_", sort_v2022)
+        )
+  )
+```
+
+```{r}
+clements2023.df<- 
+  dplyr::filter(clements2023.df, ! is.na(species_code)) |> 
+  dplyr::select( -c(sort_v2022, sort_v2023, page_6, taxon_concept_id, authority, name_and_authority ) )
+
+```
+
+###################### 
+
+## 2022
+
+Citation:
+
+Clements, J. F., T. S. Schulenberg, M. J. Iliff, T. A. Fredericks, J. A. Gerbracht, D. Lepage, S. M. Billerman, B. L. Sullivan, and C. L. Wood. 2022. The eBird/Clements checklist of Birds of the World: v2022. Downloaded from https://www.birds.cornell.edu/clementschecklist/introduction/updateindex/october-2022/2022-citation-checklist-download/
+
+Clements Checklist v2022 (4 MB Excel spreadsheet; 7 MB CSV File) Includes species, groups, and subspecies, with brief range description: https://www.birds.cornell.edu/clementschecklist/wp-content/uploads/2022/12/Clements-Checklist-v2022.csv
+
+eBird Taxonomy v2022 (1 MB Excel spreadsheet; 2 MB CSV File). Includes all categories that are reportable in eBird (including all taxa except subspecies from eBird/Clements Checklist) and is formatted with additional fields from eBird. Details of the eBird update will be posted soon on the eBird homepage: https://www.birds.cornell.edu/clementschecklist/wp-content/uploads/2022/12/ebird_taxonomy_v2022.csv
+
+eBird/Clements Checklist v2022 (5 MB Excel spreadsheet; 2 MB CSV File) Combines all taxa from the Clements Checklist and all additional categories from the eBird taxonomy, with brief range descriptions for all taxa: https://www.birds.cornell.edu/clementschecklist/wp-content/uploads/2022/12/eBird_Clements_v2022.csv
+
+```{r}
+
+clements2022.url <- 'https://www.birds.cornell.edu/clementschecklist/wp-content/uploads/2022/12/Clements-Checklist-v2022.csv'
+
+clements2022.cols <- cols(
+  `C` = col_character(),
+  `Clements v2022 change` = col_character(),
+  `text for website v2022` = col_character(),
+  `category` = col_character(),
+  `English name` = col_character(),
+  `scientific name` = col_character(),
+  `authority` = col_character(),
+  `name and authority` = col_character(),
+  `range` = col_character(),
+  `order` = col_character(),
+  `family` = col_character(),
+  `extinct` = col_logical(),
+  `extinct year` = col_character(),
+  `sort v2021` = col_character(),
+  `page 6.0` = col_character()
+)
+
+clements2022 <- read_or_download_csv(clements2022.url, col_types = clements2022.cols)
+
+print(problems(clements2024))
+print(spec(clements2024))
+
+```
+
+### 2022 harmonize columns
+
+```{r}
+
+clements2022.harmonized_names = c(
+  'sort_v2022',  
+  'change', 
+  'website_text',
+  'category',
+  'english_name',
+  'scientific_name',
+  'authority',
+  'name_and_authority',
+  'range',
+  'taxonomic_order',
+  'taxonomic_family',
+  'extinct',
+  'extinct_year', 
+  'sort_v2021',
+  'page_6'
+)
+
+names(clements2022) <- clements2022.harmonized_names
+
+clements2022.df <- dplyr::mutate(
+    clements2022,
+    version          = 'v2022', 
+    species_code     = '',
+    version_year     = as.integer(2022), 
+    previous_version = 'v2021',
+    sort             = paste0("2022_", sort_v2022), 
+    previous_sort    = ifelse(
+        is.na(sort_v2021), "", paste0("2021_", sort_v2021)
+        )
+  )
+
+clements2022.df<- 
+  dplyr::filter(clements2022.df, ! sort == '2022_0') |> 
+  dplyr::select( -c(sort_v2022, sort_v2021,  authority, name_and_authority, page_6) )
+
+```
+
+################# 
+
+# 2021
+
+################# 
+
+# combine
+
+```{r}
+clements.df <- dplyr::bind_rows(clements2024.df, clements2023.df, clements2022.df)
+
+```
