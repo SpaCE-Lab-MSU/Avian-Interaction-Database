@@ -94,6 +94,9 @@ c) Enter interactions for the species you selected by designating the selected s
 Enter “weak” if the description lacks a source, mentions that it is a “possible” interaction, rare interaction, or inferred interaction.
 Enter “strong” if the interaction was observed, was strongly stated, and/or has a source (this includes personal communications, government agencies, images/videos, or author's initials).
 
+**Time of year**
+- Enter in the time of year that the interaction occurs in. This can be month(s), seasons, or "year-round". If nothing is reported, go to the original source to determine the time of year. If you are unsure of what timeframe the interaction occurs in, check with a reviewer (Phoebe or Caroline). 
+
 **Non-breeding season**
 - If the interaction occurs during the non-breeding season (typically winter), indicate in the "nonbreedingseason" column. If the article mentions a month, you can check if it occurs during species1 breeding season using the phenology diagram (usually on the Introduction or Breeding page), or reading the Breeding page. The middle ring in the diagram in the breeding period. If you are unsure of what timeframe the interaction occurs in, check with a reviewer (Phoebe or Caroline). You will then enter a description of the timeframe in this column.
 
