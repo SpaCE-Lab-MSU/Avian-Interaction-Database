@@ -7,8 +7,8 @@
 
 ## OVERVIEW: Data entry & checking on bird-bird interactions occurs within this L0 portion of the repository. The repository L0 folder contains the following files:
 
-### [**AvianInteractionData_L0.csv**](https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database/blob/3736f34b9577716b0c7bb53d491f1ff67cc716e6/L0/AvianInteractionData_L0.csv) 
-= Entry of all records stitched together with [../R/AvianInteractionData_L0_stitch.R](,,/R/AvianInteractionData_L0_stitch.R). Each record in this csv file is a unique interaction between 2 species. Note that 2 species can interact in more than one way (equating to multiple rows), and there may be duplicate entries of interactions, each from different species accounts.
+### [**AvianInteractionData_L0.csv**](AvianInteractionData_L0.csv) 
+= Entry of all records stitched together with [../R/AvianInteractionData_L0_stitch.R](https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database/blob/a059edeba78e888432fa36b74948d3a8ac4aa192/R/AvianInteractionData_L0_stitch.R). Each record in this csv file is a unique interaction between 2 species. Note that 2 species can interact in more than one way (equating to multiple rows), and there may be duplicate entries of interactions, each from different species accounts.
 
 ### [**AvianInteractionData_metadata.csv**](AvianInteractionData_metadata.csv) 
 = Metadata for columns in **AvianInteractionData_L0.csv**.
@@ -55,6 +55,11 @@ a) Set up your Google Sheet created in Step 4. If you use Google Sheets and the 
 
 b) Go to Birds of the World Online (BOW, via the MSU Library electronic resource portal if you’re off campus). http://ezproxy.msu.edu/login?url=https://birdsoftheworld.org This is the source of natural history information for each bird species entered into the database. 
 
+- FIRST, navigate to the "References" page of the species account (usually the last page on the left-hand menu of the account). Make sure "Order of Appearance" is selected (not Alphabetical).
+  -- Example: Northern Flicker: https://birdsoftheworld.org/bow/species/norfli/cur/references
+
+- In the browser on the References page, go to File - Save As - HTML or Page Source, and save the single References file to: /L0/bow_refs/. Save the file as: "Genus_species_bow_refs_VERSION". for "VERSION" replace with the last value in the species account doi. For example, for Northern Flicker, the BOW references filename would be: "Colaptes_auratus_bow_refs_bow.norfli.02.1.html"
+
 - In general, the best approach to entering the species' data is to open the BOW species account and just skim through it page by page (section by section, in order) for **capitalized species names (often Common Names)** and ***italicized species names (often Genus species)***; this should catch nearly all the entries and will add new ones we missed before. You may see other plain text terms like "passerines" or "corvids" and these refer to entire groups of species in an interaction - these are still important to record and should not be skipped.
 
 c) Enter interactions for the species you selected by designating the selected species in "species1_scientific" and "species1_common" in your file, and the species it interacts with in "species2_scientific" and "species2_common", based on evidence from Birds of the World Online. Refer to [**`AvianInteractionData_metadata.csv`**](AvianInteractionData_metadata.csv) for rules about how to enter each column, and the information below:
@@ -80,7 +85,7 @@ c) Enter interactions for the species you selected by designating the selected s
 - If a specific subspecies is mentioned in reference, then include in species name (*Genus species subspecies*). If not, use *Genus species*.
 
 - - IMPORTANT: For each species mentioned, enter into the spreadsheet the scientific and common names that are *as written* in the source you are reading. Sometimes this name differs from the current name for the species because of name changes. If you do determine that the name *as written* in the source is out of date, you can add a note in the "name_changes" column (e.g. "article uses scientific name Picoides pubescens for Downy Woodpecker; current BOW name is Dryobates pubescens").
-- Officially, we follow the Clement's Checklist, which is updated at least yearly, but this step is done in R code after the initial data entry.
+  - Officially, we follow the Clement's Checklist, which is updated at least yearly, but this step is done in R code after the initial data entry. 
   
 - If the article does not mention a specific species but does reference a group (e.g. "corvids", "gulls", etc.), then enter species2 as an unidentified species. For the common name, use "unid." + group mentioned, and for scientific name, use the smallest taxonomic group that captures all members of that group. For example, "corvids" would be entered as common name "unid. corvid", and scientific name "Corvidae sp.". Ask a reviewer (Phoebe or India) if you are unsure how to enter this.
 
@@ -134,7 +139,7 @@ e) If you come across a BOW account that lacks interactions (none or very few), 
     - Example text (don't forget the quotes, OR) to enter into Google Scholar Advanced Search "Find articles with all of the words" (note that this species has not had a name change):
     - **EXAMPLE: "Pyrilia haematotis" OR "Brown-hooded parrot"** - [this search yielded 216 results](https://scholar.google.com/scholar?as_q=&as_epq=&as_oq=%22Brown+hooded+parrot%22+%22Pyrilia+haematotis%22&as_eq=&as_occt=any&as_sauthors=&as_publication=&as_ylo=&as_yhi=&hl=en&as_sdt=0%2C23).
     - *If this does not turn up any results, try searching just Common or Scientific name separately.*
-  - If the Google Scholar Advanced Search returns too many records, you can try to refine the search. To refine a search you need to add AND as a term after the species names and then paste the list of interaction search keywords found in [interaction_keywords_GoogleScholar.txt]([intraction_keywords_GoogleScholar.txt](https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database/blob/f93b6597a07c2e30b8f8ebe1d396cbd393dba9c8/L0/interaction_keywords_GoogleScholar.txt)), with each separated by OR. Note that some of these words have " * " meaning that the end of the word can vary (such as prey* for prey and preying). Here is the example text for the Brown-headed parrot FYI the Google Scholar Search limit is 256 characters, including spaces):
+  - If the Google Scholar Advanced Search returns too many records, you can try to refine the search. To refine a search you need to add AND as a term after the species names and then paste the list of interaction search keywords found in [interaction_keywords_GoogleScholar.txt](intraction_keywords_GoogleScholar.txt), with each separated by OR. Note that some of these words have " * " meaning that the end of the word can vary (such as prey* for prey and preying). Here is the example text for the Brown-headed parrot FYI the Google Scholar Search limit is 256 characters, including spaces):
     - "Pyrilia haematotis" OR "Brown-hooded parrot" AND "biotic interact*" OR "species interact*" OR interact OR interspec* OR conspecific OR amensal* OR "brood parasit*" OR "egg-dump*" OR "egg dump*" OR "dump* egg*" OR sympatr* OR "same range" OR associate OR co-occur* OR commensal* OR "cavity nest*" OR woodpecker OR sapsucker OR excavat* OR flicker OR mimic* OR adopt* OR scaveng* OR "nest* together" OR "communal nest*" OR "communal roost* OR steal* OR stole* OR compet* OR crech* OR "mutual allopreen" OR comigrat* OR co-migrat* OR "migrat* together" OR "forag* flock" OR feed* OR "same flock" OR "mixed flock*" OR forag* OR hybrid OR interbreed* OR kleptoparasit* OR aggregat* OR mob* OR alarm OR "nest take*" OR trophic OR predat* OR prey*
     - Press Enter or the Search icon to the right of the search bar. This will return a set of papers and other reference literature.
     - *IMPORTANT: If nothing results from this more involved search, check how Google Scholar is coding your search in the searchbar - sometimes it adds "AND" "OR" many times between words, which is incorrect. Click on Advanced Search to see how it is coding your search - fix any errors.*
@@ -158,9 +163,9 @@ In the future it will be possible to run a program to check your file for correc
 
 ## Step 7: Upload CSV to GitHub. 
 
-Open the repository https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database/tree/main/L0/species_in_review and click the **[Add file]** button. That button has two choices, select "Upload files".   
+Open the repository https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database-Working/tree/main/L0/species_in_review and click the **[Add file]** button. That button has two choices, select "Upload files".   
 
-Here is a shortcut link to that upload form: https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database/upload/main/L0/species_in_review
+Here is a shortcut link to that upload form: https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database-Working/upload/main/L0/species_in_review
 
 You may drag the CSV file, or click the "choose your files" option to select it. 
 
@@ -239,7 +244,4 @@ c) Be careful when entering species splits into the file. We use `bbsbow_names.c
 ## Draft Flow Diagram
 
 ![avian-intxn-db-data-entry-flowchart.png](avian-intxn-db-data-entry-flowchart.png)
-
-
-
 
