@@ -58,22 +58,22 @@ b) Go to **Birds of the World Online** (BOW, via the MSU Library electronic reso
 - FIRST, navigate to the "References" page of the species account (usually the last page on the left-hand menu of the account). Make sure "Order of Appearance" is selected (not Alphabetical).
   -- Example: Northern Flicker: https://birdsoftheworld.org/bow/species/norfli/cur/references
 
-- In the browser on the References page, go to File - Save As - HTML or Page Source, and save the single References file to: /L0/bow_refs/. Save the file as: "Genus_species_bow_refs_VERSION". for "VERSION" replace with the last value in the species account doi. For example, for Northern Flicker, the BOW references filename would be: "Colaptes_auratus_bow_refs_bow.norfli.02.1.html"
+- In the browser on the References page, with a Mac: go to File - Save As - HTML or Page Source (for Mac); or with Windows: Right-click on the page (make sure you are not clicking on a link), and "Save As" "Webpage - HTML Only". You will the single References HTML file to the Google Drive location: /bow_refs/. Save the file as: "Genus_species_bow_refs_VERSION". for "VERSION" replace with the last value in the species account doi. For example, for Northern Flicker, the BOW references filename would be: "Colaptes_auratus_bow_refs_bow.norfli.02.1.html"
 
 - In general, the best approach to entering the species' data is to open the BOW species account and just skim through it page by page (section by section, in order) for **capitalized species names (often Common Names)** and ***italicized species names (often Genus species)***; this should catch nearly all the entries and will add new ones we missed before. You may see other plain text terms like "passerines" or "corvids" and these refer to entire groups of species in an interaction - these are still important to record and should not be skipped.
 
 c) Enter interactions for the species you selected by designating the selected species in "species1_scientific" and "species1_common" in your file, and the species it interacts with in "species2_scientific" and "species2_common", based on evidence from Birds of the World Online. Refer to [**`AvianInteractionData_metadata.csv`**](AvianInteractionData_metadata.csv) for rules about how to enter each column, and the information below:
 
-**URLs & Notes**
-- *Important:* you need to copy-paste the full URL for each URL page that has the source(s) of the interaction. Separate URLs are entered in separate rows if there are multiple BOW pages with information on the same interaction (e.g., “behavior” and “Introduction” pages for example). For separate locations of source information, each text pertaining to the interaction is copied into the corresponding notes column: notes for source, but on a separate row.
+**Source URLs & Text Excerpts**
+- *Important:* you need to copy-paste the full URL for each URL page that has the source(s) of the interaction. Separate URLs are entered in separate rows if there are multiple BOW pages with information on the same interaction (e.g., “behavior” and “Introduction” pages for example). 
 
  - A full URL looks like this so that “behavior” is visible: https://birdsoftheworld-org.proxy2.cl.msu.edu/bow/species/gofwoo/cur/behavior.
 
 - Refer to the species1 account on Birds of the World Online. Note that the website contains a table of contents with different sections (Introduction, Systematics, Appearance, etc.). Most of the information relevant to species interactions will occur in a few of these (namely, Behavior, Breeding, Habitat). However, please skim through ALL SECTIONS to be sure we catch all interactions with other birds.
 
-- When entering information into the **notes** column, you must copy-paste enough sentences that capture the context of the interaction. Many times this is copying an entire paragraph. First, copy-paste the Section and Heading of the paragraph (e.g., "Behavior: Agonistic Behavior"), then copy-paste the paragraph that includes the interaction. You may have several rows with the same **notes** and **source_URL** because there are many pairwise interactions from the same text passage. If the passage of text copied in the Notes cells has an old species name, don't change it there. Instead, indicate name changes in the **name_changes** column.
+- When entering information into the **text_excerpt** column, you must copy-paste enough sentences that capture the context of the interaction. Many times this is copying an entire paragraph. First, copy-paste the Section and Heading of the paragraph (e.g., "Behavior: Agonistic Behavior"), then copy-paste the paragraph that includes the interaction. You may have several rows with the same **text_excerpt** and **source_URL** because there are many pairwise interactions from the same text passage. *If the passage of text copied in the **text_excerpt** cells has an old species name, don't change it there. The **text_excerpt** must be entered exactly as it appears in the original text*. Instead, indicate name changes in the **name_changes** column.
 
-- If there are more than 4 pages that an interaction is listed on, or you have more than 4 notes about an interaction, make a new line for the interaction, and continue adding additional notes to the second line. Do not add multiple URLs to a single cell. Make the n_studies number the same for both rows, since they are referencing the same interaction from the same article.
+- Do not add multiple URLs to a single cell. Each row should reflect the unique information from a URL and note combination.
 
 - You can also cite pictures and videos featured in the articles! If possible, get the direct link by right-clicking the image/video, or clicking on the image and following the highlighted link (it will usually be from Macaulay Library or eBird). If there is no direct URL, you may use the URL for the BOW page it was found on. For the note, copy any descriptions used in BOW about the image/video, or write a brief description about it.
   
@@ -89,16 +89,23 @@ c) Enter interactions for the species you selected by designating the selected s
   
 - If the article does not mention a specific species but does reference a group (e.g. "corvids", "gulls", etc.), then enter species2 as an unidentified species. For the common name, use "unid." + group mentioned, and for scientific name, use the smallest taxonomic group that captures all members of that group. For example, "corvids" would be entered as common name "unid. corvid", and scientific name "Corvidae sp.". Ask a reviewer (Phoebe or Caroline) if you are unsure how to enter this.
 
-**Strength of evidence**
-- For “weak” or “strong” BNA_evidence, this can be less clear. Here are some guidelines:
-Enter “weak” if the description lacks a source, mentions that it is a “possible” interaction, rare interaction, or inferred interaction.
-Enter “strong” if the interaction was observed, was strongly stated, and/or has a source (this includes personal communications, government agencies, images/videos, or author's initials).
+**effect_sp1_on_sp2, effect_sp2_on_sp1, Interaction**
+- Refer to the unique types of interactions found here:
+[**AvianInteractionData_metadata_interactiondefinitions.csv**](AvianInteractionData_metadata_interactiondefinitions.csv). Enter in the appropriate interaction type, as well as the direction of the interaction specific to each species. Be careful to place the correct value in the effect columns. 
 
+**Interaction Strength**
+- For “weak” vs. “strong” interactions, this can be less clear. Here are some guidelines:
+Enter “weak” if the description is vague, mentions that it is a “possible” or "likely" (but not observed) interaction, rare interaction, or inferred interaction.
+Enter “strong” if the interaction was observed, or was strongly stated (i.e., "species 1 *often* found competing with species 2").
+
+**Species1_lifestage Species2_lifestage**
+- Species can vary in the life stages involved in the interaction. Enter the lifestage appropriate to the interaction, per species. It may differ or be the same. For example, with Brood Parasites, the interactions involved include BOTH adult and nestlings. *Egg* would be unborn individuals. *Nestlings* are individuals who have hatched and remain within a nest. *Fledglings* are young who have fledged but are not yet old enough to fend for themselves. *Juvenile* is a stage following fledgling but not yet fully mature *Adult*. If there are multiple lifestages for a given species, enter them in the same cell, separated by ";".
+  
 **Time of year**
-- Enter in the time of year that the interaction occurs in. This can be month(s), seasons, or "year-round". If nothing is reported, go to the original source to determine the time of year. If you are unsure of what timeframe the interaction occurs in, check with a reviewer (Phoebe or Caroline). 
+- Enter the time of year that the interaction occurs in. This should be month(s), seasons, or "year-round". If nothing is reported, go to the original source to determine the time of year. If you are unsure of what timeframe the interaction occurs in, check with a reviewer (Phoebe or Caroline). 
 
-**Non-breeding season**
-- If the interaction occurs during the non-breeding season (typically winter), indicate in the "nonbreedingseason" column. If the article mentions a month, you can check if it occurs during species1 breeding season using the phenology diagram (usually on the Introduction or Breeding page), or reading the Breeding page. The middle ring in the diagram in the breeding period. If you are unsure of what timeframe the interaction occurs in, check with a reviewer (Phoebe or Caroline). You will then enter a description of the timeframe in this column.
+**Breeding Migration**
+- Enter the life history timing of the interaction (year-round, migration, breeding, non-breeding) or some combination separated by ";" (e.g., breeding; migration). For example, if the interaction occurs during the non-breeding season (typically winter), indicate "non-breeding". If the article mentions a month, you can check if it occurs during species1 breeding season using the phenology diagram (usually on the Introduction or Breeding page), or reading the Breeding page. The middle ring in the diagram in the breeding period. If you are unsure of what timeframe the interaction occurs in, check with a reviewer (Phoebe or Caroline). 
 
 **Uncertain Interactions**
 - If there is any uncertainty about the interaction, enter the appropriate uncertain interaction keyword from [**`AvianInteractionData_metadata_uncertain.csv`**](AvianInteractionData_metadata_uncertain.csv). You may add additional information to the uncertain_interaction column, but make sure that the note includes an uncertain keyword that is spelled correctly (the R code will look for these keywords specifically in order to determine whether or not to keep the interaction in further analysis). If you are unsure which keyword to use, you can leave a comment and ping a reviewer, or make a note when you create an issue (Step 8).
