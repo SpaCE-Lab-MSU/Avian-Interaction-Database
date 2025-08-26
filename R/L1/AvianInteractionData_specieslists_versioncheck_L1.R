@@ -616,21 +616,27 @@ df_bbs_or_avibase_no_rare <- df_bbs_or_avibase %>%
 df_bbs_or_avibase_no_rare$L1_ca.conus.data<-"yes"
 
 # 3. Start from df_bbs_or_avibase_no_rare
-# Omit rows where origlist_dataentry_origlist has "NA" or "N/A" (capitalized) anywhere
-# Examples: "NA", "N/A; unidentified species", "hybrid species, NA"
+# Omit rows where origlist_dataentry_origlist has NA or "NA" or "N/A"
+# Examples: NA, "N/A; unidentified species", "N/A; hybrid species"
 ca.conus.dataentered <- df_bbs_or_avibase_no_rare %>%
   filter(
-    !is.na(origlist_dataentry_origlist),
-    !str_detect(origlist_dataentry_origlist, "\\bNA\\b|\\bN/A\\b")
+    !is.na(origlist_dataentry_origlist) | # Exclude actual NA values
+      origlist_dataentry_origlist != "N/A; hybrid species" | # Exclude string 
+      origlist_dataentry_origlist != "N/A; unidentified species" |
+      origlist_dataentry_origlist != "NA; no interactions from BOW bc incorporated into species above"
   )
+dim(ca.conus.dataentered) #774
 
-# 4. Keep the rows that DID have NA/N/A in origlist_dataentry_origlist
-# Rows that DO contain NA/N/A in origlist_dataentry_origlist ----
+# 4. Keep the rows that DID have NA,N/A in origlist_dataentry_origlist
+# Rows that DO contain NA,N/A in origlist_dataentry_origlist ----
 missing_dataentry15Aug2025 <- df_bbs_or_avibase_no_rare %>%
   filter(
-    is.na(origlist_dataentry_origlist) |
-      str_detect(origlist_dataentry_origlist, "\\bNA\\b|\\bN/A\\b")
+      is.na(origlist_dataentry_origlist) | # actual NA values
+      origlist_dataentry_origlist == "N/A; hybrid species" | # string 
+      origlist_dataentry_origlist == "N/A; unidentified species" |
+      origlist_dataentry_origlist == "NA; no interactions from BOW bc incorporated into species above"
   )
+dim(missing_dataentry15Aug2025) #117
 # Upon inspection, the missing_dataentry15Aug2025 species are either hybrids, 
 # species at the Genus level, or species that are not found in BOW. 
 # So the original list is close enough.
@@ -731,6 +737,7 @@ rows.gone <- df_bbs_or_avibase_no_rare$scientific_name %in% extinct.or.extirpate
 df_bbs_or_avibase_no_rare$ca.conus.rejection[rows.gone] <- "no BBS, extinct/extirpated/critically endangered/super rare"
 
 # Species in CANADA/CONUS that we have already entered in 'species' folder:
+# Fratercula arctica                    Atlantic Puffin
 # Loxia sinesciuris                     Cassia Crossbill
 # Synthliboramphus craveri              Craveri's Murrelet
 # Vermivora bachmanii                   Bachman's Warbler
@@ -741,7 +748,6 @@ df_bbs_or_avibase_no_rare$ca.conus.rejection[rows.gone] <- "no BBS, extinct/exti
 # Do the final check on these interactions.
 
 # CANADA/CONUS Species that we don't have entered and should be entered now:
-# Fratercula arctica  Atlantic Puffin
 # Synthliboramphus scrippsi Scripps's Murrelet
  
 # Make sure these are the ones left:
@@ -749,7 +755,7 @@ df_bbs_or_avibase_no_rare2 <- df_bbs_or_avibase_no_rare %>%
   filter(is.na(AOU_bbs2024))
 dim(df_bbs_or_avibase_no_rare2) #62 rows
 print(df_bbs_or_avibase_no_rare2[,c(1:2,30)],n=100)
-# Yes these match. Now update the 4 species interaction CSVs above to ensure 
+# Yes these match. Now update the 3 species interaction CSVs above to ensure 
 # they are included when merged in.
 
 # Omit the species that have a ca.conus.rejection value
