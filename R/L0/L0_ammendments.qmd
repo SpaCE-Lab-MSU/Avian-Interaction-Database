@@ -1,0 +1,147 @@
+---
+title: "Ammend L0 stitched data"
+author: 
+  - Phoebe L. Zarnetske
+  - Patrick Bills
+  - Emily Parker
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    embed-resources: true
+editor: visual
+date: 08/27/2025
+date-format: iso
+---
+
+- PROJECT: Avian Interaction Database & Avian Meta-Network
+- AUTHORS: Phoebe Zarnetske, Pat Bills, Emily Parker
+- COLLABORATORS: Vincent Miele, Stephane Dray
+- DATA INPUT: Data entry CSV files in L0 folder
+- DATA OUTPUT: L0 data: AvianInteractionData_L0.csv
+- DATE: 20 Mar 2023 - AUGUST 2025
+
+
+*Run date: `{r} Sys.Date()`*
+
+## Ammendments and Corrections L0 to L1
+
+For reviewing an L0 data file from data entry for corrections, see the script \[LINK\].
+
+This will apply similar corrections to the file when stitched together to ensure it's as correct as possible.
+
+### Setup.
+
+This requires the script 'stitch.rmd' \[LINK\] to be run to create a stitched file to correct.
+
+**The files paths used for this run are:**
+
+```{r}
+#| echo: false
+#| warnings: false
+
+
+# load in all required packages in function script
+# optionally supress messages for noisey packages
+suppressMessages(
+  source(here::here('R/L0/L0_functions.R'))
+)
+
+# This uses functions in R/L0/L0_functions_files which also imports R/config.R
+# which sets the locations of the data folders. 
+
+file_paths <- get_file_paths() 
+print(file_paths)
+# for compatibility with code copied from previous version
+
+L0_dir <- file_paths$L0
+if(!dir.exists(L0_dir)) {
+  print("can't find the L0 directory")
+  print(L0_dir)
+  stop()
+}
+
+```
+
+## Reading in L0 file
+
+**set L0 file location**
+
+*update this to work on different files*
+
+```{r}
+# copy this file name from L0_stitch.rmd to use the same 
+intxnsL0.filename <-"AvianInteractionData_L0_test.csv"
+
+```
+
+Full file path for this session:
+
+```{r}
+
+#| echo: false
+
+intxnsL0.filepath <- file.path(file_paths$L0,intxnsL0.filename) 
+print(intxnsL0.filepath)
+
+```
+
+
+```{r}
+#| label: read_data
+#| echo: false
+if (file.exists(intxnsL0.filepath)) {
+  intxnsL0.wide <- read.csv(intxnsL0.filepath)
+  print(nrow(intxnsL0.wide))
+  tibble(intxnsL0.wide)
+} else {
+  print("could not find path to this CSV")
+}
+```
+
+## Wide to Long
+
+Biw collapse multiple sources now spread across columns A, B, C, D into multiple rows, which will increase the total rows in the raw file.
+
+New row count:
+
+```{r}
+#| label: wide_to_long
+#| echo: false
+
+# rename to make it easy on the tidyr functions
+
+intxnsL0 <- intxnsL0.wide |> 
+      dplyr::rename(source_URLXsource1 = sourceA_URL, 
+                    source_URLXsource2 = sourceB_URL, 
+                    source_URLXsource3 = sourceC_URL, 
+                    source_URLXsource4 = sourceD_URL) |>
+      dplyr::rename(text_excerptXsource1 = notesA, 
+                    text_excerptXsource2 = notesB, 
+                    text_excerptXsource3 = notesC, 
+                    text_excerptXsource4 = notesD) |>
+      tidyr::pivot_longer(
+        cols = contains("source"),
+        names_to = c(".value", "source"), 
+        names_sep = "X", 
+        values_drop_na = TRUE
+  )
+
+print(nrow(intxnsL0))
+```
+
+New row names:
+
+```{r}
+#| echo: false
+names(intxnsL0)
+
+```
+
+## Data Cleaning
+
+```{r}
+# Minor cleaning on int.raw: remove rows with NA in both columns of scientific names
+intxnsL0 <-intxnsL0 [!with(intxnsL0 ,is.na(species1_scientific)& is.na(species2_scientific)),]
+  
+```

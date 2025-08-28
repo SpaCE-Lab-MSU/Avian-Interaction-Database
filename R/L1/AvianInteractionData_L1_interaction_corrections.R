@@ -44,18 +44,18 @@ source(file.path(R_dir, 'AvianInteractionData_functions.R'))
 ####### INTERACTIONS
 
 
-correct_interactions <- function(intxns12) {
+correct_interactions <- function(intxns) {
   # read in file use to store corrections to interactions column, and use it to standardize
   interaction_corrections.df <- read_csv(corrections_file,"R/L0/text_corrections.csv")
 
-  intxns12$interaction <- standardize_text_column(intxns12$interaction, interaction_corrections.df )
+  intxns$interaction <- standardize_text_column(intxns$interaction, interaction_corrections.df )
 
 
   ### NOTEBOOK
   # Remove the blank entries for interaction type if they exist
-  #dim(intxns12)
-  intxns12 <- intxns12 %>% filter(!(interaction==""))
-  # dim(intxns12)
+  #dim(intxns)
+  intxns <- intxns %>% filter(!(interaction==""))
+  # dim(intxns)
   # no blanks exist
 
 
@@ -149,18 +149,18 @@ main_intxn_correct<- function(output_file_name ="intxns_types_check.csv" ){
 
 #### BROWN HEADED COWBIRD
 ## move to notebook to check this data and then add the fix in the function above
-bhcb<-function(intxns12){
+bhcb<-function(intxns){
   # Check if brood parasitism is coded correctly for Brown Headed Cowbird. Did
   # this by filtering out these species in exported csv... for next iteration, do
   # this in code. As of Dec. 18, 2023, all are correct. There are a few funny ones
   # but they are checked and ok:
   # Print out any results that are not "Not Found"
-  bhcb.sp1 <- intxns12 %>%
+  bhcb.sp1 <- intxns %>%
     filter(species1_common == "Brown-headed Cowbird")
   bncb.sp1.int.entries<-bhcb.sp1 %>% distinct(interaction, effect_sp1_on_sp2, effect_sp2_on_sp1)
   arrange(bncb.sp1.int.entries, by=interaction)
   # These make sense
-  bhcb.sp2 <- intxns12 %>%
+  bhcb.sp2 <- intxns %>%
     filter(species2_common == "Brown-headed Cowbird")
   bncb.sp2.int.entries<-bhcb.sp2 %>% distinct(interaction, effect_sp1_on_sp2, effect_sp2_on_sp1)
   arrange(bncb.sp2.int.entries, by=interaction)

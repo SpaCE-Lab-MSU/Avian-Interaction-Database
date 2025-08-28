@@ -134,6 +134,16 @@ get_file_paths <- function(config_file = NULL){
   configuration$L0 <- file.path(DATA_FOLDER, 'L0')
   configuration$L1 <- file.path(DATA_FOLDER, 'L1')
 
+  # other optional configuration
+  default_checklist_folder <- file.path(configuration$L0, "species_checklists")
+  if(exists("CHECKLIST_FOLDER")){
+    configuration$CHECKLIST_FOLDER <- CHECKLIST_FOLDER
+  } else {
+    configuration$CHECKLIST_FOLDER <- CHECKLIST_FOLDER
+
+  }
+
+
 
   return(configuration)
 

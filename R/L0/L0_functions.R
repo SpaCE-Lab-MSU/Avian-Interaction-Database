@@ -118,7 +118,9 @@ get_main_names_folder <- function(files = list_csvs()){
 }
 
 
-standard_columns <- c(
+##### UPDATE IF COLUMNS CHANGE
+
+standard_columns<- c(
     "species1_common",
     "species2_common",
     "species1_scientific",
@@ -146,6 +148,46 @@ standard_columns <- c(
     "DatabaseSearchURL"
 )
 
+# standard columns are those used after stitching
+# the following columns are in the data entry list but not in the std columns
+# "OLDsourceA"
+# "OLDsourceB"
+# "name_changes",
+# "other_species1",
+# "DatabaseSearchURL"
+
+
+##### UPDATE IF COLUMNS CHANGE
+
+dataentry_columns <- c(
+  "species1_common",
+  "species2_common",
+  "species1_scientific",
+  "species2_scientific",
+  "effect_sp1_on_sp2",
+  "effect_sp2_on_sp1",
+  "interaction",
+  "BOW_evidence",
+  "n_studies",
+  "OLDsourceA",
+  "OLDsourceB",
+  "sourceAupdatedURL",
+  "sourceBupdatedURL",
+  "sourceCupdatedURL",
+  "sourceDupdatedURL",
+  "nonbreedingseason",
+  "notesA",
+  "notesB",
+  "notesC",
+  "notesD",
+  "recorder",
+  "entry_date",
+  "uncertain_interaction",
+  "entry_changes"
+)
+
+##### DATA ENTRY COLUMN SPECS FOR READING
+##### UPDATE IF COLUMNS CHANGE
 
 avian_intxn_column_spec <-
   readr::cols(
@@ -175,9 +217,64 @@ avian_intxn_column_spec <-
     entry_changes = readr::col_character()
   )
 
+#' check columns in data entry sheet
+#'
+#' currently this only prints warning if columns deviate from the list of
+#' data entry columns above, that is missing or extra columns
+#' this is useful for discovering problems only and doesn't fix
+
+#' @param df data frame from 'raw' data entry csv
+#' @returns TRUE if all columns are present even if there are extra,
+#'          FALSE if any are missing
+check_dataentry_columns <- function(intxns.df){
+  # first add in the "optional" columns: B,C,D versions of url and notes
+
+  if (! "sourceBupdatedURL" %in% names(intxns.df)) { intxns.df$sourceBupdatedURL <- NA }
+  if (! "sourceCupdatedURL" %in% names(intxns.df)) { intxns.df$sourceCupdatedURL <- NA }
+  if (! "sourceDupdatedURL" %in% names(intxns.df)) { intxns.df$sourceDupdatedURL <- NA }
+
+  if (! "notesB" %in% names(intxns.df)) { intxns.df$notesB <- NA }
+  if (! "notesC" %in% names(intxns.df)) { intxns.df$notesC <- NA }
+  if (! "notesD" %in% names(intxns.df)) { intxns.df$notesD <- NA }
+
+  no_missing_columns <- TRUE
+  missing_dataentry_cols <- setdiff(dataentry_columns, names(intxns.df))
+  if(length(missing_dataentry_cols)>0){
+    msg <- paste("columns missing:", missing_dataentry_cols)
+    warning(msg)
+    no_missing_columns <- FALSE
+  }
+
+  # we don't really care about extra columns as those are ok to be missing
+  extra_dataentry_cols <- setdiff(names(df), dataentry_columns)
+  if(length(extra_dataentry_cols)>0){
+    msg = paste("extra columns: ", extra_dataentry_cols)
+    warning(msg)
+
+  }
+
+  return(no_missing_columns)
+}
+
+
+##### UPDATE IF COLUMNS CHANGE
+
 #' Convert columns to appropriate data types
+#'
+#' given a list of columns in the data entry sheet that must be character,
+#' converts those to char. to ensure if a number is read in it becomes char. and
+#' ensures a handful of numeric columns are forced to be numeric
+#'
+#' This function has the names of the columns hard coded and so must be edited
+#' if the columns change
+#'
+#' this is not needed if using the readr::read_csv with a spec
+#' @param df interaction data frame, amended after reading in (eg. col names
+#' updated)
+#' @returns data frame with character columns as needed
 amend_intxn_columns <- function(df) {
   # see standard_columns data above
+
 
   char_cols <- c("species1_common", "species2_common", "species1_scientific", "species2_scientific",
                  "interaction", "BOW_evidence", "sourceA_URL", "sourceB_URL", "sourceC_URL", "sourceD_URL",
@@ -206,14 +303,20 @@ read_and_amend <- function(file) {
       readr::read_csv(file, col_types = avian_intxn_column_spec),
       error = function(e) {
         warning(paste("Failed to read file:", file, "| Error:", e$message))
-        return(NULL)
+        return(NA)
       }
     )
   problems.df <- problems(df)
   if(nrow(problems.df) > 0){
-    print(file)
+    # print(file)
     print(problems.df)
   }
+
+  # this prints the file name if there are problems, but it will keep
+  # going anyway.
+
+  all_cols_present <- check_dataentry_columns(df)
+  if(!all_cols_present){ print(file)}
 
   if (is.null(df) || nrow(df) == 0) return(NULL)  # Skip empty or unreadable files
 
@@ -223,13 +326,12 @@ read_and_amend <- function(file) {
   if ("sourceCupdatedURL" %in% names(df)) names(df)[names(df) == "sourceCupdatedURL"] <- "sourceC_URL"
   if ("sourceDupdatedURL" %in% names(df)) names(df)[names(df) == "sourceDupdatedURL"] <- "sourceD_URL"
 
+
   # ADD ANY MISSING STANDARD COLUMNS WITH NA VALUES
   missing_cols <- setdiff(standard_columns, names(df))
   df[missing_cols] <- NA
   df <- df %>% dplyr::select(dplyr::all_of(standard_columns)) # SELECT STANDARD COLUMNS
 
-  # TODO uncomment this here, instead of after reading them all in.  This allows for
-  # reading a single file for appending
   df<- amend_intxn_columns(df)
   return(df)
 }
@@ -398,7 +500,7 @@ write_data_file<- function(df, filename, data_dir){
 #' new csv, overwiting any existing file.  This is in it's own function
 #' to allow inspection of the merged data frame before writing
 save_L0_intxns<- function(intxnsL0, intxns_file_name = "AvianInteractionData_L0.csv", L0_dir = "L0") {
-  data_file_path <- write_data_file(df = intxnsL0, filename = "AvianInteractionData_L0.csv", data_dir = L0_dir)
+  data_file_path <- write_data_file(df = intxnsL0, filename = intxns_file_name, data_dir = L0_dir)
   return(data_file_path)
 }
 
@@ -468,32 +570,38 @@ uncertainty_keywords = c("alleged",
   "unsubstantiated"
 )
 
-#' keyword row filter
+#' L1:  keyword row filter
 #'
 #' remove rows that match keyword in field
-#' parameters
-#'  df:  any data frame
-#'  keywords: data from of keywords such as read in by function above
-#'  uncertain_save_filepath: send full path of file to save the rows that were removed
+#' @param df any data frame with column "uncertain_interaction"
+#' keywords: data from of keywords such as read in by function above
+#' uncertain_save_filepath: send full path of file to save the rows
+#' that were removed
 #' example: filtered.df <- remove_rows_by_keywords(atx.df, uncertainty_keywords)
-#'
-remove_rows_by_keyword <- function(df, keywords, uncertain_save_filepath= NULL){
+#' @param keywords vector of character
+#' @param uncertain_save_filepath if provided, will save the rows to a file,
+#'    default NULL which means no saving
+#' @returns data frame of remaining rows
+remove_rows_by_keyword <- function(df, keywords, remove_blanks = FALSE, uncertain_save_filepath= NULL){
 
-  # save the field name in a variable in the hope we can make this a generic filtering function
+  # save the field name in a variable in the hope we can make this a generic
   field_name = "uncertain_interaction"
 
-  # remove rows with blanks in the field name
-  df <- df[! ( df[field_name]=="" | is.na(df[field_name]) ), ]
 
+  # remove rows with blanks in the field name - in this case, don't we want to keep blanks?
+  if(remove_blanks == TRUE){
+    df <- df[! ( df[field_name]=="" | is.na(df[field_name]) ), ]
+  }
   # df <- df %>% dplyr::filter(uncertain_interaction=="") %>% dplyr::filter(is.na(uncertain_interaction))
 
   # create the grep expression from all the keywords e.g may|maybe|might...
   grep_expression <- paste(keywords, collapse = "|")
 
   df <- df[!grepl(grep_expression, df[field_name],ignore.case = TRUE),]
+
   if(! is.null(uncertain_save_filename)) {
     uncertain_rows.df <-  df[grepl(grep_expression, df[field_name],ignore.case = TRUE),]
-    write_data_file(uncertain_rows.df, uncertain_save_filepath, "L0")
+    write.csv(uncertain_rows.df, uncertain_save_filename,row.names = F, fileEncoding = "UTF-8")
     print(paste("wrote file listing rows that were filtered out to ", uncertain_save_filepath))
   }
 
@@ -519,6 +627,40 @@ standardize_text_column <- function(text_vector, corrections.df) {
   return(corrected_text_vector)
 }
 
+#' convert multi source cols (wide) to arows (long)
+#'
+#' given a dataframe of interactions with sourceA, sourceB etc
+#' assume columns sourceA_URL, sourceB_URL, sourceC_URL, sourceD_URL
+sources_wide_to_long<- function(intxnsL0.wide){
+  # check that all columns are there
+  if(! ( all(c("notesA", "notesB", "notesC", "notesD") %in% names(intxnsL0.wide)) &&
+         all(c("sourceA_URL","sourceB_URL","sourceC_URL","sourceD_URL") %in% names(intxnsL0.wide))
+       )
+    ) {
+      warning("data frame does not have all the required rows notesA,... and/or sourceA_URL,... A through D.  Returning NA")
+      return(NA)
+   }
+
+
+  intxnsL0 <- intxnsL0.wide |>
+      dplyr::rename(source_URLXsource1 = sourceA_URL,
+                    source_URLXsource2 = sourceB_URL,
+                    source_URLXsource3 = sourceC_URL,
+                    source_URLXsource4 = sourceD_URL) |>
+      dplyr::rename(text_excerptXsource1 = notesA,
+                    text_excerptXsource2 = notesB,
+                    text_excerptXsource3 = notesC,
+                    text_excerptXsource4 = notesD) |>
+      tidyr::pivot_longer(
+        cols = contains("source"),
+        names_to = c(".value", "source"),
+        names_sep = "X",
+        values_drop_na = TRUE
+      )
+
+  return(intxnsL0)
+
+}
 
 ################################
 # end of functions

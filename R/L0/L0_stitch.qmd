@@ -1,0 +1,213 @@
+---
+title: "Avian Interaction Database: L0 File Preparation"
+author: 
+  - Phoebe L. Zarnetske
+  - Patrick Bills
+  - Emily Parker
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    embed-resources: true
+editor: visual
+date: 08/27/2025
+date-format: iso
+---
+
+- PROJECT: Avian Interaction Database & Avian Meta-Network
+- AUTHORS: Phoebe Zarnetske, Pat Bills, Emily Parker
+- COLLABORATORS: Vincent Miele, Stephane Dray
+- DATA INPUT: Data entry CSV files in L0 folder
+- DATA OUTPUT: L0 data: AvianInteractionData_L0.csv
+- DATE: 20 Mar 2023 - AUGUST 2025
+- Next script to run: R/L1/AvianInteractionData_L1.qmd
+
+*Run Date: `r Sys.Date()`*
+
+### Introduction
+
+This reads the various directories for CSVs in different stages, checks the files 
+and combines them. 
+Issues with files or data are reported, and total counts of files and rows 
+added are listed. There are different folders checked here in different phases of
+
+Before stitching files together, review and correct raw data files (e.g. species CSV file), using the notebook L0_file_review.rmd
+
+The code here saves the file in the Data folder in L0 in the configuration of 
+`filepaths.R`.  see below
+
+### Setup
+
+*First, setup the folders and files from configuration and check them*
+
+```{r}
+
+#| echo: false
+#| warnings: false
+
+# several of the packages print out annoying warnings when loaded
+#suppressMessages(
+  source(here::here('R/L0/L0_functions.R'))
+#)
+
+# This uses functions in R/L0/L0_functions_files which also imports R/config.R
+# which sets the locations of the data folders. 
+
+file_paths <- get_file_paths() 
+```
+
+
+**File paths used for this run:**
+
+```{r, echo=FALSE,}
+print(file_paths)
+```
+
+
+## Processing CSVs
+
+There are three main data folders for data files in different states. For each state, collect the list of files and o
+
+### 1 Fully Checked CSV files for a species. `intxnsL0sp`
+
+```{r}
+csv_file_group_name='checked'
+csv_file_path = file.path(file_paths$L0, "species")
+# filter or add in google drive files here
+checked_file_list <- list.files(path = csv_file_path , pattern = ".*\\.csv", 
+  full.names = TRUE)
+
+paste(csv_file_path, ":", csv_file_group_name, "files to process", length(checked_file_list))
+```
+
+Stitching Files together: 
+
+```{r}
+# create an intxns object/list with different aspects saved to allow for analysis
+intxnsL0sp <- L0_stitch(
+                csv_file_list = checked_file_list, 
+                csv_file_group_name = csv_file_group_name
+                )
+# convert to 'long' format.  See L0_functions
+intxnsL0sp$intxns <- sources_wide_to_long(intxnsL0sp$intxns)
+
+# intxnsL0sp is a list with several items to track counts of things and files
+# see L0_functions.R for details
+
+nrow(intxnsL0sp$intxns)
+
+```
+
+Rows in stitched file: `{r} nrow(intxnsL0sp$intxns))`
+
+*Optionally examine the full stitched data frame:*
+
+```{r, echo=FALSE}
+tibble::as_tibble(intxnsL0sp$intxns)
+```
+
+```{r, echo=FALSE}
+paste("Count of species after binding:", as.character(intxnsL0sp$count))
+```
+
+Comparison of Pre- and Post-Binding Values:
+
+```{r,echo=FALSE}
+print_binding_report(intxnsL0sp)
+```
+
+### 2 not fully Checked Species in BBS `intxnsL0sptemp`
+
+```{r}
+csv_file_group_name='species_temp'
+csv_file_path = file.path(file_paths$L0, "species_temp")
+# filter or add in google drive files here
+temp_file_list <- list.files(path = csv_file_path , pattern = ".*\\.csv", 
+  full.names = TRUE)
+
+paste(csv_file_path, ":", csv_file_group_name, "files to process",  length(temp_file_list)) 
+
+```
+
+```{r}
+
+intxnsL0sptemp <- L0_stitch(
+                    csv_file_list = temp_file_list, 
+                    csv_file_group_name=csv_file_group_name
+                    )
+paste("Count of species after binding",intxnsL0sptemp$count)
+
+```
+
+```{r,echo=FALSE}
+print_binding_report(intxnsL0sptemp)
+```
+
+### 3 Data files (species) to be reviewed or in the process of being reviewed 
+
+(variable named `intxnsL0spir` ) 
+
+```{r}
+csv_file_group_name='species_in_review'
+csv_file_path = file.path(file_paths$L0, "species_in_review")
+# filter or add in google drive files here
+in_review_file_list <- list.files(path = csv_file_path , pattern = ".*\\.csv", 
+  full.names = TRUE)
+
+paste(csv_file_path, ":", csv_file_group_name, "files to process", length(in_review_file_list))
+```
+
+```{r}
+
+intxnsL0spir <- L0_stitch(
+                  csv_file_list = in_review_file_list, 
+                  csv_file_group_name=csv_file_group_name
+                  ) 
+
+```
+
+*Count of species after binding: `{r} intxnsL0spir$count`*
+
+
+```{r,, echo=FALSE}
+paste("Count of species after binding:", as.character(intxnsL0spir$count))
+```
+
+```{r,echo=FALSE}
+print_binding_report(intxnsL0spir)
+```
+
+Before saving the species to file, un-comment and run the following to merge the species and species_in_review interaction data into checked species. These are lists with the data frames in the element `intxns`
+
+```{r}
+# echo both in-review and checked
+# intxnsL0 <-rbind(intxnsL0sp$intxns, intxnsL0spir$intxns)
+# or, do not echo in-review, only checked
+
+intxnsL0 <- intxnsL0sp$intxns
+
+```
+
+**Count of species in saved L0:**
+
+```{r,, echo=FALSE}
+ nrow(intxnsL0)
+```
+
+> Note that some species1 in a given species1 csv could also be other species because of entering many pair-wise interactions in, for example, mixed flock entry. Any duplicates will be omitted later.
+
+## Save Results to Disk
+
+export the data to become the current L0 interaction data, overwrite any existing file
+
+```{r, echo=FALSE}
+# change the name here to save a test file or overwrite previous version
+intxns_file_name <- "AvianInteractionData_L0_test.csv"
+
+L0_file <- save_L0_intxns(intxnsL0, 
+                          intxns_file_name,
+                          L0_dir = file_paths$L0)
+
+print(L0_file)
+
+```

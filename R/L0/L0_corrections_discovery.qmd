@@ -1,0 +1,276 @@
+---
+title: "Avian Interaction Database Correction Discovery"
+author: 
+  - Phoebe L. Zarnetske
+  - Patrick Bills
+  - Emily Parker
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    embed-resources: true
+editor: source
+date: 08/27/2025
+date-format: iso
+
+---
+
+- PROJECT: Avian Interaction Database & Avian Meta-Network
+- AUTHORS: Phoebe Zarnetske, Patrick Bills, Emily Parker
+- COLLABORATORS: Vincent Miele, Stephane Dray, R
+- DATA INPUT: Data entry CSV files in L0 folder
+- DATA OUTPUT: L0 data: AvianInteractionData_L0.csv
+- DATE: 20 Mar 2023 - AUGUST 2025
+- Next script to run: R/L0/L0_stitch.qmd
+
+*Run Date: `r Sys.Date()`*
+
+
+
+```{r}
+# load our functions and configuration
+source(here::here('R/L0/L0_functions.R'))
+# set the default for this var
+stop_on_error <- TRUE
+
+```
+
+# Data Corrections: Avian Interaction Database Project
+
+### Overview
+
+As part of manual data entry, CSV files may contain errors to be repaired. 
+These are typos, obvious spelling errors, blanks, mis-coding etc that require not explanation and that would have been fixed by the data entry person if discovered at the time of data entry.  These are not changes to the original source material, but fixes to errors made during coding and data entry of the source material using the protocol.  This is a step in the usual review process. 
+
+The overal process here is to discover these mistakes and correct them directly in the source CSV files and commit the changes to git, or to gather a list of corrections and apply them.  Since this is a meta-analysis and not field or lab data where lab procedures needs to be recorded, an L0 data file with data entry corrections remain L0 data.   
+
+A 'discovery' is process for finding a data item the needs correction: extra spaces, typo, miscoding, etc.
+
+For major changes and cleaning requiring transparency, such as re-coding categorical variables different from the protocol, or updating taxonmy, or other updates deviating from the source material, see the L1 directory. 
+
+**Protocol/Algorithm**
+
+1. read in all CSV files as a data frame into a list keyed by filename with row number assigned
+   - if there are errors reading the CSV, correct them immediately until all CSVs may be read.  if the CSV is problematic, put it back in the to-be-reviewed folder for futher manual review 
+2. apply the discovery to each data frame and report rows id and the issue found
+3. correct the issue discovered in the CSV data file and commit
+   - using a CSV editor edit the text and preserve CSV format (UTF-8, standard ISO date format) and save
+   - commit the correct for that one file to git with the commit message describing why it was change (don't need to specify the rows that were changes and git will show these).  If git is properly configured you 
+
+
+### set-up folder paths from configuration
+
+
+```{r}
+
+#  get the file paths for this project. See README.md for how to set those up
+file_paths <- get_file_paths()
+print("File Paths used for this run:")
+print(file_paths)
+
+
+if(!dir.exists(file_paths$SYNC_DATA_FOLDER)) { 
+  warning("can't find SYNC_DATA_FOLDER, stopping program.  see README.md for how to set this")
+  stop()
+}
+if(!dir.exists(file_paths$DATA_FOLDER)) { 
+  warning("can't find DATA_FOLDER, stopping program. see README.md for how to set this")
+  stop()
+}
+
+if(!dir.exists(file_paths$L0)) { 
+  warning("can't find L0, stopping program. see README.md for how to set this")
+  stop()
+}
+
+```
+
+### set behavior
+
+You may want to print all errors, or stop of the first error you find and fix it. 
+
+This setting is made above to ensure it's set at least once, but mentioned here to 
+reinforce what the setting is: 
+
+`stop_on_error`:  if TRUE, stop on the first file with an error, if FALSE, show 
+all errors in all files, which may print many errors
+```{r}
+# set this here
+# stop_on_error <- TRUE
+stop_on_error <- FALSE
+```
+
+### get file list
+
+```{r}
+csv_file_group_name='checked'
+csv_file_list = get_data_file_list(file_paths, "species")
+# note this file list will have the FULL path including user name
+  # but we want to keep that list of files, so just store the file name alone
+  # this means if they came from different folders we may lose that info
+  # this includes all the empty files as well, if any
+   #intxns$file_list <- unlist(lapply(csv_file_list,basename))
+
+```
+
+## discover: which files don't have the correct columns?
+
+```{r}
+
+# this code is the same as in L0 - trying to get it to display the warning/problem
+# intxns <- list()
+# intxns$list_of_df <- Filter(Negate(is.null), lapply(csv_file_list, read_and_amend))
+# intxns$intxns <- dplyr::bind_rows(intxns$list_of_df) |> dplyr::distinct()
+
+for(speciesfile in csv_file_list){
+  intxns.df <- read_and_amend(speciesfile)
+}
+
+```
+
+## discover: which files have have empty species1_scientific column? 
+
+```{r}
+files_with_blank_rows = data.frame()
+for(speciesfile in csv_file_list){
+  intxns.df <- read_and_amend(speciesfile)
+  if(is.null(intxns.df) || nrow(intxns.df)==0){
+      # optional - it's ok if a file is blank
+      # UNCOMMENT THIS TO FIND FILES WITH
+      # print(paste(speciesfile, "no data"))
+  } else {
+    # find blank rows but filter out rows that are ALL blank
+    missing_species1_scientific  <- intxns.df[is.na(intxns.df$species1_scientific),] %>%
+          dplyr::filter(dplyr::if_any(dplyr::everything(), ~!is.na(.)))
+    
+    if(is.null(missing_species1_scientific)){
+      continue
+    }
+    
+    if(nrow(missing_species1_scientific) > 0){
+      # some blank rows are at the end of the data frame and it's not an error and we skip those
+      # add in file name so we can id where the row came from
+      missing_species1_scientific<- data.frame(filename =basename(speciesfile), missing_species1_scientific)
+      knitr::kable(missing_species1_scientific)
+      files_with_blank_rows <- dplyr::bind_rows(files_with_blank_rows, missing_species1_scientific)
+      if(stop_on_error==TRUE) break
+    }
+  }
+}
+print(tibble::tibble(files_with_blank_rows))
+```
+## discover: which files have species1 that does not match filename
+
+this is only useful in some circumstances.  
+this accumulates all rows that the species1 scientific name does not match 
+the file name. This can happen if the data entry person updated the name to 
+current
+
+```{r}
+files_with_mismatch = data.frame()
+
+for(speciesfile in csv_file_list){
+  base_file_name <- basename(speciesfile)
+
+  intxns.df <- read_and_amend(speciesfile)
+  if(is.null(intxns.df)) {
+    print(paste(speciesfile, "is null"))
+    next
+  }
+
+  if(! 'species1_scientific' %in% names(intxns.df)){
+    print(paste(basename(speciesfile), "does not have species1_scientific column"))
+    next
+  }
+  
+  species_from_file <-  get_main_name(base_file_name) |> stringr::str_replace_all("_", " ")
+  mismatched_rows <- filter(intxns.df, tolower(species1_scientific) != species_from_file)
+  if(!is.null(mismatched_rows) && nrow(mismatched_rows) > 0 ){
+    mismatched_rows<- data.frame(filename =base_file_name, mismatched_rows)
+    files_with_mismatch <- dplyr::bind_rows(files_with_mismatch, mismatched_rows)
+  }
+}
+tibble::tibble(files_with_mismatch)
+```
+
+## Typos
+
+### Interaction miscoding
+
+**Find typos in interactions
+```{r}
+
+all_interactions <- c(    "hybridization",
+		"co-occur",
+		"play",
+		"courtship",
+		"copulation",
+		"copulation?",
+		"breeding",
+		"combined species"
+		)
+
+
+
+```
+
+**Find those interactions that SHOULD BE zero but aren't**
+
+These interactions are all 0,0.  Edit this list as necessary
+
+```{r}
+interactions.0 <- c(
+    "hybridization",
+		"co-occur",
+		"play",
+		"courtship",
+		"copulation",
+		"copulation?",
+		"breeding",
+		"combined species")
+```
+
+
+```{r}
+# function to check for things that should be zero, but aren't
+#| echo: false
+
+discover_interaction_errors <- function(intxns.df){
+  
+  # create empty data frame to hold the errors with an R trick
+  intxn_errors.df <- intxns.df[FALSE,]
+  
+  # loop through all the 0,0 interactionss and collect errors
+  for (intxn.keyword in interactions.0){
+      intxn_errors.df <- dplyr::bind_rows(intxn_errors.df, 
+                               intxns.df[intxns.df$interaction == intxn.keyword & intxns.df$effect_sp1_on_sp2!= 0, ])
+      intxn_errors.df <- dplyr::bind_rows(intxn_errors.df, 
+                               intxns.df[intxns.df$interaction == intxn.keyword & intxns.df$effect_sp2_on_sp1!= 0, ])
+  }  
+  
+  return(unique(intxn_errors.df))
+}
+```
+
+The following have interaction mis-codings: 
+
+```{r}
+
+for(speciesfile in csv_file_list){
+  # read one and check it
+  intxns.df <- read_and_amend(speciesfile)
+
+  if(nrow(intxns.df)== 0 ) continue
+  
+  e.df <- discover_interaction_errors(intxns.df)
+ 
+  if(nrow(e.df)>0){
+    ## replace all values with 0,0 when making corrections in L1
+    print(speciesfile)
+    print(e.df)
+    if(stop_on_error ==TRUE) stop()
+  }
+} 
+
+``` 
+

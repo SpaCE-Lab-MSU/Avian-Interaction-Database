@@ -1,0 +1,191 @@
+---
+title: 'Avian Interaction Database: Data File Repository Reporting'
+author: 
+  - Phoebe L. Zarnetske
+  - Patrick Bills
+  - Emily Parker
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    embed-resources: true
+editor: source
+date: 08/27/2025
+date-format: iso
+---
+
+*Run date: `{r} Sys.Date()`*
+
+# L0 Data Preparation: Stitch Raw Species Files
+
+- PROJECT: Avian Interaction Database & Avian Meta-Network
+- AUTHORS: Phoebe Zarnetske, Pat Bills, Emily Parker
+- COLLABORATORS: Vincent Miele, Stephane Dray
+- DATA INPUT: Data entry CSV files in L0 folder
+- DATA OUTPUT: L0 data: AvianInteractionData_L0.csv
+- DATE: 20 Mar 2023 - AUGUST 2025
+- Next script to run: 
+
+## Report of files present in L0 folders
+
+Data is collected in the Avian Interaction database in the form of CSV files named for the species, and checked into a git repository for tracking.  See [data entry protocol](#).  However to make it easy to enter these data, we are using Google Sheets spreadsheet for the entry, and then saving as CSVs into a "to be reviewed" folder.  CSV species data files in this folder is checked by a data manager and moved to the main 'species' folder.   
+
+This notebook counts files in various states and checks if shows he counts of files, whichspecies and their locations.  Run this to count the current state. 
+
+### Requirements: 
+
+You must have access to the google drive folder, that is, the google drive software installed and connected to this computer.  You must have access to our working git repository with in-progress CSV data files, and have cloned the repository on this computer, and updated it recently.  You must configure this file or your environment to the paths where google drive files and CSV files are stored.   
+
+```{r}
+#| echo: false
+#| warnings: false
+
+L0_functions_file <- here::here('R/L0/L0_functions.R')
+
+source(L0_functions_file)
+
+suppressMessages({
+library(magrittr)
+library(dplyr)
+library(stringr)
+})
+  
+# library(tidyverse)
+
+```
+
+## Folder path configuration
+
+Setup the paths to the folders, requires the file 'config.yml' set in home directory and 
+the code will raise warnings if it isn't.  See [README](../../README.md) for details. 
+
+To use this notebook on Mac, you have to allow full access to Rstudio and/or Terminal 
+ in System Settings > Privacy & Security > Full Disk Access
+
+see https://apple.stackexchange.com/questions/439714/access-google-drive-drive-from-terminal
+
+
+```{r}
+
+#| echo: false
+
+file_paths <- get_file_paths() 
+
+# renaming/assigning vars for consistency with previous code
+google_drive_folder <- file.path(file_paths$SYNC_DATA_FOLDER, "species_completed")
+L0_dir <- file_paths$L0
+
+species_dir<- file.path(file_paths$L0, "species")
+git_repo_folder <- species_dir
+species_temp_dir<-file.path(file_paths$L0, "species_temp")
+species_in_review_dir<- file.path(file_paths$L0, "species_in_review")
+
+
+```
+
+File Paths used in this run: 
+
+```{r} 
+file_paths
+```
+
+
+
+*Note 12/9/2024: some EP gsheets still need checking but contain useful data. We
+don't want to miss any in /species/ that are only in gsheet form.*
+
+```{r}
+
+# List all filenames in both folders
+google_drive_files <- list.files(google_drive_folder, full.names = FALSE)
+git_repo_files <- list.files(git_repo_folder, full.names = FALSE)
+species_in_review_files <- list.files(species_in_review_dir, full.names = FALSE)
+
+# Extract main names from filenames
+google_drive_main_names <- sapply(google_drive_files, get_main_name)
+git_repo_main_names <- sapply(git_repo_files, get_main_name)
+species_to_review_main_names <- sapply(species_in_review_files, get_main_name)
+
+# Find common names (intersection) and unique names (differences)
+common_main_names <- intersect(google_drive_main_names, git_repo_main_names)
+google_only_main_names <- setdiff(google_drive_main_names, git_repo_main_names)
+git_only_main_names <- setdiff(git_repo_main_names, google_drive_main_names)
+
+```
+
+
+Google Only Main Names:  ( `r length(google_only_main_names)` files ) 
+
+```{r, echo=FALSE}
+google_only_main_names
+```
+
+Git only (`r length(git_only_main_names)` files )
+
+```{r, echo=FALSE}
+git_only_main_names
+
+```
+
+These appear to be files that do not have initials for entry and review in the suffix, and maybe files that pre-dated using this google drive folder.   
+
+Files with matching main names in both Google Drive and Git repository:
+
+```{r, echo=FALSE}
+print(common_main_names)
+```
+
+### Species left to review
+
+```{r, echo=FALSE}
+print(paste("There are", length(species_to_review_main_names), "files to be reviewed"))
+```
+
+Optional: print all of the files in the review folder: 
+```{r}
+# species_to_review_main_names
+```
+
+Stitch and count the unique common names within files to review
+
+```{r}
+#| echo: false
+
+csv_file_group_name='species_in_review'
+print(csv_file_group_name)
+
+csv_file_path = file.path(file_paths$L0, "species_in_review")
+# filter or add in google drive files here
+in_review_file_list <- list.files(path = csv_file_path , pattern = ".*\\.csv", 
+  full.names = TRUE)
+
+print(paste(csv_file_path, ":", csv_file_group_name, "files to process", length(in_review_file_list)))
+
+intxnsL0sptemp <- L0_stitch(
+                    csv_file_list = temp_file_list, 
+                    csv_file_group_name=csv_file_group_name
+                    )
+paste("Count of species after binding",intxnsL0sptemp$count)
+
+## Notes about these results
+
+### Dec 9, 2024
+
+27 species' csvs that still need the 2nd checking and
+placing into /species/. Of these, only 4 already exist in /species/. So use
+the temp species directory also (contains CSVs that were exported on Nov 27,
+2024 from the Google Sheets)
+
+### Summer 2025
+
+- There are just 6 csvs in google drive that are not in species folder.  
+- There many just in git not in google
+- There are 293 species files in review.  
+
+**Errors found/ Fixes to be made:**
+
+- There is at least one file with a type in the file name:
+   `Campylopterus_ hemileucurus_AJ.csv` has a space which will affect the stitch process
+  
+
+
