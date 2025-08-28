@@ -58,7 +58,7 @@ b) Go to **Birds of the World Online** (BOW, via the MSU Library electronic reso
 - FIRST, navigate to the "References" page of the species account (usually the last page on the left-hand menu of the account). Make sure "Order of Appearance" is selected (not Alphabetical).
   -- Example: Northern Flicker: https://birdsoftheworld.org/bow/species/norfli/cur/references
 
-- In the browser on the References page, with a Mac: go to File - Save As - HTML or Page Source (for Mac); or with Windows: Right-click on the page (make sure you are not clicking on a link), and "Save As" "Webpage - HTML Only". You will the single References HTML file to the Google Drive location: /bow_refs/. Save the file as: "Genus_species_bow_refs_VERSION". for "VERSION" replace with the last value in the species account doi. For example, for Northern Flicker, the BOW references filename would be: "Colaptes_auratus_bow_refs_bow.norfli.02.1.html"
+- In the browser on the References page, with a Mac: go to File - Save As - HTML or Page Source (for Mac); or with Windows: Right-click on the page (make sure you are not clicking on a link), and "Save As" "Webpage - HTML Only". You will save a single References HTML file containing all of the references for your chosen species to the Google Drive location: /bow_refs/. Save the file as: "Genus_species_bow_refs_VERSION". for "VERSION" replace with the last value in the species account doi. For example, for Northern Flicker, the BOW references filename would be: "Colaptes_auratus_bow_refs_bow.norfli.02.1.html"
 
 - In general, the best approach to entering the species' data is to open the BOW species account and just skim through it page by page (section by section, in order) for **capitalized species names (often Common Names)** and ***italicized species names (often Genus species)***; this should catch nearly all the entries and will add new ones we missed before. You may see other plain text terms like "passerines" or "corvids" and these refer to entire groups of species in an interaction - these are still important to record and should not be skipped.
 
@@ -169,7 +169,7 @@ e) If you come across a BOW account that lacks interactions (none or very few), 
 
 When you've completed entering the all interactions in your google sheet, it needs to be incorporated into the collection of species files in GitHub. To do that, export your spreadsheet to CSV, which downloads it to your desktop. You will most likely need to rename the CSV file that's downloaded to your computer. Name it for the species and add your initials, e.g. **Passerina_cyanea_PLZ.csv**.    
   
-In the future it will be possible to run a program to check your file for correctness, but for now you may upload as it. **IMPORTANT: Don't open and save the CSV file from Excel, which adds incompatible characters.**  
+In the future it will be possible to run a program to check your file for correctness, but for now you may upload as is. **IMPORTANT: Don't open and save the CSV file from Excel, which adds incompatible characters.**  
 
 ## Step 7: Upload CSV to GitHub. 
 
