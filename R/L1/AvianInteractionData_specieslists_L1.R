@@ -1,15 +1,14 @@
 # TITLE:          L1 Species Lists 
-#                 Species Checklist Data: 
+#                 Species Checklist Data: Global, by region. 
 #                 Reads in lists and keeps track of which species are in which list.
 #                 Also keeps track of name changes in diff columns.
 #                 Creates a final list of species in Canada and CONUS for use in the North 
 #                 American Avian Interaction data paper and avian-meta-network paper.
-#                 Also begins to create a master lookup list to subset lists of 
-#                 species and assign names. 
-#                 ****To complete that master list, all other AviBase regions 
-#                 should be read in (currently AviBase names include Canada & CONUS).
 #                 
-#                 Reads in: (1) avibase_ca.conus_splist_2024_L0.csv (created in
+#                 ****See AvianInteractionData_specieslists_L1.R for the 
+#                 comprehensive global list.
+#                 
+#                 Reads in: (1) avibase_regional_global_splist_2024_L0.csv (created in
 #                 R/L0/AvianInteractionData_specieslists_L0.R) = CA-CONUS List,
 #                 which is the AviBase Canada list + AviBase Lower 48 US + 
 #                 AviBase Alaska list (taxonomy from Clements 2024) 
@@ -368,7 +367,7 @@ name_map <- tribble(
   "Corvus cryptoleucus/corax",      "unid. Chihuahuan Raven/Common Raven",     "Corvus cryptoleucus/corax",  "Chihuahuan Raven/Common Raven",  
   "Cyanecula svecica",      "Bluethroat",     "Luscinia svecica",  "Bluethroat",
   "Empidonax difficilis/occidentalis",      "unid. Cordilleran/Pacific-slope Flycatcher",     "Empidonax difficilis occidentalis/hellmayri",  "Western Flycatcher (Cordilleran)",
-  # Clements doesn't list name for the Cordilleran Flycatcher but it is referred toin BOW
+  # Clements doesn't list name for the Cordilleran Flycatcher but it is referred to in BOW
   "Empidonax occidentalis",      "Cordilleran Flycatcher",     "Empidonax difficilis hellmayri",  NA,
   "Gull sp.",      "unid. gull",     "Larinae sp.",  "gull sp.",
   "Habia fuscicauda",      "Red-throated Ant-Tanager",     "Driophlox fuscicauda",  "Red-throated Ant-Tanager",
@@ -626,8 +625,8 @@ df_bbs_or_avibase_no_rare$ca.conus.rejection[rows.hawaii] <- "no BBS, Hawaii"
 
 # List of species that are extinct, extirpated or critically endangered/super rare
 extinct.or.extirpated.ce <- c("Campephilus principalis",
-            "Ectopistes migratorius",
-            "Numenius borealis")
+                              "Ectopistes migratorius",
+                              "Numenius borealis")
 # Find the rows where species_name contains any of the extinct or extirpated species
 rows.gone <- df_bbs_or_avibase_no_rare$scientific_name %in% extinct.or.extirpated.ce
 # Replace the character values in ca.conus.rejection for those identified rows

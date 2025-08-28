@@ -4,12 +4,12 @@
 # AUTHORS:        Phoebe Zarnetske
 # COLLABORATORS:  Vincent Miele, Stephane Dray, Emily Parker
 # DATA INPUT:     Imports L0 raw species list data from:
-#                 (1) Clements/eBird Cheklist v2024 (Cornell Lab of Ornithology)
+#                 (1) Clements/eBird Checklist v2024 (Cornell Lab of Ornithology)
 #                 (2) the USGS North American Breeding Bird Survey (BBS) SpeciesList 
 #                 from 2024 release (up to 2023 BBS data; SpeciesList.txt is updated yearly). 
 #                 (3) CA-CONUS List = AviBase Canada list + AviBase Lower 48 US + 
 #                 AviBase Alaska list (taxonomy from Clements 2024 list)
-#                 (4) American Birding Association (ABA) Version 8.17 Nov. 2024 list
+#                 (4) AviBase Global list, by region
 # DATA OUTPUT:    (1) L0 Clements/eBird Cheklist v2024
 #                 (2) BBS List L0 data: bbs_specieslist_2023_L0.csv - this is a 
 #                     copy of the raw data, just omitting the top lines without data
@@ -18,10 +18,11 @@
 #                   and formatted
 #                 (4) American Birding Association (ABA) Version 8.17 Nov. 2024 list: formatted
 # PROJECT:        Avian Interaction Database & avian-meta-network
-# DATE:           17 January 2022 - 12 August 2025
+# DATE:           17 January 2022 - 26 August 2025
 # NOTES:          bbs_specieslist_2024_L1.csv is produced in bbs_specieslist_L1.R 
 #
-#               Next script to run: bbs_specieslist_L1.R
+#               Next script to run: bbs_specieslist_L1.R or AvianInteractionData_specieslists_L1.R or
+#                           AvianInteractionData_specieslists_Canada_CONUS_L1.R 
 #               NOTES: check out this site for code w BBS: https://rdrr.io/github/davharris/mistnet/src/extras/BBS-analysis/data_extraction/data-extraction.R    
 #               For other types of lists check out: https://datazone.birdlife.org/search 
 #               which has data on migratory status, conservation status, etc.           
@@ -134,6 +135,100 @@ write.csv(bbs.splist.2024, file.path(L0_dir,"bbs_splist_2024_L0.csv"), fileEncod
 
 # Next script to run: bbs_specieslist_L1.R 
 # Then, if combining with bbs_obs data: AvianInteractionData_L1.R
+
+#### AviBase Multi-Region Merger (Clements 2024 taxonomy) ####
+library(rvest)
+library(dplyr)
+library(stringr)
+library(tidyr)
+library(purrr)
+
+#### 1. Define regions and URLs ####
+region_urls <- list(
+  CA   = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=CA&version=text",
+  US48 = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=US48&version=text",
+  AK   = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=USak&version=text",
+  SPM  = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=PM&version=text&lifelist=&highlight=0",
+  
+)
+
+#### 2. Helper function to read a single AviBase html ####
+read_avibase <- function(region_code, url) {
+  page   <- read_html(url)
+  tables <- html_nodes(page, "table")
+  tab    <- html_table(tables[[1]], fill = TRUE)
+  
+  tab <- tab %>%
+    rename(common_name = X1, scientific_name = X2, status = X3) %>%
+    mutate(
+      order  = str_extract(common_name, "\\b[A-Z]+(?: [A-Z]+)*(?=: )"),
+      family = str_extract(common_name, "(?<=: )[A-Z][a-z]+")
+    ) %>%
+    fill(order, family) %>%
+    filter(!(common_name == paste(order, family, sep = ": "))) %>%
+    mutate(region = region_code)
+  
+  return(tab)
+}
+
+#### 3. Read all regions & build lookup table ####
+all_tables <- imap(region_urls, read_avibase)
+
+# Combine into single data frame
+merged.table <- bind_rows(all_tables)
+
+# Lookup table for regions
+region_lookup <- tibble(
+  region_code = names(region_urls),
+  region_url  = unname(unlist(region_urls))
+)
+
+#### 4. Normalize & prioritize (US48 priority example) ####
+region_priority <- c("US48", "CA", "AK") # extend as needed
+
+merged.table <- merged.table %>%
+  mutate(
+    scientific_name = str_squish(scientific_name),
+    common_name     = str_squish(common_name),
+    order           = str_squish(order),
+    family          = str_squish(family),
+    status          = str_squish(status),
+    region_factor   = factor(region, levels = region_priority)
+  )
+
+# Preferred record (by region priority)
+preferred_records <- merged.table %>%
+  arrange(scientific_name, region_factor) %>%
+  group_by(scientific_name) %>%
+  slice(1) %>%
+  ungroup() %>%
+  select(-region, -region_factor)
+
+# All regions per species (concatenated string, unlimited length)
+all_regions <- merged.table %>%
+  group_by(scientific_name) %>%
+  summarise(region = paste(sort(unique(region)), collapse = "; "), .groups = "drop")
+
+#### 5. Join preferred + all regions ####
+global.splist <- preferred_records %>%
+  left_join(all_regions, by = "scientific_name")
+
+#### 6. Example: Lump regions into broader categories ####
+# (This mapping can be built from https://avibase.bsc-eoc.org/checklist.jsp?region)
+region_groups <- tibble(
+  region_code = c("CA", "US48", "USak"),
+  region_group = c("North America", "North America", "North America")
+)
+
+global.splist <- global.splist %>%
+  left_join(region_groups, by = c("region" = "region_code"))
+
+#### 7. Outputs ####
+cat("Number of species in global.splist:", n_distinct(global.splist$scientific_name), "\n")
+
+# Save lookup & species list
+write.csv(region_lookup, "avibase_region_lookup.csv", row.names = FALSE)
+write.csv(global.splist, "avibase_global_splist_2024.csv", fileEncoding = "UTF-8", row.names = FALSE)
 
 
 #### (3) AviBase 8.17 CA-CONUS List ####
