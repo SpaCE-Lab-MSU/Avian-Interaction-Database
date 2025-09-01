@@ -574,7 +574,7 @@ df_avibase_region <- df %>%
 
 # --- Quick confirmations ---
 cat("Number of rows in df:", nrow(df), "\n") # 35606
-cat("Number of rows with region_avibase8.17:", nrow(df_avibase_region), "\n\n") #1091
+cat("Number of rows with region_avibase8.17:", nrow(df_avibase_region), "\n\n") #1091 #1104 with updated correct Canada list
 
 cat("Counts for in_* flags:\n")
 for (in_col in unique(unname(map_lookup_to_in))) {
@@ -586,8 +586,8 @@ for (in_col in unique(unname(map_lookup_to_in))) {
 }
 # in_avibase8.17 :
 #   no   yes 
-# 34515  1091 
-# 
+# 34502  1104 
+#
 # in_bbs2024 :
 #   no   yes 
 # 34844   762 
@@ -597,6 +597,7 @@ for (in_col in unique(unname(map_lookup_to_in))) {
 # 11 35595 
 # 
 # in_origlist :
+#   
 #   no   yes 
 # 34175  1431 
 
@@ -636,49 +637,56 @@ missing_dataentry15Aug2025 <- df_bbs_or_avibase_no_rare %>%
       origlist_dataentry_origlist == "N/A; unidentified species" |
       origlist_dataentry_origlist == "NA; no interactions from BOW bc incorporated into species above"
   )
-dim(missing_dataentry15Aug2025) #117
+dim(missing_dataentry15Aug2025) #117; #125 with new correct Canada list
 # Upon inspection, the missing_dataentry15Aug2025 species are either hybrids, 
 # species at the Genus level, or species that are not found in BOW. 
 # So the original list is close enough.
-# Here is the final subset for the full L1 list: df_bbs_or_avibase_no_rare (824 species)
+# Here is the final subset for the full L1 list: df_bbs_or_avibase_no_rare (832 species)
 # The *original* list L1 data that omits species that remain and are hybrid/Genus, etc: 
 # bbs2024_or_avibase8.17_not_rare_entered.csv (707 species).
 
-# Species we could enter out of the 117 non-entries in missing_dataentry15Aug2025: 
+# Species we could enter out of the 125 non-entries in missing_dataentry15Aug2025: 
 # Subset where NA is in AOU_bbs2024... these are the full species (not hybrids) 
 # that we might enter but may not actually be North American birds. Check them on BOW.
 df_bbs_or_avibase_no_rare1 <- df_bbs_or_avibase_no_rare %>%
   filter(is.na(AOU_bbs2024))
-dim(df_bbs_or_avibase_no_rare1) #62 rows
+dim(df_bbs_or_avibase_no_rare1) #62; #70 rows with correct Canada list
 print(df_bbs_or_avibase_no_rare1[,1:2],n=100)
 
 # Create a column indicating the reason for rejection
 df_bbs_or_avibase_no_rare$ca.conus.rejection<-NA
 # Fill a new column 'description' based on the 'category' column
 # List of species that are not found in North America (likely pets/accidental)
-pets.accidental <- c("Agapornis roseicollis",
+pets.accidental <- c("Acridotheres cristatellus",
+                     "Agapornis roseicollis",
                      "Aix galericulata",
                      "Amazona autumnalis",
                      "Amazona finschi",
                      "Amazona oratrix",
                      "Anhinga rufa",
+                     "Anser indicus",
                      "Anthropoides virgo",
+                     "Apus nipalensis",
                      "Brotogeris versicolurus",
                      "Calidris tenuirostris",
                      "Callipepla douglasii",
                      "Cardellina rubra",
+                     "Chloris chloris",
                      "Chloris sinica",
                      "Corvus cornix",
                      "Corvus splendens",
                      "Crithagra mozambica",
+                     "Cyanocorax colliei",
                      "Cyanocorax colliei; Calocitta colliei",
                      "Daptrius chimachima",
                      "Fringilla coelebs",
                      "Geranoaetus polyosoma",
                      "Gracula religiosa",
                      "Lonchura atricapilla",
+                     "Lophura nycthemera",
                      "Machetornis rixosa",
                      "Melopyrrha violacea",
+                     "Milvus migrans",
                      "Paroaria capitata",
                      "Parus major",
                      "Pelecanus rufescens",
@@ -690,7 +698,9 @@ pets.accidental <- c("Agapornis roseicollis",
                      "Pycnonotus jocosus",
                      "Spinus spinus",
                      "Spodiopsar cineraceus",
+                     "Sporophila bouvronides",
                      "Sporophila torqueola",
+                     "Tadorna ferruginea",
                      "Tetraogallus himalayensis",
                      "Threskiornis aethiopicus",
                      "Toxostoma cinereum",
@@ -712,8 +722,7 @@ pelagic.marine <- c("Ardenna bulleri",
                     "Phoebastria immutabilis",
                     "Phoebastria nigripes",
                     "Phoebetria palpebrata",
-                    "Pterodroma hasitata",
-                    "Puffinus opisthomelas")
+                    "Pterodroma hasitata")
 
 # Find the rows where species_name contains any of the pelagic.marine species
 rows.pelagic.marine <- df_bbs_or_avibase_no_rare$scientific_name %in% pelagic.marine
