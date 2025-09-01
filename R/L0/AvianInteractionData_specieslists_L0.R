@@ -39,7 +39,6 @@ library(stringr)
 library(readr)
 library(purrr)
 
-
 # Define local directory
 L0_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database-Working/L0/species_checklists/"
 
@@ -171,7 +170,7 @@ read_avibase <- function(region_code, url, L0_dir) {
     mutate(across(c(common_name, scientific_name, status), ~ str_squish(.)))
   
   # Save raw cleaned table for that region
-  out_file <- file.path(L0_dir, paste0("avibase_", region_code, ".csv"))
+  out_file <- file.path(L0_dir, paste0("avibase8.17_", region_code, ".csv"))
   write_csv(tab, out_file)
   
   return(tab)
