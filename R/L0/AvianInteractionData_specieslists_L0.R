@@ -9,14 +9,14 @@
 #                 from 2024 release (up to 2023 BBS data; SpeciesList.txt is updated yearly). 
 #                 (3) CA-CONUS List = AviBase Canada list + AviBase Lower 48 US + 
 #                 AviBase Alaska list (taxonomy from Clements 2024 list)
-#                 (4) AviBase Global list, by region
+#                 (4) AviBase Global URLs, by region; version 8.17 Nov 2024 list
 # DATA OUTPUT:    (1) L0 Clements/eBird Cheklist v2024
 #                 (2) BBS List L0 data: bbs_specieslist_2023_L0.csv - this is a 
 #                     copy of the raw data, just omitting the top lines without data
 #                 (3) CA.CONUS list L0 data: avibase_ca.conus_splist_2024_L0.csv 
 #                   - this is data pulled from the AviBase species list website 
 #                   and formatted
-#                 (4) American Birding Association (ABA) Version 8.17 Nov. 2024 list: formatted
+#                 (4) AviBase Global list, by region; version 8.17 Nov 2024 list
 # PROJECT:        Avian Interaction Database & avian-meta-network
 # DATE:           17 January 2022 - 26 August 2025
 # NOTES:          bbs_specieslist_2024_L1.csv is produced in bbs_specieslist_L1.R 
@@ -36,6 +36,9 @@ library(dplyr)
 library(tidyr)
 library(rvest) # for web scraping
 library(stringr)
+library(readr)
+library(purrr)
+
 
 # Define local directory
 L0_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database-Working/L0/species_checklists/"
@@ -137,325 +140,120 @@ write.csv(bbs.splist.2024, file.path(L0_dir,"bbs_splist_2024_L0.csv"), fileEncod
 # Then, if combining with bbs_obs data: AvianInteractionData_L1.R
 
 #### AviBase Multi-Region Merger (Clements 2024 taxonomy) ####
-library(rvest)
-library(dplyr)
-library(stringr)
-library(tidyr)
-library(purrr)
 
-#### 1. Define regions and URLs ####
-region_urls <- list(
-  CA   = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=CA&version=text",
-  US48 = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=US48&version=text",
-  AK   = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=USak&version=text",
-  SPM  = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=PM&version=text&lifelist=&highlight=0"
+#### 1. Function to read & clean one AviBase region ####
+read_avibase <- function(region_code, url, L0_dir) {
+  message("Processing region: ", region_code)
   
-)
-
-#### 2. Helper function to read a single AviBase html ####
-read_avibase <- function(region_code, url) {
-  page   <- read_html(url)
-  tables <- html_nodes(page, "table")
-  tab    <- html_table(tables[[1]], fill = TRUE)
+  # Read HTML and extract first table
+  tab <- url %>%
+    read_html() %>%
+    html_table(fill = TRUE) %>%
+    .[[1]]
   
+  # Rename expected columns
   tab <- tab %>%
-    rename(common_name = X1, scientific_name = X2, status = X3) %>%
+    rename(
+      common_name     = X1,
+      scientific_name = X2,
+      status          = X3
+    ) %>%
+    # Extract order/family headings
     mutate(
       order  = str_extract(common_name, "\\b[A-Z]+(?: [A-Z]+)*(?=: )"),
       family = str_extract(common_name, "(?<=: )[A-Z][a-z]+")
     ) %>%
+    # Carry order/family down through species rows
     fill(order, family) %>%
     filter(!(common_name == paste(order, family, sep = ": "))) %>%
-    mutate(region = region_code)
+    mutate(region = region_code) %>%
+    # Trim whitespace just in case
+    mutate(across(c(common_name, scientific_name, status), ~ str_squish(.)))
+  
+  # Save raw cleaned table for that region
+  out_file <- file.path(L0_dir, paste0("avibase_", region_code, ".csv"))
+  write_csv(tab, out_file)
   
   return(tab)
 }
 
-#### 3. Read all regions & build lookup table ####
-all_tables <- imap(region_urls, read_avibase)
-
-# Combine into single data frame
-merged.table <- bind_rows(all_tables)
-
-# Lookup table for regions
-region_lookup <- tibble(
-  region_code = names(region_urls),
-  region_url  = unname(unlist(region_urls))
+#### 2. Define Region URLs ####
+# Major Regions
+region_urls <- list(
+  NAM = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=NAM&version=text",
+  CAM = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=CAM&version=text",
+  SAM = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=SAM&version=text",
+  EUR = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=EUR&version=text",
+  AFR = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=AFR&version=text",
+  ASI = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=ASI&version=text",
+  MID = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=MID&version=text",
+  OCE = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=OCE&version=text",
+  AUS = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=AUS&version=text",
+  PAC = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=PAC&version=text",
+  hol = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=hol&version=text",
+  nea = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=nea&version=text",
+  pal = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=pal&version=text",
+  # Oceans:
+  oaq = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=oaq&version=text",
+  oat = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=oat&version=text",
+  # Arctic Ocean; blank
+#  oar = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=oar&version=text",
+  oin = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=oin&version=text",
+  opa = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=opa&version=text",
+  XX = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=XX&version=text",
+  CA   = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=CA&version=text",
+  #US:
+  US48 = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=US48&version=text",
+  USak   = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=USak&version=text",
+  UShi = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=UShi&version=text",
+  #Caribbean:
+  CAR = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=CAR&version=text",
+  nan = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=nan&version=text",
+  TT = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=TT&version=text"
 )
 
-#### 4. Normalize & prioritize (US48 priority example) ####
-region_priority <- c("US48", "CA", "AK") # extend as needed
+#### 3. Run all regions and combine them ####
+all_tables <- imap(region_urls, ~ read_avibase(.y, .x, L0_dir))
 
-merged.table <- merged.table %>%
-  mutate(
-    scientific_name = str_squish(scientific_name),
-    common_name     = str_squish(common_name),
-    order           = str_squish(order),
-    family          = str_squish(family),
-    status          = str_squish(status),
-    region_factor   = factor(region, levels = region_priority)
+all_data <- bind_rows(all_tables)
+
+#### 4. Create wide status columns ####
+status_wide <- all_data %>%
+select(scientific_name, common_name, order, family, region, status) %>%
+  pivot_wider(
+    id_cols = c(scientific_name, common_name, order, family),
+    names_from = region,
+    names_prefix = "status_",
+    values_from = status
   )
 
-# Preferred record (by region priority)
-preferred_records <- merged.table %>%
-  arrange(scientific_name, region_factor) %>%
-  group_by(scientific_name) %>%
-  slice(1) %>%
-  ungroup() %>%
-  select(-region, -region_factor)
+#### 5. Collapse regions into a single column ####
+regions_collapsed <- all_data %>%
+  group_by(scientific_name, common_name, order, family) %>%
+  summarise(regions = paste(sort(unique(region)), collapse = "; "), .groups = "drop")
 
-# All regions per species (concatenated string, unlimited length)
-all_regions <- merged.table %>%
-  group_by(scientific_name) %>%
-  summarise(region = paste(sort(unique(region)), collapse = "; "), .groups = "drop")
-
-#### 5. Join preferred + all regions ####
-global.splist <- preferred_records %>%
-  left_join(all_regions, by = "scientific_name")
-
-#### 6. Example: Lump regions into broader categories ####
-# (This mapping can be built from https://avibase.bsc-eoc.org/checklist.jsp?region)
-region_groups <- tibble(
-  region_code = c("CA", "US48", "USak"),
-  region_group = c("North America", "North America", "North America")
-)
-
-global.splist <- global.splist %>%
-  left_join(region_groups, by = c("region" = "region_code"))
+#### 6. Final merged dataset ####
+global.splist <- status_wide %>%
+  left_join(regions_collapsed,
+            by = c("scientific_name", "common_name", "order", "family"))
 
 #### 7. Outputs ####
-cat("Number of species in global.splist:", n_distinct(global.splist$scientific_name), "\n")
+cat("Number of species in global.splist:", n_distinct(global.splist$scientific_name), "\n") #11129; these exclude the family-level species that are in the Clements main list
 
-# Save lookup & species list
-write.csv(region_lookup, "avibase_region_lookup.csv", row.names = FALSE)
-write.csv(global.splist, "avibase_global_splist_2024.csv", fileEncoding = "UTF-8", row.names = FALSE)
-
-
-#### (3) AviBase 8.17 CA-CONUS List ####
-# This list represents birds observed in Canada and the Continental United States
-# from AviBase, using Clements 2024 taxonomy.
-
-####**** AviBase 8.17 CANADA species ****####
-# https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=US48&version=text&lifelist=&highlight=0
- 
-ca<- "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=CA&version=text&lifelist=&highlight=0" 
-avi.ca.page <- read_html(ca)
-
-# Extract all tables and select the desired table
-ca.tables <- html_nodes(avi.ca.page, "table")
-ca.table <- html_table(ca.tables[[1]], fill = TRUE) 
-head(ca.table) # it's the correct table
-
-# Rename columns
-ca.table <- ca.table %>%
-  rename(common_name = X1, scientific_name = X2, status=X3)
-
-# Move the order and family info to new columns
-ca.table <- ca.table %>%
-  mutate(
-    # Capture order (all caps) and family (first letter caps) separately
-    order = str_extract(common_name, "\\b[A-Z]+(?: [A-Z]+)*(?=: )"),
-    family = str_extract(common_name, "(?<=: )[A-Z][a-z]+")
-  ) %>%
-  fill(order, family) %>%
-  filter(!(common_name == paste(order, family, sep = ": ")))
-ca.table
-
-####**** AviBase 8.17 US Lower 48 species ****####
-# https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=US48&version=text&lifelist=&highlight=0
-
-us48<-"https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=US48&version=text&lifelist=&highlight=0" 
-avi.us48.page <- read_html(us48)
-
-# Extract all tables and select the desired table
-us48.tables <- html_nodes(avi.us48.page, "table")
-us48.table <- html_table(us48.tables[[1]], fill = TRUE) 
-head(us48.table) # it's the correct table
-
-# Rename columns
-us48.table <- us48.table %>%
-  rename(common_name = X1, scientific_name = X2, status=X3)
-
-# Move the order and family info to new columns
-us48.table <- us48.table %>%
-  mutate(
-    # Capture order (all caps) and family (first letter caps) separately
-    order = str_extract(common_name, "\\b[A-Z]+(?: [A-Z]+)*(?=: )"),
-    family = str_extract(common_name, "(?<=: )[A-Z][a-z]+")
-  ) %>%
-  fill(order, family) %>%
-  filter(!(common_name == paste(order, family, sep = ": ")))
-us48.table
-
-####**** AviBase 8.17 Alaska species ****####
-# https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=USak&version=text&lifelist=&highlight=0
-
-ak<-"https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=USak&version=text&lifelist=&highlight=0" 
-avi.ak.page <- read_html(ak)
-
-# Extract all tables and select the desired table
-ak.tables <- html_nodes(avi.ak.page, "table")
-ak.table <- html_table(ak.tables[[1]], fill = TRUE) 
-head(ak.table) # it's the correct table
-
-# Rename columns
-ak.table <- ak.table %>%
-  rename(common_name = X1, scientific_name = X2, status=X3)
-
-# Move the order and family info to new columns
-ak.table <- ak.table %>%
-  mutate(
-    # Capture order (all caps) and family (first letter caps) separately
-    order = str_extract(common_name, "\\b[A-Z]+(?: [A-Z]+)*(?=: )"),
-    family = str_extract(common_name, "(?<=: )[A-Z][a-z]+")
-  ) %>%
-  fill(order, family) %>%
-  filter(!(common_name == paste(order, family, sep = ": ")))
-ak.table
-
-# Merge CA, Lower 48, Alaska and omit duplicates. 
-# First check that there isn't an issue with merging and finding mismatches.
-library(dplyr)
-library(stringr)
-
-# Add region tags
-ak.table   <- ak.table   %>% mutate(region = "AK")
-ca.table   <- ca.table   %>% mutate(region = "CA")
-us48.table <- us48.table %>% mutate(region = "US48")
-
-# Merge all three
-merged.table <- bind_rows(ak.table, ca.table, us48.table)
-
-# Normalize whitespace in key columns
-merged.table <- merged.table %>%
-  mutate(
-    scientific_name = str_squish(scientific_name),
-    common_name     = str_squish(common_name),
-    order           = str_squish(order),
-    family          = str_squish(family),
-    status          = str_squish(status)
-  )
-
-# Set priority: US48 first
-region_priority <- c("US48", "CA", "AK")
-
-merged.table <- merged.table %>%
-  mutate(region_factor = factor(region, levels = region_priority))
-
-# Get the preferred record per species by priority region
-preferred_records <- merged.table %>%
-  arrange(scientific_name, region_factor) %>%
-  group_by(scientific_name) %>%
-  slice(1) %>%
-  ungroup() %>%
-  select(-region_factor)
-
-# Collect all unique regions per species as a concatenated string
-all_regions <- merged.table %>%
-  group_by(scientific_name) %>%
-  summarise(
-    region = paste(sort(unique(region)), collapse = "; "),
-    .groups = "drop"
-  )
-
-# Join the preferred records with the collected regions
-ca.conus <- preferred_records %>%
-  select(-region) %>%   # drop single-region column from preferred record
-  left_join(all_regions, by = "scientific_name")
-
-cat("Number of species in ca.conus:", n_distinct(ca.conus$scientific_name), "\n")
-cat("Number of rows in ca.conus:", nrow(ca.conus), "\n")
-
-ca.conus
-
-# Export this for final cleaning in L1 script where species are further subset.
+#### 8. Subset to different regions ####
+#### Adjust code below for different subsets
+#### Canada & CONUSL North America = CA / US48 / USak ####
+ca.conus <- global.splist %>%
+  filter(str_detect(regions, "\\bCA\\b|\\bUS48\\b|\\bUSak\\b"))
+dim(ca.conus) #1104 species
 write.csv(ca.conus, file.path(L0_dir,"avibase_ca.conus_splist_2024_L0.csv"), fileEncoding="UTF-8", row.names=F) 
 
+#### Western Hemisphere ####
+west.hsphere <- global.splist %>%
+  filter(str_detect(regions, "\\bCA\\b|\\bUS48\\b|\\bUSak\\b|\\bUShi\\b|\\bNAM|\\b|\\bCAM|\\b|\\bSAM|\\b|\\bCAR|\\b|\\boaq|\\b|\\boat|\\b|\\bopa|\\b|\\bXX|\\b"))
+dim(west.hsphere)
+write.csv(west.hsphere, file.path(L0_dir,"avibase_west.hsphere_splist_2024_L0.csv"), fileEncoding="UTF-8", row.names=F) 
 
-# ************************* #
-# Older code when the file read in was in .txt. format and had many lines in the beginning to ignore:
-# This function determines if a species is "valid" by looking at its latin and
-# common names.  It is called below to read in the data. 
+# Save Global lookup & species list
+write.csv(global.splist, file.path(L0_dir,"avibase_global_splist_2024_L0.csv"), fileEncoding = "UTF-8", row.names = FALSE)
 
-# validateSpecies = function(){
-#   
-# # On older versions the first 10 lines do not contain data; read in first 12 lines which contain column names in 12th line
-# skip = readLines(file.path(L0_dir,"BBS_SpeciesListL0.txt"), n = 12)
-# 
-# # The 11th line has column names separated by lots of spaces
-# column.names = grep(".$", strsplit(skip[11], " ")[[1]], value = TRUE)
-# 
-# # The 12th line has dashes that can be used for determining column widths
-# dashes = skip[12]
-# 
-# bbs.splist = na.omit(
-#   read.fwf(
-#     file.path(L0_dir,"BBS2024_SpeciesListL0.csv"),
-#     # below line ensures there are no errors with "invalid multibyte strings"
-#     fileEncoding="latin1", 
-#     as.is = TRUE,
-#     colClasses = "character",
-#     strip.white = TRUE
-#   )
-# )
-# colnames(bbs.splist) = column.names
-# rownames(bbs.splist) = bbs.splist$AOU
-# 
-# dim(bbs.splist)
-# # 760 birds observed in BBS (as of 2023 release)
-# 
-# # species with slashes, " or ", " x " or " X " or " sp." "unid", etc.
-# # are either unknown or hybrids.
-# pattern = "/|( or )|( X )|( x )|( sp\\.)|(unid)|hybrid|Admin Code"
-# 
-# bad.latin = grep(
-#   pattern,
-#   bbs.splist$Spanish_Common_Name
-# )
-# 
-# bad.english = grep(
-#   pattern,
-#   bbs.splist$English_Common_Name
-# )
-# 
-# # Something is a potential subspecies if it has three words separated by
-# # spaces.
-# possible.subspecies = grep("^.* .* .*$", bbs.splist$Spanish_Common_Name)
-# subspecies.ID = possible.subspecies[
-#   is.na(match(possible.subspecies, bad.latin))
-# ]
-# subspecies = bbs.splist$Spanish_Common_Name[subspecies.ID]
-# 
-# # Assign the genus species to the subspecies: 
-# # binomial nomenclature version of the subspecies name (i.e., discard the third name)
-# subspecies.binomial = sapply(
-#   strsplit(subspecies, " "), 
-#   function(x){
-#     paste(x[1:2], collapse = " ")
-#   }
-# )
-# 
-# ## PLZ suggests NOT INCLUDING THIS in resulting subsetting below bc it would remove 95 species##
-# # I've also decided to throw out species that have associated subspecies
-# # (e.g., with half a dozen junco races, the unknown-race-junco isn't really
-# # informative either)
-# #has.subspecies = which(bbs.splist$Spanish_Common_Name %in% subspecies.binomial)
-# 
-# #bad.species = sort(
-# #  unique(c(bad.latin, bad.english, subspecies.ID, has.subspecies))
-# #)
-# 
-# # get rid of leading 0's in AOU, since they're not used elsewhere
-# ## THIS DOESN'T WORK - needs fixing
-# rownames(bbs.splist) = gsub("^0", "", rownames(bbs.splist))
-# 
-# ## NOT INCLUDING THIS ##
-# #return(bbs.splist[-bad.species, ])
-# 
-# return(bbs.splist)
-# 
-# }
-# # Clean up the data with the validateSpecies modified function above.
-# bbs.splist.2024 = validateSpecies()
-# dim(bbs.splist.2024)
-# 
