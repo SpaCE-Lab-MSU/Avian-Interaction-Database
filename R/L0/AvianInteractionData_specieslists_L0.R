@@ -148,7 +148,7 @@ region_urls <- list(
   CA   = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=CA&version=text",
   US48 = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=US48&version=text",
   AK   = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=USak&version=text",
-  SPM  = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=PM&version=text&lifelist=&highlight=0",
+  SPM  = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=PM&version=text&lifelist=&highlight=0"
   
 )
 
@@ -238,7 +238,7 @@ write.csv(global.splist, "avibase_global_splist_2024.csv", fileEncoding = "UTF-8
 ####**** AviBase 8.17 CANADA species ****####
 # https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=US48&version=text&lifelist=&highlight=0
  
-ca<- "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=US48&version=text&lifelist=&highlight=0" 
+ca<- "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=CA&version=text&lifelist=&highlight=0" 
 avi.ca.page <- read_html(ca)
 
 # Extract all tables and select the desired table
@@ -371,18 +371,6 @@ ca.conus
 # Export this for final cleaning in L1 script where species are further subset.
 write.csv(ca.conus, file.path(L0_dir,"avibase_ca.conus_splist_2024_L0.csv"), fileEncoding="UTF-8", row.names=F) 
 
-#### (4) AviBase 8.17 Hawaii,  ####
-# This will obtain the entire region, including outlying islands
-# https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=NAM&version=text&lifelist=&highlight=0
-
-## Work on this next to pull in data from Islands in Northern & Western Hemisphere
-
-
-#### ABA Checklist Version 8.17 Nov. 2024 ####
-# The ABA Area (sometimes referred to as the ABA Checklist Area) is essentially 
-# North America north of Mexico plus the Hawaiian Islands.
-
-# https://www.aba.org/aba-checklist/#section-checklist-download
 
 # ************************* #
 # Older code when the file read in was in .txt. format and had many lines in the beginning to ignore:
