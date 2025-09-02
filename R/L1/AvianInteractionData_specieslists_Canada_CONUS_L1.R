@@ -1,5 +1,4 @@
-# TITLE:          L1 Species Lists 
-#                 Species Checklist Data: focus on CONUS and Canada: 
+# TITLE:          L1 Species Lists: North America (CONUS and Canada) 
 #                 Reads in lists and keeps track of which species are in which list.
 #                 Also keeps track of name changes in diff columns.
 #                 Creates a final list of species in Canada and CONUS for use in the North 
@@ -22,7 +21,7 @@
 #                     all from AvianInteractionData_specieslists_L0.R
 # DATA OUTPUT:    L1 data: canada.conus.splist_L1.CSV 
 # PROJECT:        Avian Interaction Database & avian-meta-network
-# DATE:           17 January 2022 - 18 Aug 2025
+# DATE:           17 January 2022 - 1 Sep 2025
 #                 
 #                 Next script to run: AvianInteractionData_L1.R
 
@@ -459,8 +458,8 @@ cat("\n--- Rows where names do not match *_clements2024 ---\n")
 print(name_mismatches) # these are the same 99; makes sense.
 
 # Check that the row that differ among initial data and modified make sense.
-## Subset to rows with non-NA region_avibase8.17 (which are Canada & CONUS)
-ca.conus.sp <- subset(df, !is.na(df[["region_avibase8.17"]]))
+## Subset to rows with non-NA regions_avibase8.17 (which are Canada & CONUS)
+ca.conus.sp <- subset(df, !is.na(df[["regions_avibase8.17"]]))
 dim(avibase)-dim(ca.conus.sp) # no lost species
 bbs.sp <- subset(df, !is.na(df[["scientific_name_bbs2024"]]))
 dim(bbs2024)-dim(bbs.sp) # lost 1 species (Snow Goose, Blue Form merged. See ";" in AOU column) 
@@ -493,12 +492,12 @@ for (lookup_col in names(map_lookup_to_in)) {
   df[[in_col]] <- ifelse(!is.na(df[[lookup_col]]) & df[[lookup_col]] != "", "yes", "no")
 }
 
-# --- Subset: rows that have a non-NA, non-empty region_avibase8.17 ---
-if (!"region_avibase8.17" %in% names(df)) {
-  df$region_avibase8.17 <- NA_character_
+# --- Subset: rows that have a non-NA, non-empty regions_avibase8.17 ---
+if (!"regions_avibase8.17" %in% names(df)) {
+  df$regions_avibase8.17 <- NA_character_
 }
 df_avibase_region <- df %>%
-  filter(!is.na(region_avibase8.17) & region_avibase8.17 != "")
+  filter(!is.na(regions_avibase8.17) & regions_avibase8.17 != "")
 
 # --- Quick confirmations ---
 cat("Number of rows in df:", nrow(df), "\n") # 35603
@@ -528,76 +527,216 @@ for (in_col in unique(unname(map_lookup_to_in))) {
 # ---- Final subsetting ----
 
 # 1. Keep rows with non-NA scientific_name_bbs2024 OR non-NA status_avibase8.17
-df_bbs_or_avibase <- df %>%
-  filter(!is.na(scientific_name_bbs2024) | !is.na(status_avibase8.17))
-
-# 2. Subset further: drop "Rare" rows, but always keep rows with non-NA scientific_name_bbs2024
-df_bbs_or_avibase_no_rare <- df_bbs_or_avibase %>%
-  filter(
-    !str_detect(status_avibase8.17, "\\bRare\\b") | !is.na(scientific_name_bbs2024)
+# Create summary status column for CA, US48, USak
+df.ca.conus <- df %>%
+  mutate(
+    status_CA_US48_USak = pmap_chr(
+      list(status_CA_avibase8.17, status_US48_avibase8.17, status_USak_avibase8.17),
+      ~ paste(na.omit(c(...)), collapse = "; ")
+    )
   )
-# indicate these should be kept fo ca.conus subset
+
+# 2. Keep only relevant status columns and all other metadata
+# 2. Drop unwanted status_* columns, keep all others
+df.ca.conus <- df.ca.conus %>%
+  select(
+    -any_of(c(
+      "status_CAM_avibase8.17", "status_SAM_avibase8.17",
+      "status_EUR_avibase8.17", "status_AFR_avibase8.17",
+      "status_ASI_avibase8.17", "status_MID_avibase8.17",
+      "status_OCE_avibase8.17", "status_AUS_avibase8.17",
+      "status_PAC_avibase8.17", "status_hol_avibase8.17",
+      "status_nea_avibase8.17", "status_pal_avibase8.17",
+      "status_oaq_avibase8.17", "status_oat_avibase8.17",
+      "status_oin_avibase8.17", "status_opa_avibase8.17",
+      "status_XX_avibase8.17",  "status_UShi_avibase8.17",
+      "status_CAR_avibase8.17", "status_nan_avibase8.17",
+      "status_TT_avibase8.17"
+    ))
+  )
+# Fill NAs
+df.ca.conus$status_CA_US48_USak[df.ca.conus$status_CA_US48_USak == "" | df.ca.conus$status_CA_US48_USak == " "] <- NA
+
+df_bbs_or_avibase <- df.ca.conus %>%
+  filter(!is.na(scientific_name_bbs2024) | !is.na(status_CA_US48_USak)) 
+
+dim(df_bbs_or_avibase) #1161 rows
+
+# 3. Subset further: drop "Rare" rows, but always keep rows with non-NA scientific_name_bbs2024
+# Where at least one of the 3 areas has the species as Rare:
+#df_bbs_or_avibase_no_rare <- df_bbs_or_avibase %>%
+#  filter(
+#    !str_detect(status_CA_US48_USak, "\\bRare\\b") | !is.na(scientific_name_bbs2024)
+#  )
+
+# Drop where all 3 areas are Rare/Accidental:
+df_bbs_or_avibase_no_rare <- df_bbs_or_avibase %>%
+  filter((status_CA_US48_USak != "Rare/Accidental; Rare/Accidental; Rare/Accidental") & (status_CA_US48_USak != "Rare/Accidental Near-threatened; Rare/Accidental Near-threatened; Rare/Accidental Near-threatened") & (status_CA_US48_USak != "Rare/Accidental Vulnerable; Rare/Accidental Vulnerable; Rare/Accidental Vulnerable") & (status_CA_US48_USak != "Rare/Accidental Vulnerable; Rare/Accidental Vulnerable; Rare/Accidental Vulnerable") | !is.na(scientific_name_bbs2024))
+
+# indicate these remaining should be kept for ca.conus subset
 df_bbs_or_avibase_no_rare$L1_ca.conus.data<-"yes"
 
-# Here is the final subset for the full L1 list: df_bbs_or_avibase_no_rare (824 species; 832 with correct Canada list)
+# Here is the final subset for the full L1 list: df_bbs_or_avibase_no_rare (824 species; 1118 with correct Canada list)
+dim(df_bbs_or_avibase_no_rare) #1118
 
 # Subset where NA is in AOU_bbs2024... these are the full species (not hybrids) 
 # but may not actually be North American birds. Check them on BOW.
 df_bbs_or_avibase_no_rare1 <- df_bbs_or_avibase_no_rare %>%
   filter(is.na(AOU_bbs2024))
-dim(df_bbs_or_avibase_no_rare1) #62 rows; 70 rows with correct Canada list
-print(df_bbs_or_avibase_no_rare1[,1:2],n=100)
+dim(df_bbs_or_avibase_no_rare1) #62 rows; 71 rows with correct Canada list; 356 rows now.
+
+# Some of these are found in AFR, AUS, EUR, MID, XX, and are very likely accidentals in CONUS/Canada. Omit them.
+df_bbs_or_avibase_no_rare2 <- df_bbs_or_avibase_no_rare1 %>%
+    filter(
+      !str_detect(regions_avibase8.17, "\\bAFR\\b|\\bAUS\\b|\\bEUR\\b|\\bMID\\b|\\bXX\\b")
+    )
+dim(df_bbs_or_avibase_no_rare2) #135 species
+
+# Omit the species found in AFR, AUS, MID, XX from the Canada/CONUS data (western hemisphere)
+df_bbs_or_avibase_no_rare.wh <- df_bbs_or_avibase_no_rare %>%
+  filter(
+    !str_detect(regions_avibase8.17, "\\bAFR\\b|\\bAUS\\b|\\bMID\\b")
+  )
+dim(df_bbs_or_avibase_no_rare.wh) #135 species
+
+print(df_bbs_or_avibase_no_rare2[,1:2],n=100)
 
 # Create a column indicating the reason for rejection
 df_bbs_or_avibase_no_rare$ca.conus.rejection<-NA
 # Fill a new column 'description' based on the 'category' column
+
+# List of species to consider keeping (pelagic):
+# Aethia pygmaea Whiskered Auklet
+# Synthliboramphus hypoleucus
+
+# keep (and it's entered & checked):
+# Corvus imparatus
+# Loxia sinesciuris Cassia Crossbill 
+# Plectrophenax hyperboreus McKay's Bunting
+# Psittacara holochlorus Green Parakeet 
+# Puffinus opisthomelas 
+# Synthliboramphus craveri
+# Synthliboramphus scrippsi
+# Urile urile
+# Vermivora bachmanii
+# Vireo flavoviridis - entered, needs checking
+
 # List of species that are not found in North America (likely pets/accidental)
-pets.accidental <- c("Acridotheres cristatellus",
-                     "Agapornis roseicollis",
+pets.accidental <- c("Agelaius humeralis",
                      "Aix galericulata",
                      "Amazona autumnalis",
                      "Amazona finschi",
                      "Amazona oratrix",
-                     "Anhinga rufa",
-                     "Anser indicus",
-                     "Anthropoides virgo",
-                     "Apus nipalensis",
+                     "Anas bahamensis",
+                     "Anthracothorax prevostii",
+                     "Aramides axillaris",
+                     "Basileuterus culicivorus",
+                     "Basileuterus lachrymosus",
+                     "Basileuterus rufifrons",
+                     "Basilinna xantusii",
                      "Brotogeris versicolurus",
-                     "Calidris tenuirostris",
+                     "Buteogallus urubitinga",
                      "Callipepla douglasii",
                      "Cardellina rubra",
-                     "Chloris chloris",
+                     "Catharus mexicanus",
                      "Chloris sinica",
-                     "Corvus cornix",
-                     "Corvus splendens",
-                     "Crithagra mozambica",
+                     "Chloroceryle amazona",
+                     "Coccyzus melacoryphus",
+                     "Coereba flaveola",
+                     "Colibri thalassinus",
+                     "Contopus caribaeus",
+                     "Cyanerpes cyaneus",
+                     "Cyanocompsa parellina",
                      "Cyanocorax colliei",
                      "Daptrius chimachima",
-                     "Fringilla coelebs",
+                     "Dendrocygna arborea",
+                     "Elaenia parvirostris",
+                     "Emberiza elegans",
+                     "Emberiza variabilis",
+                     "Empidonomus aurantioatrocristatus",
+                     "Empidonomus varius",
+                     "Euptilotis neoxenus",
+                     "Falco rufigularis",
+                     "Geothlypis poliocephala",
+                     "Geotrygon chrysia",
+                     "Geotrygon montana",
                      "Geranoaetus polyosoma",
-                     "Gracula religiosa",
-                     "Lonchura atricapilla",
+                     "Geranospiza caerulescens",
+                     "Harpagus bidentatus",
+                     "Heliomaster constantii",
+                     "Heliornis fulica",
+                     "Hesperoburhinus bistriatus",
+                     "Icterus abeillei",
+                     "Icterus pustulatus",
+                     "Icterus wagleri",
+                     "Jabiru mycteria",
+                     "Lampornis amethystinus",
+                     "Legatus leucophaius",
+                     "Leucophaeus modestus",
+                     "Leucosticte arctoa",
                      "Lophura nycthemera",
                      "Machetornis rixosa",
+                     "Margarops fuscatus",
+                     "Melanoptila glabrirostris",
+                     "Melanospiza bicolor",
+                     "Melanotis caerulescens",
                      "Melopyrrha violacea",
-                     "Milvus migrans",
+                     "Mitrephanes phaeocercus",
+                     "Mustelirallus erythrops",
+                     "Myadestes occidentalis",
+                     "Myiarchus nuttingi",
+                     "Myiarchus sagrae",
+                     "Myioborus miniatus",
+                     "Myiopagis viridicata",
+                     "Myiozetetes similis",
+                     "Nesophlox evelynae",
+                     "Oreothlypis superciliosa",
+                     "Oriturus superciliosus",
+                     "Pachyramphus major",
+                     "Pardirallus maculatus",
                      "Paroaria capitata",
-                     "Parus major",
-                     "Pelecanus rufescens",
+                     "Patagioenas squamosa",
+                     "Periporphyrus celaeno",
+                     "Phaetusa simplex",
                      "Phasianus versicolor",
-                     "Porphyrio poliocephalus",
+                     "Pheucticus chrysopeplus",
+                     "Piranga bidentata",
+                     "Porphyrio flavirostris",
+                     "Progne chalybea",
+                     "Progne cryptoleuca",
+                     "Progne elegans",
+                     "Progne tapera",
                      "Psittacara erythrogenys",
                      "Psittacara mitratus",
-                     "Pycnonotus cafer",
-                     "Pycnonotus jocosus",
-                     "Spinus spinus",
+                     "Ptiliogonys cinereus",
+                     "Pygochelidon cyanoleuca",
+                     "Rhynchopsitta pachyrhyncha",
+                     "Ridgwayia pinicola",
+                     "Rupornis magnirostris",
+                     "Selasphorus heloisa",
+                     "Spinus notatus",
+                     "Spizella wortheni",
                      "Spodiopsar cineraceus",
                      "Sporophila bouvronides",
                      "Sporophila torqueola",
-                     "Tadorna ferruginea",
-                     "Tetraogallus himalayensis",
-                     "Threskiornis aethiopicus",
+                     "Streptoprocne zonaris",
+                     "Strix virgata",
+                     "Tachornis phoenicobia",
+                     "Tachycineta albilinea",
+                     "Tachycineta cyaneoviridis",
+                     "Thamnophilus doliatus",
+                     "Tiaris olivaceus",
+                     "Tigrisoma mexicanum",
+                     "Tityra semifasciata",
                      "Toxostoma cinereum",
+                     "Turdus assimilis",
+                     "Turdus plumbeus",
+                     "Turdus rufopalliatus",
+                     "Tyrannus caudifasciatus",
+                     "Vireo crassirostris",
+                     "Vireo gundlachii",
+                     "Vireo magister",
+                     "Volatinia jacarina",
                      "Zonotrichia capensis",
                      "Zosterops japonicus")
 # Find the rows where scientific_name contains any of the pets.accidental species
@@ -606,17 +745,9 @@ rows.pets.accidental <- df_bbs_or_avibase_no_rare$scientific_name %in% pets.acci
 df_bbs_or_avibase_no_rare$ca.conus.rejection[rows.pets.accidental] <- "no BBS, pets or accidental"
 
 # List of species that are not found in North America (pelagic or marine focused)
-pelagic.marine <- c("Ardenna bulleri",
-                    "Ardenna carneipes",
-                    "Ardenna creatopus",
-                    "Ardenna grisea",
-                    "Hydrobates cheimomnestes", # but close to CA/Channel Islands
+pelagic.marine <- c("Hydrobates cheimomnestes", # but close to CA/Channel Islands
                     "Hydrobates homochroa", # but close to CA/Channel Islands
-                    "Hydrobates socorroensis", # but close to CA/Channel Islands
-                    "Phoebastria immutabilis",
-                    "Phoebastria nigripes",
-                    "Phoebetria palpebrata",
-                    "Pterodroma hasitata")
+                    "Hydrobates hornbyi")
 
 # Find the rows where species_name contains any of the pelagic.marine species
 rows.pelagic.marine <- df_bbs_or_avibase_no_rare$scientific_name %in% pelagic.marine
@@ -632,6 +763,8 @@ df_bbs_or_avibase_no_rare$ca.conus.rejection[rows.hawaii] <- "no BBS, Hawaii"
 
 # List of species that are extinct, extirpated or critically endangered/super rare
 extinct.or.extirpated.ce <- c("Campephilus principalis",
+                              "Camptorhynchus labradorius",
+            "Conuropsis carolinensis",
             "Ectopistes migratorius",
             "Numenius borealis")
 # Find the rows where species_name contains any of the extinct or extirpated species
@@ -641,11 +774,11 @@ df_bbs_or_avibase_no_rare$ca.conus.rejection[rows.gone] <- "no BBS, extinct/exti
 
 # Omit the species that have a ca.conus.rejection value
 # Replace empty strings with NA 
-dim(df_bbs_or_avibase_no_rare)
+dim(df_bbs_or_avibase_no_rare) #1118
 ca.conus.splist <- df_bbs_or_avibase_no_rare %>%
   filter(is.na(ca.conus.rejection))
-dim(ca.conus.splist)
+dim(ca.conus.splist) #769 species; #992 species
 
-# --- Export the final CANADA & CONUS subset as a CSV
+# --- Export the final 769 species CANADA & CONUS subset as a CSV
 write_csv(ca.conus.splist, file.path(L1_dir,"canada.conus.splist_L1.csv"))
 

@@ -23,7 +23,7 @@
 #                     all from AvianInteractionData_specieslists_L0.R
 # DATA OUTPUT:    L1 data: CSVs tracking the different data subsets for checking 
 # PROJECT:        Avian Interaction Database & avian-meta-network
-# DATE:           17 January 2022 - 18 Aug 2025
+# DATE:           17 January 2022 - 1 Sep 2025
 #                 
 #                 Next script to run: AvianInteractionData_L1.R
 
@@ -637,7 +637,7 @@ missing_dataentry15Aug2025 <- df_bbs_or_avibase_no_rare %>%
       origlist_dataentry_origlist == "N/A; unidentified species" |
       origlist_dataentry_origlist == "NA; no interactions from BOW bc incorporated into species above"
   )
-dim(missing_dataentry15Aug2025) #117; #125 with new correct Canada list
+dim(missing_dataentry15Aug2025) #117; #126 with new correct Canada list
 # Upon inspection, the missing_dataentry15Aug2025 species are either hybrids, 
 # species at the Genus level, or species that are not found in BOW. 
 # So the original list is close enough.
@@ -650,7 +650,7 @@ dim(missing_dataentry15Aug2025) #117; #125 with new correct Canada list
 # that we might enter but may not actually be North American birds. Check them on BOW.
 df_bbs_or_avibase_no_rare1 <- df_bbs_or_avibase_no_rare %>%
   filter(is.na(AOU_bbs2024))
-dim(df_bbs_or_avibase_no_rare1) #62; #70 rows with correct Canada list
+dim(df_bbs_or_avibase_no_rare1) #62; #71 rows with correct Canada list
 print(df_bbs_or_avibase_no_rare1[,1:2],n=100)
 
 # Create a column indicating the reason for rejection
@@ -679,6 +679,7 @@ pets.accidental <- c("Acridotheres cristatellus",
                      "Cyanocorax colliei",
                      "Cyanocorax colliei; Calocitta colliei",
                      "Daptrius chimachima",
+                     "Egretta eulophotes",
                      "Fringilla coelebs",
                      "Geranoaetus polyosoma",
                      "Gracula religiosa",
@@ -762,7 +763,7 @@ df_bbs_or_avibase_no_rare$ca.conus.rejection[rows.gone] <- "no BBS, extinct/exti
 # Make sure these are the ones left:
 df_bbs_or_avibase_no_rare2 <- df_bbs_or_avibase_no_rare %>%
   filter(is.na(AOU_bbs2024))
-dim(df_bbs_or_avibase_no_rare2) #62 rows
+dim(df_bbs_or_avibase_no_rare2) #71 rows
 print(df_bbs_or_avibase_no_rare2[,c(1:2,30)],n=100)
 # Yes these match. Now update the 3 species interaction CSVs above to ensure 
 # they are included when merged in.
