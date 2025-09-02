@@ -501,7 +501,7 @@ df_avibase_region <- df %>%
 
 # --- Quick confirmations ---
 cat("Number of rows in df:", nrow(df), "\n") # 35603
-cat("Number of rows with region_avibase8.17:", nrow(df_avibase_region), "\n\n") #1091 with correct Canada list: #1104
+cat("Number of rows with region_avibase8.17:", nrow(df_avibase_region), "\n\n") #1104 with correct Canada list: #1104
 
 cat("Counts for in_* flags:\n")
 for (in_col in unique(unname(map_lookup_to_in))) {
@@ -554,16 +554,17 @@ df.ca.conus <- df.ca.conus %>%
       "status_TT_avibase8.17"
     ))
   )
-# Fill NAs
+# Fill NAs where there are blanks now in the status column
 df.ca.conus$status_CA_US48_USak[df.ca.conus$status_CA_US48_USak == "" | df.ca.conus$status_CA_US48_USak == " "] <- NA
 
+# Omit NA rows
 df_bbs_or_avibase <- df.ca.conus %>%
   filter(!is.na(scientific_name_bbs2024) | !is.na(status_CA_US48_USak)) 
 
 dim(df_bbs_or_avibase) #1161 rows
 
 # 3. Subset further: drop "Rare" rows, but always keep rows with non-NA scientific_name_bbs2024
-# Where at least one of the 3 areas has the species as Rare:
+# Where at least one of the 3 areas has the species as Rare (this is too strict):
 #df_bbs_or_avibase_no_rare <- df_bbs_or_avibase %>%
 #  filter(
 #    !str_detect(status_CA_US48_USak, "\\bRare\\b") | !is.na(scientific_name_bbs2024)
@@ -571,19 +572,25 @@ dim(df_bbs_or_avibase) #1161 rows
 
 # Drop where all 3 areas are Rare/Accidental:
 df_bbs_or_avibase_no_rare <- df_bbs_or_avibase %>%
-  filter((status_CA_US48_USak != "Rare/Accidental; Rare/Accidental; Rare/Accidental") & (status_CA_US48_USak != "Rare/Accidental Near-threatened; Rare/Accidental Near-threatened; Rare/Accidental Near-threatened") & (status_CA_US48_USak != "Rare/Accidental Vulnerable; Rare/Accidental Vulnerable; Rare/Accidental Vulnerable") & (status_CA_US48_USak != "Rare/Accidental Vulnerable; Rare/Accidental Vulnerable; Rare/Accidental Vulnerable") | !is.na(scientific_name_bbs2024))
+  filter((status_CA_US48_USak != "Rare/Accidental; Rare/Accidental; Rare/Accidental") & 
+           (status_CA_US48_USak != "Rare/Accidental Near-threatened; Rare/Accidental Near-threatened; Rare/Accidental Near-threatened") & 
+           (status_CA_US48_USak != "Rare/Accidental Vulnerable; Rare/Accidental Vulnerable; Rare/Accidental Vulnerable") & 
+           (status_CA_US48_USak != "Rare/Accidental Vulnerable; Rare/Accidental Vulnerable; Rare/Accidental Vulnerable") | 
+           !is.na(scientific_name_bbs2024))
 
 # indicate these remaining should be kept for ca.conus subset
 df_bbs_or_avibase_no_rare$L1_ca.conus.data<-"yes"
 
-# Here is the final subset for the full L1 list: df_bbs_or_avibase_no_rare (824 species; 1118 with correct Canada list)
 dim(df_bbs_or_avibase_no_rare) #1118
 
+# Now work on omitting some of these species because they do not occur in Canada/CONUS continent.
+# To do this, create a subset for the omissions.
 # Subset where NA is in AOU_bbs2024... these are the full species (not hybrids) 
 # but may not actually be North American birds. Check them on BOW.
 df_bbs_or_avibase_no_rare1 <- df_bbs_or_avibase_no_rare %>%
   filter(is.na(AOU_bbs2024))
-dim(df_bbs_or_avibase_no_rare1) #62 rows; 71 rows with correct Canada list; 356 rows now.
+dim(df_bbs_or_avibase_no_rare1) #62 rows; 356 rows with correct Canada list.
+write_csv(df_bbs_or_avibase_no_rare1, file.path(L0_dir,"df_bbs_or_avibase_no_rare1.csv"))
 
 # Some of these are found in AFR, AUS, EUR, MID, XX, and are very likely accidentals in CONUS/Canada. Omit them.
 df_bbs_or_avibase_no_rare2 <- df_bbs_or_avibase_no_rare1 %>%
@@ -592,24 +599,26 @@ df_bbs_or_avibase_no_rare2 <- df_bbs_or_avibase_no_rare1 %>%
     )
 dim(df_bbs_or_avibase_no_rare2) #135 species
 
-# Omit the species found in AFR, AUS, MID, XX from the Canada/CONUS data (western hemisphere)
-df_bbs_or_avibase_no_rare.wh <- df_bbs_or_avibase_no_rare %>%
+# Another dataset for the other half:
+df_bbs_or_avibase_no_rare3 <- df_bbs_or_avibase_no_rare1 %>%
   filter(
-    !str_detect(regions_avibase8.17, "\\bAFR\\b|\\bAUS\\b|\\bMID\\b")
+    str_detect(regions_avibase8.17, "\\bAFR\\b|\\bAUS\\b|\\bEUR\\b|\\bMID\\b|\\bXX\\b")
   )
-dim(df_bbs_or_avibase_no_rare.wh) #135 species
+dim(df_bbs_or_avibase_no_rare3) #221 species
 
-print(df_bbs_or_avibase_no_rare2[,1:2],n=100)
-
+# Work on each dataset by checking the species' range on BOW. 
+# If it is outside Canada / CONUS, drop it.
 # Create a column indicating the reason for rejection
 df_bbs_or_avibase_no_rare$ca.conus.rejection<-NA
 # Fill a new column 'description' based on the 'category' column
+print(df_bbs_or_avibase_no_rare2[,1:2],n=135)
+print(df_bbs_or_avibase_no_rare3[,1:2],n=221)
 
 # List of species to consider keeping (pelagic):
 # Aethia pygmaea Whiskered Auklet
 # Synthliboramphus hypoleucus
 
-# keep (and it's entered & checked):
+# Species to keep in ca.conus (and they are entered & checked):
 # Corvus imparatus
 # Loxia sinesciuris Cassia Crossbill 
 # Plectrophenax hyperboreus McKay's Bunting
