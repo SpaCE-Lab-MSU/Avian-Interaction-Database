@@ -599,7 +599,7 @@ df_bbs_or_avibase_no_rare2 <- df_bbs_or_avibase_no_rare1 %>%
     )
 dim(df_bbs_or_avibase_no_rare2) #135 species
 
-# Another dataset for the other half:
+# Another dataset for the other portion:
 df_bbs_or_avibase_no_rare3 <- df_bbs_or_avibase_no_rare1 %>%
   filter(
     str_detect(regions_avibase8.17, "\\bAFR\\b|\\bAUS\\b|\\bEUR\\b|\\bMID\\b|\\bXX\\b")
@@ -615,10 +615,15 @@ print(df_bbs_or_avibase_no_rare2[,1:2],n=135)
 print(df_bbs_or_avibase_no_rare3[,1:2],n=221)
 
 # List of species to consider keeping (pelagic):
-# Aethia pygmaea Whiskered Auklet
+# Aethia pygmaea Whiskered Auklet - Caroline is entering
 # Synthliboramphus hypoleucus
 
+
 # Species to keep in ca.conus (and they are entered & checked):
+# Aethia pusilla Least Auklet
+# Aethia cristatella Crested Auklet
+# Aethia psittacula Parakeet Auklet
+# Alle alle	Dovekie
 # Corvus imparatus
 # Loxia sinesciuris Cassia Crossbill 
 # Plectrophenax hyperboreus McKay's Bunting
@@ -631,32 +636,82 @@ print(df_bbs_or_avibase_no_rare3[,1:2],n=221)
 # Vireo flavoviridis - entered, needs checking
 
 # List of species that are not found in North America (likely pets/accidental)
-pets.accidental <- c("Agelaius humeralis",
+pets.accidental <- c("Accipiter nisus",
+                     "Acridotheres cristatellus",
+                     "Acrocephalus dumetorum",
+                     "Acrocephalus schoenobaenus",
+                     "Agapornis roseicollis",
+                     "Agelaius humeralis",
                      "Aix galericulata",
                      "Amazona autumnalis",
                      "Amazona finschi",
                      "Amazona oratrix",
+                     "Anarhynchus alexandrinus",
+                     "Anarhynchus leschenaultii",
+                     "Anarhynchus mongolus",
                      "Anas bahamensis",
+                     "Anas zonorhyncha",
+                     "Anser anser",
+                     "Anhinga rufa",
+                     "Anser brachyrhynchus",
+                     "Anser erythropus",
+                     "Anser indicus",
                      "Anthracothorax prevostii",
+                     "Anthropoides virgo",
+                     "Anthus gustavi",
+                     "Anthus hodgsoni",
+                     "Anthus trivialis",
+                     "Apus nipalensis",
+                     "Apus pacificus",
                      "Aramides axillaris",
+                     "Ardea brachyrhyncha",
+                     "Ardeola bacchus",
+                     "Arundinax aedon",
+                     "Astur gentilis",
                      "Basileuterus culicivorus",
                      "Basileuterus lachrymosus",
                      "Basileuterus rufifrons",
                      "Basilinna xantusii",
+                     "Botaurus sinensis",
                      "Brotogeris versicolurus",
+                     "Branta leucopsis",
+                     "Buteo rufinus",
                      "Buteogallus urubitinga",
+                     "Calidris falcinellus",
+                     "Calidris pygmaea",
+                     "Calidris subminuta",
+                     "Calidris tenuirostris",
                      "Callipepla douglasii",
+                     "Calonectris edwardsii",
+                     "Calonectris leucomelas",
+                     "Campephilus principalis",
+                     "Camptorhynchus labradorius",
+                     "Caprimulgus jotaka",
                      "Cardellina rubra",
+                     "Carpodacus erythrinus",
+                     "Carpodacus roseus",
                      "Catharus mexicanus",
+                     "Chloris chloris",
                      "Chloris sinica",
                      "Chloroceryle amazona",
+                     "Chroicocephalus cirrocephalus",
+                     "Circus aeruginosus",
+                     "Circus cyaneus",
+                     "Coccothraustes coccothraustes",
                      "Coccyzus melacoryphus",
                      "Coereba flaveola",
                      "Colibri thalassinus",
+                     "Coloeus monedula",
+                     "Columba palumbus",
                      "Contopus caribaeus",
+                     "Conuropsis carolinensis",
+                     "Corvus cornix",
+                     "Corvus splendens",
                      "Cyanerpes cyaneus",
+                     "Crithagra mozambica",
                      "Cyanocompsa parellina",
                      "Cyanocorax colliei",
+                     "Cyanocorax colliei; Calocitta colliei",
                      "Daptrius chimachima",
                      "Dendrocygna arborea",
                      "Elaenia parvirostris",
@@ -754,9 +809,19 @@ rows.pets.accidental <- df_bbs_or_avibase_no_rare$scientific_name %in% pets.acci
 df_bbs_or_avibase_no_rare$ca.conus.rejection[rows.pets.accidental] <- "no BBS, pets or accidental"
 
 # List of species that are not found in North America (pelagic or marine focused)
-pelagic.marine <- c("Hydrobates cheimomnestes", # but close to CA/Channel Islands
+pelagic.marine <- c("Ardenna bulleri",
+                    "Ardenna carneipes",
+                    "Ardenna creatopus",
+                    "Ardenna grisea",
+                    "Bulweria bulwerii",
+                    "Calonectris edwardsii",
+                    "Calonectris leucomelas",
+                    "Creagrus furcatus",
+                    "Hydrobates cheimomnestes", # but close to CA/Channel Islands
                     "Hydrobates homochroa", # but close to CA/Channel Islands
                     "Hydrobates hornbyi")
+# Ardenna bulleri Buller's Shearwater - pelagic; needs entering
+# Ardenna carneipes Flesh-footed Shearwater - pelagic; needs entering
 
 # Find the rows where species_name contains any of the pelagic.marine species
 rows.pelagic.marine <- df_bbs_or_avibase_no_rare$scientific_name %in% pelagic.marine
