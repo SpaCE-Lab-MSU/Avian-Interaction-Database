@@ -616,24 +616,26 @@ print(df_bbs_or_avibase_no_rare3[,1:2],n=221)
 
 # List of species to consider keeping (pelagic):
 # Aethia pygmaea Whiskered Auklet - Caroline is entering
-# Synthliboramphus hypoleucus
-
+# Synthliboramphus hypoleucus - Caroline is entering
+# Rissa brevirostris	Red-legged Kittiwake - Caroline is entering
 
 # Species to keep in ca.conus (and they are entered & checked):
-# Aethia pusilla Least Auklet
-# Aethia cristatella Crested Auklet
-# Aethia psittacula Parakeet Auklet
-# Alle alle	Dovekie
-# Corvus imparatus
-# Loxia sinesciuris Cassia Crossbill 
-# Plectrophenax hyperboreus McKay's Bunting
-# Psittacara holochlorus Green Parakeet 
-# Puffinus opisthomelas 
-# Synthliboramphus craveri
-# Synthliboramphus scrippsi
-# Urile urile
-# Vermivora bachmanii
-# Vireo flavoviridis - entered, needs checking
+# Aethia pusilla Least Auklet - all set
+# Aethia cristatella Crested Auklet - all set
+# Aethia psittacula Parakeet Auklet - all set
+# Alle alle	Dovekie - all set
+# Corvus imparatus - all set
+# Fratercula arctica - all set
+# Loxia sinesciuris Cassia Crossbill - all set
+# Onychoprion fuscatus Sooty Tern - all set
+# Plectrophenax hyperboreus McKay's Bunting - all set
+# Psittacara holochlorus Green Parakeet - all set
+# Puffinus opisthomelas - all set
+# Synthliboramphus craveri - all set
+# Synthliboramphus scrippsi - all set
+# Urile urile - entered, needs checking
+# Vermivora bachmanii - all set
+# Vireo flavoviridis - entered by CR, needs checking
 
 # List of species that are not found in North America (likely pets/accidental)
 pets.accidental <- c("Accipiter nisus",
