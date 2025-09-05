@@ -95,6 +95,8 @@ c) Enter interactions for the species you selected by designating the selected s
 - Refer to the unique types of interactions found here:
 [**AvianInteractionData_metadata_interactiondefinitions.csv**](AvianInteractionData_metadata_interactiondefinitions.csv). Enter in the appropriate interaction type, as well as the direction of the interaction specific to each species. Be careful to place the correct value in the effect columns. 
 
+- A note about **"co-occur"**: Co-ocurrence is limited to species that are found in the same place at the same time. If a study was done in a certain place (over a certain time), then you can reasonably assume the birds were co-occuring. Or if a statement says, "species1 is often found with species2" and there is no information on how they interact exactly, "co-occur" is the interaction. Examples of when NOT TO ENTER "CO-OCCUR": if you find a checklist of birds in an area, or a description of birds found in an area (these are too vague). As always, if you have questions on interpreting, ask Caroline or Phoebe.  
+
 **Interaction Strength**
 - For “weak” vs. “strong” interactions, this can be less clear. Here are some guidelines:
 Enter “weak” if the description is vague, mentions that it is a “possible” or "likely" (but not observed) interaction, rare interaction, or inferred interaction.
