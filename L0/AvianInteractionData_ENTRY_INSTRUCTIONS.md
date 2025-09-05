@@ -10,7 +10,7 @@
 ### [**AvianInteractionData_L0.csv**](AvianInteractionData_L0.csv) 
 = Entry of all records stitched together with [../R/AvianInteractionData_L0_stitch.R](https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database/blob/a059edeba78e888432fa36b74948d3a8ac4aa192/R/AvianInteractionData_L0_stitch.R). Each record in this csv file is a unique interaction between 2 species. Note that 2 species can interact in more than one way (equating to multiple rows), and there may be duplicate entries of interactions, each from different species accounts.
 
-### [**AvianInteractionData_metadata.csv**](AvianInteractionData_metadata.csv) 
+### [**AvianInteractionData_metadata_version1.csv**](AvianInteractionData_metadata_version1.csv) 
 = Metadata for columns in **AvianInteractionData_L0.csv**.
 
 ### [**AvianInteractionData_SpeciesList.csv**](AvianInteractionData_SpeciesList.csv) 
