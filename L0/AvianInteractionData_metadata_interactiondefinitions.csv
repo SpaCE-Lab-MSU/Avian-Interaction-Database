@@ -8,7 +8,10 @@ commensalism-chick adoption,yes,0,1,when one species adopts another species' chi
 commensalism-scavenge,yes,1,0,case of commensalism in which a bird consumes/scavanges a previously deceased bird or deserted/addled eggs: scavenger=1; dead bird=0
 communal nesting,no,1,1,"nesting together, usually during breeding season. both species = 1"
 communal roosting,no,1,1,"roosting together, typically during nonbreeding season (indicate in ""nonbreedingseason"" column). both species = 1"
-competition,no,-1,-1,"competing over space, territory, food, etc. both species = -1"
+competition-nest,no,-1,-1,competing over nest site or nest space or nest material. both species = -1
+competition-food,no,-1,-1,competing over food. both species = -1
+competition-territory,no,-1,-1,competing over territory. both species = -1
+competition-,no,-1,-1,"competing over something other than food, nest, or territory; indicate what the competition is over, with a word after ""competition-"". both species = -1"
 copulation,no,0,0,mating across species (whether successful or not); could result in hybridization; both species = 0
 courtship,no,0,0,one species attempts to court another; both species = 0
 facilitation,no,1,1,"where both species benefit (if we do not have a specific interaction for it), e.g., mutual allopreening. both species = 1"
