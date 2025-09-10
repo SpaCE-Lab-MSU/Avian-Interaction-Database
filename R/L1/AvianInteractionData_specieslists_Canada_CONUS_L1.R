@@ -586,38 +586,27 @@ dim(df_bbs_or_avibase_no_rare) #1118
 # Now work on omitting some of these species because they do not occur in Canada/CONUS continent.
 # To do this, create a subset for the omissions.
 # Subset where NA is in AOU_bbs2024... these are the full species (not hybrids) 
-# but may not actually be North American birds. Check them on BOW.
+# but may not actually be North American birds. 
 df_bbs_or_avibase_no_rare1 <- df_bbs_or_avibase_no_rare %>%
   filter(is.na(AOU_bbs2024))
 dim(df_bbs_or_avibase_no_rare1) #62 rows; 356 rows with correct Canada list.
-write_csv(df_bbs_or_avibase_no_rare1, file.path(L0_dir,"df_bbs_or_avibase_no_rare1.csv"))
+# Export the list. Check them on BOW for their ranges.
+# If it is outside Canada / CONUS, drop it.
+write_csv(df_bbs_or_avibase_no_rare1, file.path(L0_dir,"df_bbs_or_avibase_no_rare_ca.conus_keep_or_not.csv"))
 
-# Some of these are found in AFR, AUS, EUR, MID, XX, and are very likely accidentals in CONUS/Canada. Omit them.
+# Some of these are found in AFR, AUS, EUR, MID, XX, and are very likely accidentals in CONUS/Canada.
+# After inspection, this list is too small to use as omission, and it includes some species
+# that shouldn't be omitted.
 df_bbs_or_avibase_no_rare2 <- df_bbs_or_avibase_no_rare1 %>%
     filter(
       !str_detect(regions_avibase8.17, "\\bAFR\\b|\\bAUS\\b|\\bEUR\\b|\\bMID\\b|\\bXX\\b")
     )
 dim(df_bbs_or_avibase_no_rare2) #135 species
 
-# Another dataset for the other portion:
-df_bbs_or_avibase_no_rare3 <- df_bbs_or_avibase_no_rare1 %>%
-  filter(
-    str_detect(regions_avibase8.17, "\\bAFR\\b|\\bAUS\\b|\\bEUR\\b|\\bMID\\b|\\bXX\\b")
-  )
-dim(df_bbs_or_avibase_no_rare3) #221 species
-
-# Work on each dataset by checking the species' range on BOW. 
-# If it is outside Canada / CONUS, drop it.
-# Create a column indicating the reason for rejection
-df_bbs_or_avibase_no_rare$ca.conus.rejection<-NA
-# Fill a new column 'description' based on the 'category' column
-print(df_bbs_or_avibase_no_rare2[,1:2],n=135)
-print(df_bbs_or_avibase_no_rare3[,1:2],n=221)
-
 # List of species to consider keeping (pelagic):
-# Aethia pygmaea Whiskered Auklet - Caroline is entering
-# Synthliboramphus hypoleucus - Caroline is entering
-# Rissa brevirostris	Red-legged Kittiwake - Caroline is entering
+# Aethia pygmaea Whiskered Auklet - Caroline is entering - plz checked. DONE
+# Synthliboramphus hypoleucus - Caroline is entering - plz checked. DONE
+# Rissa brevirostris	Red-legged Kittiwake - Caroline is entering- plz checked. DONE
 
 # Species to keep in ca.conus (and they are entered & checked):
 # Aethia pusilla Least Auklet - all set
@@ -635,226 +624,29 @@ print(df_bbs_or_avibase_no_rare3[,1:2],n=221)
 # Synthliboramphus scrippsi - all set
 # Urile urile - entered, needs checking
 # Vermivora bachmanii - all set
-# Vireo flavoviridis - entered by CR, needs checking
+# Vireo flavoviridis - entered by CR, plz checked. DONE
 
-# List of species that are not found in North America (likely pets/accidental)
-pets.accidental <- c("Accipiter nisus",
-                     "Acridotheres cristatellus",
-                     "Acrocephalus dumetorum",
-                     "Acrocephalus schoenobaenus",
-                     "Agapornis roseicollis",
-                     "Agelaius humeralis",
-                     "Aix galericulata",
-                     "Amazona autumnalis",
-                     "Amazona finschi",
-                     "Amazona oratrix",
-                     "Anarhynchus alexandrinus",
-                     "Anarhynchus leschenaultii",
-                     "Anarhynchus mongolus",
-                     "Anas bahamensis",
-                     "Anas zonorhyncha",
-                     "Anser anser",
-                     "Anhinga rufa",
-                     "Anser brachyrhynchus",
-                     "Anser erythropus",
-                     "Anser indicus",
-                     "Anthracothorax prevostii",
-                     "Anthropoides virgo",
-                     "Anthus gustavi",
-                     "Anthus hodgsoni",
-                     "Anthus trivialis",
-                     "Apus nipalensis",
-                     "Apus pacificus",
-                     "Aramides axillaris",
-                     "Ardea brachyrhyncha",
-                     "Ardeola bacchus",
-                     "Arundinax aedon",
-                     "Astur gentilis",
-                     "Basileuterus culicivorus",
-                     "Basileuterus lachrymosus",
-                     "Basileuterus rufifrons",
-                     "Basilinna xantusii",
-                     "Botaurus sinensis",
-                     "Brotogeris versicolurus",
-                     "Branta leucopsis",
-                     "Buteo rufinus",
-                     "Buteogallus urubitinga",
-                     "Calidris falcinellus",
-                     "Calidris pygmaea",
-                     "Calidris subminuta",
-                     "Calidris tenuirostris",
-                     "Callipepla douglasii",
-                     "Calonectris edwardsii",
-                     "Calonectris leucomelas",
-                     "Campephilus principalis",
-                     "Camptorhynchus labradorius",
-                     "Caprimulgus jotaka",
-                     "Cardellina rubra",
-                     "Carpodacus erythrinus",
-                     "Carpodacus roseus",
-                     "Catharus mexicanus",
-                     "Chloris chloris",
-                     "Chloris sinica",
-                     "Chloroceryle amazona",
-                     "Chroicocephalus cirrocephalus",
-                     "Circus aeruginosus",
-                     "Circus cyaneus",
-                     "Coccothraustes coccothraustes",
-                     "Coccyzus melacoryphus",
-                     "Coereba flaveola",
-                     "Colibri thalassinus",
-                     "Coloeus monedula",
-                     "Columba palumbus",
-                     "Contopus caribaeus",
-                     "Conuropsis carolinensis",
-                     "Corvus cornix",
-                     "Corvus splendens",
-                     "Cyanerpes cyaneus",
-                     "Crithagra mozambica",
-                     "Cyanocompsa parellina",
-                     "Cyanocorax colliei",
-                     "Cyanocorax colliei; Calocitta colliei",
-                     "Daptrius chimachima",
-                     "Dendrocygna arborea",
-                     "Elaenia parvirostris",
-                     "Emberiza elegans",
-                     "Emberiza variabilis",
-                     "Empidonomus aurantioatrocristatus",
-                     "Empidonomus varius",
-                     "Euptilotis neoxenus",
-                     "Falco rufigularis",
-                     "Geothlypis poliocephala",
-                     "Geotrygon chrysia",
-                     "Geotrygon montana",
-                     "Geranoaetus polyosoma",
-                     "Geranospiza caerulescens",
-                     "Harpagus bidentatus",
-                     "Heliomaster constantii",
-                     "Heliornis fulica",
-                     "Hesperoburhinus bistriatus",
-                     "Icterus abeillei",
-                     "Icterus pustulatus",
-                     "Icterus wagleri",
-                     "Jabiru mycteria",
-                     "Lampornis amethystinus",
-                     "Legatus leucophaius",
-                     "Leucophaeus modestus",
-                     "Leucosticte arctoa",
-                     "Lophura nycthemera",
-                     "Machetornis rixosa",
-                     "Margarops fuscatus",
-                     "Melanoptila glabrirostris",
-                     "Melanospiza bicolor",
-                     "Melanotis caerulescens",
-                     "Melopyrrha violacea",
-                     "Mitrephanes phaeocercus",
-                     "Mustelirallus erythrops",
-                     "Myadestes occidentalis",
-                     "Myiarchus nuttingi",
-                     "Myiarchus sagrae",
-                     "Myioborus miniatus",
-                     "Myiopagis viridicata",
-                     "Myiozetetes similis",
-                     "Nesophlox evelynae",
-                     "Oreothlypis superciliosa",
-                     "Oriturus superciliosus",
-                     "Pachyramphus major",
-                     "Pardirallus maculatus",
-                     "Paroaria capitata",
-                     "Patagioenas squamosa",
-                     "Periporphyrus celaeno",
-                     "Phaetusa simplex",
-                     "Phasianus versicolor",
-                     "Pheucticus chrysopeplus",
-                     "Piranga bidentata",
-                     "Porphyrio flavirostris",
-                     "Progne chalybea",
-                     "Progne cryptoleuca",
-                     "Progne elegans",
-                     "Progne tapera",
-                     "Psittacara erythrogenys",
-                     "Psittacara mitratus",
-                     "Ptiliogonys cinereus",
-                     "Pygochelidon cyanoleuca",
-                     "Rhynchopsitta pachyrhyncha",
-                     "Ridgwayia pinicola",
-                     "Rupornis magnirostris",
-                     "Selasphorus heloisa",
-                     "Spinus notatus",
-                     "Spizella wortheni",
-                     "Spodiopsar cineraceus",
-                     "Sporophila bouvronides",
-                     "Sporophila torqueola",
-                     "Streptoprocne zonaris",
-                     "Strix virgata",
-                     "Tachornis phoenicobia",
-                     "Tachycineta albilinea",
-                     "Tachycineta cyaneoviridis",
-                     "Thamnophilus doliatus",
-                     "Tiaris olivaceus",
-                     "Tigrisoma mexicanum",
-                     "Tityra semifasciata",
-                     "Toxostoma cinereum",
-                     "Turdus assimilis",
-                     "Turdus plumbeus",
-                     "Turdus rufopalliatus",
-                     "Tyrannus caudifasciatus",
-                     "Vireo crassirostris",
-                     "Vireo gundlachii",
-                     "Vireo magister",
-                     "Volatinia jacarina",
-                     "Zonotrichia capensis",
-                     "Zosterops japonicus")
-# Find the rows where scientific_name contains any of the pets.accidental species
-rows.pets.accidental <- df_bbs_or_avibase_no_rare$scientific_name %in% pets.accidental
-# Replace the character values in ca.conus.rejection for those identified rows
-df_bbs_or_avibase_no_rare$ca.conus.rejection[rows.pets.accidental] <- "no BBS, pets or accidental"
+df_bbs_or_avibase_no_rare1a<-read.csv(file.path(L0_dir,"df_bbs_or_avibase_no_rare_ca.conus_keep_or_not.csv"))
+head(df_bbs_or_avibase_no_rare1a)
+dim(df_bbs_or_avibase_no_rare1a) #356
+dim(df_bbs_or_avibase_no_rare1) #356
 
-# List of species that are not found in North America (pelagic or marine focused)
-pelagic.marine <- c("Ardenna bulleri",
-                    "Ardenna carneipes",
-                    "Ardenna creatopus",
-                    "Ardenna grisea",
-                    "Bulweria bulwerii",
-                    "Calonectris edwardsii",
-                    "Calonectris leucomelas",
-                    "Creagrus furcatus",
-                    "Hydrobates cheimomnestes", # but close to CA/Channel Islands
-                    "Hydrobates homochroa", # but close to CA/Channel Islands
-                    "Hydrobates hornbyi")
-# Ardenna bulleri Buller's Shearwater - pelagic; needs entering
-# Ardenna carneipes Flesh-footed Shearwater - pelagic; needs entering
-
-# Find the rows where species_name contains any of the pelagic.marine species
-rows.pelagic.marine <- df_bbs_or_avibase_no_rare$scientific_name %in% pelagic.marine
-# Replace the character values in ca.conus.rejection for those identified rows
-df_bbs_or_avibase_no_rare$ca.conus.rejection[rows.pelagic.marine] <- "no BBS, pelagic or marine"
-
-# List of species that are not found in North America (Hawaii)
-hawaii <- c("Branta sandvicensis")
-# Find the rows where species_name contains any of the hawaii species
-rows.hawaii <- df_bbs_or_avibase_no_rare$scientific_name %in% hawaii
-# Replace the character values in ca.conus.rejection for those identified rows
-df_bbs_or_avibase_no_rare$ca.conus.rejection[rows.hawaii] <- "no BBS, Hawaii"
-
-# List of species that are extinct, extirpated or critically endangered/super rare
-extinct.or.extirpated.ce <- c("Campephilus principalis",
-                              "Camptorhynchus labradorius",
-            "Conuropsis carolinensis",
-            "Ectopistes migratorius",
-            "Numenius borealis")
-# Find the rows where species_name contains any of the extinct or extirpated species
-rows.gone <- df_bbs_or_avibase_no_rare$scientific_name %in% extinct.or.extirpated.ce
-# Replace the character values in ca.conus.rejection for those identified rows
-df_bbs_or_avibase_no_rare$ca.conus.rejection[rows.gone] <- "no BBS, extinct/extirpated/critically endangered/super rare"
-
-# Omit the species that have a ca.conus.rejection value
-# Replace empty strings with NA 
-dim(df_bbs_or_avibase_no_rare) #1118
-ca.conus.splist <- df_bbs_or_avibase_no_rare %>%
-  filter(is.na(ca.conus.rejection))
-dim(ca.conus.splist) #769 species; #992 species
-
-# --- Export the final 769 species CANADA & CONUS subset as a CSV
+# Merge the keep or omit list with the full list of species considered for North America
+ca.conus.splist <- merge(df_bbs_or_avibase_no_rare,df_bbs_or_avibase_no_rare1a,
+                         by=c("scientific_name","common_name","scientific_name_avibase8.17",
+                              "common_name_avibase8.17","order_avibase8.17","family_avibase8.17"),
+                         all.x=T, all.Y=T)
+dim(ca.conus.splist) # 1118
+# Fill in blank "keep" with "y"
+ca.conus.splist <- ca.conus.splist %>%
+  mutate(keep = replace_na(keep, "y"))
+unique(ca.conus.splist$keep)
+# Omit the species where keep="n"
+ca.conus.splist <- ca.conus.splist %>%
+  filter(keep !="n")
+dim(ca.conus.splist) #782 species
+# drop the 'keep' column
+ca.conus.splist$keep<-NULL
+# --- Export the final 782 species CANADA & CONUS subset as a CSV
 write_csv(ca.conus.splist, file.path(L1_dir,"canada.conus.splist_L1.csv"))
 
