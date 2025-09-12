@@ -85,7 +85,7 @@
 get_file_paths <- function(config_file = NULL){
 
 
-  default_config_file <- here::here('filepaths.R')
+  default_config_file <- here::here('R/filepaths.R')
 
   if(is.null(config_file)){ config_file <- default_config_file }
 
