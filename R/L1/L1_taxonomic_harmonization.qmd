@@ -277,12 +277,13 @@ for(common_name_for_missingsp1  in records.missingsp1$species1_common){
 
 Assign scientific names to all rows for those common names that have missing sp1 scientific names
 
-update this list of fixes as errors are discovered above
+Manual Assignments: update this list of fixes as errors are discovered above
 
 ```{r}
-
+#| echo: false
 manual_assignments = list()
 manual_assignments[["Rhinoceros Auklet"]] <- "Cerorhinca monocerata"
+print(manual_assignments)
 # add more as needed  
 ```
 
@@ -318,18 +319,20 @@ records.missingsp2<- int.raw[is.na(int.raw$species2_scientific),]
 print( records.missingsp2)
 ```
 
-May 2025: 2 rows need editing for adding species names
 
+Saved outcome from Previous run
 ```         
+May 2025: 2 rows need editing 
 species1_common species2_common         species1_scientific
 866         White-cheeked Pintail   Cinnamon Teal Anas bahamensis rubirostris
 14223 Middle American Screech-Owl            <NA>        Megascops guatamalae
 species2_scientific effect_sp1_on_sp2 effect_sp2_on_sp1          interaction
 866                  <NA>                 1                 1 facilitation-feeding
 14223                <NA>                NA                NA                 <NA>
+one had both NA interactions , now we are removing those
 ```
 
-one had both NA interactions so was removed above
+
 
 List the names from the checklist that match those missing in sp2:
 
@@ -348,10 +351,11 @@ for(common_name_for_missingsp2  in records.missingsp2$species2_common){
 update this list of fixes as errors are discovered above
 
 ```{r}
-
+#| echo: false
 manual_assignments = list()
 manual_assignments["Cinnamon Teal"] <-  "Spatula cyanoptera"
 # add more as needed  
+print(manual_assignments)
 ```
 
 fix sp2 using the list above
@@ -464,6 +468,18 @@ Number of scientific names that were 'edited' by this process (raw != edited):
 print(nrow(filter(int.raw.names, genus_species.raw != genus_species.edit)))
 
 ```
+Number of common names that were 'edited' by this process (raw != edited):
+```{r}
+print(nrow(filter(int.raw.names, common_name.raw != common_name.edit)))
+
+```
+Number of common names that are different not because of Upper case
+```{r}
+print(nrow(filter(int.raw.names, toupper(common_name.raw) != toupper(common_name.edit) )))
+
+```
+If zero above, then the only 'edits' for common name for upper/lower case matching
+
 
 Test case to track with knonw misspelling: Accipiter cooperi was misspelled ( should be Accipiter cooperii) - exists in int.raw.names
 
@@ -671,13 +687,18 @@ print(dim(int.gbif.names))
 ```{r}
 print(length(unique(int.gbif.names$genus_species.raw)))
 # 3913; May 29, 2025: 3889 OK       
+```
 
-# Separate resolved and unresolved names based on specified criteria
+Separate resolved and unresolved names based on specified criteria
+```{r}
+
 resolved.gbif <- int.gbif.names %>%
   filter(!is.na(scientific_id) | grepl(" sp\\.$", genus_species.edit))
-length(unique(resolved.gbif$genus_species.raw))
+print(length(unique(resolved.gbif$genus_species.raw)))
 # 3587; May 29, 2025: 3580
+```
 
+```{r}
 unresolved.gbif <- int.gbif.names %>%
   filter(is.na(scientific_id) & !grepl(" sp\\.$", genus_species.edit))
 length(unique(unresolved.gbif$genus_species.raw))
@@ -685,23 +706,47 @@ length(unique(unresolved.gbif$genus_species.raw))
 length(unique(resolved.gbif$genus_species.raw))+length(unique(unresolved.gbif$genus_species.raw))
 # 3913 - OK; May 29, 2025: 3889 OK   
 
-# Display both results: GBIF resolved and GBIF unresolved 
-head(resolved.gbif)
-# Test: Accipiter cooperi is misspelled
+```
+
+
+Display both results: GBIF resolved and GBIF unresolved 
+
+```{r}
+tibble(resolved.gbif)
+```
+
+
+Test: Accipiter cooperi is misspelled
+```{r}
 dplyr::filter(resolved.gbif, genus_species.raw %in% c("Accipiter cooperi"))
 # doesn't exist
+```
 
-head(unresolved.gbif)
-# Test: Accipiter cooperi is misspelled - exists in unresolved.gbif
+```{r}
+tibble(unresolved.gbif)
+```
+
+Test: Accipiter cooperi is misspelled - exists in unresolved.gbif
+
+```{r}
 dplyr::filter(unresolved.gbif, genus_species.raw %in% c("Accipiter cooperi"))
 # genus_species.raw common_name.raw genus_species.edit common_name.edit scientific_id
 # 1 Accipiter cooperi   Cooper's Hawk  Accipiter cooperi    Cooper's Hawk          <NA>
 #   accepted_scientific_name
 # 1                     <NA>
-# Omit scientific_id and accepted_scientific_name since they are blank
+```
+
+Number of rows in unresolved gbig
+
+
+```{r}
+print(nrow(unresolved.gbif))
 unresolved.gbif$scientific_id<-NULL
 unresolved.gbif$accepted_scientific_name<-NULL
 ```
+Omit scientific_id and accepted_scientific_name since they are blank
+
+### Unresolved
 
 Work with unresolved.gbif to try and determine what misspellings exist in the genus_species.raw, and what they should be, based on the reference list from eBird & Clements CHECKLIST 2024.
 
@@ -712,9 +757,12 @@ reference_names <- tibble(
   genus_species = checklist$genus_species,
   common_name = checklist$common_name
 )
+```
 
+```{r}
 # Function to clean names for comparison (ignore sp., Unid., remove whitespace
 # after name)
+#| echo: false
 clean_name <- function(name) {
   name %>%
     gsub("\\b(unid\\.|sp\\.)\\b", "", .) %>%   # Remove "Unid." and "sp."
@@ -758,16 +806,24 @@ genus_species_matches <- unresolved.gbif %>%
   ) %>%
   ungroup()
 
-# Test: Accipiter cooperi is misspelled
-dplyr::filter(genus_species_matches, genus_species.raw %in% c("Accipiter cooperi"))
-# # A tibble: 1 × 6
-# genus_species.raw common_name.raw genus_species.edit common_name.edit closest_genus_species_match
-# <chr>             <chr>           <chr>              <chr>            <chr>                      
-#   1 Accipiter cooperi Cooper's Hawk   Accipiter cooperi  Cooper's Hawk    Accipiter poliogaster      
-# genus_species_match_score
-# <dbl>
-#   1                     0.849
+tibble(genus_species_matches)
+```
 
+Test of checklist and data : Accipiter cooperi is misspelled
+- should have a match of about 0.89
+
+```{r}
+
+dplyr::filter(genus_species_matches, genus_species.raw %in% c("Accipiter cooperi"))
+
+```
+
+```{r}
+print(dplyr::filter(genus_species_matches, genus_species.raw %in% c("Accipiter cooperi"))$genus_species_match_score)
+```
+
+```
+# DISABLED
 # Adjust so that columns are grouped close by for easier reference
 # final_matches <- final_matches %>%
 #   select(
@@ -775,35 +831,62 @@ dplyr::filter(genus_species_matches, genus_species.raw %in% c("Accipiter cooperi
 #     common_name, closest_common_name_match,
 #     everything()  # Keep the remaining columns in their original order
 #   )
-
 ```
 
 ---
 
 ## Scientific Name Changes: High & Low Confidence Matches
 
-
+Number of unique genus_species.raw in matches table:
 ```{r}
-length(unique(genus_species_matches$genus_species.raw))
+#| echo: false
+print(Sys.Date())
+print(length(unique(genus_species_matches$genus_species.raw)))
 ```
 
+*Previous results of this check*
+```
 326 OK because it matches the unresolved.gbif number
 May 29, 2025: 309 (unresolved.gbif =328)
+```
 
+### Extract final_matches with high confidence
 
-Extract final_matches with high confidence (genus_species_match_score > 0.90)
+set high confidence threshold  (>=)
 
 ```{r}
+high_confidence_threshold <- 0.9
+```
+
+Number of high confidence matches (genus_species_match_score > 0.90)
+
+```{r}
+#| echo: false
 high_confidence_matches <- genus_species_matches %>%
   filter(
-    genus_species_match_score >= 0.9 
+    genus_species_match_score >= high_confidence_threshold 
   )
-length(unique(high_confidence_matches$genus_species.raw))
-# 257 out of 326; May 29, 2025: 244 out of 309
-# Define range for printing in increments of 0.005; use the genus_species match
+print(length(unique(high_confidence_matches$genus_species.raw)))
+```
+*previous results:*
+
+`Dec 2024: 257 out of 326; May 29, 2025: 244 out of 309`
+
+### Determin lower confidence threshold
+
+to find Define range for printing in increments of 0.005
+
+use the genus_species match. 
+
+store each partition data.frame as an item in a list keyed on upper range
+
+```{r}
 score_start <- min(high_confidence_matches$genus_species_match_score)
 score_end <- max(high_confidence_matches$genus_species_match_score)
 increment <- 0.005
+
+# collect these in a list for exploring
+confidence_partition <- list()
 
 # Loop through each score range and print the matches within that range
 for (i in seq(score_start, score_end, by = increment)) {
@@ -812,44 +895,101 @@ for (i in seq(score_start, score_end, by = increment)) {
   
   # Print the current range if it has any entries
   if (nrow(current_range) > 0) {
-    cat("\nMatch Score Range:", sprintf("%.2f", i), "to", sprintf("%.2f", i + increment), "\n")
-    print(current_range, n=100) # print up to 100 rows in a section
+    low_range <- sprintf("%.2f", i)
+    high_range <- sprintf("%.2f", i + increment)
+    range_text = paste(low_range, "to", high_range)
+    print(paste("Match Score Range:",range_text ,": ", nrow(current_range), "records"))
+    confidence_partition[[high_range]]<- current_range
+    # print(current_range, n=100) # print up to 100 rows in a section
   }
 }
 
-# For most of the names, the match is 1 or quite high, so assign them the
-# closest match, then edit the few below noted "KEEP ORIGINAL".
-fixed_names1<-high_confidence_matches
-length(unique(high_confidence_matches$genus_species.raw))
-# 257 out of 326; May 29, 2025: 244
-# Test: Accipiter cooperi is misspelled - it disappeared here... hopefully in
-# low_confidence_matches and final_names2
-dplyr::filter(fixed_names1, genus_species.raw %in% c("Accipiter cooperi"))
+```
+View any of these dataframes using the partition list to see what's on there
+```{r}
+ confidence_partition[["0.91"]]
+```
 
-# Assign genus_species and common_name to the closest_matches based on fuzzy
-# coding match. Dec. 11, 2024: only doing genus_species for now.
+For most of the names, the match is 1 or quite high, so assign them the
+closest match, then edit the few below noted "KEEP ORIGINAL".
+
+```{r}
+fixed_names1<-high_confidence_matches
+print(length(unique(high_confidence_matches$genus_species.raw)))
+```
+
+*previous results*
+```
+257 out of 326; May 29, 2025: 244
+```
+
+Test: Accipiter cooperi is misspelled - it disappeared here... because < threshold
+
+
+```{r}
+dplyr::filter(fixed_names1, genus_species.raw %in% c("Accipiter cooperi"))
+```
+
+Assign genus_species and common_name to the closest_matches based on fuzzy
+coding match. 
+
+Dec. 11, 2024: only doing genus_species for now.
+
+```{r}
+
 names(fixed_names1)[names(fixed_names1) == "closest_genus_species_match"] <-"genus_species"
 fixed_names1$common_name.raw<-NULL
 fixed_names1 <- fixed_names1 %>% 
   distinct()
-
-save.image(file.path(L1_RData_dir,"AvianInteractionData_L1_29May2025.RData"))
-
-length(unique(fixed_names1$genus_species.raw))
-# 257 out of 326; May 29, 2025: 244
-print(dim(fixed_names1))
-# 270; May 29, 2025: 257
-# Scroll through these 270 High Confidence Genus Species Matches. Use
-# genus_species.edit to make changes given that it doesn't have extra spaces or
-# other issues. All look okay except:
-
-# genus_species.raw    closest_genus_species_match    genus_species_match_score
-
 ```
 
-Fixes suggest for matching
+---
 
-```         
+## SAVE CURRENT WORKSPACE WITH CURRENT DATE
+
+```{r}
+
+today_date_string <- format(Sys.Date(),"%Y-%m-%d")
+rdata_file_name <- paste0("AvianInteractionData_L1_workspace", today_date_string, ".RData")
+save.image(file.path(file_paths$L1,rdata_file_name ))
+```
+
+---
+
+## Scientific Name Fixes
+
+**CONTINUE CHECKING BY FUZZY MATCHING**
+
+```{r}
+length(unique(fixed_names1$genus_species.raw))
+```
+
+*previous results*
+
+257 out of 326; May 29, 2025: 244
+
+
+```{r}
+tibble(fixed_names1) %>% arrange(genus_species_match_score)
+```
+*previous count*
+
+270; May 29, 2025: 257
+
+
+Scroll through these 2High Confidence Genus Species Matches. Use
+genus_species.edit to make changes given that it doesn't have extra spaces or
+other issues. All look okay except:
+
+
+
+
+
+---
+
+### NOTES Matching results 
+
+        
  CHANGE TO CLOSEST MATCH: checklist says Corvus brachyrhynchos caurinus
  Larus brachyrhynchos caurinus   Northwestern Crow Corvus brachyrhynchos caurinus   0.900468284
 
@@ -875,19 +1015,31 @@ Fixes suggest for matching
  checklist: Parkesia noveboracensis;
  int.raw and unresolved.gbif: common_name = hybrid Barnacle x Bar-headed Goose
  BOW says the hybrid exists but is rare
+ 
+CHANGE TO CLOSEST MATCH: checklist says Corvus brachyrhynchos caurinus
+Larus brachyrhynchos caurinus	 Northwestern Crow Corvus brachyrhynchos caurinus	0.900468284
+
+
+
+PSB: Start on creating a data structure to hold these fixes to apply all at once
+
+```{r}
+# CHANGE TO CLOSEST MATCH:
+
+checklist_matches<- "genus_species.raw,common_name.raw,closest_genus_species_match,genus_species_match_score,
+Larus brachyrhynchos caurinus,Northwestern Crow Corvus brachyrhynchos caurinus,0.900468284
+Campylorhynchos brunneicapillus,Cactus Wren Campylorhynchus brunneicapillus,0.900716846
+Cathartus aura,Turkey Vulture,Cathartes aura,0.901098901
+"
 ```
 
 ```{r}
-species_updates <- list()
-species_updates[]
+closest_matches.df <- read.csv(text = checklist_matches, header = TRUE)
 ```
 
-CHANGE TO CLOSEST MATCH: checklist says Corvus brachyrhynchos caurinus
-# Larus brachyrhynchos caurinus	 Northwestern Crow Corvus brachyrhynchos caurinus	0.900468284
-    
-```
 
-Branta leucopsis
+
+deal with *Branta leucopsis*
 
 ```         
 1 Branta leucopsis x anser indicus Branta leucopsis x canadensis       0.905
@@ -899,15 +1051,22 @@ dplyr::filter(int.raw, species2_scientific %in% c("Branta leucopsis x Anser indi
 dplyr::filter(unresolved.gbif, genus_species.edit %in% c("Branta leucopsis x anser indicus"))
 dplyr::filter(unresolved.gbif, genus_species.edit %in% c("Branta leucopsis x anser indicus"))
 fixed_names1$genus_species[fixed_names1$genus_species.edit == "Branta leucopsis x anser indicus"] <- "Branta leucopsis x Anser indicus"
+```
 
-# KEEP ORIGINAL and change to species later when lumping subspecies
-# checklist: Cuculus canorus; common_name = Common Cuckoo
-# BOW says "sometimes separated subspecifically as telephonus on basis of
-# size (smaller than subtelephonus) and pale plumage (like subtelephonus), but
-# birds in this area are not constant in these characters and overlap with other
-# races occurs"
-# 2 Cuculus canorus telephonus       Cuculus canorus subtelephonus       0.908
-  
+
+KEEP ORIGINAL and change to species later when lumping subspecies
+
+checklist: Cuculus canorus; common_name = Common Cuckoo
+BOW says "sometimes separated subspecifically as telephonus on basis of
+size (smaller than subtelephonus) and pale plumage (like subtelephonus), but
+birds in this area are not constant in these characters and overlap with other
+races occurs"
+
+```
+Cuculus canorus telephonus       Cuculus canorus subtelephonus       0.908
+```
+
+```{r}  
 int.raw[which(int.raw$species1_scientific == "Cuculus canorus telephonus"), ]
 int.raw[which(int.raw$species2_scientific == "Cuculus canorus telephonus"), ]
 fixed_names1[which(fixed_names1$genus_species.edit == "Cuculus canorus telephonus"), ]
@@ -920,44 +1079,60 @@ fixed_names1$genus_species[fixed_names1$genus_species.edit == "Cuculus canorus t
 # 3 Parkesia noveboracensis limnaeus Parkesia noveboracensis             0.906
 int.raw[which(int.raw$species1_scientific == "Parkesia noveboracensis limnaeus"), ]
 int.raw[which(int.raw$species2_scientific == "Parkesia noveboracensis limnaeus"), ]
+```
 
-# CHANGE TO CLOSEST MATCH bc unresolved: BOW says: In Australia, birds in W
-# previously known as race gouldi, but chloronotus has priority and not
-# preoccupied by “chloronothos”.
-# 4 Zosterops lateralis gouldi          Zosterops lateralis              0.910
+CHANGE TO CLOSEST MATCH bc unresolved: BOW says: In Australia, birds in W
+previously known as race gouldi, but chloronotus has priority and not
+preoccupied by “chloronothos”.
+
+4 Zosterops lateralis gouldi          Zosterops lateralis              0.910
+```{r}
 int.raw[which(int.raw$species1_scientific == "Zosterops lateralis gouldi"), ]
 int.raw[which(int.raw$species2_scientific == "Zosterops lateralis gouldi"), ]
+```
 
-# CHANGE TO CLOSEST MATCH bc unclear: BOW: Mainland races tend to intergrade;
-# intermediates between erythronotus and tricolor sometimes referred to as
-# “nigriceps”, a name better applied to a “swarm of intergrades” in NC India
-# (3).
-# 5 Lanius schach erythronotus/tricolor Lanius schach erythronotus       0.914
+CHANGE TO CLOSEST MATCH bc unclear: BOW: Mainland races tend to intergrade;
+intermediates between erythronotus and tricolor sometimes referred to as
+“nigriceps”, a name better applied to a “swarm of intergrades” in NC India
+(3).
+5 Lanius schach erythronotus/tricolor Lanius schach erythronotus       0.914
+
+```{r}
 int.raw[which(int.raw$species1_scientific == "Lanius schach erythronotus/tricolor"), ]
 int.raw[which(int.raw$species2_scientific == "Lanius schach erythronotus/tricolor"), ]
 
-# KEEP ORIGINAL for now because it is a subspecies: BOW: A. w. suttoni Phillips, 1965.
-# Includes A. w. mesolega Oberholser, 1974 (see Browning 1990). Breeds in
-# foothills of Rocky Mountains from northern and eastern Utah (east of the Great
-# Salt Lake Basin; Behle 1985) and southern Wyoming south through
-# northeasternmost Arizona, northern Arizona, Colorado, central New Mexico, and
-# westernmost Oklahoma to northern Chihuahua and western Texas (Pitelka 1945a,
-# Pitelka 1951d) [type locality = Pueblo, Colorado]; some individuals wander in
-# winter to lowlands south of the breeding range, such as the Colorado Desert
-# (Phillips et al. 1964a, Patten et al. 2003) and Texas Panhandle (Seyffert
-# 1985).
-# 1 Aphelocoma woodhouseii suttoni   Aphelocoma woodhouseii cyanotis       0.916
+```
+
+
+KEEP ORIGINAL for now because it is a subspecies: BOW: A. w. suttoni Phillips, 1965.
+
+Includes A. w. mesolega Oberholser, 1974 (see Browning 1990). Breeds in
+foothills of Rocky Mountains from northern and eastern Utah (east of the Great
+Salt Lake Basin; Behle 1985) and southern Wyoming south through
+northeasternmost Arizona, northern Arizona, Colorado, central New Mexico, and
+westernmost Oklahoma to northern Chihuahua and western Texas (Pitelka 1945a,
+Pitelka 1951d) [type locality = Pueblo, Colorado]; some individuals wander in
+winter to lowlands south of the breeding range, such as the Colorado Desert
+(Phillips et al. 1964a, Patten et al. 2003) and Texas Panhandle (Seyffert1985).
+
+```
+1 Aphelocoma woodhouseii suttoni   Aphelocoma woodhouseii cyanotis       0.916
+```
+
+```{r}
 int.raw[which(int.raw$species1_scientific == "Aphelocoma woodhouseii suttoni"), ]
 int.raw[which(int.raw$species2_scientific == "Aphelocoma woodhouseii suttoni"), ]
 fixed_names1[which(fixed_names1$genus_species.edit == "Aphelocoma woodhouseii suttoni"), ]
 fixed_names1$genus_species[fixed_names1$genus_species.edit == "Aphelocoma woodhouseii suttoni"] <- "Aphelocoma woodhouseii suttoni"
-
+```
+```{r}
 # KEEP ORIGINAL and add period after sp
 # 4 Strigidae sp                     Strigidae                             0.917
 int.raw[which(int.raw$species2_scientific == "Strigidae sp"), ]
 fixed_names1[which(fixed_names1$genus_species.edit == "Strigidae sp"), ]
 fixed_names1$genus_species[fixed_names1$genus_species.edit == "Strigidae sp"] <- "Strigidae sp."
 ```
+
 
 ### Scientific Name Changes: Low Confidence Matches
 
