@@ -23,9 +23,7 @@ date-format: iso
 - DATE: 20 Mar 2023 - AUGUST 2025
 - Next script to run: R/L0/L0_stitch.qmd
 
-*Run Date: `r Sys.Date()`*
-
-
+**Run Date:** `r Sys.Date()`
 
 ```{r}
 # load our functions and configuration
@@ -195,20 +193,27 @@ tibble::tibble(files_with_mismatch)
 
 ## Typos
 
+Read and stitch, but add column indicating which file it came from
+
+```{r}
+
+
+```
+
+
 ### Interaction miscoding
+
+The following notes to be resolved: 
+
+- some are not 
+commensalism??  not in the list so far
+
 
 **Find typos in interactions
 ```{r}
 
-all_interactions <- c(    "hybridization",
-		"co-occur",
-		"play",
-		"courtship",
-		"copulation",
-		"copulation?",
-		"breeding",
-		"combined species"
-		)
+interactions_values <- read_valid_interaction_types()
+
 
 
 
@@ -218,38 +223,34 @@ all_interactions <- c(    "hybridization",
 
 These interactions are all 0,0.  Edit this list as necessary
 
+
 ```{r}
-interactions.0 <- c(
-    "hybridization",
-		"co-occur",
-		"play",
-		"courtship",
-		"copulation",
-		"copulation?",
-		"breeding",
-		"combined species")
+# interactions.0 variable is read in L0_functions.R
 ```
 
 
 ```{r}
-# function to check for things that should be zero, but aren't
+# check for interactions that should be 0,0 but aren't
 #| echo: false
 
-discover_interaction_errors <- function(intxns.df){
-  
-  # create empty data frame to hold the errors with an R trick
-  intxn_errors.df <- intxns.df[FALSE,]
-  
-  # loop through all the 0,0 interactionss and collect errors
-  for (intxn.keyword in interactions.0){
-      intxn_errors.df <- dplyr::bind_rows(intxn_errors.df, 
-                               intxns.df[intxns.df$interaction == intxn.keyword & intxns.df$effect_sp1_on_sp2!= 0, ])
-      intxn_errors.df <- dplyr::bind_rows(intxn_errors.df, 
-                               intxns.df[intxns.df$interaction == intxn.keyword & intxns.df$effect_sp2_on_sp1!= 0, ])
-  }  
-  
-  return(unique(intxn_errors.df))
-}
+intxn_errors.df<-discover_interaction_errors
+
+# 
+# discover_interaction_errors <- function(intxns.df){
+#   
+#   # create empty data frame to hold the errors with an R trick
+#   intxn_errors.df <- intxns.df[FALSE,]
+#   
+#   # loop through all the 0,0 interactionss and collect errors
+#   for (intxn.keyword in interactions.0){
+#       intxn_errors.df <- dplyr::bind_rows(intxn_errors.df, 
+#                                intxns.df[intxns.df$interaction == intxn.keyword & intxns.df$effect_sp1_on_sp2!= 0, ])
+#       intxn_errors.df <- dplyr::bind_rows(intxn_errors.df, 
+#                                intxns.df[intxns.df$interaction == intxn.keyword & intxns.df$effect_sp2_on_sp1!= 0, ])
+#   }  
+#   
+#   return(unique(intxn_errors.df))
+# }
 ```
 
 The following have interaction mis-codings: 
@@ -273,4 +274,34 @@ for(speciesfile in csv_file_list){
 } 
 
 ``` 
+
+### Scientific name errors: 
+
+*TO-DO: find white space errors*
+
+Find records that have white space around the scientific and/or common names
+and correct that white space, 
+because those may be replicated data except for this white space
+
+*TO-DO*: 
+also list which records may be duplicates after remove that white space so that
+the duplicates may be removed
+
+  
+```{r}
+# what code from the L1 taxonomy fix code looks like 
+# clean up white space, look for duplicated rows
+# need to do this on a stitched file with the filename column but 
+# before changing wide to long
+# int.raw$species1_scientific<-trimws(int.raw$species1_scientific,which=c("right"))
+# int.raw$species2_scientific<-trimws(int.raw$species2_scientific,which=c("right"))
+# int.raw$species1_common<-trimws(int.raw$species1_common,which=c("right"))
+# int.raw$species2_common<-trimws(int.raw$species2_common,which=c("right"))
+
+```
+
+### Missing species columns
+
+**TO-DO:** find missing sp1 or sp2 and look-up using common names checklist*
+OR go back to the original source and look it up
 

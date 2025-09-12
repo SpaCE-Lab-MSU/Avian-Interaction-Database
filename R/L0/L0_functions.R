@@ -8,13 +8,17 @@
 # DATE:           20 Mar 2023 - August Dec 2025)
 # NOTES:          Functions here are used in R/L0/L0_stitch.qmd notebook, see run date there
 
+# hide messages emitted when loading packages
+suppressMessages({
+  require(here)
+  library(dplyr)
+  library(readr)
+  library(magrittr)
+  library(stringr)
+})
+
 # this sets file paths using config file. See readme for details
-suppressMessages(require(here))
 source(here::here('R/config.R'))
-library(dplyr)
-library(readr)
-library(magrittr)
-library(stringr)
 
 # set the global variable with list of file paths for use in all functions
 # this is set here to ensure that it's set and check that a config file was
@@ -27,7 +31,7 @@ library(stringr)
 # source(here::here("L0_functions.R")
 # file_paths <- get_file_paths(here::here('testdata.R'))
 
-file_paths <- get_file_paths() # get_file_config()
+file_paths <- get_file_paths()
 
 # configuration of the where to find this file
 clements2024.url <- 'https://www.birds.cornell.edu/clementschecklist/wp-content/uploads/2024/10/Clements-v2024-October-2024-rev.csv'
@@ -118,8 +122,7 @@ get_main_names_folder <- function(files = list_csvs()){
 }
 
 
-##### UPDATE IF COLUMNS CHANGE
-
+##### UPDATE WHEN COLUMNS CHANGE
 standard_columns<- c(
     "species1_common",
     "species2_common",
@@ -227,7 +230,8 @@ avian_intxn_column_spec <-
 #' @returns TRUE if all columns are present even if there are extra,
 #'          FALSE if any are missing
 check_dataentry_columns <- function(intxns.df){
-  # first add in the "optional" columns: B,C,D versions of url and notes
+  # first add in the "optional" columns if they are not present:
+  #   B,C,D versions of url and notes
 
   if (! "sourceBupdatedURL" %in% names(intxns.df)) { intxns.df$sourceBupdatedURL <- NA }
   if (! "sourceCupdatedURL" %in% names(intxns.df)) { intxns.df$sourceCupdatedURL <- NA }
@@ -237,6 +241,7 @@ check_dataentry_columns <- function(intxns.df){
   if (! "notesC" %in% names(intxns.df)) { intxns.df$notesC <- NA }
   if (! "notesD" %in% names(intxns.df)) { intxns.df$notesD <- NA }
 
+  # set up vars to report if columns are missing
   no_missing_columns <- TRUE
   missing_dataentry_cols <- setdiff(dataentry_columns, names(intxns.df))
   if(length(missing_dataentry_cols)>0){
@@ -245,10 +250,12 @@ check_dataentry_columns <- function(intxns.df){
     no_missing_columns <- FALSE
   }
 
-  # we don't really care about extra columns as those are ok to be missing
+  # we don't really care if there happen to be extra columns not in the spec,
+  # but inform if they are there by issuing a warning now.
+  #
   extra_dataentry_cols <- setdiff(names(df), dataentry_columns)
   if(length(extra_dataentry_cols)>0){
-    msg = paste("extra columns: ", extra_dataentry_cols)
+    msg = paste("data sheet has extra columns: ", extra_dataentry_cols)
     warning(msg)
 
   }
@@ -257,7 +264,7 @@ check_dataentry_columns <- function(intxns.df){
 }
 
 
-##### UPDATE IF COLUMNS CHANGE
+##### UPDATE WHEN COLUMNS CHANGE
 
 #' Convert columns to appropriate data types
 #'
@@ -288,6 +295,33 @@ amend_intxn_columns <- function(df) {
   return(df)
 }
 
+#' remove empty rows
+#'
+#' rows with no species names (sci or common) in them are essentially blank
+#' this only works if the columns are in the data frame
+#' @param df interactions database df
+#' @returns data frame with empty rows removed
+remove_rows_no_species<- function(df){
+  # with(int.raw(!is.na(int.raw[["species1_scientific"]]) & !is.na(int.raw[["species2_scientific"]]) & !is.na(int.raw[["species2_common"]]))
+  columns_to_check = c("species1_scientific",
+                         "species2_scientific",
+                         "species1_common",
+                         "species2_common")
+
+  if(!all(columns_to_check %in% names(df))){
+    warning("couldn't check for blank rows, not all columns present")
+    return(df)
+  }
+
+  df <- dplyr::filter(df,!(is.na(species1_scientific)&
+                    is.na(species2_scientific) &
+                    is.na(species1_common) &
+                    is.na(species2_common)
+  ))
+
+  return(df)
+}
+
 
 # FUNCTION TO READ, RENAME COLUMNS, ADD MISSING COLUMNS, AND SELECT STANDARD COLUMNS
 
@@ -295,14 +329,19 @@ amend_intxn_columns <- function(df) {
 #'
 #' amend the raw data files by altering the columns to accommodate
 #' combining into single table
-read_and_amend <- function(file) {
+#' @param entry_file full path to a csv file containing interaction data
+#' @param add_enry_file boolean if true, add colummn with the entry file basename
+#'    really useful for finding and correcting errors but
+#'    this column can be problematic if removing redundant rows since
+#'    identical data might come from two entry files
+read_and_amend <- function(entry_file, add_entry_file_column= FALSE) {
   # TRY TO READ THE CSV, CATCH ERRORS
 
-  df <- tryCatch(
+  intxns.df <- tryCatch(
   # use readr and create a var with column names and types that readr can use
-      readr::read_csv(file, col_types = avian_intxn_column_spec),
+      readr::read_csv(entry_file, col_types = avian_intxn_column_spec),
       error = function(e) {
-        warning(paste("Failed to read file:", file, "| Error:", e$message))
+        warning(paste("Failed to read file:", entry_file, "| Error:", e$message))
         return(NA)
       }
     )
@@ -315,10 +354,10 @@ read_and_amend <- function(file) {
   # this prints the file name if there are problems, but it will keep
   # going anyway.
 
-  all_cols_present <- check_dataentry_columns(df)
-  if(!all_cols_present){ print(file)}
+  all_cols_present <- check_dataentry_columns(intxns.df)
+  if(!all_cols_present){ warning(paste("missing columns in ", entry_file))}
 
-  if (is.null(df) || nrow(df) == 0) return(NULL)  # Skip empty or unreadable files
+  if (is.null(intxns.df) || nrow(intxns.df) == 0) return(NULL)  # Skip empty or unreadable files
 
   # Rename columns individually to avoid duplication issues
   if ("sourceAupdatedURL" %in% names(df)) names(df)[names(df) == "sourceAupdatedURL"] <- "sourceA_URL"
@@ -328,12 +367,30 @@ read_and_amend <- function(file) {
 
 
   # ADD ANY MISSING STANDARD COLUMNS WITH NA VALUES
-  missing_cols <- setdiff(standard_columns, names(df))
-  df[missing_cols] <- NA
-  df <- df %>% dplyr::select(dplyr::all_of(standard_columns)) # SELECT STANDARD COLUMNS
+  missing_cols <- setdiff(standard_columns, names(intxns.df))
+  intxns.df[missing_cols] <- NA
+  intxns.df <- intxns.df %>% dplyr::select(dplyr::all_of(standard_columns)) # SELECT STANDARD COLUMNS
 
-  df<- amend_intxn_columns(df)
-  return(df)
+  intxns.df<- amend_intxn_columns(intxns.df)
+
+  # remove blank rows
+  intxns.df<-remove_rows_no_species(intxns.df)
+
+  ## trim white space off of name columns
+  intxns.df<- dplyr::mutate(intxns.df,
+                           species1_scientific = trimws(species1_scientific,which=c("right")),
+                           species2_scientific = trimws(species2_scientific,which=c("right")),
+                           species1_common = trimws(species1_common,which=c("right")),
+                           species2_common = trimws(species2_common,which=c("right"))
+  )
+
+  # add column indicating which file it came from
+  # useful for error discovery
+  if(add_entry_file_column == TRUE){
+    intxns.df$entry_file<- basename(entry_file)
+  }
+
+  return(intxns.df)
 }
 
 
@@ -395,7 +452,7 @@ get_data_file_list <- function(file_paths = NULL, sub_folder = "species"){
 #'  $pre_binding_summary: counts/summaries of 3 columns in all files before binding
 #'  $post_binding_summary: counts/summaries of 3 columns of intxns after binding
 #'
-L0_stitch<-function(csv_file_list, csv_file_group_name){
+L0_stitch<-function(csv_file_list, csv_file_group_name, add_entry_file_column = FALSE){
   # build a list object to hold data, stats, files, etc
   intxns <- list()
   # note this file list will have the FULL path including user name
@@ -405,7 +462,7 @@ L0_stitch<-function(csv_file_list, csv_file_group_name){
   intxns$file_list <- unlist(lapply(csv_file_list,basename))
 
   # Read and process all CSV files; Filter out NULL elements (empty files) from intxns.list and csv_file_list
-  intxns$list_of_df <- Filter(Negate(is.null), lapply(csv_file_list, read_and_amend))
+  intxns$list_of_df <- Filter(Negate(is.null), lapply(csv_file_list, read_and_amend, add_entry_file_column = add_entry_file_column))
 
   # Now list_of_df only contains non-empty files
 
@@ -456,8 +513,8 @@ L0_stitch<-function(csv_file_list, csv_file_group_name){
 #' print summary of stitching process
 #'
 #' this printing is on it's own so that it can be called
-#' or not when running in workflow or notebook, and can
-#' be called on any collection
+#' (or not) when running in a workflow or in a notebook, and can
+#' be called on any collection of data files
 #' @param intxns a interaction list structure from L0_stitch function that
 #'               has elements pre_binding_summary and post_binding_summary,
 #'               assumes they both have the same names
@@ -509,8 +566,7 @@ save_L0_intxns<- function(intxnsL0, intxns_file_name = "AvianInteractionData_L0.
 
 #' remove uncertain interactions
 #'
-## add after line 555 (?)
-# set of standard keywords
+#' @returns set of standard keywords
 uncertainty_keywords = c("alleged",
   "anecdotal",
   "artificial",
@@ -570,47 +626,50 @@ uncertainty_keywords = c("alleged",
   "unsubstantiated"
 )
 
-#' L1:  keyword row filter
+#' get rows by keyword for checking them
 #'
-#' remove rows that match keyword in field
+#' identify rows that match keyword in field.  originally created by Emily
+#' Parker to get a list of rows in the db that needed to be double
+#' checked with some keywords in the 'uncertain_interaction' column
+#'
 #' @param df any data frame with column "uncertain_interaction"
 #' keywords: data from of keywords such as read in by function above
 #' uncertain_save_filepath: send full path of file to save the rows
 #' that were removed
+#' This can be run after all files are stitched or on single 'file' data frame
 #' example: filtered.df <- remove_rows_by_keywords(atx.df, uncertainty_keywords)
 #' @param keywords vector of character
 #' @param uncertain_save_filepath if provided, will save the rows to a file,
 #'    default NULL which means no saving
 #' @returns data frame of remaining rows
-remove_rows_by_keyword <- function(df, keywords, remove_blanks = FALSE, uncertain_save_filepath= NULL){
+get_rows_by_keyword <- function(df, keywords, column_name = "uncertain_interaction", remove_blanks = FALSE, extracted_row_save_filepath= NULL){
 
-  # save the field name in a variable in the hope we can make this a generic
-  field_name = "uncertain_interaction"
-
-
-  # remove rows with blanks in the field name - in this case, don't we want to keep blanks?
+  # we are working on a copy of the original data frame, since R passes by value
+  # remove rows with blanks in the column - we just want
   if(remove_blanks == TRUE){
-    df <- df[! ( df[field_name]=="" | is.na(df[field_name]) ), ]
+    df <- df[! ( df[column_name]=="" | is.na(df[column_name]) ), ]
   }
-  # df <- df %>% dplyr::filter(uncertain_interaction=="") %>% dplyr::filter(is.na(uncertain_interaction))
 
   # create the grep expression from all the keywords e.g may|maybe|might...
   grep_expression <- paste(keywords, collapse = "|")
 
-  df <- df[!grepl(grep_expression, df[field_name],ignore.case = TRUE),]
-
-  if(! is.null(uncertain_save_filename)) {
-    uncertain_rows.df <-  df[grepl(grep_expression, df[field_name],ignore.case = TRUE),]
-    write.csv(uncertain_rows.df, uncertain_save_filename,row.names = F, fileEncoding = "UTF-8")
-    print(paste("wrote file listing rows that were filtered out to ", uncertain_save_filepath))
+  # df <- df[!grepl(grep_expression, df[field_name],ignore.case = TRUE),]
+  extracted_rows.df <-  df[!grepl(grep_expression, df[column_name],ignore.case = TRUE),]
+  # IF a file path is sent with the function, save these extracted rows
+  if(! is.null(extracted_row_save_filepath)) {
+    write.csv(extracted_rows.df, extracted_row_save_filepath,row.names = F, fileEncoding = "UTF-8")
   }
-
-  return(df)
+  return(extracted_rows.df)
 
 }
 
-# this is the function for a single value to be applied to a column
-# corrections data frame must have two columns 'incorrect' and 'correct'
+#' make text corrections
+#'
+#' in a single column, given a data.frame with 'corrections',
+#' change the values that are 'incorrect' to the 'correct' value
+#' corrections data frame must have two columns 'incorrect' and 'correct'
+#' this was originally for correcting only the 'interactions' column but can be
+#' used for other categorical columns
 correct_text <- function(col_text, corrections.df) {
   if ( col_text %in% corrections.df$incorrect){
     corrections.df$correct[corrections.df$incorrect==col_text]}
@@ -619,7 +678,16 @@ correct_text <- function(col_text, corrections.df) {
   }
 }
 
-# standardize text column case and value using a corrections file
+#' make text corrections, vectorized version
+#'
+#' standardize text column case and value using a corrections file
+#' by calling `correct_text` function above for all values in a vector
+#' keep a CSV file with a header and column names 'incorrect' and 'correct'
+#' which can be read in and used to correct common typos for any one database
+#' field/column
+#' @param text_vector any character vector, such as a column from a data frame
+#' @param corrections.df a data frame with columns 'incorrect' and 'correct'
+#' @returns character vector with same length as input, values corrected
 standardize_text_column <- function(text_vector, corrections.df) {
   # Remove extra end spaces and make all lowercase
   text_vector <- text_vector |> trimws( "r") |> tolower()
@@ -627,7 +695,152 @@ standardize_text_column <- function(text_vector, corrections.df) {
   return(corrected_text_vector)
 }
 
-#' convert multi source cols (wide) to arows (long)
+
+
+######## INTERACTIONS #########
+
+
+# commensalism??
+# list of all valid
+
+
+read_valid_interaction_types <- function() {
+  interaction_types_file <- here::here(file.path("R","valid_interaction_values.txt"))
+  # read a character vector
+  interaction_types <- readr::read_readlines(interaction_types_file)
+
+  return(interaction_types)
+}
+
+# all interactionst that should have zero values
+
+interactions.0 <- c(
+  "hybridization",
+  "co-occur",
+  "play",
+  "courtship",
+  "copulation",
+  "copulation?",
+  "breeding",
+  "combined species"
+  )
+
+
+#' find the problems and list them
+#' @returns data frame of rows with problems
+discover_interaction_errors <- function(intxns.df){
+
+  # create empty data frame with same columns to hold the errors with an R trick
+  intxn_errors.df <- intxns.df[FALSE,]
+
+  # loop through all the 0,0 interactionss and collect errors binding into errors df
+  for (intxn.keyword in interactions.0){
+    intxn_errors.df <- dplyr::bind_rows(intxn_errors.df,
+                       intxns.df[intxns.df$interaction == intxn.keyword & intxns.df$effect_sp1_on_sp2!= 0, ]
+                       )
+    intxn_errors.df <- dplyr::bind_rows(intxn_errors.df,
+                       intxns.df[intxns.df$interaction == intxn.keyword & intxns.df$effect_sp2_on_sp1!= 0, ]
+                       )
+  }
+
+  return(unique(intxn_errors.df))
+}
+
+
+#' just set zero interactions to all zero, overwrite everything
+#'
+fix_interaction_errors <- function(intxns.df){
+  # interactions.0 defined above
+
+  # loop through all the 0,0 interactions and set to zero
+  for (intxn.keyword in interactions.0){
+    intxns.df[intxns.df$interaction == intxn.keyword,]$effect_sp1_on_sp2 <- 0
+    intxns.df[intxns.df$interaction == intxn.keyword,]$effect_sp2_on_sp1 <- 0
+  }
+
+  return(intxns.df)
+}
+
+
+
+# FOR NOTEBOOK - SHOW INTERACTION TYPES
+# Unique interaction types:
+# sort(unique(interactions))
+
+# list number of rows with blank interactions
+# list rows with blank interactions
+
+# Ignore these interactions for now:
+# "combined species"
+# "copulation?" - for 2 swallows
+
+
+# Which are NA?
+# intxns.int.entries.NA<-intxns[which(is.na(intxns$effect_sp2_on_sp1)), ]
+# dim(intxns.int.entries.NA)
+# intxns.int.entries.NA
+# One is a NA for brood parasitism but it's for NZ species so ignore for now.
+
+#' discover interaction errors
+#'
+
+
+
+
+#' correct the interactions column
+#'
+#' issues warning messages if there are problems
+#' uses a corrections file to standardize the interactions column
+#'
+#' @param intxns a dataframe with an interactions column to be corrected
+#'
+#' @return the dataframe with the interactions column corrected
+#'
+
+
+
+#'
+#'
+#'
+#'
+#' issues warning messages if there are problems
+#' uses a corrections file to standardize the interactions column
+#'
+#' @param intxns a dataframe with an interactions column to be corrected
+#' @return the dataframe with the interactions column corrected
+correct_interactions <- function(intxns) {
+
+  # read in file use to store corrections to interactions column, and use it to standardize
+  interaction_corrections.df <- read_csv(corrections_file,"R/L0/text_corrections.csv")
+
+  intxns$interaction <- standardize_text_column(intxns$interaction, interaction_corrections.df )
+
+  # collect the warnings and problems when fixing interactions
+  # but return a df with interactions corrected?
+
+  # Remove the blank entries for interaction type if they exist
+
+  intxns <- intxns %>% filter(!(interaction==""))
+  # no blanks exist
+
+
+
+
+
+  # At least one has competition as +1 - this is not in BBS so not worrying about it now
+  # 21                    competition                -1                 1
+  # 22                    competition                 1                -1
+  # in BBS: commensalism as 0,0; ignore it for now
+  # 6470	Altamira Oriole	Tyrannus melancholicus	Tropical Kingbird	Icterus gularis	0	0	commensalism
+
+  # At least one has brood parasitism as 0,0 - this is not in BBS so not worrying about it now
+
+
+  return(intxns)
+
+}
+
+#' convert multi source cols (wide) to rows (long)
 #'
 #' given a dataframe of interactions with sourceA, sourceB etc
 #' assume columns sourceA_URL, sourceB_URL, sourceC_URL, sourceD_URL
@@ -661,6 +874,8 @@ sources_wide_to_long<- function(intxnsL0.wide){
   return(intxnsL0)
 
 }
+
+
 
 ################################
 # end of functions

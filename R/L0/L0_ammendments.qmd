@@ -14,13 +14,12 @@ date: 08/27/2025
 date-format: iso
 ---
 
-- PROJECT: Avian Interaction Database & Avian Meta-Network
-- AUTHORS: Phoebe Zarnetske, Pat Bills, Emily Parker
-- COLLABORATORS: Vincent Miele, Stephane Dray
-- DATA INPUT: Data entry CSV files in L0 folder
-- DATA OUTPUT: L0 data: AvianInteractionData_L0.csv
-- DATE: 20 Mar 2023 - AUGUST 2025
-
+-   PROJECT: Avian Interaction Database & Avian Meta-Network
+-   AUTHORS: Phoebe Zarnetske, Pat Bills, Emily Parker
+-   COLLABORATORS: Vincent Miele, Stephane Dray
+-   DATA INPUT: Data entry CSV files in L0 folder
+-   DATA OUTPUT: L0 data: AvianInteractionData_L0.csv
+-   DATE: 20 Mar 2023 - AUGUST 2025
 
 *Run date: `{r} Sys.Date()`*
 
@@ -86,7 +85,6 @@ print(intxnsL0.filepath)
 
 ```
 
-
 ```{r}
 #| label: read_data
 #| echo: false
@@ -103,40 +101,18 @@ if (file.exists(intxnsL0.filepath)) {
 
 Biw collapse multiple sources now spread across columns A, B, C, D into multiple rows, which will increase the total rows in the raw file.
 
-New row count:
-
 ```{r}
 #| label: wide_to_long
 #| echo: false
 
-# rename to make it easy on the tidyr functions
-
-intxnsL0 <- intxnsL0.wide |> 
-      dplyr::rename(source_URLXsource1 = sourceA_URL, 
-                    source_URLXsource2 = sourceB_URL, 
-                    source_URLXsource3 = sourceC_URL, 
-                    source_URLXsource4 = sourceD_URL) |>
-      dplyr::rename(text_excerptXsource1 = notesA, 
-                    text_excerptXsource2 = notesB, 
-                    text_excerptXsource3 = notesC, 
-                    text_excerptXsource4 = notesD) |>
-      tidyr::pivot_longer(
-        cols = contains("source"),
-        names_to = c(".value", "source"), 
-        names_sep = "X", 
-        values_drop_na = TRUE
-  )
-
-print(nrow(intxnsL0))
+intxnsL0<- sources_wide_to_long(intxnsL0.wide)
 ```
+
+New row count: `{r} nrow(intxnsL0)`
 
 New row names:
 
-```{r}
-#| echo: false
-names(intxnsL0)
-
-```
+`{r} names(intxnsL0)`
 
 ## Data Cleaning
 
@@ -144,4 +120,57 @@ names(intxnsL0)
 # Minor cleaning on int.raw: remove rows with NA in both columns of scientific names
 intxnsL0 <-intxnsL0 [!with(intxnsL0 ,is.na(species1_scientific)& is.na(species2_scientific)),]
   
+```
+
+### set zero interactions to be zero
+
+see L0_functions.R for list of interactions that should have 0,0
+
+set these to 0,0, overwriting any errors.
+
+```{r}
+intxnsL0 <- fix_interaction_errors(intxnsL0)
+```
+
+### consistent use of 'unid'
+
+Unid unid should be unid.
+
+**TO-DO** finish this and add this to the stitching corrections
+
+```{r}
+
+# Code from L1 from PLZ to adapt to intxnsL0 df
+# tidy up the species names
+intxnsL0<- dplyr::mutate(intxnsL0,
+      species1_scientific = ifelse(
+        str_starts(species1_scientific, "unid."),  # Exception case
+        str_replace(species1_scientific, "(unid.)s*(w+)", "1 U2"),
+        str_to_sentence(species1_scientific)       # Regular case
+      ),
+      species1_scientific = str_replace(species1_scientific, "spp.", "sp.")
+)
+
+intxnsL0<- dplyr::mutate(intxnsL0,
+      species2_scientific = ifelse(
+        str_starts(species2_scientific, "unid."),  # Exception case
+        str_replace(species2_scientific, "(unid.)s*(w+)", "1 U2"),
+        str_to_sentence(species2_scientific)       # Regular case
+      ),
+      species1_scientific = str_replace(species1_scientific, "spp.", "sp.")
+)
+# tidy common_name
+intxnsL0<- intxnsL0 %>% dplyr::mutate(
+    species1_common = 
+        stringr::str_trim(species1_common) %>%  # Start with the raw data
+        stringr::str_to_title() %>%  # Capitalize each word
+        stringr::str_replace_all("[Uu]nid ", "unid. ") %>%
+        stringr::str_replace_all("Unid.", "unid.")
+        , # add period to unids
+    species2_common = 
+        stringr::str_trim(species2_common) %>%  # Start with the raw data
+        stringr::str_to_title() %>%  # Capitalize each word
+        stringr::str_replace_all("[Uu]nid ", "unid. ") %>% # add period to unids
+        stringr::str_replace_all("Unid.", "unid.")
+)
 ```

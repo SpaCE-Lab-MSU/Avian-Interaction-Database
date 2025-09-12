@@ -14,27 +14,25 @@ date: 08/27/2025
 date-format: iso
 ---
 
-- PROJECT: Avian Interaction Database & Avian Meta-Network
-- AUTHORS: Phoebe Zarnetske, Pat Bills, Emily Parker
-- COLLABORATORS: Vincent Miele, Stephane Dray
-- DATA INPUT: Data entry CSV files in L0 folder
-- DATA OUTPUT: L0 data: AvianInteractionData_L0.csv
-- DATE: 20 Mar 2023 - AUGUST 2025
-- Next script to run: R/L1/AvianInteractionData_L1.qmd
+## About
 
-*Run Date: `r Sys.Date()`*
+-   PROJECT: Avian Interaction Database & Avian Meta-Network
+-   AUTHORS: Phoebe Zarnetske, Pat Bills, Emily Parker
+-   COLLABORATORS: Vincent Miele, Stephane Dray
+-   DATA INPUT: Data entry CSV files in L0 folder
+-   DATA OUTPUT: L0 data: AvianInteractionData_L0.csv
+-   DATE: 20 Mar 2023 - AUGUST 2025
+-   Next script to run: R/L1/AvianInteractionData_L1.qmd
+
+**Run Date** `r Sys.Date()`
 
 ### Introduction
 
-This reads the various directories for CSVs in different stages, checks the files 
-and combines them. 
-Issues with files or data are reported, and total counts of files and rows 
-added are listed. There are different folders checked here in different phases of
+This reads the various directories for CSVs in different stages, checks the files and combines them. Issues with files or data are reported, and total counts of files and rows added are listed. There are different folders checked here in different phases of
 
 Before stitching files together, review and correct raw data files (e.g. species CSV file), using the notebook L0_file_review.rmd
 
-The code here saves the file in the Data folder in L0 in the configuration of 
-`filepaths.R`.  see below
+The code here saves the file in the Data folder in L0 in the configuration of `filepaths.R`. see below
 
 ### Setup
 
@@ -45,10 +43,7 @@ The code here saves the file in the Data folder in L0 in the configuration of
 #| echo: false
 #| warnings: false
 
-# several of the packages print out annoying warnings when loaded
-#suppressMessages(
-  source(here::here('R/L0/L0_functions.R'))
-#)
+source(here::here('R/L0/L0_functions.R'))
 
 # This uses functions in R/L0/L0_functions_files which also imports R/config.R
 # which sets the locations of the data folders. 
@@ -56,13 +51,11 @@ The code here saves the file in the Data folder in L0 in the configuration of
 file_paths <- get_file_paths() 
 ```
 
-
 **File paths used for this run:**
 
 ```{r, echo=FALSE,}
 print(file_paths)
 ```
-
 
 ## Processing CSVs
 
@@ -80,7 +73,7 @@ checked_file_list <- list.files(path = csv_file_path , pattern = ".*\\.csv",
 paste(csv_file_path, ":", csv_file_group_name, "files to process", length(checked_file_list))
 ```
 
-Stitching Files together: 
+Stitching Files together:
 
 ```{r}
 # create an intxns object/list with different aspects saved to allow for analysis
@@ -103,7 +96,7 @@ Rows in stitched file: `{r} nrow(intxnsL0sp$intxns))`
 *Optionally examine the full stitched data frame:*
 
 ```{r, echo=FALSE}
-tibble::as_tibble(intxnsL0sp$intxns)
+tibble(intxnsL0sp$intxns)
 ```
 
 ```{r, echo=FALSE}
@@ -143,9 +136,9 @@ paste("Count of species after binding",intxnsL0sptemp$count)
 print_binding_report(intxnsL0sptemp)
 ```
 
-### 3 Data files (species) to be reviewed or in the process of being reviewed 
+### 3 Data files (species) to be reviewed or in the process of being reviewed
 
-(variable named `intxnsL0spir` ) 
+(variable named `intxnsL0spir` )
 
 ```{r}
 csv_file_group_name='species_in_review'
@@ -167,7 +160,6 @@ intxnsL0spir <- L0_stitch(
 ```
 
 *Count of species after binding: `{r} intxnsL0spir$count`*
-
 
 ```{r,, echo=FALSE}
 paste("Count of species after binding:", as.character(intxnsL0spir$count))
@@ -204,7 +196,7 @@ export the data to become the current L0 interaction data, overwrite any existin
 # change the name here to save a test file or overwrite previous version
 intxns_file_name <- "AvianInteractionData_L0_test.csv"
 
-L0_file <- save_L0_intxns(intxnsL0, 
+L0_file <- save_L0_intxns(intxnsL0sp$intxns, 
                           intxns_file_name,
                           L0_dir = file_paths$L0)
 
