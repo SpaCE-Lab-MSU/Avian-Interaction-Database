@@ -116,7 +116,7 @@ Optionally explore this list
 
 ```{r}
 
-# tibble(splist2024)
+tibble(splist2024)
 ```
 
 Fieldnames of Species List:
@@ -417,7 +417,9 @@ unique genus_species.raw entries
 
 Create list of unique genus_species.raw and common_name.raw pairs with formatting adjustments, stacking and collecting anything in sp1 and sp2. Also create genus_species.edit which is cleaned up genus_species.raw: removes blank spaces, capitalizes, and keeps unique rows.
 
-*note: added corrections to unid and sp to L0 ammendment code*
+*note:  since adjustments/corrections to species were added to L0 cleaning process, 
+there should be very few differences between 'raw' and 'edited' names at this point
+
 
 ```{r}
 # Authored by PLZ  
@@ -529,12 +531,12 @@ genus_species.raw      common_name       genus_species
 
 taxadb package: Modified from this code: https://docs.ropensci.org/taxadb/articles/intro.html In previous code, tried ITIS and COL to see if they were better than GBIF. GBIF has the fewest NA values, so we are sticking with it (it is the most comprehensive).
 
-Create a local GBIF database
+#### Create a local GBIF database
 
+Create a local gbif database in :
 ```{r}
-td_create("gbif")
+taxadb::td_create("gbif")
 ```
-
 Resolve scientific names for the scientific names, 
 based on genus_species.edit using GBIF
 
@@ -543,8 +545,8 @@ run Dec. 9, 2024, 29 May 2025
 ```{r}
 int.gbif.names <- int.raw.names %>%
   mutate(
-    scientific_id = get_ids(genus_species.edit, "gbif"),
-    accepted_scientific_name = get_names(scientific_id, "gbif")
+    scientific_id = taxadb::get_ids(genus_species.edit, "gbif"),
+    accepted_scientific_name = taxadb::get_names(scientific_id, "gbif")
   )
 warnings()
 ```
@@ -778,6 +780,7 @@ reference_names <- tibble(
 ```{r}
 # Function to clean names for comparison (ignore sp., Unid., remove whitespace
 # after name)
+# this was copied to L0/stitch workflow
 #| echo: false
 clean_name <- function(name) {
   name %>%
@@ -792,7 +795,8 @@ name aspects above.
 
 ```{r}
 #| echo: false
-# TO-DO move to L1_functions.R
+# copied to L1_functions.R as well
+# TO-DO, source that file above
 find_closest_match_with_score <- function(name, reference_list) {
   if (is.na(name) || name == "") {
     return(list(match = NA_character_, score = NA_real_))
@@ -836,17 +840,6 @@ dplyr::filter(genus_species_matches, genus_species.raw %in% c("Accipiter cooperi
 
 ```{r}
 print(dplyr::filter(genus_species_matches, genus_species.raw %in% c("Accipiter cooperi"))$genus_species_match_score)
-```
-
-```
-# DISABLED
-# Adjust so that columns are grouped close by for easier reference
-# final_matches <- final_matches %>%
-#   select(
-#     genus_species, closest_genus_species_match,
-#     common_name, closest_common_name_match,
-#     everything()  # Keep the remaining columns in their original order
-#   )
 ```
 
 ---
@@ -1071,7 +1064,7 @@ Larus brachyrhynchos caurinus	 Northwestern Crow Corvus brachyrhynchos caurinus	
 1 Branta leucopsis x anser indicus Branta leucopsis x canadensis       0.905
 ```
 
-```{r}
+```
 # # copied
 # dplyr::filter(int.raw, species1_scientific %in% c("Branta leucopsis x Anser indicus"))
 # dplyr::filter(int.raw, species2_scientific %in% c("Branta leucopsis x Anser indicus"))
