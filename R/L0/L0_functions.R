@@ -251,14 +251,15 @@ check_dataentry_columns <- function(intxns.df){
   }
 
   # we don't really care if there happen to be extra columns not in the spec,
-  # but inform if they are there by issuing a warning now.
+  # but here is code if we want to enforce that
+  # this is disabled while the data sheets undergo some changes
   #
-  extra_dataentry_cols <- setdiff(names(df), dataentry_columns)
-  if(length(extra_dataentry_cols)>0){
-    msg = paste("data sheet has extra columns: ", extra_dataentry_cols)
-    warning(msg)
-
-  }
+  # extra_dataentry_cols <- setdiff(names(df), dataentry_columns)
+  # if(length(extra_dataentry_cols)>0){
+  #   msg = paste("data sheet has extra columns: ", extra_dataentry_cols, " ")
+  #   warning(msg)
+  #
+  # }
 
   return(no_missing_columns)
 }
@@ -323,6 +324,67 @@ remove_rows_no_species<- function(df){
 }
 
 
+############################################################
+### TYPO FIXES
+
+#' fix common typos in species.common
+#'
+#' @param intxnsL0 data frame of avian interactions database, must have fields
+#'  species1_scientific, species2_scientific, species1_common, species2_common
+#'  @returns data frame with typos corrected in place
+fix_taxon_typos <- function(intxns.df){
+
+  # trim whitespace
+  intxns.df<- dplyr::mutate(intxns.df,
+            species1_scientific = trimws(species1_scientific,which=c("right")),
+            species2_scientific = trimws(species2_scientific,which=c("right")),
+            species1_common = trimws(species1_common,which=c("right")),
+            species2_common = trimws(species2_common,which=c("right"))
+    )
+
+  # make unid/sp. text consistent in species1
+  intxns.df<- dplyr::mutate(intxns.df,
+               species1_scientific = ifelse(
+                 str_starts(species1_scientific, "unid."),  # Exception case
+                 str_replace(species1_scientific, "(unid.)s*(w+)", "1 U2"),
+                 str_to_sentence(species1_scientific)       # Regular case
+               ) |> str_replace("spp.", "sp.")
+
+  )
+
+  # make unid/sp. text consistent in species2
+  intxns.df<- dplyr::mutate(intxns.df,
+             species2_scientific = ifelse(
+               str_starts(species2_scientific, "unid."),  # Exception case
+               str_replace(species2_scientific, "(unid.)s*(w+)", "1 U2"),
+               str_to_sentence(species2_scientific)       # Regular case
+             ) |> str_replace("spp.", "sp.")
+  )
+
+  # remove double spaces from binomials
+  intxns.df<- intxns.df %>% dplyr::mutate(
+    species1_scientific = stringr::str_replace_all(species1_scientific, "  ", " "),
+    species2_scientific = stringr::str_replace_all(species2_scientific, "  ", " ")
+  )
+
+
+  # tidy common_names
+  intxns.df<- intxns.df %>% dplyr::mutate(
+    species1_common =
+      stringr::str_trim(species1_common) %>%  # Start with the raw data
+      stringr::str_to_title() %>%  # Capitalize each word
+      stringr::str_replace_all("[Uu]nid ", "unid. ") %>%
+      stringr::str_replace_all("Unid.", "unid."), # add period to unids
+    species2_common =
+      stringr::str_trim(species2_common) %>%  # Start with the raw data
+      stringr::str_to_title() %>%  # Capitalize each word
+      stringr::str_replace_all("[Uu]nid ", "unid. ") %>% # add period to unids
+      stringr::str_replace_all("Unid.", "unid.")
+  )
+
+  return(intxns.df)
+}
+
 # FUNCTION TO READ, RENAME COLUMNS, ADD MISSING COLUMNS, AND SELECT STANDARD COLUMNS
 
 #' read avian interaction db data entry file and process
@@ -334,7 +396,7 @@ remove_rows_no_species<- function(df){
 #'    really useful for finding and correcting errors but
 #'    this column can be problematic if removing redundant rows since
 #'    identical data might come from two entry files
-read_and_amend <- function(entry_file, add_entry_file_column= FALSE) {
+read_and_amend <- function(entry_file, add_entry_file_column= FALSE, fix_errors_on_read = TRUE) {
   # TRY TO READ THE CSV, CATCH ERRORS
 
   intxns.df <- tryCatch(
@@ -345,7 +407,7 @@ read_and_amend <- function(entry_file, add_entry_file_column= FALSE) {
         return(NA)
       }
     )
-  problems.df <- problems(df)
+  problems.df <- problems(intxns.df)
   if(nrow(problems.df) > 0){
     # print(file)
     print(problems.df)
@@ -373,22 +435,31 @@ read_and_amend <- function(entry_file, add_entry_file_column= FALSE) {
 
   intxns.df<- amend_intxn_columns(intxns.df)
 
-  # remove blank rows
-  intxns.df<-remove_rows_no_species(intxns.df)
-
-  ## trim white space off of name columns
-  intxns.df<- dplyr::mutate(intxns.df,
-                           species1_scientific = trimws(species1_scientific,which=c("right")),
-                           species2_scientific = trimws(species2_scientific,which=c("right")),
-                           species1_common = trimws(species1_common,which=c("right")),
-                           species2_common = trimws(species2_common,which=c("right"))
-  )
-
   # add column indicating which file it came from
   # useful for error discovery
   if(add_entry_file_column == TRUE){
     intxns.df$entry_file<- basename(entry_file)
   }
+
+  #### fix issues with file when it's read in if that is request
+
+  if(fix_errors_on_read == FALSE){
+    # flag to fix errors set to false means don't fix problems yet
+    return(intxns.df)
+  }
+
+  # flag to fix errors set to false
+
+  # remove blank rows
+  intxns.df<-remove_rows_no_species(intxns.df)
+
+  # fix formatting/typos/inconsistencies in scientific and common name cols
+  intxns.df <- fix_taxon_typos(intxns.df)
+
+  # assign 0,0 to interactions that are supposed to be that
+  intxns.df <- fix_interaction_errors(intxns.df)
+
+  # fix typos in other columns here
 
   return(intxns.df)
 }
@@ -452,7 +523,7 @@ get_data_file_list <- function(file_paths = NULL, sub_folder = "species"){
 #'  $pre_binding_summary: counts/summaries of 3 columns in all files before binding
 #'  $post_binding_summary: counts/summaries of 3 columns of intxns after binding
 #'
-L0_stitch<-function(csv_file_list, csv_file_group_name, add_entry_file_column = FALSE){
+L0_stitch<-function(csv_file_list, csv_file_group_name, add_entry_file_column = FALSE, fix_errors_on_read = TRUE ){
   # build a list object to hold data, stats, files, etc
   intxns <- list()
   # note this file list will have the FULL path including user name
@@ -462,9 +533,9 @@ L0_stitch<-function(csv_file_list, csv_file_group_name, add_entry_file_column = 
   intxns$file_list <- unlist(lapply(csv_file_list,basename))
 
   # Read and process all CSV files; Filter out NULL elements (empty files) from intxns.list and csv_file_list
-  intxns$list_of_df <- Filter(Negate(is.null), lapply(csv_file_list, read_and_amend, add_entry_file_column = add_entry_file_column))
-
-  # Now list_of_df only contains non-empty files
+  intxns$list_of_df <- Filter(Negate(is.null), lapply(csv_file_list, read_and_amend,
+                                                      add_entry_file_column = add_entry_file_column,
+                                                      fix_errors_on_read = fix_errors_on_read))
 
   # Identify empty files (where NULL returned) and store for later diagnostics
   intxns$empty_files <- intxns$file_list[sapply(intxns$file_list, is.null)]
@@ -562,7 +633,9 @@ save_L0_intxns<- function(intxnsL0, intxns_file_name = "AvianInteractionData_L0.
 }
 
 
-
+######## UNCERTAIN INTERACTIONS:
+# this was used by Emily Parker to find rows to re-check and evaluate
+# but is most likely no longer needed
 
 #' remove uncertain interactions
 #'
@@ -704,10 +777,15 @@ standardize_text_column <- function(text_vector, corrections.df) {
 # list of all valid
 
 
-read_valid_interaction_types <- function() {
-  interaction_types_file <- here::here(file.path("R","valid_interaction_values.txt"))
+read_valid_interaction_types <- function(file_paths, interactions_def_file_name = NULL) {
+  # set the default metadata file, but use a parameter to allow for variations
+  if(is.null(interactions_def_file_name)) {
+    interactions_def_file <- file.path(file_paths$L0, 'AvianInteractionData_metadata_interactiondefinitions.csv')
+  }
+
+  interaction_types <- read.csv(interactions_def_file)
   # read a character vector
-  interaction_types <- readr::read_readlines(interaction_types_file)
+  # interaction_types <- readr::read_readlines(interaction_types_file)
 
   return(interaction_types)
 }
@@ -747,15 +825,28 @@ discover_interaction_errors <- function(intxns.df){
 }
 
 
-#' just set zero interactions to all zero, overwrite everything
+#' fix errors
+#'
+#' this code doesn't report, just fixes isses with interaction fields
+#' 1. fix known typos
+#' 2. for those interactions that should be zeron, set all zero, overwrite everything
 #'
 fix_interaction_errors <- function(intxns.df){
-  # interactions.0 defined above
+
+  # fix typos in the interaction column using
+  # text file with errors that have been discovered and cataloged
+  corrections_file <- here::here("R/L0/interaction_text_corrections.csv")
+  interaction_corrections.df <- read_csv(corrections_file,show_col_types = FALSE)
+  intxns.df$interaction <- standardize_text_column(intxns.df$interaction, interaction_corrections.df )
+
 
   # loop through all the 0,0 interactions and set to zero
+
   for (intxn.keyword in interactions.0){
-    intxns.df[intxns.df$interaction == intxn.keyword,]$effect_sp1_on_sp2 <- 0
-    intxns.df[intxns.df$interaction == intxn.keyword,]$effect_sp2_on_sp1 <- 0
+    if(intxn.keyword %in% intxns.df$interaction) {
+      intxns.df[intxns.df$interaction == intxn.keyword,]$effect_sp1_on_sp2 <- 0
+      intxns.df[intxns.df$interaction == intxn.keyword,]$effect_sp2_on_sp1 <- 0
+    }
   }
 
   return(intxns.df)

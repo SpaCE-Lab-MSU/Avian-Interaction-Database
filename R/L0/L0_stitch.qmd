@@ -9,7 +9,7 @@ format:
     toc: true
     toc-depth: 3
     embed-resources: true
-editor: visual
+editor: source
 date: 08/27/2025
 date-format: iso
 ---
@@ -24,7 +24,19 @@ date-format: iso
 -   DATE: 20 Mar 2023 - AUGUST 2025
 -   Next script to run: R/L1/AvianInteractionData_L1.qmd
 
-**Run Date** `r Sys.Date()`
+**Run Date** 
+
+```{r}
+
+#| echo: false
+#| warnings: false
+print(Sys.Date())
+
+```
+
+```{r}
+print(here::here())
+```
 
 ### Introduction
 
@@ -42,6 +54,7 @@ The code here saves the file in the Data folder in L0 in the configuration of `f
 
 #| echo: false
 #| warnings: false
+
 
 source(here::here('R/L0/L0_functions.R'))
 
@@ -73,17 +86,40 @@ checked_file_list <- list.files(path = csv_file_path , pattern = ".*\\.csv",
 paste(csv_file_path, ":", csv_file_group_name, "files to process", length(checked_file_list))
 ```
 
+Test reading a singlefile from the list of checked files
+
+```{r}
+i = sample(length(checked_file_list), 1)
+exampleL0csv <- checked_file_list[i]
+d = read_and_amend(exampleL0csv,add_entry_file_column= TRUE, fix_errors_on_read = TRUE)
+print(names(d))
+```
+
+```{r}
+tibble(d)
+```
+
 Stitching Files together:
 
 ```{r}
 # create an intxns object/list with different aspects saved to allow for analysis
 intxnsL0sp <- L0_stitch(
                 csv_file_list = checked_file_list, 
-                csv_file_group_name = csv_file_group_name
+                csv_file_group_name = csv_file_group_name,
+                add_entry_file_column = TRUE, 
+                fix_errors_on_read = TRUE
                 )
-# convert to 'long' format.  See L0_functions
-intxnsL0sp$intxns <- sources_wide_to_long(intxnsL0sp$intxns)
 
+nrow(intxnsL0sp$intxns)
+```
+
+Transform 'long' format along sources from entered wide format.\
+See documentation for this function in L0_functions.R
+
+N Rows after transform:
+
+```{r}
+intxnsL0sp$intxns <- sources_wide_to_long(intxnsL0sp$intxns)
 # intxnsL0sp is a list with several items to track counts of things and files
 # see L0_functions.R for details
 
@@ -91,82 +127,87 @@ nrow(intxnsL0sp$intxns)
 
 ```
 
-Rows in stitched file: `{r} nrow(intxnsL0sp$intxns))`
 
 *Optionally examine the full stitched data frame:*
 
-```{r, echo=FALSE}
+```{r}
+#| echo: false
 tibble(intxnsL0sp$intxns)
 ```
 
-```{r, echo=FALSE}
+```{r}
+#| echo: false
 paste("Count of species after binding:", as.character(intxnsL0sp$count))
 ```
 
 Comparison of Pre- and Post-Binding Values:
 
-```{r,echo=FALSE}
+```{r}
+#| echo: false
 print_binding_report(intxnsL0sp)
 ```
 
 ### 2 not fully Checked Species in BBS `intxnsL0sptemp`
 
-```{r}
-csv_file_group_name='species_temp'
-csv_file_path = file.path(file_paths$L0, "species_temp")
-# filter or add in google drive files here
-temp_file_list <- list.files(path = csv_file_path , pattern = ".*\\.csv", 
-  full.names = TRUE)
+Optional. Uncomment to run the unchecked species
 
-paste(csv_file_path, ":", csv_file_group_name, "files to process",  length(temp_file_list)) 
+```
+# csv_file_group_name='species_temp'
+# csv_file_path = file.path(file_paths$L0, "species_temp")
+# # filter or add in google drive files here
+# temp_file_list <- list.files(path = csv_file_path , pattern = ".*\\.csv", full.names = TRUE)
+# 
+# paste(csv_file_path, ":", csv_file_group_name, "files to process",  length(temp_file_list)) 
 
 ```
 
-```{r}
+```
 
-intxnsL0sptemp <- L0_stitch(
-                    csv_file_list = temp_file_list, 
-                    csv_file_group_name=csv_file_group_name
-                    )
-paste("Count of species after binding",intxnsL0sptemp$count)
+# intxnsL0sptemp <- L0_stitch(
+#                     csv_file_list = temp_file_list, 
+#                     csv_file_group_name=csv_file_group_name
+#                     )
+# paste("Count of species after binding",intxnsL0sptemp$count)
 
 ```
 
 ```{r,echo=FALSE}
-print_binding_report(intxnsL0sptemp)
+# print_binding_report(intxnsL0sptemp)
 ```
 
 ### 3 Data files (species) to be reviewed or in the process of being reviewed
 
-(variable named `intxnsL0spir` )
+Optional 
 
-```{r}
-csv_file_group_name='species_in_review'
-csv_file_path = file.path(file_paths$L0, "species_in_review")
-# filter or add in google drive files here
-in_review_file_list <- list.files(path = csv_file_path , pattern = ".*\\.csv", 
-  full.names = TRUE)
+(variable named intxnsL0spir )
 
-paste(csv_file_path, ":", csv_file_group_name, "files to process", length(in_review_file_list))
 ```
+# csv_file_group_name='species_in_review'
+# csv_file_path = file.path(file_paths$L0, "species_in_review")
+# # filter or add in google drive files here
+# in_review_file_list <- list.files(path = csv_file_path , pattern = ".*\\.csv", 
+#   full.names = TRUE)
 
-```{r}
-
-intxnsL0spir <- L0_stitch(
-                  csv_file_list = in_review_file_list, 
-                  csv_file_group_name=csv_file_group_name
-                  ) 
+# paste(csv_file_path, ":", csv_file_group_name, "files to process", length(in_review_file_list))
+```
 
 ```
 
-*Count of species after binding: `{r} intxnsL0spir$count`*
+# intxnsL0spir <- L0_stitch(
+#                   csv_file_list = in_review_file_list, 
+#                   csv_file_group_name=csv_file_group_name
+#                   ) 
 
-```{r,, echo=FALSE}
-paste("Count of species after binding:", as.character(intxnsL0spir$count))
 ```
 
-```{r,echo=FALSE}
-print_binding_report(intxnsL0spir)
+*Count of species after binding:*
+
+```
+# paste("Count of species after binding:", as.character(intxnsL0spir$count))
+```
+
+```
+# print_binding_report(intxnsL0spir)
 ```
 
 Before saving the species to file, un-comment and run the following to merge the species and species_in_review interaction data into checked species. These are lists with the data frames in the element `intxns`
@@ -182,7 +223,8 @@ intxnsL0 <- intxnsL0sp$intxns
 
 **Count of species in saved L0:**
 
-```{r,, echo=FALSE}
+```{r}
+#| echo: false
  nrow(intxnsL0)
 ```
 
@@ -192,14 +234,15 @@ intxnsL0 <- intxnsL0sp$intxns
 
 export the data to become the current L0 interaction data, overwrite any existing file
 
-```{r, echo=FALSE}
+```{r}
+#| echo: false
 # change the name here to save a test file or overwrite previous version
-intxns_file_name <- "AvianInteractionData_L0_test.csv"
 
-L0_file <- save_L0_intxns(intxnsL0sp$intxns, 
+intxns_file_name <- "AvianInteractionData_L0_test.csv"
+L0_file <- save_L0_intxns(intxnsL0sp$intxns,
                           intxns_file_name,
                           L0_dir = file_paths$L0)
-
 print(L0_file)
+
 
 ```

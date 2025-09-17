@@ -116,6 +116,10 @@ New row names:
 
 ## Data Cleaning
 
+???
+
+this is what was in a PLZ file, but we shouldn't remove rows for this reason
+
 ```{r}
 # Minor cleaning on int.raw: remove rows with NA in both columns of scientific names
 intxnsL0 <-intxnsL0 [!with(intxnsL0 ,is.na(species1_scientific)& is.na(species2_scientific)),]

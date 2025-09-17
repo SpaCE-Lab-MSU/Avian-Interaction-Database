@@ -23,6 +23,12 @@ date-format: iso
 - DATE: 20 Mar 2023 - AUGUST 2025
 - Next script to run: R/L0/L0_stitch.qmd
 
+### Notes
+
+this notebook is not as up-to-date with the fixes that are in 
+`L0_stitch.qmd` which makes corrections but doesn't report errors
+
+
 **Run Date:** `r Sys.Date()`
 
 ```{r}
@@ -121,7 +127,7 @@ csv_file_list = get_data_file_list(file_paths, "species")
 # intxns$intxns <- dplyr::bind_rows(intxns$list_of_df) |> dplyr::distinct()
 
 for(speciesfile in csv_file_list){
-  intxns.df <- read_and_amend(speciesfile)
+  intxns.df <- read_and_amend(speciesfile, add_entry_file_column= TRUE, fix_errors_on_read=FALSE )
 }
 
 ```
@@ -191,34 +197,30 @@ for(speciesfile in csv_file_list){
 tibble::tibble(files_with_mismatch)
 ```
 
-## Typos
+## Typos in Interactions
 
 Read and stitch, but add column indicating which file it came from
 
 ```{r}
-
-
+intxns.df <- L0_stitch(csv_file_list, csv_file_group_name, add_entry_file_column = FALSE, fix_errors_on_read = TRUE )
+print(nrow(intxns.df))
 ```
 
 
 ### Interaction miscoding
 
-The following notes to be resolved: 
 
-- some are not 
-commensalism??  not in the list so far
+**Find typos in interactions**
 
-
-**Find typos in interactions
+Set Currently used csv file with list of interactions: 
 ```{r}
-
-interactions_values <- read_valid_interaction_types()
-
-
-
+interactions_def_file_name <- 'AvianInteractionData_metadata_interactiondefinitions.csv'
+interaction_types <- read_valid_interaction_types(file_paths, interactions_def_file_name = interactions_def_file_name)
 
 ```
 
+
+```
 **Find those interactions that SHOULD BE zero but aren't**
 
 These interactions are all 0,0.  Edit this list as necessary
