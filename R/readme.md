@@ -25,13 +25,7 @@ are store in files in the L0 and L1 folders (see below).  Currently these are
 only accessible by collaborators.  Once published, the North American Avian 
 Interaction Database will be made open access and linked here. 
 
-## Workflow
-
-The workflow for this repository follows the guidelines set out by the [Environmental Data Initiative (EDI)]((https://edirepository.org/)). Briefly, this involves aligning with FAIR data practices, and employing a workflow that uses different levels for harmonization and derived data products. The overall workflow aligns with this EDI diagram:
-
-<img src="https://edirepository.org/static/images/thematic-standardization-workflow.png" class="inline"/>
-
-### Configuration for R code
+## Set-up and Configuration for R code
 
 For those using the R scripts to build the database, you must set up the 
 configuration for where to find the data, as each computer/execution environment 
@@ -59,7 +53,11 @@ SYNC_DATA_FOLDER =  "/Users/USERID/Library/CloudStorage/GoogleDrive-billspat@msu
 DATA_FOLDER =  "/Users/USERID/Avian-Interaction-Database"
 ```
 
-#### Google Drive
+This project uses the widely used ['here' package](https://here.r-lib.org) to 
+automatically identify the top folder for scripts to be able to find each other 
+regardless of where they are run. 
+
+### Google Drive
 
 We use Google Sheets (see protocol) to facilitate data entry for each species. 
 If as part of using the R code you'd like to view and access the intermediate files
@@ -96,7 +94,7 @@ path but in newer installs the path is something like
 
 
 
-#### Installing Packages
+### Installing Packages
 
 To install all of the packages used here quickly, try the `renv` package
 from Rstudio/Posit as follows:
@@ -110,23 +108,83 @@ Choose option 1. restore the project from the lockfile.
 
 If you need to update packages, choose option 2 to re-install everything. 
 
+See the file `renv.lock` for both the R version and package versions with 
+which the code was developed and tested. 
+
+## Code Workflow Overview
+
+See the main workflow document describing how data is collected, entered, 
+checked-in and reviewed.   This describes how the code is used to build the final
+database with updated taxa from the data as entered.  
+
+The workflow for this repository follows the guidelines set out by the 
+[Environmental Data Initiative (EDI)]((https://edirepository.org/)). 
+Briefly, this involves aligning with FAIR data practices, and employing a 
+workflow that uses different levels for harmonization and derived data products. 
+The overall workflow aligns with this EDI diagram:
+
+<img src="https://edirepository.org/static/images/thematic-standardization-workflow.png" class="inline"/>
+
+First, Data is entered into individual files for logistics per the main workflow
+above.
+
+The data as entered by reading from primary or secondary sources (as 
+a meta analysis) may have typos or inconsistencies from data entry personnel, but
+we consider the "L0" data to be a reviewed, corrected, validated and 
+combined table based on our data entry process.   The L0 data typically has 
+common and scientific names as they appear in the literature we base the data on. 
+
+
+1) **Review**
+   Data submitted for review can be checked using scripts reviewing 
+   Outcome: CSV files in the "species" folder with mostly cleaned and corrected data
+   but with potentially outdated taxonomic designations
+   
+2) **clean and combine**
+   Outcome: single file with all interactions that is even more cleaned and made 
+   consistent
+   
+3) **build checklist**
+   download latest checklists if necessary and build comprehensive checklist 
+   with 
+   
+4) **build taxnomic reconciliation table**
+   using checklists from step above and functions to examine / compare 
+   taxonomy in data as entered ('raw') and checklist to create an 'edited' version
+   of the scientific name or common name to correct for typos or taxonomic changes
+   to match the current checklist
+   Outcome:  L1_taxnomonic_edits.csv
+   
+5) **reconcile taxonomy**
+  apply a final cleaning, then use the taxnomic edits file to create a file that 
+  matches the final 
+  database with the taxonomic 
 
 
 ### Order & description of scripts:
 
-Preparation of Data: See
 ### For BBS analysis in North America:
 /R/bbs/bbs_specieslist_L0.R = reads in current BBS species list and adds any species that was split
 /R/bbs/bbs_specieslist_L1.R = cleans the BBS species list, e.g., combining subspecies into species
 
+
 ### For entire database:
 
+Functions
+
+- R/L0/L0_functions.R  functions called by quarto files in 
 These are RMarkdown notebooks that can be run cell-by-cell to examine output, 
 rendered to HTML with status output and saved to git with either knitr or Quarto
 
-1. R/L0/repo_status.rmd = Notebook file to list status of each folder: checked, in_review, and temporary files
-1. R/L0/L0_stitch.rmd = Notebook file to work through opening each stitches together all individual csvs in /L0/species and optionally /L0/species_in_review
-2. R/L1/AvianInteractionData_L1.R = fixes species names, interaction codes, checks species name discrepencies based on current and past BOW names.
+1. R/L0/repo_status.qmd = Quarto Notebook file to list status of each folder: checked, in_review, and temporary files
+1. R/L0/L0_stitch.qmd = Quarto Notebook file to work through opening each stitches together all individual csvs in /L0/species and optionally /L0/species_in_review
+   This called the function "read_and_amend()" for each file to be combined, which 
+   does several cleaning steps (previously done in L1) to produce as clean a table
+   for the L1 taxomomy 
+2. R/L1/AvianInteractionData_specieslists_Canada_CONUS_L1.R creates checklists
+4. R/L1/AvianInteractionData_L1.qmd = Quarto notebook to merge checklists and 
+   species in interation database file from L0_stitch process
+   
 
 ## Description of subdirectories
 
@@ -139,45 +197,15 @@ rendered to HTML with status output and saved to git with either knitr or Quarto
 - documents supporting the data and analysis.
 
 ## Funding
-Funding is provided by Michigan State University (to P.L. Zarnetske), and by a MSU Ecology Evolution, and Behavior SEED Grant (to P.L. Zarnetske). Original work on a subset of species was funded by the Yale Climate and Energy Institute (to P.L. Zarnetske), Erasmus Mundus Fellowship (to S. Zonneveld).
+Funding is provided by Michigan State University (to P.L. Zarnetske), and by a 
+MSU Ecology Evolution, and Behavior SEED Grant (to P.L. Zarnetske). 
+Original work on a subset of species was funded by the Yale Climate and Energy 
+Institute (to P.L. Zarnetske), Erasmus Mundus Fellowship (to S. Zonneveld).
 
 ## Authors of the code in this repository
 
 * Phoebe L. Zarnetske, PI, [Spatial and Community Ecology Lab (SpaCE Lab)](https://www.communityecologylab.com)
 * Patrick Bills, staff data scientist [Institute for Cyber-enabled Research (ICER)](https://icer.msu.edu)
+* Emily Parker, staff data manager 2022-24
 
-## Collaborators
-
-* Emily Parker
-* Dr. Kelly Kapsar
-
-## Student Research Assistants
-* 2024-
-  - India Hirschowitz
-  - Giovanni DePasquale
-  - Caroline Roche
-  - Ava Fountain
-  - Ann Joseph
-  - Maddie Andreatta
-* 2023
-  - India Hirschowitz
-  - Giovanni DePasquale
-  - Caroline Roche
-* 2022
-  - India Hirschowitz
-  - Jordan Zapata
-  - Elaine Hammond
-* 2021-2024
-  - Emily Parker
-* 2018-2020
-  - Erik Ralston
-  - Minali Bhatt
-
-## References
-
-Belmaker, J., P. Zarnetske, M.-N. Tuanmu, S. Zonneveld, S. Record, A. Strecker, and L. Beaudrot. 2015. Empirical evidence for the scale dependence of biotic interactions. Global Ecology and Biogeography 24:750–761. https://doi.org/10.1111/geb.12311
-
-Birds of the World - Comprehensive life histories for all bird species and families. (Accessed January 13, 2022). http://birdsoftheworld.org/bow/home.
-
-Hurlbert, A. H., A. M. Olsen, M. M. Sawyer, and P. M. Winner. 2021. The Avian Diet Database as a source of quantitative information on bird diets. Scientific Data 8:260. https://www.nature.com/articles/s41597-021-01049-9
 
