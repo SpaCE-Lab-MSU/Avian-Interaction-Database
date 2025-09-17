@@ -81,6 +81,8 @@ c) Enter interactions for the species you selected by designating the selected s
   
 - You may cite sources outside of BOW. For example, if BOW references another resource, or you are unsure about an interaction and need to go to the primary source. BOW will always be your starting point. See **Step 5e** below for how to conduct a systematic search beyond BOW.
 
+- When copying URLs from sources gathered from Google Scholar or Web of Science, ensure that the link you provide is the same as the one referenced in the database search page. Scrolling through a PDF on certain libraries can add additional queries to the URL, creating a mismatch when referencing the source in the future. To ensure that you are copying the URL as presented on the database, right-click on the hyperlink and select "Copy link address" before pasting into the source_URL column.
+
 **Names**
 - On each section, skim for Italicized words - these are usually *Genus species* names. Occasionally species will be listed in just Capital Letters (e.g., Yellow Warbler). Determine if the description means that species1 is interacting (or has an inferred interaction) with species2. 
 
