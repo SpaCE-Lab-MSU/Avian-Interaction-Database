@@ -21,7 +21,7 @@
 #                     all from AvianInteractionData_specieslists_L0.R
 # DATA OUTPUT:    L1 data: canada.conus.splist_L1.CSV 
 # PROJECT:        Avian Interaction Database & avian-meta-network
-# DATE:           17 January 2022 - 1 Sep 2025
+# DATE:           17 January 2022 - 17 Sep 2025
 #                 
 #                 Next script to run: AvianInteractionData_L1.R
 
@@ -337,7 +337,7 @@ name_map <- tribble(
   "Accipiter gentilis",      "Northern Goshawk",     "Astur atricapillus",  "American Goshawk",   
   "Accipiter sp.",      "unid. Accipiter hawk",     "Aerospiza/Tachyspiza/Accipiter/Astur sp.", "Accipitrine hawk sp. (former Accipiter sp.)",
   "Anas platyrhynchos x rubripes/diazi/fulvigula",      "hybrid Mallard x Black/Mexican/Mottled Duck",     "Anas platyrhynchos x rubripes", "Mallard x American Black Duck (hybrid)",
-  "Anser caerulescens (blue form)",      "(Blue Goose) Snow Goose",     "Anser caerulescens",  "Snow Goose",
+#  "Anser caerulescens (blue form)",      "(Blue Goose) Snow Goose",     "Anser caerulescens",  "Snow Goose",
   "Ardeid sp.",      "unid. heron/egret",     "Ardea sp.",  "Ardea sp.",
   "Bubulcus ibis",      "Cattle Egret",     "Ardea ibis",  "Western Cattle-Egret",
   "Cacomantis leucolophus",      "White-crowned Koel",     "Caliechthrus leucolophus",  "White-crowned Cuckoo",
@@ -433,7 +433,7 @@ remaining_na <- df %>%
   arrange(scientific_name)
 
 cat("\n--- Species with NA in scientific_name_clements2024 ---\n")
-print(remaining_na) #8 rows; these include 'unid' and some rows that need manual edits
+print(remaining_na) #9 rows; these include 'unid' and some rows that need manual edits
 
 # 2) Rows with semicolons in either name (for inspection); these are the species
 #  with 2 or more names in the dataset
@@ -444,7 +444,7 @@ semicolon_rows <- df %>%
   arrange(scientific_name)
 
 cat("\n--- Species with ';' in scientific_name or common_name ---\n")
-print(semicolon_rows) #99 rows
+print(semicolon_rows) #98 rows
 
 # 3) Mismatches (combined names vs Clements) — expected when aliases exist
 name_mismatches <- df %>%
@@ -455,14 +455,14 @@ name_mismatches <- df %>%
   arrange(scientific_name)
 
 cat("\n--- Rows where names do not match *_clements2024 ---\n")
-print(name_mismatches) # these are the same 99; makes sense.
+print(name_mismatches) # these are the same 98; makes sense.
 
 # Check that the row that differ among initial data and modified make sense.
 ## Subset to rows with non-NA regions_avibase8.17 (which are Canada & CONUS)
 ca.conus.sp <- subset(df, !is.na(df[["regions_avibase8.17"]]))
 dim(avibase)-dim(ca.conus.sp) # no lost species
 bbs.sp <- subset(df, !is.na(df[["scientific_name_bbs2024"]]))
-dim(bbs2024)-dim(bbs.sp) # lost 1 species (Snow Goose, Blue Form merged. See ";" in AOU column) 
+dim(bbs2024)-dim(bbs.sp) # no lost species 
 
 # **** FOR LATER/when editing for Western Hemisphere: re-write above section to automatically check that the rows are the ones with the semicolons, by initial dataset.
 
@@ -500,7 +500,7 @@ df_avibase_region <- df %>%
   filter(!is.na(regions_avibase8.17) & regions_avibase8.17 != "")
 
 # --- Quick confirmations ---
-cat("Number of rows in df:", nrow(df), "\n") # 35603
+cat("Number of rows in df:", nrow(df), "\n") # 35604
 cat("Number of rows with region_avibase8.17:", nrow(df_avibase_region), "\n\n") #1104 with correct Canada list: #1104
 
 cat("Counts for in_* flags:\n")
@@ -513,15 +513,15 @@ for (in_col in unique(unname(map_lookup_to_in))) {
 }
 #in_avibase8.17 :
 #   no   yes 
-# 34499  1104 
+# 34500  1104 
 # 
 # in_bbs2024 :
 #   no   yes 
-# 34841   762 
+# 34841   763 
 # 
 # in_clements2024 :
 #   no   yes 
-# 8 35595 
+# 9 35595 
 
 # Keep all the BBS species, and also the AviBase species that are in Canada and CONUS
 # ---- Final subsetting ----
@@ -537,7 +537,7 @@ df.ca.conus <- df %>%
   )
 
 # 2. Keep only relevant status columns and all other metadata
-# 2. Drop unwanted status_* columns, keep all others
+# Drop unwanted status_* columns, keep all others
 df.ca.conus <- df.ca.conus %>%
   select(
     -any_of(c(
@@ -561,7 +561,7 @@ df.ca.conus$status_CA_US48_USak[df.ca.conus$status_CA_US48_USak == "" | df.ca.co
 df_bbs_or_avibase <- df.ca.conus %>%
   filter(!is.na(scientific_name_bbs2024) | !is.na(status_CA_US48_USak)) 
 
-dim(df_bbs_or_avibase) #1161 rows
+dim(df_bbs_or_avibase) #1162 rows
 
 # 3. Subset further: drop "Rare" rows, but always keep rows with non-NA scientific_name_bbs2024
 # Where at least one of the 3 areas has the species as Rare (this is too strict):
@@ -581,7 +581,7 @@ df_bbs_or_avibase_no_rare <- df_bbs_or_avibase %>%
 # indicate these remaining should be kept for ca.conus subset
 df_bbs_or_avibase_no_rare$L1_ca.conus.data<-"yes"
 
-dim(df_bbs_or_avibase_no_rare) #1118
+dim(df_bbs_or_avibase_no_rare) #1119
 
 # Now work on omitting some of these species because they do not occur in Canada/CONUS continent.
 # To do this, create a subset for the omissions.
@@ -589,7 +589,7 @@ dim(df_bbs_or_avibase_no_rare) #1118
 # but may not actually be North American birds. 
 df_bbs_or_avibase_no_rare1 <- df_bbs_or_avibase_no_rare %>%
   filter(is.na(AOU_bbs2024))
-dim(df_bbs_or_avibase_no_rare1) #62 rows; 356 rows with correct Canada list.
+dim(df_bbs_or_avibase_no_rare1) #356 rows with correct Canada list.
 # Export the list. Check them on BOW for their ranges.
 # If it is outside Canada / CONUS, drop it.
 write_csv(df_bbs_or_avibase_no_rare1, file.path(L0_dir,"df_bbs_or_avibase_no_rare_ca.conus_keep_or_not.csv"))
@@ -626,7 +626,7 @@ dim(df_bbs_or_avibase_no_rare2) #135 species
 # Vermivora bachmanii - all set
 # Vireo flavoviridis - entered by CR, plz checked. DONE
 
-df_bbs_or_avibase_no_rare1a<-read.csv(file.path(L0_dir,"df_bbs_or_avibase_no_rare_ca.conus_keep_or_not.csv"))
+df_bbs_or_avibase_no_rare1a<-read.csv(file.path(L0_dir,"df_bbs_or_avibase_no_rare_ca.conus_keep_or_not_checked.csv"))
 head(df_bbs_or_avibase_no_rare1a)
 dim(df_bbs_or_avibase_no_rare1a) #356
 dim(df_bbs_or_avibase_no_rare1) #356
@@ -636,7 +636,7 @@ ca.conus.splist <- merge(df_bbs_or_avibase_no_rare,df_bbs_or_avibase_no_rare1a,
                          by=c("scientific_name","common_name","scientific_name_avibase8.17",
                               "common_name_avibase8.17","order_avibase8.17","family_avibase8.17"),
                          all.x=T, all.Y=T)
-dim(ca.conus.splist) # 1118
+dim(ca.conus.splist) # 1119
 # Fill in blank "keep" with "y"
 ca.conus.splist <- ca.conus.splist %>%
   mutate(keep = replace_na(keep, "y"))
@@ -644,9 +644,128 @@ unique(ca.conus.splist$keep)
 # Omit the species where keep="n"
 ca.conus.splist <- ca.conus.splist %>%
   filter(keep !="n")
-dim(ca.conus.splist) #782 species
+dim(ca.conus.splist) #783 species
 # drop the 'keep' column
 ca.conus.splist$keep<-NULL
+
+# Create a combined AOU column (AOU_bbs2024.combo) to provide an option for 
+# assigning subspecies to species when merging this list with interaction data.
+ca.conus.splist$AOU_bbs2024.combo<-ca.conus.splist$AOU_bbs2024
+
+# Grouping Rules provided by Jeff Hostetler @ BBS. 
+# Update the splist AOU.combo for each subspecies species (assign it to the
+# combo AOU). Make a selection for each subspecies group:
+
+# 4  31320                     Mallard (including hybrid)
+# 01320 01326
+#ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 1320] <- 31320
+#ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 1326] <- 31320
+
+
+# 5  31940            Great Blue Heron (all forms)
+# 2 31940    
+# 01920 01940
+ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 1920] <- 31940
+ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 1940] <- 31940
+
+# 6  33370             Red-tailed Hawk (all forms)
+# 03370 03380
+ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 3370] <- 33370
+ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 3380] <- 33370
+
+# 7  34120            Northern Flicker (all forms)
+# 04120 04130 04123 04125
+ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4120] <- 34120
+ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4130] <- 34120
+ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4123] <- 34120
+ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4125] <- 34120
+
+# 8  35670             Dark-eyed Junco (all forms) 
+# 05660 05670 05671 05680 05690 05677
+ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 5660] <- 35670
+ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 5670] <- 35670
+ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 5671] <- 35670
+ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 5680] <- 35670
+ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 5690] <- 35670
+ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 5677] <- 35670
+
+# 9  36550       Yellow-rumped Warbler (all forms)
+# 06550 06560 06556
+ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 6550] <- 36550
+ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 6560] <- 36550
+ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 6556] <- 36550
+
+# 10 30010                 Western & Clark's Grebe; separate species in Clements so keep as separate
+# 00010 00011 00012
+# ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 10] <- 30010
+# ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 11] <- 30010
+# ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 12] <- 30010
+
+# 11 34641  Cordilleran & Pacific-slope Flycatcher
+# 04640 04641 04642
+ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4640] <- 34641
+ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4641] <- 34641
+ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4642] <- 34641
+
+# 12 34660               Alder & Willow Flycatcher; separate species in Clements so keep as separate
+# 04660 04661 04665
+# ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4660] <- 34660
+# ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4661] <- 34660
+# ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4665] <- 34660
+
+# 13 34810      California & Woodhouse's Scrub-Jay; separate species in Clements so keep as separate
+# 04812 04813 04810
+# ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4812] <- 34810
+# ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4813] <- 34810
+# ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4810] <- 34810
+
+# 14 35740              Sagebrush & Bell's Sparrow; separate species in Clements so keep as separate
+# 05738 05739 05740
+# ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 5738] <- 35740
+# ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 5739] <- 35740
+# ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 5740] <- 35740
+
+# 15 34880                           American / Fish Crow; separate species in Clements so keep as separate
+# 04880 04880 04882 04890
+# ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4880] <- 34880
+# ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4880] <- 34880
+# ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4882] <- 34880
+# ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4890] <- 34880
+
+# Snow Goose (Blue and regular form)
+ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == "1690"] <- 31690
+ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == "1691"] <- 31690
+
+## Create a new column which contains Genus species for the combined species above, 
+## based on the Clements name. Here we assign the Clements name.
+ca.conus.splist$scientific_name_clements2024.combo<-ca.conus.splist$scientific_name_clements2024
+# Same for common name combo
+ca.conus.splist$common_name_clements2024.combo<-ca.conus.splist$common_name_clements2024
+
+# Probably a more beautiful way to code this but this works:
+# Assign all to new species combo name based on the Clements species-level name
+#ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 31320] <- "Anas platyrhynchos"
+ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 31940] <- "Ardea herodias"
+ca.conus.splist$common_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 31940] <- "Great Blue Heron"
+ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 33370] <- "Buteo jamaicensis"
+ca.conus.splist$common_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 33370] <- "Red-tailed Hawk"
+ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 34120] <- "Colaptes auratus"
+ca.conus.splist$common_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 34120] <- "Northern Flicker"
+ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 35670] <- "Junco hyemalis"
+ca.conus.splist$common_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 35670] <- "Dark-eyed Junco"
+ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 36550] <- "Setophaga coronata"
+ca.conus.splist$common_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 36550] <- "	
+Yellow-rumped Warbler"
+#ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU.combo == 30010] <- "Aechmophorus occidentalis / clarkii"
+ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 34641] <- "Empidonax difficilis"
+#ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU.combo == 34660] <- "Empidonax alnorum / traillii"
+#ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU.combo == 34810] <- "Aphelocoma californica / woodhouseii"
+#ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU.combo == 35740] <- "Artemisiospiza nevadensis / belli"
+#ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU.combo == 34880] <- "Corvus brachyrhynchos"
+ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 31690] <- "Anser caerulescens"
+ca.conus.splist$common_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 31690] <- "Snow Goose"
+
+
 # --- Export the final 782 species CANADA & CONUS subset as a CSV
 write_csv(ca.conus.splist, file.path(L1_dir,"canada.conus.splist_L1.csv"))
 
