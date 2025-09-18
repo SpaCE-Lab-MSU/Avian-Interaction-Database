@@ -781,13 +781,14 @@ sp.exclude <- "sp."
 # Filter out rows containing the string and count the remaining rows
 ca.conus.splist.knownsp <- ca.conus.splist %>%
   filter(!str_detect(common_name_bbs2024, unid_exclude)) 
-sum(grepl(string_to_exclude, ca.conus.splist$common_name_bbs2024)) # 67 unique "unid."
+sum(grepl(unid_exclude, ca.conus.splist$common_name_bbs2024)) # 67 unique "unid."
 dim(ca.conus.splist.knownsp) # 696 without "unid."
 dim(ca.conus.splist)-dim(ca.conus.splist.knownsp) # 87 rows of "unid."
 
 ca.conus.splist.knownsp1 <- ca.conus.splist.knownsp %>%
-  filter(!str_detect(common_name_bbs2024, sp.exclude)) 
-dim(ca.conus.splist.knownsp1) # 689 without "unid." and "sp."
+  filter(!str_detect(common_name_clements2024, sp.exclude)) 
+sum(grepl(sp.exclude, ca.conus.splist$common_name_clements2024)) # 24 unique "unid."
+dim(ca.conus.splist.knownsp1) # 682 without "unid." and "sp."
 
 # Any remaining species are either full species or hybrid.
 
