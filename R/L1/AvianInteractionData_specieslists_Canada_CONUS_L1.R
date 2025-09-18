@@ -656,24 +656,29 @@ ca.conus.splist$AOU_bbs2024.combo<-ca.conus.splist$AOU_bbs2024
 # Update the splist AOU.combo for each subspecies species (assign it to the
 # combo AOU). Make a selection for each subspecies group:
 
-# 4  31320                     Mallard (including hybrid)
+# 35280                     Redpoll (all groups)
+# 5280 5275 5270
+ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 5280] <- 35280
+ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 5275] <- 35280
+ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 5270] <- 35280
+
+# 31320                     Mallard (including hybrid)
 # 01320 01326
 #ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 1320] <- 31320
 #ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 1326] <- 31320
 
 
-# 5  31940            Great Blue Heron (all forms)
-# 2 31940    
+# 31940            Great Blue Heron (all forms)
 # 01920 01940
 ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 1920] <- 31940
 ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 1940] <- 31940
 
-# 6  33370             Red-tailed Hawk (all forms)
+# 33370             Red-tailed Hawk (all forms)
 # 03370 03380
 ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 3370] <- 33370
 ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 3380] <- 33370
 
-# 7  34120            Northern Flicker (all forms)
+# 34120            Northern Flicker (all forms)
 # 04120 04130 04123 04125
 ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4120] <- 34120
 ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4130] <- 34120
@@ -689,43 +694,43 @@ ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 5680] <- 35670
 ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 5690] <- 35670
 ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 5677] <- 35670
 
-# 9  36550       Yellow-rumped Warbler (all forms)
+# 36550       Yellow-rumped Warbler (all forms)
 # 06550 06560 06556
 ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 6550] <- 36550
 ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 6560] <- 36550
 ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 6556] <- 36550
 
-# 10 30010                 Western & Clark's Grebe; separate species in Clements so keep as separate
+# 30010                 Western & Clark's Grebe; separate species in Clements so keep as separate
 # 00010 00011 00012
 # ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 10] <- 30010
 # ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 11] <- 30010
 # ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 12] <- 30010
 
-# 11 34641  Cordilleran & Pacific-slope Flycatcher
+# 34641  Cordilleran & Pacific-slope Flycatcher
 # 04640 04641 04642
 ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4640] <- 34641
 ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4641] <- 34641
 ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4642] <- 34641
 
-# 12 34660               Alder & Willow Flycatcher; separate species in Clements so keep as separate
+# 34660               Alder & Willow Flycatcher; separate species in Clements so keep as separate
 # 04660 04661 04665
 # ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4660] <- 34660
 # ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4661] <- 34660
 # ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4665] <- 34660
 
-# 13 34810      California & Woodhouse's Scrub-Jay; separate species in Clements so keep as separate
+# 34810      California & Woodhouse's Scrub-Jay; separate species in Clements so keep as separate
 # 04812 04813 04810
 # ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4812] <- 34810
 # ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4813] <- 34810
 # ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4810] <- 34810
 
-# 14 35740              Sagebrush & Bell's Sparrow; separate species in Clements so keep as separate
+# 35740              Sagebrush & Bell's Sparrow; separate species in Clements so keep as separate
 # 05738 05739 05740
 # ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 5738] <- 35740
 # ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 5739] <- 35740
 # ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 5740] <- 35740
 
-# 15 34880                           American / Fish Crow; separate species in Clements so keep as separate
+# 34880                           American / Fish Crow; separate species in Clements so keep as separate
 # 04880 04880 04882 04890
 # ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4880] <- 34880
 # ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4880] <- 34880
@@ -745,6 +750,8 @@ ca.conus.splist$common_name_clements2024.combo<-ca.conus.splist$common_name_clem
 # Probably a more beautiful way to code this but this works:
 # Assign all to new species combo name based on the Clements species-level name
 #ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 31320] <- "Anas platyrhynchos"
+ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 35280] <- "Acanthis flammea"
+ca.conus.splist$common_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 35280] <- "Redpoll"
 ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 31940] <- "Ardea herodias"
 ca.conus.splist$common_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 31940] <- "Great Blue Heron"
 ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 33370] <- "Buteo jamaicensis"
@@ -758,6 +765,7 @@ ca.conus.splist$common_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo
 Yellow-rumped Warbler"
 #ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU.combo == 30010] <- "Aechmophorus occidentalis / clarkii"
 ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 34641] <- "Empidonax difficilis"
+ca.conus.splist$common_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 34641] <- "Western Flycatcher"
 #ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU.combo == 34660] <- "Empidonax alnorum / traillii"
 #ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU.combo == 34810] <- "Aphelocoma californica / woodhouseii"
 #ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU.combo == 35740] <- "Artemisiospiza nevadensis / belli"
@@ -766,6 +774,6 @@ ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.c
 ca.conus.splist$common_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 31690] <- "Snow Goose"
 
 
-# --- Export the final 782 species CANADA & CONUS subset as a CSV
+# --- Export the final 783 species CANADA & CONUS subset as a CSV
 write_csv(ca.conus.splist, file.path(L1_dir,"canada.conus.splist_L1.csv"))
 
