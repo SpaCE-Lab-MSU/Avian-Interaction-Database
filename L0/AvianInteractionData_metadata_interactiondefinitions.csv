@@ -30,5 +30,4 @@ nest predation,yes,1,-1,where one species preys upon or consumes the young in a 
 nest takeover,yes,1,-1,"where one species takes over (steals) the nest of another species, sometimes kicking out the existing eggs. species that takes over = 1; species whose nest is stolen = -1"
 play,no,0,0,species play with each other; both species = 1
 predation,yes,-1,1,predator eats prey. predator = 1; prey = -1
-predation-scavenging,yes,0,1,consuming dead prey; predator = 1; prey = 0 (because prey is already dead)
 shared scolding,no,1,1,"usually indicative of predation, where the smaller birds vocally scold a predator. The species doing the shared scolding are usually potential prey = 1."
