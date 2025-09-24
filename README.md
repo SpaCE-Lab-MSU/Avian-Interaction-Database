@@ -10,7 +10,11 @@ access for SpaCE Lab students and staff only).
 
 This project is overseen by PI Phoebe Zarnetske, [MSU Spatial and Community Ecology Lab (SpaCE Lab)](https://www.communityecologylab.com). Starting in 2019, a new protocol was established and the previous records were updated and further bird-bird interactions were added in by Zarnetske and MSU SpaCE Lab undergraduates (2019-present). The database is in preparation for publication as an open access data paper. A smaller version of these data were compiled from 2012-2014, by Zarnetske and Zonneveld, including bird-bird interactions among cavity nesting birds and their interacting bird species, based on species accounts in the Birds of North America (now Birds of the World). This led to an analysis of the influence of biotic interactions on North American cavity nesting bird species distributions ([Belmaker and Zarnetske et al. 2015 GEB](https://onlinelibrary.wiley.com/doi/full/10.1111/geb.12311)). Ongoing work involves entering and checking bird-bird interactions, based on [Birds of the World Online](http://birdsoftheworld.org/bow/home).  
 
-MSU Undergraduates led the presentation of a research poster at the 2024 [MSU Undergraduate University Research and Arts Forum](https://urca.msu.edu/uuraf):
+MSU Undergraduates led the presentations of research posters at the [MSU Undergraduate University Research and Arts Forum](https://urca.msu.edu/uuraf):
+
+Joseph, A., C. Roche, G. DePasquale, M. Andreatta, P. Bills, E. Parker, P.L. Zarnetske. April 2025. HOW DOES HUMAN FOOTPRINT IMPACT NORTH AMERICAN AVIAN SPECIES INTERACTIONS? Michigan State University Undergraduate Research and Arts Forum (UURAF). East Lansing, MI. Poster Presentation.
+
+Hirschowitz, I., P. Bills, P.L. Zarnetske. April 2025. NORTH AMERICAN AVIAN RESPONSES TO GLOBAL CHANGE: EFFECTS OF NEGATIVE INTERSPECIES INTERACTIONS ON POPULATION TRENDS. Michigan State University Undergraduate Research and Arts Forum (UURAF). East Lansing, MI. Poster Presentation.
 
 DePasquale, G., I. Hirschowitz, C. Roche, E.G. Parker, P. Bills, P.L. Zarnetske. April 2024. The North American Avian Interaction Database. Michigan State University Undergraduate Research and Arts Forum (UURAF). East Lansing, MI. Poster Presentation.
 
@@ -38,7 +42,6 @@ Order & description of scripts:
 
 - **L0**: L0 (raw) data files = CSV files containing entries in the database from 2012-present; data entry procedure follows [/L0/AvianInteractionData_ENTRY_INSTRUCTIONS.md](L0/AvianInteractionData_ENTRY_INSTRUCTIONS.md)
 - **L1**: L1 data; cleaned & edited L0 data. 
-- **L2**: Derived data from L1 data (e.g., pulling in & checking data from other sources including: Hurlbert Bird Diet Database for North America: https://www.nature.com/articles/s41597-021-01049-9 & https://github.com/hurlbertlab/dietdatabase)).
 - **R**: Code to create L0 and L1 data.
 
 ### docs
@@ -52,11 +55,21 @@ Funding is provided by Michigan State University (to P.L. Zarnetske), and by a M
 * Phoebe L. Zarnetske, PI, [Spatial and Community Ecology Lab (SpaCE Lab)](https://www.communityecologylab.com)
 
 ## Collaborators
-* Pat Bills
 * Emily Parker
+* Pat Bills
+* Sara Zonneveld
 
 ## Student Research Assistants
-* 2024-
+* 2025-
+  - Caroline Roche
+  - Liz Bauer
+  - Vivian Smith
+  - Olive Graves
+  - Sarah Pecis
+  - Addison Hoddinott
+  - Elliot Palmer
+  - Jamie Soehl
+* 2024
   - India Hirschowitz
   - Giovanni DePasquale
   - Caroline Roche
@@ -81,7 +94,6 @@ Funding is provided by Michigan State University (to P.L. Zarnetske), and by a M
 
 Belmaker, J., P. Zarnetske, M.-N. Tuanmu, S. Zonneveld, S. Record, A. Strecker, and L. Beaudrot. 2015. Empirical evidence for the scale dependence of biotic interactions. Global Ecology and Biogeography 24:750–761. https://doi.org/10.1111/geb.12311
 
-Birds of the World - Comprehensive life histories for all bird species and families. (Accessed January 13, 2025). http://birdsoftheworld.org/bow/home.
+Birds of the World - Comprehensive life histories for all bird species and families. (Accessed January 13, 2022). http://birdsoftheworld.org/bow/home.
 
 Hurlbert, A. H., A. M. Olsen, M. M. Sawyer, and P. M. Winner. 2021. The Avian Diet Database as a source of quantitative information on bird diets. Scientific Data 8:260. https://www.nature.com/articles/s41597-021-01049-9
-
