@@ -141,11 +141,6 @@ print(common_main_names)
 print(paste("There are", length(species_to_review_main_names), "files to be reviewed"))
 ```
 
-Optional: print all of the files in the review folder: 
-```{r}
-# species_to_review_main_names
-```
-
 Stitch and count the unique common names within files to review
 
 ```{r}
@@ -159,33 +154,18 @@ csv_file_path = file.path(file_paths$L0, "species_in_review")
 in_review_file_list <- list.files(path = csv_file_path , pattern = ".*\\.csv", 
   full.names = TRUE)
 
-print(paste(csv_file_path, ":", csv_file_group_name, "files to process", length(in_review_file_list)))
+paste(csv_file_path, ":", csv_file_group_name, "files to process", length(in_review_file_list))
 
-intxnsL0sptemp <- L0_stitch(
-                    csv_file_list = temp_file_list, 
-                    csv_file_group_name=csv_file_group_name
-                    )
-paste("Count of species after binding",intxnsL0sptemp$count)
+```
 
-## Notes about these results
+## Next Steps
 
-### Dec 9, 2024
+Open and Run/Render *R/L0/L0-stitch.qmd*
 
-27 species' csvs that still need the 2nd checking and
-placing into /species/. Of these, only 4 already exist in /species/. So use
-the temp species directory also (contains CSVs that were exported on Nov 27,
-2024 from the Google Sheets)
+### TO-DO
 
-### Summer 2025
+add code here to check checklists
 
-- There are just 6 csvs in google drive that are not in species folder.  
-- There many just in git not in google
-- There are 293 species files in review.  
 
-**Errors found/ Fixes to be made:**
-
-- There is at least one file with a type in the file name:
-   `Campylopterus_ hemileucurus_AJ.csv` has a space which will affect the stitch process
-  
 
 
