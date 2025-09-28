@@ -372,14 +372,15 @@ fix_taxon_typos <- function(intxns.df){
   intxns.df<- intxns.df %>% dplyr::mutate(
     species1_common =
       stringr::str_trim(species1_common) %>%  # Start with the raw data
-      stringr::str_to_title() %>%  # Capitalize each word
       stringr::str_replace_all("[Uu]nid ", "unid. ") %>%
-      stringr::str_replace_all("Unid.", "unid."), # add period to unids
+      stringr::str_replace_all("Unid.", "unid.") %>%
+      stringr::str_to_title(), # Capitalize each word
     species2_common =
       stringr::str_trim(species2_common) %>%  # Start with the raw data
-      stringr::str_to_title() %>%  # Capitalize each word
       stringr::str_replace_all("[Uu]nid ", "unid. ") %>% # add period to unids
-      stringr::str_replace_all("Unid.", "unid.")
+      stringr::str_replace_all("Unid.", "unid.") %>%
+      stringr::str_to_title()  # Capitalize each word
+
   )
 
   return(intxns.df)
