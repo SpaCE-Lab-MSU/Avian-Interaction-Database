@@ -14,18 +14,6 @@ date: 09/01/2025
 date-format: iso
 ---
 
-```{r}
-#| echo: false
-#| eval: false
-# TIPS FOR RUNNING THIS QUARTO NOTEBOOK
-# to run chunk one after the other:
-#   put the cursor in the first chunk and repeatedly press 
-#   option+command+N  = run next chunk
-# functions are defined in L1_taxonomy_functions.R
-#    and sourced below
-
-```
-
 ## Avian Interaction Pairs Data: L0 to L1 taxonomic harmonization
 
 ### About
@@ -38,7 +26,15 @@ date-format: iso
 
 ### Data input:
 
-Interactions: Output From `R/L0/AvianInteractionData_L0_stitch.R` - default file `AvianInteractionData_L0.csv`
+
+*Set the interactions database file to read from here:*
+
+( output From `R/L0/AvianInteractionData_L0_stitch.R` )
+
+```{r}
+stitched_L0_file <- "AvianInteractionData_L0_stitch.csv" 
+```
+
 
 Google Drive Files (Optional): Data imported as csv: - `/Google Drive/Shared drives/Avian_MetaNetwork/data/L1/bbs_obs/bbs_allobs_runtype1.csv`
 
@@ -189,8 +185,8 @@ Some BBS names differ from these lists so they have to be resolved manually.
 To use a different or test files, edit this L0 filename:
 
 ```{r}
-stitched_l0_file<- "AvianInteractionData_L0_test.csv"
-full_path_stitched_file <- file.path(file_paths$L0,stitched_l0_file)
+stitched_L0_file<- "AvianInteractionData_L0_stitch.csv"
+full_path_stitched_file <- file.path(file_paths$L0,stitched_L0_file)
 int.raw<-read.csv(full_path_stitched_file)
 print(paste("read in ", nrow(int.raw), "records from ", full_path_stitched_file))
 ```
