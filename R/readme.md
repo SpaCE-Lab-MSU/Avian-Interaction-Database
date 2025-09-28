@@ -9,7 +9,6 @@ For an overview of the project, details about the database, it's structure, and 
 for how the data is pulled from primary sources, see the [Project Readme file](../readme.md) 
 in the root directory. 
 
-
 ---
 
 This repository contains code and workflows for the The Avian Interaction Database project, 
@@ -24,6 +23,48 @@ See the main readme for the project, but the data that are in preparation
 are store in files in the L0 and L1 folders (see below).  Currently these are
 only accessible by collaborators.  Once published, the North American Avian 
 Interaction Database will be made open access and linked here. 
+
+
+## Quick-start 
+
+Assuming using Rstudio 2025 version or above
+
+1. copy file `R/filepaths_example.R` to `R/filepaths.R` and set files paths 
+   pointing to data on your computer (details below)
+1. install packages as needed (details below)
+2. clear R environment (scripts do not do this automatically)
+3. check file paths/repository state
+   - open R/L0/L0_repo_status.qmd
+   - in Rstudio, in the upper-right "run" button, select
+     "restart R and run all chunks"
+   - if there are errors, check if `dir.exists(DATA_FOLDER)` 
+4. stitch raw data
+   - open R/L0/L0_stitch.qmd
+   - in the upper-right "run" button, select
+     "restart R and run all chunks"
+   - this will report the file that is saved
+5. build taxonomy edits, running one chunck at time
+   - open R/L1/AvianInteractionData_L1.qmd
+   - edit the value for stitched_L0_file to match the L0 step above (near the top of file)
+   - check the value for the main checklists 
+   - position the cursor in the first block of code and run it
+   - easily run all subsequent blocks, one a time, using key short cut Option+Command+N
+     (see the "->Run" button at the top for more options)
+   - edit or add new taxonomic fixes to the edit list by adding code chunks like:
+   
+```
+int.raw.names <- add_name_edits(int.raw.names,
+  scientific_name.raw = "Corvus caurinus",
+  edit_notes = "CHANGE TO CLOSEST MATCH: checklist Northwestern Crow Corvus brachyrhynchos caurinus",
+  scientific_name.edit = "Corvus brachyrhynchos caurinus"
+  )
+  ```
+   - save the edit list as a file (Work in Progress)
+
+6. update names in interaction database (*Work in progress*)
+   - open "AvianInteractionData_L1_final_merge.qmd" 
+   - update input and output file names
+   - run to merge and create final CSV database
 
 ## Set-up and Configuration for R code
 
@@ -175,7 +216,7 @@ common and scientific names as they appear in the literature we base the data on
    to match the current checklist
    
    - Outcome:  L1_taxnomonic_edits.csv
-   - Notebook: L1/L1
+   - Notebook: L1/L1_
 
    
 5) **reconcile taxonomy**
