@@ -1,3 +1,6 @@
+### THIS IS A VERSION THAT WAS EDITED FOR A NEW WORKLFLOW BUT ABANDONDED
+### PLEASE SEE R/L0/L0_stitch.qmd FOR THE CURRENT QUARTO VERSION
+
 # TITLE:          Avian Interaction Pairs L0 Data Stitching
 # AUTHORS:        Phoebe Zarnetske, Pat Bills, Emily Parker
 # COLLABORATORS:  Vincent Miele, Stephane Dray
