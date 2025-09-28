@@ -1,3 +1,4 @@
+
 ---
 title: "L1 taxonomic harmonization"
 author: 
@@ -12,6 +13,18 @@ editor: source
 date: 09/01/2025
 date-format: iso
 ---
+
+```{r}
+#| echo: false
+#| eval: false
+# TIPS FOR RUNNING THIS QUARTO NOTEBOOK
+# to run chunk one after the other:
+#   put the cursor in the first chunk and repeatedly press 
+#   option+command+N  = run next chunk
+# functions are defined in L1_taxonomy_functions.R
+#    and sourced below
+
+```
 
 ## Avian Interaction Pairs Data: L0 to L1 taxonomic harmonization
 
@@ -33,7 +46,7 @@ Main Species List:
 
 - Current selected species list
   combined checklist based on Clements/Ebird, Avibase, 
-  output from R/L0/AvianInteractionData_specieslists_L0.R
+  output from `R/L0/AvianInteractionData_specieslists_L0.R`
 
 Other Checklists:
 
@@ -43,18 +56,28 @@ Other Checklists:
 
 ### DATA OUTPUT:
 
-L1 data: 
+L1 data: `int.namefix.bbs.RData` 
 
 
-`int.namefix.bbs.RData` (taxonomic harmonization & BBS columns into interaction data)
+### Next script to run: 
+
+`AvianInteractionData_L1_post_taxa_cleaning.R`
+
+*most of the cleaning functions have been moved to L0 scripts*
 
 ### NOTES
 
-Next script to run: `AvianInteractionData_L1_post_taxa_cleaning.R`
+This script is used to refine species name changes to align with the 
+Clements & eBird checklist to create an Rdata file.  
 
-This script is used to refine species name changes to align with BOW (Clements & eBird checklist) to create int.namefix.bbs.RData.\*\* Currently, the script is working for BBS species only; needs updating for (most of) the remainder.
+Currently, the script is working for a checklist of CONUS+Canada.  
 
 L0 data are checked to assign updated scientific and common names to the interaction pairs data. Makes a new column that also includes scientific name changes associated with the AOUcombo.index for merging with those names in the AvianInteractionData_AOUindex_L1.csv
+
+Notes Meaning: "keep raw and edit..." generally means " don't use one of the 
+results of the matching algorithms, but instead replace w/Clements2024:..."
+
+GOOD EXAMPLE TO TRACE MATCHING: Aeronautes saxitalis should be Aeronautes saxatalis
 
 ### Versions
 
@@ -72,13 +95,11 @@ File paths used for this run:
 ```{r}
 #| echo: false
 
+# functions used by all 
 source(here::here('R/L0/L0_functions.R'))
-
-#Load additional packages for L1 taxonomy, and keep it quiet
-suppressMessages({
-  library(taxadb)
-  library(stringdist)
-})
+# functions for this process to reduce this script size
+# and load libraries used here
+source(here::here('R/L1/L1_taxonomy_functions.R'))
 
 file_paths <- get_file_paths()
 
@@ -88,21 +109,29 @@ print(file_paths)
 *Note that the Checklist folder above is in L0 which contains species lists, 
 but the subset list for 2024-25 analysis is in L1 as it's built from L0 lists*
 
-------------------------------------------------------------------------
 
-## Checklists and species subsets lists:
 
-### Curated Subset List
+
+
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+## Checklists
+
+### Curated List
 
 **Previously:** all species in BBS `"bbs_splist_2024_L1.csv"`
 
-(the 2024 release which includes all species as of 2023, plus the additional AOUcombo.index column for use w BBS index)
+(the 2024 release which includes all species as of 2023, plus the additional 
+AOUcombo.index column for use w BBS index)
 
 `splist2024<-read.csv(file.path(L1_dir,"bbs_splist_2024_L1.csv"))`
 
 **Current**
 
-September 2025: new curated list curated by PLZ using Clements, AVIBase, BBS etc. See `R/L1/AvianInteractionData_specieslists_Canada_CONUS_L1.R`
+September 2025: new curated list curated by PLZ using Clements, AVIBase, BBS etc. 
+See `R/L1/AvianInteractionData_specieslists_Canada_CONUS_L1.R`
 
 ```{r}
 current_species_list_filename <- "canada.conus.splist_L1.csv"
@@ -126,7 +155,7 @@ Fieldnames of Species List:
 print(names(splist2024))
 ```
 
-### Main Checklist: 
+### Main Checklist
 
 Read in the full check list the official eBird/Clements checklist
 
@@ -141,16 +170,20 @@ amend column names of checklist to match for merging later show col name before 
 ```{r}
 print(names(checklist.orig))
 checklist <- checklist.orig
-names(checklist)[names(checklist) == "scientific.name"] <-"genus_species"
+names(checklist)[names(checklist) == "scientific.name"] <-"scientific_name"
 names(checklist)[names(checklist) == "English.name"] <-"common_name"
 print("CORRECTED CHECKLIST COLUMNS:")
 print(names(checklist))
 ```
 
-We are using the GBIF list (via taxadb) to resolve scientific names and the eBird/Clements checklist via Birds of The World naming conventions for species. Some BBS names differ from these lists so they have to be resolved manually.
+We are using the GBIF list (via taxadb) to resolve scientific names and the 
+eBird/Clements checklist via Birds of The World naming conventions for species. 
+Some BBS names differ from these lists so they have to be resolved manually.
 
-------------------------------------------------------------------------
 
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 ## Interactions Data
 
 To use a different or test files, edit this L0 filename:
@@ -162,14 +195,13 @@ int.raw<-read.csv(full_path_stitched_file)
 print(paste("read in ", nrow(int.raw), "records from ", full_path_stitched_file))
 ```
 
-#### Final Interaction Data Cleaning/Corrections
+### Final Interaction Data Cleaning/Corrections
 
 Most of these filters and adjustments are now made during the L0_stitch process
 but were are ensuring the data is clean prior to matching taxonomy
 
 
-#### Remove blank rows
-
+### Remove blank rows
 
 ```{r}
 before_filter_nrow <- nrow(int.raw)
@@ -183,8 +215,6 @@ print( paste(as.integer(before_filter_nrow - nrow(int.raw)), "blank rows removed
 ```
 
 ### Trim white space from all names columns
-
-*note this is fixed during L0 stitching*
 
 ```{r}
 # trim white space
@@ -200,7 +230,27 @@ print("unique scientific name combos after removing white space")
 print(length(unique(paste(int.raw$species1_scientific, int.raw$species2_scientific))))
 ```
 
-### Missing Scientific names?
+### Missing Scientific name check
+
+Are there any records that are missing a scientific name for species1?
+
+*if so this is problematic for adjusting the recorded name with the checklist 
+name, and should be corrected in data entry files*
+
+```{r}
+records.missingsp1 <- int.raw[is.na(int.raw$species1_scientific),]
+tibble(records.missingsp1)
+```
+
+Records missing a scientific name for sp2
+
+```{r}
+records.missingsp2 <- int.raw[is.na(int.raw$species2_scientific),]
+tibble(records.missingsp2)
+
+```
+
+
 
 Are there rows that have *only* common names for both sp1 and sp2?
 
@@ -240,8 +290,7 @@ Table of rows with both effects missing:
 tibble(filter(int.raw, is.na(effect_sp1_on_sp2) & is.na(effect_sp2_on_sp1)))
 ```
 
-Remove those with no interactions (if any
-)
+Remove those with no interactions (if any)
 ```{r}
 
 # save the original full list in case we need to check again
@@ -252,7 +301,8 @@ print("rows remaining with not both effects NA:")
 print(nrow(int.raw))
 ```
 
-### Discovery and repair of missing Sp1 scientific using Checklists
+
+### Discovery and repair of missing Sp1/Sp2 scientific names
 
 List rows with missing sp1 values but have other data to use for fix
 
@@ -271,21 +321,23 @@ for(common_name_for_missingsp1  in records.missingsp1$species1_common){
   
   matching_sp<- checklist %>% 
     dplyr::filter(common_name == common_name_for_missingsp1) %>% 
-    dplyr::select(common_name, genus_species)  
+    dplyr::select(common_name, scientific_name)  
   
-  print(as.vector(matching_sp[1,]$genus_species))
+  print(as.vector(matching_sp[1,]$scientific_name))
   # print(subset(checklist, common_name == common_name_for_missingsp1))
 }
 ```
 
-Assign scientific names to all rows for those common names that have missing sp1 scientific names
 
-Manual Assignments: update this list of fixes as errors are discovered above
+Assign scientific names to all rows for those common names 
+that have missing sp1 scientific names, create a Manual Assignment structure 
+here
 
 ```{r}
 #| echo: false
 manual_assignments = list()
 manual_assignments[["Rhinoceros Auklet"]] <- "Cerorhinca monocerata"
+
 print(manual_assignments)
 # add more as needed  
 ```
@@ -345,7 +397,7 @@ List the names from the checklist that match those missing in sp2:
 for(common_name_for_missingsp2  in records.missingsp2$species2_common){
   print(checklist %>% 
     dplyr::filter(common_name == common_name_for_missingsp2) %>% 
-    dplyr::select(common_name, genus_species))
+    dplyr::select(common_name, scientific_name))
 }
 ```
 
@@ -390,6 +442,19 @@ Double check that there are no remaining rows with missing scientific names
 ```{r}
 tibble(int.raw[is.na(int.raw$species2_scientific),]) 
 ```
+*completed fixes for missing scientific names*
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+## Taxonomy Adjustments Table
 
 **Create new data frame of all names, as is in the raw file, and what is to be 
 adjusted/updated/assigned
@@ -397,94 +462,60 @@ adjusted/updated/assigned
 
 Column Definitions:
 
-- genus_species.raw : L0 name as it appears in the original CSV file (stitched)
+- scientific_name.raw : L0 name as it appears in the original CSV file (stitched)
 - common_name.raw : L0 name as it appears in the original CSV file (stitched)
-- genus_species.edit : L1 name to be used (pre checklist )
-- common_name.edit : L1 name to be used (pre checklist )
+- scientific_name_clements2024 : L1 name to be used (pre checklist )
+- common_name_clements2024 : L1 name to be used (pre checklist )
+- edit_notes: text of why edits were made
 
+The edit columns are based on Clements 2024
 Determine how many unique entries are in int.raw\$species1_scientific , which 
 are unique combos of scientific names
 
 ```{r}
-unique.sp.raw <- data.frame(genus_species.raw = with(int.raw, union(
+unique.sp.raw <- data.frame(scientific_name.raw = with(int.raw, union(
   species1_scientific, species2_scientific
 )))
 
 print(dim(unique.sp.raw)) #3913 # May 29, 2025: 3889
 ```
 
-unique genus_species.raw entries
-
-Create list of unique genus_species.raw and common_name.raw pairs with formatting adjustments, stacking and collecting anything in sp1 and sp2. Also create genus_species.edit which is cleaned up genus_species.raw: removes blank spaces, capitalizes, and keeps unique rows.
-
-*note:  since adjustments/corrections to species were added to L0 cleaning process, 
-there should be very few differences between 'raw' and 'edited' names at this point
 
 
-```{r}
-# Authored by PLZ  
-int.raw.names <- int.raw %>%
-  # Select and stack the relevant species columns
-  select(species1_scientific, species1_common, species2_scientific, species2_common) %>%
-  transmute(
-    genus_species.raw = species1_scientific,  # Original genus_species
-    common_name.raw = species1_common
-  ) %>%
-  bind_rows(
-    int.raw %>%
-      transmute(
-        genus_species.raw = species2_scientific,  # Original genus_species
-        common_name.raw = species2_common
-      )
-  ) %>%
-  # Remove duplicates and clean up formatting
-  distinct() %>%
-  mutate(
-    # Clean genus_species while keeping the raw version
-    genus_species.edit = str_trim(genus_species.raw),  # Start with the raw data
-    genus_species.edit = ifelse(
-      str_starts(genus_species.edit, "unid."),  # Exception case
-      str_replace(genus_species.edit, "(unid.)s*(w+)", "1 U2"),
-      str_to_sentence(genus_species.edit)       # Regular case
-    ),
-    genus_species.edit = str_replace(genus_species.edit, "spp.", "sp."),  # Replace "spp." with "sp."
-    
-    # Clean common_name
-    common_name.edit = str_trim(common_name.raw),  # Start with the raw data
-    common_name.edit = str_to_title(common_name.edit),  # Capitalize each word
-    common_name.edit = str_replace_all(common_name.edit, "unid", "unid.")  # Add period to "unid"
-  ) %>%
-  filter(!is.na(genus_species.edit)) # Remove rows where genus_species.edit is <NA>
+### Create Name Edits Table
 
+Create list of unique scientific_name.raw and common_name.raw pairs with 
+formatting adjustments, stacking and collecting anything in sp1 and sp2. 
+See documentation in `L1_taxonomy_functions.R` script for details
 
-```
-
-Display the resulting cleaned data frame of the species from interaction data:
-
-
-
+*note:  since adjustments/corrections to species were added to L0 cleaning 
+process, there should be very few differences between 'raw' and 'edited' 
+names at this point in the process*
 
 
 ```{r}
+## create the raw <- edit adjustments table 
+int.raw.names <- create_names_edit_table(int.raw)
 head(tibble(int.raw.names))
-# int.raw[1:30,1:4]
-# int.raw.names[1:10,]
 ```
+
 
 Number of unique entries in raw sci names
 
 ```{r}
 
-print(length(unique(int.raw.names$genus_species.raw)))
-# 3889 - OK
+print(length(unique(int.raw.names$scientific_name.raw)))
+# May 2025: 3889
 ```
+
+
 **How many entries did the editing above fix?**
 
 
 Number of scientific names that were 'edited' by this process (raw != edited):
 ```{r}
-print(nrow(filter(int.raw.names, genus_species.raw != genus_species.edit)))
-tibble(filter(int.raw.names, genus_species.raw != genus_species.edit))
+print(nrow(filter(int.raw.names, scientific_name.raw != scientific_name.edit)))
+tibble(filter(int.raw.names, scientific_name.raw != scientific_name.edit))
 
 ```
 Number of common names that were 'edited' by this process (raw != edited):
@@ -500,25 +531,25 @@ print(nrow(filter(int.raw.names, toupper(common_name.raw) != toupper(common_name
 If zero above, then the only 'edits' for common name for upper/lower case matching
 
 
+
 Test case to track with knonw misspelling: Accipiter cooperi was misspelled ( should be Accipiter cooperii) - exists in int.raw.names
 
 ```{r}
-tibble(dplyr::filter(int.raw.names, genus_species.raw %in% c("Accipiter cooperi")))
+tibble(dplyr::filter(int.raw.names, scientific_name.raw %in% c("Accipiter cooperi")))
 ```
 
 expected output:
 
 ```         
-genus_species.raw common_name.raw genus_species.edit common_name.edit
+scientific_name.raw common_name.raw scientific_name.edit common_name.edit
 1 Accipiter cooperi   Cooper's Hawk  Accipiter cooperi    Cooper's Hawk
 ```
-
 
 
 **Side note: Accipiters are off (these are original raw data entries without taxonomic change)**
 
 ```         
-genus_species.raw      common_name       genus_species
+scientific_name.raw      common_name       scientific_name
 1    Acanthis flammea   Common Redpoll    Acanthis flammea
 2 Acanthis hornemanni    Hoary Redpoll Acanthis hornemanni
 3  Accipiter cooperii    Cooper's Hawk  Accipiter cooperii
@@ -527,9 +558,19 @@ genus_species.raw      common_name       genus_species
 6  Accipiter gentilis          Goshawk  Accipiter gentilis
 ```
 
-### Scientific Name Checking: taxadb with GBIF
 
-taxadb package: Modified from this code: https://docs.ropensci.org/taxadb/articles/intro.html In previous code, tried ITIS and COL to see if they were better than GBIF. GBIF has the fewest NA values, so we are sticking with it (it is the most comprehensive).
+
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+
+### TaxaDB
+
+taxadb package: Modified from this code:
+https://docs.ropensci.org/taxadb/articles/intro.html 
+In previous code, tried ITIS and COL to see if they were better than GBIF. 
+GBIF has the fewest NA values, so we are sticking with it (it is the most comprehensive).
 
 #### Create a local GBIF database
 
@@ -537,21 +578,21 @@ Create a local gbif database in :
 ```{r}
 taxadb::td_create("gbif")
 ```
-Resolve scientific names for the scientific names, 
-based on genus_species.edit using GBIF
 
-run Dec. 9, 2024, 29 May 2025
+Resolve scientific names for the scientific names, 
+based on scientific_name.edit using GBIF
 
 ```{r}
 int.gbif.names <- int.raw.names %>%
   mutate(
-    scientific_id = taxadb::get_ids(genus_species.edit, "gbif"),
+    scientific_id = taxadb::get_ids(scientific_name.edit, "gbif"),
     accepted_scientific_name = taxadb::get_names(scientific_id, "gbif")
   )
 warnings()
 ```
+**LIST JOIN WARNINGS => ISSUES TO FIX**
 
-For those entries that are ambigous (\> 1 match of the edited species with gbif),
+For those entries that are ambiguous (\> 1 match of the edited species with gbif),
 a warning will be issued. This loops through those warnings and prints 
 the message that has the species in question so we can view and capture it.
 
@@ -562,11 +603,8 @@ the message that has the species in question so we can view and capture it.
   for( w in ws) print(w$parent)
 ```
 
-Manually create a list of these species to be dealt with for now in a list
 
 ```{r}
-  # barring code to pull those names automatically, create a list of names to 
-  # deal with here
   duplicated_names <- list(
   'Anser anser anser',
   "Eudynamys orientalis",
@@ -579,7 +617,7 @@ for(species in duplicated_names){
   print(species)
   print(tibble(int.raw[int.raw$species1_scientific == species | int.raw$species2_scientific == species, ]))
   
-  # tibble(checklist[which(checklist$genus_species == species), ])
+  # tibble(checklist[which(checklist$scientific_name == species), ])
 }
   
   
@@ -591,7 +629,7 @@ Show the Clements checklist entries for these:
   #| echo: false
   
   options(tibble.width = 200) 
-  tibble(checklist[which(checklist$genus_species %in% duplicated_names), ])
+  tibble(checklist[which(checklist$scientific_name %in% duplicated_names), ])
 ```
 
 ```{r}
@@ -603,77 +641,74 @@ Show the Clements checklist entries for these:
 ### Notes on dispensation of names with ambigous checklist items
 
 Adjust this text to indicate decision on the species above
-Species to keep as is (e.g. KEEP ORIGINAL)
+Species to keep as is (e.g. KEEP RAW)
 
-- Anser anser anser - European Graylag Goose; checklist common_name: Graylag Goose (European) Common name change will be fixed later, below, with merging.
+```{r}
 
-- Eudynamys orientalis - Pacific Koel; same as checklist common_name
+# barring code to pull those names automatically, add fixes for these 
+# manually here
 
-- Larus fuscus fuscus - Lesser Black-backed Gull checklist common_name: Lesser Black-backed Gull (fuscus)
+#  Common name changes will be fixed later, below, with merging.
 
-- Psittacula eques - Echo Parakeet
-
-- Anas poecilorhyncha - Indian Spot-billed Duck : checklist common_name: Indian Spot-billed Duck
-
-```         
-
-# KEEP ORIGINAL - Batis molitor - Chinspot Batis
-
-# checklist common_name: Chinspot Batis
-
-head(int.raw[which(int.raw$species1_scientific == "Batis molitor"), ])
-head(int.raw[which(int.raw$species2_scientific == "Batis molitor"), ]) checklist[which(checklist$genus_species == "Batis molitor"), ]
-
-# KEEP ORIGINAL - Heteromyias armiti - Black-capped Robin
-
-# checklist common_name: Black-capped Robin
-
-dplyr::filter(int.raw, species1_scientific %in% c("Heteromyias armiti")) dplyr::filter(int.raw, species2_scientific %in% c("Heteromyias armiti")) checklist[which(checklist$genus_species == "Heteromyias armiti"), ]
-
-# KEEP ORIGINAL - Chloris sinica - Oriental Greenfinch
-
-# checklist common_name: Oriental Greenfinch
-
-dplyr::filter(int.raw, species1_scientific %in% c("Chloris sinica")) dplyr::filter(int.raw, species2_scientific %in% c("Chloris sinica")) checklist[which(checklist$genus_species == "Chloris sinica"), ]
-
-# KEEP ORIGINAL - Passer cinnamomeus - Russet Sparrow
-
-# checklist common_name: Russet Sparrow
-
-dplyr::filter(int.raw, species1_scientific %in% c("Passer cinnamomeus")) 
-dplyr::filter(int.raw, species2_scientific %in% c("Passer cinnamomeus")) checklist[which(checklist$genus_species == "Passer cinnamomeus"), ]
+int.raw.names <- int.raw.names  %>% 
+                add_name_edits("Anser anser anser", 
+                    edit_notes = "KEEP RAW, European Graylag Goose; checklist common_name: Graylag Goose (European)") %>% 
+                add_name_edits("Eudynamys orientalis", 
+                  edit_notes = "KEEP RAW Eudynamys orientalis - Pacific Koel; same as checklist common_name") %>%
+                add_name_edits("Larus fuscus fuscus", 
+                  edit_notes = "KEEP RAW  Lesser Black-backed Gull checklist common_name: Lesser Black-backed Gull (fuscus)") %>%
+                add_name_edits("Psittacula eques", 
+                  edit_notes = "KEEP RAW Echo Parakeet") %>%
+                add_name_edits("Anas poecilorhyncha",
+                  edit_notes = "KEEP RAW  Indian Spot-billed Duck : checklist common_name: Indian Spot-billed Duck")
 
 
-
-# KEEP ORIGINAL - Turdus nudigenis - Spectacled Thrush
-
-# checklist common_name: Spectacled Thrush
-
-head(int.raw[which(int.raw$species1_scientific == "Turdus nudigenis"), ])
-head(int.raw[which(int.raw$species2_scientific == "Turdus nudigenis"), ]) checklist[which(checklist$genus_species == "Turdus nudigenis"), ]
-
-# KEEP ORIGINAL - Anas flavirostris - Yellow-billed Teal
-
-# checklist common_name: Yellow-billed Teal
-
-head(int.raw[which(int.raw$species1_scientific == "Anas flavirostris"), ])
-head(int.raw[which(int.raw$species2_scientific == "Anas flavirostris"), ]) checklist[which(checklist$genus_species == "Anas flavirostris"), ]
 ```
 
-#### Check Pine Warbler - this is also dealt with below
+
+**NOTES** 
+*the following were dealt with in a previous version of this code but keeping this
+note here to track that for future reference.  need to check that status**
+
+``` 
+# KEEP RAW - Batis molitor - Chinspot Batis
+# checklist common_name: Chinspot Batis
+
+# KEEP RAW - Heteromyias armiti - Black-capped Robin
+# checklist common_name: Black-capped Robin
+
+# KEEP RAW - Chloris sinica - Oriental Greenfinch
+# checklist common_name: Oriental Greenfinch
+
+# KEEP RAW - Passer cinnamomeus - Russet Sparrow
+# checklist common_name: Russet Sparrow
+
+# KEEP RAW - Turdus nudigenis - Spectacled Thrush
+# checklist common_name: Spectacled Thrush
+
+
+# KEEP RAW - Anas flavirostris - Yellow-billed Teal
+# checklist common_name: Yellow-billed Teal
+
+```
+
+```{r}
+
+int.raw.names<- add_name_edits(int.raw.names,scientific_name.raw = "Anas poecilorhyncha",
+                edit_notes = "KEEP RAW  Indian Spot-billed Duck : checklist common_name: Indian Spot-billed Duck")
+```
+
+
+#### Example Checking process: **Pine Warbler** - this is also dealt with below
 
 CHANGE TO NEW NAME below: Dendroica pinus - Pine Warbler
 
-checklist common_name: Pine Warbler; genus_species = Setophaga pinus
+checklist common_name: Pine Warbler; scientific_name = Setophaga pinus
 
 checklists for the old and then new name FOR THIS SPECIES
 
-```{r}
-checklist[which(checklist$genus_species == "Dendroica pinus"), ] # no records
-checklist[which(checklist$genus_species == "Setophaga pinus"), ] # one record
-```
 
-records with old name: 
+is this is being used? records with old name: 
 ```{r}
 dplyr::bind_rows(
   dplyr::filter(int.raw, species1_scientific %in% c("Dendroica pinus")),
@@ -689,144 +724,227 @@ dplyr::bind_rows(
 )
 ```
 
+Which is preferred on the checklist?
+```{r}
+checklist[which(checklist$scientific_name == "Dendroica pinus"), ] # no records
+checklist[which(checklist$scientific_name == "Setophaga pinus"), ] # one record
+```
+
+Is there an entry in our name edit table with the old genus?
+```{r}
+tibble(int.raw.names[int.raw.names$scientific_name.raw == "Dendroica pinus",])
+```
+
+add edited name and note
+
+```{r}
+int.raw.names <- add_name_edits(edits.df = int.raw.names,
+               scientific_name.raw = "Dendroica pinus", 
+               scientific_name.edit = "Setophaga pinus",
+               edit_notes = "Update to new checklist name"
+)
+```
+
+*Note this is also handled below in slightly different way*
+
+**COMPLETED: NON-STANDARD ADJUSTMENTS POST-TAXA-DB**
 
 
-### Scientific Name Changes: Resolved & Unresolved Names
+## TaxaDB/GBIF Edits notes 
 
-Number of gbif names: 
+** ???PLZ  this whole section might be skippped 
+
+check after fixing mixed matches
+
+rows of gbif names vs int.raw.names 
+
+*should be the same as it includes non-matches, confirms function worked correctly*
 
 ```{r}
 
-print(dim(int.gbif.names))
+print(nrow(int.gbif.names))
+print(nrow(int.raw.names))
 # 5343; May 29, 2025: 5318
   
 ```
 
+Number of unique scientific names found for raw name entries:
+
+due to common name duplications or spelling differences
+
 ```{r}
-print(length(unique(int.gbif.names$genus_species.raw)))
+print(length(unique(int.gbif.names$scientific_name.raw)))
+
 # 3913; May 29, 2025: 3889 OK       
 ```
 
-Separate resolved and unresolved names based on specified criteria
-```{r}
 
-resolved.gbif <- int.gbif.names %>%
-  filter(!is.na(scientific_id) | grepl(" sp\\.$", genus_species.edit))
-print(length(unique(resolved.gbif$genus_species.raw)))
+Separate resolved and unresolved names based on specified criteria
+
+Number of resolved names via gbif:
+
+ 
+```{r}
+# gbif matched have a scientific_id value
+# ensure to not include genus-only entries as GBIF matched
+
+resolved.gbif <- filter(int.gbif.names, 
+  !is.na(scientific_id) | grepl(" sp\\.$", scientific_name.edit))
+
+print(length(unique(resolved.gbif$scientific_name.raw)))
+
 # 3587; May 29, 2025: 3580
 ```
 
+
+Number and percent of unresolved GBIF names: 
+
+*those full species (not unid.) that don't match*
+
 ```{r}
+#| echo: false
 unresolved.gbif <- int.gbif.names %>%
-  filter(is.na(scientific_id) & !grepl(" sp\\.$", genus_species.edit))
-length(unique(unresolved.gbif$genus_species.raw))
+  filter(is.na(scientific_id) & !grepl(" sp\\.$", scientific_name.edit))
+
+print(length(unique(unresolved.gbif$scientific_name.raw)))
+
+sprintf("%.2f%%",
+        round( 
+          length(unique(unresolved.gbif$scientific_name.raw)) /  
+          length(unique(resolved.gbif$scientific_name.raw)), 4) * 100
+      ) 
+
 # 326; May 29, 2025: 309
-length(unique(resolved.gbif$genus_species.raw))+length(unique(unresolved.gbif$genus_species.raw))
-# 3913 - OK; May 29, 2025: 3889 OK   
 
 ```
 
-
-Display both results: GBIF resolved and GBIF unresolved 
+Number of un-id names (genera only, not expected to Taxadb to match, just accounting):
 
 ```{r}
-tibble(resolved.gbif)
+int.raw.names.unid <- filter(int.raw.names, grepl(" sp\\.$", scientific_name.edit))
+print(paste("rows:", nrow(int.raw.names.unid)))
+print(paste("unique:", length(unique(int.raw.names.unid$scientific_name.edit))))
+
 ```
 
 
 Test: Accipiter cooperi is misspelled
 ```{r}
-dplyr::filter(resolved.gbif, genus_species.raw %in% c("Accipiter cooperi"))
+dplyr::filter(resolved.gbif, scientific_name.raw %in% c("Accipiter cooperi"))
 # doesn't exist
-```
-
-```{r}
-tibble(unresolved.gbif)
 ```
 
 Test: Accipiter cooperi is misspelled - exists in unresolved.gbif
 
 ```{r}
-dplyr::filter(unresolved.gbif, genus_species.raw %in% c("Accipiter cooperi"))
-# genus_species.raw common_name.raw genus_species.edit common_name.edit scientific_id
+dplyr::filter(unresolved.gbif, scientific_name.raw %in% c("Accipiter cooperi"))
+# scientific_name.raw common_name.raw scientific_name.edit common_name.edit scientific_id
 # 1 Accipiter cooperi   Cooper's Hawk  Accipiter cooperi    Cooper's Hawk          <NA>
 #   accepted_scientific_name
 # 1                     <NA>
 ```
 
-Number of rows in unresolved gbig
 
+## Add Edit and Note for all TaxaDB GBIF matches 
+
+Indicate in the names table which have valid GBIF names (may or may not be 
+checklist names) but don't overwrite existing notes
+
+how many rows have notes? even if small, we want to keep those
 
 ```{r}
-print(nrow(unresolved.gbif))
+length(which(int.raw.names$edit_notes!= ""))
+```
+
+
+For those that matched in gbif AND not already have an note, add note including
+the GBIF ID number that matched.  
+
+```{r}
+# this is maybe not the most R way to do this
+# find the rows in our names that matched GBIF, and take out the rows that already 
+# have a note in them, and update all of those notes
+rows_that_have_gbif_match <- which(!is.na(int.gbif.names$scientific_id))##  match(resolved.gbif$scientific_name.raw, int.raw.names$scientific_name.raw)
+rows_with_non_empty_notes <- which(int.raw.names$edit_notes!= "")
+
+rows_to_update <- rows_that_have_gbif_match[! rows_that_have_gbif_match  %in% rows_with_non_empty_notes ]
+
+for(r in rows_to_update){
+  int.raw.names[r,]$edit_notes <- paste('KEEP RAW, matched GBIF to ', as.character(int.gbif.names[1,"scientific_id"]))
+}
+```
+
+
+## Resolve unresolved GBIF
+
+Number of rows in unresolved gbif (full species only, not genus-only)
+```{r}
+print(paste("uresolved gbif: ", nrow(unresolved.gbif)))
+# remove empty columns
 unresolved.gbif$scientific_id<-NULL
 unresolved.gbif$accepted_scientific_name<-NULL
 ```
 Omit scientific_id and accepted_scientific_name since they are blank
 
-### Unresolved
-
-Work with unresolved.gbif to try and determine what misspellings exist in the genus_species.raw, and what they should be, based on the reference list from eBird & Clements CHECKLIST 2024.
+Work with unresolved.gbif to try and determine what misspellings exist in the scientific_name.raw, and what they should be, based on the reference list from eBird & Clements CHECKLIST 2024.
 
 **Reference list of scientific names from eBird Clements CHECKLIST 2024**
 
 ```{r}
 reference_names <- tibble(
-  genus_species = checklist$genus_species,
+  scientific_name = checklist$scientific_name,
   common_name = checklist$common_name
 )
+nrow(reference_names)
 ```
 
-```{r}
-# Function to clean names for comparison (ignore sp., Unid., remove whitespace
-# after name)
-# this was copied to L0/stitch workflow
-#| echo: false
-clean_name <- function(name) {
-  name %>%
-    gsub("\\b(unid\\.|sp\\.)\\b", "", .) %>%   # Remove "Unid." and "sp."
-    trimws()                                   # Trim extra spaces
-}
-```
 
-Use fuzzy logic function to find closest match from the CHECKLIST reference list
+
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+## Fuzzy Matching of Scientific Name to checklist
+
+Use fuzzy logic function ( see L1_taxonomy_functions.R ) to find closest match from the CHECKLIST reference list
 Function to find the closest match with a similarity score, and ignoring the
 name aspects above.
 
+### Resolve matches based on scientific_name.edit and Clements Checklist
+
+this takes a while long time to run
+
 ```{r}
-#| echo: false
-# copied to L1_functions.R as well
-# TO-DO, source that file above
-find_closest_match_with_score <- function(name, reference_list) {
-  if (is.na(name) || name == "") {
-    return(list(match = NA_character_, score = NA_real_))
-  }
-  name_cleaned <- clean_name(name)
-  reference_cleaned <- clean_name(reference_list) # Cleaned for comparison only
-  # Calculate string distances
-  distances <- stringdist::stringdist(name_cleaned, reference_cleaned, method = "jw") # Jaro-Winkler distance
-  if (length(distances) == 0 || all(is.na(distances)) || min(distances, na.rm = TRUE) > 0.5) {
-    return(list(match = NA_character_, score = NA_real_))
-  }
-  closest_match_index <- which.min(distances)
-  closest_match <- reference_list[closest_match_index]
-  similarity_score <- 1 - distances[closest_match_index]
-  return(list(match = closest_match, score = similarity_score)) # Convert distance to similarity (1 = exact match)
+
+# reminder unresolved.gbif are those rows not matched by gbif and not unid Genus sp.
+
+# saved previous version, which runs matching function twice and takes a while
+# scientific_name_matches <- unresolved.gbif %>%
+#  rowwise() %>%
+#  mutate(
+#    closest_scientific_name_match = find_closest_match_with_score(scientific_name.edit, checklist$scientific_name)$match,
+#    scientific_name_match_score = find_closest_match_with_score(scientific_name.edit, checklist$scientific_name)$score
+#  ) %>%
+#  ungroup()
+
+# refactored version using loop instead of rowwise, runs ~ 3X faster
+scientific_name_matches <- unresolved.gbif
+# add new columns
+scientific_name_matches$closest_scientific_name_match <- NA
+scientific_name_matches$scientific_name_match_score <- NA
+# fill them in one row at a time
+for(r in 1:nrow(scientific_name_matches)) {
+  # optional, print the name we are on to gauge progress
+  # print(scientific_name_matches[r,"scientific_name.edit"])
+  fuzzy_match <- find_closest_match_with_score( scientific_name_matches[r,"scientific_name.edit"], checklist$scientific_name)
+  scientific_name_matches[r,]$closest_scientific_name_match <- fuzzy_match$match
+  scientific_name_matches[r,]$scientific_name_match_score <- fuzzy_match$score
 }
-```
 
-Resolve matches based on genus_species.edit and CHECKLIST
+# idea to improve speed: rewrite scientific_name_matches to accept a vector/list of names 
+# and return list of lists, then rbind/cbind
 
-```{r}
-genus_species_matches <- unresolved.gbif %>%
-  rowwise() %>%
-  mutate(
-    closest_genus_species_match = find_closest_match_with_score(genus_species.edit, checklist$genus_species)$match,
-    genus_species_match_score = find_closest_match_with_score(genus_species.edit, checklist$genus_species)$score
-  ) %>%
-  ungroup()
-
-tibble(genus_species_matches)
+tibble(scientific_name_matches)
 ```
 
 Test of checklist and data : Accipiter cooperi is misspelled
@@ -834,24 +952,24 @@ Test of checklist and data : Accipiter cooperi is misspelled
 
 ```{r}
 
-dplyr::filter(genus_species_matches, genus_species.raw %in% c("Accipiter cooperi"))
+dplyr::filter(scientific_name_matches, scientific_name.raw %in% c("Accipiter cooperi"))
 
 ```
 
 ```{r}
-print(dplyr::filter(genus_species_matches, genus_species.raw %in% c("Accipiter cooperi"))$genus_species_match_score)
+print(dplyr::filter(scientific_name_matches, scientific_name.raw %in% c("Accipiter cooperi"))$scientific_name_match_score)
 ```
 
 ---
 
 ## Scientific Name Changes: High & Low Confidence Matches
 
-Number of unique genus_species.raw in matches table:
+Number of unique scientific_name.raw in matches table:
 ```{r}
 #| echo: false
 print(Sys.Date())
 print("")
-print(length(unique(genus_species_matches$genus_species.raw)))
+print(length(unique(scientific_name_matches$scientific_name.raw)))
 ```
 
 *Previous results of this check*
@@ -860,7 +978,12 @@ print(length(unique(genus_species_matches$genus_species.raw)))
 May 29, 2025: 309 (unresolved.gbif =328)
 ```
 
-### Extract final_matches with high confidence
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+## Scientific Name Fixes: high confidence matches
+
 
 set high confidence threshold  (>=)
 
@@ -868,31 +991,31 @@ set high confidence threshold  (>=)
 high_confidence_threshold <- 0.9
 ```
 
-Number of high confidence matches (genus_species_match_score > 0.90)
+Number of high confidence matches (scientific_name_match_score > 0.90)
 
 ```{r}
 #| echo: false
-high_confidence_matches <- genus_species_matches %>%
+high_confidence_matches <- scientific_name_matches %>%
   filter(
-    genus_species_match_score >= high_confidence_threshold 
+    scientific_name_match_score >= high_confidence_threshold 
   )
-print(length(unique(high_confidence_matches$genus_species.raw)))
+print(length(unique(high_confidence_matches$scientific_name.raw)))
 ```
 *previous results:*
 
 `Dec 2024: 257 out of 326; May 29, 2025: 244 out of 309`
 
-### Determin lower confidence threshold
+### Determine lower confidence threshold
 
 to find Define range for printing in increments of 0.005
 
-use the genus_species match. 
+use the scientific_name match. 
 
 store each partition data.frame as an item in a list keyed on upper range
 
 ```{r}
-score_start <- min(high_confidence_matches$genus_species_match_score)
-score_end <- max(high_confidence_matches$genus_species_match_score)
+score_start <- min(high_confidence_matches$scientific_name_match_score)
+score_end <- max(high_confidence_matches$scientific_name_match_score)
 increment <- 0.005
 
 # collect these in a list for exploring
@@ -901,7 +1024,7 @@ confidence_partition <- list()
 # Loop through each score range and print the matches within that range
 for (i in seq(score_start, score_end, by = increment)) {
   current_range <- high_confidence_matches %>%
-    filter(genus_species_match_score >= i & genus_species_match_score <= i + increment)
+    filter(scientific_name_match_score >= i & scientific_name_match_score <= i + increment)
   
   # Print the current range if it has any entries
   if (nrow(current_range) > 0) {
@@ -921,11 +1044,10 @@ View any of these dataframes using the partition list to see what's on there
 ```
 
 For most of the names, the match is 1 or quite high, so assign them the
-closest match, then edit the few below noted "KEEP ORIGINAL".
+closest match, then edit the few below noted "KEEP RAW".
 
 ```{r}
-fixed_names1<-high_confidence_matches
-print(length(unique(high_confidence_matches$genus_species.raw)))
+print(length(unique(high_confidence_matches$scientific_name.raw)))
 ```
 
 *previous results*
@@ -933,25 +1055,31 @@ print(length(unique(high_confidence_matches$genus_species.raw)))
 257 out of 326; May 29, 2025: 244
 ```
 
-Test: Accipiter cooperi is misspelled - it disappeared here... because < threshold
+Test: Accipiter cooperi is misspelled - not high confidence here... 
+because < threshold and because on the checklist we are comparing too, 
+the genus is changed...
 
 
 ```{r}
-dplyr::filter(fixed_names1, genus_species.raw %in% c("Accipiter cooperi"))
+dplyr::filter(high_confidence_matches, scientific_name.raw %in% c("Accipiter cooperi"))
 ```
 
-Assign genus_species and common_name to the closest_matches based on fuzzy
-coding match. 
 
-Dec. 11, 2024: only doing genus_species for now.
+### Assign scientific_name and common_name
 
-```{r}
+to the closest_matches based on fuzzy coding match. 
 
-names(fixed_names1)[names(fixed_names1) == "closest_genus_species_match"] <-"genus_species"
+Dec. 11, 2024: only doing scientific_name for now.
+
+Aug/Sept 2025 : this is no longer needed, now tracking in single file with comments
+```
+
+names(fixed_names1)[names(fixed_names1) == "closest_scientific_name_match"] <-"scientific_name"
 fixed_names1$common_name.raw<-NULL
 fixed_names1 <- fixed_names1 %>% 
   distinct()
 ```
+
 
 ---
 
@@ -964,179 +1092,276 @@ rdata_file_name <- paste0("AvianInteractionData_L1_workspace", today_date_string
 save.image(file.path(file_paths$L1,rdata_file_name ))
 ```
 
----
 
-## Scientific Name Fixes
+## assign notes to those high confidence matches
 
-**CONTINUE CHECKING BY FUZZY MATCHING**
-
+Review Number of fixed names so far, out of all unmatched gbif
 ```{r}
-length(unique(fixed_names1$genus_species.raw))
-```
+#| echo: false
+ paste(
+  nrow(high_confidence_matches),
+  "out of",
+  nrow(unresolved.gbif)
+ )
 
+
+
+```
 *previous results*
 
 257 out of 326; May 29, 2025: 244
 
 
 ```{r}
-tibble(fixed_names1) %>% arrange(genus_species_match_score)
+tibble(high_confidence_matches) %>% arrange(scientific_name_match_score)
 ```
-*previous count*
-
-270; May 29, 2025: 257
 
 
-Scroll through these 2High Confidence Genus Species Matches. Use
-genus_species.edit to make changes given that it doesn't have extra spaces or
-other issues. All look okay except:
+Scroll through these High Confidence Genus Species Matches. Use
+scientific_name.edit to make changes given that it doesn't have extra spaces or
 
+### Names Update  high-confidence matches, 
+but only update those names that haven't already been dispensated and have a note
 
 ```{r}
-# for now, leave this file in this repository, but move to original
-taxonomy_adjustments_file <- here::here(file.path("data/L1/",
-                        "taxonomy_adjustments.csv"
-                        )
-)
+# update by Row number. Not very R-like but works
 
-taxonomy_adjustments.df <- read.csv(taxonomy_adjustments_file, header = TRUE)
+# get the row numbers of the names list that we want to update with matches
+rows_high_confidence_match <- which(int.raw.names$scientific_name.raw %in%high_confidence_matches$scientific_name.raw)
+# get the row numbers of names list already updated
+rows_with_non_empty_notes <- which(!is.na(int.raw.names$edit_notes))
 
+rows_to_update <- rows_high_confidence_match[! rows_that_have_gbif_match  %in% rows_with_non_empty_notes ]
+
+for(r in rows_to_update){
+  # find the fuzzy matched name to use for new edit
+  # matching the same raw name in the  high confidence list
+  # w
+  current_scientific_name.raw
+  high_confidence_match <- filter(high_confidence_matches, scientific_name.raw ==current_scientific_name.raw)
+  if(nrow(high_confidence_match)>1) {
+    # do we have redundant matches?  if so print those and skip
+    print("duplicate matches")
+    print(high_confidence_match)
+    next # skip this one keep going
+  }
+  
+  # extract values and update list
+  int.raw.names[r,]$scientific_name.edit <- as.character(high_confidence_match$closest_scientific_name_match)
+  
+  scientific_name_match_score <- as.character(high_confidence_match$scientific_name_match_score)
+  
+  int.raw.names[r,]$edit_notes <- paste('high confidence fuzzy match with Clements checklist score', scientific_name_match_score )
+
+  
+}
 ```
-
 
 
 ---
 
-### NOTES Matching results 
 
-COPIED
- CHANGE TO CLOSEST MATCH: checklist says Corvus brachyrhynchos caurinus
- Larus brachyrhynchos caurinus   Northwestern Crow Corvus brachyrhynchos caurinus   0.900468284
+## Post-match manual name updates
 
-COPIED
- CHANGE TO CLOSEST MATCH: checklist says Campylorhynchus brunneicapillus
- Campylorhynchos brunneicapillus        Cactus Wren Campylorhynchus brunneicapillus 0.900716846
+Set matches based on review of fuzzy match to checklist
 
-COPIED
- CHANGE TO CLOSEST MATCH: checklist says Cathartes aura
- Cathartus aura Turkey Vulture  Cathartes aura  0.901098901
+After reviewing those raw entries not exactly matched by GBIF, and assigned a
+fuzzy matche value to the checklist, manually assign the `Scientific_name.edit` 
+nad a note 
 
-COPIED
- CHANGE TO CLOSEST MATCH: checklist says Motacilla alba lugens
- Moticilla alba lugens White Wagtail (Black-Backed)    Motacilla alba lugens   0.901587302
+The following is a the template of how to call the function defined to set the 
+species and the notes
+
+*this may not seem like less typing that just assigning but by centralizing the 
+procedure for updating records allows code improvements to be made in one place*
+
+---
+
+CHANGE TO CLOSEST MATCH: checklist says Corvus brachyrhynchos caurinus
+
+there is a case to keep Corvus caurinus as a species...
+
+https://bcbirds.bcfo.ca/wp-content/uploads/2021/11/butler.pdf
+
+ "Corvus caurinus"
+```{r}
+int.raw.names[int.raw.names$scientific_name.raw =="Corvus brachyrhynchos caurinus",]
+print(interaction_count_by_species(int.raw, "Corvus caurinus"))
+checklist[checklist$scientific_name=="Corvus caurinus",]
+
+```
+
+  
+```{r}
+int.raw.names <- add_name_edits(int.raw.names,
+    scientific_name.raw = "Corvus caurinus",
+    edit_notes = "CHANGE TO CLOSEST MATCH: checklist Northwestern Crow Corvus brachyrhynchos caurinus checklist match  0.900468284",
+    scientific_name.edit = "Corvus brachyrhynchos caurinus"
+  )
+
+```
+
+Previously also corrected *Larus spp.*, but this is no longer in db
+
+```{r}
+int.raw.names[int.raw.names$scientific_name.raw =="Larus brachyrhynchos caurinus",]
+print(interaction_count_by_species(int.raw, "Larus brachyrhynchos caurinus"))
+```
+
+CHANGE TO CLOSEST MATCH: checklist says Campylorhynchus brunneicapillus
+
+```{r}
+int.raw.names <- int.raw.names %>% 
+  add_name_edits(scientific_name.raw = "Campylorhynchos brunneicapillus",
+                 scientific_name.edit = "Campylorhynchus brunneicapillus",
+                 edit_notes = "CHANGE TO CLOSEST MATCH: checklist Cactus Wren Campylorhynchus brunneicapillus 0.900716846"
+  )
+
+```
+
+
+```{r}
+int.raw.names <- int.raw.names %>% 
+  add_name_edits(scientific_name.raw = "Cathartus aura",
+                 scientific_name.edit = "Cathartes aura",
+                 edit_notes = "CHANGE TO CLOSEST MATCH: checklist Cathartus aura Turkey Vulture  Cathartes aura  0.901098901"
+  )
+
+```
+
+
+ Moticilla alba lugens = White Wagtail (Black-Backed), typo fix 
+
+```{r}
+int.raw.names <- int.raw.names %>% 
+  add_name_edits(scientific_name.raw = "Moticilla alba lugens",
+                 scientific_name.edit = "Motacilla alba lugens",
+                 edit_notes = "CHANGE TO CLOSEST MATCH:  checklist Moticilla alba lugens White Wagtail (Black-Backed) ->   Motacilla alba lugens   0.901587302"
+  )
+
+```
+
 
 --- 
 
-DON'T INCLUDE: THESE typos are fixed during stitching
+*Historical fixes no longer necessary (typos are fixed during L0 stitching)*
+
+delete in future
 
 ```
  CHANGE TO CLOSEST MATCH: checklist says Stercorarius sp. (drop extra p)
  Stercorarius spp.      Jaeger  Stercorarius sp.    0.901960784
 
- CHANGE TO CLOSEST MATCH: checklist says Stercorarius sp. (drop extra p)
- Stercorarius spp.  Stercorarius spp.   NA  Stercorarius sp.    0.901960784
 
- CHANGE TO CLOSEST MATCH: checklist says Stercorarius sp. (drop extra p)
- Stercorarius spp.  Unid. Jaeger    Stercorarius sp.    0.901960784
 ```
 
 ---
 
-### COPIED
+??? look for this common name and assign
 
-KEEP ORIGINAL and change to species later when lumping subspecies
-
+KEEP RAW and change to species later when lumping subspecies
  checklist: Parkesia noveboracensis;
  int.raw and unresolved.gbif: common_name = hybrid Barnacle x Bar-headed Goose
  BOW says the hybrid exists but is rare
- 
+
+
+
 ---
 
-### COPIED COPIED
 
-CHANGE TO CLOSEST MATCH: checklist says Corvus brachyrhynchos caurinus
-Larus brachyrhynchos caurinus	 Northwestern Crow Corvus brachyrhynchos caurinus	0.900468284
+### This was code left over from  before removing hybrids
 
-
-### COPIEDCOPIED
+??? SAVE HYBRIDS OR REMOVE THEM?
 
 ```         
 1 Branta leucopsis x anser indicus Branta leucopsis x canadensis       0.905
 ```
 
 ```
-# # copied
-# dplyr::filter(int.raw, species1_scientific %in% c("Branta leucopsis x Anser indicus"))
-# dplyr::filter(int.raw, species2_scientific %in% c("Branta leucopsis x Anser indicus"))
-# dplyr::filter(unresolved.gbif, genus_species.edit %in% c("Branta leucopsis x anser indicus"))
-# dplyr::filter(unresolved.gbif, genus_species.edit %in% c("Branta leucopsis x anser indicus"))
-# fixed_names1$genus_species[fixed_names1$genus_species.edit == "Branta leucopsis x anser indicus"] <- "Branta leucopsis x Anser indicus"
+dplyr::filter(int.raw, species1_scientific %in% c("Branta leucopsis x"))
+# NO HYBRIDS IN CLEANED DATA NOW
+dplyr::filter(int.raw, species1_scientific %in% c("Branta leucopsis x Anser indicus"))
+dplyr::filter(int.raw, species2_scientific %in% c("Branta leucopsis x Anser indicus"))
+# dplyr::filter(unresolved.gbif, scientific_name.edit %in% c("Branta leucopsis x anser indicus"))
+# dplyr::filter(unresolved.gbif, scientific_name.edit %in% c("Branta leucopsis x anser indicus"))
+# fixed_names1$scientific_name[fixed_names1$scientific_name.edit == "Branta leucopsis x anser indicus"] <- "Branta leucopsis x Anser indicus"
 ```
 
-**COPIED**
 
-
-KEEP ORIGINAL and change to species later when lumping subspecies
-
-
-checklist: Cuculus canorus; common_name = Common Cuckoo
-BOW says "sometimes separated subspecifically as telephonus on basis of size (smaller than subtelephonus) and pale plumage (like subtelephonus), but
-birds in this area are not constant in these characters and overlap with other
-races occurs"
+```{r}
+int.raw.names <- int.raw.names %>% 
+  add_name_edits(scientific_name.raw = "Cuculus canorus telephonus",
+                 scientific_name.edit = "Cuculus canorus telephonus",
+                 edit_notes = "KEEP RAW: Cuculus canorus common_name = Common Cuckoo
+BOW says 'sometimes separated subspecifically as telephonus on basis of size (smaller than subtelephonus) and pale plumage (like subtelephonus), but birds in this area are not constant in these characters and overlap with other races occurs'"
+  )
 
 ```
-Cuculus canorus telephonus       Cuculus canorus subtelephonus       0.908
+
+
+Reconcile "Parkesia noveboracensis limnaeus"
+
+number of interaction records with this species?
+
+```{r}
+print(interaction_count_by_species(int.raw,"Parkesia noveboracensis limnaeus"))
+```
+
+
+```{r}
+
+int.raw.names <- int.raw.names %>% 
+  add_name_edits(scientific_name.raw = "Parkesia noveboracensis limnaeus",
+                 scientific_name.edit = "Parkesia noveboracensis",
+                 edit_notes = "CHANGE TO CLOSEST MATCH: BOW says No subspecies, following Eaton (1957a) and Molina et al. (2000). Hence, P. n. notabilis (Ridgway, 1880), P. n. limnaeus (McCabe and Miller, 1933), and P. n. uliginosus (Burleigh and Peters, 1948) are junior synonyms of P. noveboracensis (Gmelin, 1788).  0.906"
+  )
+
+```
+
+
+```{r}
+
+print(interaction_count_by_species(int.raw,"Zosterops lateralis gouldi"))
+
+int.raw.names <- int.raw.names %>% 
+  add_name_edits(scientific_name.raw = "Zosterops lateralis gouldi",
+                 scientific_name.edit = "Zosterops lateralis",
+                 edit_notes = "CHANGE TO CLOSEST MATCH bc unresolved: BOW says: 
+                 In Australia, birds previously known as race gouldi, but chloronotus has priority and not preoccupied by 'chloronothos'."
+  )
+
+```
+
+CHANGE TO CLOSEST MATCH bc unclear: BOW: Mainland races tend to intergrade;intermediates between erythronotus and tricolor sometimes referred to as
+'nigriceps', a name better applied to a 'swarm of intergrades' in NC India Lanius schach erythronotus/tricolor Lanius schach erythronotus       0.914
+
+```{r}
+interaction_count_by_match(int.raw,'erythronotus')
+interaction_count_by_species(int.raw, "Lanius schach erythronotus/tricolor")
 ```
 
 ```{r}
-# COPIED
-# int.raw[which(int.raw$species1_scientific == "Cuculus canorus telephonus"), ]
-# int.raw[which(int.raw$species2_scientific == "Cuculus canorus telephonus"), ]
-# fixed_names1[which(fixed_names1$genus_species.edit == "Cuculus canorus telephonus"), ]
-# fixed_names1$genus_species[fixed_names1$genus_species.edit == "Cuculus canorus telephonus"] <- "Cuculus canorus telephonus"
+int.raw.names <- int.raw.names %>% 
+  add_name_edits(scientific_name.raw = "Lanius schach erythronotus/tricolor",
+                 scientific_name.edit = "Lanius schach erythronotus",
+                 edit_notes = "CHANGE TO CLOSEST MATCH bc unclear: BOW: Mainland races tend to intergrade;intermediates between erythronotus and tricolor sometimes referred to as 'nigriceps', a name better applied to a 'swarm of intergrades' in NC India Lanius schach erythronotus/tricolor Lanius schach erythronotus 0.914"
+  )
 
-# COPIED
-# CHANGE TO CLOSEST MATCH: BOW says No subspecies, following Eaton (1957a) and Molina et
-# al. (2000). Hence, P. n. notabilis (Ridgway, 1880), P. n. limnaeus (McCabe and
-# Miller, 1933), and P. n. uliginosus (Burleigh and Peters, 1948) are junior
-# synonyms of P. noveboracensis (Gmelin, 1788).
-# 3 Parkesia noveboracensis limnaeus Parkesia noveboracensis             0.906
-int.raw[which(int.raw$species1_scientific == "Parkesia noveboracensis limnaeus"), ]
-int.raw[which(int.raw$species2_scientific == "Parkesia noveboracensis limnaeus"), ]
 ```
 
-### COPIED
 
-CHANGE TO CLOSEST MATCH bc unresolved: BOW says: In Australia, birds in W
-previously known as race gouldi, but chloronotus has priority and not
-preoccupied by “chloronothos”.
-
-4 Zosterops lateralis gouldi          Zosterops lateralis              0.910
-```{r}
-# COPIED
-# int.raw[which(int.raw$species1_scientific == "Zosterops lateralis gouldi"), ]
-# int.raw[which(int.raw$species2_scientific == "Zosterops lateralis gouldi"), ]
-```
-
-### COPIED
-
-CHANGE TO CLOSEST MATCH bc unclear: BOW: Mainland races tend to intergrade;
-intermediates between erythronotus and tricolor sometimes referred to as
-“nigriceps”, a name better applied to a “swarm of intergrades” in NC India
-(3).
-5 Lanius schach erythronotus/tricolor Lanius schach erythronotus       0.914
+??? HOW WILL THIS MATCH BELOW IF NOT USING THE SAME FROM CHECKLIST
 
 ```{r}
-# COPIED
-# int.raw[which(int.raw$species1_scientific == "Lanius schach erythronotus/tricolor"), ]
-# int.raw[which(int.raw$species2_scientific == "Lanius schach erythronotus/tricolor"), ]
-
+int.raw.names <- int.raw.names %>% 
+  add_name_edits(scientific_name.raw = "Aphelocoma woodhouseii suttoni",
+                 scientific_name.edit = "Aphelocoma woodhouseii suttoni",
+                 edit_notes = "KEEP RAW for now because it is a subspecies: BOW: A. w. suttoni Phillips, 1965. "
+  )
 ```
 
-### COPIED 
-**but entered the subspecies changed even though it will be removed**
-
-KEEP ORIGINAL for now because it is a subspecies: BOW: A. w. suttoni Phillips, 1965.
+  
+KEEP RAW for now because it is a subspecies: BOW: A. w. suttoni Phillips, 1965.
 
 Includes A. w. mesolega Oberholser, 1974 (see Browning 1990). Breeds in
 foothills of Rocky Mountains from northern and eastern Utah (east of the Great
@@ -1151,25 +1376,13 @@ winter to lowlands south of the breeding range, such as the Colorado Desert
 1 Aphelocoma woodhouseii suttoni   Aphelocoma woodhouseii cyanotis       0.916
 ```
 
-```{r}
-# COPIED
-# int.raw[which(int.raw$species1_scientific == "Aphelocoma woodhouseii suttoni"), ]
-# int.raw[which(int.raw$species2_scientific == "Aphelocoma woodhouseii suttoni"), ]
-# fixed_names1[which(fixed_names1$genus_species.edit == "Aphelocoma woodhouseii suttoni"), ]
-# fixed_names1$genus_species[fixed_names1$genus_species.edit == "Aphelocoma woodhouseii suttoni"] <- "Aphelocoma woodhouseii suttoni"
-```
 
-### COPIED
 
-```{r}
-# COPIED BUT THIS IS FIXED DURING STITCHING
-# KEEP ORIGINAL and add period after sp
-# 4 Strigidae sp                     Strigidae                             0.917
-# int.raw[which(int.raw$species2_scientific == "Strigidae sp"), ]
-# fixed_names1[which(fixed_names1$genus_species.edit == "Strigidae sp"), ]
-# fixed_names1$genus_species[fixed_names1$genus_species.edit == "Strigidae sp"] <- "Strigidae sp."
-```
 
+
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ## Scientific Name Changes: Low Confidence Matches
 
@@ -1177,95 +1390,129 @@ winter to lowlands south of the breeding range, such as the Colorado Desert
 
 ```{r}
 # Extract final_matches with lower confidence (match_score <= 0.90) for further checking
-low_confidence_matches <- genus_species_matches %>%
+low_confidence_matches <- scientific_name_matches %>%
   filter(
-    (genus_species_match_score < 0.9 & !is.na(genus_species_match_score)) 
+    (scientific_name_match_score < 0.9 & !is.na(scientific_name_match_score)) 
   )
 
-length(unique(low_confidence_matches$genus_species.raw))
+length(unique(low_confidence_matches$scientific_name.raw))
 # 69 out of 326 - checks out OK; May 29, 2025: 65
 
-# Then check the Low Confidence Matches, based on genus_species:
+# Then check the Low Confidence Matches, based on scientific_name:
 # Define range for printing in increments of 0.005
-score_start <- min(low_confidence_matches$genus_species_match_score)
-score_end <- max(low_confidence_matches$genus_species_match_score)
+score_start <- min(low_confidence_matches$scientific_name_match_score)
+score_end <- max(low_confidence_matches$scientific_name_match_score)
 increment <- 0.005
 
 # Loop through each score range and print the matches within that range
 for (i in seq(score_start, score_end, by = increment)) {
   current_range <- low_confidence_matches %>%
-    filter(genus_species_match_score >= i & genus_species_match_score <= i + increment)
+    filter(scientific_name_match_score >= i & scientific_name_match_score <= i + increment)
   
   # Print the current range if it has any entries
   if (nrow(current_range) > 0) {
-    cat("\nMatch Score Range:", sprintf("%.2f", i), "to", sprintf("%.2f", i + increment), "\n")
-    print(current_range, n=60)
+    cat(paste("Match Score Range:", sprintf("%.2f", i), "to", sprintf("%.2f", i + increment), "\n" ))
+    print(select(current_range, scientific_name.raw, closest_scientific_name_match,scientific_name_match_score))
+    cat("\n")
   }
 }
 dim(low_confidence_matches)
 # 70; May 29, 2025: 66
 ```
+Examine low confidence matches
+
+```{r}
+low_confidence_matches <- scientific_name_matches %>% filter(
+    (scientific_name_match_score < 0.9 & !is.na(scientific_name_match_score)) 
+    ) %>% arrange(desc(scientific_name_match_score)) 
+
+low_confidence_matches %>% select(scientific_name.raw, closest_scientific_name_match,scientific_name_match_score)
+```
+
+
+Note:  Larus sp shows up in raw but L0 should append a dot
 
 ```{r}
 # For most of the names, assign them the closest match, then edit the few above
-# noted "KEEP ORIGINAL".
+# noted "KEEP RAW".
 fixed_names2<-low_confidence_matches
-# Test: Accipiter cooperi is misspelled - it is present here
-dplyr::filter(fixed_names2, genus_species.raw %in% c("Accipiter cooperi"))
+# Test: Accipiter cooperi is misspelled - it is present here?
+dplyr::filter(fixed_names2, scientific_name.raw %in% c("Accipiter cooperi"))
 # # A tibble: 1 × 6
-# genus_species.raw common_name.raw genus_species.edit common_name.edit closest_genus_species_match
+# scientific_name.raw common_name.raw scientific_name.edit common_name.edit closest_scientific_name_match
 # <chr>             <chr>           <chr>              <chr>            <chr>                      
 #   1 Accipiter cooperi Cooper's Hawk   Accipiter cooperi  Cooper's Hawk    Accipiter poliogaster      
-# genus_species_match_score
+# scientific_name_match_score
 # <dbl>
 #   1                     0.849
 
 ```
 
+Save these fixes in new df
+
 ```{r}
-# Assign genus_species and common_name to the closest_matches based on fuzzy
-# coding match. Dec. 11, 2024: only doing genus_species for now.
-names(fixed_names2)[names(fixed_names2) == "closest_genus_species_match"] <-"genus_species"
+# Assign scientific_name and common_name to the closest_matches based on fuzzy
+# coding match. Dec. 11, 2024: only doing scientific_name for now.
+names(fixed_names2)[names(fixed_names2) == "closest_scientific_name_match"] <-"scientific_name"
 fixed_names2$common_name.raw<-NULL
 fixed_names2 <- fixed_names2 %>% 
   distinct()
 
-length(unique(fixed_names2$genus_species.raw))
+length(unique(fixed_names2$scientific_name.raw))
 # 69 out of 326 OK; May 29, 2025: 65
+```
 
-# Scroll through these 69 Low Confidence Matches in order from highest to lowest
-# match score. Many look okay except check these:
+Scroll through these ~60 Low Confidence Matches in order from highest to lowest
+match score. Many look okay 
 
-# genus_species.raw                     genus_species           genus_species_match_score
+Assigning closest low-confidence match with update notes,
+and will be updated if necessary below
+
+```{r}
+# get the matches in the int.raw.names, which will then be in the same order 
+# order as the df with our matches
+rows_to_update <- match(low_confidence_matches$scientific_name.raw, int.raw.names$scientific_name.raw)
+int.raw.names.copy_pre_low_confidence <- int.raw.names
+int.raw.names[rows_to_update, ]$scientific_name.edit <- low_confidence_matches$closest_scientific_name_match
+int.raw.names[rows_to_update, ]$edit_notes <- paste("Replace w fuzzy match low confidence to checklist", low_confidence_matches$scientific_name_match_score)
+int.raw.names[rows_to_update,]
+
 ```
 
 
-*COPIED*
-ACCEPT CHANGE TO CLOSEST MATCH because BOW states "No subspecies, following Eaton
- (1957a) and Molina et al. (2000).". Common name in int.raw is Northern Waterthrush.
- 1 Parkesia noveboracensis notabilis Parkesia noveboracensis       0.899
 
 ```{r}
-# COPIED
-# int.raw[which(int.raw$species1_scientific == "Parkesia noveboracensis notabilis"), ]
-# int.raw[which(int.raw$species2_scientific == "Parkesia noveboracensis notabilis"), ]
+int.raw.names <- int.raw.names %>% 
+  add_name_edits(scientific_name.raw = "Parkesia noveboracensis notabilis",
+                 scientific_name.edit = "Parkesia noveboracensis",
+                 edit_notes = "ACCEPT CHANGE TO CLOSEST MATCH because BOW states 'No subspecies, following Eaton (1957a) and Molina et al. (2000).'. Common name in int.raw is Northern Waterthrush. 1 Parkesia noveboracensis notabilis Parkesia noveboracensis       0.899"
+  )
 
-```
-
-
-COPIED
-```{r}
-# KEEP ORIGINAL but edit it. This is "Rock Dove" which is also known as Rock
-# Pigeon. Should be Columba livia.
-# 3 Columbina livia              Columbina inca                      0.886
-# int.raw[which(int.raw$species1_scientific == "Columbina livia"), ]
-# int.raw[which(int.raw$species2_scientific == "Columbina livia"), ]
-# fixed_names2[which(fixed_names2$genus_species.edit == "Columbina livia"), ]
-# fixed_names2$genus_species[fixed_names2$genus_species.edit == "Columbina livia"] <- "Columba livia"
 ```
 
 
 ```{r}
+
+int.raw.names <- int.raw.names %>% 
+  add_name_edits(scientific_name.raw = "Columbina livia",
+                 scientific_name.edit = "Columba livia",
+                 edit_notes = "KEEP RAW but edit it. This is 'Rock Dove' which is also known as Rock Pigeon. Should be Columba livia Columbina livia Columbina inca 0.886"
+  )
+
+```
+
+
+```{r}
+
+
+??? TBD 
+# int.raw.names <- add_name_edits(int.raw.names, scientific_name.raw = "Setophaga striata / tigrina",
+#                  scientific_name.edit = "",
+#                  edit_notes = ""
+#   )
+
+
+
 # ACCEPT CHANGE TO CLOSEST MATCH: BOW states no subspecies: "No subspecies, following
 # Parkes (1954), who could not diagnose a difference between northeastern
 # breeders and those farther west, which were named S. s. lurida (Burleigh and
@@ -1275,363 +1522,411 @@ int.raw[which(int.raw$species1_scientific == "Setophaga striata / tigrina"), ]
 int.raw[which(int.raw$species2_scientific == "Setophaga striata / tigrina"), ]
 ```
 
+American Pipit - this is no longer in the raw data
 ```{r}
-# COPIED
 
-# KEEP ORIGINAL but edit it. BOW and checklist: Polytypic American Pipit Anthus
-# rubescens is split into monotypic Siberian Pipit Anthus japonicus and
-# polytypic American Pipit Anthus rubescens (with subspecies pacificus,
-# rubescens, and alticola). int.raw interaction appears to be for North american
-# species and observation (Parasitic Jaeger). Interaction is with "American
-# Pipit"; checklist states "Anthus rubescens". 
-# Anthus americanus     Anthus cervinus  0.871
+interaction_count_by_match(int.raw, "Anthus americanus")
 
-# int.raw[which(int.raw$species1_scientific == "Anthus americanus"), ]
-# int.raw[which(int.raw$species2_scientific == "Anthus americanus"), ]
-# fixed_names2[which(fixed_names2$genus_species.edit == "Anthus americanus"), ]
-# checklist[which(checklist$common_name == "American Pipit"), ]
-# fixed_names2$genus_species[fixed_names2$genus_species.edit == "Anthus americanus"] <- "Anthus rubescens"
+checklist[which(checklist$common_name == "American Pipit"), ]
+
+int.raw.names <- int.raw.names %>% 
+  add_name_edits(scientific_name.raw = "Anthus americanus",
+                 scientific_name.edit = "Anthus rubescens",
+                 edit_notes = "KEEP RAW but edit it. BOW and checklist: Polytypic American Pipit Anthus rubescens is split into monotypic Siberian Pipit Anthus japonicus and polytypic American Pipit Anthus rubescens (with subspecies pacificus, rubescens, and alticola). int.raw interaction appears to be for North american species and observation (Parasitic Jaeger). Interaction is with 'American Pipit'; checklist states 'Anthus rubescens' 
+Anthus americanus     Anthus cervinus  0.871"
+  )
+
+
+# fixed_names2$scientific_name[fixed_names2$scientific_name.edit == "Anthus americanus"] <- "Anthus rubescens"
 ```
 
 
 ```{r}
-# COPIED
 
-# KEEP ORIGINAL and edit: checklist: Lesser Scaup =	Aythya affinis
-# 5 Anas affinis   Argya affinis       Lesser Scaup  Lesser Scaup   0.868
-# int.raw[which(int.raw$species1_scientific == "Anas affinis"), ]
-# int.raw[which(int.raw$species2_scientific == "Anas affinis"), ]
-# fixed_names2[which(fixed_names2$genus_species.edit == "Anas affinis"), ]
-# checklist[which(checklist$common_name == "Lesser Scaup"), ]
-# fixed_names2$genus_species[fixed_names2$genus_species.edit == "Anas affinis"] <- "Aythya affinis"
+int.raw.names <- int.raw.names %>% 
+  add_name_edits(scientific_name.raw = "Anas affinis",
+                 scientific_name.edit = "Aythya affinis",
+                 edit_notes = "KEEP RAW and edit: checklist: Lesser Scaup =	Aythya affinis Anas affinis   Argya affinis       Lesser Scaup  Lesser Scaup   0.868"
+  )
+
+# fixed_names2$scientific_name[fixed_names2$scientific_name.edit == "Anas affinis"] <- "Aythya affinis"
 
 ```
 
 
 ```{r}
-# COPIED
 
-# KEEP ORIGINAL and edit: Common name in int.raw is Hairy Woodpecker, so genus is off. 
-# Dryobates villosus
-# 3 Leucophaeus villosus                   Leucophaeus modestus          0.867
-# int.raw[which(int.raw$species1_scientific == "Leucophaeus villosus"), ]
-# int.raw[which(int.raw$species2_scientific == "Leucophaeus villosus"), ]
-# fixed_names2[which(fixed_names2$genus_species.edit == "Leucophaeus villosus"), ]
-# fixed_names2$genus_species[fixed_names2$genus_species.edit == "Leucophaeus villosus"] <- "Dryobates villosus"
+int.raw.names <- int.raw.names %>% 
+  add_name_edits(scientific_name.raw = "Leucophaeus villosus",
+                 scientific_name.edit = "Dryobates villosus",
+                 edit_notes = "KEEP RAW and edit: Common name in int.raw is Hairy Woodpecker, so genus is off. Dryobates villosus Leucophaeus villosus                   Leucophaeus modestus 0.867"
+  )
+
+# fixed_names2$scientific_name[fixed_names2$scientific_name.edit == "Leucophaeus villosus"] <- "Dryobates villosus"
+
 ```
 
 
+Chrysococcyx meyerii: White-Eared Bronze-Cuckoo
 ```{r}
 # COPIED but not sure what to put for reason
-
-# KEEP ORIGINAL and edit: checklist: White-Eared Bronze-Cuckoo = Chalcites meyerii
-# 1 Chrysococcyx meyerii   Chrysococcyx sp.  White-Eared Bronze-Cuckoo  White-eared Bronze-Cuckoo     0.867
-# int.raw[which(int.raw$species1_scientific == "Chrysococcyx meyerii"), ]
-# int.raw[which(int.raw$species2_scientific == "Chrysococcyx meyerii"), ]
-# fixed_names2[which(fixed_names2$genus_species.edit == "Chrysococcyx meyerii"), ]
-# checklist[which(checklist$common_name == "White-Eared Bronze-Cuckoo"), ]
-# fixed_names2$genus_species[fixed_names2$genus_species.edit == "Chrysococcyx meyerii"] <- "Chalcites meyerii"
-
-# KEEP ORIGINAL and edit: checklist: Double-Crested Cormorant = Nannopterum auritum 
-# 4 Phalacrocorax saltatrix Phalacrocorax capillatus  Double-Crested Cormorant Double-crested Cormorant  0.859
-```
-
-this is fixed during stitching, not copied
-```{r}
-
-# KEEP ORIGINAL and edit: Phalacrocorax sp. instead of spp. Also raw version has
-# spaces after: "Phalacrocorax spp. "
-#2 Phalacrocorax spp.  Phalacrocorax varius    0.861
-# int.raw[which(int.raw$species1_scientific == "Phalacrocorax spp."), ]
-# int.raw[which(int.raw$species2_scientific == "Phalacrocorax spp."), ]
-# fixed_names2[which(fixed_names2$genus_species.edit == "Phalacrocorax spp."), ]
-# fixed_names2$genus_species[fixed_names2$genus_species.edit == "Phalacrocorax spp."] <- "Phalacrocorax sp."
-
-
+checklist[which(checklist$common_name == "White-Eared Bronze-Cuckoo"), ]
+int.raw.names <- int.raw.names %>% 
+  add_name_edits(scientific_name.raw = "Chrysococcyx meyerii",
+                 scientific_name.edit = "Chalcites meyerii",
+                 edit_notes = "KEEP RAW and edit: checklist: White-Eared Bronze-Cuckoo = Chalcites meyerii"
+  )
+ 
+# fixed_names2$scientific_name[fixed_names2$scientific_name.edit == "Chrysococcyx meyerii"] <- "Chalcites meyerii"
 ```
 
 
 
-ACCEPT CHANGE TO CLOSEST MATCH: checklist: 	Black-Necked Stilt = Himantopus mexicanus 
-6 Himantopus alexandrus   Himantopus mexicanus   Black-Necked Stilt  Black-necked Stilt 0.857
+
+
+Double-Crested Cormorant: checklist species change
+
+but can't find Phalacrocorax saltatrix anywhere in the raw data
+and checklist has "Nannopterum auritum" 
+ALSO check that the same species sometimes has common name 
+
+Was the genus updated?
 
 ```{r}
-int.raw[which(int.raw$species1_scientific == "Himantopus alexandrus"), ]
-int.raw[which(int.raw$species2_scientific == "Himantopus alexandrus"), ]
+print(interaction_count_by_species(int.raw, 'Phalacrocorax saltatrix'))
+# zero! this must have been corrected??
+
+print(int.raw.names %>% filter(scientific_name.raw ==  "Phalacrocorax saltatrix"))
+checklist_common_name ="Double-crested Cormorant"
+checklist[which(checklist$common_name == checklist_common_name), ]
+checklist_species <- checklist[which(checklist$common_name == "Double-crested Cormorant"), ]$scientific_name[1]
+print(checklist_species)
+```
+
+??? PLZ 
+
+Previous version:
+Raw was "Phalacrocorax saltatrix", Double-Crested Cormorant which is now
+Nannopterum auritum in checklist
+
+*this may have been misspelled or corrected in raw data, but the raw name
+typed here is not in the raw data BUT Double-Crested Cormorant is in the data
+as Phalacrocorax auritus*
+
+Phalacrocorax auritus / Double-Crested Cormorant now Nannopterum auritum
+
+```{r}
+# this fails becuase zero rows
+int.raw.names <- int.raw.names %>% 
+  add_name_edits(scientific_name.raw = "Phalacrocorax auritus",
+                 scientific_name.edit = "Nannopterum auritum",
+                 edit_notes = "KEEP RAW and edit: checklist: Double-Crested Cormorant = Nannopterum auritum Phalacrocorax saltatrix")
+
+```
+
+
+Add a note for "Black-necked Stilt" - keeping the scientific name as it is
+
+
+```{r}
+print('checklist')
+
 checklist[which(checklist$common_name == "Black-necked Stilt"), ]
+print('interaction count')
+print(interaction_count_by_species(int.raw,"Himantopus alexandrus"))
+
+int.raw.names <- add_name_edits(int.raw.names, 
+scientific_name.raw = "Himantopus alexandrus",
+edit_notes = "ACCEPT CHANGE TO CLOSEST MATCH: checklist: 	Black-Necked Stilt = Himantopus mexicanus 6 Himantopus alexandrus   Himantopus mexicanus   Black-Necked Stilt  Black-necked Stilt 0.857"
+)
+
+```
+
+Pomarine Jaeger = Stercorarius pomarinus 
+
+```{r}
+
+interaction_count_by_species(int.raw,"Stercorarius stercorarius")
+checklist[which(checklist$common_name == "Pomarine Jaeger"), ]
+
+int.raw.names <- int.raw.names %>% 
+  add_name_edits(scientific_name.raw = "Stercorarius stercorarius",
+                 scientific_name.edit = "Stercorarius pomarinus",
+                 edit_notes = "KEEP RAW but edit: checklist: Pomarine Jaeger = Stercorarius pomarinus Also raw has space at end 5 Stercorarius stercorarius Stercorarius parasiticus    Pomarine Jaeger     Pomarine Jaeger  0.857
+"
+
+)
 
 ```
 
 
 
-
-**COPIED**
-
-KEEP ORIGINAL but edit: checklist: Pomarine Jaeger = Stercorarius pomarinus
-Also raw has space at end "Stercorarius stercorarius "
-5 Stercorarius stercorarius Stercorarius parasiticus    Pomarine Jaeger     Pomarine Jaeger  0.857
+White Wagtail
 
 ```{r}
-# int.raw[which(int.raw$species1_scientific == "Stercorarius stercorarius"), ]
-# int.raw[which(int.raw$species2_scientific == "Stercorarius stercorarius"), ]
-# checklist[which(checklist$common_name == "Pomarine Jaeger"), ]
-# fixed_names2[which(fixed_names2$genus_species.edit == "Stercorarius stercorarius"),]
-# fixed_names2$genus_species[fixed_names2$genus_species.edit == "Stercorarius stercorarius"] <- "Stercorarius pomarinus"
+
+int.raw.names <- add_name_edits( int.raw.names, 
+        scientific_name.raw = "Moticilla alba",
+        scientific_name.edit = "Motacilla citreola",
+        edit_notes = "KEEP RAW, Common name in int.raw is the White Wagtail. Moticilla alba            Motacilla citreola             0.858"
+  )
+
+```
+
+*"Speckled Teal"*
+```{r}
+int.raw[int.raw$species1_scientific == "Anas flavirostris / Anas andium", ]
+
+```
+if zero rows, not in the db - keep?  
+
+```{r}
+
+int.raw.names <- add_name_edits( int.raw.names, 
+     scientific_name.raw = "Anas flavirostris / Anas andium",
+     scientific_name.edit = "Anas andium/flavirostris",
+     edit_notes = "KEEP RAW and edit: According to BOW there is no Anas flavirostris / anas andium. Common name in int.raw is Speckled Teal but checklist is Andean/Yellow-billed Teal."
+  )
+
 ```
 
 
-typo in the code??
-
-COPIED BUT FIXED TO WHAT IT SHOULD HAVE BEEN 
-
 ```{r}
-# KEEP ORIGINAL, Common name in int.raw is the White Wagtail. 
-# 1 Moticilla alba            Motacilla citreola             0.858
-# int.raw[which(int.raw$species1_scientific == "Moticilla alba"), ]
-# int.raw[which(int.raw$species2_scientific == "Moticilla alba"), ]
-# fixed_names2[which(fixed_names2$genus_species.edit == "Moticilla alba"), ]
-# fixed_names2$genus_species[fixed_names2$genus_species.edit == "Moticilla alba"] <- "Moticilla alba"
+
+int.raw.names <- 
+  add_name_edits(int.raw.names, 
+                 scientific_name.raw =  "Hirundo mexicanus",
+                 scientific_name.edit = "Haemorhous mexicanus",
+                 edit_notes = "KEEP RAW and edit. Common name in int.raw is House Finch (Haemorhous mexicanus)."
+    ) 
+
 ```
 
-
- COPIED
+#### Hawks
 
 ```{r}
-# KEEP ORIGINAL and edit: According to BOW there is no Anas flavirostris / anas
-# andium. Common name in int.raw is Speckled Teal but checklist is Andean/Yellow-billed Teal. 
-# 3 Anas flavirostris / anas andium Anas flavirostris           0.849
-int.raw[which(int.raw$species1_scientific == "Anas flavirostris / Anas andium"), ]
-int.raw[which(int.raw$species2_scientific == "Anas flavirostris / Anas andium"), ]
-fixed_names2[which(fixed_names2$genus_species.raw == "Anas flavirostris / Anas andium"), ]
-fixed_names2$genus_species[fixed_names2$genus_species.edit == "Anas flavirostris / anas andium"] <- "Anas andium/flavirostris"
+  int.raw.names <- int.raw.names %>%
+  add_name_edits( scientific_name.raw = "Accipiter cooperi",
+                  edit_notes = "KEEP RAW and edit. Checklist shows genus moved to Astur. Also species is cooperii.",
+                 scientific_name.edit = "Astur cooperii"
+  ) %>%
+  add_name_edits(scientific_name.raw = "Accipiter sp.",
+                 scientific_name.edit = "Aerospiza/Tachyspiza/Accipiter/Astur sp.",
+                 edit_notes = "Hawk changes "
+  ) 
+
+```
+
+Accipiter atricapillus IF American Goshawk, then we can change it.  
+
+All goshawk rows: 
+```{r}
+filter(int.raw.names, scientific_name.raw ==  "Accipiter atricapillus")
+```
+
+yes - no European Goshawk in our names 
+
+```{r}
+  int.raw.names<- add_name_edits(int.raw.names, 
+                 scientific_name.raw = "Accipiter atricapillus", #  Note: need to ensure that is not European Goshawk.  
+                 scientific_name.edit = "Astur atricapillus",
+                 edit_notes = "Listed as American Goshawk; KEEP RAW and edit to Astur"
+  )
+
+```
+
+Argya affinis somervillei : rows in names?
+
+```{r}
+intxns_by_species(int.raw,"Argya affinis somervillei")
+```
+
+```{r}
+int.raw.names <- int.raw.names %>% 
+  add_name_edits(scientific_name.raw = "Argya affinis somervillei",
+                 scientific_name.edit = "Argya striata somervillei",
+                 edit_notes = "KEEP RAW and edit: BOW and checklist: 'Black-winged Babbler' is most likely Jungle Babbler (Black-winged) Argya striata somervillei match  Argya affinis somervillei  Argya affinis  0.84  "
+  )
+
 # Common name will be changed later
-#fixed_names2$common_name[fixed_names2$common_name.orig == "Speckled Teal"] <- "Andean/Yellow-billed Teal"
 
 ```
 
 ```{r}
-##COPIED
 
-# KEEP ORIGINAL and edit. Common name in int.raw is House Finch (Haemorhous mexicanus).
-# 2 Hirundo mexicanus               Todus mexicanus             0.851
-int.raw[which(int.raw$species1_scientific == "Hirundo mexicanus"), ]
-int.raw[which(int.raw$species2_scientific == "Hirundo mexicanus"), ]
-fixed_names2[which(fixed_names2$genus_species.edit == "Hirundo mexicanus"), ]
-fixed_names2$genus_species[fixed_names2$genus_species.edit == "Hirundo mexicanus"] <- "Haemorhous mexicanus"
-```
+int.raw.names <- int.raw.names %>% 
+  add_name_edits(scientific_name.raw = "Accipiter getilis",
+                 scientific_name.edit = "Astur atricapillus",
+                 edit_notes = "KEEP RAW and edit. Checklist shows genus moved to Astur atricapillus.  Accipiter getilis Accipiter poliogaster       0.839"
+  )
 
-```{r}
-# COPIED
 
-# KEEP ORIGINAL and edit. Checklist shows genus moved to Astur. Also species is cooperii.
-# 1 Accipiter cooperi               Accipiter poliogaster       0.849
-fixed_names2[which(fixed_names2$genus_species.edit == "Accipiter cooperi"), ]
-fixed_names2$genus_species[fixed_names2$genus_species.edit == "Accipiter cooperi"] <- "Astur cooperii"
-```
-
-```{r}
-#COPIED
-# 3 Accipiter spp.            Accipiter nisus                   0.840
-fixed_names2[which(fixed_names2$genus_species.edit == "Accipiter spp."), ]
-fixed_names2$genus_species[fixed_names2$genus_species.edit == "Accipiter spp."] <- 
-  "Aerospiza/Tachyspiza/Accipiter/Astur sp."
+# fixed_names2$scientific_name[fixed_names2$scientific_name.edit == "Accipiter getilis"] <- "Astur atricapillus"
 
 ```
-
-Note: need to ensure that not European Goshawk.  
 
 
 ```{r}
-# COPIED
-# Listed as American Goshawk; KEEP ORIGINAL and edit to Astur
-# 2 Accipiter atricapillus    Astur cooperii/atricapillus       0.839
-fixed_names2[which(fixed_names2$genus_species.edit == "Accipiter atricapillus"), ] 
-fixed_names2$genus_species[fixed_names2$genus_species.edit == "Accipiter atricapillus"] <- "Astur atricapillus"
+
+int.raw.names <- int.raw.names %>% 
+  add_name_edits(scientific_name.raw = "Thyrothorus rufalbus",
+                 scientific_name.edit = "Thryophilus rufalbus",
+                 edit_notes = "CHANGE TO CLOSEST MATCH: original common name: Rufous-and-white Wren; checklist confirms the suggested scientific_name change. Thyrothorus rufalbus Thryophilus rufalbus       0.831 "
+  )
+
+
+
 ```
 
 ```{r}
-# KEEP ORIGINAL and edit: BOW and checklist: "Black-winged Babbler" is most likely Jungle
-# Babbler (Black-winged) Argya striata somervillei 
-# 1 Argya affinis somervillei  Argya affinis                     0.84
-int.raw[which(int.raw$species1_scientific == "Argya affinis somervillei"), ]
-int.raw[which(int.raw$species2_scientific == "Argya affinis somervillei"), ]
-fixed_names2[which(fixed_names2$genus_species.edit == "Argya affinis somervillei"), ]
-fixed_names2$genus_species[fixed_names2$genus_species.edit == "Argya affinis somervillei"] <- "Argya striata somervillei"
-# Common name will be changed later
-#fixed_names2$common_name[fixed_names2$common_name.orig == "Black-winged Babbler"] <- "Jungle Babbler (Black-winged)"
+int.raw.names <- add_name_edits(int.raw.names,
+                                scientific_name.raw ="Chrysococcyx meyerii",
+                                scientific_name.edit = "Chalcites meyerii",
+                                edit_notes = 'Common name in int.raw = White-eared Bronze-Cuckoo. Checklist states: Move from Chrysococcyx into Chalcites to become Chalcites meyerii.'
+)
+ 
 ```
+
+
+???
+##### PLZ start here ##### 
+
+
+### FIX LIST Edits to apply to int.raw.names
+
+Two ways to add an edit/adjustment to the list:
+
+1. call the `add_name_edits` function with arguments including the data frame
+   used to collect these edits (`int.raw.names`, see above)
+
+2. add to this list below with the arguments in the following order, which are 
+   added one by one calling that `add_name_edits` function
+  
+   - original scientific_name (raw) as appears in interaction file, 
+   - editing notes, dispensation or why an edit is needed or d, 
+   - (optional) scientific_name.edit IF the name is changed
+   - (optional) common_name.edit if the name was changed 
+
 
 ```{r}
-# KEEP ORIGINAL and edit. Checklist shows genus moved to Astur atricapillus. 
-# 1 Accipiter getilis Accipiter poliogaster       0.839
-int.raw[which(int.raw$species1_scientific == "Accipiter getilis"), ]
-int.raw[which(int.raw$species2_scientific == "Accipiter getilis"), ]
-fixed_names2[which(fixed_names2$genus_species.edit == "Accipiter getilis"), ]
-fixed_names2$genus_species[fixed_names2$genus_species.edit == "Accipiter getilis"] <- "Astur atricapillus"
-# Check it: OK
-fixed_names2[which(fixed_names2$genus_species.raw == "Accipiter getilis"),]
+
+# this list is typed in this way to enable easy cutting/pasting from original 
+# code and for future readability, must be in order raw, notes, optional sciname edit, optional common name edit
+raw_names_edits <-list(c(
+"Chrysococcyx meyerii",
+"Common name in int.raw = White-eared Bronze-Cuckoo. Checklist states: Move from Chrysococcyx into Chalcites to become Chalcites meyerii.",
+"Chalcites meyerii"
+),c(
+"Accipter atricapillus",
+"KEEP RAW and edit. This is the Eurasian Goshawk based on the location of the interaction (Svalbard): was Accipter atricapillus and is now Astur gentilis",
+"Astur gentilis"
+), c(
+"Panyptila saxatilis",
+"",
+"Aeronautes saxatalis"
+),c(
+"Hirundo pyrrhonta",
+"KEEP RAW and edit: int.raw common name is Cliff Swallow, Checklist and BOW: changed to Petrochelidon pyrrhonota.",
+"Petrochelidon pyrrhonota"
+),c(
+"Pyrrhuloxia sinuata",
+"KEEP RAW and edit: Pyrrhuloxia BOW and checklist is Cardinalis sinuatus",
+"Cardinalis sinuatus"
+),c(
+"Dendroica petechia (erithachordies)",
+"KEEP RAW and edit: Yellow Warbler (Mangrove) BOW and checklist: Setophaga petechia [erithachorides Group]",
+"Setophaga petechia [erithachorides Group]"
+),c(
+"Dendroica pinus",
+"KEEP RAW and edit: Pine Warbler BOW and checklist: Setophaga pinus",
+"Setophaga pinus"
+),c(
+"Accipiter cirrhocephalus",
+"KEEP RAW and edit: Collared Sparrowhawk BOW and checklist: Genus changed to Tachyspiza cirrocephala",
+"Tachyspiza cirrocephala"
+),c(
+"Lophortyx californicus",
+"KEEP RAW and edit: California Quail BOW and checklist: California Quail; Genus changed to Callipepla californica",
+"Callipepla californica"
+),c(
+"Oceanodroma leucorrhoa",
+"KEEP RAW and edit; checklist: Leach's Storm-Petrel = Hydrobates leucorhous Oceanodroma leucorrhoa Paraclaravis mondetoura ochoterena Leach's Storm-Petrel Leach's Storm-Petrel ",
+"Hydrobates leucorhous"
+),c(
+"Duck sp",
+"KEEP RAW and edit; Duck sp. = Anatidae sp. (missing period in sp.",
+"Anatidae sp."
+),c(
+ "Duck sp.",
+"KEEP RAW and edit; Duck sp. = Anatidae sp.",
+"Anatidae sp."
+),c(
+"Roseate spoonbill",
+"KEEP RAW and edit int.raw; this entry has multiple columns off for scientific and common BOW and checklist: scientific_name of Roseate Spoonbill = Platalea ajaja",
+"Platalea ajaja"
+)
+ 
+# end of list of edits
+)
 ```
 
-??? it isn't changed here, should it be?
 
 ```{r}
-# CHANGE TO CLOSEST MATCH: original common name: Rufous-and-white Wren;
-# checklist confirms the suggested genus_species change.
-# 2 Thyrothorus rufalbus Thryophilus rufalbus       0.831 
-int.raw[which(int.raw$species1_scientific == "Thyrothorus rufalbus"), ]
-int.raw[which(int.raw$species2_scientific == "Thyrothorus rufalbus"), ]
+# add the list above
+int.raw.names <- add_edits_to_list(int.raw.names, raw_names_edits)
 
 ```
 
+
+### TYPOS 
+
+Previous Code (may be deleted?)
+
+
 ```
-# KEEP ORIGINAL and edit. Common name in int.raw = White-eared Bronze-Cuckoo.
-# Checklist states: Move from Chrysococcyx into Chalcites to become Chalcites
-# meyerii.
-# 1 Chrysococcyx meyerii Chrysococcyx caprius       0.833
-int.raw[which(int.raw$species1_scientific == "Chrysococcyx meyerii"), ]
-int.raw[which(int.raw$species2_scientific == "Chrysococcyx meyerii"), ]
-fixed_names2[which(fixed_names2$genus_species.edit == "Chrysococcyx meyerii"), ]
-fixed_names2$genus_species[fixed_names2$genus_species.edit == "Chrysococcyx meyerii"] <- "Chalcites meyerii"
-
-# KEEP ORIGINAL and edit to remove p in spp. Also has extra space in raw "Molothrus spp. "
-# 2 Molothrus spp.   Myioborus sp.          0.828
-fixed_names2[which(fixed_names2$genus_species.raw == "Molothrus spp."),]
-fixed_names2[which(fixed_names2$genus_species.edit == "Molothrus spp."),]
-fixed_names2$genus_species[fixed_names2$genus_species.edit == "Molothrus spp."] <- "Molothrus sp."
-
-# KEEP ORIGINAL and edit. This is the Eurasian Goshawk based on the location of
-# the interaction (Svalbard): was Accipter atricapillus and is now Astur gentilis
-# 1 Accipter atricapillus Accipiter striatus       0.821
-int.raw[which(int.raw$species2_scientific == "Accipter atricapillus"), ]
-fixed_names2[which(fixed_names2$genus_species.edit == "Accipter atricapillus"), ]
-fixed_names2$genus_species[fixed_names2$genus_species.edit == "Accipter atricapillus"] <- "Astur gentilis"
-
-# KEEP ORIGINAL and edit: int.raw shows common name is White-throated Swifts.
-# checklist and BOW: Aeronautes saxatalis and this species has interactions
-# documented in int.raw with Violet-green swallows (competition).
-# 3 Panyptila saxatilis  Pachyptila salvini       0.814
-int.raw[which(int.raw$species2_scientific == "Panyptila saxatilis"), ]
-fixed_names2[which(fixed_names2$genus_species.edit == "Panyptila saxatilis"), ]
-fixed_names2$genus_species[fixed_names2$genus_species.edit == "Panyptila saxatilis"] <- "Aeronautes saxatalis"
-
-# CHANGE TO CLOSEST MATCH: int.raw common name = Eurasian Magpie; 
-# BOW states it is in revision so assign to main species for now.
-# 1 Pica pica anderssoni Pica pica                0.817
-int.raw[which(int.raw$species2_scientific == "Pica pica anderssoni"), ]
-int.raw[which(int.raw$species1_scientific == "Pica pica anderssoni"), ]
-
-# KEEP ORIGINGAL and edit: int.raw common name is Cliff Swallow, Checklist and
-# BOW: changed to Petrochelidon pyrrhonota.
-# 2 Hirundo pyrrhonta    Hirundo nigrorufa        0.817
-int.raw[which(int.raw$species2_scientific == "Hirundo pyrrhonta"), ]
-int.raw[which(int.raw$species1_scientific == "Hirundo pyrrhonta"), ]
-fixed_names2[which(fixed_names2$genus_species.edit == "Hirundo pyrrhonta"), ]
-fixed_names2$genus_species[fixed_names2$genus_species.edit == "Hirundo pyrrhonta"] <- "Petrochelidon pyrrhonota"
-
-# KEEP ORIGINAL and edit: remove p from spp. Also extra space in raw "Aechmophorus spp. "
-#2 Aechmophorus spp.  Aechmophorus clarkii        Unid. Grebe          Junin Grebe        
-fixed_names2[which(fixed_names2$genus_species.raw == "Aechmophorus spp."),]
-fixed_names2[which(fixed_names2$genus_species.edit == "Aechmophorus spp."),]
-fixed_names2$genus_species[fixed_names2$genus_species.edit == "Aechmophorus spp."] <- "Aechmophorus sp."
-
-# KEEP ORIGINAL and edit: Pyrrhuloxia
-# BOW and checklist is Cardinalis sinuatus
-# int.raw Common name = Pyrrhuloxia
-#2 Pyrrhuloxia sinuata                 Pyrrhula owstoni                        0.799
-int.raw[which(int.raw$species1_scientific == "Pyrrhuloxia sinuata"), ]
-int.raw[which(int.raw$species2_scientific == "Pyrrhuloxia sinuata"), ]
-fixed_names2[which(fixed_names2$genus_species.edit == "Pyrrhuloxia sinuata"), ]
-fixed_names2$genus_species[fixed_names2$genus_species.edit == "Pyrrhuloxia sinuata"] <- "Cardinalis sinuatus"
-
-# KEEP ORIGINAL and edit: Yellow Warbler (Mangrove) 
-# BOW and checklist: Setophaga petechia [erithachorides Group]
-#3 Dendroica petechia (erithachordies) Setophaga petechia erithachorides       0.801
-int.raw[which(int.raw$species1_scientific == "Dendroica petechia (erithachordies)"), ]
-int.raw[which(int.raw$species2_scientific == "Dendroica petechia (erithachordies)"), ]
-fixed_names2[which(fixed_names2$genus_species.edit == "Dendroica petechia (erithachordies)"), ]
-fixed_names2$genus_species[fixed_names2$genus_species.edit == "Dendroica petechia (erithachordies)"] <- "Setophaga petechia [erithachorides Group]"
-
-# KEEP ORIGINAL and edit: Pine Warbler
-# BOW and checklist: Setophaga pinus
-# 4 Dendroica pinus                     Dendrocincla sp.                        0.803 
-int.raw[which(int.raw$species1_scientific == "Dendroica pinus"), ]
-int.raw[which(int.raw$species2_scientific == "Dendroica pinus"), ]
-fixed_names2[which(fixed_names2$genus_species.edit == "Dendroica pinus"), ]
-fixed_names2$genus_species[fixed_names2$genus_species.edit == "Dendroica pinus"] <- "Setophaga pinus"
-
-# KEEP ORIGINAL and edit: Collared Sparrowhawk
-# BOW and checklist: Genus changed to Tachyspiza cirrocephala
-# 1 Accipiter cirrhocephalus Accipiter striatus       0.797
-int.raw[which(int.raw$species1_scientific == "Accipiter cirrhocephalus"), ]
-int.raw[which(int.raw$species2_scientific == "Accipiter cirrhocephalus"), ]
-fixed_names2[which(fixed_names2$genus_species.edit == "Accipiter cirrhocephalus"), ]
-checklist[which(checklist$common_name == "Collared Sparrowhawk"), ]
-fixed_names2$genus_species[fixed_names2$genus_species.edit == "Accipiter cirrhocephalus"] <- "Tachyspiza cirrocephala"
-
-# KEEP ORIGINAL and edit: California Quail
-# BOW and checklist: California Quail; Genus changed to Callipepla californica
-# 1 Lophortyx californicus Lophornis ornatus       0.788
-int.raw[which(int.raw$species1_scientific == "Lophortyx californicus"), ]
-int.raw[which(int.raw$species2_scientific == "Lophortyx californicus"), ]
-fixed_names2[which(fixed_names2$genus_species.edit == "Lophortyx californicus"), ]
-checklist[which(checklist$common_name == "California Quail"), ]
-fixed_names2$genus_species[fixed_names2$genus_species.edit == "Lophortyx californicus"] <- "Callipepla californica"
-
-# KEEP ORIGINAL and edit; checklist: Leach's Storm-Petrel = Hydrobates leucorhous
-#3 Oceanodroma leucorrhoa Paraclaravis mondetoura ochoterena Leach's Storm-Petrel Leach's Storm-Petrel 
-int.raw[which(int.raw$species1_scientific == "Oceanodroma leucorrhoa"), ]
-int.raw[which(int.raw$species2_scientific == "Oceanodroma leucorrhoa"), ]
-fixed_names2[which(fixed_names2$genus_species.edit == "Oceanodroma leucorrhoa"), ]
-checklist[which(checklist$common_name == "Leach's Storm-Petrel"), ]
-fixed_names2$genus_species[fixed_names2$genus_species.edit == "Oceanodroma leucorrhoa"] <- "Hydrobates leucorhous"
-
-# # KEEP ORIGINAL and edit; Duck sp. = Anatidae sp. 
-# 2 Duck sp 0.737 Anatidae sp. 
-fixed_names2[which(fixed_names2$genus_species.raw == "Duck sp"),]
-fixed_names2[which(fixed_names2$genus_species.edit == "Duck sp"),]
-fixed_names2$genus_species[fixed_names2$genus_species.edit == "Duck sp"] <- "Anatidae sp."
-
-# KEEP ORIGINAL and edit int.raw; this entry has multiple columns off for
-# scientific and common BOW and checklist: genus_species of Roseate Spoonbill = Platalea ajaja 1
-# Roseate spoonbill Cormobates placens meridionalis       0.736
-int.raw[which(int.raw$species1_scientific == "Roseate spoonbill"), ]
-int.raw[which(int.raw$species2_scientific == "Roseate spoonbill"), ]
-checklist[which(checklist$common_name == "Roseate Spoonbill"), ]
-fixed_names2[which(fixed_names2$genus_species.edit == "Roseate spoonbill"), ]
-int.raw$species2_common[int.raw$species1_scientific == "Roseate Spoonbill"] <- "Roseate Spoonbill"
-int.raw$species1_scientific[int.raw$species1_scientific == "Roseate Spoonbill"] <- "Ardea herodias"
-fixed_names2$genus_species[fixed_names2$genus_species.edit == "Roseate spoonbill"] <- "Platalea ajaja"
-# Common name will be changed later
-#fixed_names2$common_name[fixed_names2$genus_species.raw == "Roseate spoonbill"] <- "Roseate Spoonbill"
-
-# KEEP ORIGINAL and edit: Unid. Storm Petrel. 
-# BOW: now Genus is Hydrobates instead of Oceanodrama
-#1 Oceanodroma spp.                    Oceanitidae sp.                          0.691
-int.raw[which(int.raw$species1_scientific == "Oceanodroma spp."), ]
-int.raw[which(int.raw$species2_scientific == "Oceanodroma spp."), ]
-fixed_names2[which(fixed_names2$genus_species.raw == "Oceanodroma spp."), ]
-fixed_names2[which(fixed_names2$genus_species.edit == "Oceanodroma spp."), ]
-fixed_names2$genus_species[fixed_names2$genus_species.edit == "Oceanodroma spp."] <- "Hydrobates sp."
-```
-
----
-
-## Typos 
-
-```{r}
-# COPIED 
-
 # 1 unid. 2 hawl  Turdus hauxwelli       0.674
 # Also missing: unid. Accipiter hawl
 # int.raw[which(int.raw$species1_scientific == "unid. 2 hawl"), ]
 # int.raw[which(int.raw$species2_scientific == "unid. 2 hawl"), ]
-# fixed_names2[which(fixed_names2$genus_species.raw == "unid. 2 hawl"), ]
-# fixed_names2[which(fixed_names2$genus_species.edit == "unid. 2 hawl"), ]
+# fixed_names2[which(fixed_names2$scientific_name.raw == "unid. 2 hawl"), ]
+# fixed_names2[which(fixed_names2$scientific_name.edit == "unid. 2 hawl"), ]
 # int.raw[which(int.raw$species1_scientific == "unid. Accipiter hawl"), ]
 # int.raw[which(int.raw$species2_scientific == "unid. Accipiter hawl"), ]
-# fixed_names2$genus_species[fixed_names2$genus_species.edit == "unid. 2 hawl"] <- "Aerospiza/Tachyspiza/Accipiter/Astur sp."
-# fixed_names2$genus_species[fixed_names2$genus_species.edit == "unid. Accipiter hawl"] <- "Aerospiza/Tachyspiza/Accipiter/Astur sp."
+# fixed_names2$scientific_name[fixed_names2$scientific_name.edit == "unid. 2 hawl"] <- "Aerospiza/Tachyspiza/Accipiter/Astur sp."
+# fixed_names2$scientific_name[fixed_names2$scientific_name.edit == "unid. Accipiter hawl"] <- "Aerospiza/Tachyspiza/Accipiter/Astur sp."
 ```
+
+
+
+```{r}
+int.raw.names <- int.raw.names %>% 
+          add_name_edits(int.raw.names, 
+                 scientific_name.raw = "unid. Accipiter hawl",
+                 scientific_name.edit =  "Aerospiza/Tachyspiza/Accipiter/Astur sp.",
+                 edit_notes = "typo, assign generic hawk group")
+  
+
+```
+
+
+
+## Examine Name Corrections and Notes so far
+```{r}
+print("total number of names")
+print(nrow(int.raw.names))
+print("number of names with no comment (edits)")
+print(length(which(is.na(int.raw.names$edit_notes))))
+
+
+# tibble(int.raw.names)
+
+```
+
+
+
+
+
+
 
 ### checkpoint save
 ```{r}
@@ -1639,23 +1934,34 @@ save.image(file.path(L1_RData_dir,"AvianInteractionData_L1_29May2025.RData"))
 ```
 
 
-# Combine these together for the full set of fixed genus_species for the
-# unresolved_gbif names which were fixed by referencing the CHECKLIST. Remove
-# extra columns that are not needed for combining w genus_species.
+### Previous Code 
+
+Before, Combine these together for the full set of fixed scientific_name for the
+unresolved_gbif names which were fixed by referencing the CHECKLIST. Remove
+extra columns that are not needed for combining w scientific_name.
+
+Now we are building up the int.raw.names table to accumulate notes and edits
 
 ```{r}
 fixed.unresolved.gs<-rbind(fixed_names1,fixed_names2)
-fixed.unresolved.gs$genus_species_match_score<-NULL
-length(unique(fixed.unresolved.gs$genus_species.raw))
+fixed.unresolved.gs$scientific_name_match_score<-NULL
+length(unique(fixed.unresolved.gs$scientific_name.raw))
 # 326 OK; May 29, 2025: 309
 dim(fixed.unresolved.gs)
 # 339 fixed unresolved species names; May 29, 2025: 322
+```
 
-save.image(file.path(L1_RData_dir,"AvianInteractionData_L1_29May2025.RData"))
 
-# Assign genus_species.edit and common_name.edit to the closest_matches based on
-# fuzzy coding match. Dec. 9, 2024: only doing genus_species for now.
-names(resolved.gbif)[names(resolved.gbif) == "accepted_scientific_name"] <-"genus_species"
+```{r}
+#checkpoint
+# save.image(file.path(L1_RData_dir,"AvianInteractionData_L1_29May2025.RData"))
+```
+
+Assign scientific_name.edit and common_name.edit to the closest_matches based on
+fuzzy coding match. Dec. 9, 2024: only doing scientific_name for now.
+
+```{r}
+names(resolved.gbif)[names(resolved.gbif) == "accepted_scientific_name"] <-"scientific_name"
 resolved.gbif$common_name.raw<-NULL
 resolved.gbif$scientific_id<-NULL
 
@@ -1667,7 +1973,9 @@ Save checkpoint
 save.image(file.path(L1_RData_dir,"AvianInteractionData_L1_29May2025.RData"))
 ```
 
+This takes the GBIF fixes and applies the latest Clements taxonomy update
 
+Adopt these to the note assignment raw to edit
 ```{r}
 #********FIXING INCORRECT GBIF RESOLVED: NOW HERE, EARLIER IN WORKFLOW******#
 # Some of the GBIF assignments or misspelling corrections did not work well.
@@ -1677,80 +1985,86 @@ save.image(file.path(L1_RData_dir,"AvianInteractionData_L1_29May2025.RData"))
 
 # Check recent changes in resolved.gbif (where GBIF may be incorrect):
 # See if the resolved.gbif contain Accipiter gentilis or Accipiter atricapillus
-# as genus_species ... Yes, so need to update these
-resolved.gbif[which(resolved.gbif$genus_species.edit == "Accipiter gentilis"), ]
-resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Accipiter gentilis"] <- "Astur atricapillus"
-resolved.gbif$genus_species[resolved.gbif$genus_species.raw == "Astur atricapillus"] <- "Astur atricapillus"
+# as scientific_name ... Yes, so need to update these
+
+#####??? this needs to change 
+## check the common name if Northern Goshawk -> American Goshawk and Astur atricapillus
+## BUT if it's only Goshawk, check raw data to see if it's Europe the keep scientific name
+## but if it's N. america, change as above and rename American Goshawk 
+
+resolved.gbif[which(resolved.gbif$scientific_name.edit == "Accipiter gentilis"), ]
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Accipiter gentilis"] <- "Astur atricapillus"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.raw == "Astur atricapillus"] <- "Astur atricapillus"
 
 # Spruce Grouse: raw is Canachites
 # canadensis, Dendragapus canadensis, Falcipennis canadensis - in fact it should
 # be Canachites canadensis (GBIF is incorrect) Fix
 resolved.gbif[which(resolved.gbif$common_name == "Spruce Grouse"), ]
 splist2024[which(splist2024$bbs_common_name == "Spruce Grouse"), ]
-resolved.gbif$genus_species[resolved.gbif$common_name == "Spruce Grouse"] <- "Canachites canadensis"
+resolved.gbif$scientific_name[resolved.gbif$common_name == "Spruce Grouse"] <- "Canachites canadensis"
  
 # American Three-toed Woodpecker Picoides tridactylus - raw/edit is Picoides dorsalis
 # Confirmed it is North American species, not European for this interaction.
 splist2024[which(splist2024$bbs_common_name == "American Three-toed Woodpecker"), ]
 resolved.gbif[which(resolved.gbif$common_name == "American Three-Toed Woodpecker"), ]
-resolved.gbif$genus_species[resolved.gbif$common_name == "American Three-Toed Woodpecker"] <- "Picoides dorsalis"
+resolved.gbif$scientific_name[resolved.gbif$common_name == "American Three-Toed Woodpecker"] <- "Picoides dorsalis"
 
 # Order below from: Sort by sp1sci.replaced, species1_scientific,	sp2sci.replaced, species2_scientific
 
 # Clark's Grebe Aechmophorus clarkii transitionalis 
-resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Spilopelia chinensis"] <- "Aechmophorus clarkii transitionalis"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Spilopelia chinensis"] <- "Aechmophorus clarkii transitionalis"
 
 # # BBS does not contain these subspecies; Saltmarsh Sparrows but subspecies interactions only hybrid
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Ammospiza caudacuta caudacuta"] <- "Ammospiza caudacuta"
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Ammospiza caudacuta diversa"] <- "Ammospiza caudacuta"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Ammospiza caudacuta caudacuta"] <- "Ammospiza caudacuta"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Ammospiza caudacuta diversa"] <- "Ammospiza caudacuta"
 
 # # Seaside Sparrow & Nelson's Sparrow main species interactions; subspecies rare
 # # Seaside Sparrow (Gulf of Mexico)	Nelson's Sparrow	Ammospiza maritima fisheri	Ammospiza nelsoni
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Ammospiza maritima fisheri"] <- "Ammospiza maritima"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Ammospiza maritima fisheri"] <- "Ammospiza maritima"
 # # Seaside Sparrow (Cape Sable)	Short-tailed Hawk	Ammospiza maritima mirabilis	Buteo brachyurus
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Ammospiza maritima mirabilis"] <- "Ammospiza maritima"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Ammospiza maritima mirabilis"] <- "Ammospiza maritima"
 # # Nelson's Sparrow (Atlantic Coast)	Saltmarsh Sparrow	Ammospiza nelsoni subvirgata	Ammospiza caudacuta
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Ammospiza nelsoni subvirgata"] <- "Ammospiza nelsoni"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Ammospiza nelsoni subvirgata"] <- "Ammospiza nelsoni"
 # # Nelson's Sparrow (Interior)	LeConte's Sparrow	Ammospiza nelsoni nelsoni	Ammospiza leconteii
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Ammospiza nelsoni nelsoni"] <- "Ammospiza nelsoni"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Ammospiza nelsoni nelsoni"] <- "Ammospiza nelsoni"
 # # Nelson's Sparrow (Atlantic Coast)	Savannah Sparrow	Ammospiza nelsoni subvirgata	Passerculus sandwichensis
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Ammospiza nelsoni subvirgata"] <- "Ammospiza nelsoni"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Ammospiza nelsoni subvirgata"] <- "Ammospiza nelsoni"
 
 # # Mountain Plover Charadrius montanus = Anarhynchus montanus
-resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Charadrius montanus"] <- "Anarhynchus montanus"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Charadrius montanus"] <- "Anarhynchus montanus"
 
 # Snowy Plover Charadrius nivosus = Anarhynchus nivosus	
-resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Charadrius nivosus"] <- "Anarhynchus nivosus"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Charadrius nivosus"] <- "Anarhynchus nivosus"
 
 #Sandhill Crane	Grus canadensis = Antigone canadensis
-resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Grus canadensis"] <- "Antigone canadensis"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Grus canadensis"] <- "Antigone canadensis"
 # # No subspecies in BBS so combine; interactions all at species level also
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Antigone canadensis canadensis"] <- "Antigone canadensis"
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Antigone canadensis rowani"] <- "Antigone canadensis"
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Antigone canadensis tabida"] <- "Antigone canadensis"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Antigone canadensis canadensis"] <- "Antigone canadensis"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Antigone canadensis rowani"] <- "Antigone canadensis"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Antigone canadensis tabida"] <- "Antigone canadensis"
 
 # Muscovy Duck Cairina moschata domesticus = Cairina moschata
-resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Cairina moschata domesticus"] <- "Cairina moschata"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Cairina moschata domesticus"] <- "Cairina moschata"
 
 # Dunlin (pacifica)	Calidris alpina pacifica (not subspecies in BBS)
 
 # Crested Caracara Caracara cheriway = Caracara plancus
-resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Caracara cheriway"] <- "Caracara plancus"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Caracara cheriway"] <- "Caracara plancus"
 
 # Snow Goose Chen caerulescens = Anser caerulescens
-resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Chen caerulescens"] <- "Anser caerulescens"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Chen caerulescens"] <- "Anser caerulescens"
 
 # Turkey Vulture	Cathartes aura meridionalis	= Cathartes aura 
-resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Cathartes aura meridionalis"] <- "Cathartes aura"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Cathartes aura meridionalis"] <- "Cathartes aura"
 
 # Wilson's Plover Charadrius wilsonia wilsonia = Anarhynchus wilsonia
-resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Charadrius wilsonia wilsonia"] <- "Anarhynchus wilsonia"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Charadrius wilsonia wilsonia"] <- "Anarhynchus wilsonia"
 
 # Red-shafted Flicker	Colaptes auratus collaris	= Colaptes auratus cafer
-resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Colaptes auratus collaris"] <- "Colaptes auratus cafer"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Colaptes auratus collaris"] <- "Colaptes auratus cafer"
 
 # Gilded Flicker Colaptes chrysoides mearnsi = Colaptes chrysoides; interaction only hybrid
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Colaptes chrysoides mearnsi"] <- "Colaptes chrysoides"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Colaptes chrysoides mearnsi"] <- "Colaptes chrysoides"
 
 # These have raw values but weren't updated? Odd
 # Northwestern Crow	Corvus brachyrhynchos caurinus	
@@ -1758,153 +2072,159 @@ resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Colaptes auratu
 
 # Western Flycatcher & Western Flycatcher (occidentalis/hellmayri group) Empidonax
 # occidentalis = Empidonax difficilis occidentalis but hard to tell which one
-resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Empidonax occidentalis"] <- "Empidonax difficilis"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Empidonax occidentalis"] <- "Empidonax difficilis"
 
 # No subspecies in CHECKLIST or BBS; unique interactions only hybrid
 # # Arctic Loon	Gavia arctica arctica	Gavia arctica viridigularis
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Gavia arctica arctica"] <- "Gavia arctica"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Gavia arctica arctica"] <- "Gavia arctica"
 # # Arctic Loon	Gavia arctica viridigularis
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Gavia arctica viridigularis"] <- "Gavia arctica"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Gavia arctica viridigularis"] <- "Gavia arctica"
 
 # # Black-necked Stilt Himantopus mexicanus mexicanus = Himantopus mexicanus
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Himantopus mexicanus mexicanus"] <- "Himantopus mexicanus"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Himantopus mexicanus mexicanus"] <- "Himantopus mexicanus"
 
 # # American Barn Swallow not subspecies in BBS but is in CHECKLIST
 # # American Barn Swallow	Hirundo rustica erythrogaster - only 1 interaction
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Hirundo rustica erythrogaster"] <- "Hirundo rustica"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Hirundo rustica erythrogaster"] <- "Hirundo rustica"
 
 # No subspecies in BBS; combine but unique interactions are only hybrid
 # #Hooded Oriole (sennettii)	Icterus cucullatus sennettii 
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Icterus cucullatus sennettii"] <- "Icterus cucullatus"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Icterus cucullatus sennettii"] <- "Icterus cucullatus"
 # #Hooded Oriole (cucullatus)	Icterus cucullatus cucullatus
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Icterus cucullatus cucullatus"] <- "Icterus cucullatus"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Icterus cucullatus cucullatus"] <- "Icterus cucullatus"
 
 # # BBS no subspecies but interactions are only hybrid
 # #Audubon's Oriole (Audubon's)	Icterus graduacauda audubonii	& Icterus graduacauda graduacauda = Icterus graduacauda
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Icterus graduacauda audubonii"] <- "Icterus graduacauda"
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Icterus graduacauda graduacauda"] <- "Icterus graduacauda"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Icterus graduacauda audubonii"] <- "Icterus graduacauda"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Icterus graduacauda graduacauda"] <- "Icterus graduacauda"
 
 # # Juncos: many subspecies but most interactions at species level
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Junco hyemalis carolinensis"] <- "Junco hyemalis"
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Junco hyemalis dorsalis"] <- "Junco hyemalis"
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Junco hyemalis montanus"] <- "Junco hyemalis"
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Junco hyemalis pinosus"] <- "Junco hyemalis"
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Junco hyemalis pontilis"] <- "Junco hyemalis"
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Junco hyemalis shufeldti"] <- "Junco hyemalis"
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Junco hyemalis thurberi"] <- "Junco hyemalis"
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Junco hyemalis caniceps"] <- "Junco hyemalis"
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Junco hyemalis townsendi"] <- "Junco hyemalis"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Junco hyemalis carolinensis"] <- "Junco hyemalis"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Junco hyemalis dorsalis"] <- "Junco hyemalis"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Junco hyemalis montanus"] <- "Junco hyemalis"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Junco hyemalis pinosus"] <- "Junco hyemalis"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Junco hyemalis pontilis"] <- "Junco hyemalis"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Junco hyemalis shufeldti"] <- "Junco hyemalis"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Junco hyemalis thurberi"] <- "Junco hyemalis"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Junco hyemalis caniceps"] <- "Junco hyemalis"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Junco hyemalis townsendi"] <- "Junco hyemalis"
 # 
 # # No subspecies in BBS but is in CHECKLIST as Gray-crowned Rosy-Finch (Gray-crowned)
 # # Leucosticte tephrocotis [tephrocotis Group]
 # # Sierra Nevada Gray-crowned Rosy-Finch	Leucosticte tephrocotis dawsoni
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Leucosticte tephrocotis dawsoni"] <- "Leucosticte tephrocotis"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Leucosticte tephrocotis dawsoni"] <- "Leucosticte tephrocotis"
 # #Aleutian and Kodiak Island Gray-crowned Rosy-Finch	Leucosticte tephrocotis griseonucha
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Leucosticte tephrocotis griseonucha"] <- "Leucosticte tephrocotis"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Leucosticte tephrocotis griseonucha"] <- "Leucosticte tephrocotis"
 # # Hepburn's Gray-crowned Rosy-Finch	Leucosticte tephrocotis littoralis
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Leucosticte tephrocotis littoralis"] <- "Leucosticte tephrocotis"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Leucosticte tephrocotis littoralis"] <- "Leucosticte tephrocotis"
 # # Gray-crowned Rosy-Finch (tephrocotis)	Leucosticte tephrocotis tephrocotis
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Leucosticte tephrocotis tephrocotis"] <- "Leucosticte tephrocotis"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Leucosticte tephrocotis tephrocotis"] <- "Leucosticte tephrocotis"
 # # Pribilof Islands Gray-crowned Rosy-Finch	Leucosticte tephrocotis umbrina
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Leucosticte tephrocotis umbrina"] <- "Leucosticte tephrocotis"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Leucosticte tephrocotis umbrina"] <- "Leucosticte tephrocotis"
 
 # # no subspecies in BBS but only co-occur interactions: Short-billed
 # # Dowitcher	Limnodromus griseus hendersoni = Limnodromus griseus
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Limnodromus griseus hendersoni"] <- "Limnodromus griseus" 
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Limnodromus griseus hendersoni"] <- "Limnodromus griseus" 
 
 # not in BBS: Cassia Crossbill	Loxia sinesciuris
 # 
 # # Wild Turkey - no subspecies in BBS but interactions mostly at main species
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Meleagris gallopavo intermedia"] <- "Meleagris gallopavo"
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Meleagris gallopavo merriami"] <- "Meleagris gallopavo"
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Meleagris gallopavo osceola"] <- "Meleagris gallopavo"
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Meleagris gallopavo silvestris"] <- "Meleagris gallopavo"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Meleagris gallopavo intermedia"] <- "Meleagris gallopavo"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Meleagris gallopavo merriami"] <- "Meleagris gallopavo"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Meleagris gallopavo osceola"] <- "Meleagris gallopavo"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Meleagris gallopavo silvestris"] <- "Meleagris gallopavo"
 
 # #California Towhee
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Melozone crissalis crissalis"] <- "Melozone crissalis"
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Melozone crissalis petulans"] <- "Melozone crissalis"
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Melozone crissalis senicula"] <- "Melozone crissalis"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Melozone crissalis crissalis"] <- "Melozone crissalis"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Melozone crissalis petulans"] <- "Melozone crissalis"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Melozone crissalis senicula"] <- "Melozone crissalis"
 
 ## Canyon Towhee
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Melozone fusca fusca"] <- "Melozone fusca"
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Melozone fusca mesoleuca"] <- "Melozone fusca"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Melozone fusca fusca"] <- "Melozone fusca"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Melozone fusca mesoleuca"] <- "Melozone fusca"
 
 # BBS no subspecies but interactions are only hybrids
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Melospiza georgiana georgiana"] <- "Melospiza georgiana"
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Melospiza georgiana nigrescens"] <- "Melospiza georgiana"
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Melospiza melodia gouldii"] <- "Melospiza melodia"
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Melospiza melodia graminea"] <- "Melospiza melodia"
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Melospiza melodia morphna"] <- "Melospiza melodia"
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Melospiza melodia heermanni"] <- "Melospiza melodia"
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Melospiza melodia montana"] <- "Melospiza melodia"
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Melospiza melodia cleonensis"] <- "Melospiza melodia"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Melospiza georgiana georgiana"] <- "Melospiza georgiana"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Melospiza georgiana nigrescens"] <- "Melospiza georgiana"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Melospiza melodia gouldii"] <- "Melospiza melodia"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Melospiza melodia graminea"] <- "Melospiza melodia"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Melospiza melodia morphna"] <- "Melospiza melodia"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Melospiza melodia heermanni"] <- "Melospiza melodia"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Melospiza melodia montana"] <- "Melospiza melodia"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Melospiza melodia cleonensis"] <- "Melospiza melodia"
 
 # # BBS has no subspecies American Black-crowned Night-Heron Nycticorax nycticorax hoactli
-# resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Nycticorax nycticorax hoactli"] <- "Nycticorax nycticorax"
+# resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Nycticorax nycticorax hoactli"] <- "Nycticorax nycticorax"
 
 # No subspecies in BBS: Passerella iliaca Fox Sparrows but all seem to have
 # interactions doubled w main species (except hybrid)
  
 # Brandt's Cormorant	Phalacrocorax penicillatus = Urile penicillatus
-resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Phalacrocorax penicillatus"] <- "Urile penicillatus"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Phalacrocorax penicillatus"] <- "Urile penicillatus"
 
 # Ruby-crowned Kinglet Regulus calendula
-resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Regulus calendula"] <- "Corthylio calendula"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Regulus calendula"] <- "Corthylio calendula"
 
 #Spotted Dove	Spilopelia chinensis		
-resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Spilopelia chinensis"] <- "Streptopelia chinensis"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Spilopelia chinensis"] <- "Streptopelia chinensis"
 
-resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Setophaga coronata auduboni"] <- "Setophaga coronata auduboni"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Setophaga coronata auduboni"] <- "Setophaga coronata auduboni"
 
-resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Ammospiza leconteii"] <- "Ammospiza leconteii"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Ammospiza leconteii"] <- "Ammospiza leconteii"
 
-resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Ammospiza maritima"] <- "Ammospiza maritima"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Ammospiza maritima"] <- "Ammospiza maritima"
 
-resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Anas diazi"] <- "Anas diazi"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Anas diazi"] <- "Anas diazi"
 
-resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Anser caerulescens"] <- "Anser caerulescens"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Anser caerulescens"] <- "Anser caerulescens"
 
-resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Anser rossii"] <- "Anser rossii"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Anser rossii"] <- "Anser rossii"
 
-resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Antigone canadensis"] <- "Antigone canadensis"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Antigone canadensis"] <- "Antigone canadensis"
 
-resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Aratinga nenday"] <- "Aratinga nenday"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Aratinga nenday"] <- "Aratinga nenday"
 
-resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Buteo plagiatus"] <- "Buteo plagiatus"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Buteo plagiatus"] <- "Buteo plagiatus"
 
-resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Calidris pugnax"] <- "Calidris pugnax"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Calidris pugnax"] <- "Calidris pugnax"
 
 # colima warbler Leiothlypis crissalis - not in BBS
 
 # Northern Harrier	Circus cyaneus = Circus hudsonius
 # Northern Harrier Circus cyaneus hudsonius = Circus hudsonius
-resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Circus cyaneus" & resolved.gbif$common_name.edit == "Northern Harrier" ] <- "Circus hudsonius"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Circus cyaneus" & resolved.gbif$common_name.edit == "Northern Harrier" ] <- "Circus hudsonius"
 
-resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Circus cyaneus hudsonius" & resolved.gbif$common_name.edit == "Northern Harrier" ] <- "Circus hudsonius"
-resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Circus hudsonius"] <- "Circus hudsonius"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Circus cyaneus hudsonius" & resolved.gbif$common_name.edit == "Northern Harrier" ] <- "Circus hudsonius"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Circus hudsonius"] <- "Circus hudsonius"
 
 # American Green-winged Teal Anas crecca carolinensis = change to BBS version just Anas crecca
-resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Anas crecca carolinensis"] <- "Anas crecca"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Anas crecca carolinensis"] <- "Anas crecca"
 
 #Ross's Goose	Chen rossii
-resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Chen rossii"] <- "Anser rossii"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Chen rossii"] <- "Anser rossii"
 
 # Northern Shoveler	Anas clypeata = Spatula clypeata
-resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Anas clypeata"] <- "Spatula clypeata"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Anas clypeata"] <- "Spatula clypeata"
 # Blue-winged Teal Anas discors = Spatula discors
-resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Anas discors"] <- "Spatula discors"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Anas discors"] <- "Spatula discors"
 # White-winged Scoter	Melanitta fusca = Melanitta deglandi
-resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Melanitta fusca"] <- "Melanitta deglandi"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Melanitta fusca"] <- "Melanitta deglandi"
 
-resolved.gbif$genus_species[resolved.gbif$genus_species.edit == "Accipiter cooperii"] <- "Astur cooperii"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Accipiter cooperii"] <- "Astur cooperii"
 
-# Take the genus_species in resolved.gbif and fixed.unresolved.gs and rbind them,
+```
+
+Binding 
+
+```{r}
+############################################################
+# Take the scientific_name in resolved.gbif and fixed.unresolved.gs and rbind them,
 # remove duplicates, then merge with CHECKLIST to get common name assigned. Keep
-# reference of the genus_species.raw bc need to merge back into the int.raw data.
+# reference of the scientific_name.raw bc need to merge back into the int.raw data.
 int.final.names<-rbind(resolved.gbif,fixed.unresolved.gs)
 dim(int.final.names)
 # 5339; May 29, 2025: 5312 
-length(unique(int.final.names$genus_species.raw))
+length(unique(int.final.names$scientific_name.raw))
 # 3913 OK May 29, 2025: 3889
 
 # Remove duplicate rows, if any exist
@@ -1912,38 +2232,48 @@ int.final.names <- int.final.names %>%
   distinct()
 dim(int.final.names)
 # 4576; May 29, 2025: 4551
-length(unique(int.final.names$genus_species.raw))
+length(unique(int.final.names$scientific_name.raw))
 # 3913 OK; May 29, 2025: 3889 OK
 
 # NOTE TO FIX THESE 4576 LATER; decide whether to assign Family level or Genus for
-# this instead of the genus_species.raw. Some have some typos (only a few). Some
-# of the int.final.names genus_species are blank. Most are because they are
+# this instead of the scientific_name.raw. Some have some typos (only a few). Some
+# of the int.final.names scientific_name are blank. Most are because they are
 # Genus sp. For now, leave these as is since we cannot get to species level on
 # these interactions.
-int.final.names.Gsp<-int.final.names[which(is.na(int.final.names$genus_species)), ]
+int.final.names.Gsp<-int.final.names[which(is.na(int.final.names$scientific_name)), ]
 dim(int.final.names.Gsp)
 # 621 Genus-level entries ; May 29, 2025: 626
+```
 
-# All the NA in genus_species are "Genus sp.". If the NA exists in
-# genus_species, assign it the genus_species.edit which includes this
-# designation.
-int.final.names$genus_species1 <- ifelse(is.na(int.final.names$genus_species), 
-                                        int.final.names$genus_species.edit, 
-                                        int.final.names$genus_species)
-names(int.final.names)[names(int.final.names) == "genus_species"] <-"genus_species.gbif.chklist"
-names(int.final.names)[names(int.final.names) == "genus_species1"] <-"genus_species"
 
-# Now merge the GBIF & checked CHECKLIST-derived int.final.names$genus_species
+All the NA in scientific_name are "Genus sp.". If the NA exists in
+scientific_name, assign it the scientific_name.edit which includes this
+designation.
+
+```{r}
+### 
+
+
+int.final.names$scientific_name1 <- ifelse(is.na(int.final.names$scientific_name), 
+                                        int.final.names$scientific_name.edit, 
+                                        int.final.names$scientific_name)
+names(int.final.names)[names(int.final.names) == "scientific_name"] <-"scientific_name.gbif.chklist"
+names(int.final.names)[names(int.final.names) == "scientific_name1"] <-"scientific_name"
+```
+
+
+```{r}
+# Now merge the GBIF & checked CHECKLIST-derived int.final.names$scientific_name
 # with the CHECKLIST to get final checklist common_name. First drop some
 # checklist columns.
-checklist.narrow<-subset(checklist, select=c("genus_species",
+checklist.narrow<-subset(checklist, select=c("scientific_name",
                                              "common_name",
                                              "category",
                                              "order",
                                              "family"))
 checklist.narrow<-data.frame(checklist.narrow)
-int.checklist<-merge(int.final.names,checklist.narrow, by=c("genus_species"),all.x=T)
-length(unique(int.checklist$genus_species.raw))
+int.checklist<-merge(int.final.names,checklist.narrow, by=c("scientific_name"),all.x=T)
+length(unique(int.checklist$scientific_name.raw))
 # 3913 OK; May 29, 2025: 3889 OK
 head(int.checklist)
 dim(int.checklist)
@@ -1957,49 +2287,95 @@ dim(int.checklist.NAcommon)
 # 898; May 29, 2025: 894
 dim(int.checklist.NAcommon)-dim(int.final.names.Gsp)
 # 621 Genus-level entries from above but 277 (May 29: 268) missing common name! Some are
-# duplicate rows from genus_species.raw. Also some of the GBIF species
+# duplicate rows from scientific_name.raw. Also some of the GBIF species
 # assignments do not work (GBIF taxonomic backbone is not quite up to date for
 # these birds)
 
-# Fix these by assigning the appropriate genus_species based on CHECKLIST, then
+```
+
+
+REVIEW: This should be taken care of by the look-up checklist table
+
+```{r}
+# Fix these by assigning the appropriate scientific_name based on CHECKLIST, then
 # merge with CHECKLIST to get common names; add common name from
 # common_name.orig when it doesn't exist in CHECKLIST
 
-int.checklist$genus_species[int.checklist$genus_species.edit == "Acanthis flammea"] <- "Acanthis flammea hornemanni"
-int.checklist$common_name[int.checklist$genus_species.edit == "Acanthiza apicalis albiventris"] <- "Red-Tailed Thornbill"
-int.checklist$genus_species[int.checklist$genus_species.edit == "Accipiter bicolor"] <- "Astur bicolor"
-int.checklist$genus_species[int.checklist$genus_species.edit == "Accipiter cooperii"] <- "Astur cooperii"
-int.checklist$genus_species[int.checklist$genus_species.edit == "Accipiter gentilis"] <- "Astur atricapillus"
-int.checklist$genus_species[int.checklist$genus_species.edit == "Accipiter gentilis laingi"] <- "Astur atricapillus laingi"
-int.checklist$genus_species[int.checklist$genus_species.edit == "Accipiter melanoleucus"] <- "Astur melanoleucus"
-int.checklist$genus_species[int.checklist$genus_species.edit == "Accipiter sp."] <- "Aerospiza/Tachyspiza/Accipiter/Astur sp."
-int.checklist$common_name[int.checklist$genus_species.edit == "Accipiter striatus venator"] <- "Sharp-Shinned Hawk (Puerto Rican)"
+int.checklist$scientific_name[int.checklist$scientific_name.edit == "Acanthis flammea"] <- "Acanthis flammea hornemanni"
+int.checklist$common_name[int.checklist$scientific_name.edit == "Acanthiza apicalis albiventris"] <- "Red-Tailed Thornbill"
+int.checklist$scientific_name[int.checklist$scientific_name.edit == "Accipiter bicolor"] <- "Astur bicolor"
+int.checklist$scientific_name[int.checklist$scientific_name.edit == "Accipiter cooperii"] <- "Astur cooperii"
+int.checklist$scientific_name[int.checklist$scientific_name.edit == "Accipiter gentilis"] <- "Astur atricapillus"
+int.checklist$scientific_name[int.checklist$scientific_name.edit == "Accipiter gentilis laingi"] <- "Astur atricapillus laingi"
+int.checklist$scientific_name[int.checklist$scientific_name.edit == "Accipiter melanoleucus"] <- "Astur melanoleucus"
+int.checklist$scientific_name[int.checklist$scientific_name.edit == "Accipiter sp."] <- "Aerospiza/Tachyspiza/Accipiter/Astur sp."
+int.checklist$common_name[int.checklist$scientific_name.edit == "Accipiter striatus venator"] <- "Sharp-Shinned Hawk (Puerto Rican)"
 #? Acrocephalus scirpaceus baeticatus and Acrocephalus gracilirostris leptorhynchus without CHECKLIST common_name
-int.checklist$common_name[int.checklist$genus_species.edit == "Aechmophorus clarkii clarkii"] <- "Clark's Grebe (clarkii)"
-int.checklist$common_name[int.checklist$genus_species.edit == "Aechmophorus clarkii transitionalis"] <- "Clark's Grebe (transitionalis)"
+int.checklist$common_name[int.checklist$scientific_name.edit == "Aechmophorus clarkii clarkii"] <- "Clark's Grebe (clarkii)"
+int.checklist$common_name[int.checklist$scientific_name.edit == "Aechmophorus clarkii transitionalis"] <- "Clark's Grebe (transitionalis)"
 # no subspecies in CHECKLIST
-int.checklist$genus_species[int.checklist$genus_species.edit == "Aechmophorus occidentalis ephemeralis"] <- "Aechmophorus occidentalis"
-int.checklist$genus_species[int.checklist$genus_species.edit == "Aechmophorus occidentalis occidentalis"] <- "Aechmophorus occidentalis"
+int.checklist$scientific_name[int.checklist$scientific_name.edit == "Aechmophorus occidentalis ephemeralis"] <- "Aechmophorus occidentalis"
+int.checklist$scientific_name[int.checklist$scientific_name.edit == "Aechmophorus occidentalis occidentalis"] <- "Aechmophorus occidentalis"
 # ? Aegolius funereus funereus:  Tengmalm's Owl - not in CHECKLIST
 # ? Agelaioides badius badius and Agelaioides badius bolivianus: Grayish Baywing subspecies but no common_name in CHECKLIST
 # ? Agelaioides badius fringillarius: Pale Baywing subspecies? only species in CHECKLIST 
-int.checklist$genus_species[int.checklist$genus_species.edit == "Agelaioides badius fringillarius"] <- "Agelaioides fringillarius"
+int.checklist$scientific_name[int.checklist$scientific_name.edit == "Agelaioides badius fringillarius"] <- "Agelaioides fringillarius"
 # Aimophila ruficeps eremoeca: Rufus-crowned sparrow; no common_name in CHECKLIST
-int.checklist$common_name[int.checklist$genus_species.edit == "Aimophila ruficeps eremoeca"] <- "Rufous-Crowned Sparrow (Eremoeca)"
-int.checklist$common_name[int.checklist$genus_species.edit == "Aimophila ruficeps scottii"] <- "Rufous-Crowned Sparrow (Scottii)"
-int.checklist$common_name[int.checklist$genus_species.edit == "Schoeniparus castaneceps"] <- "Rufous-winged Fulvetta"
-int.checklist$genus_species[int.checklist$genus_species.edit == "Schoeniparus castaneceps"] <- "Schoeniparus castaneceps"
-int.checklist$common_name[int.checklist$genus_species.edit == "Schoeniparus cinereus"] <- "Yellow-Throated Fulvetta"
-int.checklist$genus_species[int.checklist$genus_species.edit == "Schoeniparus cinereus"] <- "Schoeniparus cinereus"
-int.checklist$common_name[int.checklist$genus_species.edit == "Schoeniparus dubius"] <- "Rusty-Capped Fulvetta"
-int.checklist$genus_species[int.checklist$genus_species.edit == "Schoeniparus dubius"] <- "Schoeniparus dubius"
+int.checklist$common_name[int.checklist$scientific_name.edit == "Aimophila ruficeps eremoeca"] <- "Rufous-Crowned Sparrow (Eremoeca)"
+int.checklist$common_name[int.checklist$scientific_name.edit == "Aimophila ruficeps scottii"] <- "Rufous-Crowned Sparrow (Scottii)"
+int.checklist$common_name[int.checklist$scientific_name.edit == "Schoeniparus castaneceps"] <- "Rufous-winged Fulvetta"
+int.checklist$scientific_name[int.checklist$scientific_name.edit == "Schoeniparus castaneceps"] <- "Schoeniparus castaneceps"
+int.checklist$common_name[int.checklist$scientific_name.edit == "Schoeniparus cinereus"] <- "Yellow-Throated Fulvetta"
+int.checklist$scientific_name[int.checklist$scientific_name.edit == "Schoeniparus cinereus"] <- "Schoeniparus cinereus"
+int.checklist$common_name[int.checklist$scientific_name.edit == "Schoeniparus dubius"] <- "Rusty-Capped Fulvetta"
+int.checklist$scientific_name[int.checklist$scientific_name.edit == "Schoeniparus dubius"] <- "Schoeniparus dubius"
 # Alcippe poioicephala phayrei is a subspecies but no common_name in CHECKLIST
 # GBIF WAS INCORRECT:
-int.checklist$common_name[int.checklist$genus_species.edit == "Ammospiza caudacuta caudacuta"] <- "Saltmarsh Sparrow (Caudacuta)"
-int.checklist$genus_species[int.checklist$genus_species.edit == "Ammospiza caudacuta caudacuta"] <- "Ammospiza caudacuta caudacuta"
-int.checklist$common_name[int.checklist$genus_species.edit == "Ammospiza caudacuta diversa"] <- "Saltmarsh Sparrow (Diversa)"
-int.checklist$genus_species[int.checklist$genus_species.edit == "Ammospiza caudacuta diversa"] <- "Ammospiza caudacuta diversa"
+int.checklist$common_name[int.checklist$scientific_name.edit == "Ammospiza caudacuta caudacuta"] <- "Saltmarsh Sparrow (Caudacuta)"
+int.checklist$scientific_name[int.checklist$scientific_name.edit == "Ammospiza caudacuta caudacuta"] <- "Ammospiza caudacuta caudacuta"
+int.checklist$common_name[int.checklist$scientific_name.edit == "Ammospiza caudacuta diversa"] <- "Saltmarsh Sparrow (Diversa)"
+int.checklist$scientific_name[int.checklist$scientific_name.edit == "Ammospiza caudacuta diversa"] <- "Ammospiza caudacuta diversa"
+```
 
+Subset to the checklist 
+
+Analysis Paper: 
+
+1 sp1 and sp2 on checklist (canada CONUS)
+Data Paper Goal: 
+
+1. Sp1 or sp2 needs to be on Checklist (canada conus checklist)
+2. Final check:which rows are not (sp1 AND sp2 on Canada Conus checklist)?
+    how many?
+    which of these are NOT on full clements list
+    how many? 
+    review data
+    check against all clements
+    assume names are fixed via gbif/taxa db
+    
+    if descions are made add name edits to be added to the int.raw.names list above
+
+
+
+```{r}
+#| label: subset_check
+# rcode for above, prints a data frame of non-checklist rows
+```
+
+review data frame to make decisions
+
+```{r}
+# make additional edits using int.raw.names <- add_name_edits(...)
+# re-run the block subset_check
+
+```
+
+
+
+
+
+
+```{r}
 # ... FINISH THIS LATER FOR OTHER non-BBS species
 
 # For now, focus on BBS splist because need to get these data cleaned and
@@ -2007,14 +2383,14 @@ int.checklist$genus_species[int.checklist$genus_species.edit == "Ammospiza cauda
 # below after this is completed...
 
 #******** BBS WORK **********# 
-# Merge genus_species in splist with genus_species in int.checklist
+# Merge scientific_name in splist with scientific_name in int.checklist
 # to check current common_name list and identify gaps and updates to
-# genus_species. This will update most of the BBS species, but not necessarily the ones
-# outside of BBS. "genus_species" = the names agreed upon by CHECKLIST and by
+# scientific_name. This will update most of the BBS species, but not necessarily the ones
+# outside of BBS. "scientific_name" = the names agreed upon by CHECKLIST and by
 # the GBIF-screened species. common_name = the CHECKLIST common_name.
 int.checklist <- subset(
   int.checklist,
-  select = c("genus_species", "common_name", "genus_species.raw","genus_species.edit")
+  select = c("scientific_name", "common_name", "scientific_name.raw","scientific_name.edit")
 )
 dim(int.checklist)
 # 4576; 29 May 2025: 4551
@@ -2022,10 +2398,16 @@ int.checklist <- int.checklist %>%
   distinct()
 dim(int.checklist)
 # 3915 OK; May 29, 2025: 3891
-length(unique(int.checklist$genus_species.raw))
+length(unique(int.checklist$scientific_name.raw))
 # 3913 OK; May 29, 2025: 3889
 
+```
+
+## Save data
+
+```{r}
 save.image(file.path(L1_RData_dir,"AvianInteractionData_L1_29May2025.RData"))
+write_csv((file.path(L1_RData_dir,"avian_interaction_raw_to_checklist_names.csv")))
 ```
 
 
@@ -2041,7 +2423,7 @@ database
 # PARKING LOT FOR CONTINUED CLEANING...
 
 # Hoary Redpoll lumped into Redpoll, but not sure this is the case in the BBS...
-# bbs.splist$genus_species[bbs.splist$genus_species.bbs2024 == "Acanthis
+# bbs.splist$scientific_name[bbs.splist$scientific_name.bbs2024 == "Acanthis
 # flammea"] <- "Acanthis flammea hornemanni"
 
 ```

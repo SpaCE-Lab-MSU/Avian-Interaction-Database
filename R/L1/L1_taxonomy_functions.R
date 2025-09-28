@@ -1,9 +1,22 @@
-require(stringdist)
+# L1_taxonomy_functions.R
+# TITLE:          Functions to handle taxonomic processing for L0 to L1 cleaning
+# AUTHORS:        Phoebe Zarnetske, Patrick Bills
+# COLLABORATORS:  Vincent Miele, Stephane Dray
+# PROJECT:        Avian Interaction Database & Avian Meta-Network
+# DATE:           20 Mar 2023 - August 2025
+# NOTES:
+#   Functions here are used in R/L0/L0_stitch.qmd notebook
+#
 
-read_checklist <- function(){
 
 
-}
+# load libraries use here but don't show loading messages so they
+# don't pollute the Quarto and Rmarkdown notebooks that source this file
+suppressMessages({
+  library(taxadb)
+  library(stringdist)
+})
+
 
 #' read in the interactions file
 read_interactions <- function(filename = "AvianInteractionData_L0.csv"){
@@ -11,13 +24,6 @@ read_interactions <- function(filename = "AvianInteractionData_L0.csv"){
   return(int.raw)
 }
 
-
-
-# Reference list of scientific names from eBird Clements CHECKLIST 2024
-# reference_names <- tibble(
-#   genus_species = checklist$genus_species,
-#   common_name = checklist$common_name
-# )
 
 # Function to clean names for comparison (ignore sp., Unid., remove whitespace
 # after name)
@@ -27,11 +33,13 @@ clean_name <- function(name) {
     trimws()                                   # Trim extra spaces
 }
 
-# Use fuzzy logic function to find closest match from the CHECKLIST reference list
-# Function to find the closest match with a similarity score, and ignoring the
-# name aspects above.
-# reference list = data frame with colums "genus_species", "common_name"
-
+#' fuzzy taxonomy match
+#' Use fuzzy logic function to find closest match from the CHECKLIST reference list
+#' Function to find the closest match with a similarity score, and ignoring the
+#' name aspects above.
+#' @param name a species binomial aka scientific name
+#' @param reference list = data frame with columns "genus_species", "common_name"
+#' @returns two item list,
 find_closest_match_with_score <- function(name, reference_list) {
   if (is.na(name) || name == "") {
     return(list(match = NA_character_, score = NA_real_))
@@ -48,3 +56,154 @@ find_closest_match_with_score <- function(name, reference_list) {
   similarity_score <- 1 - distances[closest_match_index]
   return(list(match = closest_match, score = similarity_score)) # Convert distance to similarity (1 = exact match)
 }
+
+
+
+#### functions to manage taxonomy adjustments and comments
+
+# the L0 to L1 process creates a table of taxonomic names that appear in the
+# data as entered and require fix for typo or update to match
+#
+
+#' Create list of unique scientific_name.raw and common_name.raw pairs with
+#' formatting adjustments, stacking and collecting anything in sp1 and sp2.
+#'
+#' columns with ".raw" are original from data-entry to L0 process
+#' columns with ".edit" are changed versions,
+#' and .edit names have some cleaning applied
+#'    removes blank spaces, capitalizes, and keeps unique rows.
+#'
+create_names_edit_table <-function(intxns.df) {
+  int.raw.names <- intxns.df %>%
+    # Select and stack the relevant species columns
+    select(species1_scientific, species1_common, species2_scientific, species2_common) %>%
+    transmute(
+      scientific_name.raw = species1_scientific,  # Original scientific_name
+      common_name.raw = species1_common
+    ) %>%
+    bind_rows(
+      int.raw %>%
+        transmute(
+          scientific_name.raw = species2_scientific,  # Original scientific_name
+          common_name.raw = species2_common
+        )
+    ) %>%
+    # Remove duplicates and clean up formatting
+    distinct() %>%
+    mutate(
+      # Clean scientific_name while keeping the raw version
+      scientific_name.edit = str_trim(scientific_name.raw),  # Start with the raw data
+      scientific_name.edit = ifelse(
+        str_starts(scientific_name.edit, "unid."),  # Exception case
+        str_replace(scientific_name.edit, "(unid.)s*(w+)", "1 U2"),
+        str_to_sentence(scientific_name.edit)       # Regular case
+      ),
+      scientific_name.edit = str_replace(scientific_name.edit, "spp.", "sp."),  # Replace "spp." with "sp."
+
+      # Clean common_name
+      common_name.edit = str_trim(common_name.raw),  # Start with the raw data
+      common_name.edit = str_to_title(common_name.edit),  # Capitalize each word
+      common_name.edit = str_replace_all(common_name.edit, "unid", "unid.")  # Add period to "unid"
+    ) %>%
+    filter(!is.na(scientific_name.edit)) # Remove rows where scientific_name.edit is <NA>
+
+
+    # Add blank column to add notes to track dispensation
+
+    int.raw.names$edit_notes <- NA
+    return(int.raw.names)
+}
+
+
+
+
+#' update name edits table
+#'
+#' consistent function for add notes and keepting track of how and why
+#' a scientific name was updated or fixed
+#'
+#' @param edits.df the table of edits, aka int.raw.names
+#' @param scientific_name.raw required name to lookup in th in the raw table
+add_name_edits<-function(edits.df, scientific_name.raw,
+                         edit_notes,
+                         scientific_name.edit=NULL,
+                         common_name.edit=NULL) {
+
+  if(nrow(edits.df[edits.df$scientific_name.raw == scientific_name.raw, ]) == 0){
+    warning(paste(scientific_name.raw,  "not found in names list, no edits"))
+    return(edits.df)
+  }
+
+  edits.df[edits.df$scientific_name.raw == scientific_name.raw,]$edit_notes <- edit_notes
+  if(! is.null(scientific_name.raw)) {
+    edits.df[edits.df$scientific_name.raw == scientific_name.raw,]$scientific_name.edit <- scientific_name.edit
+  }
+  if(! is.null(common_name.edit)){
+    edits.df[edits.df$scientific_name.raw == scientific_name.raw,]$common_name.edit <- common_name.edit
+  }
+  return(edits.df)
+}
+
+
+add_edits_to_list <- function(edits.df, edit_list){
+  # maybe should use apply but this also works
+  for(e in edit_list ){
+    # ensure all args have something
+    # this is not the most R way to do this
+    if(length(e)<3) {append(e,"NULL")}
+    if(length(e)<4) {append(e,"NULL")}
+
+    edits.df <- add_name_edits(edits.df,
+                               scientific_name.raw = e[1],
+                               edit_notes = e[2],
+                               scientific_name.edit = e[3],
+                               common_name.edit = e[4] )
+  }
+  return(edits.df)
+}
+
+#######################################################
+#### short-cut functions for listing or counting records by species
+
+# list those without a note AND are not UNIDs Genus sp.
+unresolved_species<- function(int.names.raw){
+  filter(int.names.raw,
+         is.na(edit_notes) & !grepl(" sp\\.$", scientific_name.edit)
+         )
+}
+
+
+
+# get interactions where sp in sp1 OR sp2
+intxns_by_species<- function(intxns.df, scientific_name){
+  return(filter(intxns.df, species1_scientific == scientific_name | species2_scientific == scientific_name))
+}
+
+
+#' count of interactions by scientific name
+interaction_count_by_species<- function(intxns.df, scientific_name){
+  rex = filter(intxns.df, species1_scientific == scientific_name | species2_scientific == scientific_name)
+  return(nrow(rex))
+
+}
+
+#' count interactions by partial match (grep)
+interaction_count_by_match<- function(intxns.df, scientific_name_fragment){
+  rex = filter(intxns.df, grepl(scientific_name_fragment, species1_scientific) | grepl(scientific_name_fragment,species2_scientific))
+  return(nrow(rex))
+}
+
+#' subset of interactions by partial match common name sp1 or sp2
+interaction_records_by_match_common<- function(intxns.df, common_name_fragment){
+  rex = filter(intxns.df,
+               grepl(common_name_fragment, species1_common, ignore.case = TRUE) |
+                 grepl(common_name_fragment,species2_common,ignore.case = TRUE))
+
+  return(rex)
+}
+
+interaction_count_by_match_common<- function(intxns.df, common_name_fragment){
+  rex = interaction_records_by_match_common(intxns.df, common_name_fragment)
+  return(nrow(rex))
+}
+
