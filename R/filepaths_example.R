@@ -15,7 +15,11 @@
 # by convention configuration variables (constants) are uppercase
 
 SYNC_DATA_FOLDER <- "/path/to/google_drive" #or OneDrive folder with spreadsheets
+# the L0 and L1 data folders are under this one:
 DATA_FOLDER <-  "/path/to/data_respository/top_folder"
+# for L0 checklist (Clements etc)
+CHECKLIST_FOLDER = file.path(DATA_FOLDER, "L0", "species_checklists")
+# currently using hard-coded folder path for curated L1 checklist
 
 # add comments or save alternate paths using comments, for example
 # old data folder

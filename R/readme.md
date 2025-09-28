@@ -42,8 +42,11 @@ to check that they are set and the paths are found.
    (this is an R script and uses R syntax, not a config or environment file)
    - DATA_FOLDER : the path to the folder that has the L0 and L1 subfolders
    - SYNC_DATA_FOLDER : the path to yoru google drive folder. 
+   - CHECKLIST_FOLDER : location of various checklist files
    
-   
+**TO-DO: we have two checklists L0 = Clements etc and L1= PLZ Curated and this
+system does not accommodate for that**
+
    
 
 Example filepaths.R contents
@@ -51,6 +54,8 @@ Example filepaths.R contents
 ```
 SYNC_DATA_FOLDER =  "/Users/USERID/Library/CloudStorage/GoogleDrive-billspat@msu.edu/Shared\ drives/Avian_MetaNetwork/"
 DATA_FOLDER =  "/Users/USERID/Avian-Interaction-Database"
+# no need to edit this to match your computer if the folder above is correct
+CHECKLIST_FOLDER = file.path(DATA_FOLDER, "L1", "species_checklists")
 ```
 
 This project uses the widely used ['here' package](https://here.r-lib.org) to 
@@ -59,9 +64,10 @@ regardless of where they are run.
 
 ### Google Drive
 
-We use Google Sheets (see protocol) to facilitate data entry for each species. 
-If as part of using the R code you'd like to view and access the intermediate files
-in Google Drive, you must have google drive installed. 
+We use Google Sheet to facilitate data entry for each species (see protocol in
+main readme). If, as part of using the R code, you'd like to view and access 
+the intermediate files in Google Drive, you must have google drive installed.  If 
+you are not reviewing those files, this is not necessary. 
 
 To use Google drive on MacOS15, you may have to grant 'full file access' to 
 Rstudio in the the MacOS System Settings - Privacy & Security - Full Disk Acces - 
@@ -111,7 +117,8 @@ If you need to update packages, choose option 2 to re-install everything.
 See the file `renv.lock` for both the R version and package versions with 
 which the code was developed and tested. 
 
-## Code Workflow Overview
+
+## Code Workflow
 
 See the main workflow document describing how data is collected, entered, 
 checked-in and reviewed.   This describes how the code is used to build the final
@@ -136,73 +143,74 @@ common and scientific names as they appear in the literature we base the data on
 
 
 1) **Review**
-   Data submitted for review can be checked using scripts reviewing 
-   Outcome: CSV files in the "species" folder with mostly cleaned and corrected data
-   but with potentially outdated taxonomic designations
-   
+
+  - Data submitted for review can be checked using scripts reviewing 
+  - Outcome: CSV files in the "species" folder with mostly cleaned and corrected data
+  - but with potentially outdated taxonomic designations
+  - Scripts/Notebooks:
+    - L0/L0_functions.R = contains most cleaning/data processing code
+    - L0/L0_repo_status.qmd = count numbers of files in various states
+    - L0/L0_corrections_discovery.qmd = point out issues in files to be corrected
+    - L0/L0_ammendments.qmd = work in progress fix issues and 
+  
 2) **clean and combine**
-   Outcome: single file with all interactions that is even more cleaned and made 
+
+   - Outcome: single file with all interactions that is even more cleaned and made 
    consistent
+   - Scripts/Notebooks:
+      - L0/L0_functions.R = contains most cleaning/data processing code
+      - L0_stitch.qmd : read each file,clean (as above) and stictch together
    
 3) **build checklist**
    download latest checklists if necessary and build comprehensive checklist 
    with 
+   - see working repository!
+     R/L1/AvianInteractionData_specieslists_Canada_CONUS_L1.R 
+   - 
    
 4) **build taxnomic reconciliation table**
    using checklists from step above and functions to examine / compare 
    taxonomy in data as entered ('raw') and checklist to create an 'edited' version
    of the scientific name or common name to correct for typos or taxonomic changes
    to match the current checklist
-   Outcome:  L1_taxnomonic_edits.csv
+   
+   - Outcome:  L1_taxnomonic_edits.csv
+   - Notebook: L1/L1
+
    
 5) **reconcile taxonomy**
-  apply a final cleaning, then use the taxnomic edits file to create a file that 
-  matches the final 
-  database with the taxonomic 
+
+  - apply a final cleaning, then use the taxonomic edits file to merge with current create a file that 
+  - apply various methods matches the final 
+  - database with the taxonomic 
+  
+  - TBD
 
 
-### Order & description of scripts:
+## Additional scripts
 
-### For BBS analysis in North America:
-/R/bbs/bbs_specieslist_L0.R = reads in current BBS species list and adds any species that was split
-/R/bbs/bbs_specieslist_L1.R = cleans the BBS species list, e.g., combining subspecies into species
+**R/config.R** sourced by all scripts to set file paths, should not need editing or
+sourcing
 
 
-### For entire database:
 
-Functions
+**Previous BBS scripts (see working repository)**
 
-- R/L0/L0_functions.R  functions called by quarto files in 
-These are RMarkdown notebooks that can be run cell-by-cell to examine output, 
-rendered to HTML with status output and saved to git with either knitr or Quarto
+- /R/bbs/bbs_specieslist_L0.R = reads in current BBS species list and adds any species that was split
+- /R/bbs/bbs_specieslist_L1.R = cleans the BBS species list, e.g., combining subspecies into species
 
-1. R/L0/repo_status.qmd = Quarto Notebook file to list status of each folder: checked, in_review, and temporary files
-1. R/L0/L0_stitch.qmd = Quarto Notebook file to work through opening each stitches together all individual csvs in /L0/species and optionally /L0/species_in_review
-   This called the function "read_and_amend()" for each file to be combined, which 
-   does several cleaning steps (previously done in L1) to produce as clean a table
-   for the L1 taxomomy 
-2. R/L1/AvianInteractionData_specieslists_Canada_CONUS_L1.R creates checklists
-4. R/L1/AvianInteractionData_L1.qmd = Quarto notebook to merge checklists and 
-   species in interation database file from L0_stitch process
-   
 
-## Description of subdirectories
 
-- **L0**: L0 (raw) data files = CSV files containing entries in the database from 2012-present; data entry procedure follows [/L0/AvianInteractionData_ENTRY_INSTRUCTIONS.md](L0/AvianInteractionData_ENTRY_INSTRUCTIONS.md)
-- **L1**: L1 data; cleaned & edited L0 data.
-- **L2**: Derived data from L1 data (e.g., pulling in & checking data from other sources including: Hurlbert Bird Diet Database for North America: https://www.nature.com/articles/s41597-021-01049-9 & https://github.com/hurlbertlab/dietdatabase)).
-- **R**: Code to create L0 and L1 data.
+## Acknowledgements 
 
-### docs
-- documents supporting the data and analysis.
-
-## Funding
 Funding is provided by Michigan State University (to P.L. Zarnetske), and by a 
 MSU Ecology Evolution, and Behavior SEED Grant (to P.L. Zarnetske). 
 Original work on a subset of species was funded by the Yale Climate and Energy 
 Institute (to P.L. Zarnetske), Erasmus Mundus Fellowship (to S. Zonneveld).
 
-## Authors of the code in this repository
+Please see main readme for additional acknlowedgmens
+
+## Authors (R code)
 
 * Phoebe L. Zarnetske, PI, [Spatial and Community Ecology Lab (SpaCE Lab)](https://www.communityecologylab.com)
 * Patrick Bills, staff data scientist [Institute for Cyber-enabled Research (ICER)](https://icer.msu.edu)
