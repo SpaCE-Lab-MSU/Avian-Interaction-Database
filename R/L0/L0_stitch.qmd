@@ -238,7 +238,7 @@ export the data to become the current L0 interaction data, overwrite any existin
 #| echo: false
 # change the name here to save a test file or overwrite previous version
 
-intxns_file_name <- "AvianInteractionData_L0_test.csv"
+intxns_file_name <- "AvianInteractionData_L0_stitched.csv"
 L0_file <- save_L0_intxns(intxnsL0sp$intxns,
                           intxns_file_name,
                           L0_dir = file_paths$L0)
