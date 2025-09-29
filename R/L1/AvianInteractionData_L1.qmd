@@ -1876,6 +1876,12 @@ int.raw.names <- add_edits_to_list(int.raw.names, raw_names_edits)
 
 ### TYPOS 
 
+Previous data entry versions have the typo 'hawl' - is that still here?
+
+```{r}
+interaction_records_by_match_common(int.raw, 'hawl')
+```
+
 Previous Code (may be deleted?)
 
 
