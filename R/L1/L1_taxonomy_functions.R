@@ -44,8 +44,11 @@ find_closest_match_with_score <- function(name, reference_list) {
   if (is.na(name) || name == "") {
     return(list(match = NA_character_, score = NA_real_))
   }
-  name_cleaned <- clean_name(name)
-  reference_cleaned <- clean_name(reference_list) # Cleaned for comparison only
+
+  # use cleaned, un-cased names to improve matching
+  name_cleaned <- tolower(clean_name(name))
+  reference_cleaned <- tolower(clean_name(reference_list)) # Cleaned for comparison only
+
   # Calculate string distances
   distances <- stringdist::stringdist(name_cleaned, reference_cleaned, method = "jw") # Jaro-Winkler distance
   if (length(distances) == 0 || all(is.na(distances)) || min(distances, na.rm = TRUE) > 0.5) {
