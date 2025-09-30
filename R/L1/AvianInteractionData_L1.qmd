@@ -312,7 +312,16 @@ print("rows remaining with not both effects NA:")
 print(nrow(int.raw))
 ```
 
+### Some quick typo fixes
 
+This is the same function run during stitching, but run it again and to create
+a cleaned L0 data set to work with 
+
+```{r}
+
+int.raw<-fix_taxon_typos(int.raw)
+
+```
 ### Discovery and repair of missing Sp1/Sp2 scientific names
 
 List rows with missing sp1 values but have other data to use for fix
@@ -1155,10 +1164,6 @@ Review Number of fixed names so far, out of all unmatched gbif
 257 out of 326; May 29, 2025: 244
 
 
-```{r}
-
-```
-
 
 ### Names Update  high-confidence matches, 
 but only update those names that haven't already been dispensated and have a note
@@ -1183,11 +1188,11 @@ for(r in rows_to_update){
   
   current_scientific_name.raw <- int.raw.names[r,]$scientific_name.raw
   
-  high_confidence_match <- unique(high_confidence_matches[
-    high_confidence_matches$scientific_name.raw ==current_scientific_name.raw,
-    "closest_scientific_name_match"]) 
+  high_confidence_match <- high_confidence_matches[
+      high_confidence_matches$scientific_name.raw == int.raw.names[r,]$scientific_name.raw &
+      high_confidence_matches$common_name.raw == int.raw.names[r,]$common_name.raw, ]
   
-  if(length(high_confidence_match)>1) {
+  if(nrow(high_confidence_match)>1) {
     # do we have redundant matches?  if so print those and skip
     print("duplicate matches")
     print(high_confidence_match)
@@ -1195,7 +1200,7 @@ for(r in rows_to_update){
   }
   
   # extract values and update list
-  int.raw.names[r,]$scientific_name.edit <- as.character(high_confidence_match$closest_scientific_name_match)
+  int.raw.names[r,]$scientific_name.edit <- high_confidence_match$closest_scientific_name_match
   
   scientific_name_match_score <- as.character(high_confidence_match$scientific_name_match_score)
   
@@ -1203,8 +1208,7 @@ for(r in rows_to_update){
 
   
 }
-print("remaining unresolved:")
-print(nrow(unresolved_species(int.raw.names)))
+
 ```
 
 remaining unresolved after high-conf matches:
@@ -1303,19 +1307,21 @@ int.raw.names <- int.raw.names %>%
 
 ```
 
+Moticilla alba ocularis = White Wagtail (ocularis), misspelled genus
 
---- 
+```{r}
+filter(checklist, scientific_name == "Motacilla alba ocularis")
 
-*Historical fixes no longer necessary (typos are fixed during L0 stitching)*
-
-delete in future
+int.raw.names <- add_name_edits(int.raw.names, 
+                 scientific_name.raw = "Moticilla alba ocularis",
+                 edit_notes = "CHANGE TO CLOSEST MATCH: checklist Motacilla alba ocularis White Wagtail (Ocularis), Pied Wagtail",
+                 scientific_name.edit = "Motacilla alba ocularis",
+                 common_name.edit = "White Wagtail (ocularis)"
+  )
 
 ```
- CHANGE TO CLOSEST MATCH: checklist says Stercorarius sp. (drop extra p)
- Stercorarius spp.      Jaeger  Stercorarius sp.    0.901960784
 
 
-```
 
 ---
 
@@ -1494,27 +1500,118 @@ for(r in 1:nrow(name_matches)) {
 name_matches %>% arrange(desc(name_match_score))
 ```
 
+#### Example Matches to set threshold
 
+Raw  Checklist Match ( match value)
 
+- *Northern Jancan* matches *Northern Jacana* 0.9458333	=> correct
+- *Black-Winged Babbler*	matches *Black-chinned Babbler*	0.9190476 => incorrect 
 
-
-
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-
-## Scientific Name Changes: Low Confidence Matches
-
-
+Conclusion there is no obvious threshold for match scores 0.9 = < s < 1.0, so 
+set threshold to 1.0
 
 ```{r}
-# Extract final_matches with lower confidence (match_score <= 0.90) for further checking
+common_name_match_threshold <- 1.0
+```
+
+Update name edits using common name matches
+
+```{r}
+#| echo: false
+
+high_confidence_matches <- filter(name_matches, name_match_score >= common_name_match_threshold)
+
+# update by Row number. Not very R-like but works
+
+# get the row numbers of the names list that we want to update with matches
+rows_high_confidence_match <- which(int.raw.names$common_name.raw %in% high_confidence_matches$common_name.raw)
+# get the row numbers of names list already updated -> this process will not overwrite existing notes
+rows_with_non_empty_notes <- which(!is.na(int.raw.names$edit_notes))
+
+rows_to_update <- rows_high_confidence_match[!rows_high_confidence_match  %in% rows_with_non_empty_notes ]
+
+print(paste("updating", length(rows_to_update), "rows"))
+      
+for(r in rows_to_update){
+  # find the fuzzy matched name to use for new edit
+  # matching the same raw name in the  high confidence list
+  
+  current_common_name.raw <- int.raw.names[r,]$common_name.raw
+  
+  high_confidence_match <- high_confidence_matches[
+      high_confidence_matches$scientific_name.raw == int.raw.names[r,]$scientific_name.raw &
+      high_confidence_matches$common_name.raw == int.raw.names[r,]$common_name.raw, ]
+  
+  if(nrow(high_confidence_match)>1) {
+    # do we have redundant matches?  if so print those and skip
+    print("duplicate matches")
+    print(high_confidence_match)
+    next # skip this one keep going
+  }
+  
+  # update sci name edit to matching checklist sciname
+  int.raw.names[r,]$scientific_name.edit <- high_confidence_match$scientific_name.checklist
+  
+  # update notes 
+  int.raw.names[r,]$edit_notes <- paste('KEEP RAW: high confidence fuzzy match with Clements checklist common name checklist ',
+       as.character(high_confidence_match$name_match_score ))
+
+  
+}
+
+
+```
+
+
+### Manual edits after common name match 
+
+Jancana spinosa matched Northern Jacana, discovering the typo
+
+```{r}
+
+int.raw.names <- add_name_edits(int.raw.names,
+            "Jancana spinosa",
+            "Typo edit:Jancana spinosa should be  Jacana spinosa Northern Jacana",
+            "Jacana spinosa",
+            "Northern Jacana")
+
+```
+Remaining Unresolved Species:
+
+```{r}
+nrow(unresolved_species(int.raw.names))
+```
+
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+## Scientific Name Changes: Low Confidence Matches on scientific name
+
+Extract scientific name matches with lower confidence (match_score <= 0.90) 
+for those remaining species that didn't match for further 
+checking
+
+```{r}
+
 low_confidence_matches <- scientific_name_matches %>%
   filter(
     (scientific_name_match_score < 0.9 & !is.na(scientific_name_match_score)) 
   ) %>% 
   filter( # remove unid species from matches
     !grepl(" sp\\.$", closest_scientific_name_match)
-  )
+  ) %>% 
+  filter(
+    scientific_name.raw %in% unresolved_species(int.raw.names)$scientific_name.raw
+  ) 
+
+  # couldn't get Mutate to work, so here is a loop to add in the common name where it's found
+  low_confidence_matches$common_name.checklist <- NA
+  for(r in 1:nrow(low_confidence_matches)){
+    common_names <- filter(checklist,scientific_name == low_confidence_matches[r,"closest_scientific_name_match"] & category == "species")$common_name
+    if(length(common_names)==1) low_confidence_matches[r,"common_name.checklist"]<- common_names[1]
+  }
+
 
 length(unique(low_confidence_matches$scientific_name.raw))
 ```
@@ -1526,45 +1623,13 @@ Check Low Confidence Matches , based on scientific_name:
 Define range for printing in increments of 0.005
 
 
-```{r}
-#| echo: false
-#| eval: false
-
-# this was previously use to list matches in groups but since there are so few
-# just showing the whole lists sorted by confidence below 
-
-# not run
-
-# score_start <- min(low_confidence_matches$scientific_name_match_score)
-# score_end <- max(low_confidence_matches$scientific_name_match_score)
-# increment <- 0.005
-
-# Loop through each score range and print the matches within that range
-
-
-# for (i in seq(score_start, score_end, by = increment)) {
-#   current_range <- low_confidence_matches %>%
-#     filter(scientific_name_match_score >= i & scientific_name_match_score <= i + increment)
-#   
-#   # Print the current range if it has any entries
-#   if (nrow(current_range) > 0) {
-#     cat(paste("Match Score Range:", sprintf("%.2f", i), "to", sprintf("%.2f", i + increment), "\n" ))
-#     print(select(current_range, scientific_name.raw, common_name.raw, closest_scientific_name_match,scientific_name_match_score))
-#     cat("\n")
-#   }
-# }
-
-```
-
 Examine low confidence matches
 
 ```{r}
 
-low_confidence_matches %>% select(scientific_name.raw, closest_scientific_name_match,scientific_name_match_score) %>% arrange(desc(scientific_name_match_score))
+View(low_confidence_matches) #  %>% select(-c(scientific_name.edit, common_name.edit, edit_notes))
 ```
 
-
-Note:  Larus sp shows up in raw but L0 should append a dot
 
 ```{r}
 # For most of the names, assign them the closest match, then edit the few above
@@ -1584,52 +1649,45 @@ dplyr::filter(low_confidence_matches, scientific_name.raw %in% c("Accipiter coop
 ```
 
 
-
-```{r}
-#| echo: false
-#| eval: false
-# old version Save these fixes in new df
-# Assign scientific_name and common_name to the closest_matches based on fuzzy
-# coding match. Dec. 11, 2024: only doing scientific_name for now.
-# names(fixed_names2)[names(fixed_names2) == "closest_scientific_name_match"] <-"scientific_name"
-# fixed_names2$common_name.raw<-NULL
-# fixed_names2 <- fixed_names2 %>% 
-#   distinct()
-# 
-# length(unique(fixed_names2$scientific_name.raw))
-# 69 out of 326 OK; May 29, 2025: 65
-```
-
-
-Scroll through these ~60 Low Confidence Matches in order from highest to lowest
-match score. Many look okay 
+Scroll through these Low Confidence Matches in order from highest to lowest
 
 Assigning closest low-confidence match with update notes,
 and will be updated if necessary below
 
-```{r}
-# get the matches in the int.raw.names, which will then be in the same order 
-# order as the df with our matches
-rows_to_update <- match(low_confidence_matches$scientific_name.raw, int.raw.names$scientific_name.raw)
-# save a copy
-int.raw.names.copy_pre_low_confidence <- int.raw.names
+??? PLZ I believe now that we are Matching common names, the 10 remaining should
+be matched manually, disabling this next part 
 
-int.raw.names[rows_to_update, ]$scientific_name.edit <- low_confidence_matches$closest_scientific_name_match
-int.raw.names[rows_to_update, ]$edit_notes <- paste("Replace w fuzzy match low confidence to checklist", low_confidence_matches$scientific_name_match_score)
-# view the outcome
-tibble(int.raw.names[rows_to_update,])
+```{r}
+
+# disabled, to be deleted 
+
+# # get the matches in the int.raw.names, which will then be in the same order 
+# # order as the df with our matches
+# rows_to_update <- match(low_confidence_matches$scientific_name.raw, int.raw.names$scientific_name.raw)
+# # save a copy
+# int.raw.names.copy_pre_low_confidence <- int.raw.names
+# 
+# int.raw.names[rows_to_update, ]$scientific_name.edit <- low_confidence_matches$closest_scientific_name_match
+# int.raw.names[rows_to_update, ]$edit_notes <- paste("Replace w fuzzy match low confidence to checklist", low_confidence_matches$scientific_name_match_score)
+# # view the outcome
+# tibble(int.raw.names[rows_to_update,])
 
 ```
 
-list those with comments that are not on checklist
+
+
+
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+### Manual fixes after exploring the checklist 
+
 ```{r}
-
-tibble(unresolved_species(int.raw.names))
-
+scientific_name.to_fix = "Parkesia noveboracensis notabilis"
+filter(int.raw.names,scientific_name.raw==scientific_name.to_fix) 
 
 ```
-
-
 
 ```{r}
 int.raw.names <- int.raw.names %>% 
@@ -1651,122 +1709,161 @@ int.raw.names <- int.raw.names %>%
 
 ```
 
+**Unresolved by Matching: Argya affinis somervillei**
+
+```{r}
+intxns_by_species(int.raw,"Argya affinis somervillei")
+```
+```{r}
+int.raw.names <- int.raw.names %>% 
+  add_name_edits(scientific_name.raw = "Argya affinis somervillei",
+                 scientific_name.edit = "Argya striata somervillei",
+                 edit_notes = "KEEP RAW and edit: BOW and checklist: 'Black-winged Babbler' is most likely Jungle Babbler (Black-winged) Argya striata somervillei match  Argya affinis somervillei  Argya affinis  0.84  "
+  )
+
+
+```
+
+
+#######################
+
+??? PLZ could use help determining this one, the note doesn't match the problem
+
+ - entry is an unid, could be one or the ther
+ - the note talks about subspecies but this is not the case here
+ - decision needs to be made to match to checklist for this ambiguous id
+
+```{r}
+scientific_name.to_fix <- "Setophaga striata / tigrina"
+scientific_name_matches %>%filter(scientific_name.raw == scientific_name.to_fix)
+
+```
+
+This is an unid that could be one or the other.. closest match is the species Setophaga striata
 
 ```{r}
 
+filter(checklist, scientific_name == "Setophaga tigrina")
+```
 
-??? TBD 
-# int.raw.names <- add_name_edits(int.raw.names, scientific_name.raw = "Setophaga striata / tigrina",
-#                  scientific_name.edit = "",
-#                  edit_notes = ""
+```{r}
+# disabled this one, needs edit
+# int.raw.names <- add_name_edits(int.raw.names, 
+#       scientific_name.raw = "Setophaga striata / tigrina",
+#       edit_notes = "ACCEPT CHANGE TO CLOSEST MATCH: BOW states no subspecies: No subspecies, following Parkes (1954), who could not diagnose a difference between northeastern
+# breeders and those farther west, which were named S. s. lurida (Burleigh and Peters, 1948).",
+#       scientific_name.edit = "",
+#       )
+# 
+# 
+# 
+# # ACCEPT CHANGE TO CLOSEST MATCH: BOW states no subspecies: "No subspecies, following
+# # Parkes (1954), who could not diagnose a difference between northeastern
+# # breeders and those farther west, which were named S. s. lurida (Burleigh and
+# # Peters, 1948)."
+# # 1 Setophaga striata / tigrina Setophaga striata       0.877
+# int.raw[which(int.raw$species1_scientific == "Setophaga striata / tigrina"), ]
+# int.raw[which(int.raw$species2_scientific == "Setophaga striata / tigrina"), ]
+```
+
+American Pipit - this seems to be fixed in raw data
+```{r}
+
+print(interaction_count_by_match(int.raw, "Anthus americanus"))
+print(interaction_count_by_match_common(int.raw, "American Pipit"))
+```
+
+```{r}
+# disabled until confirmation to be deleted
+# checklist[which(checklist$common_name == "American Pipit"), ]
+# 
+# int.raw.names <- int.raw.names %>% 
+#   add_name_edits(scientific_name.raw = "Anthus americanus",
+#                  scientific_name.edit = "Anthus rubescens",
+#                  edit_notes = "KEEP RAW but edit it. BOW and checklist: Polytypic American Pipit Anthus rubescens is split into monotypic Siberian Pipit Anthus japonicus and polytypic American Pipit Anthus rubescens (with subspecies pacificus, rubescens, and alticola). int.raw interaction appears to be for North american species and observation (Parasitic Jaeger). Interaction is with 'American Pipit'; checklist states 'Anthus rubescens' 
+# Anthus americanus     Anthus cervinus  0.871"
+#   )
+
+```
+
+
+```{r}
+filter(int.raw.names, scientific_name.raw == "Anas affinis")
+```
+
+```{r}
+# this edit disabled, fixed by common name match
+
+# int.raw.names <- int.raw.names %>% 
+#   add_name_edits(scientific_name.raw = "Anas affinis",
+#                  scientific_name.edit = "Aythya affinis",
+#                  edit_notes = "KEEP RAW and edit: checklist: Lesser Scaup =	Aythya affinis Anas affinis   Argya affinis       Lesser Scaup  Lesser Scaup   0.868"
 #   )
 
 
-
-# ACCEPT CHANGE TO CLOSEST MATCH: BOW states no subspecies: "No subspecies, following
-# Parkes (1954), who could not diagnose a difference between northeastern
-# breeders and those farther west, which were named S. s. lurida (Burleigh and
-# Peters, 1948)."
-# 1 Setophaga striata / tigrina Setophaga striata       0.877
-int.raw[which(int.raw$species1_scientific == "Setophaga striata / tigrina"), ]
-int.raw[which(int.raw$species2_scientific == "Setophaga striata / tigrina"), ]
-```
-
-American Pipit - this is no longer in the raw data
-```{r}
-
-interaction_count_by_match(int.raw, "Anthus americanus")
-
-checklist[which(checklist$common_name == "American Pipit"), ]
-
-int.raw.names <- int.raw.names %>% 
-  add_name_edits(scientific_name.raw = "Anthus americanus",
-                 scientific_name.edit = "Anthus rubescens",
-                 edit_notes = "KEEP RAW but edit it. BOW and checklist: Polytypic American Pipit Anthus rubescens is split into monotypic Siberian Pipit Anthus japonicus and polytypic American Pipit Anthus rubescens (with subspecies pacificus, rubescens, and alticola). int.raw interaction appears to be for North american species and observation (Parasitic Jaeger). Interaction is with 'American Pipit'; checklist states 'Anthus rubescens' 
-Anthus americanus     Anthus cervinus  0.871"
-  )
-
-
-# fixed_names2$scientific_name[fixed_names2$scientific_name.edit == "Anthus americanus"] <- "Anthus rubescens"
 ```
 
 
+Hairy Woodpecter
+
 ```{r}
-
-int.raw.names <- int.raw.names %>% 
-  add_name_edits(scientific_name.raw = "Anas affinis",
-                 scientific_name.edit = "Aythya affinis",
-                 edit_notes = "KEEP RAW and edit: checklist: Lesser Scaup =	Aythya affinis Anas affinis   Argya affinis       Lesser Scaup  Lesser Scaup   0.868"
-  )
-
-# fixed_names2$scientific_name[fixed_names2$scientific_name.edit == "Anas affinis"] <- "Aythya affinis"
-
+filter(int.raw.names, scientific_name.raw == "Leucophaeus villosus")
 ```
 
-
 ```{r}
+# disabled here, fixed during common name matching
 
-int.raw.names <- int.raw.names %>% 
-  add_name_edits(scientific_name.raw = "Leucophaeus villosus",
-                 scientific_name.edit = "Dryobates villosus",
-                 edit_notes = "KEEP RAW and edit: Common name in int.raw is Hairy Woodpecker, so genus is off. Dryobates villosus Leucophaeus villosus                   Leucophaeus modestus 0.867"
-  )
-
-# fixed_names2$scientific_name[fixed_names2$scientific_name.edit == "Leucophaeus villosus"] <- "Dryobates villosus"
+# int.raw.names <- int.raw.names %>% 
+#   add_name_edits(scientific_name.raw = "Leucophaeus villosus",
+#                  scientific_name.edit = "Dryobates villosus",
+#                  edit_notes = "KEEP RAW and edit: Common name in int.raw is Hairy Woodpecker, so genus is off. Dryobates villosus Leucophaeus villosus                   Leucophaeus modestus 0.867"
+#   )
 
 ```
 
 
 Chrysococcyx meyerii: White-Eared Bronze-Cuckoo
+
 ```{r}
-# COPIED but not sure what to put for reason
-checklist[which(checklist$common_name == "White-Eared Bronze-Cuckoo"), ]
-int.raw.names <- int.raw.names %>% 
-  add_name_edits(scientific_name.raw = "Chrysococcyx meyerii",
-                 scientific_name.edit = "Chalcites meyerii",
-                 edit_notes = "KEEP RAW and edit: checklist: White-Eared Bronze-Cuckoo = Chalcites meyerii"
-  )
- 
-# fixed_names2$scientific_name[fixed_names2$scientific_name.edit == "Chrysococcyx meyerii"] <- "Chalcites meyerii"
+filter(int.raw.names, scientific_name.raw == "Chrysococcyx meyerii")  %>% select(scientific_name.edit, common_name.edit, edit_notes)
 ```
 
+```{r}
+# disabled since fixed by common name match
+# checklist[which(checklist$common_name == "White-Eared Bronze-Cuckoo"), ]
+# int.raw.names <- int.raw.names %>% 
+#   add_name_edits(scientific_name.raw = "Chrysococcyx meyerii",
+#                  scientific_name.edit = "Chalcites meyerii",
+#                  edit_notes = "KEEP RAW and edit: checklist: White-Eared Bronze-Cuckoo = Chalcites meyerii"
+#   )
+ 
 
+```
 
 
 
 Double-Crested Cormorant: checklist species change
 
-but can't find Phalacrocorax saltatrix anywhere in the raw data
-and checklist has "Nannopterum auritum" 
-ALSO check that the same species sometimes has common name 
-
-Was the genus updated?
 
 ```{r}
-print(interaction_count_by_species(int.raw, 'Phalacrocorax saltatrix'))
-# zero! this must have been corrected??
-
-print(int.raw.names %>% filter(scientific_name.raw ==  "Phalacrocorax saltatrix"))
-checklist_common_name ="Double-crested Cormorant"
-checklist[which(checklist$common_name == checklist_common_name), ]
-checklist_species <- checklist[which(checklist$common_name == "Double-crested Cormorant"), ]$scientific_name[1]
-print(checklist_species)
+print(interaction_count_by_species(int.raw, "Phalacrocorax auritus"))
+```
+```{r}
+filter(int.raw.names,scientific_name.raw == "Phalacrocorax auritus")
 ```
 
-??? PLZ 
+```{r}
+checklist_common_name ="Double-crested Cormorant"
+checklist[which(checklist$common_name == checklist_common_name), ]
 
-Previous version:
-Raw was "Phalacrocorax saltatrix", Double-Crested Cormorant which is now
-Nannopterum auritum in checklist
+```
 
-*this may have been misspelled or corrected in raw data, but the raw name
-typed here is not in the raw data BUT Double-Crested Cormorant is in the data
-as Phalacrocorax auritus*
 
-Phalacrocorax auritus / Double-Crested Cormorant now Nannopterum auritum
+Update scientific name Phalacrocorax auritus / Double-Crested Cormorant 
+based on discovery in checklist and matching common name
 
 ```{r}
-# this fails becuase zero rows
+
 int.raw.names <- int.raw.names %>% 
   add_name_edits(scientific_name.raw = "Phalacrocorax auritus",
                  scientific_name.edit = "Nannopterum auritum",
@@ -1775,21 +1872,18 @@ int.raw.names <- int.raw.names %>%
 ```
 
 
-Add a note for "Black-necked Stilt" - keeping the scientific name as it is
+
+### Example, reviewing a change already made by common name match
+
 
 
 ```{r}
-print('checklist')
 
 checklist[which(checklist$common_name == "Black-necked Stilt"), ]
-print('interaction count')
-print(interaction_count_by_species(int.raw,"Himantopus alexandrus"))
+```
 
-int.raw.names <- add_name_edits(int.raw.names, 
-scientific_name.raw = "Himantopus alexandrus",
-edit_notes = "ACCEPT CHANGE TO CLOSEST MATCH: checklist: 	Black-Necked Stilt = Himantopus mexicanus 6 Himantopus alexandrus   Himantopus mexicanus   Black-Necked Stilt  Black-necked Stilt 0.857"
-)
-
+```{r}
+filter(int.raw.names, scientific_name.edit == "Himantopus mexicanus")
 ```
 
 Pomarine Jaeger = Stercorarius pomarinus 
@@ -1823,21 +1917,39 @@ int.raw.names <- add_name_edits( int.raw.names,
 
 ```
 
+
 *"Speckled Teal"*
 ```{r}
-int.raw[int.raw$species1_scientific == "Anas flavirostris / Anas andium", ]
-
+scientific_name.to_fix <- "Anas flavirostris / anas andium"
+filter(int.raw.names, scientific_name.raw == scientific_name.to_fix)
 ```
 if zero rows, not in the db - keep?  
 
 ```{r}
+scientific_name.checklist = "Anas andium/flavirostris"
+filter(checklist, scientific_name == scientific_name.checklist) %>% select(scientific_name, common_name)
+```
+
+
+
+```{r}
 
 int.raw.names <- add_name_edits( int.raw.names, 
-     scientific_name.raw = "Anas flavirostris / Anas andium",
+     scientific_name.raw = "Anas flavirostris / anas andium" ,
      scientific_name.edit = "Anas andium/flavirostris",
      edit_notes = "KEEP RAW and edit: According to BOW there is no Anas flavirostris / anas andium. Common name in int.raw is Speckled Teal but checklist is Andean/Yellow-billed Teal."
   )
 
+```
+
+
+**House Finch (Haemorhous mexicanus)**
+
+Fixed during common name match, can delete
+
+```{r}
+scientific_name.to_fix <-  "Hirundo mexicanus"
+filter(int.raw.names, scientific_name.raw == scientific_name.to_fix)
 ```
 
 
@@ -1852,7 +1964,11 @@ int.raw.names <-
 
 ```
 
-#### Hawks
+
+################
+??? PLZ
+
+### Hawks
 
 ```{r}
   int.raw.names <- int.raw.names %>%
@@ -1885,22 +2001,8 @@ yes - no European Goshawk in our names
 
 ```
 
-Argya affinis somervillei : rows in names?
 
-```{r}
-intxns_by_species(int.raw,"Argya affinis somervillei")
-```
 
-```{r}
-int.raw.names <- int.raw.names %>% 
-  add_name_edits(scientific_name.raw = "Argya affinis somervillei",
-                 scientific_name.edit = "Argya striata somervillei",
-                 edit_notes = "KEEP RAW and edit: BOW and checklist: 'Black-winged Babbler' is most likely Jungle Babbler (Black-winged) Argya striata somervillei match  Argya affinis somervillei  Argya affinis  0.84  "
-  )
-
-# Common name will be changed later
-
-```
 
 ```{r}
 
@@ -1911,30 +2013,44 @@ int.raw.names <- int.raw.names %>%
   )
 
 
-# fixed_names2$scientific_name[fixed_names2$scientific_name.edit == "Accipiter getilis"] <- "Astur atricapillus"
+```
+
+
+
+Thyrothorus rufalbus - fixed by common name match, can delete
+
+```{r}
+
+filter(int.raw.names, scientific_name.raw == "Thyrothorus rufalbus")
 
 ```
 
 
 ```{r}
-
-int.raw.names <- int.raw.names %>% 
-  add_name_edits(scientific_name.raw = "Thyrothorus rufalbus",
-                 scientific_name.edit = "Thryophilus rufalbus",
-                 edit_notes = "CHANGE TO CLOSEST MATCH: original common name: Rufous-and-white Wren; checklist confirms the suggested scientific_name change. Thyrothorus rufalbus Thryophilus rufalbus       0.831 "
-  )
-
+# disabled - fixed by common name
+# int.raw.names <- int.raw.names %>% 
+#   add_name_edits(scientific_name.raw = "Thyrothorus rufalbus",
+#                  scientific_name.edit = "Thryophilus rufalbus",
+#                  edit_notes = "CHANGE TO CLOSEST MATCH: original common name: Rufous-and-white Wren; checklist confirms the suggested scientific_name change. Thyrothorus rufalbus Thryophilus rufalbus       0.831 "
+#   )
+# 
 
 
 ```
 
+
+"Chrysococcyx meyerii" fixed by common name match, can delete
+
 ```{r}
-int.raw.names <- add_name_edits(int.raw.names,
-                                scientific_name.raw ="Chrysococcyx meyerii",
-                                scientific_name.edit = "Chalcites meyerii",
-                                edit_notes = 'Common name in int.raw = White-eared Bronze-Cuckoo. Checklist states: Move from Chrysococcyx into Chalcites to become Chalcites meyerii.'
-)
+# disable, already martched by common name
+# 
+# int.raw.names <- add_name_edits(int.raw.names,
+#                   scientific_name.raw ="Chrysococcyx meyerii",
+#                   scientific_name.edit = "Chalcites meyerii",
+#                   edit_notes = 'Common name in int.raw = White-eared Bronze-Cuckoo. Checklist states: Move from Chrysococcyx into Chalcites to become Chalcites meyerii.'
+# )
  
+
 ```
 
 
@@ -2003,14 +2119,6 @@ raw_names_edits <-list(c(
 "KEEP RAW and edit; checklist: Leach's Storm-Petrel = Hydrobates leucorhous Oceanodroma leucorrhoa Paraclaravis mondetoura ochoterena Leach's Storm-Petrel Leach's Storm-Petrel ",
 "Hydrobates leucorhous"
 ),c(
-"Duck sp",
-"KEEP RAW and edit; Duck sp. = Anatidae sp. (missing period in sp.",
-"Anatidae sp."
-),c(
- "Duck sp.",
-"KEEP RAW and edit; Duck sp. = Anatidae sp.",
-"Anatidae sp."
-),c(
 "Roseate spoonbill",
 "KEEP RAW and edit int.raw; this entry has multiple columns off for scientific and common BOW and checklist: scientific_name of Roseate Spoonbill = Platalea ajaja",
 "Platalea ajaja"
@@ -2021,31 +2129,67 @@ raw_names_edits <-list(c(
 ```
 
 
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------
+
+## Unid sp.  fixes
+
+??? PLZ 
+
+Unid sp.   to work on:
+
 ```{r}
-# add the list above
-int.raw.names <- add_edits_to_list(int.raw.names, raw_names_edits)
+int.raw.names.unid <- filter(int.raw.names, grepl(" sp\\.$", scientific_name.raw))
+print(nrow(int.raw.names.unid))
+View(int.raw.names.unid  )
 
 ```
 
+### TYPOS
 
-### TYPOS 
-
-Previous data entry versions have the typo 'hawl' - is that still here?
+Build a list of things to updated here
 
 ```{r}
-interaction_records_by_match(int.raw, 'hawk')
+
+int.raw.names <- add_name_edits(int.raw.names, 
+    scientific_name.raw = "Duck sp.",
+                         edit_notes = "KEEP RAW and edit Duck sp. = Anatidae sp.",
+                         scientific_name.edit="Anatidae sp."
+                         )
+
 ```
 
-Previous Code (may be deleted?)
+
+typo 'hawl' 
+
+```{r}
+interaction_records_by_match(int.raw, 'hawl')
+```
+
+??? PLZ this was from previous code, please fix as needed
+
+
+```{r}
+
+# ????
+int.raw.names <- int.raw.names %>% 
+          add_name_edits(int.raw.names, 
+                 scientific_name.raw = "unid. Accipiter hawl",
+                 scientific_name.edit =  "Aerospiza/Tachyspiza/Accipiter/Astur sp.",
+                 edit_notes = "typo, assign generic hawk group")
+  
 
 
 ```
-# 1 unid. 2 hawl  Turdus hauxwelli       0.674
-# Also missing: unid. Accipiter hawl
-# int.raw[which(int.raw$species1_scientific == "unid. 2 hawl"), ]
-# int.raw[which(int.raw$species2_scientific == "unid. 2 hawl"), ]
-# fixed_names2[which(fixed_names2$scientific_name.raw == "unid. 2 hawl"), ]
-# fixed_names2[which(fixed_names2$scientific_name.edit == "unid. 2 hawl"), ]
+
+```
+# unid. Accipiter hawl
 # int.raw[which(int.raw$species1_scientific == "unid. Accipiter hawl"), ]
 # int.raw[which(int.raw$species2_scientific == "unid. Accipiter hawl"), ]
 # fixed_names2$scientific_name[fixed_names2$scientific_name.edit == "unid. 2 hawl"] <- "Aerospiza/Tachyspiza/Accipiter/Astur sp."
@@ -2054,33 +2198,16 @@ Previous Code (may be deleted?)
 
 
 
-```{r}
-int.raw.names <- int.raw.names %>% 
-          add_name_edits(int.raw.names, 
-                 scientific_name.raw = "unid. Accipiter hawl",
-                 scientific_name.edit =  "Aerospiza/Tachyspiza/Accipiter/Astur sp.",
-                 edit_notes = "typo, assign generic hawk group")
-  
-
-```
-
-
-
 ## Examine Name Corrections and Notes so far
 ```{r}
 print("total number of names")
 print(nrow(int.raw.names))
-print("number of names with no comment (edits)")
-print(length(which(is.na(int.raw.names$edit_notes))))
-
-
-# tibble(int.raw.names)
+print("number of species with no edits")
+print(nrow(unresolved_species(int.raw.names)))
+print("number of all rows with not edits including UnIDs")
+print( nrow( filter(int.raw.names, is.na(edit_notes))))
 
 ```
-
-
-
-
 
 
 
@@ -2088,6 +2215,48 @@ print(length(which(is.na(int.raw.names$edit_notes))))
 ```{r}
 save.image(file.path(L1_RData_dir,"AvianInteractionData_L1_29May2025.RData"))
 ```
+
+
+
+
+--------------------------------------------------------------------------------
+
+## Merge with Checklist to see how many are GBIF-only and don't match
+
+this adds new columns scientific_name.checklist and common_name.checklist
+which would ultimately but what is published. 
+
+scientific_name.checklist and scientific_name.edit are the same where they match
+
+```{r}
+# add a checklist column - this will be the sci name to publish
+
+int.raw.names.checklist<- checklist_merge(int.raw.names, checklist)
+View(int.raw.names.checklist)
+
+```
+
+Count of rows Not on checklist 
+```{r}
+nrow(filter(int.raw.names.checklist, is.na(scientific_name.checklist)))
+
+```
+
+Rows to to match that are not unids: 
+
+```{r}
+nrow(
+  filter(int.raw.names.checklist, is.na(scientific_name.checklist)) %>%
+  filter(!grepl(" sp\\.$", scientific_name.raw))
+)
+```
+
+### Using curated list to match gbif to checklist
+
+Goal: use the Canada+CONUS list which has gbif to checklist mapping
+but is not all species. 
+
+
 
 
 ### Previous Code 
