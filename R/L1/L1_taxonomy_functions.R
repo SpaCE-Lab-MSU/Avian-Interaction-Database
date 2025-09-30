@@ -283,7 +283,7 @@ interaction_count_by_match_common<- function(intxns.df, common_name_fragment){
 #' based on scientific_name.edit
 
 
-checklist_merge <- function(edits.df, checklist) {
+checklist_join <- function(edits.df, checklist) {
     checklist.for_merge <- filter(checklist, category == "species" | category == "slash") %>%
             dplyr::select(scientific_name, common_name, species_code) %>%
             dplyr::rename(scientific_name.checklist = scientific_name, common_name.checklist = common_name)
