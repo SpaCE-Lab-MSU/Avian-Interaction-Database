@@ -40,13 +40,13 @@ Google Drive Files (Optional): Data imported as csv: - `/Google Drive/Shared dri
 
 Main Species List: 
 
-- Current selected species list
-  combined checklist based on Clements/Ebird, Avibase, 
+- Current selected species list =
+  combined checklist based on Clements/eBird v2024, Avibase v8.17, BBS v2024:
   output from `R/L0/AvianInteractionData_specieslists_L0.R`
 
 Other Checklists:
 
-- Full Clements/Ebird list 
+- Full Clements/eBird v2024 list 
 
 - GBIF database (via taxadb package)
 
@@ -70,7 +70,7 @@ Currently, the script is working for a checklist of CONUS+Canada.
 
 L0 data are checked to assign updated scientific and common names to the interaction pairs data. Makes a new column that also includes scientific name changes associated with the AOUcombo.index for merging with those names in the AvianInteractionData_AOUindex_L1.csv
 
-Notes Meaning: "keep raw and edit..." generally means " don't use one of the 
+Notes Meaning: "keep raw and edit..." generally means "don't use one of the 
 results of the matching algorithms, but instead replace w/Clements2024:..."
 
 GOOD EXAMPLE TO TRACE MATCHING: Aeronautes saxitalis should be Aeronautes saxatalis
@@ -81,8 +81,8 @@ GOOD EXAMPLE TO TRACE MATCHING: Aeronautes saxitalis should be Aeronautes saxata
 -   updated through 12 Dec 2024 (PLZ);
     -   As of Dec. 12, 2024, this is mainly cleaned for BBS species
 -   May 2025- July 2025 convert to notebook/Quarto, (PSB)
--   August 2025, using new species lists Canada+Conus from PLZ (PSB)
--   September 10, 2025, using species lists from commit from plz (PSB)
+-   August 2025, using new species lists Canada+CONUS from PLZ (PSB)
+-   September 10, 2025, using species lists from commit from PLZ (PSB)
 
 ### Set-up
 
@@ -120,7 +120,7 @@ but the subset list for 2024-25 analysis is in L1 as it's built from L0 lists*
 **Previously:** all species in BBS `"bbs_splist_2024_L1.csv"`
 
 (the 2024 release which includes all species as of 2023, plus the additional 
-AOUcombo.index column for use w BBS index)
+AOUcombo.index column for use w BBS AOU index)
 
 `splist2024<-read.csv(file.path(L1_dir,"bbs_splist_2024_L1.csv"))`
 
@@ -153,7 +153,7 @@ print(names(splist2024))
 
 ### Main Checklist
 
-Read in the full check list the official eBird/Clements checklist
+Read in the full check list the official eBird/Clements v2024 checklist
 
 ```{r}
 checklist_filename <- "eBird-Clements-v2024-integrated-checklist-October-2024-rev.csv"
@@ -173,7 +173,7 @@ print(names(checklist))
 ```
 
 We are using the GBIF list (via taxadb) to resolve scientific names and the 
-eBird/Clements checklist via Birds of The World naming conventions for species. 
+eBird/Clements v2024 checklist (reflected in Birds of The World naming conventions for species). 
 Some BBS names differ from these lists so they have to be resolved manually.
 
 
@@ -273,7 +273,7 @@ if(exists("int.raw.saved_all_rows")) int.raw<- int.raw.saved_all_rows
 
 print("n rows with both effects missing:")
 print(nrow(filter(int.raw, is.na(effect_sp1_on_sp2) & is.na(effect_sp2_on_sp1))))
-print("n rows with at least on effect present:")
+print("n rows with at least one effect present:")
 print(nrow(filter(int.raw, !is.na(effect_sp1_on_sp2) | !is.na(effect_sp2_on_sp1))))
 print("list of rows with both effects missing:")
 ```
@@ -430,7 +430,7 @@ for(cname in names(manual_assignments)){
     ]$species2_scientific = manual_assignments[[cname]] 
   }
 }
-  # double remaining rows with missing sp2 (should be zero)
+  # double check remaining rows with missing sp2 (should be zero)
 ```
 
 Double check that there are no remaining rows with missing scientific names
@@ -2421,5 +2421,18 @@ database
 # Hoary Redpoll lumped into Redpoll, but not sure this is the case in the BBS...
 # bbs.splist$scientific_name[bbs.splist$scientific_name.bbs2024 == "Acanthis
 # flammea"] <- "Acanthis flammea hornemanni"
+
+```
+
+```{r}
+# Summary info before exporting - replace DATA with data object name
+print("unique scientific names = number of unique species in this database")
+print(length(unique(paste(DATA$species1_scientific, DATA$species2_scientific))))
+
+print("unique types of interactions")
+print(length(unique(DATA$interaction)))
+
+print("unique pairwise interactions")
+# edit to report number of unique rows by DATA$species1_scientific, DATA$species2_scientific, DATA$interaction
 
 ```
