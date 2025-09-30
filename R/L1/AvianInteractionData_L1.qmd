@@ -465,15 +465,15 @@ Column Definitions:
 - edit_notes: text of why edits were made
 
 The edit columns are based on Clements 2024
-Determine how many unique entries are in int.raw\$species1_scientific , which 
-are unique combos of scientific names
+Determine how many unique entries are in int.raw\$species1_scientific, which 
+are unique combos of scientific names.
 
 ```{r}
 unique.sp.raw <- data.frame(scientific_name.raw = with(int.raw, union(
   species1_scientific, species2_scientific
 )))
 
-print(dim(unique.sp.raw)) #3913 # May 29, 2025: 3889
+print(dim(unique.sp.raw)) #3913 # May 29, 2025: 3889; Sept. 29, 2025: 3879
 ```
 
 
