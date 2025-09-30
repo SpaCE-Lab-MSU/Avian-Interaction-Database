@@ -342,6 +342,10 @@ fix_taxon_typos <- function(intxns.df){
             species2_common = trimws(species2_common,which=c("right"))
     )
 
+  # sometimes there is no space before "unid" aka Unid.duck"
+  intxns.df$species1_common<- str_replace(intxns.df$species1_common, "[Uu]nid\\.([A-Za-z])", "Unid. \1")
+  intxns.df$species2_common<- str_replace(intxns.df$species2_common, "[Uu]nid\\.([A-Za-z])", "Unid. \1")
+
   # make unid/sp. text consistent in species1
   intxns.df<- dplyr::mutate(intxns.df,
                species1_scientific = ifelse(
@@ -354,12 +358,18 @@ fix_taxon_typos <- function(intxns.df){
 
   # make unid/sp. text consistent in species2
   intxns.df<- dplyr::mutate(intxns.df,
-             species2_scientific = ifelse(
+            species2_scientific = ifelse(
                str_starts(species2_scientific, "unid."),  # Exception case
                str_replace(species2_scientific, "(unid.)s*(w+)", "1 U2"),
                str_to_sentence(species2_scientific)       # Regular case
              ) |> str_replace("spp.", "sp.")
   )
+
+  # add a period to the end of all Genus sp.
+  intxns.df$species1_scientific<- str_replace(intxns.df$species1_scientific, " sp$", " sp.")
+  intxns.df$species2_scientific<- str_replace(intxns.df$species2_scientific, " sp$", " sp.")
+
+
 
   # remove double spaces from binomials
   intxns.df<- intxns.df %>% dplyr::mutate(
