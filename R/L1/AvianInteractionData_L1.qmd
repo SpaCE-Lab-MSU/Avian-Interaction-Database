@@ -2142,18 +2142,21 @@ raw_names_edits <-list(c(
 
 ??? PLZ 
 
-Unid sp.   to work on:
+Open the Unid sp. (Genu-only) to work on:
 
+How many unique Unid sp?
+ 
 ```{r}
 int.raw.names.unid <- filter(int.raw.names, grepl(" sp\\.$", scientific_name.raw))
-print(nrow(int.raw.names.unid))
-View(int.raw.names.unid  )
+length(unique(int.raw.names.unid$scientific_name.edit))
+
+# optional, in Rstudio, open the list in a new tab
+# View(int.raw.names.unid )
 
 ```
 
 ### TYPOS
 
-Build a list of things to updated here
 
 ```{r}
 
@@ -2177,7 +2180,7 @@ interaction_records_by_match(int.raw, 'hawl')
 
 ```{r}
 
-# ????
+# ??? review 
 int.raw.names <- int.raw.names %>% 
           add_name_edits(int.raw.names, 
                  scientific_name.raw = "unid. Accipiter hawl",
@@ -2185,50 +2188,107 @@ int.raw.names <- int.raw.names %>%
                  edit_notes = "typo, assign generic hawk group")
   
 
-
-```
-
-```
+# previous code
 # unid. Accipiter hawl
-# int.raw[which(int.raw$species1_scientific == "unid. Accipiter hawl"), ]
-# int.raw[which(int.raw$species2_scientific == "unid. Accipiter hawl"), ]
 # fixed_names2$scientific_name[fixed_names2$scientific_name.edit == "unid. 2 hawl"] <- "Aerospiza/Tachyspiza/Accipiter/Astur sp."
 # fixed_names2$scientific_name[fixed_names2$scientific_name.edit == "unid. Accipiter hawl"] <- "Aerospiza/Tachyspiza/Accipiter/Astur sp."
+
+
 ```
+
 
 
 
 ## Examine Name Corrections and Notes so far
+
+
+Total number of name combinations in database:
+
+
 ```{r}
-print("total number of names")
+#| echo: false
+#| output: true
+
 print(nrow(int.raw.names))
-print("number of species with no edits")
+
+```
+
+number of full species without notes (dispensation/edits) :
+
+```{r}
+#| echo: false
+#| output: true
+
 print(nrow(unresolved_species(int.raw.names)))
-print("number of all rows with not edits including UnIDs")
+
+```
+
+number of all rows without notes (dispensation/edits) including UnID:
+
+```{r}
+#| echo: false
+#| output: true
+
 print( nrow( filter(int.raw.names, is.na(edit_notes))))
 
 ```
 
 
-
 ### checkpoint save
 ```{r}
-save.image(file.path(L1_RData_dir,"AvianInteractionData_L1_29May2025.RData"))
-```
+#| echo: false
+#| output: true
 
+today_date_string <- format(Sys.Date(),"%Y-%m-%d")
+rdata_file_name <- paste0("AvianInteractionData_L1_workspace", today_date_string, ".RData")
+f <- file.path(file_paths$L1,rdata_file_name )
+save.image(f)
+
+print(paste("whole enviroment saved as ", f))
+
+
+```
 
 
 
 --------------------------------------------------------------------------------
 
-## Merge with Checklist to see how many are GBIF-only and don't match
+## Join with Checklist and report 
 
-this adds new columns scientific_name.checklist and common_name.checklist
+Join the scientific name 'edits' with the current Clements checklist
+to start matching for final species.  
+
+This adds final columns 
+
+- scientific_name.checklist
+- common_name.checklist
+
 which would ultimately but what is published. 
 
-scientific_name.checklist and scientific_name.edit are the same where they match
-
 ```{r}
+#| echo: false
+
+# Historical code, can be deleted but saved for now to compare
+# note this code from previous version shows status of unresolved names
+# perhaps from GBIF?  not sure about main checklist
+
+# fixed.unresolved.gs<-rbind(fixed_names1,fixed_names2)
+# fixed.unresolved.gs$scientific_name_match_score<-NULL
+# length(unique(fixed.unresolved.gs$scientific_name.raw))
+# # 326 OK; May 29, 2025: 309
+# dim(fixed.unresolved.gs)
+# # 339 fixed unresolved species names; May 29, 2025: 322
+```
+
+
+At this stage, scientific_name.checklist == scientific_name.edit where 
+they match, leaving scientific_name.edit as GBIF entries that need updating
+
+Call the join function from L1 functions script and view the results
+```{r}
+#| echo: false
+#| output: true
+
 # add a checklist column - this will be the sci name to publish
 
 int.raw.names.checklist<- checklist_merge(int.raw.names, checklist)
@@ -2236,104 +2296,161 @@ View(int.raw.names.checklist)
 
 ```
 
-Count of rows Not on checklist 
+
+How many rows are not in the checklist (sci/common combos):
+
 ```{r}
-nrow(filter(int.raw.names.checklist, is.na(scientific_name.checklist)))
+#| echo: false
+#| output: true
+
+filter(int.raw.names.checklist, is.na(scientific_name.checklist))  %>%
+  nrow()
+```
+
+
+
+Rows to to match that full scientific names (not unids): 
+
+```{r}
+#| echo: false
+#| output: true
+
+filter(int.raw.names.checklist, is.na(scientific_name.checklist)) %>%
+  filter(!grepl(" sp\\.$", scientific_name.raw)) %>%
+  nrow()
 
 ```
 
-Rows to to match that are not unids: 
+
+Number of scientific names (not unids, ignoring common names) that are GBIF-only:
 
 ```{r}
-nrow(
-  filter(int.raw.names.checklist, is.na(scientific_name.checklist)) %>%
-  filter(!grepl(" sp\\.$", scientific_name.raw))
-)
+#| echo: false
+#| output: true
+
+filter(int.raw.names.checklist, is.na(scientific_name.checklist)) %>%
+  filter(!grepl(" sp\\.$", scientific_name.raw)) %>% 
+    select(scientific_name.edit) %>% unique() %>% nrow()
+    
+
 ```
 
-### Using curated list to match gbif to checklist
+**Save our lists so far as CSV with the current date**
 
-Goal: use the Canada+CONUS list which has gbif to checklist mapping
+```{r}
+#| echo: false
+#| output: true
+
+today_date_string <- format(Sys.Date(),"%Y-%m-%d")
+taxonomic_edits_file_name =  paste0("AvianInteractionData_L1_taxonomic_updates_", today_date_string, ".csv")
+
+f = file.path(file_paths$L1, taxonomic_edits_file_name)
+write.csv(int.raw.names.checklist, file = row.names = FALSE)
+print(paste("saved file", f))
+```
+
+
+## Final Taxonomic Edits
+
+
+### Using common-name fuzzy match 
+
+Of the unique scientific names (not unids) above that are GBIF-only, attempt 
+to match on common name to
+
+1) get the accepted common name from Taxadb for matching Scientific name
+2) match this common name with Clements 
+
+
+```{r}
+
+
+```
+
+
+### Remaining unmatched: apply subset/curated list 
+
+For the remaining scientific names that we have not matched yet, use
+the current  the Canada+CONUS list which has gbif to checklist mapping
 but is not all species. 
 
 
-
-
-### Previous Code 
-
-Before, Combine these together for the full set of fixed scientific_name for the
-unresolved_gbif names which were fixed by referencing the CHECKLIST. Remove
-extra columns that are not needed for combining w scientific_name.
-
-Now we are building up the int.raw.names table to accumulate notes and edits
-
-```{r}
-fixed.unresolved.gs<-rbind(fixed_names1,fixed_names2)
-fixed.unresolved.gs$scientific_name_match_score<-NULL
-length(unique(fixed.unresolved.gs$scientific_name.raw))
-# 326 OK; May 29, 2025: 309
-dim(fixed.unresolved.gs)
-# 339 fixed unresolved species names; May 29, 2025: 322
-```
-
-
-```{r}
-#checkpoint
-# save.image(file.path(L1_RData_dir,"AvianInteractionData_L1_29May2025.RData"))
-```
-
-Assign scientific_name.edit and common_name.edit to the closest_matches based on
-fuzzy coding match. Dec. 9, 2024: only doing scientific_name for now.
-
-```{r}
-names(resolved.gbif)[names(resolved.gbif) == "accepted_scientific_name"] <-"scientific_name"
-resolved.gbif$common_name.raw<-NULL
-resolved.gbif$scientific_id<-NULL
-
-```
-
-Save checkpoint
-
-```{r}
-save.image(file.path(L1_RData_dir,"AvianInteractionData_L1_29May2025.RData"))
-```
-
-
+## Manual Fixes to Final Checklist
 
 
 This takes the GBIF fixes and applies the latest Clements taxonomy update
 
-Adopt these to the note assignment raw to edit
+*TO-DO: Adopt these to the note assignment raw to edit**
 
-## Fixes from previous work to be confirmed
+**Workflow: **
+
+Goal is to accumulate a list of fixes and notes
+
+1. review existing edits below
+   use a lookup function to see if an edit (raw -> edit, common name) is still needed
+   TO-DO : write this lookup/diagnostic function or block of code here!!
+
+2. use sleuthing to  
+
+
+Our current workflow use `int.raw.names`  and resolves in this order: 
+
+1. scientific_name.raw : what's in entered data
+2. scientific_name.edit : corrected to match either correct GBIF or Clements checklist
+3. scientific_name.checklist : final resolved name from GBIF to Clements checklist
+
+
+## Manual fixes 
+
+*Note about historical code: delete this note when complete*
+
+********FIXING INCORRECT GBIF RESOLVED: NOW HERE, EARLIER IN WORKFLOW******
+
+Fixes from previous work to be confirmed and converted to our current workflow
+
+Previous code copies the confirmed checklist taxon into a column 
+`resolved.gbif$scientific_name` which we are no longer using (see above)
+
+*Many of these changes have already been made above. *
+edit these here by changing the before merging in.
+
+
+> Check recent changes in resolved.gbif (where GBIF may be incorrect):
+> See if the resolved.gbif contain Accipiter gentilis or Accipiter atricapillus
+> as scientific_name ... Yes, so need to update these
+
+**Northern Goshawk**
+
+*THIS IS FIXED ABOVE*
+
+check the common name if Northern Goshawk -> American Goshawk and Astur atricapillus
+BUT if it's only Goshawk, check raw data to see if it's Europe the keep scientific name
+but if it's N. america, change as above and rename American Goshawk 
 
 ```
-#********FIXING INCORRECT GBIF RESOLVED: NOW HERE, EARLIER IN WORKFLOW******#
-# Some of the GBIF assignments or misspelling corrections did not work well.
-# Refer to the bbs.splist.NA and int.raw.bbs_subset (both created way below)-
-# they have missing species in .raw, that actually exist in int.raw. Need to
-# edit these here by changing the before merging in.
-
-# Check recent changes in resolved.gbif (where GBIF may be incorrect):
-# See if the resolved.gbif contain Accipiter gentilis or Accipiter atricapillus
-# as scientific_name ... Yes, so need to update these
-
-#####??? this needs to change 
-## check the common name if Northern Goshawk -> American Goshawk and Astur atricapillus
-## BUT if it's only Goshawk, check raw data to see if it's Europe the keep scientific name
-## but if it's N. america, change as above and rename American Goshawk 
-
 resolved.gbif[which(resolved.gbif$scientific_name.edit == "Accipiter gentilis"), ]
 resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Accipiter gentilis"] <- "Astur atricapillus"
 resolved.gbif$scientific_name[resolved.gbif$scientific_name.raw == "Astur atricapillus"] <- "Astur atricapillus"
+```
 
-# Spruce Grouse: raw is Canachites
-# canadensis, Dendragapus canadensis, Falcipennis canadensis - in fact it should
-# be Canachites canadensis (GBIF is incorrect) Fix
+```{r}
+rawsp<- "Canachites canadensis"
+checklistsp <- "Canachites canadensis"
+
+
+```
+
+
+Spruce Grouse: raw is Canachites
+canadensis, Dendragapus canadensis, Falcipennis canadensis - in fact it should
+be Canachites canadensis (GBIF is incorrect) Fix
+```
 resolved.gbif[which(resolved.gbif$common_name == "Spruce Grouse"), ]
 splist2024[which(splist2024$bbs_common_name == "Spruce Grouse"), ]
 resolved.gbif$scientific_name[resolved.gbif$common_name == "Spruce Grouse"] <- "Canachites canadensis"
- 
+```
+
+```
 # American Three-toed Woodpecker Picoides tridactylus - raw/edit is Picoides dorsalis
 # Confirmed it is North American species, not European for this interaction.
 splist2024[which(splist2024$bbs_common_name == "American Three-toed Woodpecker"), ]
@@ -2545,11 +2662,13 @@ resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Accipiter c
 
 ```
 
-Binding 
+
+
 
 
 ```
-# previous binding code
+# previous binding code, can be deleted, kept for comparision
+
 ############################################################
 # # Take the scientific_name in resolved.gbif and fixed.unresolved.gs and rbind them,
 # # remove duplicates, then merge with CHECKLIST to get common name assigned. Keep
@@ -2568,68 +2687,90 @@ Binding
 # length(unique(int.final.names$scientific_name.raw))
 # # 3913 OK; May 29, 2025: 3889 OK
 # 
-# # NOTE TO FIX THESE 4576 LATER; decide whether to assign Family level or Genus for
-# # this instead of the scientific_name.raw. Some have some typos (only a few). Some
-# # of the int.final.names scientific_name are blank. Most are because they are
-# # Genus sp. For now, leave these as is since we cannot get to species level on
-# # these interactions.
+
+
+NOTE TO FIX THESE 4576 LATER; decide whether to assign Family level or Genus for
+this instead of the scientific_name.raw. Some have some typos (only a few). Some
+ of the int.final.names scientific_name are blank. Most are because they are
+Genus sp. For now, leave these as is since we cannot get to species level on
+these interactions.
+
+```
+
+```
 # int.final.names.Gsp<-int.final.names[which(is.na(int.final.names$scientific_name)), ]
 # dim(int.final.names.Gsp)
 # 621 Genus-level entries ; May 29, 2025: 626
 ```
+
+Previous code: handle Genus sp.
 
 
 All the NA in scientific_name are "Genus sp.". If the NA exists in
 scientific_name, assign it the scientific_name.edit which includes this
 designation.
 
-```{r}
+```
 ### 
 
 
-int.final.names$scientific_name1 <- ifelse(is.na(int.final.names$scientific_name), 
-                                        int.final.names$scientific_name.edit, 
-                                        int.final.names$scientific_name)
-names(int.final.names)[names(int.final.names) == "scientific_name"] <-"scientific_name.gbif.chklist"
-names(int.final.names)[names(int.final.names) == "scientific_name1"] <-"scientific_name"
+# int.final.names$scientific_name1 <- ifelse(is.na(int.final.names$scientific_name), 
+#                                         int.final.names$scientific_name.edit, 
+#                                         int.final.names$scientific_name)
+# names(int.final.names)[names(int.final.names) == "scientific_name"] <-"scientific_name.gbif.chklist"
+# names(int.final.names)[names(int.final.names) == "scientific_name1"] <-"scientific_name"
 ```
 
 
 ```{r}
-# Now merge the GBIF & checked CHECKLIST-derived int.final.names$scientific_name
-# with the CHECKLIST to get final checklist common_name. First drop some
-# checklist columns.
-checklist.narrow<-subset(checklist, select=c("scientific_name",
-                                             "common_name",
-                                             "category",
-                                             "order",
-                                             "family"))
-checklist.narrow<-data.frame(checklist.narrow)
-int.checklist<-merge(int.final.names,checklist.narrow, by=c("scientific_name"),all.x=T)
-length(unique(int.checklist$scientific_name.raw))
-# 3913 OK; May 29, 2025: 3889 OK
-head(int.checklist)
-dim(int.checklist)
-# 4576; May 29, 2025: 4551
-
-# 933 missing common names - about 30% are "Genus sp." but others are just
-# missing?? For now we are just going to focus on fixing the BBS species. Later
-# this needs to be edited with a better workflow. 
-int.checklist.NAcommon<-int.checklist[which(is.na(int.checklist$common_name)), ]
-dim(int.checklist.NAcommon)
-# 898; May 29, 2025: 894
-dim(int.checklist.NAcommon)-dim(int.final.names.Gsp)
-# 621 Genus-level entries from above but 277 (May 29: 268) missing common name! Some are
-# duplicate rows from scientific_name.raw. Also some of the GBIF species
-# assignments do not work (GBIF taxonomic backbone is not quite up to date for
-# these birds)
-
+# # Now merge the GBIF & checked CHECKLIST-derived int.final.names$scientific_name
+# # with the CHECKLIST to get final checklist common_name. First drop some
+# # checklist columns.
+# checklist.narrow<-subset(checklist, select=c("scientific_name",
+#                                              "common_name",
+#                                              "category",
+#                                              "order",
+#                                              "family"))
+# checklist.narrow<-data.frame(checklist.narrow)
+# int.checklist<-merge(int.final.names,checklist.narrow, by=c("scientific_name"),all.x=T)
+# length(unique(int.checklist$scientific_name.raw))
+# # 3913 OK; May 29, 2025: 3889 OK
+# head(int.checklist)
+# dim(int.checklist)
+# # 4576; May 29, 2025: 4551
+# 
+# # 933 missing common names - about 30% are "Genus sp." but others are just
+# # missing?? For now we are just going to focus on fixing the BBS species. Later
+# # this needs to be edited with a better workflow. 
+# int.checklist.NAcommon<-int.checklist[which(is.na(int.checklist$common_name)), ]
+# dim(int.checklist.NAcommon)
+# # 898; May 29, 2025: 894
+# dim(int.checklist.NAcommon)-dim(int.final.names.Gsp)
+# # 621 Genus-level entries from above but 277 (May 29: 268) missing common name! Some are
+# # duplicate rows from scientific_name.raw. Also some of the GBIF species
+# # assignments do not work (GBIF taxonomic backbone is not quite up to date for
+# # these birds)
+# 
 ```
 
+  
 
 
+#### Manual fixes 
 
-#### Match to checklist based on scientific name
+These are to be reviewed and kept or removed 
+
+Notes from previous code
+
+```
+Aegolius funereus funereus:  Tengmalm's Owl - not in CHECKLIST
+Agelaioides badius badius and Agelaioides badius bolivianus: Grayish Baywing subspecies but no common_name in CHECKLIST
+Agelaioides badius fringillarius: Pale Baywing subspecies? only species in CHECKLIST
+Aimophila ruficeps eremoeca: Rufus-crowned sparrow; no common_name in CHECKLIST
+Alcippe poioicephala phayrei is a subspecies but no common_name in CHECKLIST
+
+ Acrocephalus scirpaceus baeticatus and Acrocephalus gracilirostris leptorhynchus without CHECKLIST common_name
+```
 
 ```{r}
 # match with checklist
