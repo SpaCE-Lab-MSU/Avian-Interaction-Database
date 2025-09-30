@@ -59,6 +59,7 @@ find_closest_match_with_score <- function(name, reference_list) {
 
 
 
+
 #### functions to manage taxonomy adjustments and comments
 
 # the L0 to L1 process creates a table of taxonomic names that appear in the
@@ -144,7 +145,53 @@ add_name_edits<-function(edits.df, scientific_name.raw,
   return(edits.df)
 }
 
+#' add taxonomy edit matching common name
+#'
+#' this finds rows in the names table by matching common name,
+#' looks up the scientific name and then calls the add_name_edits function
+#' above for consistency.  IF the suggestion scientific name edit
+#'
+add_name_edits_by_common_name<- function(edits.df, common_name.raw,
+                              edit_notes,
+                              scientific_name.edit,
+                              quiet=FALSE) {
+  matching_rows <- edits.df[edits.df$common_name.raw == common_name.raw, ]
 
+  if(nrow(matching_rows) == 0){
+    warning(paste(common_name.raw,  "not found in names list, no edits"))
+    return(edits.df)
+  }
+  # there could be more than on matching common name, but edit all occuring
+  # sci names for those IF the edited name is different
+  # if the table already matches the suggested edit, don't overwrite
+
+  for(r in 1:nrow(matching_rows)){
+    matching_scientific_name.raw <- matching_rows[r,]$scientific_name.raw
+    matching_scientific_name.edit <- matching_rows[r,]$scientific_name.edit
+    if (matching_scientific_name.edit != scientific_name.edit){
+      edits.df <- add_name_edits(edits.df,
+                  matching_scientific_name.raw, edit_notes, scientific_name.edit
+                  )
+    } else { #do nothing but warn
+      if(!quiet){
+        warning(paste(common_name.raw, " entry already has matching edit for ,",
+                      scientific_name.edit, "...leaving as-as")
+                )
+      }
+
+    }
+  } # end loop
+
+
+  return(edits.df)
+}
+
+
+#' add taxonomy edit matching common name
+
+#' given a list of edits in a data frame with minimally the
+#' scientific_name.raw to match and an edit text, apply the function
+#' add_name_edits above.  This is in a loop to
 add_edits_to_list <- function(edits.df, edit_list){
   # maybe should use apply but this also works
   for(e in edit_list ){
@@ -162,35 +209,52 @@ add_edits_to_list <- function(edits.df, edit_list){
   return(edits.df)
 }
 
+
+
+
+
 #######################################################
-#### short-cut functions for listing or counting records by species
+#### short-cut/convenience functions for listing or counting records by species
 
 # list those without a note AND are not UNIDs Genus sp.
-unresolved_species<- function(int.names.raw){
-  filter(int.names.raw,
+unresolved_species<- function(edit.df){
+  filter(edit.df,
          is.na(edit_notes) & !grepl(" sp\\.$", scientific_name.edit)
          )
 }
 
 
-
-# get interactions where sp in sp1 OR sp2
+#' interaction records where sp in sp1 OR sp2
+#'
+#' convenience function to help remember this syntax,
+#' return only records where scientific name matches exactly
+#' @param intxns.df data frame in same format as Avian Interaction  database
+#' @param scientific_name name to find
+#' @returns data frame of matching records
 intxns_by_species<- function(intxns.df, scientific_name){
   return(filter(intxns.df, species1_scientific == scientific_name | species2_scientific == scientific_name))
 }
 
 
 #' count of interactions by scientific name
+#'
+#' convenience function, call the above lookup function and returns count of records
 interaction_count_by_species<- function(intxns.df, scientific_name){
   rex = filter(intxns.df, species1_scientific == scientific_name | species2_scientific == scientific_name)
   return(nrow(rex))
 
 }
 
+
+#' count interactions by partial match (grep)
+interaction_records_by_match<- function(intxns.df, scientific_name_fragment){
+  rex = filter(intxns.df, grepl(scientific_name_fragment, species1_scientific) | grepl(scientific_name_fragment,species2_scientific))
+  return(rex)
+}
+
 #' count interactions by partial match (grep)
 interaction_count_by_match<- function(intxns.df, scientific_name_fragment){
-  rex = filter(intxns.df, grepl(scientific_name_fragment, species1_scientific) | grepl(scientific_name_fragment,species2_scientific))
-  return(nrow(rex))
+  return(nrow(interaction_records_by_match(intxns.df, scientific_name_fragment)))
 }
 
 #' subset of interactions by partial match common name sp1 or sp2
