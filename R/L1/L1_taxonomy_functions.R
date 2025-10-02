@@ -158,19 +158,22 @@ add_name_edits_by_common_name<- function(edits.df, common_name.raw,
                               edit_notes,
                               scientific_name.edit,
                               quiet=FALSE) {
-  matching_rows <- edits.df[edits.df$common_name.raw == common_name.raw, ]
+  matching_rows <- which(edits.df$common_name.raw == common_name.raw)
 
-  if(nrow(matching_rows) == 0){
+  print(common_name.raw)
+  print(scientific_name.edit)
+
+  if(length(matching_rows) == 0){
     warning(paste(common_name.raw,  "not found in names list, no edits"))
     return(edits.df)
   }
   # there could be more than on matching common name, but edit all occuring
   # sci names for those IF the edited name is different
   # if the table already matches the suggested edit, don't overwrite
+  for(r in matching_rows){
 
-  for(r in 1:nrow(matching_rows)){
-    matching_scientific_name.raw <- matching_rows[r,]$scientific_name.raw
-    matching_scientific_name.edit <- matching_rows[r,]$scientific_name.edit
+    matching_scientific_name.raw <- edits.df[r,]$scientific_name.raw
+    matching_scientific_name.edit <- edits.df[r,]$scientific_name.edit
     if (matching_scientific_name.edit != scientific_name.edit){
       edits.df <- add_name_edits(edits.df,
                   matching_scientific_name.raw, edit_notes, scientific_name.edit
