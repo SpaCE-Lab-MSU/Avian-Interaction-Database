@@ -1,0 +1,89 @@
+---
+title: "Testing Taxadb for Birds"
+author: 
+  - Patrick Bills
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    embed-resources: true
+editor: visual
+date: 09/01/2025
+date-format: iso
+---
+
+This notebook contains experiments to learn how Taxadb really works and how it can help to resolve species names to current checklist.
+
+```{r}
+#| label: setup
+
+library(taxadb)
+taxadb::td_create("gbif")
+# functions used by all 
+source(here::here('R/L0/L0_functions.R'))
+source(here::here('R/L1/L1_taxonomy_functions.R'))
+
+file_paths <- get_file_paths()
+
+
+```
+
+```{r}
+#| label: read-data
+
+stitched_L0_file<- "AvianInteractionData_L0_stitch.csv"
+full_path_stitched_file <- file.path(file_paths$L0,stitched_L0_file)
+int.raw<-read.csv(full_path_stitched_file)
+print(paste("read in ", nrow(int.raw), "records from ", full_path_stitched_file))
+
+```
+
+```{r}
+
+int.raw.names <- create_names_edit_table(int.raw)
+```
+
+```{r}
+#| label: read-checlists
+
+checklist_filename <- "eBird-Clements-v2024-integrated-checklist-October-2024-rev.csv"
+checklist.orig <- read.csv(file.path(file_paths$CHECKLIST_FOLDER,checklist_filename))
+checklist <- checklist.orig
+# make consistent with data columns
+names(checklist)[names(checklist) == "scientific.name"] <-"scientific_name"
+names(checklist)[names(checklist) == "English.name"] <-"common_name"
+
+```
+
+```{r}
+
+mutate(int.raw.names, 
+    scientific_id = taxadb::get_ids(scientific_name.edit, "gbif"),
+    accepted_scientific_name = taxadb::get_names(scientific_id, "gbif")
+)
+
+
+```
+
+```{r}
+sp <- "Ardea alba modesta"
+scientific_id <- taxadb::get_ids(sp, "gbif")
+suggested_name <- taxadb::get_names(scientific_id, "gbif")
+```
+
+```{r}
+sp <-  "Ardea alba modesta"
+
+print(sp)
+suggested_sp <- taxadb::get_names(taxadb::get_ids(sp, "gbif") ,"gbif")
+print(suggested_sp)
+sp <- suggested_sp
+
+print("try with this suggested sp")
+suggested_sp <- taxadb::get_names(taxadb::get_ids(sp, "gbif") ,"gbif")
+
+print(suggested_sp)
+
+```
+
+How many names in our raw data are changed by TaxaDB that should not have been changed?
