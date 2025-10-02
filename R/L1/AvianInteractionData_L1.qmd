@@ -26,13 +26,18 @@ date-format: iso
 
 ### Data input:
 
+**Avian Interaction Database L0**
+
+Raw Data, combined (stitched) and with content
+cleaning but taxonomic names as entered (older names, typos, etc)
 
 *Set the interactions database file to read from here:*
 
 ( output From `R/L0/AvianInteractionData_L0_stitch.R` )
 
 ```{r}
-stitched_L0_file <- "AvianInteractionData_L0_stitch.csv" 
+
+AvianInteractionData_L0_file <- "AvianInteractionData_L0_stitch.csv" 
 ```
 
 
@@ -49,22 +54,28 @@ Curated Species checklist:
   - used for species lookup / matching
 
 
-Other Checklists:
-
-- Full Clements/eBird v2024 list 
-
-- GBIF database (via taxadb package)
-
 ### DATA OUTPUT:
 
-L1 data: `int.namefix.bbs.RData` 
+Taxonomic Resolution Table: 
+
+Avian Interaction Database, cleaned and with taxonomic names resolved to 
+match checklists listed above: `AvianInteractionData_L1.csv`
+
+```{r}
+AvianInteractionData_L1_file <- "AvianInteractionData_L1.csv" 
+
+today_date_string <- format(Sys.Date(),"%Y-%m-%d")
+taxonomic_resolutions_file_name =  paste0("AvianInteractionData_L1_taxonomic_resolutions_", today_date_string, ".csv")
+
+AvianInteractionData_L1_taxonomy_table_file <- "AvianInteractionData_L1_taxnomony_resolutions.csv"
+```
 
 
 ### Next script to run: 
 
-`AvianInteractionData_L1_post_taxa_cleaning.R`
+- AvianInteractionData_L1_post_taxa_cleaning.R
+- AvianInteractionData_L1_CanadaCONUS.R
 
-*most of the cleaning functions have been moved to L0 scripts*
 
 ### NOTES
 
@@ -80,32 +91,46 @@ results of the matching algorithms, but instead replace w/Clements2024:..."
 
 GOOD EXAMPLE TO TRACE MATCHING: Aeronautes saxitalis should be Aeronautes saxatalis
 
+### Workflow Summary
+
+At each step, resolution narrows down those names that require manual entry 
+in a table to identify the current accepted name in checklist
+
+1. setup 
+   - read in checklists and L0 data
+   - final data cleaning to ensure no typos etc
+   -  create a name resolution table to be completed
+2. fix missing scientific names manually 
+3. match scientific names matching checklist
+4. resolve names common names matching checklist
+5. use fuzzy matching to find close scientfic names to checklist
+6. use fuzzy matching to find close common names
+7. use gbif to see if name can be resolved to a checklist name
+8. save data files
+
+
 ### Versions
 
 -   Original R script `AvianInteractionData_L1.R` 27 Oct 2022 (PLZ)
 -   updated through 12 Dec 2024 (PLZ);
     -   As of Dec. 12, 2024, this is mainly cleaned for BBS species
--   May 2025- July 2025 convert to notebook/Quarto, (PSB)
--   August 2025, using new species lists Canada+CONUS from PLZ (PSB)
--   September 10, 2025, using species lists from commit from PLZ (PSB)
+-  May 2025- July 2025 convert to workflow notebook/Quarto, (PSB)
+-  August 2025, using new species lists Canada+CONUS from PLZ (PSB)
+-  September 10, 2025, using species lists from commit from PLZ (PSB)
+-  Oct 1, 2025: workflow reorginzation for better taxonomic resolution (PSB)
 
 
 ## TO DO / Notes
 
-
-somehow Duck sp  is making it through L0 instead of Duck sp.
-
-the low-confidence (and maybe some high confidence?) matches sometimes
-give the result as an unid ( Astur sp. ) which then removes the species. 
-these are sometimes caught later but really should be filtered out from the 
-low-confidence match process and discovered/fixed later
+code/function to match to checklist to be able to be moved around
 
 
 
 
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
-
-## Set-up
+## Data Set-up
 
 File paths used for this run:
 
@@ -126,17 +151,9 @@ print(file_paths)
 *Note that the Checklist folder above is in L0 which contains species lists, 
 but the subset list for 2024-25 analysis is in L1 as it's built from L0 lists*
 
+### Setup: Checklists
 
-
-
-
-
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-
-## Checklists
-
-### Curated List
+#### Curated List
 
 **Previously:** all species in BBS `"bbs_splist_2024_L1.csv"`
 
@@ -172,7 +189,7 @@ Fieldnames of Species List:
 print(names(splist2024))
 ```
 
-### Main Checklist
+#### Main Checklist
 
 Read in the full check list the official eBird/Clements v2024 checklist
 
@@ -197,17 +214,12 @@ We are using the GBIF list (via taxadb) to resolve scientific names and the
 eBird/Clements v2024 checklist (reflected in Birds of The World naming conventions for species). 
 Some BBS names differ from these lists so they have to be resolved manually.
 
-
-
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-## Interactions Data
+#### Interactions Data
 
 To use a different or test files, edit this L0 filename:
 
 ```{r}
-stitched_L0_file<- "AvianInteractionData_L0_stitch.csv"
-full_path_stitched_file <- file.path(file_paths$L0,stitched_L0_file)
+full_path_stitched_file <- file.path(file_paths$L0,AvianInteractionData_L0_file)
 int.raw<-read.csv(full_path_stitched_file)
 print(paste("read in ", nrow(int.raw), "records from ", full_path_stitched_file))
 ```
@@ -218,7 +230,7 @@ Most of these filters and adjustments are now made during the L0_stitch process
 but were are ensuring the data is clean prior to matching taxonomy
 
 
-### Remove blank rows
+#### Remove blank rows
 
 ```{r}
 before_filter_nrow <- nrow(int.raw)
@@ -231,7 +243,7 @@ int.raw <- filter(int.raw,!(is.na(species1_scientific)&
 print( paste(as.integer(before_filter_nrow - nrow(int.raw)), "blank rows removed"))
 ```
 
-### Trim white space from all names columns
+#### Trim white space from all names columns
 
 ```{r}
 # trim white space
@@ -247,7 +259,7 @@ print("unique scientific name combos after removing white space")
 print(length(unique(paste(int.raw$species1_scientific, int.raw$species2_scientific))))
 ```
 
-### Missing Scientific name check
+#### Missing Scientific name check
 
 Are there any records that are missing a scientific name for species1?
 
@@ -267,8 +279,6 @@ tibble(records.missingsp2)
 
 ```
 
-
-
 Are there rows that have *only* common names for both sp1 and sp2?
 
 ```{r}
@@ -278,11 +288,10 @@ int.common_names_only <- dplyr::filter(int.raw, is.na(species1_scientific) & is.
 print(nrow(int.common_names_only))
 ```
 
-### remove rows that do not have interactions
+#### remove rows that do not have interactions
 
 *These should be corrected in the L0 correct process, 
 but catch them here before correcting taxonomy*
-
 
 List rows with both interaction columns missing
 
@@ -318,7 +327,7 @@ print("rows remaining with not both effects NA:")
 print(nrow(int.raw))
 ```
 
-### Some quick typo fixes
+#### Some quick typo fixes
 
 This is the same function run during stitching, but run it again and to create
 a cleaned L0 data set to work with 
@@ -328,7 +337,9 @@ a cleaned L0 data set to work with
 int.raw<-fix_taxon_typos(int.raw)
 
 ```
-### Discovery and repair of missing Sp1/Sp2 scientific names
+
+
+#### Discovery and repair of missing Sp1/Sp2 scientific names
 
 List rows with missing sp1 values but have other data to use for fix
 
@@ -1948,7 +1959,6 @@ int.raw.names <-
 
 
 ################
-??? PLZ
 
 ### Hawks
 
@@ -2268,12 +2278,10 @@ they match, leaving scientific_name.edit as GBIF entries that need updating
 
 Call the join function from L1 functions script and view the results
 ```{r}
-#| echo: false
-#| output: true
 
 # add a checklist column - this will be the sci name to publish
 
-int.raw.names.checklist<- checklist_merge(int.raw.names, checklist)
+int.raw.names.checklist<- checklist_join(int.raw.names, checklist)
 View(int.raw.names.checklist)
 
 ```
@@ -2310,28 +2318,14 @@ Number of scientific names (not unids, ignoring common names) that are GBIF-only
 #| echo: false
 #| output: true
 
-unresolved_checklist_rows <- which(filter(int.raw.names.checklist, is.na(scientific_name.checklist)) %>%
-  filter(!grepl(" sp\\.$", scientific_name.raw)))
+unresolved_checklist_rows <-  filter(int.raw.names.checklist, is.na(scientific_name.checklist)) %>%
+  filter(!grepl(" sp\\.$", scientific_name.raw))
   
-unresolved_checklist_scinames  <- int.raw.names.checklist[unresolved_checklist_rows,] %>% 
+unresolved_checklist_scinames  <- unresolved_checklist_rows %>% 
     select(scientific_name.edit) %>% unique() 
     
-print(nrow(unresoled_checklist_scinames))
+print(nrow(unresolved_checklist_scinames))
     
-```
-
-**Save our lists so far as CSV with the current date**
-
-```{r}
-#| echo: false
-#| output: true
-
-today_date_string <- format(Sys.Date(),"%Y-%m-%d")
-taxonomic_edits_file_name =  paste0("AvianInteractionData_L1_taxonomic_updates_", today_date_string, ".csv")
-
-f = file.path(file_paths$L1, taxonomic_edits_file_name)
-write.csv(int.raw.names.checklist, file = row.names = FALSE)
-print(paste("saved file", f))
 ```
 
 
@@ -2819,10 +2813,10 @@ edits_by_scientific_name <- list(
     c("Ammospiza caudacuta diversa","Ammospiza caudacuta diversa"),
     c("Schoeniparus castaneceps","Schoeniparus castaneceps"),
     c("Schoeniparus cinereus","Schoeniparus cinereus"),
-    c("Schoeniparus dubius","Schoeniparus dubius"),
+    c("Schoeniparus dubius","Schoeniparus dubius")
 )
 
-for(edit in edits_by_scientific_name){
+for(edit in edits_by_scientific_name) {
   scientific_name.raw <- edit[1]
   scientific_name.edit <- edit[2]
   # check if it's on the checklist
@@ -2838,18 +2832,20 @@ for(edit in edits_by_scientific_name){
   
   for(i in 1:nrow(rows_in_names)){
     int.raw.name <- rows_in_names[r,]
-    already_edited_name <- rows_in_names[1,$scientific_name.edit
+    already_edited_name <- rows_in_names[1,]$scientific_name.edit
   
-  if(already_edited_name == scientific_name.edit ) { 
-    next
-  } else {
+    if(already_edited_name == scientific_name.edit ) { 
+      next
+    } else {
       
       int.raw.names <- add_name_edits(int.raw.names,
                       scientific_name.raw,
-                      edit.note,
+                      edit_note,
                       scientific_name.edit)
+    }
   }
 }
+  
 ```
 
 #### Match to checklist based on common name. 
@@ -2871,20 +2867,22 @@ edits_by_common_name <- list(
     c("Ammospiza caudacuta diversa","Saltmarsh Sparrow (Diversa)"),
     c("Schoeniparus castaneceps","Rufous-winged Fulvetta"),
     c("Schoeniparus cinereus","Yellow-Throated Fulvetta"),
-    c("Schoeniparus dubius","Rusty-Capped Fulvetta"),
+    c("Schoeniparus dubius","Rusty-Capped Fulvetta")
 )
 
 for(edit in edits_by_common_name){
-  common_name.raw <- edit[1]
-  scientific_name.edit <- edit[2]
+  print(edit)
+  
+  common_name.raw <- edit[2]
+  scientific_name.edit <- edit[1]
   # check if it's on the checklist
   
   edit_note <- "Update to match checklist based on common name"
-  
+
   int.raw.names <- add_name_edits_by_common_name(int.raw.names, 
-                       common_name.raw,
-                        edit_notes,
-                        scientific_name.edit
+                       common_name.raw = common_name.raw,
+                        edit_notes = edit_note,
+                        scientific_name.edit = scientific_name.edit
   )
 }
  
@@ -2929,39 +2927,33 @@ review data frame to make decisions
 
 
 ```{r}
-# ... FINISH THIS LATER FOR OTHER non-BBS species
-
-# For now, focus on BBS splist because need to get these data cleaned and
-# aligned for merging with bbs.obs for network modeling. Return to the cleaning
-# below after this is completed...
-
-#******** BBS WORK **********# 
-# Merge scientific_name in splist with scientific_name in int.checklist
-# to check current common_name list and identify gaps and updates to
-# scientific_name. This will update most of the BBS species, but not necessarily the ones
-# outside of BBS. "scientific_name" = the names agreed upon by CHECKLIST and by
-# the GBIF-screened species. common_name = the CHECKLIST common_name.
-int.checklist <- subset(
-  int.checklist,
-  select = c("scientific_name", "common_name", "scientific_name.raw","scientific_name.edit")
-)
-dim(int.checklist)
-# 4576; 29 May 2025: 4551
-int.checklist <- int.checklist %>% 
-  distinct()
-dim(int.checklist)
-# 3915 OK; May 29, 2025: 3891
-length(unique(int.checklist$scientific_name.raw))
-# 3913 OK; May 29, 2025: 3889
+# # ... FINISH THIS LATER FOR OTHER non-BBS species
+# 
+# # For now, focus on BBS splist because need to get these data cleaned and
+# # aligned for merging with bbs.obs for network modeling. Return to the cleaning
+# # below after this is completed...
+# 
+# #******** BBS WORK **********# 
+# # Merge scientific_name in splist with scientific_name in int.checklist
+# # to check current common_name list and identify gaps and updates to
+# # scientific_name. This will update most of the BBS species, but not necessarily the ones
+# # outside of BBS. "scientific_name" = the names agreed upon by CHECKLIST and by
+# # the GBIF-screened species. common_name = the CHECKLIST common_name.
+# int.checklist <- subset(
+#   int.checklist,
+#   select = c("scientific_name", "common_name", "scientific_name.raw","scientific_name.edit")
+# )
+# dim(int.checklist)
+# # 4576; 29 May 2025: 4551
+# int.checklist <- int.checklist %>% 
+#   distinct()
+# dim(int.checklist)
+# # 3915 OK; May 29, 2025: 3891
+# length(unique(int.checklist$scientific_name.raw))
+# # 3913 OK; May 29, 2025: 3889
 
 ```
 
-## Save data
-
-```{r}
-save.image(file.path(L1_RData_dir,"AvianInteractionData_L1_29May2025.RData"))
-write_csv((file.path(L1_RData_dir,"avian_interaction_raw_to_checklist_names.csv")))
-```
 
 
 ### Subspecies
@@ -2983,8 +2975,10 @@ database
 
 ```
 
+
+### Work through hybrids 
+
 ```
-# Work through hybrids 
 
 Hybrids to standardize: 
   
@@ -2993,9 +2987,6 @@ Hybrids to standardize:
   Hybrid Bullock's Oriole X Baltimore = Oriole Icterus bullockii x galbula
   Hybrid Western Gull X Glaucous-Winged Gull = Larus occidentalis x glaucescens
   Hybrid Barnacle X Bar-Headed Goose = Branta leucopsis x anser indicus
-
-
-  
 
 dplyr::filter(int.raw, species1_scientific %in% c("Branta leucopsis x"))
 # NO HYBRIDS IN CLEANED DATA NOW
@@ -3006,7 +2997,85 @@ dplyr::filter(int.raw, species2_scientific %in% c("Branta leucopsis x Anser indi
 # fixed_names1$scientific_name[fixed_names1$scientific_name.edit == "Branta leucopsis x anser indicus"] <- "Branta leucopsis x Anser indicus"
 ```
 
+
+
+## Merge and Save data
+
+Update the scientific names in the interactions data with our table as much 
+as possible
+
+```{r}
+
+int.raw.resolved <- int.raw
+
+updated_rows <- c()
+
+for(r in 1:nrow(int.raw.names.checklist)){
+  # if no resolution discovered, skip (for now - ultimately all are updated)
+  if(is.na(int.raw.names.checklist[r,"scientific_name.checklist"])){
+    next
+  }
+  
+  # extract values from data frame for readability
+  scientific_name.raw <- int.raw.names.checklist[r,]$scientific_name.raw
+  scientific_name.checklist <- int.raw.names.checklist[r,]$scientific_name.checklist
+  common_name.checklist <- int.raw.names.checklist[r,]$common_name.checklist
+  
+  # if no change, then skip since don't need to update the row
+  if( scientific_name.raw  == scientific_name.checklist ){
+    next
+  }
+  
+  # update sp1s and sp2s
+  # use matches from original dataframe but update our resolved data frame 
+  # since the rows are the same order and number 
+  # this allows for matching on the raw sci name for common name updates, 
+  # even after it's been updated
+  
+  updated_sp1_rows = which(int.raw$species1_scientific == scientific_name.raw)
+  if(length(updated_sp1_rows) > 0){
+    int.raw.resolved[updated_sp1_rows, ]$species1_scientific <- scientific_name.checklist 
+    int.raw.resolved[updated_sp1_rows, ]$species1_common <- common_name.checklist
+    updated_rows <- union(updated_rows, updated_sp1_rows)
+  }
+
+  updated_sp2_rows = which(int.raw$species2_scientific == scientific_name.raw)
+  if(length(updated_sp2_rows) > 0){
+    int.raw.resolved[updated_sp2_rows, ]$species2_scientific <- scientific_name.checklist 
+    int.raw.resolved[updated_sp2_rows,  ]$species2_common <- common_name.checklist
+    updated_rows <- union(updated_rows, updated_sp2_rows)
+  }
+  
+}
+
+print(length(updated_rows))
 ```
+
+Save Results to CSV
+
+```{r}
+#| label: save_output
+#| echo: false
+#| output: true
+
+# set these variables here for flexibility if the workflow changes 
+interaction_data <- int.raw.resolved
+taxonomic_resolutions<- int.raw.names.checklist
+
+# AvianInteractionData_L1_file and AvianInteractionData_L1_taxonomy_table is set at the top of this file
+
+f <- file.path(file_paths$L1, AvianInteractionData_L1_file )
+write_csv(interaction_data, f)
+print(paste("interaction database saved to ", f))
+
+f<- file.path(file_paths$L1,taxonomic_resolutions_file_name)
+write_csv(taxonomic_resolutions, f)
+print(paste("taxonomic_resolutions_file saved to ", f))
+
+```
+
+```
+
 
 ```{r}
 # Summary info before exporting - replace DATA with data object name
