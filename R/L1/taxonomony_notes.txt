@@ -167,19 +167,6 @@ CHANGE TO CLOSEST MATCH: checklist Cactus Wren Campylorhynchus brunneicapillus 0
 
 
 
-these is taken care of with fuzzy matching
-
-
- Moticilla alba lugens = White Wagtail (Black-Backed), typo fix
-
-Moticilla alba lugens",
-"Motacilla alba lugens",
-
-
-```
-
-
-
 Moticilla alba ocularis = White Wagtail (ocularis), misspelled genus
 
 
