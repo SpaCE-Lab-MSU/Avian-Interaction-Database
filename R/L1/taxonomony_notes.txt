@@ -1,0 +1,288 @@
+
+Taxonomy Resolution Notes
+----
+
+This is a scratch file for keeping notes about discoveries for taxonomic names
+that need to be updated.   This started from pulling comments out of the original
+AvianInteractionsData_L1 script from PLZ December 2024-May 2025
+
+Notes should minimally include L0 species and the checklist scientific name, and we'll assume it's the map from old to checklist
+
+Ultimately the entry should go into the CSV file "manual_taxonomic_resolutions.csv"
+
+
+
+######## HAWKS
+
+ Accipiters are off (these are original raw data entries without taxonomic change)**
+
+ check the common name if Northern Goshawk -> American Goshawk and Astur atricapillus
+BUT if it's only Goshawk, check raw data to see if it's Europe the keep scientific name
+but if it's N. america, change as above and rename American Goshawk
+
+
+"Accipiter cooperi",  "Astur cooperii", "Misspelling and checklist genus change for American Goshawk only (Clements 2024)"
+"Accipiter cooperii",  "Astur cooperii", "Checklist genus change for American Goshawk only (Clements 2024)"
+"Accipiter gentilis", Northern Goshawk  -> "Astur gentilis", ???
+"Accipiter gentilis", Goshawk
+"Accipter atricapillus","Astur gentilis", "This is the Eurasian Goshawk based on the location of the interaction (Svalbard): was Accipter atricapillus and is now Astur gentilis",
+Accipiter bicolor","Astur bicolor"
+Accipiter gentilis laingi","Astur atricapillus laingi
+Accipiter gentilis","Astur atricapillus", "Checklist shows genus moved to Astur atricapillus.
+Accipiter melanoleucus","Astur melanoleucus
+Accipiter sp.","Aerospiza/Tachyspiza/Accipiter/Astur sp.
+
+
+"unid. 2 hawl", "Aerospiza/Tachyspiza/Accipiter/Astur sp.",
+"unid. Accipiter hawl", "Aerospiza/Tachyspiza/Accipiter/Astur sp.", "Checklist genus change for Acipiter means it's one of these genera (Clements 2024)"
+
+Accipiter atricapillus IF American Goshawk, then we can change it.
+
+All goshawk rows:
+```{r}
+filter(int.raw.names, scientific_name.raw ==  "Accipiter atricapillus")
+```
+
+???
+"Accipiter getilis",  "Astur atricapillus",
+                Accipiter getilis Accipiter poliogaster       0.839"
+
+`
+
+
+
+######## Notes to review
+
+1 Aphelocoma woodhouseii suttoni   Aphelocoma woodhouseii cyanotis       0.916
+
+KEEP RAW for now because it is a subspecies: BOW: A. w. suttoni Phillips, 1965.
+
+Includes A. w. mesolega Oberholser, 1974 (see Browning 1990). Breeds in
+foothills of Rocky Mountains from northern and eastern Utah (east of the Great
+Salt Lake Basin; Behle 1985) and southern Wyoming south through
+northeasternmost Arizona, northern Arizona, Colorado, central New Mexico, and
+westernmost Oklahoma to northern Chihuahua and western Texas (Pitelka 1945a,
+Pitelka 1951d) [type locality = Pueblo, Colorado]; some individuals wander in
+winter to lowlands south of the breeding range, such as the Colorado Desert
+(Phillips et al. 1964a, Patten et al. 2003) and Texas Panhandle (Seyffert1985).
+
+
+
+
+##### BBS ERA FIXES
+
+Classes of these
+1. fixes of GBIF that selected a file
+2. things fixed by dirctly or fuzzy matching Clements list
+3. things fixed by dirctly or fuzzy matching Clements list common name
+
+These may be BBS names or not
+
+
+```
+American Three-toed Woodpecker Picoides tridactylus - raw/edit is Picoides dorsalis
+Confirmed it is North American species, not European for this interaction.
+splist2024[which(splist2024$bbs_common_name == "American Three-toed Woodpecker"), ]
+resolved.gbif[which(resolved.gbif$common_name == "American Three-Toed Woodpecker"), ]
+resolved.gbif$scientific_name[resolved.gbif$common_name == "American Three-Toed Woodpecker"] <- "Picoides dorsalis"
+
+Order below from: Sort by sp1sci.replaced, species1_scientific,	sp2sci.replaced, species2_scientific
+
+Clark's Grebe Aechmophorus clarkii transitionalis
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Spilopelia chinensis"] <- "Aechmophorus clarkii transitionalis"
+
+# BBS does not contain these subspecies; Saltmarsh Sparrows but subspecies interactions only hybrid
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Ammospiza caudacuta caudacuta"] <- "Ammospiza caudacuta"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Ammospiza caudacuta diversa"] <- "Ammospiza caudacuta"
+
+# Seaside Sparrow & Nelson's Sparrow main species interactions; subspecies rare
+# Seaside Sparrow (Gulf of Mexico)	Nelson's Sparrow	Ammospiza maritima fisheri	Ammospiza nelsoni
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Ammospiza maritima fisheri"] <- "Ammospiza maritima"
+# Seaside Sparrow (Cape Sable)	Short-tailed Hawk	Ammospiza maritima mirabilis	Buteo brachyurus
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Ammospiza maritima mirabilis"] <- "Ammospiza maritima"
+# Nelson's Sparrow (Atlantic Coast)	Saltmarsh Sparrow	Ammospiza nelsoni subvirgata	Ammospiza caudacuta
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Ammospiza nelsoni subvirgata"] <- "Ammospiza nelsoni"
+# Nelson's Sparrow (Interior)	LeConte's Sparrow	Ammospiza nelsoni nelsoni	Ammospiza leconteii
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Ammospiza nelsoni nelsoni"] <- "Ammospiza nelsoni"
+# Nelson's Sparrow (Atlantic Coast)	Savannah Sparrow	Ammospiza nelsoni subvirgata	Passerculus sandwichensis
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Ammospiza nelsoni subvirgata"] <- "Ammospiza nelsoni"
+
+# Mountain Plover Charadrius montanus = Anarhynchus montanus
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Charadrius montanus"] <- "Anarhynchus montanus"
+
+Snowy Plover Charadrius nivosus = Anarhynchus nivosus
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Charadrius nivosus"] <- "Anarhynchus nivosus"
+
+#Sandhill Crane	Grus canadensis = Antigone canadensis
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Grus canadensis"] <- "Antigone canadensis"
+# No subspecies in BBS so combine; interactions all at species level also
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Antigone canadensis canadensis"] <- "Antigone canadensis"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Antigone canadensis rowani"] <- "Antigone canadensis"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Antigone canadensis tabida"] <- "Antigone canadensis"
+
+Muscovy Duck Cairina moschata domesticus = Cairina moschata
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Cairina moschata domesticus"] <- "Cairina moschata"
+
+Dunlin (pacifica)	Calidris alpina pacifica (not subspecies in BBS)
+
+Crested Caracara Caracara cheriway = Caracara plancus
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Caracara cheriway"] <- "Caracara plancus"
+
+Snow Goose Chen caerulescens = Anser caerulescens
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Chen caerulescens"] <- "Anser caerulescens"
+
+Turkey Vulture	Cathartes aura meridionalis	= Cathartes aura
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Cathartes aura meridionalis"] <- "Cathartes aura"
+
+Wilson's Plover Charadrius wilsonia wilsonia = Anarhynchus wilsonia
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Charadrius wilsonia wilsonia"] <- "Anarhynchus wilsonia"
+
+Red-shafted Flicker	Colaptes auratus collaris	= Colaptes auratus cafer
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Colaptes auratus collaris"] <- "Colaptes auratus cafer"
+
+Gilded Flicker Colaptes chrysoides mearnsi = Colaptes chrysoides; interaction only hybrid
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Colaptes chrysoides mearnsi"] <- "Colaptes chrysoides"
+
+
+These have raw values but weren't updated? Odd
+Northwestern Crow	Corvus brachyrhynchos caurinus
+Cooper's Hawk	Accipiter cooperi
+
+Western Flycatcher & Western Flycatcher (occidentalis/hellmayri group) Empidonax
+occidentalis = Empidonax difficilis occidentalis but hard to tell which one
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Empidonax occidentalis"] <- "Empidonax difficilis"
+
+No subspecies in CHECKLIST or BBS; unique interactions only hybrid
+# Arctic Loon	Gavia arctica arctica	Gavia arctica viridigularis
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Gavia arctica arctica"] <- "Gavia arctica"
+# Arctic Loon	Gavia arctica viridigularis
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Gavia arctica viridigularis"] <- "Gavia arctica"
+
+# Black-necked Stilt Himantopus mexicanus mexicanus = Himantopus mexicanus
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Himantopus mexicanus mexicanus"] <- "Himantopus mexicanus"
+
+# American Barn Swallow not subspecies in BBS but is in CHECKLIST
+# American Barn Swallow	Hirundo rustica erythrogaster - only 1 interaction
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Hirundo rustica erythrogaster"] <- "Hirundo rustica"
+
+No subspecies in BBS; combine but unique interactions are only hybrid
+#Hooded Oriole (sennettii)	Icterus cucullatus sennettii
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Icterus cucullatus sennettii"] <- "Icterus cucullatus"
+#Hooded Oriole (cucullatus)	Icterus cucullatus cucullatus
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Icterus cucullatus cucullatus"] <- "Icterus cucullatus"
+
+# BBS no subspecies but interactions are only hybrid
+#Audubon's Oriole (Audubon's)	Icterus graduacauda audubonii	& Icterus graduacauda graduacauda = Icterus graduacauda
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Icterus graduacauda audubonii"] <- "Icterus graduacauda"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Icterus graduacauda graduacauda"] <- "Icterus graduacauda"
+
+# Juncos: many subspecies but most interactions at species level
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Junco hyemalis carolinensis"] <- "Junco hyemalis"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Junco hyemalis dorsalis"] <- "Junco hyemalis"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Junco hyemalis montanus"] <- "Junco hyemalis"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Junco hyemalis pinosus"] <- "Junco hyemalis"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Junco hyemalis pontilis"] <- "Junco hyemalis"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Junco hyemalis shufeldti"] <- "Junco hyemalis"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Junco hyemalis thurberi"] <- "Junco hyemalis"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Junco hyemalis caniceps"] <- "Junco hyemalis"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Junco hyemalis townsendi"] <- "Junco hyemalis"
+#
+# No subspecies in BBS but is in CHECKLIST as Gray-crowned Rosy-Finch (Gray-crowned)
+# Leucosticte tephrocotis [tephrocotis Group]
+# Sierra Nevada Gray-crowned Rosy-Finch	Leucosticte tephrocotis dawsoni
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Leucosticte tephrocotis dawsoni"] <- "Leucosticte tephrocotis"
+#Aleutian and Kodiak Island Gray-crowned Rosy-Finch	Leucosticte tephrocotis griseonucha
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Leucosticte tephrocotis griseonucha"] <- "Leucosticte tephrocotis"
+# Hepburn's Gray-crowned Rosy-Finch	Leucosticte tephrocotis littoralis
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Leucosticte tephrocotis littoralis"] <- "Leucosticte tephrocotis"
+# Gray-crowned Rosy-Finch (tephrocotis)	Leucosticte tephrocotis tephrocotis
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Leucosticte tephrocotis tephrocotis"] <- "Leucosticte tephrocotis"
+# Pribilof Islands Gray-crowned Rosy-Finch	Leucosticte tephrocotis umbrina
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Leucosticte tephrocotis umbrina"] <- "Leucosticte tephrocotis"
+
+# no subspecies in BBS but only co-occur interactions: Short-billed
+# Dowitcher	Limnodromus griseus hendersoni = Limnodromus griseus
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Limnodromus griseus hendersoni"] <- "Limnodromus griseus"
+
+not in BBS: Cassia Crossbill	Loxia sinesciuris
+#
+# Wild Turkey - no subspecies in BBS but interactions mostly at main species
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Meleagris gallopavo intermedia"] <- "Meleagris gallopavo"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Meleagris gallopavo merriami"] <- "Meleagris gallopavo"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Meleagris gallopavo osceola"] <- "Meleagris gallopavo"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Meleagris gallopavo silvestris"] <- "Meleagris gallopavo"
+
+#California Towhee
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Melozone crissalis crissalis"] <- "Melozone crissalis"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Melozone crissalis petulans"] <- "Melozone crissalis"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Melozone crissalis senicula"] <- "Melozone crissalis"
+
+## Canyon Towhee
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Melozone fusca fusca"] <- "Melozone fusca"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Melozone fusca mesoleuca"] <- "Melozone fusca"
+
+BBS no subspecies but interactions are only hybrids
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Melospiza georgiana georgiana"] <- "Melospiza georgiana"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Melospiza georgiana nigrescens"] <- "Melospiza georgiana"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Melospiza melodia gouldii"] <- "Melospiza melodia"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Melospiza melodia graminea"] <- "Melospiza melodia"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Melospiza melodia morphna"] <- "Melospiza melodia"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Melospiza melodia heermanni"] <- "Melospiza melodia"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Melospiza melodia montana"] <- "Melospiza melodia"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Melospiza melodia cleonensis"] <- "Melospiza melodia"
+
+# BBS has no subspecies American Black-crowned Night-Heron Nycticorax nycticorax hoactli
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Nycticorax nycticorax hoactli"] <- "Nycticorax nycticorax"
+
+No subspecies in BBS: Passerella iliaca Fox Sparrows but all seem to have
+interactions doubled w main species (except hybrid)
+
+Ruby-crowned Kinglet Regulus calendula
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Regulus calendula"] <- "Corthylio calendula"
+
+#Spotted Dove	Spilopelia chinensis
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Spilopelia chinensis"] <- "Streptopelia chinensis"
+
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Setophaga coronata auduboni"] <- "Setophaga coronata auduboni"
+
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Ammospiza leconteii"] <- "Ammospiza leconteii"
+
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Ammospiza maritima"] <- "Ammospiza maritima"
+
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Anas diazi"] <- "Anas diazi"
+
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Anser caerulescens"] <- "Anser caerulescens"
+
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Anser rossii"] <- "Anser rossii"
+
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Antigone canadensis"] <- "Antigone canadensis"
+
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Aratinga nenday"] <- "Aratinga nenday"
+
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Buteo plagiatus"] <- "Buteo plagiatus"
+
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Calidris pugnax"] <- "Calidris pugnax"
+
+colima warbler Leiothlypis crissalis - not in BBS
+
+Northern Harrier	Circus cyaneus = Circus hudsonius
+Northern Harrier Circus cyaneus hudsonius = Circus hudsonius
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Circus cyaneus" & resolved.gbif$common_name.edit == "Northern Harrier" ] <- "Circus hudsonius"
+
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Circus cyaneus hudsonius" & resolved.gbif$common_name.edit == "Northern Harrier" ] <- "Circus hudsonius"
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Circus hudsonius"] <- "Circus hudsonius"
+
+American Green-winged Teal Anas crecca carolinensis = change to BBS version just Anas crecca
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Anas crecca carolinensis"] <- "Anas crecca"
+
+#Ross's Goose	Chen rossii
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Chen rossii"] <- "Anser rossii"
+
+Northern Shoveler	Anas clypeata = Spatula clypeata
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Anas clypeata"] <- "Spatula clypeata"
+Blue-winged Teal Anas discors = Spatula discors
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Anas discors"] <- "Spatula discors"
+White-winged Scoter	Melanitta fusca = Melanitta deglandi
+resolved.gbif$scientific_name[resolved.gbif$scientific_name.edit == "Melanitta fusca"] <- "Melanitta deglandi"
+
+
