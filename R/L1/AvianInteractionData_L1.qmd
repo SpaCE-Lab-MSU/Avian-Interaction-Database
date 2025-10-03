@@ -97,11 +97,12 @@ in a table to identify the current accepted name in checklist
    -  create a name resolution table to be completed
 2. fix missing scientific names manually 
 3. match scientific names matching checklist
-4. use fuzzy matching to find close scientific names to checklist
-5. resolve names common names matching checklist
-6. use fuzzy matching to find close common names
+4. use fuzzy matching to find scientific names in checklist (high confidence only)
+5. resolve names common names matching checklist (high confidence only)
 7. use gbif to see if name can be resolved to a checklist name
-8. add manual fixes 
+  
+8. apply manual fixes and overrides to 
+9. handle the genus only unids
 9. save data files
 
 
@@ -1198,71 +1199,54 @@ gbif_on_checklist <- filter(int.gbif.names, accepted_scientific_name %in% checkl
 print(nrow(gbif_on_checklist))
 ```
 
-Note that one of these is domestic chicken and that needs to be edited by manually 
-as GBIF matches to *Gallus gallus* but checklist that is the African wild species, 
-and on the checklist Domestic Chicken is *Gallus gallus (Domestic type)*
+*TO-DO* 
 
-see table of updates 
-
-
-
-Number of un-id names (genera only, not expected to Taxadb to match, just accounting):
+we know it is suggesting Gallus gallus for chicken but that is not correct 
+by checklist, so remove all of those 
 
 ```{r}
-int.raw.names.unid <- filter(int.raw.names, grepl(" sp\\.$", scientific_name.edit))
-print(paste("rows:", nrow(int.raw.names.unid)))
-print(paste("unique:", length(unique(int.raw.names.unid$scientific_name.edit))))
-
+gbif_on_checklist <- filter(gbif_on_checklist, accepted_scientific_name != 'Gallus gallus')
+print(nrow(gbif_on_checklist))
 ```
 
 
-
-
-
-For those that matched in gbif AND not already have an note, add note including
-the GBIF ID number that matched.  
+apply these changes 
 
 ```{r}
-# this is maybe not the most R way to do this
-# find the rows in our names that matched GBIF, and take out the rows that already 
-# have a note in them, and update all of those notes
-rows_that_have_gbif_match <- which(!is.na(int.gbif.names$scientific_id))##  match(resolved.gbif$scientific_name.raw, int.raw.names$scientific_name.raw)
-rows_with_non_empty_notes <- which(!is.na(int.raw.names$edit_notes))
-
-rows_to_update <- rows_that_have_gbif_match[! rows_that_have_gbif_match  %in% rows_with_non_empty_notes ]
-
-for(r in rows_to_update){
-   if ( int.raw.names[r,]$scientific_name.edit != int.gbif.names[r, "accepted_scientific_name"]){
-     warning(paste(int.raw.names[r,"scientific_name.edit"], "did not match gbif name", int.raw.names[r,"accepted_scientific_name"]))
-   }
-   int.raw.names[r,]$edit_notes <- paste('matched GBIF to ', as.character(int.gbif.names[r,"scientific_id"]))
+# make a copy 
+int.raw.names.gbif <- int.raw.names
+# just use a loop through gbif matches to update 
+for(r in 1:nrow(gbif_on_checklist)){
+  names_row <- which(int.raw.names.gbif $scientific_name.raw == gbif_on_checklist[r,"scientific_name.raw"] & 
+                int.raw.names.gbif $common_name.raw == gbif_on_checklist[r,"common_name.raw"])
+  
+  int.raw.names.gbif[names_row, ]$scientific_name.edit <- gbif_on_checklist[r,]$accepted_scientific_name
+  gbif_note <- paste("GBIF: Match using taxadb/", gbif_on_checklist[r,]$scientific_id, " on checklist (Clements 2024)")
+  int.raw.names.gbif[names_row, ]$edit_notes <- gbif_note
 }
+                  
+  
 ```
 
+Review outcome of applying GBIF
+```{r}
+tibble(filter(int.raw.names.gbif, grepl("GBIF", edit_notes)))
+```
 
-
-Remaining names to be fixed
+After Review, save copy back to taxonomy table variable
 
 ```{r}
-View(unresolved_species(int.raw.names))
+int.raw.names <-  int.raw.names.gbif 
+
 ```
 
-
-
-#### Wrap-up manual fixes
-
-Unique scientific names in unresolved list and manu: 
+Remaining names to be resolved
 
 ```{r}
 length(unique(unresolved_species(int.raw.names)$scientific_name.raw))
 ```
 
 
-Remaining Unresolved Species:
-
-```{r}
-nrow(unresolved_species(int.raw.names))
-```
 
 
 --------------------------------------------------------------------------------
@@ -1270,32 +1254,38 @@ nrow(unresolved_species(int.raw.names))
 
 ## Scientific Name Changes: Low Confidence Matches on scientific name
 
+**OPTIONAL**
+
+this may no longer be necessary since ~ 50 species to resolve after
+applying the high-confidence resolutions. 
+
+
 Extract scientific name matches with lower confidence (match_score <= 0.90) 
 for those remaining species that didn't match for further 
 checking
 
 ```{r}
 
-low_confidence_matches <- scientific_name_matches %>%
-  filter(
-    (scientific_name_match_score < 0.9 & !is.na(scientific_name_match_score)) 
-  ) %>% 
-  filter( # remove unid species from matches
-    !grepl(" sp\\.$", closest_scientific_name_match)
-  ) %>% 
-  filter(
-    scientific_name.raw %in% unresolved_species(int.raw.names)$scientific_name.raw
-  ) 
-
-  # couldn't get Mutate to work, so here is a loop to add in the common name where it's found
-  low_confidence_matches$common_name.checklist <- NA
-  for(r in 1:nrow(low_confidence_matches)){
-    common_names <- filter(checklist,scientific_name == low_confidence_matches[r,"closest_scientific_name_match"] & category == "species")$common_name
-    if(length(common_names)==1) low_confidence_matches[r,"common_name.checklist"]<- common_names[1]
-  }
-
-
-length(unique(low_confidence_matches$scientific_name.raw))
+# low_confidence_matches <- scientific_name_matches %>%
+#   filter(
+#     (scientific_name_match_score < 0.9 & !is.na(scientific_name_match_score)) 
+#   ) %>% 
+#   filter( # remove unid species from matches
+#     !grepl(" sp\\.$", closest_scientific_name_match)
+#   ) %>% 
+#   filter(
+#     scientific_name.raw %in% unresolved_species(int.raw.names)$scientific_name.raw
+#   ) 
+# 
+#   # couldn't get Mutate to work, so here is a loop to add in the common name where it's found
+#   low_confidence_matches$common_name.checklist <- NA
+#   for(r in 1:nrow(low_confidence_matches)){
+#     common_names <- filter(checklist,scientific_name == low_confidence_matches[r,"closest_scientific_name_match"] & category == "species")$common_name
+#     if(length(common_names)==1) low_confidence_matches[r,"common_name.checklist"]<- common_names[1]
+#   }
+# 
+# 
+# length(unique(low_confidence_matches$scientific_name.raw))
 ```
 
 previously 69 out of 326 - checks out OK; May 29, 2025: 65
@@ -1315,7 +1305,17 @@ and will be updated if necessary below
 --------------------------------------------------------------------------------
 ### Manual edits 
 
-These are being transferred to a table to apply in bulk
+Not all automatic fixes were correct or some simply must be determined 
+manually.   These are collected in a CSV file with the same columns as our `int.raw.names`
+data frame. 
+
+**TO-DO**
+
+1. complete the entries in this file 
+2. set the file name.  for example, "manual_taxonomic_resolutions.csv"
+3. read in the file and verify all rows are ok
+4. apply the edits in the file regardless if there is alread a note since 
+   these may override the automatic resolutions
 
 
 
@@ -1329,57 +1329,24 @@ checklist[which(checklist$common_name == "Black-necked Stilt"), ]
 filter(int.raw.names, scientific_name.edit == "Himantopus mexicanus")
 ```
 
-Pomarine Jaeger = Stercorarius pomarinus 
-
-```{r}
-
-interaction_count_by_species(int.raw,"Stercorarius stercorarius")
-checklist[which(checklist$common_name == "Pomarine Jaeger"), ]
-
-int.raw.names <- int.raw.names %>% 
-  add_name_edits(scientific_name.raw = "Stercorarius stercorarius",
-                 scientific_name.edit = "Stercorarius pomarinus",
-                 edit_notes = "KEEP RAW but edit: checklist: Pomarine Jaeger = Stercorarius pomarinus Also raw has space at end 5 Stercorarius stercorarius Stercorarius parasiticus    Pomarine Jaeger     Pomarine Jaeger  0.857
-"
-
-)
-
-```
-
-
-
-White Wagtail
-
-```{r}
-
-int.raw.names <- add_name_edits( int.raw.names, 
-        scientific_name.raw = "Moticilla alba",
-        scientific_name.edit = "Motacilla citreola",
-        edit_notes = "Common name in int.raw is the White Wagtail. Moticilla alba            Motacilla citreola             0.858"
-  )
-
-```
-
-
 
 
 --------------------------------------------------------------------------------
 
-## Unid sp.  fixes
+## Unid : Genus-only speciesfixes
 
 
 Open the Unid sp. (Genu-only) to work on:
 
-How many unique Unid sp?
- 
-```{r}
-int.raw.names.unid <- filter(int.raw.names, grepl(" sp\\.$", scientific_name.raw))
-length(unique(int.raw.names.unid$scientific_name.edit))
+Number of un-id names (genera only, not expected to Taxadb to match, just accounting):
 
-# optional, in Rstudio, open the list in a new tab
-# View(int.raw.names.unid )
+```{r}
+int.raw.names.unid <- filter(int.raw.names, grepl(" sp\\.$", scientific_name.edit))
+print(paste("rows:", nrow(int.raw.names.unid)))
+print(paste("unique:", length(unique(int.raw.names.unid$scientific_name.edit))))
 
 ```
+
 
 
 
