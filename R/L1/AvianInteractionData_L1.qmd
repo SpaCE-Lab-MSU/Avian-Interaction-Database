@@ -58,8 +58,7 @@ as entered to match the current checklist.  Update the code below
 ```{r}
 #| echo: false
 
-taxonomic_resolutions_file_name<- here::here('R/L1', "manual_taxonomic_resolutions_L1_2025-10.csv")
-
+manual_taxonomic_resolutions_file_name<- here::here('R/L1', "manual_taxonomic_resolutions_L1_2025-10.csv")
 ```
 
 
@@ -104,19 +103,22 @@ At each step, resolution narrows down those names that require manual entry
 in a table to identify the current accepted name in checklist
 
 1. setup 
-   - read in checklists and L0 data
+   - read in checklists and L0 data (int.raw)
    - final data cleaning to ensure no typos etc
-   -  create a name resolution table to be completed
+   - create a name resolution table to be completed (int.raw.names)
 2. fix missing scientific names manually 
-3. match scientific names matching checklist
-4. use fuzzy matching to find scientific names in checklist (high confidence only)
-5. resolve names common names matching checklist (high confidence only)
-7. use gbif to see if name can be resolved to a checklist name
-  
-8. apply manual fixes and overrides to 
-9. handle the genus only unids
-9. save data files
-
+3. resolve scientific names already exactly matching checklist 
+4. for those names not resolved, use fuzzy matching to find scientific names in checklist (high confidence only)
+5. for those names not resolved, match common names with checklist (high confidence only)
+6. for those names not resolved, use gbif to see if name can be resolved to a checklist name
+8. read in CSV of manual resolutions and apply to whole list 
+9. resolve genus only unids
+10. resolve hybrids ( X and / )
+11. merge checklist common names into resolutions matching on scientific name
+12. join checklist scientific names and common names to interactions data
+13. save data files 
+    - interaction data with checklist names resolved 
+    - resolutions table with explanations
 
 ### Versions
 
@@ -126,16 +128,14 @@ in a table to identify the current accepted name in checklist
 -  May 2025- July 2025 convert to workflow notebook/Quarto, (PSB)
 -  August 2025, using new species lists Canada+CONUS from PLZ (PSB)
 -  September 10, 2025, using species lists from commit from PLZ (PSB)
--  Oct 1, 2025: workflow reorginzation for better taxonomic resolution (PSB)
+-  Oct 1, 2025: workflow reorganzation for better taxonomic resolution (PSB)
 
 
 ## TO DO / Notes
 
-code/function to match to checklist to be able to be moved around
+complete code to apply CSV of resolutions to file
 
-change and reorder the the section `## Join with Checklist and report`
- = since we are not relying on taxadb, dont' need a 'checklist' column but simply 
- an 'edit' column to indicate final dispensation and will use notes to indicate where it came from (checklist, gbif, etc)
+code/function to checklist to be able to be moved around
 
 perhaps also include the species code from Clements in the final taxonomy table 
 so that it can be looked up next year directly to see if scientific name has changed
@@ -143,6 +143,7 @@ so that it can be looked up next year directly to see if scientific name has cha
 read the original 2024 list, not my version that has 2023/22 links (does not add rows)
 
 add code to get the timestamp for the L0 file and report that here
+
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -744,7 +745,7 @@ reference_names <- tibble(
 nrow(reference_names)
 
 ```
-### repeat of names to resolve: 
+#### Number of names to resolve: 
 
 ```{r}
 
@@ -754,6 +755,8 @@ print(length(unique(unresolved_species(int.raw.names)$scientific_name.edit)))
 
 Calculate the fuzzy match score and closest name in the checklist for 
 each record in the unresolved names
+
+*To examine the matches created by this process use `View(scientific_name_matches)`*
 
 *(this takes several minutes to complete)*
 
@@ -785,7 +788,7 @@ tibble(scientific_name_matches)
 Distribution of Match Scores
 
 ```{r}
-library(ggplot2)
+suppressMessages(suppressWarnings(library(ggplot2))) # don't print to console
 g<- ggplot(scientific_name_matches, aes(scientific_name_match_score)) +  
         geom_histogram(binwidth=0.01, color = "#000000", fill = "#0099F8") # + 
 
@@ -808,6 +811,7 @@ print(dplyr::filter(scientific_name_matches,
 
 #### Scientific Name Matching Set High Confidence threshold
 
+To review fuzzy match results on unresolved names, run `View(scientific_name_matches)`
 
 After review of matches, all of the matches with score > 0.95 looked correct, 
 and many but not all in range from 0.095 > score > 0.90 so those need to be checked. 
@@ -831,10 +835,6 @@ print(length(unique(high_confidence_matches$scientific_name.raw)))
 proportion_high_confidence = length(unique(high_confidence_matches$scientific_name.raw)) / length(unique(scientific_name_matches$scientific_name.raw))
 print(sprintf("%.2f%%", round(proportion_high_confidence*100,2)))
 ```
-```{r}
-View(high_confidence_matches )
-
-```
 *previous results:*
 
 `Dec 2024: 257 out of 326; May 29, 2025: 244 out of 309`
@@ -843,17 +843,34 @@ Sept 2025:
   - >= 0.95 134 (33%)
   - >= 0.90 211
   
-### Assign note to all high confidence matches. 
+### Resolve (assing edit_note to all high confidence matches)
 
 ```{r}
+
 edit_note <- "high confidence str match to checklist (Clements 2024) "
+
+
 # make a copy
 int.raw.names.matches <- int.raw.names
+
 # fill the matching rows with the matched sci names
+# this assignment works becuase the match data frame contains the original row numbers
 int.raw.names.matches[high_confidence_matches$row_number,]$scientific_name.edit<- high_confidence_matches$closest_scientific_name_match
 int.raw.names.matches[high_confidence_matches$row_number,]$edit_notes <- paste( edit_note, round(high_confidence_matches$scientific_name_match_score,3))
 
-View(int.raw.names.matches)
+# to review these assignments, run View(int.raw.names.matches) which includes all reslutions
+```
+
+Remaining species to resolve after high-confidence scientific name match:
+
+```{r}
+#| echo: false
+#| output: true
+print("unresolved rows in names table:")
+print(length(unresolved_species_rows(int.raw.names.matches)))
+print("unresolved unique scientific names ")
+print(length(unique(unresolved_species(int.raw.names.matches)$scientific_name.raw)))
+
 ```
 
 ```{r}
@@ -862,19 +879,6 @@ View(int.raw.names.matches)
 int.raw.names <- int.raw.names.matches
 rm(int.raw.names.matches)
 ```
-
-### Medium Confidence species rows
-
-Remaining species to resolve after high-confidence match
-
-```{r}
-#| echo: false
-#| output: true
-
-length(unique(unresolved_species(int.raw.names)$scientific_name.raw))
-```
-
-
 
 
 
@@ -904,7 +908,7 @@ from in matches from 0.90 - 0.95.
 
 Hold these and match on common name first, then re-run fuzzy matching
 
-skipp this because the histogram shows this data 
+skipp this because the histogram shows this information 
 ```{r}
 # score_start <- min(high_confidence_matches$scientific_name_match_score)
 # score_end <- max(high_confidence_matches$scientific_name_match_score)
@@ -1002,15 +1006,11 @@ for(r in 1:nrow(name_matches)) {
 }
 ```
 
+To view this table, run `View(name_matches)`
 
+#### Example Matches
 
-```{r}
-View(name_matches %>% arrange(desc(name_match_score)))
-```
-
-#### Example Matches to set threshold
-
-Raw  Checklist Match ( match value)
+Considerations for setting the threshold (September 2025)
 
 - *Northern Jancan* matches *Northern Jacana* 0.9458333	=> correct
 - *Black-Winged Babbler*	matches *Black-chinned Babbler*	0.9190476 => incorrect 
@@ -1056,8 +1056,13 @@ Remaining unresolved rows after high confidence scientific and common name match
 ```{r}
 #| echo: false
 #| output: true
-nrow(unresolved_species(int.raw.names.matches))
+print("unresolved rows in names table:")
+print(length(unresolved_species_rows(int.raw.names.matches)))
+print("unresolved unique scientific names ")
+print(length(unique(unresolved_species(int.raw.names.matches)$scientific_name.raw)))
+
 ```
+
 ```{r}
 #| echo: false
 #| output: true
@@ -1106,7 +1111,7 @@ int.raw.names.unresolved<- mutate(int.raw.names.unresolved,
 
 ```
 
-Save CSV of our current unresolved species
+Optional: Save CSV of our current unresolved species
 
 ```{r}
 today_date_string <- format(Sys.Date(),"%Y-%m-%d")
@@ -1200,7 +1205,7 @@ print(
 )
 ```
 
-How many of those gbif matches are on the checklist?
+How many of those gbif matches are actually on the checklist?
 
 ```{r}
 #| echo: false
@@ -1252,10 +1257,17 @@ int.raw.names <-  int.raw.names.gbif
 
 ```
 
-Remaining names to be resolved
+
+Remaining species to resolve after fuzzy and gbif matching:
 
 ```{r}
-length(unique(unresolved_species(int.raw.names)$scientific_name.raw))
+#| echo: false
+#| output: true
+print("unresolved rows in names table:")
+print(length(unresolved_species_rows(int.raw.names.gbif)))
+print("unresolved unique scientific names ")
+print(length(unique(unresolved_species(int.raw.names.gbif)$scientific_name.raw)))
+
 ```
 
 
@@ -1390,68 +1402,12 @@ print(paste("whole enviroment saved as ", f))
 
 
 
---------------------------------------------------------------------------------
-
-## Checklist common-name fuzzy match (this was repeated when were doing GBIF< may not be needed/redundant)
-
-
-1) get the accepted common name from Taxadb for matching Scientific name
-2) match this common name with Clements 
-
-## Fuzzy Match on Common names
-
-after applying high-confidence matches, try matching on common names from GBIF
-
-```{r}
-
-# list of rows that aren't matched yet
-
-# create list of names to match from unresolved rows
-name_matches<- unresolved_species(int.raw.names)
-# add new columns
-name_matches$closest_name_match <- NA
-name_matches$name_match_score <- NA
-name_matches$scientific_name.checklist <- NA
-
-checklist_common_names<- filter(checklist,category == "species" )$common_name
-
-# fill them in one row at a time
-for(r in 1:nrow(name_matches)) {
-  # optional, print the name we are on to gauge progress
-  # print(scientific_name_matches[r,"scientific_name.edit"])
-  
-  raw_common_name<-name_matches[r,"common_name.raw"] 
-  fuzzy_match <- find_closest_match_with_score(raw_common_name, checklist_common_names)
-  
-
-  
-  # find the associated sci name, but only look at species records 
-  # (some groups have the same common name for the whole genus)
-  scientific_name_lookup <- as.character(filter(checklist, 
-                                    common_name == fuzzy_match$match & category == "species") %>%   
-                          select(scientific_name))
-  if(length(scientific_name_lookup) == 0) warning(paste(" no scientific name in checklist for ",fuzzy_match$match))
-  else {
-    name_matches[r,]$closest_name_match <- fuzzy_match$match
-    name_matches[r,]$name_match_score <- fuzzy_match$score
-    name_matches[r,]$scientific_name.checklist <- scientific_name_lookup 
-  }
-}
-```
-
-
-
-```{r}
-name_matches %>% arrange(desc(name_match_score))
-```
-
-
 
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-## Manual edits 
+## Manual Taxanomic Edits
 
 Not all automatic fixes were correct or some simply must be determined 
 manually.   These are collected in a CSV file with the same columns as our `int.raw.names`
@@ -1493,21 +1449,21 @@ If it does not this process will skip to the end leaving some species unresolved
 
 manual_taxonomic_resolutions <- data.frame()
 
-if(!exists(manual_taxonomic_resolutions_file_name)) {
-  warning("you must set the variable 'taxonomic_resolutions_file_name' to the path to the current file for name edits")  
-} else {
+# # the exists function is not working correctly in quarto/rstudio 
+# if(!exists(manual_taxonomic_resolutions_file_name)) {
+#   warning("you must set the variable 'taxonomic_resolutions_file_name' to the path to the current file for name edits")  
+# } else {
     if(file.exists(manual_taxonomic_resolutions_file_name)) {
-      manual_taxonomic_resolutions <- read_csv(manual_taxonomic_resolutions_file_name) 
-    }
-    else {
+      manual_taxonomic_resolutions <- read_csv(manual_taxonomic_resolutions_file_name, show_col_types = FALSE) 
+    } else {
       warning(paste("Manual taxonomic resolutions file not found", manual_taxonomic_resolutions_file_name))
       # couldn't find the file but keep going and check if we have an empty data frame
   }
-}
+# }
 
 ```
 
-**Workflow: **
+**Manual Taxonomic Resolution Workflow: **
 
 Goal is to accumulate a list of fixes and notes
 
@@ -1537,11 +1493,16 @@ Our current workflow use `int.raw.names`  and resolves in this order:
 2. scientific_name.edit : corrected to match either correct GBIF or Clements checklist
 3. scientific_name.checklist : final resolved name from GBIF to Clements checklist
 
+```{r}
+# filter out blank rows
+manual_taxonomic_resolutions <- filter(manual_taxonomic_resolutions, !is.na(scientific_name.edit))
+tibble(manual_taxonomic_resolutions)
+```
+
+```{r}
 
 
-
-
-
+```
 
 
 
