@@ -222,14 +222,22 @@ add_edits_to_list <- function(edits.df, edit_list){
 #######################################################
 #### short-cut/convenience functions for listing or counting records by species
 
-# list those without a note AND are not UNIDs Genus sp.
-unresolved_species<- function(edit.df){
-  filter(edit.df,
-         is.na(edit_notes) & !grepl(" sp\\.$", scientific_name.edit)
-         )
+# unresolved species ==> those without a note AND are not UNIDs Genus sp.
+# getting the rows to save is handy for matching various lists
+unresolved_species_rows <- function(names.df){
+  which(
+    is.na(names.df$edit_notes) &
+    !grepl(" sp\\.$", names.df$scientific_name.edit)
+  )
+}
+
+# use the function above for consistency but return whole rows
+unresolved_species<- function(names.df){
+  names.df[unresolved_species_rows(names.df),]
 }
 
 
+#### pull out various subsets of interactions by species or common names
 #' interaction records where sp in sp1 OR sp2
 #'
 #' convenience function to help remember this syntax,
