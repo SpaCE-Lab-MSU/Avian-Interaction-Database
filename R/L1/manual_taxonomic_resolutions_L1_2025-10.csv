@@ -1,5 +1,7 @@
 scientific_name.raw,common_name.raw,scientific_name.edit,edit_notes,comments
-Acanthis hornemanni,Hoary Redpoll,,, common name match:  Hoary-throated Spinetail 0.75 Synallaxis kollari ; scientific name match:  Acanthis flammea hornemanni 0.84 ;
+Duck sp.,Unid. Duck,Anatidae sp.,"TYPO, match to checklist",UNID
+Acanthis hornemanni,Hoary Redpoll,Acanthis hornemanni,, REVIEW repolls common name match:  Hoary-throated Spinetail 0.75 Synallaxis kollari ; scientific name match:  Acanthis flammea hornemanni 0.84 ;
+Accipiter atricapillus,American Goshawk,Astur atricapillus,"Update to checklist Listed as American Goshawk, now genus Astur (Clements 2024)",
 Accipiter gentilis,Northern Goshawk,,, common name match:  Northern Shrike 0.85 Lanius borealis ; scientific name match:  Accipiter nisus 0.86 ;
 Accipiter gentilis,Goshawk,,, common name match:  Red Goshawk 0.88 Erythrotriorchis radiatus ; scientific name match:  Accipiter nisus 0.86 ;
 Accipiter gentilis laingi,Northern Goshawk,,, common name match:  Northern Shrike 0.85 Lanius borealis ; scientific name match:  Accipiter nisus granti 0.8 ;
@@ -9,17 +11,17 @@ Anas flavirostris / anas andium,Speckled Teal,Anas andium/flavirostris,According
 Anas platyrhynchos domesticus,Domestic Duck,,, common name match:  Mexican Duck 0.81 Anas diazi ; scientific name match:  Anas platyrhynchos (Domestic type) 0.91 ;
 Anas superciliosa rogersi,Australian Black Duck,,, common name match:  Australian Shelduck 0.83 Tadorna tadornoides ; scientific name match:  Anas superciliosa 0.89 ;
 Aphelocoma woodhouseii suttoni,Woodhouse's Scrub-Jay (Suttoni),,," REVIEW unclear which sub-species this should be, ncommon name match:  Woodhouse's Scrub-Jay 0.89 Aphelocoma woodhouseii ; scientific name match:  Aphelocoma woodhouseii cyanotis 0.92 ;"
-Argya affinis somervillei,Black-Winged Babbler,,, common name match:  Black-chinned Babbler 0.92 Cyanoderma pyrrhops ; scientific name match:  Argya affinis 0.84 ;
+Argya affinis somervillei,Black-Winged Babbler,Argya striata somervillei,Update to checklist: BOW and checklist: 'Black-winged Babbler' is most likely Jungle Babbler (Black-winged) Argya striata somervillei, common name match:  Black-chinned Babbler 0.92 Cyanoderma pyrrhops ; scientific name match:  Argya affinis 0.84 ;
 Branta canadensis minima,Cackling Canada Goose,,, common name match:  Cackling/Canada Goose 0.91 character(0) ; scientific name match:  Branta canadensis maxima 0.92 ;
 Branta canadensis/hutchinsii,Unid. Canada Goose /Cackling Goose,,, common name match:  Canada Goose 0.7 Branta canadensis ; scientific name match:  Branta hutchinsii/canadensis 0.92 ;
 Branta leucopsis x anser indicus,Hybrid Barnacle X Bar-Headed Goose,,, common name match:  Hoary-headed Grebe 0.69 Poliocephalus poliocephalus ; scientific name match:  Branta leucopsis x canadensis 0.91 ;
-Bubulcus ibis,Cattle Egret,,, common name match:  Little Egret 0.86 Egretta garzetta ; scientific name match:  Lanius nubicus 0.74 ;
-Bulbucus ibis,Cattle Egret,,, common name match:  Little Egret 0.86 Egretta garzetta ; scientific name match:  Caprimulgus nubicus 0.75 ;
+Bubulcus ibis,Cattle Egret,Ardea ibis/coromanda,match to checklist but unspecified so either one of  these closely related species Western/Eastern Cattle-Egret       ,REVIEW  common name match:  Little Egret 0.86 Egretta garzetta ; scientific name match:  Lanius nubicus 0.74 ;
+Bulbucus ibis,Cattle Egret,Ardea ibis/coromanda,match to checklist but unspecified so either one of  these closely related species Western/Eastern Cattle-Egret       , common name match:  Little Egret 0.86 Egretta garzetta ; scientific name match:  Caprimulgus nubicus 0.75 ;
 Buteo polyosoma,Red-Backed Hawk,,, common name match:  Red-backed Shrike 0.88 Lanius collurio ; scientific name match:  Buteo lagopus 0.78 ;
 Cacomantis variolosus sepulcralis,Brush Cuckoo,,, common name match:  Barusan Cuckoo-Dove 0.83 Macropygia modiglianii ; scientific name match:  Cacomantis variolosus obscuratus 0.9 ;
 Carduelis carduelis paropanisi,Eastern European Goldfinch,,,"REVIEW  needs override check: species and common name are not on checklist.  It matched matched  Carduelis carduelis parva BUT not in eastern Europe, in Azores, canary islands (western) fr 'The former caniceps group of subspecies, containing subspecies C. c. caniceps, C. c. paropanisi, C. c. subulata, and C. c. ultima, were shifted to a separate species, the grey-crowned goldfinch, by the International Ornithological Congress in 2023.   Carduelis caniceps paropanisi is the Grey-crowned Goldfinch (occurs in Asia only)'      common name match:  European Greenfinch 0.8 Chloris chloris ; scientific name match:  Carduelis carduelis parva 0.92 ;"
-Carduelis carduelis subulata,Eastern European Goldfinch,,, common name match:  European Greenfinch 0.8 Chloris chloris ; scientific name match:  Carduelis carduelis 0.89 ;
-Carduelis flammea,Common Redpoll,,, common name match:  Common Poorwill 0.84 Phalaenoptilus nuttallii ; scientific name match:  Thripadectes flammulatus 0.81 ;
+Carduelis carduelis subulata,Eastern European Goldfinch,,, REVIEW  common name match:  European Greenfinch 0.8 Chloris chloris ; scientific name match:  Carduelis carduelis 0.89 ;
+Carduelis flammea,Common Redpoll,,, REVIEW common name match:  Common Poorwill 0.84 Phalaenoptilus nuttallii ; scientific name match:  Thripadectes flammulatus 0.81 ;
 Chen rossii,Ross' Goose,,, common name match:  Ross's Goose 0.91 Anser rossii ; scientific name match:  Machetornis rixosa 0.78 ;
 Chrysococcyx lucidus layardi,New Caledonian Bronze-Cuckoo,,, common name match:  New Caledonian Crow 0.84 Corvus moneduloides ; scientific name match:  Chrysococcyx flavigularis 0.85 ;
 Chrysococcyx lucidus plagosus,Golden Bronze-Cuckoo,,, common name match:  Horsfield's Bronze-Cuckoo 0.82 Chalcites basalis ; scientific name match:  Chrysococcyx caprius 0.82 ;
@@ -30,7 +32,7 @@ Chrysococcyx minutillus russatus,Gould's Bronze-Cuckoo,,, common name match:  Bo
 Circus dossenus,Wood Harrier,,, common name match:  Pied Harrier 0.83 Circus melanoleucos ; scientific name match:  Circus hudsonius 0.84 ;
 Colaptes cafer,Red-Shafted Flicker,,, common name match:  Red-tailed Shrike 0.83 Lanius phoenicuroides ; scientific name match:  Colaptes campestris 0.87 ;
 Columbina livia,Rock Dove,Columba livia,"typo, This is 'Rock Dove' which is also known as Rock Pigeon. match checklist (Clements 2024)", common name match:  Stock Dove 0.9 Columba oenas ; scientific name match:  Columbina inca 0.89 ;
-Corvus caurinus,Northwestern Crow,Corvus brachyrhynchos caurinus,, REVIEW common name match:  Worthen's Sparrow 0.78 Spizella wortheni ; scientific name match:  Corvus nasicus 0.88 ;
+Corvus caurinus,Northwestern Crow,Corvus brachyrhynchos caurinus,, REVIEW.  Is this the correct subspecies for this common name?  this common name is not on the checklist.  previous comment:  there is a case to keep Corvus caurinus as a species: https://bcbirds.bcfo.ca/wp-content/uploads/2021/11/butler.pdf  but the non-sub species 'Corvus caurinus' isn't on Clements checklist.    common name match:  Worthen's Sparrow 0.78 Spizella wortheni ; scientific name match:  Corvus nasicus 0.88 ;
 Cyanoderma ambiguum,Buff-Chested Babbler,,, common name match:  Gray-chested Babbler 0.87 Kakamega poliothorax ; scientific name match:  Cyanoderma sp. 0.84 ;
 Dendroica nigrescens,Gray Warbler,,, common name match:  Gray Warbler-Finch 0.89 Certhidea fusca ; scientific name match:  Dendrocitta cinerascens 0.87 ;
 Empidonax occidentalis,Western Flycater (Occidentalis/Hellmayri Group),,, common name match:  Western Flycatcher 0.76 Empidonax difficilis ; scientific name match:  Empidonax flaviventris 0.82 ;
@@ -54,20 +56,22 @@ Spizella arborea,American Tree Swallow,,, common name match:  American Tree Spar
 Sturnella magna / neglecta,Meadowlark,,, common name match:  Masked Lark 0.8 Spizocorys personata ; scientific name match:  Sturnella neglecta/magna 0.89 ;
 Terpsiphone affinis floris,Lesser Sundas Blyth's Paradise Flycatcher,,, common name match:  Amur/Blyth's/Indian Paradise-Flycatcher 0.75 character(0) ; scientific name match:  Terpsiphone affinis affinis 0.91 ;
 Tyto alba furcata,Barn Owl (White-Winged),,, common name match:  Barn Swallow (White-bellied) 0.78 character(0) ; scientific name match:  Tyto alba guttata 0.86 ;
-unid. Accipiter hawl,Accipiter Sp.,,, common name match:  Pacific Wren 0.7 Troglodytes pacificus ; scientific name match:  Yuhina occipitalis 0.74 ;
+unid. Accipiter hawl,Accipiter Sp., Aerospiza/Tachyspiza/Accipiter/Astur sp.,manually assign slash genera since this genus was split,"REVIEW and remove this comment if ok, fuzzy match was way off  common name match:  Pacific Wren 0.7 Troglodytes pacificus ; scientific name match:  Yuhina occipitalis 0.74 ;"
 Zosterops lateralis gouldi,Western Silvereye,,, common name match:  Western Fire-eye 0.88 Pyriglena maura ; scientific name match:  Zosterops lateralis 0.91 ;
 Roseate spoonbill,Great Blue Heron,Platalea ajaja,"common name is incorrect, manual match to checklist (Clements 2024)",OVERRIDE automatic common name match since common name is incorrect
-Zosterops lateralis gouldi,Western Silvereye,,,needs override check: this matched to Zosterops lateralis without a subspecies
-Carduelis carduelis paropanisi,Eastern European Goldfinch,,,
+Zosterops lateralis gouldi,Western Silvereye, Zosterops lateralis,"CHANGE TO CLOSEST MATCH bc unresolved: BOW says: In Australia, birds previously known as race gouldi, but chloronotus has priority and not preoccupied by 'chloronothos'.",REVIEW/OVERRIDE. The default matched the common name to  Zosterops lateralis without a subspecies
  Turdus nudigenis,Bare-Eyed Thrush ,,,Needs review.  The entry has common name Bare-Eyed Thrush  but  Turdus nudigenis  matches Spectacled Thrush. Is Bare-eyed thrush a synonym for another species or subspecies?
 Agelaioides badius badius ,,,,REVIEW  notes from previous script :  Agelaioides badius badius and Agelaioides badius bolivianus: Grayish Baywing subspecies but no common_name in CHECKLIST
 Agelaioides badius fringillarius,,,,REVIEW notes from previous script : Agelaioides badius fringillarius: Pale Baywing subspecies? only species in CHECKLIST
 Cuculus canorus telephonus,Common Cuckoo,,,"OVERRIDE automatic match was to Cuculus canorus subtelephonus, a cuckoo subspecies in Asia only that does not have an english common name"
+Parkesia noveboracensis notabilis,Northern Waterthrush,Parkesia noveboracensis,"ACCEPT CHANGE TO CLOSEST MATCH because BOW states 'No subspecies, following Eaton (1957a) and Molina et al. (2000).'. Common name in int.raw is Northern Waterthrush. ","REVIEW these subspecies were all changed to species based on common name match, and subspecies are not on the checklist.   If acceptiable then delete these.  If you want to keep this reasoning, leave these rows"
+Parkesia noveboracensis notabilis,Northern Waterthrush,Parkesia noveboracensis,"ACCEPT CHANGE TO CLOSEST MATCH because BOW states 'No subspecies, following Eaton (1957a) and Molina et al. (2000).'. Common name in int.raw is Northern Waterthrush. ","REVIEW these subspecies were all changed to species based on common name match, and subspecies are not on the checklist.   If acceptiable then delete these.  If you want to keep this reasoning, leave these rows"
+Parkesia noveboracensis limnaeus,Northern Waterthrush,Parkesia noveboracensis,"ACCEPT CHANGE TO CLOSEST MATCH because BOW states 'No subspecies, following Eaton (1957a) and Molina et al. (2000).'. Common name in int.raw is Northern Waterthrush. ","REVIEW these subspecies were all changed to species based on common name match, and subspecies are not on the checklist.   If acceptiable then delete these.  If you want to keep this reasoning, leave these rows"
 Dendroica petechia (erithachordies),Yellow Warbler,Setophaga petechia [erithachorides Group],match sub-species to checklist Clements 2024,"OVERRIDE common name was just Yellow warbler so it matched, but subspecies ""Yellow Warbler (Mangrove) BOW and checklist: Setophaga petechia [erithachorides Group]"""
-Larus argentatus vegae,Herring Gull (Vega),Larus vegae,GBIF:5789289,REVIEW GBIF sugggestions
-Colaptes cafer,Red-Shafted Flicker,Colaptes auratus cafer,GBIF:6177452,REVIEW GBIF sugggestions
-Tyto alba furcata,Barn Owl (White-Winged),Tyto furcata,GBIF:9568884,REVIEW GBIF sugggestions
-Pterocnemia pennata,Rhea,Rhea pennata,GBIF:2495160,REVIEW GBIF sugggestions
-Carduelis flammea,Common Redpoll,Acanthis flammea,GBIF:5231630,REVIEW GBIF sugggestions
-Spizella arborea,American Tree Swallow,Spizelloides arborea,GBIF:7357320,REVIEW GBIF sugggestions
-Dendroica nigrescens,Gray Warbler,Setophaga nigrescens,GBIF:7341770,REVIEW GBIF sugggestions
+Larus argentatus vegae,Herring Gull (Vega),Larus vegae,GBIF:5789289,"REVIEW GBIF sugggestions, these have been made already by the workflow.  If correct, then this row can be deleted from this table"
+Colaptes cafer,Red-Shafted Flicker,Colaptes auratus cafer,GBIF:6177452,"REVIEW GBIF sugggestions, these have been made already by the workflow.  If correct, then this row can be deleted from this table"
+Tyto alba furcata,Barn Owl (White-Winged),Tyto furcata,GBIF:9568884,"REVIEW GBIF sugggestions, these have been made already by the workflow.  If correct, then this row can be deleted from this table"
+Pterocnemia pennata,Rhea,Rhea pennata,GBIF:2495160,"REVIEW GBIF sugggestions, these have been made already by the workflow.  If correct, then this row can be deleted from this table"
+Carduelis flammea,Common Redpoll,Acanthis flammea,GBIF:5231630,"REVIEW GBIF sugggestions, these have been made already by the workflow.  If correct, then this row can be deleted from this table"
+Spizella arborea,American Tree Swallow,Spizelloides arborea,GBIF:7357320,"REVIEW GBIF sugggestions, these have been made already by the workflow.  If correct, then this row can be deleted from this table"
+Dendroica nigrescens,Gray Warbler,Setophaga nigrescens,GBIF:7341770,"REVIEW GBIF sugggestions, these have been made already by the workflow.  If correct, then this row can be deleted from this table"

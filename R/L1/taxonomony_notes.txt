@@ -1,18 +1,32 @@
 
-Taxonomy Resolution Notes
-----
+# Taxonomy Resolution Notes
+
+## About this file
 
 This is a scratch file for keeping notes about discoveries for taxonomic names
 that need to be updated.   This started from pulling comments out of the original
-AvianInteractionsData_L1 script from PLZ December 2024-May 2025
+AvianInteractionsData_L1 script from PLZ December 2024-May 2025, but adding outputs
+from the Clements checklist and our Names list.  Can also copy/paste out of
+Avibase as needed.
 
-Notes should minimally include L0 species and the checklist scientific name, and we'll assume it's the map from old to checklist
-
-Ultimately the entry should go into the CSV file "manual_taxonomic_resolutions.csv"
+these notes are meant to help complete the columns in  the manual_taxonomics_resolutions.csv file
 
 
+summmary, moving this manual resolutions/overrides as :
 
-######## HAWKS
+  original R code -> these notes -> resolutions CSV table
+
+and the workflow will read the table and apply the changes.  If all changes are
+discussed in these notes are accounted for in the resolutions table CSV file,
+then they can be delete from this notes file (otherwise will be duplicated/confusing
+which is the authority)
+
+
+
+## Notes
+
+
+######## HAWKS ########
 
  Accipiters are off (these are original raw data entries without taxonomic change)**
 
@@ -47,13 +61,64 @@ filter(int.raw.names, scientific_name.raw ==  "Accipiter atricapillus")
 "Accipiter getilis",  "Astur atricapillus",
                 Accipiter getilis Accipiter poliogaster       0.839"
 
-`
 
 
 
-######## Notes to review
+#################### Redpolls ############################
+note from old code:
 
-1 Aphelocoma woodhouseii suttoni   Aphelocoma woodhouseii cyanotis       0.916
+PARKING LOT FOR CONTINUED CLEANING...
+
+Hoary Redpoll lumped into Redpoll, but not sure this is the case in the BBS...
+bbs.splist$scientific_name[bbs.splist$scientific_name.bbs2024 == "Acanthis
+flammea"] <- "Acanthis flammea hornemanni"
+
+
+Acanthis flammea Acanthis flammea hornemanni
+
+filter(checklist, grepl('redpoll', common_name, ignore.case = TRUE)) %>% select(scientific_name, common_name, range)
+
+
+scientific_name,common_name,range
+Acanthis flammea,Redpoll,
+Acanthis flammea flammea/rostrata/islandica,Redpoll (Common),
+Acanthis flammea flammea,Redpoll (flammea),northern Eurasia and northern North America
+Acanthis flammea rostrata/islandica,Redpoll (rostrata/islandica),
+Acanthis flammea cabaret,Redpoll (Lesser),"formerly restricted to British Isles and the Alps; breeding range has expanded in recent decades, and now occurs discontinuously eastward through southern Norway, southwestern Sweden, and Denmark eastward to southern Poland, Slovakia, and northern Romania. Introduced (mostly or entirely cabaret?) to New Zealand"
+Acanthis flammea [flammea Group/cabaret],Redpoll (Common/Lesser),
+Acanthis flammea hornemanni/exilipes,Redpoll (Hoary),tundra of northern Eurasia and northern North America
+Acanthis flammea exilipes,Redpoll (exilipes),tundra of northern Eurasia and northern North America
+Acanthis flammea hornemanni,Redpoll (hornemanni),Ellesmere and Baffin islands and northern Greenland; winters to northern USA and British Isles
+Acanthis flammea [flammea Group x hornemanni/exilipes],Redpoll (Common x Hoary),
+Acanthis flammea [flammea Group/hornemanni/exilipes],Redpoll (Common/Hoary),
+
+#################### Cattle-Egret #########################
+
+filter(checklist, grepl('cattle-egret', common_name, ignore.case = TRUE))  %>% select(category, common_name, scientific_name)
+
+  category                              common_name            scientific_name
+1  species                     Western Cattle-Egret                 Ardea ibis
+2  species                     Eastern Cattle-Egret            Ardea coromanda
+3    slash             Western/Eastern Cattle-Egret       Ardea ibis/coromanda
+4    slash Western Cattle-Egret/Yellow-billed Egret   Ardea ibis/brachyrhyncha
+5    slash        Eastern Cattle-Egret/Medium Egret Ardea coromanda/intermedia
+6    slash        Eastern Cattle-Egret/Plumed Egret  Ardea coromanda/plumifera
+
+filter(int.raw.names, grepl('cattle egret', common_name.raw, ignore.case = TRUE))
+
+  scientific_name.raw      common_name.raw scientific_name.edit     common_name.edit                                                     edit_notes
+1 Bubulcus coromandus Eastern Cattle Egret      Ardea coromanda Eastern Cattle Egret high confidence common name fuzzy match (Clements 2024)  0.967
+2       Bubulcus ibis Western Cattle Egret           Ardea ibis Western Cattle Egret high confidence common name fuzzy match (Clements 2024)  0.967
+3        Bubulcus sp.   Unid. Cattle Egret         Bubulcus sp.   Unid. Cattle Egret                                                           <NA>
+4       Bubulcus ibis         Cattle Egret        Bubulcus ibis         Cattle Egret                                                           <NA>
+5          Ardea ibis Western Cattle Egret           Ardea ibis Western Cattle Egret             L0 species as entered on checklist (Clements 2024)
+6       Bubulcus ibis Eastern Cattle Egret      Ardea coromanda Eastern Cattle Egret high confidence common name fuzzy match (Clements 2024)  0.967
+7       Bulbucus ibis         Cattle Egret        Bulbucus ibis         Cattle Egret                                                           <NA>
+8     Ardea coromanda Eastern Cattle Egret      Ardea coromanda Eastern Cattle Egret             L0 species as entered on checklist (Clements 2024)
+
+
+
+################ Aphelocoma woodhouseii suttoni   Aphelocoma woodhouseii cyanotis       0.916
 
 KEEP RAW for now because it is a subspecies: BOW: A. w. suttoni Phillips, 1965.
 
@@ -66,13 +131,78 @@ Pitelka 1951d) [type locality = Pueblo, Colorado]; some individuals wander in
 winter to lowlands south of the breeding range, such as the Colorado Desert
 (Phillips et al. 1964a, Patten et al. 2003) and Texas Panhandle (Seyffert1985).
 
+In another spot, comment is:
+Aphelocoma woodhouseii suttoni", "Aphelocoma woodhouseii suttoni
+KEEP RAW for now because it is a subspecies: BOW: A. w. suttoni Phillips, 1965.
+
+
+########## Lanius schach erythronotus/tricolor ########
+
+CHANGE TO CLOSEST MATCH bc unclear: BOW: Mainland races tend to intergrade;intermediates between erythronotus and tricolor sometimes referred to as
+'nigriceps', a name better applied to a 'swarm of intergrades' in NC India Lanius schach erythronotus/tricolor Lanius schach erythronotus       0.914
+
+
+interaction_count_by_match(int.raw,'erythronotus')
+interaction_count_by_species(int.raw, "Lanius schach erythronotus/tricolor")
+
+Lanius schach erythronotus/tricolor",
+Lanius schach erythronotus",
+CHANGE TO CLOSEST MATCH bc unclear: BOW: Mainland races tend to intergrade;intermediates between erythronotus and tricolor sometimes referred to as 'nigriceps', a name better applied to a 'swarm of intergrades' in NC India Lanius schach erythronotus/tricolor Lanius schach erythronotus 0.914"
 
 
 
-##### BBS ERA FIXES
+#######
+
+
+
+
+
+Larus brachyrhynchos caurinus, Campylorhynchus brunneicapillus
+
+CHANGE TO CLOSEST MATCH: checklist says Campylorhynchus brunneicapillus
+
+CHANGE TO CLOSEST MATCH: checklist Cactus Wren Campylorhynchus brunneicapillus 0.900716846"
+
+
+
+
+
+these is taken care of with fuzzy matching
+
+
+ Moticilla alba lugens = White Wagtail (Black-Backed), typo fix
+
+Moticilla alba lugens",
+"Motacilla alba lugens",
+
+
+```
+
+
+
+Moticilla alba ocularis = White Wagtail (ocularis), misspelled genus
+
+
+filter(checklist, scientific_name == "Motacilla alba ocularis")
+
+Moticilla alba ocularis",
+"CHANGE TO CLOSEST MATCH: checklist Motacilla alba ocularis White Wagtail (Ocularis), Pied Wagtail",
+"Motacilla alba ocularis",
+common_name.edit = "White Wagtail (ocularis)"
+  )
+
+```
+
+
+
+######################### OLD BBS ERA FIXES #########################
+
+I believe most of these are not needed and that many are correcting some GBIF
+corrections that took us off-list
 
 Classes of these
-1. fixes of GBIF that selected a file
+
+1. un-fixing of GBIF suggestions
 2. things fixed by dirctly or fuzzy matching Clements list
 3. things fixed by dirctly or fuzzy matching Clements list common name
 
