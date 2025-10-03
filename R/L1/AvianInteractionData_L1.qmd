@@ -1402,8 +1402,6 @@ print(paste("whole enviroment saved as ", f))
 
 
 
-
-
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
@@ -1446,21 +1444,18 @@ variable and that the file exists.
 If it does not this process will skip to the end leaving some species unresolved. 
 
 ```{r}
-
+#| label: read_manual_resolutions
 manual_taxonomic_resolutions <- data.frame()
 
-# # the exists function is not working correctly in quarto/rstudio 
-# if(!exists(manual_taxonomic_resolutions_file_name)) {
-#   warning("you must set the variable 'taxonomic_resolutions_file_name' to the path to the current file for name edits")  
-# } else {
-    if(file.exists(manual_taxonomic_resolutions_file_name)) {
-      manual_taxonomic_resolutions <- read_csv(manual_taxonomic_resolutions_file_name, show_col_types = FALSE) 
-    } else {
-      warning(paste("Manual taxonomic resolutions file not found", manual_taxonomic_resolutions_file_name))
-      # couldn't find the file but keep going and check if we have an empty data frame
-  }
-# }
+if(file.exists(manual_taxonomic_resolutions_file_name)) {
+  manual_taxonomic_resolutions <- read_csv(manual_taxonomic_resolutions_file_name, show_col_types = FALSE) 
+} else {
+  warning(paste("Manual taxonomic resolutions file not found", manual_taxonomic_resolutions_file_name))
+  # couldn't find the file but keep going and check if we have an empty data frame
+}
 
+manual_taxonomic_resolutions <- filter(manual_taxonomic_resolutions, !is.na(scientific_name.edit))
+print(paste("read in ", nrow(manual_taxonomic_resolutions), "manual name resolutions"))
 ```
 
 **Manual Taxonomic Resolution Workflow: **
@@ -1487,57 +1482,45 @@ How to to add an edit/adjustment to the list:
    - (optional) common_name.edit if the name was changed 
 
 
-Our current workflow use `int.raw.names`  and resolves in this order: 
-
-1. scientific_name.raw : what's in entered data
-2. scientific_name.edit : corrected to match either correct GBIF or Clements checklist
-3. scientific_name.checklist : final resolved name from GBIF to Clements checklist
 
 ```{r}
-# filter out blank rows
-manual_taxonomic_resolutions <- filter(manual_taxonomic_resolutions, !is.na(scientific_name.edit))
-tibble(manual_taxonomic_resolutions)
+#| label: apply_manual_resolutions
+
+int.raw.names.manual <- int.raw.names
+for(r in 1:nrow(manual_taxonomic_resolutions)){
+  manual.edit = manual_taxonomic_resolutions[r,]
+  r = which(int.raw.names.manual$scientific_name.raw == manual.edit$scientific_name.raw)
+  # TODO check if r is a real vector of integers
+  int.raw.names.manual[r,]$scientific_name.edit <- manual.edit$scientific_name.raw
+  int.raw.names.manual[r,]$edit_notes <- manual.edit$edit_notes
+
+}
+
 ```
+
+Remaining species to manual resolve after fuzzy and gbif matching:
 
 ```{r}
-
+#| echo: false
+#| output: true
+print("unresolved rows in names table:")
+print(length(unresolved_species_rows(int.raw.names.manual)))
+print("unresolved unique scientific names ")
+print(length(unique(unresolved_species(int.raw.names.manual)$scientific_name.raw)))
 
 ```
 
+To view, run View(unresolved_species(int.raw.names.manual))
 
+If updating the CSV, re-run from chunk `read_manual_resolutions`
 
-### Manual fixes after exploring the checklist 
-
-
-
-
-
-## Subset to the checklist 
-
-This should go into a different script/notebook
-
-Analysis Paper: 
-
-1 sp1 and sp2 on checklist (canada CONUS)
-Data Paper Goal: 
-
-1. Sp1 or sp2 needs to be on Checklist (canada conus checklist)
-2. Final check:which rows are not (sp1 AND sp2 on Canada Conus checklist)?
-    how many?
-    which of these are NOT on full clements list
-    how many? 
-    review data
-    check against all clements
-    assume names are fixed via gbif/taxa db
-    
-    if descions are made add name edits to be added to the int.raw.names list above
-
-
+After review, save this list to the main name resolution data frame
 
 ```{r}
-#| label: subset_check
-# rcode for above, prints a data frame of non-checklist rows
+int.raw.names <- int.raw.names.manual
+
 ```
+
 
 review data frame to make decisions
 
@@ -1622,30 +1605,38 @@ dplyr::filter(int.raw, species2_scientific %in% c("Branta leucopsis x Anser indi
 
 ## Merge and Save data
 
+Update resolved common names use the checklist common names 
+
+```{r}
+# mutate is terrible at joining things and I only want to join common name
+for(r in 1:nrow(int.raw.names)){
+  common_name.checklist <- checklist[checklist$scientific_name == int.raw.names[r,]$scientific_name.edit,]$common_name
+  if(length(common_name.checklist) > 0 ) { # match 
+    int.raw.names[r,]$common_name.edit <- common_name.checklist
+  }
+}
+
+```
+
 Update the scientific names in the interactions data with our table as much 
 as possible
 
 ```{r}
-
+# make a copy of the database data frame so we can re-run if necessary
 int.raw.resolved <- int.raw
 
 updated_rows <- c()
 
-for(r in 1:nrow(int.raw.names.checklist)){
+for(r in 1:nrow(int.raw.names)){
   # if no resolution discovered, skip (for now - ultimately all are updated)
-  if(is.na(int.raw.names.checklist[r,"scientific_name.checklist"])){
+  if(is.na(int.raw.names[r,"scientific_name.edit"])){
     next
   }
   
   # extract values from data frame for readability
-  scientific_name.raw <- int.raw.names.checklist[r,]$scientific_name.raw
-  scientific_name.checklist <- int.raw.names.checklist[r,]$scientific_name.checklist
-  common_name.checklist <- int.raw.names.checklist[r,]$common_name.checklist
-  
-  # if no change, then skip since don't need to update the row
-  if( scientific_name.raw  == scientific_name.checklist ){
-    next
-  }
+  scientific_name.raw <- int.raw.names[r,]$scientific_name.raw
+  scientific_name.edit <- int.raw.names[r,]$scientific_name.edit
+  common_name.edit <- int.raw.names[r,]$common_name.edit
   
   # update sp1s and sp2s
   # use matches from original dataframe but update our resolved data frame 
@@ -1655,15 +1646,15 @@ for(r in 1:nrow(int.raw.names.checklist)){
   
   updated_sp1_rows = which(int.raw$species1_scientific == scientific_name.raw)
   if(length(updated_sp1_rows) > 0){
-    int.raw.resolved[updated_sp1_rows, ]$species1_scientific <- scientific_name.checklist 
-    int.raw.resolved[updated_sp1_rows, ]$species1_common <- common_name.checklist
+    int.raw.resolved[updated_sp1_rows, ]$species1_scientific <- scientific_name.edit
+    int.raw.resolved[updated_sp1_rows, ]$species1_common <- common_name.edit
     updated_rows <- union(updated_rows, updated_sp1_rows)
   }
 
   updated_sp2_rows = which(int.raw$species2_scientific == scientific_name.raw)
   if(length(updated_sp2_rows) > 0){
-    int.raw.resolved[updated_sp2_rows, ]$species2_scientific <- scientific_name.checklist 
-    int.raw.resolved[updated_sp2_rows,  ]$species2_common <- common_name.checklist
+    int.raw.resolved[updated_sp2_rows, ]$species2_scientific <- scientific_name.edit
+    int.raw.resolved[updated_sp2_rows,  ]$species2_common <- common_name.edit
     updated_rows <- union(updated_rows, updated_sp2_rows)
   }
   
@@ -1672,20 +1663,30 @@ for(r in 1:nrow(int.raw.names.checklist)){
 print(length(updated_rows))
 ```
 
+Review the updated database using `View(int.raw.resolved)`  The original is still in `int.raw`
 
 
-Database Summary
+## Database Summary
 
 ```{r}
 
 print("unique scientific names = number of unique species in this database")
-print(length(unique(paste(int.raw$species1_scientific, int.raw$species2_scientific))))
+print(length(union(int.raw.resolved$species1_scientific, int.raw$species2_scientific)))
 
 
 print("unique types of interactions")
-print(length(unique(int.raw$interaction)))
+print(length(unique(int.raw.resolved$interaction)))
 
 print("unique pairwise interactions")
+
+# this will require ignoring the order of species, so need to create pairs and sort them
+# dat <- data.frame(c('a','b','c'), c('b','a','d'), stringsAsFactors=F );
+# colnames(dat) <- c('V1','V2');
+# x <- unique(as.data.frame(t(apply(dat, 1, sort ))));
+# rownames(x) <- 1:nrow(x);
+# x;
+print(length(unique(paste(int.raw.resolved$species1_scientific, int.raw$species2_scientific))))
+
 # edit to report number of unique rows by DATA$species1_scientific, DATA$species2_scientific, DATA$interaction
 
 ```
@@ -1700,7 +1701,7 @@ Save Results to CSV
 
 # set these variables here for flexibility if the workflow changes 
 interaction_data <- int.raw.resolved
-taxonomic_resolutions<- int.raw.names.checklist
+taxonomic_resolutions<- int.raw.names
 
 # AvianInteractionData_L1_file and AvianInteractionData_L1_taxonomy_table is set at the top of this file
 
@@ -1708,10 +1709,36 @@ f <- file.path(file_paths$L1, AvianInteractionData_L1_file )
 write_csv(interaction_data, f)
 print(paste("interaction database saved to ", f))
 
-f<- file.path(file_paths$L1,XXX)
+f<- file.path(file_paths$L1, AvianInteractionData_L1_taxonomy_table_file )
 write_csv(taxonomic_resolutions, f)
 print(paste("taxonomic_resolutions_file saved to ", f))
 
 ```
 
 
+## Subset to the checklist 
+
+This should go into a different script/notebook
+
+Analysis Paper: 
+
+1 sp1 and sp2 on checklist (canada CONUS)
+Data Paper Goal: 
+
+1. Sp1 or sp2 needs to be on Checklist (canada conus checklist)
+2. Final check:which rows are not (sp1 AND sp2 on Canada Conus checklist)?
+    how many?
+    which of these are NOT on full clements list
+    how many? 
+    review data
+    check against all clements
+    assume names are fixed via gbif/taxa db
+    
+    if descions are made add name edits to be added to the int.raw.names list above
+
+
+
+```{r}
+#| label: subset_check
+# rcode for above, prints a data frame of non-checklist rows
+```
