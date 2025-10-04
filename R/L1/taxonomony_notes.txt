@@ -27,6 +27,14 @@ which is the authority)
 
 
 ######## HAWKS ########
+OCT 2025: manual change: All of these become Astur (then same species or subspecies)
+Accipiter atricapillus	American Goshawk
+Accipiter gentilis	Northern Goshawk
+Accipiter gentilis	Goshawk
+Accipiter getilis	Northern Goshawk
+Accipiter gentilis laingi	Northern Goshawk
+Accipiter melanoleucus Black Sparrowhawk
+
 
  Accipiters are off (these are original raw data entries without taxonomic change)**
 
@@ -65,6 +73,9 @@ filter(int.raw.names, scientific_name.raw ==  "Accipiter atricapillus")
 
 
 #################### Redpolls ############################
+Oct 2025: Hoary Redpoll = Acanthis flammea hornemanni/exilipes on Clement 2024
+
+Common Redpoll = 
 note from old code:
 
 PARKING LOT FOR CONTINUED CLEANING...
@@ -119,6 +130,7 @@ filter(int.raw.names, grepl('cattle egret', common_name.raw, ignore.case = TRUE)
 
 
 ################ Aphelocoma woodhouseii suttoni   Aphelocoma woodhouseii cyanotis       0.916
+Oct 2025: Update to checklist at species level because unclear which subspecies (several are in Mexico), even though it is a subspecies in BBS: Pacific Black Duck=Anas superciliosa. edited to match checklist (Clements 2024).
 
 KEEP RAW for now because it is a subspecies: BOW: A. w. suttoni Phillips, 1965.
 
