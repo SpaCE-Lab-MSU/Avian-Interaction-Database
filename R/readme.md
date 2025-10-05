@@ -43,7 +43,7 @@ Assumes the use of Rstudio 2025 version or above.
    - in the upper-right "run" button, select
      "restart R and run all chunks"
    - this will report the file that is saved
-5. build taxonomy edits, running one chunck at time
+5. build taxonomy edits, running one chunk at time
    - open R/L1/AvianInteractionData_L1.qmd
    - edit the value for stitched_L0_file to match the L0 step above (near the top of file)
    - check the value for the main checklists 

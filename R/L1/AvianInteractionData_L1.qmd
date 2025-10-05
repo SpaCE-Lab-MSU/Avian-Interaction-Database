@@ -90,7 +90,7 @@ AvianInteractionData_L1_taxonomy_table_file <- "AvianInteractionData_L1_taxnomon
 This script is used to refine species name changes to align with the 
 Clements & eBird checklist to create an Rdata file.  
 
-Currently, the script is working for a checklist of CONUS+Canada.  
+Currently, the script is working for a checklist of CONUS+Alaska+Canada.  
 
 L0 data are checked to assign updated scientific and common names to the interaction pairs data. Makes a new column that also includes scientific name changes associated with the AOUcombo.index for merging with those names in the AvianInteractionData_AOUindex_L1.csv
 
@@ -111,12 +111,12 @@ in a table to identify the current accepted name in checklist
 4. for those names not resolved, use fuzzy matching to find scientific names in checklist (high confidence only)
 5. for those names not resolved, match common names with checklist (high confidence only)
 6. for those names not resolved, use gbif to see if name can be resolved to a checklist name
-8. read in CSV of manual resolutions and apply to whole list 
-9. resolve genus only unids
-10. resolve hybrids ( X and / )
-11. merge checklist common names into resolutions matching on scientific name
-12. join checklist scientific names and common names to interactions data
-13. save data files 
+7. read in CSV of manual resolutions and apply to whole list 
+8. resolve genus only unids
+9. resolve hybrids ( X and / )
+10. merge checklist common names into resolutions matching on scientific name
+11. join checklist scientific names and common names to interactions data
+12. save data files 
     - interaction data with checklist names resolved 
     - resolutions table with explanations
 
@@ -128,7 +128,7 @@ in a table to identify the current accepted name in checklist
 -  May 2025- July 2025 convert to workflow notebook/Quarto, (PSB)
 -  August 2025, using new species lists Canada+CONUS from PLZ (PSB)
 -  September 10, 2025, using species lists from commit from PLZ (PSB)
--  Oct 1, 2025: workflow reorganzation for better taxonomic resolution (PSB)
+-  Oct 1, 2025: workflow reorganization for better taxonomic resolution (PSB; PLZ edits and checks
 
 
 ## TO DO / Notes
@@ -175,8 +175,8 @@ but the subset list for 2024-25 analysis is in L1 as it's built from L0 lists*
 
 **Previously:** all species in BBS `"bbs_splist_2024_L1.csv"`
 
-(the 2024 release which includes all species as of 2023, plus the additional 
-AOUcombo.index column for use w BBS AOU index)
+(the 2024 BBS release includes all species as of 2023 BBS surveys, plus the additional 
+AOUcombo.index column (= lumps BBS subspecies into species)for use w BBS AOU index)
 
 `splist2024<-read.csv(file.path(L1_dir,"bbs_splist_2024_L1.csv"))`
 
@@ -218,6 +218,7 @@ print("CORRECTED CHECKLIST COLUMNS:")
 print(names(checklist))
 ```
 
+## PLZ: @billspat the GBIF stuff isn't happening anymore... edit description below
 We are using the GBIF list (via taxadb) to resolve scientific names and the 
 eBird/Clements v2024 checklist (reflected in Birds of The World naming conventions for species). 
 Some BBS names differ from these lists so they have to be resolved manually.
@@ -353,8 +354,13 @@ a cleaned L0 data set to work with
 
 ```{r}
 
-int.raw<-fix_taxon_typos(int.raw)
+int.raw1<-fix_taxon_typos(int.raw)
 
+# See what is different between int.raw and int.raw1 using the diffdf package:
+diffdf(int.raw, int.raw1)
+# Should be finding editorial differences involving "."
+# Oct 5: found 12 rows that differ in some way (spaces and "." ",")
+int.raw<-fix_taxon_typos(int.raw)
 ```
 
 
@@ -385,9 +391,7 @@ for(common_name_for_missingsp1  in records.missingsp1$species1_common){
 ```
 
 
-Assign scientific names to all rows for those common names 
-that have missing sp1 scientific names, create a Manual Assignment structure 
-here
+Assign scientific names to all rows for those common names that have missing sp1 scientific names, create a Manual Assignment structure here:
 
 ```{r}
 #| echo: false
@@ -427,7 +431,7 @@ rows with missing **sp2 scientific**:
 
 ```{r}
 records.missingsp2<- int.raw[is.na(int.raw$species2_scientific),]
-print( records.missingsp2)
+print(records.missingsp2)
 ```
 
 
@@ -459,9 +463,9 @@ for(common_name_for_missingsp2  in records.missingsp2$species2_common){
 
 **Sp2 fix list**
 
-update this list of fixes as errors are discovered above
+Update this list of fixes as errors are discovered above.
 
-Note that the common names will be update updated below with the checklist
+Note that the common names will be update updated below with the checklist.
 
 ```{r}
 #| echo: false
@@ -513,7 +517,7 @@ tibble(int.raw[is.na(int.raw$species2_scientific),])
 ## Taxonomy Adjustments Table
 
 **Create new data frame of all names, as is in the raw file, and what is to be 
-adjusted/updated/assigned
+adjusted/updated/assigned.
 
 
 Column Definitions:
@@ -524,7 +528,7 @@ Column Definitions:
 - common_name_clements2024 : L1 name to be used (pre checklist )
 - edit_notes: text of why edits were made
 
-The edit columns are based on Clements 2024
+The edit columns are based on the Clements 2024 checklist.
 Determine how many unique entries are in int.raw\$species1_scientific, which 
 are unique combos of scientific names.
 
@@ -568,9 +572,10 @@ nrow(unique(unresolved_species(int.raw.names)))
 Historical numbers of unresolved species:
 May 2025: 3889
 Sept 2025: 3876
+Oct 2025: 3876
 
 
-Test case to track with knwnn misspelling: Accipiter cooperi was misspelled ( should be Accipiter cooperii) - exists in int.raw.names
+Test case to track with known misspelling: Accipiter cooperi was misspelled (should be Accipiter cooperii) - exists in int.raw.names
 
 ```{r}
 known_misspellings <- c("Accipiter cooperi")
@@ -674,7 +679,6 @@ print(unresolved_species(int.raw.names.checklist_match))
 
 ```
 
-
 #### L0 Checklist matching Summary
 
 Number rows with species already on the checklist, so already resolved, which includes
@@ -695,6 +699,7 @@ nrow(unique ( unresolved_species(int.raw.names.checklist_match)))
 
 ```
 September 2025: 545 rows 
+October 5, 2025: 429 rows
 
 ### save to actual list and continue
 
@@ -713,7 +718,7 @@ length(unique(unresolved_species(int.raw.names)$scientific_name.raw))
 
 ```
 September 2025: 504 (just about 30 redundant common names)
-
+October 5, 2025: 404
 
 
 
@@ -813,11 +818,16 @@ print(dplyr::filter(scientific_name_matches,
 
 To review fuzzy match results on unresolved names, run `View(scientific_name_matches)`
 
+PLZ Oct 5: after reviewing, and ordering from 1.0 to 0, found that Cercotrichas coryphoeus
+Karoo Scrub-Robin (0.92555990) was the first that did not match.
+
 After review of matches, all of the matches with score > 0.95 looked correct, 
 and many but not all in range from 0.095 > score > 0.90 so those need to be checked. 
+PLZ Oct 5: after reviewing, and ordering from 1.0 to 0, found that Cercotrichas coryphoeus
+Karoo Scrub-Robin (0.92555990) was the first that did not match because Genus changed (to Tychaedon).
 
 Setting the threshold to 0.95 for automatic assignment, and will add common name 
-matching to increase confidence in the others
+matching to increase confidence in the others.
 
 ```{r}
 high_confidence_threshold <- 0.95
@@ -842,6 +852,8 @@ print(sprintf("%.2f%%", round(proportion_high_confidence*100,2)))
 Sept 2025:
   - >= 0.95 134 (33%)
   - >= 0.90 211
+Oct 2025:
+  - >= 0.93 166 (41.09%)
   
 ### Resolve (assing edit_note to all high confidence matches)
 
@@ -908,7 +920,7 @@ from in matches from 0.90 - 0.95.
 
 Hold these and match on common name first, then re-run fuzzy matching
 
-skipp this because the histogram shows this information 
+skip this because the histogram above shows this information. 
 ```{r}
 # score_start <- min(high_confidence_matches$scientific_name_match_score)
 # score_end <- max(high_confidence_matches$scientific_name_match_score)
@@ -1014,6 +1026,7 @@ Considerations for setting the threshold (September 2025)
 
 - *Northern Jancan* matches *Northern Jacana* 0.9458333	=> correct
 - *Black-Winged Babbler*	matches *Black-chinned Babbler*	0.9190476 => incorrect 
+- *Cackling/Canada Goose* matches *character(0)* 0.9099206 => incorrect (should be Branta hutchinsii/canadensis)
 
 Conclusion setting threshold for match scores minimum 0.940 for high-confidence matches
 which corrects a good number of species.  
@@ -1021,6 +1034,8 @@ which corrects a good number of species.
 ```{r}
 common_name_match_threshold <- 0.94
 ```
+
+
 
 Update name edits using common name matches
 
@@ -1145,7 +1160,7 @@ In previous code, tried ITIS and COL to see if they were better than GBIF.
 GBIF has the fewest NA values, so we are sticking with it (it is the most comprehensive).
 
 The GBIF database is frequently at odds with the Clements checklist.  Taxadb will
-help find synonms for a scientific name, but the result is often not on the checklist. 
+help find synonyms for a scientific name, but the result is often not on the checklist. 
 
 However, it may be good at finding a handful of synonyms that _are_ on the checklist. 
 
