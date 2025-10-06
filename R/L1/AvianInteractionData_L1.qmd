@@ -1694,27 +1694,33 @@ print(length(updated_rows))
 
 Review the updated database using `View(int.raw.resolved)`  The original is still in `int.raw`
 
+```{r}
+# after review, copy int.raw.resolved to main variable 
 
+int.raw <- int.raw.resolved
+
+```
 ## Database Summary
 
 ```{r}
 
 print("unique scientific names = number of unique species in this database")
-print(length(union(int.raw.resolved$species1_scientific, int.raw$species2_scientific)))
+print(length(union(int.raw$species1_scientific, int.raw$species2_scientific)))
 
 
 print("unique types of interactions")
-print(length(unique(int.raw.resolved$interaction)))
+print(length(unique(int.raw$interaction)))
 
 print("unique pairwise interactions")
 
-# this will require ignoring the order of species, so need to create pairs and sort them
+# if you want toignoring the order of species, we will need to create pairs and sort them
+# some sample code saved here to consider: 
 # dat <- data.frame(c('a','b','c'), c('b','a','d'), stringsAsFactors=F );
-# colnames(dat) <- c('V1','V2');
+# colnames(dat) <- c('s1','s2');
 # x <- unique(as.data.frame(t(apply(dat, 1, sort ))));
 # rownames(x) <- 1:nrow(x);
 # x;
-print(length(unique(paste(int.raw.resolved$species1_scientific, int.raw$species2_scientific))))
+print(length(unique(paste(int.raw$species1_scientific, int.raw$species2_scientific))))
 
 # edit to report number of unique rows by DATA$species1_scientific, DATA$species2_scientific, DATA$interaction
 
@@ -1729,7 +1735,7 @@ Save Results to CSV
 #| output: true
 
 # set these variables here for flexibility if the workflow changes 
-interaction_data <- int.raw.resolved
+interaction_data <- int.raw
 taxonomic_resolutions<- int.raw.names
 
 # AvianInteractionData_L1_file and AvianInteractionData_L1_taxonomy_table is set at the top of this file
