@@ -34,7 +34,7 @@ cleaning but taxonomic names as entered (older names, typos, etc)
 
 ```{r}
 
-AvianInteractionData_L0_file <- "AvianInteractionData_L0_stitch.csv" 
+AvianInteractionData_L0_file <-  "AvianInteractionData_L0_stitch_oct25.csv"
 ```
 
 
