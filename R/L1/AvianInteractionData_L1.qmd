@@ -362,9 +362,9 @@ nothing was missed when it was run during L0.  Shouldn't really find anything el
 
 ```{r}
 
-int.raw1<-fix_taxon_typos(int.raw) 
+# int.raw1<-fix_taxon_typos(int.raw) 
 # See what is different between int.raw and int.raw1 using the diffdf package:
-diffdf(int.raw, int.raw1)
+# diffdf(int.raw, int.raw1)
 # Should be finding editorial differences involving "."
 # Oct 5: found 12 rows that differ in some way (spaces and "." ",")
 int.raw<-fix_taxon_typos(int.raw)
@@ -674,7 +674,7 @@ and add a note to track those. These do not need to be resolved.
 
 on_checklist_note <- "L0 species as entered on checklist (Clements 2024)"
 
-checklist.species<- filter(checklist, category %in% species_categories)$scientific_name
+checklist.species <- checklist[checklist$category %in% species_categories, "scientific_name"]
 
 # make a copy
 int.raw.names.checklist_match <- int.raw.names
@@ -747,7 +747,9 @@ Create a reference list from our Checklist read in above (Clements)
 
 ```{r}
 
-checklist.species<- filter(checklist, category == "species" | category == "slash" | category == "subspecies")
+
+# checklist.species<- filter(checklist, category == "species" | category == "slash" | category == "subspecies")
+checklist.species<- filter(checklist, category %in% species_categories)
 
 reference_names <- tibble(
   scientific_name = checklist.species$scientific_name,
@@ -1510,15 +1512,15 @@ How to to add an edit/adjustment to the list:
 int.raw.names.manual <- int.raw.names
 for(r in 1:nrow(manual_taxonomic_resolutions)){
   manual.edit = manual_taxonomic_resolutions[r,]
-  r = which(int.raw.names.manual$scientific_name.raw == manual.edit$scientific_name.raw)
+  matching_rows = which(int.raw.names.manual$scientific_name.raw == manual.edit$scientific_name.raw)
   # TODO check if r is a real vector of integers
-  if(is.na(r) | r == c(0) | length(r) == 0){
+  if(length(matching_rows) == 0){
     # manual edited raw species is not in L0 data, may be left over,
     not_found_msg <- paste(manual.edit$scientific_name.raw, ": this raw /L0 species in manual edits table no longer found in L0 data" )
     warning(not_found_msg)
   } else {
-    int.raw.names.manual[r,]$scientific_name.edit <- manual.edit$scientific_name.raw
-    int.raw.names.manual[r,]$edit_notes <- manual.edit$edit_notes
+    int.raw.names.manual[matching_rows,]$scientific_name.edit <- manual.edit$scientific_name.raw
+    int.raw.names.manual[matching_rows,]$edit_notes <- manual.edit$edit_notes
   }
 
 }
