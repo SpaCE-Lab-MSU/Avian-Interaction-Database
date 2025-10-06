@@ -10,7 +10,7 @@
 ### [**AvianInteractionData_L0.csv**](AvianInteractionData_L0.csv) 
 = Entry of all records stitched together with [../R/AvianInteractionData_L0_stitch.R](https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database/blob/a059edeba78e888432fa36b74948d3a8ac4aa192/R/AvianInteractionData_L0_stitch.R). Each record in this csv file is a unique interaction between 2 species. Note that 2 species can interact in more than one way (equating to multiple rows), and there may be duplicate entries of interactions, each from different species accounts.
 
-### [**AvianInteractionData_metadata.csv**](AvianInteractionData_metadata.csv) 
+### [**AvianInteractionData_metadata_version1.csv**](AvianInteractionData_metadata_version1.csv) 
 = Metadata for columns in **AvianInteractionData_L0.csv**.
 
 ### [**AvianInteractionData_SpeciesList.csv**](AvianInteractionData_SpeciesList.csv) 
@@ -81,6 +81,8 @@ c) Enter interactions for the species you selected by designating the selected s
   
 - You may cite sources outside of BOW. For example, if BOW references another resource, or you are unsure about an interaction and need to go to the primary source. BOW will always be your starting point. See **Step 5e** below for how to conduct a systematic search beyond BOW.
 
+- When copying URLs from sources gathered from Google Scholar or Web of Science (**Step 5e**), ensure that the link you provide is the same as the one referenced in the database search page. Scrolling through a PDF on certain libraries can add additional queries to the URL, creating a mismatch when referencing the source in the future. To ensure that you are copying the URL as presented on the database, right-click on the hyperlink and select "Copy link address" before pasting into the source_URL column.
+
 **Names**
 - On each section, skim for Italicized words - these are usually *Genus species* names. Occasionally species will be listed in just Capital Letters (e.g., Yellow Warbler). Determine if the description means that species1 is interacting (or has an inferred interaction) with species2. 
 
@@ -144,8 +146,10 @@ e) If you come across a BOW account that lacks interactions (none or very few), 
       - Uncheck "NOT Database: Preprint Citation Index". Click to remove this refine from your search. We want to include preprints.
     - Make note of any sources that were returned in the search but are not accessible via MSU or Google by entering in the relevant information into the Google Sheet [inaccessible_avian_literature](https://docs.google.com/spreadsheets/d/1I2F4vM05t0BGF4e8RHGDkGT3quRBlTonAAbIvrEdotg/edit?gid=0#gid=0) in the literature_search folder on Google Drive.; it is possible we can find them via Interlibrary Loan.
     - Once a source is open, search in it using ctrl-F (PC) or command-F (Mac) for the species names - Common and Scientific - this will allow you to find mention of the species and read sections where it is mentioned to uncover potential interactions. If the source is about the species, then search as you would through the BOW account (skim for capitolized and/or italicized species names). **Important:** if you find descriptions of other species' pairwise interactions in a source, please enter them, and indicate that it is a different species1 (see above).
-   
+    - Refer to **Step 5c** when copying URLs from WOS.
+
   - (iii) Perform a **Google Scholar Advanced Search** to identify primary literature and other sources online. Navigate to [**Google Scholar**](https://scholar.google.com).
+    - Navigate to the Settings by selecting the 3 horizontal lines at the upper left of the page. Click on **Settings**. Select **Languages** and click the option that says "Search only for pages written in these languages." Check "English."
     - Navigate to the Advanced Search by selecting the 3 horizontal lines at the upper left of the page. Click on the **Advanced Search**. Into the cell next to **Find articles with all of the words** paste all the species current and past names for both Common and Scientific names (see the BOW account section "Systematics History" to find these names), in quotes, separated by OR. *If you have questions about the alternative or former names of the species, please consult with Phoebe before conducting the search since the Systematics History section of accounts can be confusing*. Note that you do not have to add subspecies. Note also that capitalization doesn't matter and neither do hyphens (i.e., "Brown-hooded parrot" will return the same results as "Brown hooded parrot". Also, if you leave off OR, it will be interpreted as AND, requiring all of the text strings to appear in the search result.
     - Example text (don't forget the quotes, OR) to enter into Google Scholar Advanced Search "Find articles with all of the words" (note that this species has not had a name change):
     - **EXAMPLE: "Pyrilia haematotis" OR "Brown-hooded parrot"** - [this search yielded 216 results](https://scholar.google.com/scholar?as_q=&as_epq=&as_oq=%22Brown+hooded+parrot%22+%22Pyrilia+haematotis%22&as_eq=&as_occt=any&as_sauthors=&as_publication=&as_ylo=&as_yhi=&hl=en&as_sdt=0%2C23).
@@ -155,6 +159,7 @@ e) If you come across a BOW account that lacks interactions (none or very few), 
     - *IMPORTANT: If nothing results from this more involved search, check how Google Scholar is coding your search in the searchbar - sometimes it adds "AND" "OR" many times between words, which is incorrect. Click on Advanced Search to see how it is coding your search - fix any errors.*
     - Once the search returns results correctly, read the titles and if you recognize the same source you already entered in (ii) or (iii), you can skip these since you already entered them. You can also skip over checklists, which just list birds and do not describe interactions. Click on each potential source in order and navigate to the source (you may have to click on "All Versions" below the source to find a PDF or accessible link). If the source is a book, try to find an electronic version (e.g., you may be able to search in Google Books).
     - As above with WOS or Scopus, search in the text for the species to find where it is mentioned.
+    - Refer to **Step 5c** when copying URLs from Google Scholar.
       
   - (iv) Search other species account sources. Note that hopefully these sources have mostly been incorporated into BOW already, but please check to make sure, given that your species has few or no interactions on BOW: 
     - Search Bulletin of the (**British Ornithologists’ Club**)[https://bioone.org/journals/bulletin-of-the-british-ornithologists-club] [Search in the search bar in upper right] - this is not indexed and may not appear in search results in the databases above.
