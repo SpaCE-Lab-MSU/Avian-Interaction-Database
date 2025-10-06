@@ -218,10 +218,18 @@ print("CORRECTED CHECKLIST COLUMNS:")
 print(names(checklist))
 ```
 
-## PLZ: @billspat the GBIF stuff isn't happening anymore... edit description below
-We are using the GBIF list (via taxadb) to resolve scientific names and the 
-eBird/Clements v2024 checklist (reflected in Birds of The World naming conventions for species). 
-Some BBS names differ from these lists so they have to be resolved manually.
+
+**SET HOW WE FIND 'SPECIES' IN CHECKLIST**
+
+The clements checklist includes families, species, hybrids, etc.   In several
+places below we want to find only the 'species' which includse a few 
+categories.  This variable is used in several places in this notebook
+to search only 'species' in the checklist 
+
+```{r}
+species_categories <- c("group (monotypic)","species","slash","subspecies" )
+
+```
 
 ```{r}
 #| echo: false
@@ -349,13 +357,12 @@ print(nrow(int.raw))
 
 #### Some quick typo fixes
 
-This is the same function run during stitching, but run it again and to create
-a cleaned L0 data set to work with 
+This is the same function run during stitching, but run it again and to ensure 
+nothing was missed when it was run during L0.  Shouldn't really find anything else
 
 ```{r}
 
-int.raw1<-fix_taxon_typos(int.raw)
-
+int.raw1<-fix_taxon_typos(int.raw) 
 # See what is different between int.raw and int.raw1 using the diffdf package:
 diffdf(int.raw, int.raw1)
 # Should be finding editorial differences involving "."
@@ -667,7 +674,6 @@ and add a note to track those. These do not need to be resolved.
 
 on_checklist_note <- "L0 species as entered on checklist (Clements 2024)"
 
-species_categories = c("group (monotypic)","species","slash","subspecies" )
 checklist.species<- filter(checklist, category %in% species_categories)$scientific_name
 
 # make a copy
@@ -981,7 +987,7 @@ the whole matching process instead of direct match and then fuzzy match
 ```{r}
 on_checklist_note <- "L0 species matched by common name to checklist (Clements 2024)"
 
-species_categories = c("group (monotypic)","species","slash","subspecies" )
+# species_categories defined in checklist reading section above
 checklist.common<- filter(checklist, category %in% species_categories)$common_name
 ```
 
@@ -1007,7 +1013,7 @@ for(r in 1:nrow(name_matches)) {
   # find the associated sci name, but only look at species records 
   # (some groups have the same common name for the whole genus)
   scientific_name_lookup <- as.character(filter(checklist, 
-                                    common_name == fuzzy_match$match & category == "species") %>%   
+                                    common_name == fuzzy_match$match & category %in% species_categories ) %>%   
                           select(scientific_name))
   if(length(scientific_name_lookup) == 0) warning(paste(" no scientific name in checklist for ",fuzzy_match$match))
   else {
@@ -1506,8 +1512,14 @@ for(r in 1:nrow(manual_taxonomic_resolutions)){
   manual.edit = manual_taxonomic_resolutions[r,]
   r = which(int.raw.names.manual$scientific_name.raw == manual.edit$scientific_name.raw)
   # TODO check if r is a real vector of integers
-  int.raw.names.manual[r,]$scientific_name.edit <- manual.edit$scientific_name.raw
-  int.raw.names.manual[r,]$edit_notes <- manual.edit$edit_notes
+  if(is.na(r) | r == c(0) | length(r) == 0){
+    # manual edited raw species is not in L0 data, may be left over,
+    not_found_msg <- paste(manual.edit$scientific_name.raw, ": this raw /L0 species in manual edits table no longer found in L0 data" )
+    warning(not_found_msg)
+  } else {
+    int.raw.names.manual[r,]$scientific_name.edit <- manual.edit$scientific_name.raw
+    int.raw.names.manual[r,]$edit_notes <- manual.edit$edit_notes
+  }
 
 }
 
