@@ -30,6 +30,7 @@ cleaning but taxonomic names as entered (older names, typos, etc)
 
 *Set the interactions L1 database file to read from here:*
 
+
 ( output From `R/L1/AvianInteractionData_L1.R` )
 
 ```{r}
@@ -71,6 +72,30 @@ today_date_string <- format(Sys.Date(),"%Y-%m-%d")
 
 This script is used to subset out only the species that occur in CONUS+Alaska+Canada.  
 
+
+## Data Set-up
+
+File paths used for this run:
+
+```{r}
+#| echo: false
+
+# functions used by all 
+source(here::here('R/L0/L0_functions.R'))
+# functions for this process to reduce this script size
+# and load libraries used here
+source(here::here('R/L1/L1_taxonomy_functions.R'))
+
+file_paths <- get_file_paths()
+
+print(file_paths)
+```
+
+*Note that the Checklist folder above is in L0 which contains species lists, 
+but the subset list for 2024-25 analysis is in L1 as it's built from L0 lists*
+
+
+
 ### Setup: Checklists
 
 #### Curated List
@@ -81,21 +106,119 @@ See `R/L1/AvianInteractionData_specieslists_Canada_CONUS_L1.R`
 ```{r}
 
 current_species_list_filename <- "canada.conus.splist_L1.csv"
-splist2024_filepath <- file.path(file_paths$L1,"species_checklists",current_species_list_filename )
-splist2024 <- read.csv(splist2024_filepath)
-print(paste("Read in ", nrow(splist2024), "entries from checklist file", splist2024_filepath))
+splist_filepath <- file.path(file_paths$L1,"species_checklists",current_species_list_filename )
+splist <- read.csv(splist_filepath)
+print(paste("Read in ", nrow(splist), "entries from checklist file", splist_filepath))
 
 ```
 
-#### Main Checklist
+
 
 #### Interactions Data
 
+To use a different or test files, edit this L0 filename:
+
 ```{r}
-full_path_L1_file <- file.path(file_paths$L1,AvianInteractionData_L1_file)
-interaction_data<-read.csv(full_path_L1_file)
-print(paste("read in ", nrow(interaction_data), "records from ", full_path_L1_file))
+intxns.db.file <- file.path(file_paths$L1,AvianInteractionData_L1_file)
+intxns.db <-read.csv(intxns.db.file)
+print(paste("read in ", nrow(intxns.db), "records from ", intxns.db.file))
 ```
+
+algorithm
+
+- normalize
+  - make list of all clements species to use from unsplitting combo list, this is the actual clements name
+  - each of those should have a list row nmuber 
+
+- get all interactions where both sp1 and sp2 on on that list
+- of those interactions, convert sp1/sp2 to the sci name phoebe wants 
+    
+
+
+```{r}
+
+
+splist <- dplyr::mutate(splist, ID = as.character(row_number()))
+sp_lookup <- list()
+
+
+for(r in 1:nrow(splist)){
+  species_to_match <- str_split( splist$scientific_name[r], "; ")
+  for(species in unlist(species_to_match)){
+     sp_lookup<- rbind(sp_lookup, list(species, unlist(r)))
+  }
+}
+
+sp_lookup<- data.frame(sp_lookup)
+names(sp_lookup)<- c("species", "row")
+
+```
+
+subset 
+```{r}
+intxns.db.subset <- intxns.db[intxns.db$species1_scientific %in% sp_lookup$species & intxns.db$species2_scientific %in% sp_lookup$species,]
+
+
+```
+
+did this work???
+```{r}
+for(s in intxns.db.subset$species1_scientific) { if(nrow(filter(sp_lookup,species == s))!=1){print(s)}  }
+```
+
+```{r}
+# I hate rowwise , loops are easier to read
+intxns.db.subset$sp1 <- NA
+intxns.db.subset$sp2 <- NA
+
+for(r in 1:nrow(intxns.db.subset)){
+  s1 <- intxns.db.subset[r,]$species1_scientific
+  r1<- unlist(sp_lookup[sp_lookup$species == s1, "row"])
+  if(length(r1)!=1) {
+    # yes there are duplicate matches and I'm just picking the first one to get this done
+    r1 <- r1[1]
+  }
+  intxns.db.subset[r,]$sp1 <- splist[r1,"scientific_name_clements2024"]
+  
+  s2 <- intxns.db.subset[r,]$species2_scientific
+  r2<- unlist(filter(sp_lookup,species == s2)$row)
+  if(length(r2)!=1) {
+    r2 <- r2[1]
+  }
+  intxns.db.subset[r,]$sp2 <- splist[r2,"scientific_name_clements2024"]
+  
+}
+
+
+```
+
+Now columns sp1 and sp1 match the field scientific_name_clements2024 from CONUS etc list
+
+# TODO #####################
+
+$species1_scientific etc are THE ORIGINAL NAMES, NOT CLEMENTS OR BBS
+
+select, rename etc fields on this database to match what you need here
+
+```{r}
+
+
+```
+
+
+save the file with the file name defined in the OUTPUT section above
+this has the current date embedded in it
+
+
+```{r}
+
+f <- file.path(file_paths$L1, paste("test_", AvianInteractionData_CanadaAKCONUS_L1_file ))
+write_csv(intxns.db.subset, f)
+print(f)
+
+```
+
+
 
 
 
