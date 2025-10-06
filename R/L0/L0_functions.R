@@ -433,10 +433,10 @@ read_and_amend <- function(entry_file, add_entry_file_column= FALSE, fix_errors_
   if (is.null(intxns.df) || nrow(intxns.df) == 0) return(NULL)  # Skip empty or unreadable files
 
   # Rename columns individually to avoid duplication issues
-  if ("sourceAupdatedURL" %in% names(df)) names(df)[names(df) == "sourceAupdatedURL"] <- "sourceA_URL"
-  if ("sourceBupdatedURL" %in% names(df)) names(df)[names(df) == "sourceBupdatedURL"] <- "sourceB_URL"
-  if ("sourceCupdatedURL" %in% names(df)) names(df)[names(df) == "sourceCupdatedURL"] <- "sourceC_URL"
-  if ("sourceDupdatedURL" %in% names(df)) names(df)[names(df) == "sourceDupdatedURL"] <- "sourceD_URL"
+  if ("sourceAupdatedURL" %in% names(intxns.df)) names(intxns.df)[names(intxns.df) == "sourceAupdatedURL"] <- "sourceA_URL"
+  if ("sourceBupdatedURL" %in% names(intxns.df)) names(intxns.df)[names(intxns.df) == "sourceBupdatedURL"] <- "sourceB_URL"
+  if ("sourceCupdatedURL" %in% names(intxns.df)) names(intxns.df)[names(intxns.df) == "sourceCupdatedURL"] <- "sourceC_URL"
+  if ("sourceDupdatedURL" %in% names(intxns.df)) names(intxns.df)[names(intxns.df) == "sourceDupdatedURL"] <- "sourceD_URL"
 
 
   # ADD ANY MISSING STANDARD COLUMNS WITH NA VALUES
