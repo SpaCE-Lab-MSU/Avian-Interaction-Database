@@ -216,6 +216,7 @@ this has the current date embedded in it
 
 f <- file.path(file_paths$L1, AvianInteractionDataSubset_L1_file  )
 write_csv(intxns.db.subset, f)
+print(f)
 
 ```
 
