@@ -34,13 +34,14 @@ cleaning but taxonomic names as entered (older names, typos, etc)
 
 ```{r}
 
-AvianInteractionData_L0_file <-  "AvianInteractionData_L0_stitch_oct25.csv"
+AvianInteractionData_L0_file <-  "AvianInteractionData_L0_stitch_06oct25.csv"
+
 ```
 
 
 **Main Checklists:**
 
-- Full Clements/Ebird list 
+- Full 2024 Clements/eBird list 
 - GBIF database (via taxadb package)
 
 Curated Species checklist: 
@@ -74,7 +75,7 @@ match checklists listed above: `AvianInteractionData_L1.csv`
 AvianInteractionData_L1_file <- "AvianInteractionData_L1.csv" 
 
 today_date_string <- format(Sys.Date(),"%Y-%m-%d")
-AvianInteractionData_L1_taxonomy_table_file <- "AvianInteractionData_L1_taxnomony_resolutions.csv"
+AvianInteractionData_L1_taxonomy_table_file <- "AvianInteractionData_L1_taxonomy_resolutions.csv"
 
 ```
 
@@ -222,7 +223,7 @@ print(names(checklist))
 **SET HOW WE FIND 'SPECIES' IN CHECKLIST**
 
 The clements checklist includes families, species, hybrids, etc.   In several
-places below we want to find only the 'species' which includse a few 
+places below we want to find only the 'species' which include a few 
 categories.  This variable is used in several places in this notebook
 to search only 'species' in the checklist 
 
@@ -724,7 +725,7 @@ length(unique(unresolved_species(int.raw.names)$scientific_name.raw))
 
 ```
 September 2025: 504 (just about 30 redundant common names)
-October 5, 2025: 404
+October 6, 2025: 404
 
 
 
@@ -1351,7 +1352,7 @@ and will be updated if necessary below
 
 --------------------------------------------------------------------------------
 
-## Unid : Genus-only speciesfixes
+## Unid : Genus-only species fixes
 
 
 Open the Unid sp. (Genu-only) to work on:
@@ -1396,7 +1397,7 @@ print(nrow(unresolved_species(int.raw.names)))
 
 ```
 
-number of all rows without notes (dispensation/edits) including UnID:
+number of all rows without notes (dispensation/edits) including Unid.:
 
 ```{r}
 #| echo: false
@@ -1456,7 +1457,7 @@ all of the name resolutions include those
 
 **TO-DO**
 
-1. complete the entries in this file 
+1. complete the entries in this file - PLZ completed 10/5/2025
 3. read in the file and verify all rows are ok, filter out unfinished rows
 4. apply the edits in the file regardless if there is alread a note since 
    these may override the automatic resolutions
@@ -1488,7 +1489,7 @@ Goal is to accumulate a list of fixes and notes
 1. review existing edits below
    use a lookup function to see if an edit (raw -> edit, common name) is still needed
 
-1. ReView the outputs of various steps of corrections
+1. Review the outputs of various steps of corrections
    The lower-confidence matches that may be skipped are a good source of 
 How to to add an edit/adjustment to the list:
 
@@ -1634,7 +1635,7 @@ dplyr::filter(int.raw, species2_scientific %in% c("Branta leucopsis x Anser indi
 
 ## Merge and Save data
 
-Update resolved common names use the checklist common names 
+Update resolved common names use the Clements/eBird 2024 checklist to assign common names (by referencing the official scientific name; all fixed above)
 
 ```{r}
 # mutate is terrible at joining things and I only want to join common name
@@ -1713,7 +1714,7 @@ print(length(unique(int.raw$interaction)))
 
 print("unique pairwise interactions")
 
-# if you want toignoring the order of species, we will need to create pairs and sort them
+# if you want to ignore the order of species, we will need to create pairs and sort them
 # some sample code saved here to consider: 
 # dat <- data.frame(c('a','b','c'), c('b','a','d'), stringsAsFactors=F );
 # colnames(dat) <- c('s1','s2');
@@ -1760,8 +1761,8 @@ Analysis Paper:
 1 sp1 and sp2 on checklist (canada CONUS)
 Data Paper Goal: 
 
-1. Sp1 or sp2 needs to be on Checklist (canada conus checklist)
-2. Final check:which rows are not (sp1 AND sp2 on Canada Conus checklist)?
+1. Sp1 or sp2 needs to be on Checklist (canada alaska conus checklist)
+2. Final check:which rows are not (sp1 AND sp2 on Canada Alaska Conus checklist)?
     how many?
     which of these are NOT on full clements list
     how many? 
