@@ -1,0 +1,103 @@
+---
+title: "L1 post-taxonomic harmonization subset to Canada/AK/CONUS"
+author: 
+  - Phoebe L. Zarnetske
+  - Patrick Bills
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    embed-resources: true
+editor: source
+date: 10/06/2025
+date-format: iso
+---
+
+## Avian Interaction Pairs Data: L1 to regional subset for Canada/Alaska/CONUS
+
+### About
+
+- **PROJECT:** Avian Interaction Database and MetaNetwork
+- **COLLABORATORS:** Vincent Miele, Stephane Dray, Emily Parker
+- **Run Date:** `r Sys.Date()`
+
+### Data inputs:
+
+**Avian Interaction Database L0**
+
+Raw Data, combined (stitched) and with content
+cleaning but taxonomic names as entered (older names, typos, etc)
+
+*Set the interactions L1 database file to read from here:*
+
+( output From `R/L1/AvianInteractionData_L1.R` )
+
+```{r}
+
+AvianInteractionData_L1_file <-  "AvianInteractionData_L1.csv"
+
+```
+
+**Main Checklists:**
+
+Curated Species checklist: 
+
+- Current selected species list for Canada/Alaska/CONUS =
+  combined checklist based on Clements/eBird v2024, Avibase v8.17, BBS v2024:
+ ( output via Working repo, from `R/L1/AvianInteractionData_specieslists_Canada_CONUS_L1.R` ) = canada.conus.splist_L1.CSV
+
+
+### DATA OUTPUT:
+
+L1 Canada, Alaska, CONUS species from L1 Avian Interaction Database 
+  (`AvianInteractionData_L1.csv`); saved as:
+
+```{r}
+AvianInteractionData_CanadaAKCONUS_L1_file <- "AvianInteractionData_Canada-AK-CONUS_L1.csv" 
+
+today_date_string <- format(Sys.Date(),"%Y-%m-%d")
+
+```
+
+
+### Next script to run: 
+
+- depends on project: 
+  for Avian Interaction Database North America:
+  for Avian MetaNetwork Analysis: https://github.com/SpaCE-Lab-MSU/avian-meta-network/tree/main/R/L2
+
+
+### NOTES
+
+This script is used to subset out only the species that occur in CONUS+Alaska+Canada.  
+
+### Setup: Checklists
+
+#### Curated List
+
+October 2025: new curated list curated by PLZ using Clements, AVIBase, BBS etc. 
+See `R/L1/AvianInteractionData_specieslists_Canada_CONUS_L1.R`
+
+```{r}
+
+current_species_list_filename <- "canada.conus.splist_L1.csv"
+splist2024_filepath <- file.path(file_paths$L1,"species_checklists",current_species_list_filename )
+splist2024 <- read.csv(splist2024_filepath)
+print(paste("Read in ", nrow(splist2024), "entries from checklist file", splist2024_filepath))
+
+```
+
+#### Main Checklist
+
+#### Interactions Data
+
+```{r}
+full_path_L1_file <- file.path(file_paths$L1,AvianInteractionData_L1_file)
+interaction_data<-read.csv(full_path_L1_file)
+print(paste("read in ", nrow(interaction_data), "records from ", full_path_L1_file))
+```
+
+
+
+
+
