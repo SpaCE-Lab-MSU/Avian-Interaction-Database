@@ -54,8 +54,8 @@ L1 Canada, Alaska, CONUS species from L1 Avian Interaction Database
   (`AvianInteractionData_L1.csv`); saved as:
 
 ```{r}
-AvianInteractionData_CanadaAKCONUS_L1_file <- "AvianInteractionData_Canada-AK-CONUS_L1.csv" 
-
+AvianInteractionData_CanadaAKCONUS_L1_file <- "AvianInteractionData_CanadaAKCONUS_L1.csv" 
+splist_CanadaAKCONUS_L1_file <- "splist_CanadaAKCONUS_L1.csv"
 today_date_string <- format(Sys.Date(),"%Y-%m-%d")
 
 ```
@@ -126,40 +126,73 @@ print(paste("read in ", nrow(intxns.db), "records from ", intxns.db.file))
 
 algorithm
 
-- normalize
-  - make list of all clements species to use from unsplitting combo list, this is the actual clements name
-  - each of those should have a list row nmuber 
+@billspat this is not needed bc we already have Clements columns
+<!-- - normalize -->
+<!--   - make list of all clements species to use from unsplitting combo list, this is the actual clements name -->
+<!--   - each of those should have a list row nmuber  -->
 
 - get all interactions where both sp1 and sp2 on on that list
 - of those interactions, convert sp1/sp2 to the sci name phoebe wants 
     
 
-
+Subset by scientific_name_clements2024
 ```{r}
+length(unique(splist$scientific_name_clements2024))
+dim(splist) #783
+dim(intxns.db) #31040
+# Some duplicate rows; these are just the unids. so we can ignore them
+duplicate_indices <- duplicated(splist$scientific_name_clements2024)
+duplicate_clements <- splist[duplicate_indices, ]
+duplicate_clements
 
+intxns.db.subset <- intxns.db[intxns.db$species1_scientific %in% splist$scientific_name_clements2024 | intxns.db$species2_scientific %in% splist$scientific_name_clements2024,]
 
-splist <- dplyr::mutate(splist, ID = as.character(row_number()))
-sp_lookup <- list()
+intxns.db.non.subset <- intxns.db[!(intxns.db$species1_scientific %in% splist$scientific_name_clements2024 | intxns.db$species2_scientific %in% splist$scientific_name_clements2024),]
 
+usp1<-(unique(intxns.db.subset$species1_scientific))
+usp2<-(unique(intxns.db.subset$species2_scientific))
+usp1.2<-append(usp1,usp2)
+length(unique(usp1.2)) #2138 unique species in the interaction data
 
-for(r in 1:nrow(splist)){
-  species_to_match <- str_split( splist$scientific_name[r], "; ")
-  for(species in unlist(species_to_match)){
-     sp_lookup<- rbind(sp_lookup, list(species, unlist(r)))
-  }
-}
+# Merge these data with a simplified Clements/eBird BBS AOU combo list:
+splist<-splist %>%
+      select(scientific_name_clements2024, scientific_name_clements2024.combo,
+             common_name_clements2024, common_name_clements2024.combo, 
+             AOU_bbs2024, AOU_bbs2024.combo, in_bbs2024)
 
-sp_lookup<- data.frame(sp_lookup)
-names(sp_lookup)<- c("species", "row")
+# Update names for merge in analysis code
+splist <- splist %>%
+  rename(scientific_name = scientific_name_clements2024,
+         scientific_name.combo = scientific_name_clements2024.combo,
+         common_name = common_name_clements2024,
+         common_name.combo = common_name_clements2024.combo)
 
 ```
 
-subset 
-```{r}
-intxns.db.subset <- intxns.db[intxns.db$species1_scientific %in% sp_lookup$species & intxns.db$species2_scientific %in% sp_lookup$species,]
+save the file with the file name defined in the OUTPUT section above
+this has the current date embedded in it
 
+
+```{r}
+
+f <- file.path(file_paths$L1, AvianInteractionData_CanadaAKCONUS_L1_file )
+write_csv(intxns.db.subset, f)
+print(f)
+
+s <- file.path(file_paths$L1, splist_CanadaAKCONUS_L1_file )
+write_csv(splist, s)
+print(s)
 
 ```
+
+@billspat: Could add another merge that pulls in the splist into the intxn.db.subset to create a single dataset; need to merge by sp1 and sp2
+
+### PLZ: END OF CODE ###
+
+
+
+
+
 
 did this work???
 ```{r}
@@ -202,19 +235,6 @@ select, rename etc fields on this database to match what you need here
 
 ```{r}
 
-
-```
-
-
-save the file with the file name defined in the OUTPUT section above
-this has the current date embedded in it
-
-
-```{r}
-
-f <- file.path(file_paths$L1, paste("test_", AvianInteractionData_CanadaAKCONUS_L1_file ))
-write_csv(intxns.db.subset, f)
-print(f)
 
 ```
 
