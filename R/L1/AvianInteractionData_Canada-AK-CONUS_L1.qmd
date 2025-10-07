@@ -91,9 +91,9 @@ file_paths <- get_file_paths()
 print(file_paths)
 ```
 
-*Note that the Checklist folder above is in L0 which contains species lists, 
-but the subset list for 2024-25 analysis is in L1 as it's built from L0 lists*
-
+*Note that the Checklist folder above is in L0 which contains raw species lists, 
+but the Canada/Alaska/CONUS L1 Checklist is the one to use here because it is 
+built from multiple L0 lists*
 
 
 ### Setup: Checklists
@@ -116,7 +116,7 @@ print(paste("Read in ", nrow(splist), "entries from checklist file", splist_file
 
 #### Interactions Data
 
-To use a different or test files, edit this L0 filename:
+To use a different or test interaction files, edit this L1 filename:
 
 ```{r}
 intxns.db.file <- file.path(file_paths$L1,AvianInteractionData_L1_file)
@@ -124,18 +124,10 @@ intxns.db <-read.csv(intxns.db.file)
 print(paste("read in ", nrow(intxns.db), "records from ", intxns.db.file))
 ```
 
-algorithm
+- get all interactions where either sp1 or sp2 is a species on the Canada/AK/CONUS list 
+- subset out a few relevant columns in the splist for use with BBS network and spatial analysis
 
-@billspat this is not needed bc we already have Clements columns
-<!-- - normalize -->
-<!--   - make list of all clements species to use from unsplitting combo list, this is the actual clements name -->
-<!--   - each of those should have a list row nmuber  -->
-
-- get all interactions where both sp1 and sp2 on on that list
-- of those interactions, convert sp1/sp2 to the sci name phoebe wants 
-    
-
-Subset by scientific_name_clements2024
+Use scientific_name_clements2024 as the match for names.
 ```{r}
 length(unique(splist$scientific_name_clements2024))
 dim(splist) #783
@@ -154,18 +146,11 @@ usp2<-(unique(intxns.db.subset$species2_scientific))
 usp1.2<-append(usp1,usp2)
 length(unique(usp1.2)) #2138 unique species in the interaction data
 
-# Merge these data with a simplified Clements/eBird BBS AOU combo list:
+# Create a simplified Clements/eBird BBS AOU combo splist:
 splist<-splist %>%
-      select(scientific_name_clements2024, scientific_name_clements2024.combo,
-             common_name_clements2024, common_name_clements2024.combo, 
-             AOU_bbs2024, AOU_bbs2024.combo, in_bbs2024)
-
-# Update names for merge in analysis code
-splist <- splist %>%
-  rename(scientific_name = scientific_name_clements2024,
-         scientific_name.combo = scientific_name_clements2024.combo,
-         common_name = common_name_clements2024,
-         common_name.combo = common_name_clements2024.combo)
+      select(scientific_name_clements2024.combo, common_name_clements2024.combo,
+             AOU_bbs2024.combo, scientific_name_clements2024, common_name_clements2024, 
+             scientific_name_bbs2024, AOU_bbs2024, in_bbs2024)
 
 ```
 
@@ -179,13 +164,13 @@ f <- file.path(file_paths$L1, AvianInteractionData_CanadaAKCONUS_L1_file )
 write_csv(intxns.db.subset, f)
 print(f)
 
+## @billspat: how to move this to L1/species_checklists/ ??
 s <- file.path(file_paths$L1, splist_CanadaAKCONUS_L1_file )
 write_csv(splist, s)
 print(s)
 
 ```
 
-@billspat: Could add another merge that pulls in the splist into the intxn.db.subset to create a single dataset; need to merge by sp1 and sp2
 
 ### PLZ: END OF CODE ###
 
