@@ -1,7 +1,7 @@
-# TITLE:          L1 Species Lists: North America (CONUS and Canada) 
+# TITLE:          L1 Species Lists: North America (CONUS and Alaska and Canada) 
 #                 Reads in lists and keeps track of which species are in which list.
 #                 Also keeps track of name changes in diff columns.
-#                 Creates a final list of species in Canada and CONUS for use in the North 
+#                 Creates a final list of species in Canada / Alaska / CONUS for use in the North 
 #                 American Avian Interaction data paper and avian-meta-network paper.
 #                 
 #                 ****See AvianInteractionData_specieslists_L1.R for the 
@@ -761,8 +761,7 @@ ca.conus.splist$common_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo
 ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 35670] <- "Junco hyemalis"
 ca.conus.splist$common_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 35670] <- "Dark-eyed Junco"
 ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 36550] <- "Setophaga coronata"
-ca.conus.splist$common_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 36550] <- "	
-Yellow-rumped Warbler"
+ca.conus.splist$common_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 36550] <- "Yellow-rumped Warbler"
 #ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU.combo == 30010] <- "Aechmophorus occidentalis / clarkii"
 ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 34641] <- "Empidonax difficilis"
 ca.conus.splist$common_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 34641] <- "Western Flycatcher"
