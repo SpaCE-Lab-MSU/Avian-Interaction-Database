@@ -54,8 +54,11 @@ L1 Canada, Alaska, CONUS species from L1 Avian Interaction Database
   (`AvianInteractionData_L1.csv`); saved as:
 
 ```{r}
-AvianInteractionData_CanadaAKCONUS_L1_file <- "AvianInteractionData_CanadaAKCONUS_L1.csv" 
+AvianInteractionData_CanadaAKCONUS_L1_file <- "AvianInteractionData_CanadaAKCONUS_L1.csv"
+AvianInteractionData_CanadaAKCONUS_breeding_file <- "AvianInteractionData_CanadaAKCONUS_breeding_L1.csv"
 splist_CanadaAKCONUS_L1_file <- "splist_CanadaAKCONUS_L1.csv"
+AvianInteractionData_L1_not_CanadaAKCONUS_file <- 
+  "AvianInteractionData_L1_not_CanadaAKCONUS.csv"
 today_date_string <- format(Sys.Date(),"%Y-%m-%d")
 
 ```
@@ -64,8 +67,9 @@ today_date_string <- format(Sys.Date(),"%Y-%m-%d")
 ### Next script to run: 
 
 - depends on project: 
-  for Avian Interaction Database North America:
-  for Avian MetaNetwork Analysis: https://github.com/SpaCE-Lab-MSU/avian-meta-network/tree/main/R/L2
+  - for Avian Interaction Database North America (Data Paper): a summary and 
+  figure-generating script (to be written)
+  - for Avian MetaNetwork Analysis: https://github.com/SpaCE-Lab-MSU/avian-meta-network/tree/main/R/L2
 
 
 ### NOTES
@@ -138,8 +142,13 @@ duplicate_clements <- splist[duplicate_indices, ]
 duplicate_clements
 
 intxns.db.subset <- intxns.db[intxns.db$species1_scientific %in% splist$scientific_name_clements2024 | intxns.db$species2_scientific %in% splist$scientific_name_clements2024,]
+dim(intxns.db.subset)
 
 intxns.db.non.subset <- intxns.db[!(intxns.db$species1_scientific %in% splist$scientific_name_clements2024 | intxns.db$species2_scientific %in% splist$scientific_name_clements2024),]
+dim(intxns.db.non.subset)
+# Check that these equate to dim(intxns.db)
+dim(intxns.db.non.subset)+dim(intxns.db.subset)
+dim(intxns.db)
 
 usp1<-(unique(intxns.db.subset$species1_scientific))
 usp2<-(unique(intxns.db.subset$species2_scientific))
@@ -153,10 +162,74 @@ splist<-splist %>%
              scientific_name_bbs2024, AOU_bbs2024, in_bbs2024)
 
 ```
+Adjust nonbreeding season column @billspat note to move this to the L0 cleaning
 
-save the file with the file name defined in the OUTPUT section above
+```{r}
+# List of characters to re-assign
+old1 <- c("YSE", "YES", "Yes", "possibly", "potential", "yes")
+new1 <- "nonbreeding"
+# Re-assign values 
+intxns.db.subset$nonbreedingseason <- ifelse(intxns.db.subset$nonbreedingseason %in% old1, new1, intxns.db.subset$nonbreedingseason)
+
+old2 <- "breeding and nonbreeding"
+new2 <- "breeding"
+# Re-assign values 
+intxns.db.subset$nonbreedingseason <- ifelse(intxns.db.subset$nonbreedingseason %in% old2, new2, intxns.db.subset$nonbreedingseason)
+
+# Replace NA in 'nonbreedingseason' with "breeding"
+intxns.db.subset$nonbreedingseason[is.na(intxns.db.subset$nonbreedingseason)] <- "breeding"
+
+# Rename the column to 'season'
+intxns.db.subset <- intxns.db.subset %>%
+  rename(season = nonbreedingseason)
+
+```
+
+Create summary information in a table
+```{r}
+unique_counts_multi <- purrr::map_dfr(
+      .x = c("interaction", "season"), 
+      .f = ~ intxns.db.subset %>%
+        count(!!sym(.x)) %>%
+        mutate(Column = .x) %>%
+        rename(Value = !!sym(.x), Count = n) %>%
+        select(Column, Value, Count)
+    )
+# Nicer format
+    kable(unique_counts_multi,
+          caption = "Breeding and Non-breeding Data: Summaries",
+          col.names = c("Column", "Value", "Count"),
+          format = "markdown")
+```
+
+Version with only breeding season interactions:
+
+```{r}
+# Subset rows where 'season' is "breeding"
+intxns.db.subset.breeding <- intxns.db.subset %>%
+  filter(season == "breeding")
+dim(intxns.db.subset.breeding) #23160
+dim(intxns.db.subset) #26196
+
+# Summary table
+unique_counts_multi.b <- purrr::map_dfr(
+      .x = c("interaction", "season"), 
+      .f = ~ intxns.db.subset.breeding %>%
+        count(!!sym(.x)) %>%
+        mutate(Column = .x) %>%
+        rename(Value = !!sym(.x), Count = n) %>%
+        select(Column, Value, Count)
+    )
+# Nicer format
+    kable(unique_counts_multi.b,
+          caption = "Breeding Season Data: Summaries",
+          col.names = c("Column", "Value", "Count"),
+          format = "markdown")
+
+```
+
+Save the file with the file name defined in the OUTPUT section above
 this has the current date embedded in it
-
 
 ```{r}
 
@@ -164,68 +237,18 @@ f <- file.path(file_paths$L1, AvianInteractionData_CanadaAKCONUS_L1_file )
 write_csv(intxns.db.subset, f)
 print(f)
 
+fb <- file.path(file_paths$L1, AvianInteractionData_CanadaAKCONUS_breeding_file )
+write_csv(intxns.db.subset, fb)
+print(fb)
+
+fx <- file.path(file_paths$L1, AvianInteractionData_L1_not_CanadaAKCONUS_file )
+write_csv(intxns.db.non.subset, fx)
+print(fx)
+
 ## @billspat: how to move this to L1/species_checklists/ ??
 s <- file.path(file_paths$L1, splist_CanadaAKCONUS_L1_file )
 write_csv(splist, s)
 print(s)
 
 ```
-
-
-### PLZ: END OF CODE ###
-
-
-
-
-
-
-did this work???
-```{r}
-for(s in intxns.db.subset$species1_scientific) { if(nrow(filter(sp_lookup,species == s))!=1){print(s)}  }
-```
-
-```{r}
-# I hate rowwise , loops are easier to read
-intxns.db.subset$sp1 <- NA
-intxns.db.subset$sp2 <- NA
-
-for(r in 1:nrow(intxns.db.subset)){
-  s1 <- intxns.db.subset[r,]$species1_scientific
-  r1<- unlist(sp_lookup[sp_lookup$species == s1, "row"])
-  if(length(r1)!=1) {
-    # yes there are duplicate matches and I'm just picking the first one to get this done
-    r1 <- r1[1]
-  }
-  intxns.db.subset[r,]$sp1 <- splist[r1,"scientific_name_clements2024"]
-  
-  s2 <- intxns.db.subset[r,]$species2_scientific
-  r2<- unlist(filter(sp_lookup,species == s2)$row)
-  if(length(r2)!=1) {
-    r2 <- r2[1]
-  }
-  intxns.db.subset[r,]$sp2 <- splist[r2,"scientific_name_clements2024"]
-  
-}
-
-
-```
-
-Now columns sp1 and sp1 match the field scientific_name_clements2024 from CONUS etc list
-
-# TODO #####################
-
-$species1_scientific etc are THE ORIGINAL NAMES, NOT CLEMENTS OR BBS
-
-select, rename etc fields on this database to match what you need here
-
-```{r}
-
-
-```
-
-
-
-
-
-
 
