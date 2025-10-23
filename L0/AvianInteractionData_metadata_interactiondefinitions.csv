@@ -32,3 +32,4 @@ nest takeover,yes,1,-1,"where one species takes over (steals) the nest of anothe
 play,no,0,0,species play with each other; both species = 1
 predation,yes,-1,1,predator eats prey. predator = 1; prey = -1
 shared scolding,no,1,1,"usually indicative of predation, where the smaller birds vocally scold a predator. The species doing the shared scolding are usually potential prey = 1."
+-artificial,yes/no,-1/0/1,-1/0/1,"modifier attached to then end of interaction (e.g. courtship-artificial) when interaction is induced by humans through lab experiments, playback, in captivity, or with domesticated birds. Symmetry and impact on species depend on the interaction being modified."
