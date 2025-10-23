@@ -120,9 +120,15 @@ Enter “strong” if the interaction was observed, or was strongly stated (i.e.
 
 **Multi-species interactions**
 - If you find a description that lists > 2 species involved in an interaction (e.g., mixed flock, aggregate foraging, competing over same resource), then enter in all pairwise interactions into the same google sheet. Indicate in the **other_species1** column that the species1 of that row is different from the file name/article title.
-  
+
+**Artificial Interactions**
+- If you encounter a description of an interaction that was induced by human researchers (e.g., a bird responded to the playback of another species' call, or two species were recorded courting in captivity, or a bird ejected eggs of another species that were placed in its nest by humans), attach the "-artificial" modifier to the end of the interaction (e.g., courtship-artificial). Keep the values for symmetry and effect on each species the same as the interaction being modified.
+
 **Name Changes**
 - Bird names change through time, sometimes fairly often. If the row contains a species1 or species2 bird with any kind of name change (whether Scientific or Common or both), write a note in this column explaining the name change. If it is difficult to determine which species was involved in the interaction because of a name change, also indicate that in the **uncertain_interactions** column.
+
+**Abbreviations and Codes**
+- If you encounter a 4-letter banding abbreviation (e.g. GHOW) or other acronym or code for mentioning a bird, copy and paste the text excerpt where the abbreviation is defined (e.g., "Great-horned Owl (GHOW)...") into the **text_excerpt** column in every row where an interaction was derived from a text excerpt that includes an abbreviation.
 
 **Other**
 - Note that for species1, its interaction with species2 will become part of species2’s pairwise interactions. NOTE: if a duplicate entry occurs, it’s ok (we will edit in R). It takes too much time to avoid duplicates by manually searching for the species2 entries that already exist.
