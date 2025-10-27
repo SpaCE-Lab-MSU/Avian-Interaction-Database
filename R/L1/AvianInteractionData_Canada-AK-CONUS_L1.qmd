@@ -9,7 +9,7 @@ format:
     toc-depth: 3
     embed-resources: true
 editor: source
-date: 10/06/2025
+date: 10/26/2025
 date-format: iso
 ---
 
@@ -17,8 +17,8 @@ date-format: iso
 
 ### About
 
-- **PROJECT:** Avian Interaction Database and MetaNetwork
-- **COLLABORATORS:** Vincent Miele, Stephane Dray, Emily Parker
+- **PROJECT:** Avian Interaction Database (CONUS/Canada/AK) and MetaNetwork
+- **COLLABORATORS:** Vincent Miele, Stephane Dray
 - **Run Date:** `r Sys.Date()`
 
 ### Data inputs:
@@ -104,7 +104,7 @@ built from multiple L0 lists*
 
 #### Curated List
 
-October 2025: new curated list curated by PLZ using Clements, AVIBase, BBS etc. 
+October 2025: new curated list curated by PLZ using Clements, AviBase, BBS etc. 
 See `R/L1/AvianInteractionData_specieslists_Canada_CONUS_L1.R`
 
 ```{r}
