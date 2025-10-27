@@ -9,7 +9,7 @@ format:
     toc-depth: 3
     embed-resources: true
 editor: source
-date: 09/01/2025
+date: 10/26/2025
 date-format: iso
 ---
 
@@ -18,7 +18,7 @@ date-format: iso
 ### About
 
 - **PROJECT:** Avian Interaction Database
-- **COLLABORATORS:** Vincent Miele, Stephane Dray, Emily Parker
+- **COLLABORATORS:** Vincent Miele, Stephane Dray
 - **Run Date:** `r Sys.Date()`
 
 ### Data inputs:
@@ -111,7 +111,7 @@ in a table to identify the current accepted name in checklist
 3. resolve scientific names already exactly matching checklist 
 4. for those names not resolved, use fuzzy matching to find scientific names in checklist (high confidence only)
 5. for those names not resolved, match common names with checklist (high confidence only)
-6. for those names not resolved, use gbif to see if name can be resolved to a checklist name
+6. for those names not resolved, use GBIF to see if name can be resolved to a checklist name
 7. read in CSV of manual resolutions and apply to whole list 
 8. resolve genus only unids
 9. resolve hybrids ( X and / )
@@ -222,13 +222,13 @@ print(names(checklist))
 
 **SET HOW WE FIND 'SPECIES' IN CHECKLIST**
 
-The clements checklist includes families, species, hybrids, etc.   In several
+The Clements checklist includes families, species, hybrids, etc.   In several
 places below we want to find only the 'species' which include a few 
 categories.  This variable is used in several places in this notebook
 to search only 'species' in the checklist 
 
 ```{r}
-species_categories <- c("group (monotypic)","species","slash","subspecies" )
+species_categories <- c("group (monotypic)","species","slash","subspecies","genus","family")
 
 ```
 
@@ -545,7 +545,7 @@ unique.sp.raw <- data.frame(scientific_name.raw = with(int.raw, union(
   species1_scientific, species2_scientific
 )))
 
-print(dim(unique.sp.raw)) #3913 # May 29, 2025: 3889; Sept. 29, 2025: 3879
+print(dim(unique.sp.raw)) #3913 # May 29, 2025: 3889; Sept. 29, 2025: 3879; Oct 26: 3873
 ```
 
 
@@ -863,6 +863,8 @@ Sept 2025:
   - >= 0.90 211
 Oct 2025:
   - >= 0.93 166 (41.09%)
+Oct 26, 2025:
+  - >= 0.95 134 (33.17%) - same as Sept
   
 ### Resolve (assing edit_note to all high confidence matches)
 
@@ -1432,7 +1434,7 @@ print(paste("whole enviroment saved as ", f))
 ## Manual Taxanomic Edits
 
 Not all automatic fixes were correct or some simply must be determined 
-manually.   These are collected in a CSV file with the same columns as our `int.raw.names`
+manually. These are collected in a CSV file with the same columns as our `int.raw.names`
 data frame with columns
 
 scientific_name.raw : name to match our name edits table 
