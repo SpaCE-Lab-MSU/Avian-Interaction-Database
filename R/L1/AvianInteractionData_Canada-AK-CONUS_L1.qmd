@@ -238,7 +238,7 @@ write_csv(intxns.db.subset, f)
 print(f)
 
 fb <- file.path(file_paths$L1, AvianInteractionData_CanadaAKCONUS_breeding_file )
-write_csv(intxns.db.subset, fb)
+write_csv(intxns.db.subset.breeding, fb)
 print(fb)
 
 fx <- file.path(file_paths$L1, AvianInteractionData_L1_not_CanadaAKCONUS_file )
