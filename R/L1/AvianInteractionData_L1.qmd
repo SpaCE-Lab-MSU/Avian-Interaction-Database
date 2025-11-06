@@ -33,6 +33,8 @@ cleaning but taxonomic names as entered (older names, typos, etc)
 ( output From `R/L0/AvianInteractionData_L0_stitch.R` )
 
 ```{r}
+# Clear all existing data
+rm(list=ls())
 
 AvianInteractionData_L0_file <-  "AvianInteractionData_L0_stitch_06oct25.csv"
 
@@ -48,7 +50,8 @@ Curated Species checklist:
 
 - Current selected species list =
   combined checklist based on Clements/eBird v2024, Avibase v8.17, BBS v2024:
-  output from `R/L0/AvianInteractionData_specieslists_L0.R`
+  output from `R/L0/AvianInteractionData_specieslists_L1.R` (global) or
+  `R/L0/AvianInteractionData_specieslists_Canada_CONUS_L1.R` (North America)
   - used for species lookup / matching
 
 **Manual Taxonomic Resolution Overrides Table:**
@@ -82,8 +85,7 @@ AvianInteractionData_L1_taxonomy_table_file <- "AvianInteractionData_L1_taxonomy
 
 ### Next script to run: 
 
-- AvianInteractionData_L1_post_taxa_cleaning.R
-- AvianInteractionData_L1_CanadaCONUS.R
+- AvianInteractionData_Canada-AK-CONUS_L1.qmd - this cleans further (e.g., breeding/non-breeding) and some of that needs to go in general cleaning (either here or in another script).
 
 
 ### NOTES
