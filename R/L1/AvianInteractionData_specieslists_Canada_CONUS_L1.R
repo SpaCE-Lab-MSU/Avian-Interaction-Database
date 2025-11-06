@@ -781,8 +781,8 @@ ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 1691] <- 31690
 #"Corvus caurinus",      "Northwestern Crow",     "Corvus brachyrhynchos",  "American Crow",  
 ca.conus.splist$scientific_name_clements2024[ca.conus.splist$scientific_name == "Corvus brachyrhynchos/caurinus"] <- "Corvus brachyrhynchos"
 ca.conus.splist$common_name_clements2024[ca.conus.splist$common_name == "unid. American Crow/Northwestern Crow"] <- "American Crow"
-ca.conus.splist$scientific_name_clements2024[ca.conus.splist$scientific_name == "Corvus caurinus"] <- "Corvus brachyrhynchos"
-ca.conus.splist$common_name_clements2024[ca.conus.splist$common_name == "Northwestern Crow"] <- "American Crow"
+ca.conus.splist$scientific_name_clements2024[ca.conus.splist$scientific_name == "Corvus caurinus"] <- "Corvus brachyrhynchos caurinus"
+# There is no common name for the subspecies in Clements. 
 
 ## Create a new column which contains Genus species for the combined species above, 
 ## based on the Clements name. Here we assign the Clements name.
@@ -811,7 +811,8 @@ ca.conus.splist$common_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo
 #ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU.combo == 34660] <- "Empidonax alnorum / traillii"
 #ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU.combo == 34810] <- "Aphelocoma californica / woodhouseii"
 #ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU.combo == 35740] <- "Artemisiospiza nevadensis / belli"
-#ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU.combo == 34880] <- "Corvus brachyrhynchos" - done above
+ca.conus.splist$common_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 34880] <- "American Crow"
+ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 34880] <- "Corvus brachyrhynchos"
 ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 31690] <- "Anser caerulescens"
 ca.conus.splist$common_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 31690] <- "Snow Goose"
 
@@ -835,7 +836,7 @@ dim(ca.conus.splist.knownsp1) # 683 without "unid." and "sp."
 # Any remaining species are either full species or hybrid.
 
 # The number of unique species is: 
-length(unique(ca.conus.splist$scientific_name_clements2024)) #776
+length(unique(ca.conus.splist$scientific_name_clements2024)) #777
 length(unique(ca.conus.splist$scientific_name_clements2024.combo)) #760
 length(unique(ca.conus.splist$common_name_clements2024)) # 770
 length(unique(ca.conus.splist$common_name_clements2024.combo)) # 760
@@ -847,7 +848,7 @@ ca.conus.splist$scientific_name_clements2024[duplicated(ca.conus.splist$scientif
 ca.conus.splist$common_name_clements2024.combo[duplicated(ca.conus.splist$common_name_clements2024.combo)]
 ca.conus.splist$scientific_name_clements2024.combo[duplicated(ca.conus.splist$scientific_name_clements2024.combo)]
 
-# --- Export the final 785 rows (776 species including subspecies) for the CANADA & CONUS subset as a CSV (this includes unid. and sp.)
+# --- Export the final 785 rows (777 species including subspecies) for the CANADA & CONUS subset as a CSV (this includes unid. and sp.)
 write_csv(ca.conus.splist, file.path(L1_dir,"canada.conus.splist_L1.csv"))
 
 #--- Export the final 785 rows for the CANADA & CONUS subset as a CSV without extra columns
@@ -859,4 +860,4 @@ splist_CanadaAKCONUS_L1<-subset(ca.conus.splist, select=c("scientific_name_cleme
                                                           "scientific_name_bbs2024",
                                                           "AOU_bbs2024",
                                                           "in_bbs2024"))
-write_csv(splist_CanadaAKCONUS_L1, file.path(L1_dir,"../splist_CanadaAKCONUS_L1.csv"))
+write_csv(splist_CanadaAKCONUS_L1, file.path(L1_dir,"splist_CanadaAKCONUS_L1.csv"))
