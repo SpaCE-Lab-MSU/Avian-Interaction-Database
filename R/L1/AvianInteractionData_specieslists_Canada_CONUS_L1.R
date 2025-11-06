@@ -799,3 +799,13 @@ dim(ca.conus.splist.knownsp1) # 682 without "unid." and "sp."
 # --- Export the final 783 species CANADA & CONUS subset as a CSV
 write_csv(ca.conus.splist, file.path(L1_dir,"canada.conus.splist_L1.csv"))
 
+#--- Export the final 783 species CANADA & CONUS subset as a CSV without extra columns
+splist_CanadaAKCONUS_L1<-subset(ca.conus.splist, select=c("scientific_name_clements2024.combo",
+                                                          "common_name_clements2024.combo",
+                                                          "AOU_bbs2024.combo",
+                                                          "scientific_name_clements2024",
+                                                          "common_name_clements2024",
+                                                          "scientific_name_bbs2024",
+                                                          "AOU_bbs2024",
+                                                          "in_bbs2024"))
+write_csv(splist_CanadaAKCONUS_L1, file.path(L1_dir,"../splist_CanadaAKCONUS_L1.csv"))
