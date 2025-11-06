@@ -9,7 +9,7 @@ format:
     toc-depth: 3
     embed-resources: true
 editor: source
-date: 10/26/2025
+date: 11/06/2025
 date-format: iso
 ---
 

@@ -9,7 +9,7 @@ format:
     toc-depth: 3
     embed-resources: true
 editor: source
-date: 10/26/2025
+date: 11/06/2025
 date-format: iso
 ---
 
@@ -34,6 +34,8 @@ cleaning but taxonomic names as entered (older names, typos, etc)
 ( output From `R/L1/AvianInteractionData_L1.R` )
 
 ```{r}
+# Clear all existing data
+rm(list=ls())
 
 AvianInteractionData_L1_file <-  "AvianInteractionData_L1.csv"
 
@@ -45,7 +47,7 @@ Curated Species checklist:
 
 - Current selected species list for Canada/Alaska/CONUS =
   combined checklist based on Clements/eBird v2024, Avibase v8.17, BBS v2024:
- ( output via Working repo, from `R/L1/AvianInteractionData_specieslists_Canada_CONUS_L1.R` ) = canada.conus.splist_L1.CSV
+ ( output via Working repo, from `R/L1/AvianInteractionData_specieslists_Canada_CONUS_L1.R` ) = splist_CanadaAKCONUS_L1.csv
 
 
 ### DATA OUTPUT:
@@ -56,7 +58,6 @@ L1 Canada, Alaska, CONUS species from L1 Avian Interaction Database
 ```{r}
 AvianInteractionData_CanadaAKCONUS_L1_file <- "AvianInteractionData_CanadaAKCONUS_L1.csv"
 AvianInteractionData_CanadaAKCONUS_breeding_file <- "AvianInteractionData_CanadaAKCONUS_breeding_L1.csv"
-splist_CanadaAKCONUS_L1_file <- "splist_CanadaAKCONUS_L1.csv"
 AvianInteractionData_L1_not_CanadaAKCONUS_file <- 
   "AvianInteractionData_L1_not_CanadaAKCONUS.csv"
 today_date_string <- format(Sys.Date(),"%Y-%m-%d")
@@ -109,7 +110,7 @@ See `R/L1/AvianInteractionData_specieslists_Canada_CONUS_L1.R`
 
 ```{r}
 
-current_species_list_filename <- "canada.conus.splist_L1.csv"
+current_species_list_filename <- "splist_CanadaAKCONUS_L1.csv"
 splist_filepath <- file.path(file_paths$L1,"species_checklists",current_species_list_filename )
 splist <- read.csv(splist_filepath)
 print(paste("Read in ", nrow(splist), "entries from checklist file", splist_filepath))
@@ -133,8 +134,8 @@ print(paste("read in ", nrow(intxns.db), "records from ", intxns.db.file))
 
 Use scientific_name_clements2024 as the match for names.
 ```{r}
-length(unique(splist$scientific_name_clements2024))
-dim(splist) #783
+length(unique(splist$scientific_name_clements2024)) #777
+dim(splist) #785
 dim(intxns.db) #31040
 # Some duplicate rows; these are just the unids. so we can ignore them
 duplicate_indices <- duplicated(splist$scientific_name_clements2024)
@@ -142,7 +143,7 @@ duplicate_clements <- splist[duplicate_indices, ]
 duplicate_clements
 
 intxns.db.subset <- intxns.db[intxns.db$species1_scientific %in% splist$scientific_name_clements2024 | intxns.db$species2_scientific %in% splist$scientific_name_clements2024,]
-dim(intxns.db.subset)
+dim(intxns.db.subset) #26200
 
 intxns.db.non.subset <- intxns.db[!(intxns.db$species1_scientific %in% splist$scientific_name_clements2024 | intxns.db$species2_scientific %in% splist$scientific_name_clements2024),]
 dim(intxns.db.non.subset)
@@ -153,7 +154,7 @@ dim(intxns.db)
 usp1<-(unique(intxns.db.subset$species1_scientific))
 usp2<-(unique(intxns.db.subset$species2_scientific))
 usp1.2<-append(usp1,usp2)
-length(unique(usp1.2)) #2138 unique species in the interaction data
+length(unique(usp1.2)) #2139 unique species in the interaction data
 
 # Create a simplified Clements/eBird BBS AOU combo splist:
 splist<-splist %>%
@@ -209,7 +210,7 @@ Version with only breeding season interactions:
 intxns.db.subset.breeding <- intxns.db.subset %>%
   filter(season == "breeding")
 dim(intxns.db.subset.breeding) #23160
-dim(intxns.db.subset) #26196
+dim(intxns.db.subset) #26200
 
 # Summary table
 unique_counts_multi.b <- purrr::map_dfr(
@@ -244,11 +245,6 @@ print(fb)
 fx <- file.path(file_paths$L1, AvianInteractionData_L1_not_CanadaAKCONUS_file )
 write_csv(intxns.db.non.subset, fx)
 print(fx)
-
-## @billspat: how to move this to L1/species_checklists/ ??
-s <- file.path(file_paths$L1, splist_CanadaAKCONUS_L1_file )
-write_csv(splist, s)
-print(s)
 
 ```
 
