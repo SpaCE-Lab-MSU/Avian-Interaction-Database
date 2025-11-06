@@ -88,6 +88,32 @@ bbs2024$French_Common_Name<-NULL
 bbs2024 <- bbs2024 %>% arrange(scientific_name)
 head(bbs2024)
 
+# From a subsequent analysis, we learned that these species exist in the 
+# 1966-2023 BBS observational data but are not included on the BBS list because they have
+# been combined into American Crow. Here we add those 2 species to ensure the splist 
+# creation goes smoothly; later we assign all species to American Crow and its AOU.combo.
+
+# 4890	Corvus caurinus	34880	Corvus brachyrhynchos	(Northwestern Crow) American Crow
+# 4882	Corvus brachyrhynchos / caurinus	34880	Corvus brachyrhynchos	unid. American Crow / Northwestern Crow
+# 4882: Since either species is now Corvus brachyrhynchos we will make them a combo species with American Crow.
+# 4890: Assign the Corvus caurinus to American crow (Corvus brachyrhynchos); this should be fixed in the creation of the list but for now we do it here.
+# Add 2 new rows to the end
+bbs2024 <- bbs2024 %>%
+  add_row(AOU = 4890, 
+          common_name = "Northwestern Crow",
+          order = "Passeriformes",
+          family = "Corvidae",
+          scientific_name = "Corvus caurinus",
+          list = "BBS 2024")
+
+bbs2024 <- bbs2024 %>%
+  add_row(AOU = 4882, 
+          common_name = "unid. American Crow / Northwestern Crow",
+          order = "Passeriformes",
+          family = "Corvidae",
+          scientific_name = "Corvus brachyrhynchos / caurinus",
+          list = "BBS 2024")
+
 # Merge the datasets so we create a master lookup table of different names.
 # Function to normalize names for joining
 normalize_name <- function(x) {
@@ -181,9 +207,9 @@ master3 <- master2 %>%
 
 # --- Check output ---
 head(master3) 
-dim(master2) #35708
-dim(master3) #35708
-dim(master3)-dim(clements2024) #112 that differ
+dim(master2) #35710
+dim(master3) #35710
+dim(master3)-dim(clements2024) #114 rows that are not matching correctly with Clements 2024 names
 
 # Remove the ; if it doesn't have any info after it or before it.
 # Helper: remove semicolons only at the edges of a cell
@@ -210,7 +236,7 @@ master5 <- master4 %>%
   group_by(scientific_name) %>%
   summarise(across(everything(), ~ paste(unique(na.omit(.)), collapse = "; "), .names = "{.col}"),
             .groups = "drop")
-dim(master5)-dim(clements2024) #38 that still differ
+dim(master5)-dim(clements2024) #40 that still differ
 # View the values of a column that should have semicolons added
 unique(master4$in_bbs2024)
 unique(master5$in_bbs2024) # worked.
@@ -359,9 +385,9 @@ name_map <- tribble(
   "Colaptes auratus auratus x auratus cafer",      "hybrid Northern Flicker (Red x Yellow-shafted)",    "Colaptes auratus luteus x cafer",  "Northern Flicker (Yellow-shafted x Red-shafted)",
   "Coragyps/Cathartes atratus/aura",      "unid. Black Vulture/Turkey Vulture",     "Cathartes sp.",  "Cathartes sp.",
   #  https://birdsoftheworld.org/bow/species/amecro/cur/introduction: Published August 8, 2025. Until recently, the American Crow in the northwest was classified as a separate species ("Northwestern Crow," Corvus caurinus), but because of extensive interbreeding with the Western American Crow (C. brachyrhynchos hesperis) in areas of co-occurrence, those in the northwest are now considered a subspecies of the American Crow (C. b. caurinus). We will assign all to American Crow.
-  #  No common name in Clements for this species.
-  "Corvus brachyrhynchos/caurinus",      "unid. American Crow/Northwestern Crow",     "Corvus brachyrhynchos",  "American Crow",  
-  "Corvus caurinus",      "Northwestern Crow",     "Corvus brachyrhynchos",  "American Crow",  
+  #  No common name in Clements for this species; assign American Crow (but this is done farther below, not here, as this step would omit a row)
+  #"Corvus brachyrhynchos/caurinus",      "unid. American Crow/Northwestern Crow",     "Corvus brachyrhynchos",  "American Crow",  
+  #"Corvus caurinus",      "Northwestern Crow",     "Corvus brachyrhynchos",  "American Crow",  
   "Corvus cryptoleucus/corax",      "unid. Chihuahuan Raven/Common Raven",     "Corvus cryptoleucus/corax",  "Chihuahuan Raven/Common Raven",  
   "Cyanecula svecica",      "Bluethroat",     "Luscinia svecica",  "Bluethroat",
   "Empidonax difficilis/occidentalis",      "unid. Cordilleran/Pacific-slope Flycatcher",     "Empidonax difficilis occidentalis/hellmayri",  "Western Flycatcher (Cordilleran)",
@@ -432,7 +458,8 @@ remaining_na <- df %>%
   arrange(scientific_name)
 
 cat("\n--- Species with NA in scientific_name_clements2024 ---\n")
-print(remaining_na) #9 rows; these include 'unid' and some rows that need manual edits
+print(remaining_na) #11 rows
+# these include 'unid' and some rows that need manual edits like Northwestern Crow
 
 # 2) Rows with semicolons in either name (for inspection); these are the species
 #  with 2 or more names in the dataset
@@ -443,7 +470,7 @@ semicolon_rows <- df %>%
   arrange(scientific_name)
 
 cat("\n--- Species with ';' in scientific_name or common_name ---\n")
-print(semicolon_rows) #98 rows
+print(semicolon_rows) #99 rows
 
 # 3) Mismatches (combined names vs Clements) — expected when aliases exist
 name_mismatches <- df %>%
@@ -454,14 +481,14 @@ name_mismatches <- df %>%
   arrange(scientific_name)
 
 cat("\n--- Rows where names do not match *_clements2024 ---\n")
-print(name_mismatches) # these are the same 98; makes sense.
+print(name_mismatches) # these are the same 99; makes sense.
 
 # Check that the row that differ among initial data and modified make sense.
 ## Subset to rows with non-NA regions_avibase8.17 (which are Canada & CONUS)
 ca.conus.sp <- subset(df, !is.na(df[["regions_avibase8.17"]]))
 dim(avibase)-dim(ca.conus.sp) # no lost species
 bbs.sp <- subset(df, !is.na(df[["scientific_name_bbs2024"]]))
-dim(bbs2024)-dim(bbs.sp) # no lost species 
+dim(bbs2024)-dim(bbs.sp) # 0 lost species 
 
 # **** FOR LATER/when editing for Western Hemisphere: re-write above section to automatically check that the rows are the ones with the semicolons, by initial dataset.
 
@@ -499,7 +526,7 @@ df_avibase_region <- df %>%
   filter(!is.na(regions_avibase8.17) & regions_avibase8.17 != "")
 
 # --- Quick confirmations ---
-cat("Number of rows in df:", nrow(df), "\n") # 35604
+cat("Number of rows in df:", nrow(df), "\n") # 35606
 cat("Number of rows with region_avibase8.17:", nrow(df_avibase_region), "\n\n") #1104 with correct Canada list: #1104
 
 cat("Counts for in_* flags:\n")
@@ -512,15 +539,15 @@ for (in_col in unique(unname(map_lookup_to_in))) {
 }
 #in_avibase8.17 :
 #   no   yes 
-# 34500  1104 
+# 34502  1104 
 # 
 # in_bbs2024 :
 #   no   yes 
-# 34841   763 
+# 34841   765 
 # 
 # in_clements2024 :
 #   no   yes 
-# 9 35595 
+# 11 35595 
 
 # Keep all the BBS species, and also the AviBase species that are in Canada and CONUS
 # ---- Final subsetting ----
@@ -560,7 +587,7 @@ df.ca.conus$status_CA_US48_USak[df.ca.conus$status_CA_US48_USak == "" | df.ca.co
 df_bbs_or_avibase <- df.ca.conus %>%
   filter(!is.na(scientific_name_bbs2024) | !is.na(status_CA_US48_USak)) 
 
-dim(df_bbs_or_avibase) #1162 rows
+dim(df_bbs_or_avibase) #1164 rows
 
 # 3. Subset further: drop "Rare" rows, but always keep rows with non-NA scientific_name_bbs2024
 # Where at least one of the 3 areas has the species as Rare (this is too strict):
@@ -580,7 +607,7 @@ df_bbs_or_avibase_no_rare <- df_bbs_or_avibase %>%
 # indicate these remaining should be kept for ca.conus subset
 df_bbs_or_avibase_no_rare$L1_ca.conus.data<-"yes"
 
-dim(df_bbs_or_avibase_no_rare) #1119
+dim(df_bbs_or_avibase_no_rare) #1121
 
 # Now work on omitting some of these species because they do not occur in Canada/CONUS continent.
 # To do this, create a subset for the omissions.
@@ -635,7 +662,7 @@ ca.conus.splist <- merge(df_bbs_or_avibase_no_rare,df_bbs_or_avibase_no_rare1a,
                          by=c("scientific_name","common_name","scientific_name_avibase8.17",
                               "common_name_avibase8.17","order_avibase8.17","family_avibase8.17"),
                          all.x=T, all.Y=T)
-dim(ca.conus.splist) # 1119
+dim(ca.conus.splist) # 1121
 # Fill in blank "keep" with "y"
 ca.conus.splist <- ca.conus.splist %>%
   mutate(keep = replace_na(keep, "y"))
@@ -643,7 +670,7 @@ unique(ca.conus.splist$keep)
 # Omit the species where keep="n"
 ca.conus.splist <- ca.conus.splist %>%
   filter(keep !="n")
-dim(ca.conus.splist) #783 species
+dim(ca.conus.splist) #785 species
 # drop the 'keep' column
 ca.conus.splist$keep<-NULL
 
@@ -746,6 +773,17 @@ ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4890] <- 34880
 ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 1690] <- 31690
 ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 1691] <- 31690
 
+# Add Clements name for Northwestern Crow:
+#  https://birdsoftheworld.org/bow/species/amecro/cur/introduction: Published August 8, 2025. 
+# Until recently, the American Crow in the northwest was classified as a separate species ("Northwestern Crow," Corvus caurinus), but because of extensive interbreeding with the Western American Crow (C. brachyrhynchos hesperis) in areas of co-occurrence, those in the northwest are now considered a subspecies of the American Crow (C. b. caurinus). We will assign all to American Crow.
+#  No common name in Clements for this species; assign American Crow 
+#"Corvus brachyrhynchos/caurinus",      "unid. American Crow/Northwestern Crow",     "Corvus brachyrhynchos",  "American Crow",  
+#"Corvus caurinus",      "Northwestern Crow",     "Corvus brachyrhynchos",  "American Crow",  
+ca.conus.splist$scientific_name_clements2024[ca.conus.splist$scientific_name == "Corvus brachyrhynchos/caurinus"] <- "Corvus brachyrhynchos"
+ca.conus.splist$common_name_clements2024[ca.conus.splist$common_name == "unid. American Crow/Northwestern Crow"] <- "American Crow"
+ca.conus.splist$scientific_name_clements2024[ca.conus.splist$scientific_name == "Corvus caurinus"] <- "Corvus brachyrhynchos"
+ca.conus.splist$common_name_clements2024[ca.conus.splist$common_name == "Northwestern Crow"] <- "American Crow"
+
 ## Create a new column which contains Genus species for the combined species above, 
 ## based on the Clements name. Here we assign the Clements name.
 ca.conus.splist$scientific_name_clements2024.combo<-ca.conus.splist$scientific_name_clements2024
@@ -773,7 +811,7 @@ ca.conus.splist$common_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo
 #ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU.combo == 34660] <- "Empidonax alnorum / traillii"
 #ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU.combo == 34810] <- "Aphelocoma californica / woodhouseii"
 #ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU.combo == 35740] <- "Artemisiospiza nevadensis / belli"
-#ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU.combo == 34880] <- "Corvus brachyrhynchos"
+#ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU.combo == 34880] <- "Corvus brachyrhynchos" - done above
 ca.conus.splist$scientific_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 31690] <- "Anser caerulescens"
 ca.conus.splist$common_name_clements2024.combo[ca.conus.splist$AOU_bbs2024.combo == 31690] <- "Snow Goose"
 
@@ -785,21 +823,34 @@ sp.exclude <- "sp."
 # Filter out rows containing the string and count the remaining rows
 ca.conus.splist.knownsp <- ca.conus.splist %>%
   filter(!str_detect(common_name_bbs2024, unid_exclude)) 
-sum(grepl(unid_exclude, ca.conus.splist$common_name_bbs2024)) # 67 unique "unid."
-dim(ca.conus.splist.knownsp) # 696 without "unid."
-dim(ca.conus.splist)-dim(ca.conus.splist.knownsp) # 87 rows of "unid."
+sum(grepl(unid_exclude, ca.conus.splist$common_name_bbs2024)) # 68 unique "unid."
+dim(ca.conus.splist.knownsp) # 697 without "unid."
+dim(ca.conus.splist)-dim(ca.conus.splist.knownsp) # 88 rows of "unid."
 
 ca.conus.splist.knownsp1 <- ca.conus.splist.knownsp %>%
   filter(!str_detect(common_name_clements2024, sp.exclude)) 
 sum(grepl(sp.exclude, ca.conus.splist$common_name_clements2024)) # 24 unique "unid."
-dim(ca.conus.splist.knownsp1) # 682 without "unid." and "sp."
+dim(ca.conus.splist.knownsp1) # 683 without "unid." and "sp."
 
 # Any remaining species are either full species or hybrid.
 
-# --- Export the final 783 species CANADA & CONUS subset as a CSV
+# The number of unique species is: 
+length(unique(ca.conus.splist$scientific_name_clements2024)) #776
+length(unique(ca.conus.splist$scientific_name_clements2024.combo)) #760
+length(unique(ca.conus.splist$common_name_clements2024)) # 770
+length(unique(ca.conus.splist$common_name_clements2024.combo)) # 760
+# Some species lack a common name and American Crow is twice because of the 
+# merging of Northwestern and American Crows:
+ca.conus.splist$common_name_clements2024[duplicated(ca.conus.splist$common_name_clements2024)]
+ca.conus.splist$scientific_name_clements2024[duplicated(ca.conus.splist$scientific_name_clements2024)]
+# These are the species combos assigned above:
+ca.conus.splist$common_name_clements2024.combo[duplicated(ca.conus.splist$common_name_clements2024.combo)]
+ca.conus.splist$scientific_name_clements2024.combo[duplicated(ca.conus.splist$scientific_name_clements2024.combo)]
+
+# --- Export the final 785 rows (776 species including subspecies) for the CANADA & CONUS subset as a CSV (this includes unid. and sp.)
 write_csv(ca.conus.splist, file.path(L1_dir,"canada.conus.splist_L1.csv"))
 
-#--- Export the final 783 species CANADA & CONUS subset as a CSV without extra columns
+#--- Export the final 785 rows for the CANADA & CONUS subset as a CSV without extra columns
 splist_CanadaAKCONUS_L1<-subset(ca.conus.splist, select=c("scientific_name_clements2024.combo",
                                                           "common_name_clements2024.combo",
                                                           "AOU_bbs2024.combo",
