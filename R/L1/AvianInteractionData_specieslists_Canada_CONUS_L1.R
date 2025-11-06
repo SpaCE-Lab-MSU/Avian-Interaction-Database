@@ -21,7 +21,7 @@
 #                     all from AvianInteractionData_specieslists_L0.R
 # DATA OUTPUT:    L1 data: canada.conus.splist_L1.CSV 
 # PROJECT:        Avian Interaction Database & avian-meta-network
-# DATE:           17 January 2022 - 17 Sep 2025
+# DATE:           17 January 2022 - 5 Nov 2025
 #                 
 #                 Next script to run: AvianInteractionData_L1.R
 
@@ -31,7 +31,6 @@ rm(list=ls())
 #Load packages
 library(tidyverse)
 library(stringr)
-#library(purrr)
 
 # Local directories
 L0_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database-Working/L0/species_checklists"
@@ -359,10 +358,10 @@ name_map <- tribble(
   "Chrysococcyx ruficollis",      "Rufous-throated Bronze Cuckoo",     "Chalcites ruficollis",  "Rufous-throated Bronze-Cuckoo", 
   "Colaptes auratus auratus x auratus cafer",      "hybrid Northern Flicker (Red x Yellow-shafted)",    "Colaptes auratus luteus x cafer",  "Northern Flicker (Yellow-shafted x Red-shafted)",
   "Coragyps/Cathartes atratus/aura",      "unid. Black Vulture/Turkey Vulture",     "Cathartes sp.",  "Cathartes sp.",
-  #  https://birdsoftheworld.org/bow/species/amecro/cur/introduction: Published August 8, 2025. Until recently, the American Crow in the northwest was classified as a separate species ("Northwestern Crow," Corvus caurinus), but because of extensive interbreeding with the Western American Crow (C. brachyrhynchos hesperis) in areas of co-occurrence, those in the northwest are now considered a subspecies of the American Crow (C. b. caurinus). 
+  #  https://birdsoftheworld.org/bow/species/amecro/cur/introduction: Published August 8, 2025. Until recently, the American Crow in the northwest was classified as a separate species ("Northwestern Crow," Corvus caurinus), but because of extensive interbreeding with the Western American Crow (C. brachyrhynchos hesperis) in areas of co-occurrence, those in the northwest are now considered a subspecies of the American Crow (C. b. caurinus). We will assign all to American Crow.
   #  No common name in Clements for this species.
-  "Corvus brachyrhynchos/caurinus",      "unid. American Crow/Northwestern Crow",     "Corvus brachyrhynchos caurinus",  NA,  
-  "Corvus caurinus",      "Northwestern Crow",     "Corvus brachyrhynchos caurinus",  NA,  
+  "Corvus brachyrhynchos/caurinus",      "unid. American Crow/Northwestern Crow",     "Corvus brachyrhynchos",  "American Crow",  
+  "Corvus caurinus",      "Northwestern Crow",     "Corvus brachyrhynchos",  "American Crow",  
   "Corvus cryptoleucus/corax",      "unid. Chihuahuan Raven/Common Raven",     "Corvus cryptoleucus/corax",  "Chihuahuan Raven/Common Raven",  
   "Cyanecula svecica",      "Bluethroat",     "Luscinia svecica",  "Bluethroat",
   "Empidonax difficilis/occidentalis",      "unid. Cordilleran/Pacific-slope Flycatcher",     "Empidonax difficilis occidentalis/hellmayri",  "Western Flycatcher (Cordilleran)",
@@ -737,9 +736,15 @@ ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4642] <- 34641
 # ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4882] <- 34880
 # ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4890] <- 34880
 
+# 34880                           American / Northwestern Crow; same species in Clements 
+# 04880 04882 04890
+ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4880] <- 34880
+ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4882] <- 34880
+ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4890] <- 34880
+
 # Snow Goose (Blue and regular form)
-ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == "1690"] <- 31690
-ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == "1691"] <- 31690
+ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 1690] <- 31690
+ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 1691] <- 31690
 
 ## Create a new column which contains Genus species for the combined species above, 
 ## based on the Clements name. Here we assign the Clements name.
