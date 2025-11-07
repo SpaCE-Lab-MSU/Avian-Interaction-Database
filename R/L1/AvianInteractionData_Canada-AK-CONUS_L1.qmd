@@ -154,7 +154,7 @@ dim(intxns.db)
 usp1<-(unique(intxns.db.subset$species1_scientific))
 usp2<-(unique(intxns.db.subset$species2_scientific))
 usp1.2<-append(usp1,usp2)
-length(unique(usp1.2)) #2139 unique species in the interaction data
+length(unique(usp1.2)) #2137 unique species in the interaction data
 
 # Create a simplified Clements/eBird BBS AOU combo splist:
 splist<-splist %>%
@@ -209,7 +209,7 @@ Version with only breeding season interactions:
 # Subset rows where 'season' is "breeding"
 intxns.db.subset.breeding <- intxns.db.subset %>%
   filter(season == "breeding")
-dim(intxns.db.subset.breeding) #23160
+dim(intxns.db.subset.breeding) #23164
 dim(intxns.db.subset) #26200
 
 # Summary table
