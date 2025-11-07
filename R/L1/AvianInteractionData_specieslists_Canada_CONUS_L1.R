@@ -19,7 +19,7 @@
 #                         eBird-Clements-v2024-integrated-checklist-October-2024-rev.csv,
 #                         bbs_splist_2024_L0.csv
 #                     all from AvianInteractionData_specieslists_L0.R
-# DATA OUTPUT:    L1 data: canada.conus.splist_L1.CSV 
+# DATA OUTPUT:    L1 data: canada.conus.splist_L1.CSV; splist_CanadaAKCONUS_L1.csv (column subset) 
 # PROJECT:        Avian Interaction Database & avian-meta-network
 # DATE:           17 January 2022 - 5 Nov 2025
 #                 
@@ -756,13 +756,6 @@ ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4642] <- 34641
 # ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 5739] <- 35740
 # ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 5740] <- 35740
 
-# 34880                           American / Fish Crow; separate species in Clements so keep as separate
-# 04880 04880 04882 04890
-# ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4880] <- 34880
-# ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4880] <- 34880
-# ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4882] <- 34880
-# ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4890] <- 34880
-
 # 34880                           American / Northwestern Crow; same species in Clements 
 # 04880 04882 04890
 ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4880] <- 34880
@@ -782,7 +775,9 @@ ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 1691] <- 31690
 ca.conus.splist$scientific_name_clements2024[ca.conus.splist$scientific_name == "Corvus brachyrhynchos/caurinus"] <- "Corvus brachyrhynchos"
 ca.conus.splist$common_name_clements2024[ca.conus.splist$common_name == "unid. American Crow/Northwestern Crow"] <- "American Crow"
 ca.conus.splist$scientific_name_clements2024[ca.conus.splist$scientific_name == "Corvus caurinus"] <- "Corvus brachyrhynchos caurinus"
-# There is no common name for the subspecies in Clements. 
+# There is no common name for the subspecies in Clements, but it exists in BBS obs data
+# so we will assign it American Crow here. 
+ca.conus.splist$common_name_clements2024[ca.conus.splist$scientific_name_clements2024 == "Corvus brachyrhynchos caurinus"] <- "American Crow"
 
 ## Create a new column which contains Genus species for the combined species above, 
 ## based on the Clements name. Here we assign the Clements name.
