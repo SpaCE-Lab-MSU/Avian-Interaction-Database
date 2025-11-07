@@ -1699,6 +1699,20 @@ print(length(updated_rows))
 
 Review the updated database using `View(int.raw.resolved)`  The original is still in `int.raw`
 
+11/6/2025: STILL NOT CHANGING Northwestern Crow to American Crow!!! I cannot figure this out. Hard-coding here.
+```{r}
+int.raw.resolved
+
+int.raw.resolved$species1_scientific[int.raw.resolved$species1_common == "Northwestern Crow"] <- "Corvus brachyrhynchos"
+int.raw.resolved$species1_common[int.raw.resolved$species1_common == "Northwestern Crow"] <- "American Crow"
+int.raw.resolved$species2_scientific[int.raw.resolved$species2_common == "Northwestern Crow"] <- "Corvus brachyrhynchos"
+int.raw.resolved$species2_common[int.raw.resolved$species2_common == "Northwestern Crow"] <- "American Crow"
+int.raw.resolved$species1_scientific[int.raw.resolved$species1_scientific == "Corvus brachyrhynchos caurinus"] <- "Corvus brachyrhynchos"
+int.raw.resolved$species1_common[int.raw.resolved$species1_scientific == "Corvus brachyrhynchos"] <- "American Crow"
+int.raw.resolved$species2_scientific[int.raw.resolved$species2_scientific == "Corvus brachyrhynchos caurinus"] <- "Corvus brachyrhynchos"
+int.raw.resolved$species2_common[int.raw.resolved$species2_scientific == "Corvus brachyrhynchos"] <- "American Crow"
+```
+
 ```{r}
 # after review, copy int.raw.resolved to main variable 
 
@@ -1714,9 +1728,9 @@ print(length(union(int.raw$species1_scientific, int.raw$species2_scientific)))
 
 
 print("unique types of interactions")
-print(length(unique(int.raw$interaction)))
+print(length(unique(int.raw$interaction))) #36
 
-print("unique pairwise interactions")
+print("unique pairwise interactions") #19417
 
 # if you want to ignore the order of species, we will need to create pairs and sort them
 # some sample code saved here to consider: 
