@@ -1,0 +1,65 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "The Avian Interaction Database",
+    "section": "",
+    "text": "Blurb about the project."
+  },
+  {
+    "objectID": "index.html#quarto",
+    "href": "index.html#quarto",
+    "title": "The Avian Interaction Database",
+    "section": "",
+    "text": "Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see https://quarto.org."
+  },
+  {
+    "objectID": "index.html#running-code",
+    "href": "index.html#running-code",
+    "title": "The Avian Interaction Database",
+    "section": "Running Code",
+    "text": "Running Code\nWhen you click the Render button a document will be generated that includes both content and the output of embedded code. You can embed code like this:\n\n1 + 1\n\n[1] 2\n\n\nYou can add options to executable code like this\n\n\n[1] 4\n\n\nThe echo: false option disables the printing of code (only output is displayed)."
+  },
+  {
+    "objectID": "index.html#developing-the-most-complete-network-of-interactions-among-the-birds-of-the-western-hemisphere.",
+    "href": "index.html#developing-the-most-complete-network-of-interactions-among-the-birds-of-the-western-hemisphere.",
+    "title": "The Avian Interaction Database",
+    "section": "Developing the most complete network of interactions among the birds of the Western Hemisphere.",
+    "text": "Developing the most complete network of interactions among the birds of the Western Hemisphere."
+  },
+  {
+    "objectID": "team.html#team",
+    "href": "team.html#team",
+    "title": "Meet the Team",
+    "section": "",
+    "text": "We are a collaborative group of ecologists, data scientists, and software developers working together to build and maintain the Avian Interaction Database.\n\n\n\n\n\n\n\n\n\n\n\n\n\nPhoebe Zarnetske\n\n\nPrincipal Investigator\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nKelly Kapsar\n\n\nData Manager\n\n\n\n\n\n\n\n\n\n\n\nLucas Mansfield\n\n\nPhD Student\n\n\n\n\n\n\n\n\n\n\n\n\n\nMinyoung Lee\n\n\nPostdoctoral Researcher\n\n\n\n\n\n\n\n\n\n\n\n\n\nJenna Baljunas\n\n\nPhD Student"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About the Project",
+    "section": "",
+    "text": "Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see https://quarto.org."
+  },
+  {
+    "objectID": "about.html#quarto",
+    "href": "about.html#quarto",
+    "title": "About the Project",
+    "section": "",
+    "text": "Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see https://quarto.org."
+  },
+  {
+    "objectID": "about.html#running-code",
+    "href": "about.html#running-code",
+    "title": "About the Project",
+    "section": "Running Code",
+    "text": "Running Code\nWhen you click the Render button a document will be generated that includes both content and the output of embedded code. You can embed code like this:\n\n1 + 1\n\n[1] 2\n\n\nYou can add options to executable code like this\n\n\n[1] 4\n\n\nThe echo: false option disables the printing of code (only output is displayed)."
+  },
+  {
+    "objectID": "team.html",
+    "href": "team.html",
+    "title": "Meet the Team",
+    "section": "",
+    "text": "We are a collaborative group of data-minded ecologists working together to build and maintain the Avian Interaction Database.\n\n\n\n\n\n\n\n\n\n\n\n\n\nPhoebe Zarnetske\n\n\nPrincipal Investigator\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nKelly Kapsar\n\n\nData Manager\n\n\n\n\n\n\n\n\n\n\n\nLucas Mansfield\n\n\nPhD Student\n\n\n\n\n\n\n\n\n\n\n\n\n\nMinyoung Lee\n\n\nPostdoctoral Researcher\n\n\n\n\n\n\n\n\n\n\n\n\n\nJenna Baljunas\n\n\nPhD Student"
+  }
+]

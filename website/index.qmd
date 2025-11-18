@@ -1,0 +1,17 @@
+---
+title: "The Avian Interaction Database"
+subtitle: "A project from the [SpaCE Lab](https://www.communityecologylab.com/)"
+format: html
+editor: visual
+title-block-banner: images/bird-telephone-banner.jpg
+---
+
+## 
+
+::: {style="text-align: center"}
+## Developing the most complete network of interactions among the birds of the Western Hemisphere.
+:::
+
+Blurb about the project.
+
+![](images/pelican.jpg){fig-align="right" width="372"}

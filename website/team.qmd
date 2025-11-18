@@ -1,0 +1,178 @@
+---
+title: "Meet the Team"
+---
+
+::: {.text-center .mb-4}
+We are a collaborative group of data-minded ecologists working together to build and maintain the Avian Interaction Database.
+:::
+
+<br>
+
+
+:::{layout-ncol=3}
+
+:::{.left}
+:::
+
+:::{.center}
+
+
+
+
+
+::: {.col}
+::: {.card .h-100 .team-card}
+![](images/team/plzarnetske.png){.team-photo}
+
+::: {.card-body}
+<div class="team-name">Phoebe Zarnetske</div>
+<div class="team-role">Principal Investigator</div>
+<p class="card-text">
+</p>
+:::
+:::
+:::
+
+
+
+
+
+
+:::
+
+:::{.right}
+:::
+
+:::
+
+
+
+:::{layout-ncol=3}
+
+:::{.left}
+
+
+
+
+
+
+
+::: {.col}
+::: {.card .h-100 .team-card}
+![](images/team/kapsar.jpg){.team-photo}
+
+::: {.card-body}
+<div class="team-name">Kelly Kapsar</div>
+<div class="team-role">Data Manager</div>
+<p class="card-text">
+</p>
+:::
+:::
+:::
+
+
+
+
+
+::: {.col}
+::: {.card .h-100 .team-card}
+
+![](images/team/SpaCE_Lab_Lucas.jpg){.team-photo}
+
+::: {.card-body}
+<div class="team-name">Lucas Mansfield</div>
+<div class="team-role">PhD Student</div>
+
+<p class="card-text">
+</p>
+:::
+
+:::
+:::
+
+
+
+
+
+
+:::
+:::{.center}
+
+
+
+
+
+
+
+
+
+
+
+::: {.col}
+::: {.card .h-100 .team-card}
+![](images/team/Minyoung_profile.jpg){.team-photo}
+
+::: {.card-body}
+<div class="team-name">Minyoung Lee</div>
+<div class="team-role">Postdoctoral Researcher</div>
+<p class="card-text">
+</p>
+:::
+:::
+:::
+
+
+
+
+
+
+
+
+
+
+
+
+:::
+
+
+
+
+
+
+:::{.right}
+
+
+
+
+::: {.col}
+::: {.card .h-100 .team-card}
+![](images/team/Baljunas_profile.jpg){.team-photo}
+
+::: {.card-body}
+<div class="team-name">Jenna Baljunas</div>
+<div class="team-role">PhD Student</div>
+
+<p class="card-text">
+</p>
+:::
+:::
+:::
+
+
+
+
+
+
+
+
+
+:::
+
+
+
+
+
+
+
+
+:::

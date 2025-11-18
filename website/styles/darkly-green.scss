@@ -1,0 +1,88 @@
+/*-- scss:defaults --*/
+
+/* Base colors */
+$body-bg: #fff8de;        /* main page background */
+$body-color: #06150E;     /* default text color */
+
+/* Links */
+$link-color: #0E5116;        /* main link color */
+$link-hover-color: #0F300F;  /* darker on hover */
+
+/* Navbar */
+$navbar-bg: #06150E;         /* very dark green/black bar */
+$navbar-fg: #ffffff;
+$navbar-hover-bg: #0E5116;
+$navbar-brand-color: #ffffff;
+$navbar-nav-link-padding-x: 1rem;
+
+/* Buttons */
+$btn-border-radius: 999px; /* pill-shaped buttons, optional */
+
+/* Primary button – mid green */
+$btn-primary-bg: #0E5116;
+$btn-primary-border-color: #0E5116;
+$btn-primary-color: #ffffff;
+$btn-primary-hover-bg: #0F300F;
+$btn-primary-hover-border-color: #0F300F;
+
+/* Secondary button – light green */
+$btn-secondary-bg: #638959;
+$btn-secondary-border-color: #638959;
+$btn-secondary-color: #06150E;
+$btn-secondary-hover-bg: #0E5116;
+$btn-secondary-hover-border-color: #0E5116;
+
+/* Info/success (optional – reusing greens) */
+$success: #0E5116;
+$info: #638959;
+
+/* Cards / content blocks */
+$card-bg: rgba(255, 255, 255, 0.8);  /* slightly translucent light card */
+$card-border-color: #638959;
+$card-color: #06150E;
+
+/* Code blocks (optional subtle tweak) */
+$code-color: #0F300F;
+$code-bg: rgba(6, 21, 14, 0.07);
+
+
+/* Make the hero/banner taller */
+.quarto-title-block .quarto-title-banner {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
+/*-- scss:rules --*/
+
+/* Team cards */
+.team-card {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #06150E;
+  border-radius: 1rem;
+  border: 1px solid #638959;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* uniform image size & cropping */
+.team-photo {
+  width: 100%;
+  aspect-ratio: 2.5 / 3;      /* use 1 / 1 for square, if you prefer */
+  object-fit: cover;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+/* center text inside cards */
+.team-card .card-body {
+  text-align: center;
+}
+
+.team-name {
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.team-role {
+  font-style: italic;
+  margin-bottom: 0.5rem;
+}

@@ -1,0 +1,22 @@
+project:
+  type: website
+  output-dir: ../docs
+
+website:
+  title: "The Avian Interaction Database"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: about.qmd
+        text: About the Project
+      - href: team.qmd
+        text: Meet the Team
+
+format:
+  html:
+    theme:
+      - darkly
+      - styles/darkly-green.scss
+    toc: false
+    smooth-scroll: true
