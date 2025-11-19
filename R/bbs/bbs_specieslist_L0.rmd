@@ -1,25 +1,31 @@
 ---
-title: "BBS Species Updates Notebook"
-format: pdf
+title: "Avian Interaction Database L0 BBS Species List Data"
+author:  "Phoebe Zarnetske, Pat Bills"
+date: "`r Sys.Date()`"
+output: 
+html_notebook: default
+project: "Avian Interaction Database & avian-meta-network"
+collaborators: "Vincent Miele, Stephane Dray, Emily Parker, Kelly Kapsar"
 ---
 
-## L0 BBS Species List Data
+# L0 BBS Species List Data
+
+## Introduction
 
 Pulls in raw BBS SpeciesList from 2024 release (up to 2023 BBS data), so it can be used in avian-meta-network (align with intxnpairs data before merging in L2)
-PROJECT:        Avian Interaction Database & avian-meta-network
-AUTHORS:        Phoebe Zarnetske, Patrick Bills
-COLLABORATORS:  Vincent Miele, Stephane Dray, Emily Parker, Kelly Kapsar
-DATA INPUT:     Imports L0 raw species list data from the USGS North American Breeding Bird Survey (SpeciesList.txt is updated every year).
-without data
 
-Check differences from years of BBS species 
+PROJECT: Avian Interaction Database & avian-meta-network
+
+AUTHORS: Phoebe Zarnetske, Patrick Bills
+
+COLLABORATORS: Vincent Miele, Stephane Dray, Emily Parker, Kelly Kapsar
+
+DATA INPUT: Imports L0 raw species list data from the USGS North American Breeding Bird Survey (SpeciesList.txt is updated every year).  You can find the URL by going to the USGS bbs page
+https://www.sciencebase.gov/catalog/item/66d9ed16d34eef5af66d534b
 
 
-to develop taxonomic harmonization workflow
+Please see the R script file bbs_specieslist_L0_v2.R for the non-notebook, original form. 
 
-
-#   you can find the URL by going to the USGS bbs page
-#   https://www.sciencebase.gov/catalog/item/66d9ed16d34eef5af66d534b
 
 
 ```{r setup,message=FALSE, echo=FALSE}
@@ -52,8 +58,8 @@ encoding.2023$encoding[1]
 print(bbs.splist.2023.file)
 ```
 
-not sure why this isn't UTF8 unless this file was downloaded on a windows computer
-and saved here. 
+*not sure why this isn't UTF8 unless this file was downloaded on a windows computer
+and saved here.*
 
 read into a data frame and check it 
 ```{r}
@@ -62,7 +68,8 @@ bbs.splist.2023<-read.csv(bbs.splist.2023.file ,fileEncoding=encoding.2023$encod
 print(nrow(bbs.splist.2023))
 head(bbs.splist.2023)
 ```
-Read using re-useable function that also 
+
+Read using re-useable function that also checks if it's already downloaded
 
 ```{r}
 
