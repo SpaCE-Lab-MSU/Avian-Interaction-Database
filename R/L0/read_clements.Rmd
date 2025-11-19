@@ -1,6 +1,7 @@
 ---
 title: "Reading Clements Checklists"
-output: html_notebook
+output: 
+html_notebook: default
 editor_options:
   chunk_output_type: inline
 ---

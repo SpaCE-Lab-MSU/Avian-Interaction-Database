@@ -14,6 +14,8 @@ date-format: iso
 
 This notebook contains experiments to learn how Taxadb really works and how it can help to resolve species names to current checklist.
 
+It is not used as part of the actual workflow, but kept here for reference.
+
 ```{r}
 #| label: setup
 
@@ -90,16 +92,14 @@ How many names in our raw data are changed by TaxaDB that should not have been c
 
 ##### TEST of TAXADB/GBIF
 
-running TaxaDB seems to change entries for the worse in some cases, to older
-versions of the taxonomy and it's not clear why. 
+running TaxaDB seems to change entries for the worse in some cases, to older versions of the taxonomy and it's not clear why.
 
-This is a test of how changing these entries would help or hurt. 
+This is a test of how changing these entries would help or hurt.
 
-1) is the original (raw) already on the checklist y/n
-1) does GBIF suggest a different or same s/d
-2) is that GBIF suggestion on the checklist y/n
-3) does the GBIF change make a checklist item no longer a checklist item
-
+1)  is the original (raw) already on the checklist y/n
+2)  does GBIF suggest a different or same s/d
+3)  is that GBIF suggestion on the checklist y/n
+4)  does the GBIF change make a checklist item no longer a checklist item
 
 ```{r}
 
@@ -113,9 +113,7 @@ resolved.gbif <- mutate(resolved.gbif, gbif_suggestion_broken = (raw_on_checklis
 
 ```
 
-
-this is the number of entries already on the checklist that that taxadb/gbif 
-makes a suggestion that is NOT on the checklist (e.g. 'breaking' the correctness)
+this is the number of entries already on the checklist that that taxadb/gbif makes a suggestion that is NOT on the checklist (e.g. 'breaking' the correctness)
 
 ```{r}
 

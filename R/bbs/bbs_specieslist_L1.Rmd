@@ -2,26 +2,39 @@
 title: "L1 BBS Species List Harmonization"
 author:  "Phoebe Zarnetske, Pat Bills"
 date: "`r Sys.Date()`"
-output: html_notebook
+output: 
+html_notebook: default
 project: "Avian Interaction Database & avian-meta-network"
 collaborators: "Vincent Miele, Stephane Dray, Emily Parker, Kelly Kapsar"
 ---
 
-# L1 BBS Species List Harmonization
+# Avian Interaction Database L1 Breeding Bird Survey Species List Harmonization
 
-## Introductiobn
+Reads in BBS L0 data file (bbs_specieslist_2024_L0.csv, the L0 BBS SpeciesList 
+from 2024 release  which includes up to 2023 BBS data),
+so it can be used in the North American Avian Interaction data
+
+Please see the R script file bbs_specieslist_L1.R for the non-notebook, original form. 
+
+## Introduction
+
+This is a notebook version of bbs_species_list_L1.R and is adapted from code
+previously used to harmonize the species names attested in Breeding Bird Survey (BBS)
+but the L1 harmonization for the Avian Interaction Database no longer uses BBS
+naming. 
 
 ### Purpose
 
 Explores numbers of species and matches and works through species changes 
 and updates the BBS database and  harmonizes with Clements checklist/Cornll 
 This is to build species transform lists used by for `bbs_specieslist_L1.R`
+(L0 BBS SpeciesList from 2024 release (up to 2023 BBS data),so it can be used in 
+the North American Avian Interaction data paper and the avian-meta-network 
+(align with combination AOUs for subspecies before using in avian-meta-network)
 
-
-(L0 BBS SpeciesList from 2024 release (up to 2023 BBS data),so it can be used in the North American Avian Interaction data paper and the avian-meta-network (align with combination
-AOUs for subspecies before using in avian-meta-network)
 
 ### Inputs: 
+
 - L0 data: A Breeding Bird Survey CSV file created in `bbs_specieslist_L0.R` 
 - SpeciesList2.csv from Jeff Hostetler @ BBS contains combo AOUs for subspecies.
 

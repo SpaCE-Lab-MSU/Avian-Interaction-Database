@@ -1,6 +1,7 @@
 ---
 title: "Avian Interaction Database: L0 File Preparation"
-output: html_notebook
+output: 
+html_notebook: default
 knit: (function(inputFile, encoding) {
       out_dir <- "html";
       rmarkdown::render(inputFile,
@@ -9,40 +10,61 @@ knit: (function(inputFile, encoding) {
 ---
 
 
-# L0 Species Checklist Data: Pulls in raw lists from sources and
+# L0 Species Checklist Data
 
-creates formatted versions of lists as L0 data
+Pulls in raw lists from sources and creates formatted versions of lists as L0 data
 
-AUTHORS:        Phoebe Zarnetske
+- AUTHORS:        Phoebe Zarnetske
+- COLLABORATORS:  Vincent Miele, Stephane Dray, Emily Parker, Pat Bills
+- PROJECT:        Avian Interaction Database & avian-meta-network
+- DATE:           17 January 2022 - 12 August 2025
 
-COLLABORATORS:  Vincent Miele, Stephane Dray, Emily Parker
-DATA INPUT:     Imports L0 raw species list data from:
+### NOTES:          
 
-(1) Clements/eBird Cheklist v2024 (Cornell Lab of Ornithology)
-(2) the USGS North American Breeding Bird Survey (BBS) SpeciesList
-from 2024 release (up to 2023 BBS data; SpeciesList.txt is updated yearly).
-(3) CA-CONUS List = AviBase Canada list + AviBase Lower 48 US +
-AviBase Alaska list (taxonomy from Clements 2024 list)
-(4) American Birding Association (ABA) Version 8.17 Nov. 2024 list
+check out this site for code w BBS: 
 
-DATA OUTPUT:    
-(1) L0 Clements/eBird Cheklist v2024
-(2) BBS List L0 data: bbs_specieslist_2023_L0.csv - this is a
-    copy of the raw data, just omitting the top lines without data
-(3) CA.CONUS list L0 data: avibase_ca.conus_splist_2024_L0.csv
-  - this is data pulled from the AviBase species list website
-  and formatted
-(4) American Birding Association (ABA) Version 8.17 Nov. 2024 list: formatted
+https://rdrr.io/github/davharris/mistnet/src/extras/BBS-analysis/data_extraction/data-extraction.R
 
-PROJECT:        Avian Interaction Database & avian-meta-network
-DATE:           17 January 2022 - 12 August 2025
-NOTES:          bbs_specieslist_2024_L1.csv is produced in bbs_specieslist_L1.R
-
-Next script to run: bbs_specieslist_L1.R
-
-NOTES: check out this site for code w BBS: https://rdrr.io/github/davharris/mistnet/src/extras/BBS-analysis/data_extraction/data-extraction.R
 For other types of lists check out: https://datazone.birdlife.org/search
 which has data on migratory status, conservation status, etc.
+
+bbs_specieslist_2024_L1.csv is produced in bbs_specieslist_L1_v2.R
+
+Next script to run: bbs/bbs_specieslist_L1_v2.R
+
+### Notes August 2025
+
+This is an Rmarkdown/Notebook version of  what was previously used just for BBS, 
+written by PLZ. See the folder R/bbs for those original scripts.  This needs review and 
+should be converted to quarto as the other scripts or archived.  
+
+This script was not used in the final workflow, but is kept for historical reference. 
+
+PLZ created species lists used by the L0 and L1 workflows are not in this 
+repository, but in the non-public "working" data repository.  
+
+
+
+## DATA INPUT:     
+
+Imports L0 raw species list data from:
+
+1. Clements/eBird Cheklist v2024 (Cornell Lab of Ornithology)
+2. the USGS North American Breeding Bird Survey (BBS) SpeciesList
+from 2024 release (up to 2023 BBS data; SpeciesList.txt is updated yearly).
+3. CA-CONUS List = AviBase Canada list + AviBase Lower 48 US +
+AviBase Alaska list (taxonomy from Clements 2024 list)
+4. American Birding Association (ABA) Version 8.17 Nov. 2024 list
+
+## DATA OUTPUT:    
+
+1. L0 Clements/eBird Cheklist v2024
+2. BBS List L0 data: bbs_specieslist_2023_L0.csv 
+   - this is a copy of the raw data, just omitting the top lines without data
+3. CA.CONUS list L0 data: avibase_ca.conus_splist_2024_L0.csv
+  - this is data pulled from the AviBase species list website and formatted
+4. American Birding Association (ABA) Version 8.17 Nov. 2024 list: formatted
+
 
 ```{r}
 
@@ -65,9 +87,13 @@ which has data on migratory status, conservation status, etc.
 
 
 ```{r}
-suppressMessages(source(here::here('R/L0/L0_functions.R')))
-source(here::here('R/L0/L0_functions.R'))
-
+# suppress messages from loading packages for clean report output
+suppressMessages({
+  source(here::here('R/L0/L0_functions.R'))
+  library(dplyr)
+  library(stringr)
+  }
+)
 # This uses functions in R/L0/L0_functions_files which also imports R/config.R
 # which sets the locations of the data folders. 
 
@@ -120,11 +146,16 @@ dim(bbs.splist.2024)
 
 Number of species: 
 
+```{r}
 # 763 species
+```
 
-# Compare the BBS list from last year to this year to identify changes:
+### Compare the BBS list from last year to this year to identify changes:
 
-# Full join on "AOU" only, ignoring extra rows in the 2024 data
+
+ Full join on "AOU" only, ignoring extra rows in the 2024 data
+
+```{r}
 differences <- bbs.splist.2023 %>%
   full_join(bbs.splist.2024, by = "AOU", suffix = c(".2023", ".2024")) %>%
   # Use rowwise to apply comparisons across columns
@@ -159,46 +190,76 @@ differences <- bbs.splist.2023 %>%
   filter(!all(differing_values[[1]] == "")) %>%
   # Select only the relevant columns
   select(AOU, differing_values)
+```
 
-# Unnest the differing values into a more readable format with unique names
+
+Unnest the differing values into a more readable format with unique names
+
+
+```{r}
 clean_differences <- differences %>%
   unnest_wider(differing_values, names_sep = "_diff")
 
 # Print out the differences
 print(clean_differences, n = Inf)
 
-# Export to take a look (ignore the encodings which don't match)
+```
+
+
+Export to take a look (ignore the encodings which don't match)
+
+```{r}
+
 write.csv(clean_differences,file.path(L0_dir,"BBS_specieslist_diffs2023-2024.csv"), fileEncoding="UTF-8", row.names=F)
-# The current comparison lists these species as changing since last time:
-# differing_values_diffEnglish_Common_Name
-# Northern Goshawk -> American Goshawk
-# (unid. Red/Yellow Shafted) Northern Flicker -> (unid. Red / Yellow Shafted) Northern Flicker
-# Pacific-slope Flycatcher -> (Pacific-slope Flycatcher) Western Flycatcher
-# Cordilleran Flycatcher -> (Cordilleran Flycatcher) Western Flycatcher
-# unid. Cordilleran / Pacific-slope Flycatcher -> (unid. Cordilleran / Pac-slope) Western Flycatcher
-# Swinhoe¬ís White-eye -> Swinhoe‚Äôs White-eye
-# Unid. Cassia Crossbill / Red Crossbill -> unid. Cassia Crossbill / Red Crossbill
-# (unid. Myrtle/Audubon's) Yellow-rumped Warbler -> (unid. Myrtle / Audubon's) Yellow-rumped Warbler
+```
 
-# The species re-assignment checking will occur in the next script.
-# Export the cleaned data (note the encoding to maintain special characters)
+
+Winter 2025: The current comparison lists these species as changing since last time:
+
+differing_values_diffEnglish_Common_Name
+
+- Northern Goshawk -> American Goshawk
+- (unid. Red/Yellow Shafted) Northern Flicker -> (unid. Red / Yellow Shafted) Northern Flicker
+- Pacific-slope Flycatcher -> (Pacific-slope Flycatcher) Western Flycatcher
+- Cordilleran Flycatcher -> (Cordilleran Flycatcher) Western Flycatcher
+- unid. Cordilleran / Pacific-slope Flycatcher -> (unid. Cordilleran / Pac-slope) Western Flycatcher
+- Swinhoe¬ís White-eye -> Swinhoe‚Äôs White-eye
+- Unid. Cassia Crossbill / Red Crossbill -> unid. Cassia Crossbill / Red Crossbill
+- (unid. Myrtle/Audubon's) Yellow-rumped Warbler -> (unid. Myrtle / Audubon's) Yellow-rumped Warbler
+
+
+The species re-assignment checking occurs in R/L1/AvianInteractionData_L1.qmd
+
+
+
+Export the cleaned data (note the encoding to maintain special characters)
+
+```{r}
 write.csv(bbs.splist.2024, file.path(L0_dir,"bbs_splist_2024_L0.csv"), fileEncoding="UTF-8", row.names=F)
+```
 
-# Next script to run: bbs_specieslist_L1.R
-# Then, if combining with bbs_obs data: AvianInteractionData_L1.R
+### Next script to run: bbs_specieslist_L1.R
+
+Then, if combining with bbs_obs data: AvianInteractionData_L1.R
 
 
-#### (3) AviBase 8.17 CA-CONUS List ####
-# This list represents birds observed in Canada and the Continental United States
-# from AviBase, using Clements 2024 taxonomy.
+### (3) AviBase 8.17 CA-CONUS List ####
 
-####**** AviBase 8.17 CANADA species ****####
-# https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=US48&version=text&lifelist=&highlight=0
+This list represents birds observed in Canada and the Continental United States from AviBase, using Clements 2024 taxonomy.
 
+### **** AviBase 8.17 CANADA species ****####
+
+https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=US48&version=text&lifelist=&highlight=0
+
+```{r}
 ca<- "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=US48&version=text&lifelist=&highlight=0"
 avi.ca.page <- read_html(ca)
+```
 
-# Extract all tables and select the desired table
+
+Extract all tables and select the desired table
+
+```{r}
 ca.tables <- html_nodes(avi.ca.page, "table")
 ca.table <- html_table(ca.tables[[1]], fill = TRUE)
 head(ca.table) # it's the correct table
@@ -218,13 +279,22 @@ ca.table <- ca.table %>%
   filter(!(common_name == paste(order, family, sep = ": ")))
 ca.table
 
-####**** AviBase 8.17 US Lower 48 species ****####
-# https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=US48&version=text&lifelist=&highlight=0
+```
 
+### **** AviBase 8.17 US Lower 48 species ****####
+
+https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=US48&version=text&lifelist=&highlight=0
+
+```{r}
 us48<-"https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=US48&version=text&lifelist=&highlight=0"
 avi.us48.page <- read_html(us48)
+```
 
-# Extract all tables and select the desired table
+
+Extract all tables and select the desired table
+
+```{r}
+
 us48.tables <- html_nodes(avi.us48.page, "table")
 us48.table <- html_table(us48.tables[[1]], fill = TRUE)
 head(us48.table) # it's the correct table
@@ -243,10 +313,14 @@ us48.table <- us48.table %>%
   fill(order, family) %>%
   filter(!(common_name == paste(order, family, sep = ": ")))
 us48.table
+```
 
-####**** AviBase 8.17 Alaska species ****####
-# https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=USak&version=text&lifelist=&highlight=0
 
+### **** AviBase 8.17 Alaska species ****####
+
+https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=USak&version=text&lifelist=&highlight=0
+
+```{r}
 ak<-"https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=USak&version=text&lifelist=&highlight=0"
 avi.ak.page <- read_html(ak)
 
@@ -269,11 +343,14 @@ ak.table <- ak.table %>%
   fill(order, family) %>%
   filter(!(common_name == paste(order, family, sep = ": ")))
 ak.table
+```
 
-# Merge CA, Lower 48, Alaska and omit duplicates.
-# First check that there isn't an issue with merging and finding mismatches.
-library(dplyr)
-library(stringr)
+
+### Merge CA, Lower 48, Alaska and omit duplicates.
+
+First check that there isn't an issue with merging and finding mismatches.
+
+```{r}
 
 # Add region tags
 ak.table   <- ak.table   %>% mutate(region = "AK")
@@ -322,16 +399,29 @@ ca.conus <- preferred_records %>%
 
 cat("Number of species in ca.conus:", n_distinct(ca.conus$scientific_name), "\n")
 cat("Number of rows in ca.conus:", nrow(ca.conus), "\n")
-
-ca.conus
-
-# Export this for final cleaning in L1 script where species are further subset.
-write.csv(ca.conus, file.path(L0_dir,"avibase_ca.conus_splist_2024_L0.csv"), fileEncoding="UTF-8", row.names=F)
-
-#### (4) AviBase 8.17 Hawaii,  ####
-# This will obtain the entire region, including outlying islands
-# https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=NAM&version=text&lifelist=&highlight=0
-
-## Work on this next to pull in data from Islands in Northern & Western Hemisphere
-
 ```
+
+optionally display this file
+```{r}
+# ca.conus
+```
+
+
+Export this for final cleaning in L1 script where species are further subset.
+
+```{r}
+write.csv(ca.conus, file.path(L0_dir,"avibase_ca.conus_splist_2024_L0.csv"), fileEncoding="UTF-8", row.names=F)
+```
+
+### (4) AviBase 8.17 Hawaii,  ####
+
+
+This will obtain the entire region, including outlying islands
+
+https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&synlang=&region=NAM&version=text&lifelist=&highlight=0
+
+TBD
+
+**Work on this next to pull in data from Islands in Northern & Western Hemisphere**
+
+
