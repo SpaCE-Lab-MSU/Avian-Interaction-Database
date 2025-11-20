@@ -1,32 +1,32 @@
-# TITLE:          L0 Species Checklist Data: Pulls in raw lists from sources and 
+# TITLE:          L0 Species Checklist Data: Pulls in raw lists from sources and
 #                   creates formatted versions of lists as L0 data
 
 # AUTHORS:        Phoebe Zarnetske
 # COLLABORATORS:  Vincent Miele, Stephane Dray, Emily Parker
 # DATA INPUT:     Imports L0 raw species list data from:
 #                 (1) Clements/eBird Checklist v2024 (Cornell Lab of Ornithology)
-#                 (2) the USGS North American Breeding Bird Survey (BBS) SpeciesList 
-#                 from 2024 release (up to 2023 BBS data; SpeciesList.txt is updated yearly). 
-#                 (3) CA-CONUS List = AviBase Canada list + AviBase Lower 48 US + 
+#                 (2) the USGS North American Breeding Bird Survey (BBS) SpeciesList
+#                 from 2024 release (up to 2023 BBS data; SpeciesList.txt is updated yearly).
+#                 (3) CA-CONUS List = AviBase Canada list + AviBase Lower 48 US +
 #                 AviBase Alaska list (taxonomy from Clements 2024 list)
 #                 (4) AviBase Global URLs, by region; version 8.17 Nov 2024 list
 # DATA OUTPUT:    (1) L0 Clements/eBird Cheklist v2024
-#                 (2) BBS List L0 data: bbs_specieslist_2023_L0.csv - this is a 
+#                 (2) BBS List L0 data: bbs_specieslist_2023_L0.csv - this is a
 #                     copy of the raw data, just omitting the top lines without data
-#                 (3) CA.CONUS list L0 data: avibase_ca.conus_splist_2024_L0.csv 
-#                   - this is data pulled from the AviBase species list website 
+#                 (3) CA.CONUS list L0 data: avibase_ca.conus_splist_2024_L0.csv
+#                   - this is data pulled from the AviBase species list website
 #                   and formatted
 #                 (4) AviBase Global list, by region; version 8.17 Nov 2024 list
 # PROJECT:        Avian Interaction Database & avian-meta-network
 # DATE:           17 January 2022 - 26 August 2025
-# NOTES:          bbs_specieslist_2024_L1.csv is produced in bbs_specieslist_L1.R 
+# NOTES:          bbs_specieslist_2024_L1.csv is produced in bbs_specieslist_L1.R
 #
 #               Next script to run: bbs_specieslist_L1.R or AvianInteractionData_specieslists_L1.R or
-#                           AvianInteractionData_specieslists_Canada_CONUS_L1.R 
-#               NOTES: check out this site for code w BBS: https://rdrr.io/github/davharris/mistnet/src/extras/BBS-analysis/data_extraction/data-extraction.R    
-#               For other types of lists check out: https://datazone.birdlife.org/search 
-#               which has data on migratory status, conservation status, etc.           
-    
+#                           AvianInteractionData_specieslists_Canada_CONUS_L1.R
+#               NOTES: check out this site for code w BBS: https://rdrr.io/github/davharris/mistnet/src/extras/BBS-analysis/data_extraction/data-extraction.R
+#               For other types of lists check out: https://datazone.birdlife.org/search
+#               which has data on migratory status, conservation status, etc.
+
 
 # Clear all existing data
 rm(list=ls())
@@ -42,15 +42,15 @@ library(purrr)
 # Define local directory
 L0_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database-Working/L0/species_checklists/"
 
-#### (1) Clements/eBird 2024 Checklist: Cornell Lab of Ornithology 
+#### (1) Clements/eBird 2024 Checklist: Cornell Lab of Ornithology
 clements2024<-read.csv("https://www.birds.cornell.edu/clementschecklist/wp-content/uploads/2024/10/eBird-Clements-v2024-integrated-checklist-October-2024-rev.csv")
 
 # Export this as its original filename for final cleaning in L1 script.
-write.csv(clements2024, file.path(L0_dir,"eBird-Clements-v2024-integrated-checklist-October-2024-rev.csv"), fileEncoding="UTF-8", row.names=F) 
+write.csv(clements2024, file.path(L0_dir,"eBird-Clements-v2024-integrated-checklist-October-2024-rev.csv"), fileEncoding="UTF-8", row.names=F)
 
 #### (2) BBS List ####
 # Below section is modified from: https://rdrr.io/github/davharris/mistnet/src/extras/BBS-analysis/data_extraction/species-handling.R
-# Read in the SpeciesList file: 
+# Read in the SpeciesList file:
 # Reading in a copy placed in the L0 directory on October 22, 2024, and renamed BBS2024_SpeciesListL0.txt
 guess_encoding(file.path(L0_dir,"bbs_splist_2022_L0.csv"))
 #ISO-8859-1
@@ -131,11 +131,11 @@ write.csv(clean_differences,file.path(L0_dir,"BBS_specieslist_diffs2023-2024.csv
 # Unid. Cassia Crossbill / Red Crossbill -> unid. Cassia Crossbill / Red Crossbill
 # (unid. Myrtle/Audubon's) Yellow-rumped Warbler -> (unid. Myrtle / Audubon's) Yellow-rumped Warbler
 
-# The species re-assignment checking will occur in the next script. 
+# The species re-assignment checking will occur in the next script.
 # Export the cleaned data (note the encoding to maintain special characters)
-write.csv(bbs.splist.2024, file.path(L0_dir,"bbs_splist_2024_L0.csv"), fileEncoding="UTF-8", row.names=F) 
+write.csv(bbs.splist.2024, file.path(L0_dir,"bbs_splist_2024_L0.csv"), fileEncoding="UTF-8", row.names=F)
 
-# Next script to run: bbs_specieslist_L1.R 
+# Next script to run: bbs_specieslist_L1.R
 # Then, if combining with bbs_obs data: AvianInteractionData_L1.R
 
 #### AviBase Multi-Region Merger (Clements 2024 taxonomy) ####
@@ -143,13 +143,13 @@ write.csv(bbs.splist.2024, file.path(L0_dir,"bbs_splist_2024_L0.csv"), fileEncod
 #### 1. Function to read & clean one AviBase region ####
 read_avibase <- function(region_code, url, L0_dir) {
   message("Processing region: ", region_code)
-  
+
   # Read HTML and extract first table
   tab <- url %>%
     read_html() %>%
     html_table(fill = TRUE) %>%
     .[[1]]
-  
+
   # Rename expected columns
   tab <- tab %>%
     rename(
@@ -168,11 +168,11 @@ read_avibase <- function(region_code, url, L0_dir) {
     mutate(region = region_code) %>%
     # Trim whitespace just in case
     mutate(across(c(common_name, scientific_name, status), ~ str_squish(.)))
-  
+
   # Save raw cleaned table for that region
   out_file <- file.path(L0_dir, paste0("avibase8.17_", region_code, ".csv"))
   write_csv(tab, out_file)
-  
+
   return(tab)
 }
 
@@ -245,13 +245,13 @@ cat("Number of species in global.splist:", n_distinct(global.splist$scientific_n
 ca.conus <- global.splist %>%
   filter(str_detect(regions, "\\bCA\\b|\\bUS48\\b|\\bUSak\\b"))
 dim(ca.conus) #1104 species
-write.csv(ca.conus, file.path(L0_dir,"avibase_ca.conus_splist_2024_L0.csv"), fileEncoding="UTF-8", row.names=F) 
+write.csv(ca.conus, file.path(L0_dir,"avibase_ca.conus_splist_2024_L0.csv"), fileEncoding="UTF-8", row.names=F)
 
 #### Western Hemisphere ####
 west.hsphere <- global.splist %>%
   filter(str_detect(regions, "\\bCA\\b|\\bUS48\\b|\\bUSak\\b|\\bUShi\\b|\\bNAM|\\b|\\bCAM|\\b|\\bSAM|\\b|\\bCAR|\\b|\\boaq|\\b|\\boat|\\b|\\bopa|\\b|\\bXX|\\b"))
 dim(west.hsphere)
-write.csv(west.hsphere, file.path(L0_dir,"avibase_west.hsphere_splist_2024_L0.csv"), fileEncoding="UTF-8", row.names=F) 
+write.csv(west.hsphere, file.path(L0_dir,"avibase_west.hsphere_splist_2024_L0.csv"), fileEncoding="UTF-8", row.names=F)
 
 # Save Global lookup & species list
 write.csv(global.splist, file.path(L0_dir,"avibase_global_splist_2024_L0.csv"), fileEncoding = "UTF-8", row.names = FALSE)
