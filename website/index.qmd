@@ -17,11 +17,9 @@ Blurb about the project.
 :::
 
 
-::: {style="display: flex; justify-content: space-between; gap: 2rem;"}
-
-<div style="flex: 1;">
-
-**Most recent bird species added!**
+::::: {style="display: flex; justify-content: space-between; gap: 2rem;"}
+::: {style="flex: 1;"}
+**Most recent bird species added:**
 
 ```{r}
 #| echo: false
@@ -37,10 +35,10 @@ clem <- readr::read_csv("code/clemtax_2025.csv")
 info1 <- get_avicommons_image("Electron platyrhynchum", size = 480)
 plot_avicommons_image(info1)
 ```
+:::
 
-</div> <div style="flex: 1;">
-
-**Species with highest number of interactions!**
+::: {style="flex: 1;"}
+**Species with highest number of interactions:**
 
 ```{r}
 #| echo: false
@@ -52,10 +50,5 @@ plot_avicommons_image(info1)
 info2 <- get_avicommons_image("Querula purpurata", size = 480)
 plot_avicommons_image(info2)
 ```
-
-</div>
-  
-  
 :::
-
 
