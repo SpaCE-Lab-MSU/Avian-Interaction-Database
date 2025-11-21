@@ -51,4 +51,4 @@ info2 <- get_avicommons_image("Querula purpurata", size = 480)
 plot_avicommons_image(info2)
 ```
 :::
-:
+
