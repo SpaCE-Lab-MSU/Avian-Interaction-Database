@@ -12,6 +12,42 @@ title-block-banner: images/bird-telephone-banner.jpg
 ## Developing the most complete network of interactions among the birds of the Western Hemisphere.
 :::
 
+::: {style="margin-bottom: 5rem;"}
 Blurb about the project.
+:::
 
-![](images/pelican.jpg){fig-align="right" width="372"}
+::::: {style="display: flex; justify-content: space-between; gap: 2rem;"}
+::: {style="flex: 1;"}
+**Most recent bird species added:**
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-width: 4
+#| fig-height: 4
+library(jsonlite)
+library(readr)
+source("code/avicommons_clem.r")
+avi <- jsonlite::fromJSON("code/avicommons_full.json")
+clem <- readr::read_csv("code/clemtax_2025.csv")
+info1 <- get_avicommons_image("Electron platyrhynchum", size = 480)
+plot_avicommons_image(info1)
+```
+:::
+
+::: {style="flex: 1;"}
+**Species with highest number of interactions:**
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-width: 4
+#| fig-height: 4
+
+info2 <- get_avicommons_image("Querula purpurata", size = 480)
+plot_avicommons_image(info2)
+```
+:::
+:::::

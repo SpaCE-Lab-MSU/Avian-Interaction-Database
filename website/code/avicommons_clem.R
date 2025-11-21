@@ -3,9 +3,6 @@ library(auk)
 library(dplyr)
 library(magick)
 
-avi <- fromJSON("./website/avicommons_full.json")
-clem <- read.csv("./website/clemtax_2025.csv")
-
 
 # ---- Retrieving info from Avicommons using scientific name ----
 
@@ -89,19 +86,16 @@ plot_avicommons_image <- function(img_info) {
 
   #Scientific name
   text(
-    x = 0.5, y = 0.11,
+    x = 0.5, y = 0.09,
     labels = bquote(italic(.(sci))),
     cex = 1.1
   )
 
   #Attribution
   text(
-    x = 0.5, y = 0.05,
+    x = 0.5, y = 0.02,
     labels = paste0("Photo: ", by, " | ", toupper(lic)),
     cex = 0.8
   )
 }
 
-# ---- TESTING ----
-test_info <- get_avicommons_image("Eumyias albicaudatus", size = 900)
-plot_avicommons_image(test_info)
