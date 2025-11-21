@@ -16,6 +16,7 @@ title-block-banner: images/bird-telephone-banner.jpg
 Blurb about the project.
 :::
 
+
 ::::: {style="display: flex; justify-content: space-between; gap: 2rem;"}
 ::: {style="flex: 1;"}
 **Most recent bird species added:**
@@ -50,4 +51,4 @@ info2 <- get_avicommons_image("Querula purpurata", size = 480)
 plot_avicommons_image(info2)
 ```
 :::
-:::::
+:
