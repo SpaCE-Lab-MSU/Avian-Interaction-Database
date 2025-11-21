@@ -24,26 +24,32 @@ are stored in files in the L0 and L1 folders (see below).  Currently these are
 only accessible by collaborators. Once published, the North American Avian 
 Interaction Database will be made open access and linked here. 
 
+For collaborators to use this workflow to construct the database from source files,
+you must also have a copy of the in-progress ('working') data project on your
+computer. 
 
 ## Quick-start 
 
 Assumes the use of Rstudio 2025 version or above.
 
+0. in addition to this repository, clone the data repository to a different 
+   location on your computer and make a note of the folder path for the
+   steps below
 1. copy file `R/filepaths_example.R` to `R/filepaths.R` and set files paths 
    pointing to data on your computer (details below). 
-1. install packages as needed (details below)
-2. clear R environment (scripts do not do this automatically)
-3. check file paths/repository state
-   - open R/L0/L0_repo_status.qmd
+2. install packages as needed (details below)
+3. clear R environment (scripts do not do this automatically)
+4. check file paths/repository state
+   - open R/auxilliary_files/L0_repo_status.qmd
    - in Rstudio, in the upper-right "run" button, select
      "restart R and run all chunks"
    - if there are errors, check if `dir.exists(DATA_FOLDER)` 
-4. stitch raw data
+5. stitch raw data
    - open R/L0/L0_stitch.qmd
    - in the upper-right "run" button, select
      "restart R and run all chunks"
    - this will report the file that is saved
-5. build taxonomy edits, running one chunk at time
+6. build taxonomy edits, running one chunk at time
    - open R/L1/AvianInteractionData_L1.qmd
    - edit the value for stitched_L0_file to match the L0 step above (near the top of file)
    - check the value for the main checklists 
@@ -61,8 +67,8 @@ int.raw.names <- add_name_edits(int.raw.names,
   ```
    - save the edit list as a file (Work in Progress)
 
-6. update names in interaction database (*Work in progress*)
-   - open "AvianInteractionData_L1_final_merge.qmd" 
+7. subset the data and update names in interaction database (*Work in progress*)
+   - open "R/L1/AvianInteractionData_Canada-AK-CONUS_L1.qmd" 
    - update input and output file names
    - run to merge and create final CSV database
 
