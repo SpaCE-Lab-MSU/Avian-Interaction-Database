@@ -54,9 +54,9 @@ write.csv(clements2024, file.path(file_paths$CHECKLIST_FOLDER,"eBird-Clements-v2
 # Below section is modified from: https://rdrr.io/github/davharris/mistnet/src/extras/BBS-analysis/data_extraction/species-handling.R
 # Read in the SpeciesList file:
 # Reading in a copy placed in the L0 directory on October 22, 2024, and renamed BBS2024_SpeciesListL0.txt
-guess_encoding(file.path(file_paths$CHECKLIST_FOLDER,"bbs_splist_2022_L0.csv"))
+# guess_encoding(file.path(file_paths$CHECKLIST_FOLDER,"bbs_splist_2022_L0.csv"))
 #ISO-8859-1
-bbs.splist.2023<-read.csv(file.path(file_paths$CHECKLIST_FOLDER,"bbs_splist_2022_L0.csv"),fileEncoding="ISO-8859-1")
+# bbs.splist.2023<-read.csv(file.path(file_paths$CHECKLIST_FOLDER,"bbs_splist_2022_L0.csv"),fileEncoding="ISO-8859-1")
 # The original file SpeciesList.csv (from 2024 BBS release) is here: https://www.sciencebase.gov/catalog/item/66d9ed16d34eef5af66d534b
 guess_encoding(file.path(file_paths$CHECKLIST_FOLDER,"BBS2024_SpeciesListL0.csv"))
 #UTF-8
@@ -64,11 +64,11 @@ bbs.splist.2024<-read.csv(file.path(file_paths$CHECKLIST_FOLDER,"BBS2024_Species
 
 # Make a column for genus_species
 bbs.splist.2024$genus_species<- do.call(paste, c(bbs.splist.2024[c("Genus", "Species")], sep = " "))
-names(bbs.splist.2023)
-names(bbs.splist.2024)
-bbs.splist.2023$Spanish_Common_Name<-NULL
-bbs.splist.2023$Order<-bbs.splist.2023$ORDER
-bbs.splist.2023$ORDER<-NULL
+# names(bbs.splist.2023)
+# names(bbs.splist.2024)
+# bbs.splist.2023$Spanish_Common_Name<-NULL
+# bbs.splist.2023$Order<-bbs.splist.2023$ORDER
+# bbs.splist.2023$ORDER<-NULL
 
 # Make a column for genus_species
 bbs.splist.2024$genus_species<- do.call(paste, c(bbs.splist.2024[c("Genus", "Species")], sep = " "))
@@ -77,51 +77,51 @@ dim(bbs.splist.2024)
 
 # Compare the BBS list from last year to this year to identify changes:
 
-# Full join on "AOU" only, ignoring extra rows in the 2024 data
-differences <- bbs.splist.2023 %>%
-  full_join(bbs.splist.2024, by = "AOU", suffix = c(".2023", ".2024")) %>%
-  # Use rowwise to apply comparisons across columns
-  rowwise() %>%
-  # Create a data frame of differing values
-  mutate(
-    differing_values = list(
-      tibble(
-        AOU = AOU,
-        English_Common_Name = if_else(English_Common_Name.2023 != English_Common_Name.2024,
-                                      paste(English_Common_Name.2023, "->", English_Common_Name.2024),
-                                      ""),
-        French_Common_Name = if_else(French_Common_Name.2023 != French_Common_Name.2024,
-                                     paste(French_Common_Name.2023, "->", French_Common_Name.2024),
-                                     ""),
-        Order = if_else(Order.2023 != Order.2024,
-                        paste(Order.2023, "->", Order.2024),
-                        ""),
-        Family = if_else(Family.2023 != Family.2024,
-                         paste(Family.2023, "->", Family.2024),
-                         ""),
-        Genus = if_else(Genus.2023 != Genus.2024,
-                        paste(Genus.2023, "->", Genus.2024),
-                        ""),
-        Species = if_else(Species.2023 != Species.2024,
-                          paste(Species.2023, "->", Species.2024),
-                          "")
-      )
-    )
-  ) %>%
-  # Filter for rows where any differences exist
-  filter(!all(differing_values[[1]] == "")) %>%
-  # Select only the relevant columns
-  select(AOU, differing_values)
-
-# Unnest the differing values into a more readable format with unique names
-clean_differences <- differences %>%
-  unnest_wider(differing_values, names_sep = "_diff")
-
-# Print out the differences
-print(clean_differences, n = Inf)
-
-# Export to take a look (ignore the encodings which don't match)
-write.csv(clean_differences,file.path(file_paths$CHECKLIST_FOLDER,"BBS_specieslist_diffs2023-2024.csv"), fileEncoding="UTF-8", row.names=F)
+# # Full join on "AOU" only, ignoring extra rows in the 2024 data
+# differences <- bbs.splist.2023 %>%
+#   full_join(bbs.splist.2024, by = "AOU", suffix = c(".2023", ".2024")) %>%
+#   # Use rowwise to apply comparisons across columns
+#   rowwise() %>%
+#   # Create a data frame of differing values
+#   mutate(
+#     differing_values = list(
+#       tibble(
+#         AOU = AOU,
+#         English_Common_Name = if_else(English_Common_Name.2023 != English_Common_Name.2024,
+#                                       paste(English_Common_Name.2023, "->", English_Common_Name.2024),
+#                                       ""),
+#         French_Common_Name = if_else(French_Common_Name.2023 != French_Common_Name.2024,
+#                                      paste(French_Common_Name.2023, "->", French_Common_Name.2024),
+#                                      ""),
+#         Order = if_else(Order.2023 != Order.2024,
+#                         paste(Order.2023, "->", Order.2024),
+#                         ""),
+#         Family = if_else(Family.2023 != Family.2024,
+#                          paste(Family.2023, "->", Family.2024),
+#                          ""),
+#         Genus = if_else(Genus.2023 != Genus.2024,
+#                         paste(Genus.2023, "->", Genus.2024),
+#                         ""),
+#         Species = if_else(Species.2023 != Species.2024,
+#                           paste(Species.2023, "->", Species.2024),
+#                           "")
+#       )
+#     )
+#   ) %>%
+#   # Filter for rows where any differences exist
+#   filter(!all(differing_values[[1]] == "")) %>%
+#   # Select only the relevant columns
+#   select(AOU, differing_values)
+#
+# # Unnest the differing values into a more readable format with unique names
+# clean_differences <- differences %>%
+#   unnest_wider(differing_values, names_sep = "_diff")
+#
+# # Print out the differences
+# print(clean_differences, n = Inf)
+#
+# # Export to take a look (ignore the encodings which don't match)
+# write.csv(clean_differences,file.path(file_paths$CHECKLIST_FOLDER,"BBS_specieslist_diffs2023-2024.csv"), fileEncoding="UTF-8", row.names=F)
 # The current comparison lists these species as changing since last time:
 # differing_values_diffEnglish_Common_Name
 # Northern Goshawk -> American Goshawk
