@@ -84,7 +84,6 @@ to check that they are set and the paths are found.
 3. open the new `filepaths.R` and put the paths for your computer
    (this is an R script and uses R syntax, not a config or environment file)
    - DATA_FOLDER : the path to the folder that has the L0 and L1 subfolders.
-   - SYNC_DATA_FOLDER : the path to your Google Drive folder containing this project's data. 
    - CHECKLIST_FOLDER : location of various checklist files in the repository.
    
 **TO-DO: we have two checklists L0 = Clements etc and L1= PLZ Curated and this
@@ -95,7 +94,6 @@ system does not accommodate for that**
 Example `filepaths.R` contents
 
 ```
-SYNC_DATA_FOLDER =  "/Users/USERID/Library/CloudStorage/GoogleDrive-billspat@msu.edu/Shared\ drives/Avian_MetaNetwork/"
 DATA_FOLDER =  "/Users/USERID/Avian-Interaction-Database-Working"
 # no need to edit this to match your computer if the folder above is correct
 CHECKLIST_FOLDER = file.path(DATA_FOLDER, "L1", "species_checklists")

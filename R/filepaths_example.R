@@ -17,8 +17,6 @@
 # By convention configuration variables (constants) are uppercase.
 
 # Paths to set and replace "filepath" with your computer's filepath:
-# Path for "species_completed" Google Drive folder with spreadsheets:
-SYNC_DATA_FOLDER <- "/path/to/google_drive" 
 # The L0 and L1 data folders are within the Avian-Interaction-Working repository's folder:
 DATA_FOLDER <-  "/path/to/data_respository/top_folder"
 # Path for for L0 checklists (Clements etc):

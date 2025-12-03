@@ -16,7 +16,6 @@
 #' # DO NOT EDIT THESE VARIABLES
 #' # global variables that are set and overridden by function below
 #' # these are here for compability with scripts that don't use the configuration system.
-#' SYNC_DATA_FOLDER <- ""
 #' DATA_FOLDER <- ""
 #'
 #' #' wrapper for config file with flex file
@@ -40,13 +39,6 @@
 #'
 #'   # make them all uppercase, which allows for any case in config file
 #'   names(configuration) <- toupper(names(configuration))
-#'
-#'   if( "SYNC_DATA_FOLDER" %in% names(configuration)){
-#'     SYNC_DATA_FOLDER<- configuration$SYNC_DATA_FOLDER
-#'   } else {
-#'     warning("config.yml must have an entry SYNC_DATA_FOLDER See README.md for how to set-up")
-#'
-#'   }
 #'
 #'   if( 'DATA_FOLDER' %in% names(configuration)) {
 #'     DATA_FOLDER <- configuration$DATA_FOLDER
@@ -98,17 +90,6 @@ get_file_paths <- function(config_file = NULL){
   }
 
   source(config_file)
-  if(!exists("SYNC_DATA_FOLDER")){
-    message = paste("the config file ",
-                    config_file,
-                    "must set the variable SYNC_DATA_FOLDER See README.md for how to set-up")
-    warning(message)
-    stop()
-  } else if(!dir.exists(SYNC_DATA_FOLDER)){
-    message = paste("the sync data folder (google drive, onedrive) '", SYNC_DATA_FOLDER, " in the config file ", config_file, "can't be found")
-    warning(message)
-    stop()
-  }
 
   if(!exists("DATA_FOLDER")) {
     message = paste("the config file ",
@@ -126,7 +107,6 @@ get_file_paths <- function(config_file = NULL){
   # more folders, and to share among programs
   configuration <- list()
   configuration$DATA_FOLDER <- DATA_FOLDER
-  configuration$SYNC_DATA_FOLDER <- SYNC_DATA_FOLDER
 
   # these hard-coded paths are set by convention for the repository.
   # If the repository structure changes,this code must be updated!
