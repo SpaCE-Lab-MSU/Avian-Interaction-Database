@@ -36,7 +36,7 @@ cleaning but taxonomic names as entered (older names, typos, etc)
 # Clear all existing data
 rm(list=ls())
 
-AvianInteractionData_L0_file <-  "AvianInteractionData_L0_stitch_06oct25.csv"
+AvianInteractionData_L0_file <-  "AvianInteractionData_L0_stitch_20251204.csv"
 
 ```
 
@@ -206,7 +206,7 @@ Read in the full check list the official eBird/Clements v2024 checklist
 
 
 checklist_filename <- "eBird-Clements-v2024-integrated-checklist-October-2024-rev.csv"
-checklist.orig <- read.csv(file.path(file_paths$CHECKLIST_FOLDER,checklist_filename))
+checklist.orig <- read.csv(file.path(file_paths$CHECKLIST_L0,checklist_filename))
 print(paste("Read in ", nrow(checklist.orig), "entries from checklist file", checklist_filename))
 ```
 
@@ -1463,7 +1463,7 @@ all of the name resolutions include those
 
 1. complete the entries in this file - PLZ completed 10/5/2025
 3. read in the file and verify all rows are ok, filter out unfinished rows
-4. apply the edits in the file regardless if there is alread a note since 
+4. apply the edits in the file regardless if there is already a note since 
    these may override the automatic resolutions
    
 First step, check that the path to the manual resolutions file is named in a 
