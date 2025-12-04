@@ -1,28 +1,28 @@
-# TITLE:          L1 Species Lists: North America (CONUS and Alaska and Canada) 
+# TITLE:          L1 Species Lists: North America (CONUS and Alaska and Canada)
 #                 Reads in lists and keeps track of which species are in which list.
 #                 Also keeps track of name changes in diff columns.
-#                 Creates a final list of species in Canada / Alaska / CONUS for use in the North 
+#                 Creates a final list of species in Canada / Alaska / CONUS for use in the North
 #                 American Avian Interaction data paper and avian-meta-network paper.
-#                 
-#                 ****See AvianInteractionData_specieslists_L1.R for the 
+#
+#                 ****See AvianInteractionData_specieslists_L1.R for the
 #                 comprehensive global list.
-#                 
+#
 #                 Reads in: (1) avibase_ca.conus_splist_2024_L0.csv (created in
 #                 R/L0/AvianInteractionData_specieslists_L0.R) = CA-CONUS List,
-#                 which is the AviBase Canada list + AviBase Lower 48 US + 
-#                 AviBase Alaska list (taxonomy from Clements 2024) 
+#                 which is the AviBase Canada list + AviBase Lower 48 US +
+#                 AviBase Alaska list (taxonomy from Clements 2024)
 #                 (2) Clements-eBird 2024 list
 #                 (3) BBS 2024 release
 # AUTHORS:        Phoebe Zarnetske
 # COLLABORATORS:  Vincent Miele, Stephane Dray, Emily Parker, Pat Bills
-# DATA INPUT:     L0 data: avibase_ca.conus_splist_2024_L0.csv, 
+# DATA INPUT:     L0 data: avibase_ca.conus_splist_2024_L0.csv,
 #                         eBird-Clements-v2024-integrated-checklist-October-2024-rev.csv,
 #                         bbs_splist_2024_L0.csv
 #                     all from AvianInteractionData_specieslists_L0.R
-# DATA OUTPUT:    L1 data: canada.conus.splist_L1.CSV; splist_CanadaAKCONUS_L1.csv (column subset) 
+# DATA OUTPUT:    L1 data: canada.conus.splist_L1.CSV; splist_CanadaAKCONUS_L1.csv (column subset)
 # PROJECT:        Avian Interaction Database & avian-meta-network
 # DATE:           17 January 2022 - 5 Nov 2025
-#                 
+#
 #                 Next script to run: AvianInteractionData_L1.R
 
 # Clear all existing data
@@ -33,11 +33,12 @@ library(tidyverse)
 library(stringr)
 
 # Local directories
-L0_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database-Working/L0/species_checklists"
-L1_dir <- "/Users/plz/Documents/GitHub/Avian-Interaction-Database-Working/L1/species_checklists"
+# Get file paths
+source("R/config.R")
+file_paths <- get_file_paths()
 
 #### Read in AviBase species list: all species in Canada and CONUS (with Clements 2024 taxonomy)
-avibase<-read.csv(file.path(L0_dir,"avibase_ca.conus_splist_2024_L0.csv"), fileEncoding="UTF-8")
+avibase<-read.csv(file.path(file_paths$CHECKLIST_L0,"avibase_ca.conus_splist_2024_L0.csv"), fileEncoding="UTF-8")
 
 # Name columns for merging later
 names(avibase)
@@ -48,7 +49,7 @@ avibase <- avibase %>% arrange(scientific_name)
 head(avibase)
 
 #### Official 2024 eBird & Clements checklist
-clements2024<-read.csv(file.path(L0_dir,"eBird-Clements-v2024-integrated-checklist-October-2024-rev.csv"))
+clements2024<-read.csv(file.path(file_paths$CHECKLIST_L0,"eBird-Clements-v2024-integrated-checklist-October-2024-rev.csv"))
 
 # Clements List: Name the columns for merging later
 clements2024<-subset(clements2024, select=c("English.name","scientific.name",
@@ -60,7 +61,7 @@ clements2024 <- clements2024 %>%
   rename(common_name = English.name,
          scientific_name = scientific.name,
          region = range,
-         order = order, 
+         order = order,
          family = family)
 names(clements2024)
 # Sort by scientific name
@@ -69,13 +70,13 @@ head(clements2024)
 
 #### BBS List 2024: all species in BBS (the 2024 release which includes all
 # BBS observed species as of 2023)
-bbs2024<-read.csv(file.path(L0_dir,"bbs_splist_2024_L0.csv"), fileEncoding="UTF-8")
+bbs2024<-read.csv(file.path(file_paths$CHECKLIST_L0,"bbs_splist_2024_L0.csv"), fileEncoding="UTF-8")
 
 bbs2024$list<-"BBS 2024"
 bbs2024 <- bbs2024 %>%
   rename(scientific_name = genus_species,
          common_name = English_Common_Name,
-         order = Order, 
+         order = Order,
          family = Family,
          AOU = AOU)
 names(bbs2024)
@@ -88,9 +89,9 @@ bbs2024$French_Common_Name<-NULL
 bbs2024 <- bbs2024 %>% arrange(scientific_name)
 head(bbs2024)
 
-# From a subsequent analysis, we learned that these species exist in the 
+# From a subsequent analysis, we learned that these species exist in the
 # 1966-2023 BBS observational data but are not included on the BBS list because they have
-# been combined into American Crow. Here we add those 2 species to ensure the splist 
+# been combined into American Crow. Here we add those 2 species to ensure the splist
 # creation goes smoothly; later we assign all species to American Crow and its AOU.combo.
 
 # 4890	Corvus caurinus	34880	Corvus brachyrhynchos	(Northwestern Crow) American Crow
@@ -99,7 +100,7 @@ head(bbs2024)
 # 4890: Assign the Corvus caurinus to American crow (Corvus brachyrhynchos); this should be fixed in the creation of the list but for now we do it here.
 # Add 2 new rows to the end
 bbs2024 <- bbs2024 %>%
-  add_row(AOU = 4890, 
+  add_row(AOU = 4890,
           common_name = "Northwestern Crow",
           order = "Passeriformes",
           family = "Corvidae",
@@ -107,7 +108,7 @@ bbs2024 <- bbs2024 %>%
           list = "BBS 2024")
 
 bbs2024 <- bbs2024 %>%
-  add_row(AOU = 4882, 
+  add_row(AOU = 4882,
           common_name = "unid. American Crow / Northwestern Crow",
           order = "Passeriformes",
           family = "Corvidae",
@@ -168,7 +169,7 @@ clements2024_std <- clements2024 %>%
 # --- Merge all sources on normalized keys ---
 master <- avibase_std %>%
   full_join(bbs2024_std, by = c("common_name_clean", "scientific_name_clean")) %>%
-  full_join(clements2024_std, by = c("common_name_clean", "scientific_name_clean")) 
+  full_join(clements2024_std, by = c("common_name_clean", "scientific_name_clean"))
 
 # --- Unified names (priority: Clements → Avibase → BBS) ---
 master1 <- master %>%
@@ -206,7 +207,7 @@ master3 <- master2 %>%
             .groups = "drop")
 
 # --- Check output ---
-head(master3) 
+head(master3)
 dim(master2) #35710
 dim(master3) #35710
 dim(master3)-dim(clements2024) #114 rows that are not matching correctly with Clements 2024 names
@@ -225,11 +226,11 @@ clean_edge_semicolons <- function(x) {
   x
 }
 
-# Misspellings are likely happening for the remaining issues. 
+# Misspellings are likely happening for the remaining issues.
 # Run this in Setophaga coronata audoboni; should be Setophaga coronata auduboni
 # Using recode from dplyr
 master4 <- master3 %>%
-  mutate(scientific_name = recode(scientific_name, 
+  mutate(scientific_name = recode(scientific_name,
                                   "Setophaga coronata audoboni" = "Setophaga coronata auduboni"))
 # Apply the correction script Now do it on the entire list.
 master5 <- master4 %>%
@@ -245,10 +246,10 @@ unique(master5$in_bbs2024) # worked.
 # Apply to all character columns
 master6 <- master5 %>%
   mutate(across(where(is.character), clean_edge_semicolons))
-master6 
+master6
 
-# Next step in 2 Parts: (1) check the duplicate common names that do not have a 
-# Clements match; likely misspellings to fix or species changes. (2) Code these 
+# Next step in 2 Parts: (1) check the duplicate common names that do not have a
+# Clements match; likely misspellings to fix or species changes. (2) Code these
 # manually in a list.
 df <- master6
 
@@ -356,10 +357,10 @@ df <- df %>%
 name_map <- tribble(
   ~incorrect_scientific,     ~incorrect_common,      ~correct_scientific,   ~correct_common,
   "Acanthis hornemanni",     "Hoary Redpoll",      "Acanthis flammea hornemanni/exilipes",  "Redpoll (Hoary)",
-  "Accipiter atricapillus",      "American Goshawk",     "Astur atricapillus",  "American Goshawk",   
+  "Accipiter atricapillus",      "American Goshawk",     "Astur atricapillus",  "American Goshawk",
   "Accipiter bicolor",      "Bicolored Hawk",     "Astur bicolor",  "Bicolored Hawk",
   "Accipiter cooperii",      "Cooper's Hawk",     "Astur cooperii",  "Cooper's Hawk",
-  "Accipiter gentilis",      "Northern Goshawk",     "Astur atricapillus",  "American Goshawk",   
+  "Accipiter gentilis",      "Northern Goshawk",     "Astur atricapillus",  "American Goshawk",
   "Accipiter sp.",      "unid. Accipiter hawk",     "Aerospiza/Tachyspiza/Accipiter/Astur sp.", "Accipitrine hawk sp. (former Accipiter sp.)",
   "Anas platyrhynchos x rubripes/diazi/fulvigula",      "hybrid Mallard x Black/Mexican/Mottled Duck",     "Anas platyrhynchos x rubripes", "Mallard x American Black Duck (hybrid)",
 #  "Anser caerulescens (blue form)",      "(Blue Goose) Snow Goose",     "Anser caerulescens",  "Snow Goose",
@@ -369,26 +370,26 @@ name_map <- tribble(
   "Cacomantis pallidus",      "Pallid Cuckoo",     "Heteroscenes pallidus",  "Pallid Cuckoo",
   "Calocitta colliei",      "Black-throated Magpie-Jay",     "Cyanocorax colliei",  "Black-throated Magpie-Jay",
   "Calocitta formosa",      "White-throated Magpie-Jay",     "Cyanocorax formosus",  "White-throated Magpie-Jay",
-  "Carduelis flammea/hornemanni",      "unid. Common Redpoll/Hoary Redpoll",     "Acanthis flammea [flammea Group/hornemanni/exilipes]",  "Redpoll (Common/Hoary)",  
+  "Carduelis flammea/hornemanni",      "unid. Common Redpoll/Hoary Redpoll",     "Acanthis flammea [flammea Group/hornemanni/exilipes]",  "Redpoll (Common/Hoary)",
   "Carpodacus purpureus/cassinii/mexicanus",      "unid. Purple Finch/Cassin's Finch/House Finch",     "Haemorhous sp.",  "Haemorhous sp.",
-  "Charadrius montanus",      "Mountain Plover",     "Anarhynchus montanus",  "Mountain Plover", 
-  "Charadrius nivosus",      "Snowy Plover",     "Anarhynchus nivosus",  "Snowy Plover", 
-  "Charadrius wilsonia",      "Wilson's Plover",     "Anarhynchus wilsonia",  "Wilson's Plover", 
-  "Chordeiles acutipennis/minor",      "unid. Lesser Nighthawk/Common Nighthawk",     "Chordeiles sp.",  "nighthawk sp.", 
-  "Chrysococcyx basalis",      "Horsfield's Bronze-Cuckoo",     "Chalcites basalis",  "Horsfield's Bronze-Cuckoo", 
-  "Chrysococcyx lucidus",      "Shining Bronze-Cuckoo",     "Chalcites lucidus",  "Shining Bronze-Cuckoo", 
-  "Chrysococcyx megarhynchus",      "Long-billed Cuckoo",     "Chalcites megarhynchus",  "Long-billed Cuckoo", 
-  "Chrysococcyx meyerii",      "White-eared Bronze Cuckoo",     "Chalcites meyerii",  "White-eared Bronze-Cuckoo", 
-  "Chrysococcyx minutillus",      "Little Bronze Cuckoo",     "Chalcites minutillus",  "Little Bronze-Cuckoo", 
-  "Chrysococcyx osculans",      "Black-eared Cuckoo",     "Chalcites osculans",  "Black-eared Cuckoo", 
-  "Chrysococcyx ruficollis",      "Rufous-throated Bronze Cuckoo",     "Chalcites ruficollis",  "Rufous-throated Bronze-Cuckoo", 
+  "Charadrius montanus",      "Mountain Plover",     "Anarhynchus montanus",  "Mountain Plover",
+  "Charadrius nivosus",      "Snowy Plover",     "Anarhynchus nivosus",  "Snowy Plover",
+  "Charadrius wilsonia",      "Wilson's Plover",     "Anarhynchus wilsonia",  "Wilson's Plover",
+  "Chordeiles acutipennis/minor",      "unid. Lesser Nighthawk/Common Nighthawk",     "Chordeiles sp.",  "nighthawk sp.",
+  "Chrysococcyx basalis",      "Horsfield's Bronze-Cuckoo",     "Chalcites basalis",  "Horsfield's Bronze-Cuckoo",
+  "Chrysococcyx lucidus",      "Shining Bronze-Cuckoo",     "Chalcites lucidus",  "Shining Bronze-Cuckoo",
+  "Chrysococcyx megarhynchus",      "Long-billed Cuckoo",     "Chalcites megarhynchus",  "Long-billed Cuckoo",
+  "Chrysococcyx meyerii",      "White-eared Bronze Cuckoo",     "Chalcites meyerii",  "White-eared Bronze-Cuckoo",
+  "Chrysococcyx minutillus",      "Little Bronze Cuckoo",     "Chalcites minutillus",  "Little Bronze-Cuckoo",
+  "Chrysococcyx osculans",      "Black-eared Cuckoo",     "Chalcites osculans",  "Black-eared Cuckoo",
+  "Chrysococcyx ruficollis",      "Rufous-throated Bronze Cuckoo",     "Chalcites ruficollis",  "Rufous-throated Bronze-Cuckoo",
   "Colaptes auratus auratus x auratus cafer",      "hybrid Northern Flicker (Red x Yellow-shafted)",    "Colaptes auratus luteus x cafer",  "Northern Flicker (Yellow-shafted x Red-shafted)",
   "Coragyps/Cathartes atratus/aura",      "unid. Black Vulture/Turkey Vulture",     "Cathartes sp.",  "Cathartes sp.",
   #  https://birdsoftheworld.org/bow/species/amecro/cur/introduction: Published August 8, 2025. Until recently, the American Crow in the northwest was classified as a separate species ("Northwestern Crow," Corvus caurinus), but because of extensive interbreeding with the Western American Crow (C. brachyrhynchos hesperis) in areas of co-occurrence, those in the northwest are now considered a subspecies of the American Crow (C. b. caurinus). We will assign all to American Crow.
   #  No common name in Clements for this species; assign American Crow (but this is done farther below, not here, as this step would omit a row)
-  #"Corvus brachyrhynchos/caurinus",      "unid. American Crow/Northwestern Crow",     "Corvus brachyrhynchos",  "American Crow",  
-  #"Corvus caurinus",      "Northwestern Crow",     "Corvus brachyrhynchos",  "American Crow",  
-  "Corvus cryptoleucus/corax",      "unid. Chihuahuan Raven/Common Raven",     "Corvus cryptoleucus/corax",  "Chihuahuan Raven/Common Raven",  
+  #"Corvus brachyrhynchos/caurinus",      "unid. American Crow/Northwestern Crow",     "Corvus brachyrhynchos",  "American Crow",
+  #"Corvus caurinus",      "Northwestern Crow",     "Corvus brachyrhynchos",  "American Crow",
+  "Corvus cryptoleucus/corax",      "unid. Chihuahuan Raven/Common Raven",     "Corvus cryptoleucus/corax",  "Chihuahuan Raven/Common Raven",
   "Cyanecula svecica",      "Bluethroat",     "Luscinia svecica",  "Bluethroat",
   "Empidonax difficilis/occidentalis",      "unid. Cordilleran/Pacific-slope Flycatcher",     "Empidonax difficilis occidentalis/hellmayri",  "Western Flycatcher (Cordilleran)",
   # Clements doesn't list name for the Cordilleran Flycatcher but it is referred to in BOW
@@ -402,16 +403,16 @@ name_map <- tribble(
   "Nannopterum auritum/carbo",      "unid. Double-crested Cormorant/Great Cormorant",     "Phalacrocorax carbo/Nannopterum auritum",  "Great/Double-crested Cormorant",
   "Nannopterum brasilianum/auritum",      "unid. Neotropic/Double-crested Cormorant",     "Nannopterum auritum/brasilianum",  "Double-crested/Neotropic Cormorant",
   "Nycticorax/Nyctanassa nycticorax/violacea",      "unid Black-crowned/Yellow-crowned Night-Heron",     "Nycticorax nycticorax/Nyctanassa violacea",  "Yellow-crowned/Black-crowned Night Heron",
-  "Poecile atricapillus/hudsonicus",      "unid. Black-capped Chickadee/Boreal Chickadee",     "Poecile atricapillus/hudsonicus",  "Black-capped/Boreal Chickadee",  
-  "Polioptila caerulea/melanura",      "unid. Blue-gray/Black-tailed Gnatcatcher",     "Polioptila caerulea/melanura",  "Blue-gray/Black-tailed Gnatcatcher",  
-  "Porphyrio martinicus",      "Purple Gallinule",     "Porphyrio martinica",  "Purple Gallinule",  
-  "Psilorhinus morio",      "Brown Jay",     "Cyanocorax morio",  "Brown Jay",   
-  "Rallus crepitans/elegans",      "unid. Clapper/King Rail",     "Rallus elegans/crepitans",  "King/Clapper Rail",   
-  "Streptopelia chinensis",      "Spotted Dove",     "Spilopelia chinensis",  "Spotted Dove",  
-  "Sturnella magna/neglecta",      "unid. Eastern Meadowlark/Western Meadowlark",     "Sturnella neglecta/magna",  "Western/Eastern Meadowlark",  
-  "Tern sp.",      "unid. tern",     "Sterninae sp.",  "tern sp.",  
-  "Tringa melanoleuca/flavipes",      "unid. Greater Yellowlegs/Lesser Yellowlegs",     "Tringa flavipes/melanoleuca",  "Lesser/Greater Yellowlegs",  
-  "Trochilid sp.",      "unid. hummingbird",     "Trochilidae sp.",  "hummingbird sp.",  
+  "Poecile atricapillus/hudsonicus",      "unid. Black-capped Chickadee/Boreal Chickadee",     "Poecile atricapillus/hudsonicus",  "Black-capped/Boreal Chickadee",
+  "Polioptila caerulea/melanura",      "unid. Blue-gray/Black-tailed Gnatcatcher",     "Polioptila caerulea/melanura",  "Blue-gray/Black-tailed Gnatcatcher",
+  "Porphyrio martinicus",      "Purple Gallinule",     "Porphyrio martinica",  "Purple Gallinule",
+  "Psilorhinus morio",      "Brown Jay",     "Cyanocorax morio",  "Brown Jay",
+  "Rallus crepitans/elegans",      "unid. Clapper/King Rail",     "Rallus elegans/crepitans",  "King/Clapper Rail",
+  "Streptopelia chinensis",      "Spotted Dove",     "Spilopelia chinensis",  "Spotted Dove",
+  "Sturnella magna/neglecta",      "unid. Eastern Meadowlark/Western Meadowlark",     "Sturnella neglecta/magna",  "Western/Eastern Meadowlark",
+  "Tern sp.",      "unid. tern",     "Sterninae sp.",  "tern sp.",
+  "Tringa melanoleuca/flavipes",      "unid. Greater Yellowlegs/Lesser Yellowlegs",     "Tringa flavipes/melanoleuca",  "Lesser/Greater Yellowlegs",
+  "Trochilid sp.",      "unid. hummingbird",     "Trochilidae sp.",  "hummingbird sp.",
   "Uria aalge/lomvia",      "unid. Common Murre/Thick-billed Murre",     "Uria lomvia/aalge",  "Thick-billed/Common Murre",
   "Vermivora cyanoptera x chrysoptera",      "Brewster's Warbler (Golden-winged x Blue-winged)",     "Vermivora chrysoptera x cyanoptera (F1 hybrid)",  "Brewster's Warbler (hybrid)",
   "Vireo plumbeus/cassinii",      "unid. Plumbeous Vireo/Cassin's Vireo",     "Vireo cassinii/plumbeus",  "Cassin's/Plumbeous Vireo",
@@ -423,10 +424,10 @@ for (i in seq_len(nrow(name_map))) {
   inc_com <- name_map$incorrect_common[i]
   cor_sci <- name_map$correct_scientific[i]
   cor_com <- name_map$correct_common[i]
-  
+
   incorrect_idx <- which(df$scientific_name == inc_sci & df$common_name == inc_com)
   correct_idx   <- which(df$scientific_name == cor_sci & df$common_name == cor_com)
-  
+
   if (length(incorrect_idx) == 1 && length(correct_idx) == 1) {
     # transfer every non-clements col
     for (col in names(df)) {
@@ -442,7 +443,7 @@ for (i in seq_len(nrow(name_map))) {
       reorder_clements_first(df$scientific_name[correct_idx], df$scientific_name_clements2024[correct_idx])
     df$common_name[correct_idx] <-
       reorder_clements_first(df$common_name[correct_idx], df$common_name_clements2024[correct_idx])
-    
+
     # drop the incorrect row
     df <- df[-incorrect_idx, ]
   }
@@ -488,11 +489,11 @@ print(name_mismatches) # these are the same 99; makes sense.
 ca.conus.sp <- subset(df, !is.na(df[["regions_avibase8.17"]]))
 dim(avibase)-dim(ca.conus.sp) # no lost species
 bbs.sp <- subset(df, !is.na(df[["scientific_name_bbs2024"]]))
-dim(bbs2024)-dim(bbs.sp) # 0 lost species 
+dim(bbs2024)-dim(bbs.sp) # 0 lost species
 
 # **** FOR LATER/when editing for Western Hemisphere: re-write above section to automatically check that the rows are the ones with the semicolons, by initial dataset.
 
-# Change the yes/no columns to updated values reflecting current df rows 
+# Change the yes/no columns to updated values reflecting current df rows
 # --- Ensure the expected lookup columns exist so we don't get "column not found" errors ---
 lookup_cols <- c(
   "scientific_name_avibase8.17",
@@ -538,16 +539,16 @@ for (in_col in unique(unname(map_lookup_to_in))) {
   }
 }
 #in_avibase8.17 :
-#   no   yes 
-# 34502  1104 
-# 
+#   no   yes
+# 34502  1104
+#
 # in_bbs2024 :
-#   no   yes 
-# 34841   765 
-# 
+#   no   yes
+# 34841   765
+#
 # in_clements2024 :
-#   no   yes 
-# 11 35595 
+#   no   yes
+# 11 35595
 
 # Keep all the BBS species, and also the AviBase species that are in Canada and CONUS
 # ---- Final subsetting ----
@@ -585,7 +586,7 @@ df.ca.conus$status_CA_US48_USak[df.ca.conus$status_CA_US48_USak == "" | df.ca.co
 
 # Omit NA rows
 df_bbs_or_avibase <- df.ca.conus %>%
-  filter(!is.na(scientific_name_bbs2024) | !is.na(status_CA_US48_USak)) 
+  filter(!is.na(scientific_name_bbs2024) | !is.na(status_CA_US48_USak))
 
 dim(df_bbs_or_avibase) #1164 rows
 
@@ -598,10 +599,10 @@ dim(df_bbs_or_avibase) #1164 rows
 
 # Drop where all 3 areas are Rare/Accidental:
 df_bbs_or_avibase_no_rare <- df_bbs_or_avibase %>%
-  filter((status_CA_US48_USak != "Rare/Accidental; Rare/Accidental; Rare/Accidental") & 
-           (status_CA_US48_USak != "Rare/Accidental Near-threatened; Rare/Accidental Near-threatened; Rare/Accidental Near-threatened") & 
-           (status_CA_US48_USak != "Rare/Accidental Vulnerable; Rare/Accidental Vulnerable; Rare/Accidental Vulnerable") & 
-           (status_CA_US48_USak != "Rare/Accidental Vulnerable; Rare/Accidental Vulnerable; Rare/Accidental Vulnerable") | 
+  filter((status_CA_US48_USak != "Rare/Accidental; Rare/Accidental; Rare/Accidental") &
+           (status_CA_US48_USak != "Rare/Accidental Near-threatened; Rare/Accidental Near-threatened; Rare/Accidental Near-threatened") &
+           (status_CA_US48_USak != "Rare/Accidental Vulnerable; Rare/Accidental Vulnerable; Rare/Accidental Vulnerable") &
+           (status_CA_US48_USak != "Rare/Accidental Vulnerable; Rare/Accidental Vulnerable; Rare/Accidental Vulnerable") |
            !is.na(scientific_name_bbs2024))
 
 # indicate these remaining should be kept for ca.conus subset
@@ -611,14 +612,14 @@ dim(df_bbs_or_avibase_no_rare) #1121
 
 # Now work on omitting some of these species because they do not occur in Canada/CONUS continent.
 # To do this, create a subset for the omissions.
-# Subset where NA is in AOU_bbs2024... these are the full species (not hybrids) 
-# but may not actually be North American birds. 
+# Subset where NA is in AOU_bbs2024... these are the full species (not hybrids)
+# but may not actually be North American birds.
 df_bbs_or_avibase_no_rare1 <- df_bbs_or_avibase_no_rare %>%
   filter(is.na(AOU_bbs2024))
 dim(df_bbs_or_avibase_no_rare1) #356 rows with correct Canada list.
 # Export the list. Check them on BOW for their ranges.
 # If it is outside Canada / CONUS, drop it.
-write_csv(df_bbs_or_avibase_no_rare1, file.path(L0_dir,"df_bbs_or_avibase_no_rare_ca.conus_keep_or_not.csv"))
+write_csv(df_bbs_or_avibase_no_rare1, file.path(file_paths$CHECKLIST_L0,"df_bbs_or_avibase_no_rare_ca.conus_keep_or_not.csv"))
 
 # Some of these are found in AFR, AUS, EUR, MID, XX, and are very likely accidentals in CONUS/Canada.
 # After inspection, this list is too small to use as omission, and it includes some species
@@ -652,7 +653,7 @@ dim(df_bbs_or_avibase_no_rare2) #135 species
 # Vermivora bachmanii - all set
 # Vireo flavoviridis - entered by CR, plz checked. DONE
 
-df_bbs_or_avibase_no_rare1a<-read.csv(file.path(L0_dir,"df_bbs_or_avibase_no_rare_ca.conus_keep_or_not_checked.csv"))
+df_bbs_or_avibase_no_rare1a<-read.csv(file.path(file_paths$CHECKLIST_L0,"df_bbs_or_avibase_no_rare_ca.conus_keep_or_not_checked.csv"))
 head(df_bbs_or_avibase_no_rare1a)
 dim(df_bbs_or_avibase_no_rare1a) #356
 dim(df_bbs_or_avibase_no_rare1) #356
@@ -674,11 +675,11 @@ dim(ca.conus.splist) #785 species
 # drop the 'keep' column
 ca.conus.splist$keep<-NULL
 
-# Create a combined AOU column (AOU_bbs2024.combo) to provide an option for 
+# Create a combined AOU column (AOU_bbs2024.combo) to provide an option for
 # assigning subspecies to species when merging this list with interaction data.
 ca.conus.splist$AOU_bbs2024.combo<-ca.conus.splist$AOU_bbs2024
 
-# Grouping Rules provided by Jeff Hostetler @ BBS. 
+# Grouping Rules provided by Jeff Hostetler @ BBS.
 # Update the splist AOU.combo for each subspecies species (assign it to the
 # combo AOU). Make a selection for each subspecies group:
 
@@ -711,7 +712,7 @@ ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4130] <- 34120
 ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4123] <- 34120
 ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4125] <- 34120
 
-# 8  35670             Dark-eyed Junco (all forms) 
+# 8  35670             Dark-eyed Junco (all forms)
 # 05660 05670 05671 05680 05690 05677
 ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 5660] <- 35670
 ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 5670] <- 35670
@@ -756,7 +757,7 @@ ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4642] <- 34641
 # ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 5739] <- 35740
 # ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 5740] <- 35740
 
-# 34880                           American / Northwestern Crow; same species in Clements 
+# 34880                           American / Northwestern Crow; same species in Clements
 # 04880 04882 04890
 ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4880] <- 34880
 ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 4882] <- 34880
@@ -767,19 +768,19 @@ ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 1690] <- 31690
 ca.conus.splist$AOU_bbs2024.combo[ca.conus.splist$AOU_bbs2024 == 1691] <- 31690
 
 # Add Clements name for Northwestern Crow:
-#  https://birdsoftheworld.org/bow/species/amecro/cur/introduction: Published August 8, 2025. 
+#  https://birdsoftheworld.org/bow/species/amecro/cur/introduction: Published August 8, 2025.
 # Until recently, the American Crow in the northwest was classified as a separate species ("Northwestern Crow," Corvus caurinus), but because of extensive interbreeding with the Western American Crow (C. brachyrhynchos hesperis) in areas of co-occurrence, those in the northwest are now considered a subspecies of the American Crow (C. b. caurinus). We will assign all to American Crow.
-#  No common name in Clements for this species; assign American Crow 
-#"Corvus brachyrhynchos/caurinus",      "unid. American Crow/Northwestern Crow",     "Corvus brachyrhynchos",  "American Crow",  
-#"Corvus caurinus",      "Northwestern Crow",     "Corvus brachyrhynchos",  "American Crow",  
+#  No common name in Clements for this species; assign American Crow
+#"Corvus brachyrhynchos/caurinus",      "unid. American Crow/Northwestern Crow",     "Corvus brachyrhynchos",  "American Crow",
+#"Corvus caurinus",      "Northwestern Crow",     "Corvus brachyrhynchos",  "American Crow",
 ca.conus.splist$scientific_name_clements2024[ca.conus.splist$scientific_name == "Corvus brachyrhynchos/caurinus"] <- "Corvus brachyrhynchos"
 ca.conus.splist$common_name_clements2024[ca.conus.splist$common_name == "unid. American Crow/Northwestern Crow"] <- "American Crow"
 ca.conus.splist$scientific_name_clements2024[ca.conus.splist$scientific_name == "Corvus caurinus"] <- "Corvus brachyrhynchos caurinus"
 # There is no common name for the subspecies in Clements, but it exists in BBS obs data
-# so we will assign it American Crow here. 
+# so we will assign it American Crow here.
 ca.conus.splist$common_name_clements2024[ca.conus.splist$scientific_name_clements2024 == "Corvus brachyrhynchos caurinus"] <- "American Crow"
 
-## Create a new column which contains Genus species for the combined species above, 
+## Create a new column which contains Genus species for the combined species above,
 ## based on the Clements name. Here we assign the Clements name.
 ca.conus.splist$scientific_name_clements2024.combo<-ca.conus.splist$scientific_name_clements2024
 # Same for common name combo
@@ -818,24 +819,24 @@ sp.exclude <- "sp."
 
 # Filter out rows containing the string and count the remaining rows
 ca.conus.splist.knownsp <- ca.conus.splist %>%
-  filter(!str_detect(common_name_bbs2024, unid_exclude)) 
+  filter(!str_detect(common_name_bbs2024, unid_exclude))
 sum(grepl(unid_exclude, ca.conus.splist$common_name_bbs2024)) # 68 unique "unid."
 dim(ca.conus.splist.knownsp) # 697 without "unid."
 dim(ca.conus.splist)-dim(ca.conus.splist.knownsp) # 88 rows of "unid."
 
 ca.conus.splist.knownsp1 <- ca.conus.splist.knownsp %>%
-  filter(!str_detect(common_name_clements2024, sp.exclude)) 
+  filter(!str_detect(common_name_clements2024, sp.exclude))
 sum(grepl(sp.exclude, ca.conus.splist$common_name_clements2024)) # 24 unique "unid."
 dim(ca.conus.splist.knownsp1) # 683 without "unid." and "sp."
 
 # Any remaining species are either full species or hybrid.
 
-# The number of unique species is: 
+# The number of unique species is:
 length(unique(ca.conus.splist$scientific_name_clements2024)) #777
 length(unique(ca.conus.splist$scientific_name_clements2024.combo)) #760
 length(unique(ca.conus.splist$common_name_clements2024)) # 770
 length(unique(ca.conus.splist$common_name_clements2024.combo)) # 760
-# Some species lack a common name and American Crow is twice because of the 
+# Some species lack a common name and American Crow is twice because of the
 # merging of Northwestern and American Crows:
 ca.conus.splist$common_name_clements2024[duplicated(ca.conus.splist$common_name_clements2024)]
 ca.conus.splist$scientific_name_clements2024[duplicated(ca.conus.splist$scientific_name_clements2024)]
@@ -844,7 +845,7 @@ ca.conus.splist$common_name_clements2024.combo[duplicated(ca.conus.splist$common
 ca.conus.splist$scientific_name_clements2024.combo[duplicated(ca.conus.splist$scientific_name_clements2024.combo)]
 
 # --- Export the final 785 rows (777 species including subspecies) for the CANADA & CONUS subset as a CSV (this includes unid. and sp.)
-write_csv(ca.conus.splist, file.path(L1_dir,"canada.conus.splist_L1.csv"))
+write_csv(ca.conus.splist, file.path(file_paths$CHECKLIST_L1,"canada.conus.splist_L1.csv"))
 
 #--- Export the final 785 rows for the CANADA & CONUS subset as a CSV without extra columns
 splist_CanadaAKCONUS_L1<-subset(ca.conus.splist, select=c("scientific_name_clements2024.combo",
@@ -855,4 +856,4 @@ splist_CanadaAKCONUS_L1<-subset(ca.conus.splist, select=c("scientific_name_cleme
                                                           "scientific_name_bbs2024",
                                                           "AOU_bbs2024",
                                                           "in_bbs2024"))
-write_csv(splist_CanadaAKCONUS_L1, file.path(L1_dir,"splist_CanadaAKCONUS_L1.csv"))
+write_csv(splist_CanadaAKCONUS_L1, file.path(file_paths$CHECKLIST_L1,"splist_CanadaAKCONUS_L1.csv"))

@@ -19,8 +19,10 @@
 # Paths to set and replace "filepath" with your computer's filepath:
 # The L0 and L1 data folders are within the Avian-Interaction-Working repository's folder:
 DATA_FOLDER <-  "/path/to/data_respository/top_folder"
-# Path for for L0 checklists (Clements etc):
-CHECKLIST_FOLDER = file.path(DATA_FOLDER, "L0", "species_checklists")
+
+# Path for for L0 and L1 checklists (Clements etc):
+CHECKLIST_L0 = file.path(DATA_FOLDER, "L0", "species_checklists")
+CHECKLIST_L1 = file.path(DATA_FOLDER, "L1", "species_checklists")
 # Note: currently using hard-coded folder path for curated L1 checklist.
 
 # Add comments or save alternate paths using comments, for example:
