@@ -110,45 +110,66 @@ read_avibase <- function(region_code, url, L0_dir) {
   return(tab)
 }
 
-#### 2. Define Region URLs ####
-# Major Regions
-region_urls <- list(
-  NAM = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=NAM&version=text",
-  CAM = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=CAM&version=text",
-  SAM = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=SAM&version=text",
-  EUR = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=EUR&version=text",
-  AFR = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=AFR&version=text",
-  ASI = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=ASI&version=text",
-  MID = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=MID&version=text",
-  OCE = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=OCE&version=text",
-  AUS = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=AUS&version=text",
-  PAC = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=PAC&version=text",
-  hol = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=hol&version=text",
-  nea = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=nea&version=text",
-  pal = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=pal&version=text",
-  # Oceans:
-  oaq = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=oaq&version=text",
-  oat = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=oat&version=text",
-  # Arctic Ocean; blank
-#  oar = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=oar&version=text",
-  oin = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=oin&version=text",
-  opa = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=opa&version=text",
-  XX = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=XX&version=text",
-  CA   = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=CA&version=text",
-  #US:
-  US48 = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=US48&version=text",
-  USak   = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=USak&version=text",
-  UShi = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=UShi&version=text",
-  #Caribbean:
-  CAR = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=CAR&version=text",
-  nan = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=nan&version=text",
-  TT = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=TT&version=text"
-)
+################################################################################
 
-#### 3. Run all regions and combine them ####
-all_tables <- imap(region_urls, ~ read_avibase(.y, .x, file_paths$CHECKLIST_L0))
+########## TEMPORARILY REMOVING DIRECT DOWNLOAD SINCE AVIBASE WAS UPDATED FOR
+########## 2025 CLEMENTS CHECKLIST
+# INSTEAD USING ALREADY DOWNLOADED CHECKLISTS WITH 2024 DATA IN REPO
 
+
+# #### 2. Define Region URLs ####
+# # Major Regions
+# region_urls <- list(
+#   NAM = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=NAM&version=text",
+#   CAM = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=CAM&version=text",
+#   SAM = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=SAM&version=text",
+#   EUR = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=EUR&version=text",
+#   AFR = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=AFR&version=text",
+#   ASI = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=ASI&version=text",
+#   MID = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=MID&version=text",
+#   OCE = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=OCE&version=text",
+#   AUS = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=AUS&version=text",
+#   PAC = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=PAC&version=text",
+#   hol = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=hol&version=text",
+#   nea = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=nea&version=text",
+#   pal = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=pal&version=text",
+#   # Oceans:
+#   oaq = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=oaq&version=text",
+#   oat = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=oat&version=text",
+#   # Arctic Ocean; blank
+# #  oar = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=oar&version=text",
+#   oin = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=oin&version=text",
+#   opa = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=opa&version=text",
+#   XX = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=XX&version=text",
+#   CA   = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=CA&version=text",
+#   #US:
+#   US48 = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=US48&version=text",
+#   USak   = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=USak&version=text",
+#   UShi = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=UShi&version=text",
+#   #Caribbean:
+#   CAR = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=CAR&version=text",
+#   nan = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=nan&version=text",
+#   TT = "https://avibase.bsc-eoc.org/checklist.jsp?lang=EN&p2=1&list=clements&region=TT&version=text"
+# )
+#
+# #### 3. Run all regions and combine them ####
+# all_tables <- imap(region_urls, ~ read_avibase(.y, .x, file_paths$CHECKLIST_L0))
+
+################################################################################
+
+# 2024 avibase data
+
+### Load in 2024 version of avibase data
+all_tables <- list.files(file_paths$CHECKLIST_L0, pattern = "8.17_", full.names = T)
+all_tables <- lapply(all_tables, read.csv)
+
+# Fix nan values being input as numeric instead of character in Nan region table
+all_tables[[11]]$region <- as.character(all_tables[[11]]$region)
+
+# Generate full data table
 all_data <- bind_rows(all_tables)
+
+################################################################################
 
 #### 4. Create wide status columns ####
 status_wide <- all_data %>%
