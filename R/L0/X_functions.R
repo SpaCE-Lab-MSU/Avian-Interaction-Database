@@ -1,4 +1,4 @@
-# L0_functions.R
+# X_functions.R
 # TITLE:          Avian Interaction Pairs L0 Data Stitching together CSVs into 1
 # AUTHORS:        Phoebe Zarnetske, Pat Bills, Emily Parker
 # COLLABORATORS:  Vincent Miele, Stephane Dray
@@ -28,7 +28,7 @@ source(here::here('R/config.R'))
 # put this statement in your script or notebook after sourcing this file
 # and put the alternate config files,
 # for example, at the top of your script...
-# source(here::here("L0_functions.R")
+# source(here::here("X_functions.R")
 # file_paths <- get_file_paths(here::here('testdata.R'))
 
 file_paths <- get_file_paths()
@@ -791,7 +791,7 @@ standardize_text_column <- function(text_vector, corrections.df) {
 read_valid_interaction_types <- function(file_paths, interactions_def_file_name = NULL) {
   # set the default metadata file, but use a parameter to allow for variations
   if(is.null(interactions_def_file_name)) {
-    interactions_def_file <- file.path(file_paths$L0, 'AvianInteractionData_metadata_interactiondefinitions.csv')
+    interactions_def_file <- file.path(file_paths$L0, 'aux_interaction_defs.csv')
   }
 
   interaction_types <- read.csv(interactions_def_file)
@@ -846,7 +846,7 @@ fix_interaction_errors <- function(intxns.df){
 
   # fix typos in the interaction column using
   # text file with errors that have been discovered and cataloged
-  corrections_file <- here::here("R/L0/interaction_text_corrections.csv")
+  corrections_file <- here::here("R/L0/aux_text_corrections.csv")
   interaction_corrections.df <- read_csv(corrections_file,show_col_types = FALSE)
   intxns.df$interaction <- standardize_text_column(intxns.df$interaction, interaction_corrections.df )
 

@@ -37,7 +37,7 @@ cleaning but taxonomic names as entered (older names, typos, etc)
 # Clear all existing data
 rm(list=ls())
 
-AvianInteractionData_L1_file <-  "AvianInteractionData_L1.csv"
+AvianInteractionData_L1_file <-  "ain_all.csv"
 
 ```
 
@@ -47,19 +47,20 @@ Curated Species checklist:
 
 - Current selected species list for Canada/Alaska/CONUS =
   combined checklist based on Clements/eBird v2024, Avibase v8.17, BBS v2024:
- ( output via Working repo, from `R/L1/AvianInteractionData_specieslists_Canada_CONUS_L1.R` ) = splist_CanadaAKCONUS_L1.csv
+ ( output via Working repo, from `R/L1/3_subset_species_lists.R` ) = spp_joint_cac_colsubset.csv
+
 
 
 ### DATA OUTPUT:
 
 L1 Canada, Alaska, CONUS species from L1 Avian Interaction Database 
-  (`AvianInteractionData_L1.csv`); saved as:
+  (`ain_all.csv`); saved as:
 
 ```{r}
-AvianInteractionData_CanadaAKCONUS_L1_file <- "AvianInteractionData_CanadaAKCONUS_L1.csv"
-AvianInteractionData_CanadaAKCONUS_breeding_file <- "AvianInteractionData_CanadaAKCONUS_breeding_L1.csv"
+AvianInteractionData_CanadaAKCONUS_L1_file <- "ain_cac.csv"
+AvianInteractionData_CanadaAKCONUS_breeding_file <- "ain_cac_breeding.csv"
 AvianInteractionData_L1_not_CanadaAKCONUS_file <- 
-  "AvianInteractionData_L1_not_CanadaAKCONUS.csv"
+  "ain_notcac.csv"
 today_date_string <- format(Sys.Date(),"%Y-%m-%d")
 
 ```
@@ -86,10 +87,10 @@ File paths used for this run:
 #| echo: false
 
 # functions used by all 
-source(here::here('R/L0/L0_functions.R'))
+source(here::here('R/L0/X_functions.R'))
 # functions for this process to reduce this script size
 # and load libraries used here
-source(here::here('R/L1/L1_taxonomy_functions.R'))
+source(here::here('R/L1/X_taxonomy_functions.R'))
 
 file_paths <- get_file_paths()
 
@@ -106,11 +107,11 @@ built from multiple L0 lists*
 #### Curated List
 
 October 2025: new curated list curated by PLZ using Clements, AviBase, BBS etc. 
-See `R/L1/AvianInteractionData_specieslists_Canada_CONUS_L1.R`
+See `R/L1/3_subset_species_lists.R`
 
 ```{r}
 
-current_species_list_filename <- "splist_CanadaAKCONUS_L1.csv"
+current_species_list_filename <- "spp_joint_cac_colsubset.csv"
 splist_filepath <- file.path(file_paths$L1,"species_checklists",current_species_list_filename )
 splist <- read.csv(splist_filepath)
 print(paste("Read in ", nrow(splist), "entries from checklist file", splist_filepath))

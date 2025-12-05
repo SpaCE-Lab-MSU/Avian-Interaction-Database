@@ -22,7 +22,7 @@ date-format: iso
 -   DATA INPUT: Data entry CSV files in L0 folder
 -   DATA OUTPUT: L0 data: AvianInteractionData_L0.csv
 -   DATE: 20 Mar 2023 - AUGUST 2025
--   Next script to run: R/L1/AvianInteractionData_L1.qmd
+-   Next script to run: ....
 
 **Run Date** 
 
@@ -47,7 +47,7 @@ The code here saves the file in the Data folder in L0 in the configuration of `f
 *First set the file to save*
 
 ```{r}
-stitched_L0_file <- "AvianInteractionData_L0_stitch_20251204.csv" 
+stitched_L0_file <- "ain_all_raw.csv" 
 ```
 
 
@@ -59,9 +59,9 @@ stitched_L0_file <- "AvianInteractionData_L0_stitch_20251204.csv"
 #| warnings: false
 
 
-source(here::here('R/L0/L0_functions.R'))
+source(here::here('R/L0/X_functions.R'))
 
-# This uses functions in R/L0/L0_functions_files which also imports R/config.R
+# This uses functions in R/L0/X_functions_files which also imports R/config.R
 # which sets the locations of the data folders. 
 
 file_paths <- get_file_paths() 
@@ -117,14 +117,14 @@ nrow(intxnsL0sp$intxns)
 ```
 
 Transform 'long' format along sources from entered wide format.\
-See documentation for this function in L0_functions.R
+See documentation for this function in X_functions.R
 
 N Rows after transform:
 
 ```{r}
 intxnsL0sp$intxns <- sources_wide_to_long(intxnsL0sp$intxns)
 # intxnsL0sp is a list with several items to track counts of things and files
-# see L0_functions.R for details
+# see X_functions.R for details
 
 nrow(intxnsL0sp$intxns)
 

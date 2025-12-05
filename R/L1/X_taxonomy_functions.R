@@ -1,4 +1,4 @@
-# L1_taxonomy_functions.R
+# X_taxonomy_functions.R
 # TITLE:          Functions to handle taxonomic processing for L0 to L1 cleaning
 # AUTHORS:        Phoebe Zarnetske, Patrick Bills
 # COLLABORATORS:  Vincent Miele, Stephane Dray

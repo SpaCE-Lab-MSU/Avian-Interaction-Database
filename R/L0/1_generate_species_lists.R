@@ -13,7 +13,7 @@
 # DATA OUTPUT:    (1) L0 Clements/eBird Cheklist v2024
 #                 (2) BBS List L0 data: bbs_specieslist_2024_L0.csv - this is a
 #                     copy of the raw data, just omitting the top lines without data
-#                 (3) CA.CONUS list L0 data: avibase_ca.conus_splist_2024_L0.csv
+#                 (3) CA.CONUS list L0 data:spp_avibase_cac_2024.csv
 #                   - this is data pulled from the AviBase species list website
 #                   and formatted
 #                 (4) AviBase Global list, by region; version 8.17 Nov 2024 list
@@ -22,7 +22,7 @@
 # NOTES:          bbs_specieslist_2024_L1.csv is produced in bbs_specieslist_L1.R
 #
 #               Next script to run: bbs_specieslist_L1.R or AvianInteractionData_specieslists_L1.R or
-#                           AvianInteractionData_specieslists_Canada_CONUS_L1.R
+#                           3_subset_species_lists.R
 #               NOTES: check out this site for code w BBS: https://rdrr.io/github/davharris/mistnet/src/extras/BBS-analysis/data_extraction/data-extraction.R
 #               For other types of lists check out: https://datazone.birdlife.org/search
 #               which has data on migratory status, conservation status, etc.
@@ -48,7 +48,7 @@ file_paths <- get_file_paths()
 clements2024<-read.csv("https://www.birds.cornell.edu/clementschecklist/wp-content/uploads/2024/10/eBird-Clements-v2024-integrated-checklist-October-2024-rev.csv")
 
 # Export this as its original filename for final cleaning in L1 script.
-write.csv(clements2024, file.path(file_paths$CHECKLIST_L0,"eBird-Clements-v2024-integrated-checklist-October-2024-rev.csv"), fileEncoding="UTF-8", row.names=F)
+write.csv(clements2024, file.path(file_paths$CHECKLIST_L0,"spp_joint_all.csv"), fileEncoding="UTF-8", row.names=F)
 
 #### (2) BBS List ####
 # Below section is modified from: https://rdrr.io/github/davharris/mistnet/src/extras/BBS-analysis/data_extraction/species-handling.R
@@ -56,9 +56,9 @@ write.csv(clements2024, file.path(file_paths$CHECKLIST_L0,"eBird-Clements-v2024-
 # Read in the SpeciesList file:
 # Reading in a copy placed in the L0 directory on October 22, 2024, and renamed BBS2024_SpeciesListL0.txt
 # The original file SpeciesList.csv (from 2024 BBS release) is here: https://www.sciencebase.gov/catalog/item/66d9ed16d34eef5af66d534b
-guess_encoding(file.path(file_paths$CHECKLIST_L0,"BBS2024_SpeciesListL0.csv"))
+guess_encoding(file.path(file_paths$CHECKLIST_L0,"spp_bbs_2024_raw.csv"))
 #UTF-8
-bbs.splist.2024<-read.csv(file.path(file_paths$CHECKLIST_L0,"BBS2024_SpeciesListL0.csv"),fileEncoding="UTF-8")
+bbs.splist.2024<-read.csv(file.path(file_paths$CHECKLIST_L0,"spp_bbs_2024_raw.csv"),fileEncoding="UTF-8")
 
 # Make a column for genus_species
 bbs.splist.2024$genus_species<- do.call(paste, c(bbs.splist.2024[c("Genus", "Species")], sep = " "))
@@ -67,7 +67,7 @@ dim(bbs.splist.2024)
 
 # The species re-assignment checking will occur in the next script.
 # Export the cleaned data (note the encoding to maintain special characters)
-write.csv(bbs.splist.2024, file.path(file_paths$CHECKLIST_L0,"bbs_splist_2024_L0.csv"), fileEncoding="UTF-8", row.names=F)
+write.csv(bbs.splist.2024, file.path(file_paths$CHECKLIST_L0,"spp_bbs_2024_clean.csv"), fileEncoding="UTF-8", row.names=F)
 
 # Next script to run: bbs_specieslist_L1.R
 # Then, if combining with bbs_obs data: AvianInteractionData_L1.R
@@ -200,14 +200,14 @@ cat("Number of species in global.splist:", n_distinct(global.splist$scientific_n
 ca.conus <- global.splist %>%
   filter(str_detect(regions, "\\bCA\\b|\\bUS48\\b|\\bUSak\\b"))
 dim(ca.conus) #1104 species
-write.csv(ca.conus, file.path(file_paths$CHECKLIST_L0,"avibase_ca.conus_splist_2024_L0.csv"), fileEncoding="UTF-8", row.names=F)
+write.csv(ca.conus, file.path(file_paths$CHECKLIST_L0,"spp_avibase_cac_2024.csv"), fileEncoding="UTF-8", row.names=F)
 
 #### Western Hemisphere ####
 west.hsphere <- global.splist %>%
   filter(str_detect(regions, "\\bCA\\b|\\bUS48\\b|\\bUSak\\b|\\bUShi\\b|\\bNAM|\\b|\\bCAM|\\b|\\bSAM|\\b|\\bCAR|\\b|\\boaq|\\b|\\boat|\\b|\\bopa|\\b|\\bXX|\\b"))
 dim(west.hsphere)
-write.csv(west.hsphere, file.path(file_paths$CHECKLIST_L0,"avibase_west.hsphere_splist_2024_L0.csv"), fileEncoding="UTF-8", row.names=F)
+write.csv(west.hsphere, file.path(file_paths$CHECKLIST_L0,"spp_avibase_westh_2024.csv"), fileEncoding="UTF-8", row.names=F)
 
 # Save Global lookup & species list
-write.csv(global.splist, file.path(file_paths$CHECKLIST_L0,"avibase_global_splist_2024_L0.csv"), fileEncoding = "UTF-8", row.names = FALSE)
+write.csv(global.splist, file.path(file_paths$CHECKLIST_L0,"spp_avibase_all_2024.csv"), fileEncoding = "UTF-8", row.names = FALSE)
 

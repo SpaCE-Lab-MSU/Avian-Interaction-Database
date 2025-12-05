@@ -21,8 +21,8 @@
 DATA_FOLDER <-  "/path/to/data_respository/top_folder"
 
 # Path for for L0 and L1 checklists (Clements etc):
-CHECKLIST_L0 = file.path(DATA_FOLDER, "L0", "species_checklists")
-CHECKLIST_L1 = file.path(DATA_FOLDER, "L1", "species_checklists")
+CHECKLIST_L0 = "./data/L0/species_checklists"
+CHECKLIST_L1 = "./data/L1/species_checklists"
 # Note: currently using hard-coded folder path for curated L1 checklist.
 
 # Add comments or save alternate paths using comments, for example:

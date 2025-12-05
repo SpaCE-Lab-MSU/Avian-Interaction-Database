@@ -30,13 +30,13 @@ cleaning but taxonomic names as entered (older names, typos, etc)
 
 *Set the interactions database file to read from here:*
 
-( output From `R/L0/AvianInteractionData_L0_stitch.R` )
+( output From `R/L0/2_stitch_species.R` )
 
 ```{r}
 # Clear all existing data
 rm(list=ls())
 
-AvianInteractionData_L0_file <-  "AvianInteractionData_L0_stitch_20251204.csv"
+AvianInteractionData_L0_file <-  "ain_all_raw.csv"
 
 ```
 
@@ -51,7 +51,7 @@ Curated Species checklist:
 - Current selected species list =
   combined checklist based on Clements/eBird v2024, Avibase v8.17, BBS v2024:
   output from `R/L0/AvianInteractionData_specieslists_L1.R` (global) or
-  `R/L0/AvianInteractionData_specieslists_Canada_CONUS_L1.R` (North America)
+  `R/L0/3_subset_species_lists.R` (North America)
   - used for species lookup / matching
 
 **Manual Taxonomic Resolution Overrides Table:**
@@ -62,7 +62,7 @@ as entered to match the current checklist.  Update the code below
 ```{r}
 #| echo: false
 
-manual_taxonomic_resolutions_file_name<- here::here('R/L1', "manual_taxonomic_resolutions_L1_2025-10.csv")
+manual_taxonomic_resolutions_file_name<- here::here('R/L1', "aux_taxonomy_resolutions_202510.csv")
 ```
 
 
@@ -72,20 +72,20 @@ manual_taxonomic_resolutions_file_name<- here::here('R/L1', "manual_taxonomic_re
 Taxonomic Resolution Table: 
 
 Avian Interaction Database, cleaned and with taxonomic names resolved to 
-match checklists listed above: `AvianInteractionData_L1.csv`
+match checklists listed above: `ain_all.csv`
 
 ```{r}
-AvianInteractionData_L1_file <- "AvianInteractionData_L1.csv" 
+AvianInteractionData_L1_file <- "ain_all.csv" 
 
 today_date_string <- format(Sys.Date(),"%Y-%m-%d")
-AvianInteractionData_L1_taxonomy_table_file <- "AvianInteractionData_L1_taxonomy_resolutions.csv"
+AvianInteractionData_L1_taxonomy_table_file <- "aux_taxonomy_resolutions.csv"
 
 ```
 
 
 ### Next script to run: 
 
-- AvianInteractionData_Canada-AK-CONUS_L1.qmd - this cleans further (e.g., breeding/non-breeding) and some of that needs to go in general cleaning (either here or in another script).
+- 5_subset_network.qmd - this cleans further (e.g., breeding/non-breeding) and some of that needs to go in general cleaning (either here or in another script).
 
 
 ### NOTES
@@ -159,10 +159,10 @@ File paths used for this run:
 #| echo: false
 
 # functions used by all 
-source(here::here('R/L0/L0_functions.R'))
+source(here::here('R/L0/X_functions.R'))
 # functions for this process to reduce this script size
 # and load libraries used here
-source(here::here('R/L1/L1_taxonomy_functions.R'))
+source(here::here('R/L1/X_taxonomy_functions.R'))
 
 file_paths <- get_file_paths()
 
@@ -186,11 +186,11 @@ AOUcombo.index column (= lumps BBS subspecies into species)for use w BBS AOU ind
 **Current**
 
 September 2025: new curated list curated by PLZ using Clements, AVIBase, BBS etc. 
-See `R/L1/AvianInteractionData_specieslists_Canada_CONUS_L1.R`
+See `R/L1/3_subset_species_lists.R`
 
 ```{r}
 
-current_species_list_filename <- "canada.conus.splist_L1.csv"
+current_species_list_filename <- "spp_joint_cac.csv"
 splist2024_filepath <- file.path(file_paths$L1,"species_checklists",current_species_list_filename )
 splist2024 <- read.csv(splist2024_filepath)
 print(paste("Read in ", nrow(splist2024), "entries from checklist file", splist2024_filepath))
@@ -205,7 +205,7 @@ Read in the full check list the official eBird/Clements v2024 checklist
 #| label: read_clements
 
 
-checklist_filename <- "eBird-Clements-v2024-integrated-checklist-October-2024-rev.csv"
+checklist_filename <- "spp_joint_all.csv"
 checklist.orig <- read.csv(file.path(file_paths$CHECKLIST_L0,checklist_filename))
 print(paste("Read in ", nrow(checklist.orig), "entries from checklist file", checklist_filename))
 ```
@@ -257,7 +257,7 @@ print(paste("read in ", nrow(int.raw), "records from ", full_path_stitched_file)
 
 ### Final Interaction Data Cleaning/Corrections
 
-Most of these filters and adjustments are now made during the L0_stitch process
+Most of these filters and adjustments are now made during the 2_stitch_species process
 but were are ensuring the data is clean prior to matching taxonomy
 
 
@@ -555,7 +555,7 @@ print(dim(unique.sp.raw)) #3913 # May 29, 2025: 3889; Sept. 29, 2025: 3879; Oct 
 
 Create list of unique scientific_name.raw and common_name.raw pairs with 
 formatting adjustments, stacking and collecting anything in sp1 and sp2. 
-See documentation in `L1_taxonomy_functions.R` script for details
+See documentation in `X_taxonomy_functions.R` script for details
 
 *note:  since adjustments/corrections to species were added to L0 cleaning 
 process, there should be very few differences between 'raw' and 'edited' 
@@ -740,7 +740,7 @@ October 6, 2025: 404
 
 ## Fuzzy Matching of Scientific Name to checklist
 
-Use fuzzy logic function ( see L1_taxonomy_functions.R ) to find closest match from the CHECKLIST reference list
+Use fuzzy logic function ( see X_taxonomy_functions.R ) to find closest match from the CHECKLIST reference list
 Function to find the closest match with a similarity score, try and determine what misspellings exist 
 
 

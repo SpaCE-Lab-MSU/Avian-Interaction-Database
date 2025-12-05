@@ -7,19 +7,19 @@
 #                 ****See AvianInteractionData_specieslists_L1.R for the
 #                 comprehensive global list.
 #
-#                 Reads in: (1) avibase_ca.conus_splist_2024_L0.csv (created in
-#                 R/L0/AvianInteractionData_specieslists_L0.R) = CA-CONUS List,
+#                 Reads in: (1) spp_avibase_cac_2024.csv (created in
+#                 R/L0/1_generate_species_lists.R) = CA-CONUS List,
 #                 which is the AviBase Canada list + AviBase Lower 48 US +
 #                 AviBase Alaska list (taxonomy from Clements 2024)
 #                 (2) Clements-eBird 2024 list
 #                 (3) BBS 2024 release
 # AUTHORS:        Phoebe Zarnetske
 # COLLABORATORS:  Vincent Miele, Stephane Dray, Emily Parker, Pat Bills
-# DATA INPUT:     L0 data: avibase_ca.conus_splist_2024_L0.csv,
-#                         eBird-Clements-v2024-integrated-checklist-October-2024-rev.csv,
-#                         bbs_splist_2024_L0.csv
-#                     all from AvianInteractionData_specieslists_L0.R
-# DATA OUTPUT:    L1 data: canada.conus.splist_L1.CSV; splist_CanadaAKCONUS_L1.csv (column subset)
+# DATA INPUT:     L0 data: spp_avibase_cac_2024.csv,
+#                         spp_joint_all.csv,
+#                         spp_bbs_2024_clean.csv
+#                     all from 1_generate_species_lists.R
+# DATA OUTPUT:    L1 data: spp_joint_cac.csv; spp_joint_cac_colsubset.csv (column subset)
 # PROJECT:        Avian Interaction Database & avian-meta-network
 # DATE:           17 January 2022 - 5 Nov 2025
 #
@@ -38,7 +38,7 @@ source("R/config.R")
 file_paths <- get_file_paths()
 
 #### Read in AviBase species list: all species in Canada and CONUS (with Clements 2024 taxonomy)
-avibase<-read.csv(file.path(file_paths$CHECKLIST_L0,"avibase_ca.conus_splist_2024_L0.csv"), fileEncoding="UTF-8")
+avibase<-read.csv(file.path(file_paths$CHECKLIST_L0,"spp_avibase_cac_2024.csv"), fileEncoding="UTF-8")
 
 # Name columns for merging later
 names(avibase)
@@ -49,7 +49,7 @@ avibase <- avibase %>% arrange(scientific_name)
 head(avibase)
 
 #### Official 2024 eBird & Clements checklist
-clements2024<-read.csv(file.path(file_paths$CHECKLIST_L0,"eBird-Clements-v2024-integrated-checklist-October-2024-rev.csv"))
+clements2024<-read.csv(file.path(file_paths$CHECKLIST_L0,"spp_joint_all.csv"))
 
 # Clements List: Name the columns for merging later
 clements2024<-subset(clements2024, select=c("English.name","scientific.name",
@@ -70,7 +70,7 @@ head(clements2024)
 
 #### BBS List 2024: all species in BBS (the 2024 release which includes all
 # BBS observed species as of 2023)
-bbs2024<-read.csv(file.path(file_paths$CHECKLIST_L0,"bbs_splist_2024_L0.csv"), fileEncoding="UTF-8")
+bbs2024<-read.csv(file.path(file_paths$CHECKLIST_L0,"spp_bbs_2024_clean.csv"), fileEncoding="UTF-8")
 
 bbs2024$list<-"BBS 2024"
 bbs2024 <- bbs2024 %>%
@@ -619,7 +619,7 @@ df_bbs_or_avibase_no_rare1 <- df_bbs_or_avibase_no_rare %>%
 dim(df_bbs_or_avibase_no_rare1) #356 rows with correct Canada list.
 # Export the list. Check them on BOW for their ranges.
 # If it is outside Canada / CONUS, drop it.
-write_csv(df_bbs_or_avibase_no_rare1, file.path(file_paths$CHECKLIST_L0,"df_bbs_or_avibase_no_rare_ca.conus_keep_or_not.csv"))
+write_csv(df_bbs_or_avibase_no_rare1, file.path(file_paths$CHECKLIST_L0,"spp_bbs_avibase_no_rare_to_check.csv"))
 
 # Some of these are found in AFR, AUS, EUR, MID, XX, and are very likely accidentals in CONUS/Canada.
 # After inspection, this list is too small to use as omission, and it includes some species
@@ -653,7 +653,7 @@ dim(df_bbs_or_avibase_no_rare2) #135 species
 # Vermivora bachmanii - all set
 # Vireo flavoviridis - entered by CR, plz checked. DONE
 
-df_bbs_or_avibase_no_rare1a<-read.csv(file.path(file_paths$CHECKLIST_L0,"df_bbs_or_avibase_no_rare_ca.conus_keep_or_not_checked.csv"))
+df_bbs_or_avibase_no_rare1a<-read.csv(file.path(file_paths$CHECKLIST_L0,"spp_bbs_avibase_no_rare_checked.csv"))
 head(df_bbs_or_avibase_no_rare1a)
 dim(df_bbs_or_avibase_no_rare1a) #356
 dim(df_bbs_or_avibase_no_rare1) #356
@@ -845,7 +845,7 @@ ca.conus.splist$common_name_clements2024.combo[duplicated(ca.conus.splist$common
 ca.conus.splist$scientific_name_clements2024.combo[duplicated(ca.conus.splist$scientific_name_clements2024.combo)]
 
 # --- Export the final 785 rows (777 species including subspecies) for the CANADA & CONUS subset as a CSV (this includes unid. and sp.)
-write_csv(ca.conus.splist, file.path(file_paths$CHECKLIST_L1,"canada.conus.splist_L1.csv"))
+write_csv(ca.conus.splist, file.path(file_paths$CHECKLIST_L1,"spp_joint_cac.csv"))
 
 #--- Export the final 785 rows for the CANADA & CONUS subset as a CSV without extra columns
 splist_CanadaAKCONUS_L1<-subset(ca.conus.splist, select=c("scientific_name_clements2024.combo",
@@ -856,4 +856,4 @@ splist_CanadaAKCONUS_L1<-subset(ca.conus.splist, select=c("scientific_name_cleme
                                                           "scientific_name_bbs2024",
                                                           "AOU_bbs2024",
                                                           "in_bbs2024"))
-write_csv(splist_CanadaAKCONUS_L1, file.path(file_paths$CHECKLIST_L1,"splist_CanadaAKCONUS_L1.csv"))
+write_csv(splist_CanadaAKCONUS_L1, file.path(file_paths$CHECKLIST_L1,"spp_joint_cac_colsubset.csv"))
