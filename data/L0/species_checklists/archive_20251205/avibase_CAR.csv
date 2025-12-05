@@ -1,0 +1,819 @@
+common_name,scientific_name,status,order,family,region
+White-faced Whistling-Duck,Dendrocygna viduata,Rare/Accidental,ANSERIFORMES,Anatidae,CAR
+Black-bellied Whistling-Duck,Dendrocygna autumnalis,,ANSERIFORMES,Anatidae,CAR
+West Indian Whistling-Duck,Dendrocygna arborea,Endemic Near-threatened,ANSERIFORMES,Anatidae,CAR
+Fulvous Whistling-Duck,Dendrocygna bicolor,,ANSERIFORMES,Anatidae,CAR
+Snow Goose,Anser caerulescens,,ANSERIFORMES,Anatidae,CAR
+Ross's Goose,Anser rossii,Rare/Accidental,ANSERIFORMES,Anatidae,CAR
+Greater White-fronted Goose,Anser albifrons,Rare/Accidental,ANSERIFORMES,Anatidae,CAR
+Brant,Branta bernicla,Rare/Accidental,ANSERIFORMES,Anatidae,CAR
+Canada Goose,Branta canadensis,,ANSERIFORMES,Anatidae,CAR
+Tundra Swan,Cygnus columbianus,Rare/Accidental,ANSERIFORMES,Anatidae,CAR
+Orinoco Goose,Oressochen jubatus,Rare/Accidental Near-threatened,ANSERIFORMES,Anatidae,CAR
+Egyptian Goose,Alopochen aegyptiaca,Introduced species,ANSERIFORMES,Anatidae,CAR
+Common Shelduck,Tadorna tadorna,Rare/Accidental,ANSERIFORMES,Anatidae,CAR
+Muscovy Duck,Cairina moschata,Introduced species,ANSERIFORMES,Anatidae,CAR
+Wood Duck,Aix sponsa,,ANSERIFORMES,Anatidae,CAR
+Garganey,Spatula querquedula,Rare/Accidental,ANSERIFORMES,Anatidae,CAR
+Blue-winged Teal,Spatula discors,,ANSERIFORMES,Anatidae,CAR
+Cinnamon Teal,Spatula cyanoptera,,ANSERIFORMES,Anatidae,CAR
+Northern Shoveler,Spatula clypeata,,ANSERIFORMES,Anatidae,CAR
+Gadwall,Mareca strepera,,ANSERIFORMES,Anatidae,CAR
+Eurasian Wigeon,Mareca penelope,,ANSERIFORMES,Anatidae,CAR
+American Wigeon,Mareca americana,,ANSERIFORMES,Anatidae,CAR
+Mallard,Anas platyrhynchos,,ANSERIFORMES,Anatidae,CAR
+American Black Duck,Anas rubripes,Rare/Accidental,ANSERIFORMES,Anatidae,CAR
+Mottled Duck,Anas fulvigula,Rare/Accidental,ANSERIFORMES,Anatidae,CAR
+White-cheeked Pintail,Anas bahamensis,,ANSERIFORMES,Anatidae,CAR
+Northern Pintail,Anas acuta,,ANSERIFORMES,Anatidae,CAR
+Green-winged Teal,Anas crecca,,ANSERIFORMES,Anatidae,CAR
+Canvasback,Aythya valisineria,Rare/Accidental,ANSERIFORMES,Anatidae,CAR
+Redhead,Aythya americana,,ANSERIFORMES,Anatidae,CAR
+Common Pochard,Aythya ferina,Rare/Accidental Vulnerable,ANSERIFORMES,Anatidae,CAR
+Ring-necked Duck,Aythya collaris,,ANSERIFORMES,Anatidae,CAR
+Ferruginous Duck,Aythya nyroca,Rare/Accidental Near-threatened,ANSERIFORMES,Anatidae,CAR
+Tufted Duck,Aythya fuligula,Rare/Accidental,ANSERIFORMES,Anatidae,CAR
+Greater Scaup,Aythya marila,Rare/Accidental,ANSERIFORMES,Anatidae,CAR
+Lesser Scaup,Aythya affinis,,ANSERIFORMES,Anatidae,CAR
+Common Eider,Somateria mollissima,Rare/Accidental Near-threatened,ANSERIFORMES,Anatidae,CAR
+Surf Scoter,Melanitta perspicillata,Rare/Accidental,ANSERIFORMES,Anatidae,CAR
+White-winged Scoter,Melanitta deglandi,Rare/Accidental,ANSERIFORMES,Anatidae,CAR
+Black Scoter,Melanitta americana,Rare/Accidental Near-threatened,ANSERIFORMES,Anatidae,CAR
+Long-tailed Duck,Clangula hyemalis,Rare/Accidental Vulnerable,ANSERIFORMES,Anatidae,CAR
+Bufflehead,Bucephala albeola,,ANSERIFORMES,Anatidae,CAR
+Hooded Merganser,Lophodytes cucullatus,,ANSERIFORMES,Anatidae,CAR
+Common Merganser,Mergus merganser,Rare/Accidental,ANSERIFORMES,Anatidae,CAR
+Red-breasted Merganser,Mergus serrator,Rare/Accidental,ANSERIFORMES,Anatidae,CAR
+Masked Duck,Nomonyx dominicus,,ANSERIFORMES,Anatidae,CAR
+Ruddy Duck,Oxyura jamaicensis,,ANSERIFORMES,Anatidae,CAR
+Andean Duck,Oxyura ferruginea,Uncertain origin,ANSERIFORMES,Anatidae,CAR
+Rufous-vented Chachalaca,Ortalis ruficauda,,GALLIFORMES,Cracidae,CAR
+Helmeted Guineafowl,Numida meleagris,Introduced species,GALLIFORMES,Numididae,CAR
+Northern Bobwhite,Colinus virginianus,Near-threatened,GALLIFORMES,Odontophoridae,CAR
+Crested Bobwhite,Colinus cristatus,Extirpated,GALLIFORMES,Odontophoridae,CAR
+California Quail,Callipepla californica,Extirpated,GALLIFORMES,Odontophoridae,CAR
+Ring-necked Pheasant,Phasianus colchicus,Extirpated,GALLIFORMES,Phasianidae,CAR
+Indian Peafowl,Pavo cristatus,Introduced species,GALLIFORMES,Phasianidae,CAR
+Red Junglefowl,Gallus gallus,Introduced species,GALLIFORMES,Phasianidae,CAR
+Red-legged Partridge,Alectoris rufa,Extirpated Near-threatened,GALLIFORMES,Phasianidae,CAR
+Rock Pigeon,Columba livia,Introduced species,COLUMBIFORMES,Columbidae,CAR
+Scaly-naped Pigeon,Patagioenas squamosa,,COLUMBIFORMES,Columbidae,CAR
+Bare-eyed Pigeon,Patagioenas corensis,Introduced species,COLUMBIFORMES,Columbidae,CAR
+White-crowned Pigeon,Patagioenas leucocephala,Near-threatened,COLUMBIFORMES,Columbidae,CAR
+Plain Pigeon,Patagioenas inornata,Endemic Near-threatened,COLUMBIFORMES,Columbidae,CAR
+Ring-tailed Pigeon,Patagioenas caribaea,Endemic Vulnerable,COLUMBIFORMES,Columbidae,CAR
+Passenger Pigeon,Ectopistes migratorius,Rare/Accidental Extinct,COLUMBIFORMES,Columbidae,CAR
+Eurasian Collared-Dove,Streptopelia decaocto,Introduced species,COLUMBIFORMES,Columbidae,CAR
+African Collared-Dove,Streptopelia roseogrisea,Introduced species,COLUMBIFORMES,Columbidae,CAR
+Spotted Dove,Spilopelia chinensis,Extirpated,COLUMBIFORMES,Columbidae,CAR
+Common Ground Dove,Columbina passerina,,COLUMBIFORMES,Columbidae,CAR
+Blue-headed Quail-Dove,Starnoenas cyanocephala,Endemic Endangered,COLUMBIFORMES,Columbidae,CAR
+Crested Quail-Dove,Geotrygon versicolor,Endemic Near-threatened,COLUMBIFORMES,Columbidae,CAR
+Ruddy Quail-Dove,Geotrygon montana,,COLUMBIFORMES,Columbidae,CAR
+Gray-fronted Quail-Dove,Geotrygon caniceps,Endemic Vulnerable,COLUMBIFORMES,Columbidae,CAR
+White-fronted Quail-Dove,Geotrygon leucometopia,Endemic Endangered,COLUMBIFORMES,Columbidae,CAR
+Key West Quail-Dove,Geotrygon chrysia,Endemic,COLUMBIFORMES,Columbidae,CAR
+Bridled Quail-Dove,Geotrygon mystacea,Endemic,COLUMBIFORMES,Columbidae,CAR
+Caribbean Dove,Leptotila jamaicensis,,COLUMBIFORMES,Columbidae,CAR
+Gray-headed Dove,Leptotila plumbeiceps,,COLUMBIFORMES,Columbidae,CAR
+Grenada Dove,Leptotila wellsi,Endemic Critically endangered,COLUMBIFORMES,Columbidae,CAR
+White-winged Dove,Zenaida asiatica,,COLUMBIFORMES,Columbidae,CAR
+Zenaida Dove,Zenaida aurita,,COLUMBIFORMES,Columbidae,CAR
+Eared Dove,Zenaida auriculata,,COLUMBIFORMES,Columbidae,CAR
+Mourning Dove,Zenaida macroura,,COLUMBIFORMES,Columbidae,CAR
+Pied Imperial-Pigeon,Ducula bicolor,Introduced species,COLUMBIFORMES,Columbidae,CAR
+Greater Ani,Crotophaga major,Rare/Accidental,CUCULIFORMES,Cuculidae,CAR
+Smooth-billed Ani,Crotophaga ani,,CUCULIFORMES,Cuculidae,CAR
+Dark-billed Cuckoo,Coccyzus melacoryphus,Rare/Accidental,CUCULIFORMES,Cuculidae,CAR
+Yellow-billed Cuckoo,Coccyzus americanus,,CUCULIFORMES,Cuculidae,CAR
+Pearly-breasted Cuckoo,Coccyzus euleri,Rare/Accidental,CUCULIFORMES,Cuculidae,CAR
+Mangrove Cuckoo,Coccyzus minor,,CUCULIFORMES,Cuculidae,CAR
+Black-billed Cuckoo,Coccyzus erythropthalmus,,CUCULIFORMES,Cuculidae,CAR
+Chestnut-bellied Cuckoo,Coccyzus pluvialis,Endemic,CUCULIFORMES,Cuculidae,CAR
+Bay-breasted Cuckoo,Coccyzus rufigularis,Endemic Endangered,CUCULIFORMES,Cuculidae,CAR
+Jamaican Lizard-Cuckoo,Coccyzus vetula,Endemic,CUCULIFORMES,Cuculidae,CAR
+Puerto Rican Lizard-Cuckoo,Coccyzus vieilloti,Endemic,CUCULIFORMES,Cuculidae,CAR
+Great Lizard-Cuckoo,Coccyzus merlini,Endemic,CUCULIFORMES,Cuculidae,CAR
+Hispaniolan Lizard-Cuckoo,Coccyzus longirostris,Endemic,CUCULIFORMES,Cuculidae,CAR
+Common Cuckoo,Cuculus canorus,Rare/Accidental,CUCULIFORMES,Cuculidae,CAR
+Lesser Nighthawk,Chordeiles acutipennis,Rare/Accidental,CAPRIMULGIFORMES,Caprimulgidae,CAR
+Common Nighthawk,Chordeiles minor,,CAPRIMULGIFORMES,Caprimulgidae,CAR
+Antillean Nighthawk,Chordeiles gundlachii,,CAPRIMULGIFORMES,Caprimulgidae,CAR
+White-tailed Nightjar,Hydropsalis cayennensis,,CAPRIMULGIFORMES,Caprimulgidae,CAR
+Jamaican Pauraque,Siphonorhis americana,Endemic Critically endangered,CAPRIMULGIFORMES,Caprimulgidae,CAR
+Least Pauraque,Siphonorhis brewsteri,Endemic Near-threatened,CAPRIMULGIFORMES,Caprimulgidae,CAR
+Chuck-will's-widow,Antrostomus carolinensis,Near-threatened,CAPRIMULGIFORMES,Caprimulgidae,CAR
+Rufous Nightjar,Antrostomus rufus,,CAPRIMULGIFORMES,Caprimulgidae,CAR
+Cuban Nightjar,Antrostomus cubanensis,Endemic,CAPRIMULGIFORMES,Caprimulgidae,CAR
+Hispaniolan Nightjar,Antrostomus ekmani,Endemic,CAPRIMULGIFORMES,Caprimulgidae,CAR
+Eastern Whip-poor-will,Antrostomus vociferus,Rare/Accidental Near-threatened,CAPRIMULGIFORMES,Caprimulgidae,CAR
+Puerto Rican Nightjar,Antrostomus noctitherus,Endemic Vulnerable,CAPRIMULGIFORMES,Caprimulgidae,CAR
+Northern Potoo,Nyctibius jamaicensis,,NYCTIBIIFORMES,Nyctibiidae,CAR
+Black Swift,Cypseloides niger,Vulnerable,APODIFORMES,Apodidae,CAR
+White-collared Swift,Streptoprocne zonaris,,APODIFORMES,Apodidae,CAR
+Gray-rumped Swift,Chaetura cinereiventris,,APODIFORMES,Apodidae,CAR
+Lesser Antillean Swift,Chaetura martinica,Endemic,APODIFORMES,Apodidae,CAR
+Chimney Swift,Chaetura pelagica,Vulnerable,APODIFORMES,Apodidae,CAR
+Short-tailed Swift,Chaetura brachyura,,APODIFORMES,Apodidae,CAR
+Alpine Swift,Tachymarptis melba,Rare/Accidental,APODIFORMES,Apodidae,CAR
+Common Swift,Apus apus,Rare/Accidental,APODIFORMES,Apodidae,CAR
+Little Swift,Apus affinis,Rare/Accidental,APODIFORMES,Apodidae,CAR
+House Swift,Apus nipalensis,Rare/Accidental,APODIFORMES,Apodidae,CAR
+Antillean Palm Swift,Tachornis phoenicobia,Endemic,APODIFORMES,Apodidae,CAR
+Rufous-breasted Hermit,Glaucis hirsutus,,APODIFORMES,Trochilidae,CAR
+Jamaican Mango,Anthracothorax mango,Endemic,APODIFORMES,Trochilidae,CAR
+Green-breasted Mango,Anthracothorax prevostii,,APODIFORMES,Trochilidae,CAR
+Hispaniolan Mango,Anthracothorax dominicus,Endemic,APODIFORMES,Trochilidae,CAR
+Puerto Rican Mango,Anthracothorax aurulentus,Endemic,APODIFORMES,Trochilidae,CAR
+Green Mango,Anthracothorax viridis,Endemic,APODIFORMES,Trochilidae,CAR
+Purple-throated Carib,Eulampis jugularis,Endemic,APODIFORMES,Trochilidae,CAR
+Green-throated Carib,Eulampis holosericeus,Endemic,APODIFORMES,Trochilidae,CAR
+Ruby-throated Hummingbird,Archilochus colubris,,APODIFORMES,Trochilidae,CAR
+Bahama Woodstar,Nesophlox evelynae,Endemic,APODIFORMES,Trochilidae,CAR
+Inagua Woodstar,Nesophlox lyrura,Endemic,APODIFORMES,Trochilidae,CAR
+Vervain Hummingbird,Mellisuga minima,Endemic,APODIFORMES,Trochilidae,CAR
+Bee Hummingbird,Mellisuga helenae,Endemic Near-threatened,APODIFORMES,Trochilidae,CAR
+Rufous Hummingbird,Selasphorus rufus,Rare/Accidental Near-threatened,APODIFORMES,Trochilidae,CAR
+Cuban Emerald,Riccordia ricordii,Endemic,APODIFORMES,Trochilidae,CAR
+Brace's Emerald,Riccordia bracei,Endemic Extinct,APODIFORMES,Trochilidae,CAR
+Hispaniolan Emerald,Riccordia swainsonii,Endemic,APODIFORMES,Trochilidae,CAR
+Puerto Rican Emerald,Riccordia maugaeus,Endemic,APODIFORMES,Trochilidae,CAR
+Blue-headed Hummingbird,Riccordia bicolor,Endemic Near-threatened,APODIFORMES,Trochilidae,CAR
+Antillean Crested Hummingbird,Orthorhyncus cristatus,,APODIFORMES,Trochilidae,CAR
+Red-billed Streamertail,Trochilus polytmus,Endemic,APODIFORMES,Trochilidae,CAR
+Black-billed Streamertail,Trochilus scitulus,Endemic,APODIFORMES,Trochilidae,CAR
+King Rail,Rallus elegans,Near-threatened,GRUIFORMES,Rallidae,CAR
+Clapper Rail,Rallus crepitans,,GRUIFORMES,Rallidae,CAR
+Virginia Rail,Rallus limicola,Rare/Accidental,GRUIFORMES,Rallidae,CAR
+Corn Crake,Crex crex,Rare/Accidental,GRUIFORMES,Rallidae,CAR
+Spotted Rail,Pardirallus maculatus,,GRUIFORMES,Rallidae,CAR
+Zapata Rail,Mustelirallus cerverai,Endemic Critically endangered,GRUIFORMES,Rallidae,CAR
+Uniform Crake,Amaurolimnas concolor,Extirpated,GRUIFORMES,Rallidae,CAR
+Sora,Porzana carolina,,GRUIFORMES,Rallidae,CAR
+Spotted Crake,Porzana porzana,Rare/Accidental,GRUIFORMES,Rallidae,CAR
+Common Gallinule,Gallinula galeata,,GRUIFORMES,Rallidae,CAR
+American Coot,Fulica americana,,GRUIFORMES,Rallidae,CAR
+Purple Gallinule,Porphyrio martinica,,GRUIFORMES,Rallidae,CAR
+Azure Gallinule,Porphyrio flavirostris,Rare/Accidental,GRUIFORMES,Rallidae,CAR
+Western Swamphen,Porphyrio porphyrio,Rare/Accidental,GRUIFORMES,Rallidae,CAR
+African Swamphen,Porphyrio madagascariensis,Rare/Accidental,GRUIFORMES,Rallidae,CAR
+Gray-headed Swamphen,Porphyrio poliocephalus,Rare/Accidental,GRUIFORMES,Rallidae,CAR
+Yellow Rail,Coturnicops noveboracensis,Rare/Accidental,GRUIFORMES,Rallidae,CAR
+Yellow-breasted Crake,Laterallus flaviventer,,GRUIFORMES,Rallidae,CAR
+Black Rail,Laterallus jamaicensis,Rare/Accidental,GRUIFORMES,Rallidae,CAR
+Limpkin,Aramus guarauna,,GRUIFORMES,Aramidae,CAR
+Sandhill Crane,Antigone canadensis,,GRUIFORMES,Gruidae,CAR
+Double-striped Thick-knee,Hesperoburhinus bistriatus,,CHARADRIIFORMES,Burhinidae,CAR
+Black-winged Stilt,Himantopus himantopus,Rare/Accidental,CHARADRIIFORMES,Recurvirostridae,CAR
+Black-necked Stilt,Himantopus mexicanus,,CHARADRIIFORMES,Recurvirostridae,CAR
+American Avocet,Recurvirostra americana,,CHARADRIIFORMES,Recurvirostridae,CAR
+American Oystercatcher,Haematopus palliatus,,CHARADRIIFORMES,Haematopodidae,CAR
+Black-bellied Plover,Pluvialis squatarola,Vulnerable,CHARADRIIFORMES,Charadriidae,CAR
+American Golden-Plover,Pluvialis dominica,,CHARADRIIFORMES,Charadriidae,CAR
+Pacific Golden-Plover,Pluvialis fulva,,CHARADRIIFORMES,Charadriidae,CAR
+Eurasian Dotterel,Eudromias morinellus,Rare/Accidental,CHARADRIIFORMES,Charadriidae,CAR
+Killdeer,Charadrius vociferus,Near-threatened,CHARADRIIFORMES,Charadriidae,CAR
+Common Ringed Plover,Charadrius hiaticula,Rare/Accidental,CHARADRIIFORMES,Charadriidae,CAR
+Semipalmated Plover,Charadrius semipalmatus,,CHARADRIIFORMES,Charadriidae,CAR
+Piping Plover,Charadrius melodus,Near-threatened,CHARADRIIFORMES,Charadriidae,CAR
+Little Ringed Plover,Thinornis dubius,Rare/Accidental,CHARADRIIFORMES,Charadriidae,CAR
+Northern Lapwing,Vanellus vanellus,Rare/Accidental Near-threatened,CHARADRIIFORMES,Charadriidae,CAR
+Southern Lapwing,Vanellus chilensis,,CHARADRIIFORMES,Charadriidae,CAR
+Wilson's Plover,Anarhynchus wilsonia,,CHARADRIIFORMES,Charadriidae,CAR
+Collared Plover,Anarhynchus collaris,,CHARADRIIFORMES,Charadriidae,CAR
+Snowy Plover,Anarhynchus nivosus,Near-threatened,CHARADRIIFORMES,Charadriidae,CAR
+Northern Jacana,Jacana spinosa,,CHARADRIIFORMES,Jacanidae,CAR
+Wattled Jacana,Jacana jacana,Rare/Accidental,CHARADRIIFORMES,Jacanidae,CAR
+Upland Sandpiper,Bartramia longicauda,,CHARADRIIFORMES,Scolopacidae,CAR
+Whimbrel,Numenius phaeopus,,CHARADRIIFORMES,Scolopacidae,CAR
+Eskimo Curlew,Numenius borealis,Rare/Accidental Critically endangered (possibly extinct),CHARADRIIFORMES,Scolopacidae,CAR
+Long-billed Curlew,Numenius americanus,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,CAR
+Eurasian Curlew,Numenius arquata,Rare/Accidental Near-threatened,CHARADRIIFORMES,Scolopacidae,CAR
+Bar-tailed Godwit,Limosa lapponica,Rare/Accidental Near-threatened,CHARADRIIFORMES,Scolopacidae,CAR
+Black-tailed Godwit,Limosa limosa,Rare/Accidental Near-threatened,CHARADRIIFORMES,Scolopacidae,CAR
+Hudsonian Godwit,Limosa haemastica,Vulnerable,CHARADRIIFORMES,Scolopacidae,CAR
+Marbled Godwit,Limosa fedoa,Vulnerable,CHARADRIIFORMES,Scolopacidae,CAR
+Short-billed Dowitcher,Limnodromus griseus,Vulnerable,CHARADRIIFORMES,Scolopacidae,CAR
+Long-billed Dowitcher,Limnodromus scolopaceus,Near-threatened,CHARADRIIFORMES,Scolopacidae,CAR
+Jack Snipe,Lymnocryptes minimus,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,CAR
+American Woodcock,Scolopax minor,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,CAR
+Common Snipe,Gallinago gallinago,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,CAR
+Wilson's Snipe,Gallinago delicata,,CHARADRIIFORMES,Scolopacidae,CAR
+Wilson's Phalarope,Phalaropus tricolor,,CHARADRIIFORMES,Scolopacidae,CAR
+Red Phalarope,Phalaropus fulicarius,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,CAR
+Red-necked Phalarope,Phalaropus lobatus,,CHARADRIIFORMES,Scolopacidae,CAR
+Terek Sandpiper,Xenus cinereus,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,CAR
+Spotted Sandpiper,Actitis macularius,,CHARADRIIFORMES,Scolopacidae,CAR
+Green Sandpiper,Tringa ochropus,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,CAR
+Solitary Sandpiper,Tringa solitaria,,CHARADRIIFORMES,Scolopacidae,CAR
+Wood Sandpiper,Tringa glareola,,CHARADRIIFORMES,Scolopacidae,CAR
+Common Redshank,Tringa totanus,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,CAR
+Lesser Yellowlegs,Tringa flavipes,Vulnerable,CHARADRIIFORMES,Scolopacidae,CAR
+Willet,Tringa semipalmata,,CHARADRIIFORMES,Scolopacidae,CAR
+Spotted Redshank,Tringa erythropus,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,CAR
+Common Greenshank,Tringa nebularia,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,CAR
+Greater Yellowlegs,Tringa melanoleuca,Near-threatened,CHARADRIIFORMES,Scolopacidae,CAR
+Ruddy Turnstone,Arenaria interpres,Near-threatened,CHARADRIIFORMES,Scolopacidae,CAR
+Red Knot,Calidris canutus,Near-threatened,CHARADRIIFORMES,Scolopacidae,CAR
+Ruff,Calidris pugnax,,CHARADRIIFORMES,Scolopacidae,CAR
+Sharp-tailed Sandpiper,Calidris acuminata,Rare/Accidental Vulnerable,CHARADRIIFORMES,Scolopacidae,CAR
+Curlew Sandpiper,Calidris ferruginea,Vulnerable,CHARADRIIFORMES,Scolopacidae,CAR
+Stilt Sandpiper,Calidris himantopus,Near-threatened,CHARADRIIFORMES,Scolopacidae,CAR
+Red-necked Stint,Calidris ruficollis,Rare/Accidental Near-threatened,CHARADRIIFORMES,Scolopacidae,CAR
+Buff-breasted Sandpiper,Calidris subruficollis,Vulnerable,CHARADRIIFORMES,Scolopacidae,CAR
+Sanderling,Calidris alba,,CHARADRIIFORMES,Scolopacidae,CAR
+Dunlin,Calidris alpina,Near-threatened,CHARADRIIFORMES,Scolopacidae,CAR
+Purple Sandpiper,Calidris maritima,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,CAR
+Baird's Sandpiper,Calidris bairdii,,CHARADRIIFORMES,Scolopacidae,CAR
+Little Stint,Calidris minuta,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,CAR
+White-rumped Sandpiper,Calidris fuscicollis,Vulnerable,CHARADRIIFORMES,Scolopacidae,CAR
+Least Sandpiper,Calidris minutilla,Near-threatened,CHARADRIIFORMES,Scolopacidae,CAR
+Pectoral Sandpiper,Calidris melanotos,,CHARADRIIFORMES,Scolopacidae,CAR
+Western Sandpiper,Calidris mauri,,CHARADRIIFORMES,Scolopacidae,CAR
+Semipalmated Sandpiper,Calidris pusilla,Near-threatened,CHARADRIIFORMES,Scolopacidae,CAR
+Collared Pratincole,Glareola pratincola,Rare/Accidental,CHARADRIIFORMES,Glareolidae,CAR
+Long-tailed Jaeger,Stercorarius longicaudus,,CHARADRIIFORMES,Stercorariidae,CAR
+Parasitic Jaeger,Stercorarius parasiticus,,CHARADRIIFORMES,Stercorariidae,CAR
+Pomarine Jaeger,Stercorarius pomarinus,,CHARADRIIFORMES,Stercorariidae,CAR
+Great Skua,Stercorarius skua,Rare/Accidental,CHARADRIIFORMES,Stercorariidae,CAR
+Brown Skua,Stercorarius antarcticus,Rare/Accidental,CHARADRIIFORMES,Stercorariidae,CAR
+South Polar Skua,Stercorarius maccormicki,,CHARADRIIFORMES,Stercorariidae,CAR
+Atlantic Puffin,Fratercula arctica,Rare/Accidental Vulnerable,CHARADRIIFORMES,Alcidae,CAR
+Razorbill,Alca torda,Rare/Accidental,CHARADRIIFORMES,Alcidae,CAR
+Dovekie,Alle alle,Rare/Accidental,CHARADRIIFORMES,Alcidae,CAR
+Little Gull,Hydrocoloeus minutus,Rare/Accidental,CHARADRIIFORMES,Laridae,CAR
+Black-legged Kittiwake,Rissa tridactyla,Rare/Accidental Vulnerable,CHARADRIIFORMES,Laridae,CAR
+Sabine's Gull,Xema sabini,Rare/Accidental,CHARADRIIFORMES,Laridae,CAR
+Slender-billed Gull,Chroicocephalus genei,Rare/Accidental,CHARADRIIFORMES,Laridae,CAR
+Bonaparte's Gull,Chroicocephalus philadelphia,,CHARADRIIFORMES,Laridae,CAR
+Black-headed Gull,Chroicocephalus ridibundus,,CHARADRIIFORMES,Laridae,CAR
+Gray-hooded Gull,Chroicocephalus cirrocephalus,Rare/Accidental,CHARADRIIFORMES,Laridae,CAR
+Laughing Gull,Leucophaeus atricilla,,CHARADRIIFORMES,Laridae,CAR
+Franklin's Gull,Leucophaeus pipixcan,Rare/Accidental,CHARADRIIFORMES,Laridae,CAR
+Audouin's Gull,Ichthyaetus audouinii,Rare/Accidental Vulnerable,CHARADRIIFORMES,Laridae,CAR
+Black-tailed Gull,Larus crassirostris,Rare/Accidental,CHARADRIIFORMES,Laridae,CAR
+Common Gull,Larus canus,Rare/Accidental,CHARADRIIFORMES,Laridae,CAR
+Ring-billed Gull,Larus delawarensis,,CHARADRIIFORMES,Laridae,CAR
+Kelp Gull,Larus dominicanus,Rare/Accidental,CHARADRIIFORMES,Laridae,CAR
+American Herring Gull,Larus smithsonianus,,CHARADRIIFORMES,Laridae,CAR
+European Herring Gull,Larus argentatus,Rare/Accidental,CHARADRIIFORMES,Laridae,CAR
+Yellow-legged Gull,Larus michahellis,Rare/Accidental,CHARADRIIFORMES,Laridae,CAR
+Great Black-backed Gull,Larus marinus,,CHARADRIIFORMES,Laridae,CAR
+Glaucous Gull,Larus hyperboreus,Rare/Accidental,CHARADRIIFORMES,Laridae,CAR
+Lesser Black-backed Gull,Larus fuscus,,CHARADRIIFORMES,Laridae,CAR
+California Gull,Larus californicus,Rare/Accidental,CHARADRIIFORMES,Laridae,CAR
+Iceland Gull,Larus glaucoides,Rare/Accidental,CHARADRIIFORMES,Laridae,CAR
+Black Skimmer,Rynchops niger,,CHARADRIIFORMES,Laridae,CAR
+White Tern,Gygis alba,Rare/Accidental,CHARADRIIFORMES,Laridae,CAR
+Brown Noddy,Anous stolidus,,CHARADRIIFORMES,Laridae,CAR
+Black Noddy,Anous minutus,Rare/Accidental,CHARADRIIFORMES,Laridae,CAR
+Sooty Tern,Onychoprion fuscatus,,CHARADRIIFORMES,Laridae,CAR
+Bridled Tern,Onychoprion anaethetus,,CHARADRIIFORMES,Laridae,CAR
+Least Tern,Sternula antillarum,,CHARADRIIFORMES,Laridae,CAR
+Large-billed Tern,Phaetusa simplex,Rare/Accidental,CHARADRIIFORMES,Laridae,CAR
+Gull-billed Tern,Gelochelidon nilotica,,CHARADRIIFORMES,Laridae,CAR
+Caspian Tern,Hydroprogne caspia,,CHARADRIIFORMES,Laridae,CAR
+Whiskered Tern,Chlidonias hybrida,Rare/Accidental,CHARADRIIFORMES,Laridae,CAR
+Black Tern,Chlidonias niger,,CHARADRIIFORMES,Laridae,CAR
+White-winged Tern,Chlidonias leucopterus,,CHARADRIIFORMES,Laridae,CAR
+Forster's Tern,Sterna forsteri,,CHARADRIIFORMES,Laridae,CAR
+Arctic Tern,Sterna paradisaea,,CHARADRIIFORMES,Laridae,CAR
+Common Tern,Sterna hirundo,,CHARADRIIFORMES,Laridae,CAR
+Roseate Tern,Sterna dougallii,,CHARADRIIFORMES,Laridae,CAR
+Sandwich Tern,Thalasseus sandvicensis,,CHARADRIIFORMES,Laridae,CAR
+Royal Tern,Thalasseus maximus,,CHARADRIIFORMES,Laridae,CAR
+American Flamingo,Phoenicopterus ruber,,PHOENICOPTERIFORMES,Phoenicopteridae,CAR
+Least Grebe,Tachybaptus dominicus,,PODICIPEDIFORMES,Podicipedidae,CAR
+Pied-billed Grebe,Podilymbus podiceps,,PODICIPEDIFORMES,Podicipedidae,CAR
+Horned Grebe,Podiceps auritus,Vulnerable,PODICIPEDIFORMES,Podicipedidae,CAR
+Red-necked Grebe,Podiceps grisegena,Rare/Accidental,PODICIPEDIFORMES,Podicipedidae,CAR
+Eared Grebe,Podiceps nigricollis,Rare/Accidental,PODICIPEDIFORMES,Podicipedidae,CAR
+White-tailed Tropicbird,Phaethon lepturus,,PHAETHONTIFORMES,Phaethontidae,CAR
+Red-billed Tropicbird,Phaethon aethereus,,PHAETHONTIFORMES,Phaethontidae,CAR
+Pacific Loon,Gavia pacifica,Rare/Accidental,GAVIIFORMES,Gaviidae,CAR
+Common Loon,Gavia immer,Rare/Accidental,GAVIIFORMES,Gaviidae,CAR
+Atlantic Yellow-nosed Albatross,Thalassarche chlororhynchos,Endangered,PROCELLARIIFORMES,Diomedeidae,CAR
+Black-browed Albatross,Thalassarche melanophris,Rare/Accidental,PROCELLARIIFORMES,Diomedeidae,CAR
+Wilson's Storm-Petrel,Oceanites oceanicus,,PROCELLARIIFORMES,Oceanitidae,CAR
+Leach's Storm-Petrel,Hydrobates leucorhous,Vulnerable,PROCELLARIIFORMES,Hydrobatidae,CAR
+Band-rumped Storm-Petrel,Hydrobates castro,,PROCELLARIIFORMES,Hydrobatidae,CAR
+Northern Fulmar,Fulmarus glacialis,Rare/Accidental,PROCELLARIIFORMES,Procellariidae,CAR
+Trindade Petrel,Pterodroma arminjoniana,Rare/Accidental Vulnerable,PROCELLARIIFORMES,Procellariidae,CAR
+Bermuda Petrel,Pterodroma cahow,Rare/Accidental Endangered,PROCELLARIIFORMES,Procellariidae,CAR
+Black-capped Petrel,Pterodroma hasitata,Breeding endemic Endangered,PROCELLARIIFORMES,Procellariidae,CAR
+Jamaican Petrel,Pterodroma caribbaea,Endemic Critically endangered (possibly extinct),PROCELLARIIFORMES,Procellariidae,CAR
+Bulwer's Petrel,Bulweria bulwerii,Rare/Accidental,PROCELLARIIFORMES,Procellariidae,CAR
+Cory's Shearwater,Calonectris borealis,,PROCELLARIIFORMES,Procellariidae,CAR
+Scopoli's Shearwater,Calonectris diomedea,,PROCELLARIIFORMES,Procellariidae,CAR
+Cape Verde Shearwater,Calonectris edwardsii,Rare/Accidental Near-threatened,PROCELLARIIFORMES,Procellariidae,CAR
+Great Shearwater,Ardenna gravis,,PROCELLARIIFORMES,Procellariidae,CAR
+Sooty Shearwater,Ardenna grisea,Near-threatened,PROCELLARIIFORMES,Procellariidae,CAR
+Manx Shearwater,Puffinus puffinus,,PROCELLARIIFORMES,Procellariidae,CAR
+Barolo Shearwater,Puffinus baroli,Rare/Accidental,PROCELLARIIFORMES,Procellariidae,CAR
+Sargasso Shearwater,Puffinus lherminieri,,PROCELLARIIFORMES,Procellariidae,CAR
+White Stork,Ciconia ciconia,Rare/Accidental,CICONIIFORMES,Ciconiidae,CAR
+Jabiru,Jabiru mycteria,Rare/Accidental,CICONIIFORMES,Ciconiidae,CAR
+Wood Stork,Mycteria americana,,CICONIIFORMES,Ciconiidae,CAR
+Magnificent Frigatebird,Fregata magnificens,,SULIFORMES,Fregatidae,CAR
+Northern Gannet,Morus bassanus,Rare/Accidental,SULIFORMES,Sulidae,CAR
+Red-footed Booby,Sula sula,,SULIFORMES,Sulidae,CAR
+Brown Booby,Sula leucogaster,,SULIFORMES,Sulidae,CAR
+Masked Booby,Sula dactylatra,,SULIFORMES,Sulidae,CAR
+Anhinga,Anhinga anhinga,,SULIFORMES,Anhingidae,CAR
+Great Cormorant,Phalacrocorax carbo,Rare/Accidental,SULIFORMES,Phalacrocoracidae,CAR
+Double-crested Cormorant,Nannopterum auritum,,SULIFORMES,Phalacrocoracidae,CAR
+Neotropic Cormorant,Nannopterum brasilianum,,SULIFORMES,Phalacrocoracidae,CAR
+White Ibis,Eudocimus albus,,PELECANIFORMES,Threskiornithidae,CAR
+Scarlet Ibis,Eudocimus ruber,Rare/Accidental,PELECANIFORMES,Threskiornithidae,CAR
+Glossy Ibis,Plegadis falcinellus,,PELECANIFORMES,Threskiornithidae,CAR
+White-faced Ibis,Plegadis chihi,Rare/Accidental,PELECANIFORMES,Threskiornithidae,CAR
+Eurasian Spoonbill,Platalea leucorodia,Rare/Accidental,PELECANIFORMES,Threskiornithidae,CAR
+Roseate Spoonbill,Platalea ajaja,,PELECANIFORMES,Threskiornithidae,CAR
+American White Pelican,Pelecanus erythrorhynchos,,PELECANIFORMES,Pelecanidae,CAR
+Brown Pelican,Pelecanus occidentalis,,PELECANIFORMES,Pelecanidae,CAR
+American Bittern,Botaurus lentiginosus,,PELECANIFORMES,Ardeidae,CAR
+Least Bittern,Botaurus exilis,,PELECANIFORMES,Ardeidae,CAR
+Little Bittern,Botaurus minutus,Rare/Accidental,PELECANIFORMES,Ardeidae,CAR
+Yellow-crowned Night Heron,Nyctanassa violacea,,PELECANIFORMES,Ardeidae,CAR
+Bermuda Night Heron,Nyctanassa carcinocatactes,Endemic Extinct,PELECANIFORMES,Ardeidae,CAR
+Black-crowned Night Heron,Nycticorax nycticorax,,PELECANIFORMES,Ardeidae,CAR
+Little Blue Heron,Egretta caerulea,,PELECANIFORMES,Ardeidae,CAR
+Tricolored Heron,Egretta tricolor,,PELECANIFORMES,Ardeidae,CAR
+Reddish Egret,Egretta rufescens,Near-threatened,PELECANIFORMES,Ardeidae,CAR
+Snowy Egret,Egretta thula,,PELECANIFORMES,Ardeidae,CAR
+Little Egret,Egretta garzetta,Rare/Accidental,PELECANIFORMES,Ardeidae,CAR
+Western Reef-Heron,Egretta gularis,Rare/Accidental,PELECANIFORMES,Ardeidae,CAR
+Striated Heron,Butorides striata,Rare/Accidental,PELECANIFORMES,Ardeidae,CAR
+Green Heron,Butorides virescens,,PELECANIFORMES,Ardeidae,CAR
+Squacco Heron,Ardeola ralloides,Rare/Accidental,PELECANIFORMES,Ardeidae,CAR
+Western Cattle-Egret,Ardea ibis,,PELECANIFORMES,Ardeidae,CAR
+Great Egret,Ardea alba,,PELECANIFORMES,Ardeidae,CAR
+Gray Heron,Ardea cinerea,,PELECANIFORMES,Ardeidae,CAR
+Great Blue Heron,Ardea herodias,,PELECANIFORMES,Ardeidae,CAR
+Cocoi Heron,Ardea cocoi,Rare/Accidental,PELECANIFORMES,Ardeidae,CAR
+Purple Heron,Ardea purpurea,Rare/Accidental,PELECANIFORMES,Ardeidae,CAR
+Black Vulture,Coragyps atratus,Rare/Accidental,CATHARTIFORMES,Cathartidae,CAR
+Turkey Vulture,Cathartes aura,,CATHARTIFORMES,Cathartidae,CAR
+Osprey,Pandion haliaetus,,ACCIPITRIFORMES,Pandionidae,CAR
+Hook-billed Kite,Chondrohierax uncinatus,,ACCIPITRIFORMES,Accipitridae,CAR
+Cuban Kite,Chondrohierax wilsonii,Endemic Critically endangered,ACCIPITRIFORMES,Accipitridae,CAR
+Swallow-tailed Kite,Elanoides forficatus,,ACCIPITRIFORMES,Accipitridae,CAR
+Sharp-shinned Hawk,Accipiter striatus,,ACCIPITRIFORMES,Accipitridae,CAR
+Cooper's Hawk,Astur cooperii,Rare/Accidental,ACCIPITRIFORMES,Accipitridae,CAR
+Gundlach's Hawk,Astur gundlachi,Endemic Endangered,ACCIPITRIFORMES,Accipitridae,CAR
+American Goshawk,Astur atricapillus,,ACCIPITRIFORMES,Accipitridae,CAR
+Western Marsh Harrier,Circus aeruginosus,,ACCIPITRIFORMES,Accipitridae,CAR
+Northern Harrier,Circus hudsonius,,ACCIPITRIFORMES,Accipitridae,CAR
+Pallid Harrier,Circus macrourus,Rare/Accidental Near-threatened,ACCIPITRIFORMES,Accipitridae,CAR
+Black Kite,Milvus migrans,Rare/Accidental,ACCIPITRIFORMES,Accipitridae,CAR
+Bald Eagle,Haliaeetus leucocephalus,Rare/Accidental,ACCIPITRIFORMES,Accipitridae,CAR
+Mississippi Kite,Ictinia mississippiensis,,ACCIPITRIFORMES,Accipitridae,CAR
+Snail Kite,Rostrhamus sociabilis,,ACCIPITRIFORMES,Accipitridae,CAR
+Common Black Hawk,Buteogallus anthracinus,,ACCIPITRIFORMES,Accipitridae,CAR
+Cuban Black Hawk,Buteogallus gundlachii,Endemic Near-threatened,ACCIPITRIFORMES,Accipitridae,CAR
+Bermuda Hawk,Bermuteo avivorus,Endemic Extinct,ACCIPITRIFORMES,Accipitridae,CAR
+Broad-winged Hawk,Buteo platypterus,,ACCIPITRIFORMES,Accipitridae,CAR
+Ridgway's Hawk,Buteo ridgwayi,Endemic Critically endangered,ACCIPITRIFORMES,Accipitridae,CAR
+Short-tailed Hawk,Buteo brachyurus,Rare/Accidental,ACCIPITRIFORMES,Accipitridae,CAR
+Swainson's Hawk,Buteo swainsoni,,ACCIPITRIFORMES,Accipitridae,CAR
+Red-tailed Hawk,Buteo jamaicensis,,ACCIPITRIFORMES,Accipitridae,CAR
+Rough-legged Hawk,Buteo lagopus,Rare/Accidental,ACCIPITRIFORMES,Accipitridae,CAR
+American Barn Owl,Tyto furcata,,STRIGIFORMES,Tytonidae,CAR
+Ashy-faced Owl,Tyto glaucops,Endemic,STRIGIFORMES,Tytonidae,CAR
+Flammulated Owl,Psiloscops flammeolus,Rare/Accidental,STRIGIFORMES,Strigidae,CAR
+Puerto Rican Owl,Gymnasio nudipes,Endemic,STRIGIFORMES,Strigidae,CAR
+Bare-legged Owl,Margarobyas lawrencii,Endemic,STRIGIFORMES,Strigidae,CAR
+Snowy Owl,Bubo scandiacus,Rare/Accidental Vulnerable,STRIGIFORMES,Strigidae,CAR
+Great Horned Owl,Bubo virginianus,Uncertain origin,STRIGIFORMES,Strigidae,CAR
+Northern Hawk Owl,Surnia ulula,Rare/Accidental,STRIGIFORMES,Strigidae,CAR
+Cuban Pygmy-Owl,Glaucidium siju,Endemic,STRIGIFORMES,Strigidae,CAR
+Burrowing Owl,Athene cunicularia,,STRIGIFORMES,Strigidae,CAR
+Barred Owl,Strix varia,Rare/Accidental,STRIGIFORMES,Strigidae,CAR
+Jamaican Owl,Asio grammicus,Endemic,STRIGIFORMES,Strigidae,CAR
+Long-eared Owl,Asio otus,Rare/Accidental,STRIGIFORMES,Strigidae,CAR
+Stygian Owl,Asio stygius,,STRIGIFORMES,Strigidae,CAR
+Short-eared Owl,Asio flammeus,,STRIGIFORMES,Strigidae,CAR
+Northern Saw-whet Owl,Aegolius acadicus,Rare/Accidental,STRIGIFORMES,Strigidae,CAR
+Bermuda Saw-whet Owl,Aegolius gradyi,Endemic Extinct,STRIGIFORMES,Strigidae,CAR
+Cuban Trogon,Priotelus temnurus,Endemic,TROGONIFORMES,Trogonidae,CAR
+Hispaniolan Trogon,Priotelus roseigaster,Endemic,TROGONIFORMES,Trogonidae,CAR
+European Bee-eater,Merops apiaster,Rare/Accidental,CORACIIFORMES,Meropidae,CAR
+Cuban Tody,Todus multicolor,Endemic,CORACIIFORMES,Todidae,CAR
+Broad-billed Tody,Todus subulatus,Endemic,CORACIIFORMES,Todidae,CAR
+Narrow-billed Tody,Todus angustirostris,Endemic,CORACIIFORMES,Todidae,CAR
+Jamaican Tody,Todus todus,Endemic,CORACIIFORMES,Todidae,CAR
+Puerto Rican Tody,Todus mexicanus,Endemic,CORACIIFORMES,Todidae,CAR
+Common Kingfisher,Alcedo atthis,Uncertain origin,CORACIIFORMES,Alcedinidae,CAR
+Ringed Kingfisher,Megaceryle torquata,,CORACIIFORMES,Alcedinidae,CAR
+Belted Kingfisher,Megaceryle alcyon,,CORACIIFORMES,Alcedinidae,CAR
+Green Kingfisher,Chloroceryle americana,Rare/Accidental,CORACIIFORMES,Alcedinidae,CAR
+Channel-billed Toucan,Ramphastos vitellinus,Introduced species,PICIFORMES,Ramphastidae,CAR
+Antillean Piculet,Nesoctites micromegas,Endemic,PICIFORMES,Picidae,CAR
+Yellow-bellied Sapsucker,Sphyrapicus varius,,PICIFORMES,Picidae,CAR
+Cuban Green Woodpecker,Xiphidiopicus percussus,Endemic,PICIFORMES,Picidae,CAR
+Guadeloupe Woodpecker,Melanerpes herminieri,Endemic,PICIFORMES,Picidae,CAR
+Puerto Rican Woodpecker,Melanerpes portoricensis,Endemic,PICIFORMES,Picidae,CAR
+Red-headed Woodpecker,Melanerpes erythrocephalus,Rare/Accidental,PICIFORMES,Picidae,CAR
+Hispaniolan Woodpecker,Melanerpes striatus,Endemic,PICIFORMES,Picidae,CAR
+Jamaican Woodpecker,Melanerpes radiolatus,Endemic,PICIFORMES,Picidae,CAR
+West Indian Woodpecker,Melanerpes superciliaris,Endemic,PICIFORMES,Picidae,CAR
+Downy Woodpecker,Dryobates pubescens,Rare/Accidental,PICIFORMES,Picidae,CAR
+Hairy Woodpecker,Dryobates villosus,,PICIFORMES,Picidae,CAR
+Ivory-billed Woodpecker,Campephilus principalis,Critically endangered (possibly extinct),PICIFORMES,Picidae,CAR
+Pileated Woodpecker,Dryocopus pileatus,Rare/Accidental,PICIFORMES,Picidae,CAR
+Northern Flicker,Colaptes auratus,Rare/Accidental,PICIFORMES,Picidae,CAR
+Bermuda Flicker,Colaptes oceanicus,Endemic Extinct,PICIFORMES,Picidae,CAR
+Fernandina's Flicker,Colaptes fernandinae,Endemic Endangered,PICIFORMES,Picidae,CAR
+Crested Caracara,Caracara plancus,Rare/Accidental,FALCONIFORMES,Falconidae,CAR
+Yellow-headed Caracara,Daptrius chimachima,Rare/Accidental,FALCONIFORMES,Falconidae,CAR
+Eurasian Kestrel,Falco tinnunculus,Rare/Accidental,FALCONIFORMES,Falconidae,CAR
+American Kestrel,Falco sparverius,,FALCONIFORMES,Falconidae,CAR
+Merlin,Falco columbarius,,FALCONIFORMES,Falconidae,CAR
+Aplomado Falcon,Falco femoralis,Rare/Accidental,FALCONIFORMES,Falconidae,CAR
+Bat Falcon,Falco rufigularis,Rare/Accidental,FALCONIFORMES,Falconidae,CAR
+Gyrfalcon,Falco rusticolus,Rare/Accidental,FALCONIFORMES,Falconidae,CAR
+Peregrine Falcon,Falco peregrinus,,FALCONIFORMES,Falconidae,CAR
+Rose-ringed Parakeet,Psittacula krameri,Introduced species,PSITTACIFORMES,Psittaculidae,CAR
+Budgerigar,Melopsittacus undulatus,Extirpated,PSITTACIFORMES,Psittaculidae,CAR
+Monk Parakeet,Myiopsitta monachus,Introduced species,PSITTACIFORMES,Psittacidae,CAR
+White-winged Parakeet,Brotogeris versicolurus,Introduced species,PSITTACIFORMES,Psittacidae,CAR
+Red-crowned Amazon,Amazona viridigenalis,Introduced species Endangered,PSITTACIFORMES,Psittacidae,CAR
+Red-necked Amazon,Amazona arausiaca,Endemic Vulnerable,PSITTACIFORMES,Psittacidae,CAR
+Martinique Amazon,Amazona martinicana,Endemic Extinct,PSITTACIFORMES,Psittacidae,CAR
+St. Lucia Amazon,Amazona versicolor,Endemic Vulnerable,PSITTACIFORMES,Psittacidae,CAR
+Yellow-naped Amazon,Amazona auropalliata,Introduced species Critically endangered,PSITTACIFORMES,Psittacidae,CAR
+Yellow-headed Amazon,Amazona oratrix,Introduced species Endangered,PSITTACIFORMES,Psittacidae,CAR
+Black-billed Amazon,Amazona agilis,Endemic Endangered,PSITTACIFORMES,Psittacidae,CAR
+White-fronted Amazon,Amazona albifrons,Introduced species,PSITTACIFORMES,Psittacidae,CAR
+Yellow-billed Amazon,Amazona collaria,Endemic Vulnerable,PSITTACIFORMES,Psittacidae,CAR
+Cuban Amazon,Amazona leucocephala,Endemic Near-threatened,PSITTACIFORMES,Psittacidae,CAR
+Hispaniolan Amazon,Amazona ventralis,Endemic Vulnerable,PSITTACIFORMES,Psittacidae,CAR
+Puerto Rican Amazon,Amazona vittata,Endemic Critically endangered,PSITTACIFORMES,Psittacidae,CAR
+Imperial Amazon,Amazona imperialis,Endemic Critically endangered,PSITTACIFORMES,Psittacidae,CAR
+Guadeloupe Amazon,Amazona violacea,Endemic Extinct,PSITTACIFORMES,Psittacidae,CAR
+St. Vincent Amazon,Amazona guildingii,Endemic Vulnerable,PSITTACIFORMES,Psittacidae,CAR
+Orange-winged Amazon,Amazona amazonica,Introduced species,PSITTACIFORMES,Psittacidae,CAR
+Green-rumped Parrotlet,Forpus passerinus,Introduced species,PSITTACIFORMES,Psittacidae,CAR
+Olive-throated Parakeet,Eupsittula nana,,PSITTACIFORMES,Psittacidae,CAR
+Orange-fronted Parakeet,Eupsittula canicularis,Introduced species Vulnerable,PSITTACIFORMES,Psittacidae,CAR
+Brown-throated Parakeet,Eupsittula pertinax,Introduced species,PSITTACIFORMES,Psittacidae,CAR
+Nanday Parakeet,Aratinga nenday,Introduced species,PSITTACIFORMES,Psittacidae,CAR
+Blue-and-yellow Macaw,Ara ararauna,Introduced species,PSITTACIFORMES,Psittacidae,CAR
+Cuban Macaw,Ara tricolor,Extinct,PSITTACIFORMES,Psittacidae,CAR
+Scarlet Macaw,Ara macao,Introduced species,PSITTACIFORMES,Psittacidae,CAR
+Red-and-green Macaw,Ara chloropterus,Introduced species,PSITTACIFORMES,Psittacidae,CAR
+Red-masked Parakeet,Psittacara erythrogenys,Introduced species Near-threatened,PSITTACIFORMES,Psittacidae,CAR
+Cuban Parakeet,Psittacara euops,Endemic Vulnerable,PSITTACIFORMES,Psittacidae,CAR
+Hispaniolan Parakeet,Psittacara chloropterus,Endemic,PSITTACIFORMES,Psittacidae,CAR
+Puerto Rican Parakeet,Psittacara maugei,Endemic,PSITTACIFORMES,Psittacidae,CAR
+Guadeloupe Parakeet,Psittacara labati,Endemic Extinct,PSITTACIFORMES,Psittacidae,CAR
+White-winged Becard,Pachyramphus polychopterus,Uncertain origin,PASSERIFORMES,Tityridae,CAR
+Jamaican Becard,Pachyramphus niger,Endemic,PASSERIFORMES,Tityridae,CAR
+Jamaican Elaenia,Myiopagis cotta,Endemic,PASSERIFORMES,Tyrannidae,CAR
+Yellow-bellied Elaenia,Elaenia flavogaster,,PASSERIFORMES,Tyrannidae,CAR
+Caribbean Elaenia,Elaenia martinica,,PASSERIFORMES,Tyrannidae,CAR
+Greater Antillean Elaenia,Elaenia fallax,Endemic,PASSERIFORMES,Tyrannidae,CAR
+Euler's Flycatcher,Lathrotriccus euleri,,PASSERIFORMES,Tyrannidae,CAR
+Olive-sided Flycatcher,Contopus cooperi,Rare/Accidental Near-threatened,PASSERIFORMES,Tyrannidae,CAR
+Jamaican Pewee,Contopus pallidus,Endemic,PASSERIFORMES,Tyrannidae,CAR
+Western Wood-Pewee,Contopus sordidulus,,PASSERIFORMES,Tyrannidae,CAR
+Eastern Wood-Pewee,Contopus virens,,PASSERIFORMES,Tyrannidae,CAR
+Cuban Pewee,Contopus caribaeus,Endemic,PASSERIFORMES,Tyrannidae,CAR
+Hispaniolan Pewee,Contopus hispaniolensis,Endemic,PASSERIFORMES,Tyrannidae,CAR
+Lesser Antillean Pewee,Contopus latirostris,Endemic,PASSERIFORMES,Tyrannidae,CAR
+Yellow-bellied Flycatcher,Empidonax flaviventris,Rare/Accidental,PASSERIFORMES,Tyrannidae,CAR
+Acadian Flycatcher,Empidonax virescens,,PASSERIFORMES,Tyrannidae,CAR
+Alder Flycatcher,Empidonax alnorum,Rare/Accidental,PASSERIFORMES,Tyrannidae,CAR
+Willow Flycatcher,Empidonax traillii,Rare/Accidental,PASSERIFORMES,Tyrannidae,CAR
+Least Flycatcher,Empidonax minimus,Rare/Accidental,PASSERIFORMES,Tyrannidae,CAR
+Eastern Phoebe,Sayornis phoebe,,PASSERIFORMES,Tyrannidae,CAR
+Say's Phoebe,Sayornis saya,Rare/Accidental,PASSERIFORMES,Tyrannidae,CAR
+Vermilion Flycatcher,Pyrocephalus rubinus,Rare/Accidental,PASSERIFORMES,Tyrannidae,CAR
+Pied Water-Tyrant,Fluvicola pica,Rare/Accidental,PASSERIFORMES,Tyrannidae,CAR
+Sad Flycatcher,Myiarchus barbirostris,Endemic,PASSERIFORMES,Tyrannidae,CAR
+Ash-throated Flycatcher,Myiarchus cinerascens,Rare/Accidental,PASSERIFORMES,Tyrannidae,CAR
+Great Crested Flycatcher,Myiarchus crinitus,,PASSERIFORMES,Tyrannidae,CAR
+Brown-crested Flycatcher,Myiarchus tyrannulus,Rare/Accidental,PASSERIFORMES,Tyrannidae,CAR
+Grenada Flycatcher,Myiarchus nugator,Endemic,PASSERIFORMES,Tyrannidae,CAR
+Rufous-tailed Flycatcher,Myiarchus validus,Endemic,PASSERIFORMES,Tyrannidae,CAR
+La Sagra's Flycatcher,Myiarchus sagrae,Endemic,PASSERIFORMES,Tyrannidae,CAR
+Stolid Flycatcher,Myiarchus stolidus,Endemic,PASSERIFORMES,Tyrannidae,CAR
+Puerto Rican Flycatcher,Myiarchus antillarum,Endemic,PASSERIFORMES,Tyrannidae,CAR
+Lesser Antillean Flycatcher,Myiarchus oberi,Endemic,PASSERIFORMES,Tyrannidae,CAR
+Great Kiskadee,Pitangus sulphuratus,Rare/Accidental,PASSERIFORMES,Tyrannidae,CAR
+Piratic Flycatcher,Legatus leucophaius,Rare/Accidental,PASSERIFORMES,Tyrannidae,CAR
+Tropical Kingbird,Tyrannus melancholicus,,PASSERIFORMES,Tyrannidae,CAR
+Cassin's Kingbird,Tyrannus vociferans,Rare/Accidental,PASSERIFORMES,Tyrannidae,CAR
+Western Kingbird,Tyrannus verticalis,,PASSERIFORMES,Tyrannidae,CAR
+Eastern Kingbird,Tyrannus tyrannus,,PASSERIFORMES,Tyrannidae,CAR
+Gray Kingbird,Tyrannus dominicensis,,PASSERIFORMES,Tyrannidae,CAR
+Loggerhead Kingbird,Tyrannus caudifasciatus,Endemic,PASSERIFORMES,Tyrannidae,CAR
+Giant Kingbird,Tyrannus cubensis,Endemic Endangered,PASSERIFORMES,Tyrannidae,CAR
+Scissor-tailed Flycatcher,Tyrannus forficatus,,PASSERIFORMES,Tyrannidae,CAR
+Fork-tailed Flycatcher,Tyrannus savana,,PASSERIFORMES,Tyrannidae,CAR
+Blue Mountain Vireo,Vireo osburni,Endemic Near-threatened,PASSERIFORMES,Vireonidae,CAR
+White-eyed Vireo,Vireo griseus,,PASSERIFORMES,Vireonidae,CAR
+Thick-billed Vireo,Vireo crassirostris,,PASSERIFORMES,Vireonidae,CAR
+Mangrove Vireo,Vireo pallens,,PASSERIFORMES,Vireonidae,CAR
+San Andres Vireo,Vireo caribaeus,Endemic Vulnerable,PASSERIFORMES,Vireonidae,CAR
+Jamaican Vireo,Vireo modestus,Endemic,PASSERIFORMES,Vireonidae,CAR
+Cuban Vireo,Vireo gundlachii,Endemic,PASSERIFORMES,Vireonidae,CAR
+Puerto Rican Vireo,Vireo latimeri,Endemic,PASSERIFORMES,Vireonidae,CAR
+Flat-billed Vireo,Vireo nanus,Endemic,PASSERIFORMES,Vireonidae,CAR
+Bell's Vireo,Vireo bellii,Rare/Accidental,PASSERIFORMES,Vireonidae,CAR
+Yellow-throated Vireo,Vireo flavifrons,,PASSERIFORMES,Vireonidae,CAR
+Blue-headed Vireo,Vireo solitarius,,PASSERIFORMES,Vireonidae,CAR
+Philadelphia Vireo,Vireo philadelphicus,,PASSERIFORMES,Vireonidae,CAR
+Warbling Vireo,Vireo gilvus,,PASSERIFORMES,Vireonidae,CAR
+Red-eyed Vireo,Vireo olivaceus,,PASSERIFORMES,Vireonidae,CAR
+Yellow-green Vireo,Vireo flavoviridis,,PASSERIFORMES,Vireonidae,CAR
+Black-whiskered Vireo,Vireo altiloquus,,PASSERIFORMES,Vireonidae,CAR
+Yucatan Vireo,Vireo magister,,PASSERIFORMES,Vireonidae,CAR
+Loggerhead Shrike,Lanius ludovicianus,Rare/Accidental Near-threatened,PASSERIFORMES,Laniidae,CAR
+Northern Shrike,Lanius borealis,Rare/Accidental,PASSERIFORMES,Laniidae,CAR
+Blue Jay,Cyanocitta cristata,Rare/Accidental,PASSERIFORMES,Corvidae,CAR
+Black-billed Magpie,Pica hudsonia,Extirpated,PASSERIFORMES,Corvidae,CAR
+American Crow,Corvus brachyrhynchos,Introduced species,PASSERIFORMES,Corvidae,CAR
+Cuban Palm-Crow,Corvus minutus,Endemic,PASSERIFORMES,Corvidae,CAR
+Hispaniolan Palm-Crow,Corvus palmarum,Endemic,PASSERIFORMES,Corvidae,CAR
+Cuban Crow,Corvus nasicus,Endemic,PASSERIFORMES,Corvidae,CAR
+White-necked Crow,Corvus leucognaphalus,Endemic Vulnerable,PASSERIFORMES,Corvidae,CAR
+Jamaican Crow,Corvus jamaicensis,Endemic Near-threatened,PASSERIFORMES,Corvidae,CAR
+Fish Crow,Corvus ossifragus,Rare/Accidental,PASSERIFORMES,Corvidae,CAR
+Common Raven,Corvus corax,Rare/Accidental,PASSERIFORMES,Corvidae,CAR
+Eurasian Skylark,Alauda arvensis,Extirpated,PASSERIFORMES,Alaudidae,CAR
+Horned Lark,Eremophila alpestris,Rare/Accidental,PASSERIFORMES,Alaudidae,CAR
+Bank Swallow,Riparia riparia,,PASSERIFORMES,Hirundinidae,CAR
+Tree Swallow,Tachycineta bicolor,,PASSERIFORMES,Hirundinidae,CAR
+White-winged Swallow,Tachycineta albiventer,Rare/Accidental,PASSERIFORMES,Hirundinidae,CAR
+Golden Swallow,Tachycineta euchrysea,Endemic Vulnerable,PASSERIFORMES,Hirundinidae,CAR
+Violet-green Swallow,Tachycineta thalassina,Rare/Accidental,PASSERIFORMES,Hirundinidae,CAR
+Bahama Swallow,Tachycineta cyaneoviridis,Endemic Endangered,PASSERIFORMES,Hirundinidae,CAR
+Purple Martin,Progne subis,,PASSERIFORMES,Hirundinidae,CAR
+Cuban Martin,Progne cryptoleuca,Endemic,PASSERIFORMES,Hirundinidae,CAR
+Caribbean Martin,Progne dominicensis,,PASSERIFORMES,Hirundinidae,CAR
+Brown-chested Martin,Progne tapera,Rare/Accidental,PASSERIFORMES,Hirundinidae,CAR
+Northern Rough-winged Swallow,Stelgidopteryx serripennis,,PASSERIFORMES,Hirundinidae,CAR
+Barn Swallow,Hirundo rustica,,PASSERIFORMES,Hirundinidae,CAR
+Western House-Martin,Delichon urbicum,Rare/Accidental,PASSERIFORMES,Hirundinidae,CAR
+Cliff Swallow,Petrochelidon pyrrhonota,,PASSERIFORMES,Hirundinidae,CAR
+Cave Swallow,Petrochelidon fulva,,PASSERIFORMES,Hirundinidae,CAR
+Arctic Warbler,Phylloscopus borealis,Rare/Accidental,PASSERIFORMES,Phylloscopidae,CAR
+Eurasian Blackcap,Sylvia atricapilla,Uncertain origin,PASSERIFORMES,Sylviidae,CAR
+Ruby-crowned Kinglet,Corthylio calendula,Rare/Accidental,PASSERIFORMES,Regulidae,CAR
+Golden-crowned Kinglet,Regulus satrapa,Rare/Accidental,PASSERIFORMES,Regulidae,CAR
+White-breasted Nuthatch,Sitta carolinensis,Rare/Accidental,PASSERIFORMES,Sittidae,CAR
+Bahama Nuthatch,Sitta insularis,Endemic Critically endangered,PASSERIFORMES,Sittidae,CAR
+Red-breasted Nuthatch,Sitta canadensis,Rare/Accidental,PASSERIFORMES,Sittidae,CAR
+Brown Creeper,Certhia americana,Rare/Accidental,PASSERIFORMES,Certhiidae,CAR
+Cuban Gnatcatcher,Polioptila lembeyei,Endemic,PASSERIFORMES,Polioptilidae,CAR
+Blue-gray Gnatcatcher,Polioptila caerulea,,PASSERIFORMES,Polioptilidae,CAR
+Zapata Wren,Ferminia cerverai,Endemic Endangered,PASSERIFORMES,Troglodytidae,CAR
+Northern House Wren,Troglodytes aedon,Rare/Accidental,PASSERIFORMES,Troglodytidae,CAR
+Kalinago Wren,Troglodytes martinicensis,,PASSERIFORMES,Troglodytidae,CAR
+St. Lucia Wren,Troglodytes mesoleucus,Endemic,PASSERIFORMES,Troglodytidae,CAR
+St. Vincent Wren,Troglodytes musicus,Endemic,PASSERIFORMES,Troglodytidae,CAR
+Grenada Wren,Troglodytes grenadensis,Endemic,PASSERIFORMES,Troglodytidae,CAR
+Southern House Wren,Troglodytes musculus,Rare/Accidental,PASSERIFORMES,Troglodytidae,CAR
+Winter Wren,Troglodytes hiemalis,,PASSERIFORMES,Troglodytidae,CAR
+Sedge Wren,Cistothorus stellaris,Rare/Accidental,PASSERIFORMES,Troglodytidae,CAR
+Marsh Wren,Cistothorus palustris,Rare/Accidental,PASSERIFORMES,Troglodytidae,CAR
+Common Hill Myna,Gracula religiosa,Introduced species,PASSERIFORMES,Sturnidae,CAR
+European Starling,Sturnus vulgaris,Introduced species,PASSERIFORMES,Sturnidae,CAR
+Common Myna,Acridotheres tristis,Introduced species,PASSERIFORMES,Sturnidae,CAR
+Gray Catbird,Dumetella carolinensis,,PASSERIFORMES,Mimidae,CAR
+Martinique Thrasher,Ramphocinclus brachyurus,Endemic,PASSERIFORMES,Mimidae,CAR
+St. Lucia Thrasher,Ramphocinclus sanctaeluciae,Endemic,PASSERIFORMES,Mimidae,CAR
+Scaly-breasted Thrasher,Allenia fusca,Endemic,PASSERIFORMES,Mimidae,CAR
+Pearly-eyed Thrasher,Margarops fuscatus,,PASSERIFORMES,Mimidae,CAR
+Brown Trembler,Cinclocerthia ruficauda,Endemic,PASSERIFORMES,Mimidae,CAR
+Gray Trembler,Cinclocerthia gutturalis,Endemic,PASSERIFORMES,Mimidae,CAR
+Brown Thrasher,Toxostoma rufum,Rare/Accidental,PASSERIFORMES,Mimidae,CAR
+Bahama Mockingbird,Mimus gundlachii,Endemic,PASSERIFORMES,Mimidae,CAR
+Tropical Mockingbird,Mimus gilvus,,PASSERIFORMES,Mimidae,CAR
+Northern Mockingbird,Mimus polyglottos,,PASSERIFORMES,Mimidae,CAR
+Eastern Bluebird,Sialia sialis,Rare/Accidental,PASSERIFORMES,Turdidae,CAR
+Cuban Solitaire,Myadestes elisabeth,Endemic Near-threatened,PASSERIFORMES,Turdidae,CAR
+Rufous-throated Solitaire,Myadestes genibarbis,Endemic,PASSERIFORMES,Turdidae,CAR
+Varied Thrush,Ixoreus naevius,Rare/Accidental,PASSERIFORMES,Turdidae,CAR
+Veery,Catharus fuscescens,,PASSERIFORMES,Turdidae,CAR
+Gray-cheeked Thrush,Catharus minimus,,PASSERIFORMES,Turdidae,CAR
+Bicknell's Thrush,Catharus bicknelli,Vulnerable,PASSERIFORMES,Turdidae,CAR
+Swainson's Thrush,Catharus ustulatus,,PASSERIFORMES,Turdidae,CAR
+Hermit Thrush,Catharus guttatus,,PASSERIFORMES,Turdidae,CAR
+Wood Thrush,Hylocichla mustelina,,PASSERIFORMES,Turdidae,CAR
+Forest Thrush,Turdus lherminieri,Endemic Near-threatened,PASSERIFORMES,Turdidae,CAR
+Cocoa Thrush,Turdus fumigatus,,PASSERIFORMES,Turdidae,CAR
+Spectacled Thrush,Turdus nudigenis,,PASSERIFORMES,Turdidae,CAR
+American Robin,Turdus migratorius,Rare/Accidental,PASSERIFORMES,Turdidae,CAR
+Grand Cayman Thrush,Turdus ravidus,Endemic Extinct,PASSERIFORMES,Turdidae,CAR
+White-chinned Thrush,Turdus aurantius,Endemic,PASSERIFORMES,Turdidae,CAR
+Red-legged Thrush,Turdus plumbeus,Endemic,PASSERIFORMES,Turdidae,CAR
+La Selle Thrush,Turdus swalesi,Endemic Vulnerable,PASSERIFORMES,Turdidae,CAR
+White-eyed Thrush,Turdus jamaicensis,Endemic,PASSERIFORMES,Turdidae,CAR
+Dark-sided Flycatcher,Muscicapa sibirica,,PASSERIFORMES,Muscicapidae,CAR
+Northern Wheatear,Oenanthe oenanthe,Rare/Accidental,PASSERIFORMES,Muscicapidae,CAR
+Bohemian Waxwing,Bombycilla garrulus,Rare/Accidental,PASSERIFORMES,Bombycillidae,CAR
+Cedar Waxwing,Bombycilla cedrorum,,PASSERIFORMES,Bombycillidae,CAR
+Palmchat,Dulus dominicus,Endemic,PASSERIFORMES,Dulidae,CAR
+Village Weaver,Ploceus cucullatus,Introduced species,PASSERIFORMES,Ploceidae,CAR
+Northern Red Bishop,Euplectes franciscanus,Introduced species,PASSERIFORMES,Ploceidae,CAR
+Yellow-crowned Bishop,Euplectes afer,Introduced species,PASSERIFORMES,Ploceidae,CAR
+Bronze Mannikin,Spermestes cucullata,Introduced species,PASSERIFORMES,Estrildidae,CAR
+African Silverbill,Euodice cantans,Introduced species,PASSERIFORMES,Estrildidae,CAR
+Indian Silverbill,Euodice malabarica,Introduced species,PASSERIFORMES,Estrildidae,CAR
+Java Sparrow,Padda oryzivora,Introduced species Endangered,PASSERIFORMES,Estrildidae,CAR
+Scaly-breasted Munia,Lonchura punctulata,Introduced species,PASSERIFORMES,Estrildidae,CAR
+Tricolored Munia,Lonchura malacca,Introduced species,PASSERIFORMES,Estrildidae,CAR
+Chestnut Munia,Lonchura atricapilla,Introduced species,PASSERIFORMES,Estrildidae,CAR
+White-headed Munia,Lonchura maja,Introduced species,PASSERIFORMES,Estrildidae,CAR
+Orange-cheeked Waxbill,Estrilda melpoda,Introduced species,PASSERIFORMES,Estrildidae,CAR
+Common Waxbill,Estrilda astrild,Introduced species,PASSERIFORMES,Estrildidae,CAR
+Black-rumped Waxbill,Estrilda troglodytes,Introduced species,PASSERIFORMES,Estrildidae,CAR
+Red Avadavat,Amandava amandava,Introduced species,PASSERIFORMES,Estrildidae,CAR
+Pin-tailed Whydah,Vidua macroura,Introduced species,PASSERIFORMES,Viduidae,CAR
+House Sparrow,Passer domesticus,Introduced species,PASSERIFORMES,Passeridae,CAR
+Eurasian Tree Sparrow,Passer montanus,Introduced species,PASSERIFORMES,Passeridae,CAR
+White Wagtail,Motacilla alba,Rare/Accidental,PASSERIFORMES,Motacillidae,CAR
+American Pipit,Anthus rubescens,,PASSERIFORMES,Motacillidae,CAR
+Sprague's Pipit,Anthus spragueii,Rare/Accidental Vulnerable,PASSERIFORMES,Motacillidae,CAR
+Hispaniolan Euphonia,Chlorophonia musica,Endemic,PASSERIFORMES,Fringillidae,CAR
+Puerto Rican Euphonia,Chlorophonia sclateri,Endemic,PASSERIFORMES,Fringillidae,CAR
+Lesser Antillean Euphonia,Chlorophonia flavifrons,Endemic,PASSERIFORMES,Fringillidae,CAR
+Jamaican Euphonia,Euphonia jamaica,Endemic,PASSERIFORMES,Fringillidae,CAR
+Evening Grosbeak,Coccothraustes vespertinus,Rare/Accidental Vulnerable,PASSERIFORMES,Fringillidae,CAR
+Pine Grosbeak,Pinicola enucleator,Rare/Accidental,PASSERIFORMES,Fringillidae,CAR
+House Finch,Haemorhous mexicanus,Rare/Accidental,PASSERIFORMES,Fringillidae,CAR
+Purple Finch,Haemorhous purpureus,Rare/Accidental,PASSERIFORMES,Fringillidae,CAR
+Red Crossbill,Loxia curvirostra,Rare/Accidental,PASSERIFORMES,Fringillidae,CAR
+Hispaniolan Crossbill,Loxia megaplaga,Endemic Endangered,PASSERIFORMES,Fringillidae,CAR
+European Goldfinch,Carduelis carduelis,,PASSERIFORMES,Fringillidae,CAR
+Pine Siskin,Spinus pinus,Rare/Accidental,PASSERIFORMES,Fringillidae,CAR
+Antillean Siskin,Spinus dominicensis,Endemic,PASSERIFORMES,Fringillidae,CAR
+American Goldfinch,Spinus tristis,Rare/Accidental,PASSERIFORMES,Fringillidae,CAR
+Red Siskin,Spinus cucullatus,Extirpated Endangered,PASSERIFORMES,Fringillidae,CAR
+Lapland Longspur,Calcarius lapponicus,Rare/Accidental,PASSERIFORMES,Calcariidae,CAR
+Snow Bunting,Plectrophenax nivalis,Rare/Accidental,PASSERIFORMES,Calcariidae,CAR
+Grasshopper Sparrow,Ammodramus savannarum,,PASSERIFORMES,Passerellidae,CAR
+Chipping Sparrow,Spizella passerina,,PASSERIFORMES,Passerellidae,CAR
+Clay-colored Sparrow,Spizella pallida,,PASSERIFORMES,Passerellidae,CAR
+Field Sparrow,Spizella pusilla,Rare/Accidental,PASSERIFORMES,Passerellidae,CAR
+Lark Sparrow,Chondestes grammacus,,PASSERIFORMES,Passerellidae,CAR
+American Tree Sparrow,Spizelloides arborea,Rare/Accidental,PASSERIFORMES,Passerellidae,CAR
+Fox Sparrow,Passerella iliaca,,PASSERIFORMES,Passerellidae,CAR
+Dark-eyed Junco,Junco hyemalis,Rare/Accidental,PASSERIFORMES,Passerellidae,CAR
+Rufous-collared Sparrow,Zonotrichia capensis,,PASSERIFORMES,Passerellidae,CAR
+White-crowned Sparrow,Zonotrichia leucophrys,,PASSERIFORMES,Passerellidae,CAR
+Harris's Sparrow,Zonotrichia querula,Rare/Accidental Near-threatened,PASSERIFORMES,Passerellidae,CAR
+White-throated Sparrow,Zonotrichia albicollis,Rare/Accidental,PASSERIFORMES,Passerellidae,CAR
+Vesper Sparrow,Pooecetes gramineus,Rare/Accidental,PASSERIFORMES,Passerellidae,CAR
+LeConte's Sparrow,Ammospiza leconteii,Rare/Accidental,PASSERIFORMES,Passerellidae,CAR
+Nelson's Sparrow,Ammospiza nelsoni,Rare/Accidental,PASSERIFORMES,Passerellidae,CAR
+Saltmarsh Sparrow,Ammospiza caudacuta,Rare/Accidental Endangered,PASSERIFORMES,Passerellidae,CAR
+Savannah Sparrow,Passerculus sandwichensis,,PASSERIFORMES,Passerellidae,CAR
+Song Sparrow,Melospiza melodia,,PASSERIFORMES,Passerellidae,CAR
+Lincoln's Sparrow,Melospiza lincolnii,,PASSERIFORMES,Passerellidae,CAR
+Swamp Sparrow,Melospiza georgiana,,PASSERIFORMES,Passerellidae,CAR
+Zapata Sparrow,Torreornis inexpectata,Endemic Near-threatened,PASSERIFORMES,Passerellidae,CAR
+Green-tailed Towhee,Pipilo chlorurus,Rare/Accidental,PASSERIFORMES,Passerellidae,CAR
+Eastern Towhee,Pipilo erythrophthalmus,Rare/Accidental,PASSERIFORMES,Passerellidae,CAR
+Bermuda Towhee,Pipilo naufragus,Endemic Extinct,PASSERIFORMES,Passerellidae,CAR
+Western Chat-Tanager,Calyptophilus tertius,Endemic Vulnerable,PASSERIFORMES,Calyptophilidae,CAR
+Eastern Chat-Tanager,Calyptophilus frugivorus,Endemic Near-threatened,PASSERIFORMES,Calyptophilidae,CAR
+Black-crowned Palm-Tanager,Phaenicophilus palmarum,Endemic,PASSERIFORMES,Phaenicophilidae,CAR
+Gray-crowned Palm-Tanager,Phaenicophilus poliocephalus,Endemic Near-threatened,PASSERIFORMES,Phaenicophilidae,CAR
+White-winged Warbler,Xenoligea montana,Endemic Vulnerable,PASSERIFORMES,Phaenicophilidae,CAR
+Green-tailed Warbler,Microligea palustris,Endemic,PASSERIFORMES,Phaenicophilidae,CAR
+Puerto Rican Tanager,Nesospingus speculiferus,Endemic Vulnerable,PASSERIFORMES,Nesospingidae,CAR
+Western Spindalis,Spindalis zena,,PASSERIFORMES,Spindalidae,CAR
+Jamaican Spindalis,Spindalis nigricephala,Endemic,PASSERIFORMES,Spindalidae,CAR
+Hispaniolan Spindalis,Spindalis dominicensis,Endemic,PASSERIFORMES,Spindalidae,CAR
+Puerto Rican Spindalis,Spindalis portoricensis,Endemic,PASSERIFORMES,Spindalidae,CAR
+Yellow-headed Warbler,Teretistris fernandinae,Endemic,PASSERIFORMES,Teretistridae,CAR
+Oriente Warbler,Teretistris fornsi,Endemic,PASSERIFORMES,Teretistridae,CAR
+Yellow-breasted Chat,Icteria virens,,PASSERIFORMES,Icteriidae,CAR
+Yellow-headed Blackbird,Xanthocephalus xanthocephalus,,PASSERIFORMES,Icteridae,CAR
+Bobolink,Dolichonyx oryzivorus,,PASSERIFORMES,Icteridae,CAR
+Eastern Meadowlark,Sturnella magna,,PASSERIFORMES,Icteridae,CAR
+Hispaniolan Oriole,Icterus dominicensis,Endemic,PASSERIFORMES,Icteridae,CAR
+Cuban Oriole,Icterus melanopsis,Endemic,PASSERIFORMES,Icteridae,CAR
+Bahama Oriole,Icterus northropi,Endemic Endangered,PASSERIFORMES,Icteridae,CAR
+Puerto Rican Oriole,Icterus portoricensis,Endemic,PASSERIFORMES,Icteridae,CAR
+St. Lucia Oriole,Icterus laudabilis,Endemic Endangered,PASSERIFORMES,Icteridae,CAR
+Montserrat Oriole,Icterus oberi,Endemic Vulnerable,PASSERIFORMES,Icteridae,CAR
+Martinique Oriole,Icterus bonana,Endemic Vulnerable,PASSERIFORMES,Icteridae,CAR
+Orchard Oriole,Icterus spurius,,PASSERIFORMES,Icteridae,CAR
+Hooded Oriole,Icterus cucullatus,Rare/Accidental,PASSERIFORMES,Icteridae,CAR
+Yellow-tailed Oriole,Icterus mesomelas,Rare/Accidental,PASSERIFORMES,Icteridae,CAR
+Venezuelan Troupial,Icterus icterus,Introduced species,PASSERIFORMES,Icteridae,CAR
+Bullock's Oriole,Icterus bullockii,Rare/Accidental,PASSERIFORMES,Icteridae,CAR
+Jamaican Oriole,Icterus leucopteryx,Endemic,PASSERIFORMES,Icteridae,CAR
+Yellow Oriole,Icterus nigrogularis,Rare/Accidental,PASSERIFORMES,Icteridae,CAR
+Altamira Oriole,Icterus gularis,Uncertain origin,PASSERIFORMES,Icteridae,CAR
+Baltimore Oriole,Icterus galbula,,PASSERIFORMES,Icteridae,CAR
+Jamaican Blackbird,Nesopsar nigerrimus,Endemic Endangered,PASSERIFORMES,Icteridae,CAR
+Red-winged Blackbird,Agelaius phoeniceus,,PASSERIFORMES,Icteridae,CAR
+Red-shouldered Blackbird,Agelaius assimilis,Endemic,PASSERIFORMES,Icteridae,CAR
+Tawny-shouldered Blackbird,Agelaius humeralis,Endemic,PASSERIFORMES,Icteridae,CAR
+Yellow-shouldered Blackbird,Agelaius xanthomus,Endemic Endangered,PASSERIFORMES,Icteridae,CAR
+Shiny Cowbird,Molothrus bonariensis,,PASSERIFORMES,Icteridae,CAR
+Brown-headed Cowbird,Molothrus ater,,PASSERIFORMES,Icteridae,CAR
+Giant Cowbird,Molothrus oryzivorus,Rare/Accidental,PASSERIFORMES,Icteridae,CAR
+Cuban Blackbird,Ptiloxena atroviolacea,Endemic,PASSERIFORMES,Icteridae,CAR
+Rusty Blackbird,Euphagus carolinus,Rare/Accidental Vulnerable,PASSERIFORMES,Icteridae,CAR
+Common Grackle,Quiscalus quiscula,Rare/Accidental Near-threatened,PASSERIFORMES,Icteridae,CAR
+Boat-tailed Grackle,Quiscalus major,Rare/Accidental,PASSERIFORMES,Icteridae,CAR
+Great-tailed Grackle,Quiscalus mexicanus,Rare/Accidental,PASSERIFORMES,Icteridae,CAR
+Greater Antillean Grackle,Quiscalus niger,Endemic,PASSERIFORMES,Icteridae,CAR
+Carib Grackle,Quiscalus lugubris,,PASSERIFORMES,Icteridae,CAR
+Yellow-hooded Blackbird,Chrysomus icterocephalus,Rare/Accidental,PASSERIFORMES,Icteridae,CAR
+Ovenbird,Seiurus aurocapilla,,PASSERIFORMES,Parulidae,CAR
+Worm-eating Warbler,Helmitheros vermivorum,,PASSERIFORMES,Parulidae,CAR
+Louisiana Waterthrush,Parkesia motacilla,,PASSERIFORMES,Parulidae,CAR
+Northern Waterthrush,Parkesia noveboracensis,,PASSERIFORMES,Parulidae,CAR
+Bachman's Warbler,Vermivora bachmanii,Rare/Accidental Critically endangered (possibly extinct),PASSERIFORMES,Parulidae,CAR
+Golden-winged Warbler,Vermivora chrysoptera,Near-threatened,PASSERIFORMES,Parulidae,CAR
+Blue-winged Warbler,Vermivora cyanoptera,,PASSERIFORMES,Parulidae,CAR
+Black-and-white Warbler,Mniotilta varia,,PASSERIFORMES,Parulidae,CAR
+Prothonotary Warbler,Protonotaria citrea,,PASSERIFORMES,Parulidae,CAR
+Swainson's Warbler,Limnothlypis swainsonii,,PASSERIFORMES,Parulidae,CAR
+Tennessee Warbler,Leiothlypis peregrina,,PASSERIFORMES,Parulidae,CAR
+Orange-crowned Warbler,Leiothlypis celata,Rare/Accidental,PASSERIFORMES,Parulidae,CAR
+Nashville Warbler,Leiothlypis ruficapilla,Rare/Accidental,PASSERIFORMES,Parulidae,CAR
+Virginia's Warbler,Leiothlypis virginiae,Rare/Accidental,PASSERIFORMES,Parulidae,CAR
+Semper's Warbler,Leucopeza semperi,Endemic Critically endangered (possibly extinct),PASSERIFORMES,Parulidae,CAR
+Connecticut Warbler,Oporornis agilis,,PASSERIFORMES,Parulidae,CAR
+MacGillivray's Warbler,Geothlypis tolmiei,Rare/Accidental,PASSERIFORMES,Parulidae,CAR
+Mourning Warbler,Geothlypis philadelphia,Rare/Accidental,PASSERIFORMES,Parulidae,CAR
+Kentucky Warbler,Geothlypis formosa,,PASSERIFORMES,Parulidae,CAR
+Bahama Yellowthroat,Geothlypis rostrata,Endemic,PASSERIFORMES,Parulidae,CAR
+Common Yellowthroat,Geothlypis trichas,,PASSERIFORMES,Parulidae,CAR
+Whistling Warbler,Catharopeza bishopi,Endemic Endangered,PASSERIFORMES,Parulidae,CAR
+Plumbeous Warbler,Setophaga plumbea,Endemic,PASSERIFORMES,Parulidae,CAR
+Elfin-woods Warbler,Setophaga angelae,Endemic Endangered,PASSERIFORMES,Parulidae,CAR
+Arrowhead Warbler,Setophaga pharetra,Endemic,PASSERIFORMES,Parulidae,CAR
+Hooded Warbler,Setophaga citrina,,PASSERIFORMES,Parulidae,CAR
+American Redstart,Setophaga ruticilla,,PASSERIFORMES,Parulidae,CAR
+Kirtland's Warbler,Setophaga kirtlandii,Near-threatened,PASSERIFORMES,Parulidae,CAR
+Cape May Warbler,Setophaga tigrina,,PASSERIFORMES,Parulidae,CAR
+Cerulean Warbler,Setophaga cerulea,Rare/Accidental Near-threatened,PASSERIFORMES,Parulidae,CAR
+Northern Parula,Setophaga americana,Rare/Accidental,PASSERIFORMES,Parulidae,CAR
+Magnolia Warbler,Setophaga magnolia,,PASSERIFORMES,Parulidae,CAR
+Bay-breasted Warbler,Setophaga castanea,,PASSERIFORMES,Parulidae,CAR
+Blackburnian Warbler,Setophaga fusca,,PASSERIFORMES,Parulidae,CAR
+Yellow Warbler,Setophaga petechia,,PASSERIFORMES,Parulidae,CAR
+Chestnut-sided Warbler,Setophaga pensylvanica,,PASSERIFORMES,Parulidae,CAR
+Blackpoll Warbler,Setophaga striata,Near-threatened,PASSERIFORMES,Parulidae,CAR
+Black-throated Blue Warbler,Setophaga caerulescens,,PASSERIFORMES,Parulidae,CAR
+Palm Warbler,Setophaga palmarum,,PASSERIFORMES,Parulidae,CAR
+Olive-capped Warbler,Setophaga pityophila,Endemic,PASSERIFORMES,Parulidae,CAR
+Pine Warbler,Setophaga pinus,,PASSERIFORMES,Parulidae,CAR
+Yellow-rumped Warbler,Setophaga coronata,,PASSERIFORMES,Parulidae,CAR
+Yellow-throated Warbler,Setophaga dominica,,PASSERIFORMES,Parulidae,CAR
+Bahama Warbler,Setophaga flavescens,Endemic Endangered,PASSERIFORMES,Parulidae,CAR
+Vitelline Warbler,Setophaga vitellina,Endemic Near-threatened,PASSERIFORMES,Parulidae,CAR
+Prairie Warbler,Setophaga discolor,,PASSERIFORMES,Parulidae,CAR
+Adelaide's Warbler,Setophaga adelaidae,Endemic,PASSERIFORMES,Parulidae,CAR
+Barbuda Warbler,Setophaga subita,Endemic Vulnerable,PASSERIFORMES,Parulidae,CAR
+St. Lucia Warbler,Setophaga delicata,Endemic,PASSERIFORMES,Parulidae,CAR
+Black-throated Gray Warbler,Setophaga nigrescens,Rare/Accidental,PASSERIFORMES,Parulidae,CAR
+Townsend's Warbler,Setophaga townsendi,Rare/Accidental,PASSERIFORMES,Parulidae,CAR
+Golden-cheeked Warbler,Setophaga chrysoparia,Rare/Accidental Endangered,PASSERIFORMES,Parulidae,CAR
+Black-throated Green Warbler,Setophaga virens,,PASSERIFORMES,Parulidae,CAR
+Canada Warbler,Cardellina canadensis,,PASSERIFORMES,Parulidae,CAR
+Wilson's Warbler,Cardellina pusilla,,PASSERIFORMES,Parulidae,CAR
+Summer Tanager,Piranga rubra,,PASSERIFORMES,Cardinalidae,CAR
+Scarlet Tanager,Piranga olivacea,,PASSERIFORMES,Cardinalidae,CAR
+Western Tanager,Piranga ludoviciana,Rare/Accidental,PASSERIFORMES,Cardinalidae,CAR
+Northern Cardinal,Cardinalis cardinalis,Rare/Accidental,PASSERIFORMES,Cardinalidae,CAR
+Rose-breasted Grosbeak,Pheucticus ludovicianus,,PASSERIFORMES,Cardinalidae,CAR
+Blue Grosbeak,Passerina caerulea,,PASSERIFORMES,Cardinalidae,CAR
+Lazuli Bunting,Passerina amoena,Rare/Accidental,PASSERIFORMES,Cardinalidae,CAR
+Indigo Bunting,Passerina cyanea,,PASSERIFORMES,Cardinalidae,CAR
+Painted Bunting,Passerina ciris,,PASSERIFORMES,Cardinalidae,CAR
+Dickcissel,Spiza americana,,PASSERIFORMES,Cardinalidae,CAR
+Palm Tanager,Thraupis palmarum,Rare/Accidental,PASSERIFORMES,Thraupidae,CAR
+Lesser Antillean Tanager,Stilpnia cucullata,Endemic,PASSERIFORMES,Thraupidae,CAR
+Swallow Tanager,Tersina viridis,Uncertain origin,PASSERIFORMES,Thraupidae,CAR
+Red-legged Honeycreeper,Cyanerpes cyaneus,,PASSERIFORMES,Thraupidae,CAR
+Saffron Finch,Sicalis flaveola,Introduced species,PASSERIFORMES,Thraupidae,CAR
+Grassland Yellow-Finch,Sicalis luteola,Introduced species,PASSERIFORMES,Thraupidae,CAR
+Blue-black Grassquit,Volatinia jacarina,,PASSERIFORMES,Thraupidae,CAR
+Lined Seedeater,Sporophila lineola,Rare/Accidental,PASSERIFORMES,Thraupidae,CAR
+Chestnut-bellied Seed-Finch,Sporophila angolensis,Introduced species,PASSERIFORMES,Thraupidae,CAR
+Yellow-bellied Seedeater,Sporophila nigricollis,,PASSERIFORMES,Thraupidae,CAR
+Bananaquit,Coereba flaveola,,PASSERIFORMES,Thraupidae,CAR
+Yellow-faced Grassquit,Tiaris olivaceus,,PASSERIFORMES,Thraupidae,CAR
+Orangequit,Euneornis campestris,Endemic,PASSERIFORMES,Thraupidae,CAR
+Puerto Rican Bullfinch,Melopyrrha portoricensis,Endemic Vulnerable,PASSERIFORMES,Thraupidae,CAR
+St. Kitts Bullfinch,Melopyrrha grandis,Endemic Critically endangered (possibly extinct),PASSERIFORMES,Thraupidae,CAR
+Cuban Bullfinch,Melopyrrha nigra,Endemic Near-threatened,PASSERIFORMES,Thraupidae,CAR
+Grand Cayman Bullfinch,Melopyrrha taylori,Endemic Near-threatened,PASSERIFORMES,Thraupidae,CAR
+Greater Antillean Bullfinch,Melopyrrha violacea,Endemic,PASSERIFORMES,Thraupidae,CAR
+Yellow-shouldered Grassquit,Loxipasser anoxanthus,Endemic,PASSERIFORMES,Thraupidae,CAR
+Cuban Grassquit,Phonipara canora,Endemic,PASSERIFORMES,Thraupidae,CAR
+Lesser Antillean Bullfinch,Loxigilla noctis,Endemic,PASSERIFORMES,Thraupidae,CAR
+Barbados Bullfinch,Loxigilla barbadensis,Endemic,PASSERIFORMES,Thraupidae,CAR
+St. Lucia Black Finch,Melanospiza richardsoni,Endemic Endangered,PASSERIFORMES,Thraupidae,CAR
+Black-faced Grassquit,Melanospiza bicolor,,PASSERIFORMES,Thraupidae,CAR
+Lesser Antillean Saltator,Saltator albicollis,Endemic,PASSERIFORMES,Thraupidae,CAR

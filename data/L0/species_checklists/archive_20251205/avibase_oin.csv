@@ -1,0 +1,26 @@
+common_name,scientific_name,status,order,family,region
+Whimbrel,Numenius phaeopus,,CHARADRIIFORMES,Scolopacidae,oin
+Brown Noddy,Anous stolidus,,CHARADRIIFORMES,Laridae,oin
+Sooty Tern,Onychoprion fuscatus,,CHARADRIIFORMES,Laridae,oin
+Bridled Tern,Onychoprion anaethetus,,CHARADRIIFORMES,Laridae,oin
+Common Tern,Sterna hirundo,,CHARADRIIFORMES,Laridae,oin
+Black-naped Tern,Sterna sumatrana,,CHARADRIIFORMES,Laridae,oin
+Lesser Crested Tern,Thalasseus bengalensis,,CHARADRIIFORMES,Laridae,oin
+Atlantic Yellow-nosed Albatross,Thalassarche chlororhynchos,Endangered,PROCELLARIIFORMES,Diomedeidae,oin
+Indian Yellow-nosed Albatross,Thalassarche carteri,Endangered,PROCELLARIIFORMES,Diomedeidae,oin
+White-faced Storm-Petrel,Pelagodroma marina,,PROCELLARIIFORMES,Oceanitidae,oin
+Black-bellied Storm-Petrel,Fregetta tropica,,PROCELLARIIFORMES,Oceanitidae,oin
+Swinhoe's Storm-Petrel,Hydrobates monorhis,Near-threatened,PROCELLARIIFORMES,Hydrobatidae,oin
+Soft-plumaged Petrel,Pterodroma mollis,,PROCELLARIIFORMES,Procellariidae,oin
+Salvin's Prion,Pachyptila salvini,,PROCELLARIIFORMES,Procellariidae,oin
+MacGillivray's Prion,Pachyptila macgillivrayi,Critically endangered,PROCELLARIIFORMES,Procellariidae,oin
+Bulwer's Petrel,Bulweria bulwerii,,PROCELLARIIFORMES,Procellariidae,oin
+Jouanin's Petrel,Bulweria fallax,Near-threatened,PROCELLARIIFORMES,Procellariidae,oin
+Flesh-footed Shearwater,Ardenna carneipes,Near-threatened,PROCELLARIIFORMES,Procellariidae,oin
+Wedge-tailed Shearwater,Ardenna pacifica,,PROCELLARIIFORMES,Procellariidae,oin
+Lesser Frigatebird,Fregata ariel,,SULIFORMES,Fregatidae,oin
+Great Frigatebird,Fregata minor,,SULIFORMES,Fregatidae,oin
+Red-footed Booby,Sula sula,,SULIFORMES,Sulidae,oin
+Masked Booby,Sula dactylatra,,SULIFORMES,Sulidae,oin
+Indian Pond-Heron,Ardeola grayii,,PELECANIFORMES,Ardeidae,oin
+Common Myna,Acridotheres tristis,,PASSERIFORMES,Sturnidae,oin

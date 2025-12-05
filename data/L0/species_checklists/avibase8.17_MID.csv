@@ -1,0 +1,965 @@
+common_name,scientific_name,status,order,family,region
+Common Ostrich,Struthio camelus,,STRUTHIONIFORMES,Struthionidae,MID
+White-faced Whistling-Duck,Dendrocygna viduata,Rare/Accidental,ANSERIFORMES,Anatidae,MID
+Fulvous Whistling-Duck,Dendrocygna bicolor,Rare/Accidental,ANSERIFORMES,Anatidae,MID
+Lesser Whistling-Duck,Dendrocygna javanica,Rare/Accidental,ANSERIFORMES,Anatidae,MID
+Bar-headed Goose,Anser indicus,Rare/Accidental,ANSERIFORMES,Anatidae,MID
+Snow Goose,Anser caerulescens,Rare/Accidental,ANSERIFORMES,Anatidae,MID
+Graylag Goose,Anser anser,,ANSERIFORMES,Anatidae,MID
+Greater White-fronted Goose,Anser albifrons,,ANSERIFORMES,Anatidae,MID
+Lesser White-fronted Goose,Anser erythropus,Vulnerable,ANSERIFORMES,Anatidae,MID
+Taiga Bean-Goose,Anser fabalis,,ANSERIFORMES,Anatidae,MID
+Tundra Bean-Goose,Anser serrirostris,Rare/Accidental,ANSERIFORMES,Anatidae,MID
+Pink-footed Goose,Anser brachyrhynchus,Rare/Accidental,ANSERIFORMES,Anatidae,MID
+Brant,Branta bernicla,Rare/Accidental,ANSERIFORMES,Anatidae,MID
+Barnacle Goose,Branta leucopsis,Rare/Accidental,ANSERIFORMES,Anatidae,MID
+Cackling Goose,Branta hutchinsii,Rare/Accidental,ANSERIFORMES,Anatidae,MID
+Canada Goose,Branta canadensis,Rare/Accidental,ANSERIFORMES,Anatidae,MID
+Red-breasted Goose,Branta ruficollis,Vulnerable,ANSERIFORMES,Anatidae,MID
+Mute Swan,Cygnus olor,,ANSERIFORMES,Anatidae,MID
+Black Swan,Cygnus atratus,Uncertain origin,ANSERIFORMES,Anatidae,MID
+Tundra Swan,Cygnus columbianus,,ANSERIFORMES,Anatidae,MID
+Whooper Swan,Cygnus cygnus,,ANSERIFORMES,Anatidae,MID
+Knob-billed Duck,Sarkidiornis melanotos,,ANSERIFORMES,Anatidae,MID
+Egyptian Goose,Alopochen aegyptiaca,Rare/Accidental,ANSERIFORMES,Anatidae,MID
+Ruddy Shelduck,Tadorna ferruginea,,ANSERIFORMES,Anatidae,MID
+Common Shelduck,Tadorna tadorna,,ANSERIFORMES,Anatidae,MID
+Spur-winged Goose,Plectropterus gambensis,Rare/Accidental,ANSERIFORMES,Anatidae,MID
+Muscovy Duck,Cairina moschata,Introduced species,ANSERIFORMES,Anatidae,MID
+Cotton Pygmy-Goose,Nettapus coromandelianus,Rare/Accidental,ANSERIFORMES,Anatidae,MID
+Ringed Teal,Callonetta leucophrys,Rare/Accidental,ANSERIFORMES,Anatidae,MID
+Mandarin Duck,Aix galericulata,Uncertain origin,ANSERIFORMES,Anatidae,MID
+Baikal Teal,Sibirionetta formosa,,ANSERIFORMES,Anatidae,MID
+Garganey,Spatula querquedula,,ANSERIFORMES,Anatidae,MID
+Northern Shoveler,Spatula clypeata,,ANSERIFORMES,Anatidae,MID
+Gadwall,Mareca strepera,,ANSERIFORMES,Anatidae,MID
+Falcated Duck,Mareca falcata,Rare/Accidental,ANSERIFORMES,Anatidae,MID
+Eurasian Wigeon,Mareca penelope,,ANSERIFORMES,Anatidae,MID
+Indian Spot-billed Duck,Anas poecilorhyncha,Introduced species,ANSERIFORMES,Anatidae,MID
+Eastern Spot-billed Duck,Anas zonorhyncha,Uncertain origin,ANSERIFORMES,Anatidae,MID
+Mallard,Anas platyrhynchos,,ANSERIFORMES,Anatidae,MID
+Cape Teal,Anas capensis,Rare/Accidental,ANSERIFORMES,Anatidae,MID
+Red-billed Duck,Anas erythrorhyncha,Rare/Accidental,ANSERIFORMES,Anatidae,MID
+Northern Pintail,Anas acuta,,ANSERIFORMES,Anatidae,MID
+Green-winged Teal,Anas crecca,,ANSERIFORMES,Anatidae,MID
+Marbled Duck,Marmaronetta angustirostris,Near-threatened,ANSERIFORMES,Anatidae,MID
+Red-crested Pochard,Netta rufina,,ANSERIFORMES,Anatidae,MID
+Southern Pochard,Netta erythrophthalma,Rare/Accidental,ANSERIFORMES,Anatidae,MID
+Canvasback,Aythya valisineria,Rare/Accidental,ANSERIFORMES,Anatidae,MID
+Common Pochard,Aythya ferina,Vulnerable,ANSERIFORMES,Anatidae,MID
+Ferruginous Duck,Aythya nyroca,Near-threatened,ANSERIFORMES,Anatidae,MID
+Tufted Duck,Aythya fuligula,,ANSERIFORMES,Anatidae,MID
+Greater Scaup,Aythya marila,,ANSERIFORMES,Anatidae,MID
+Common Eider,Somateria mollissima,Rare/Accidental Near-threatened,ANSERIFORMES,Anatidae,MID
+Velvet Scoter,Melanitta fusca,Vulnerable,ANSERIFORMES,Anatidae,MID
+White-winged Scoter,Melanitta deglandi,Rare/Accidental,ANSERIFORMES,Anatidae,MID
+Common Scoter,Melanitta nigra,Rare/Accidental,ANSERIFORMES,Anatidae,MID
+Long-tailed Duck,Clangula hyemalis,Rare/Accidental Vulnerable,ANSERIFORMES,Anatidae,MID
+Common Goldeneye,Bucephala clangula,,ANSERIFORMES,Anatidae,MID
+Smew,Mergellus albellus,,ANSERIFORMES,Anatidae,MID
+Common Merganser,Mergus merganser,,ANSERIFORMES,Anatidae,MID
+Red-breasted Merganser,Mergus serrator,,ANSERIFORMES,Anatidae,MID
+Ruddy Duck,Oxyura jamaicensis,Introduced species,ANSERIFORMES,Anatidae,MID
+White-headed Duck,Oxyura leucocephala,Endangered,ANSERIFORMES,Anatidae,MID
+Helmeted Guineafowl,Numida meleagris,,GALLIFORMES,Numididae,MID
+Vulturine Guineafowl,Acryllium vulturinum,Rare/Accidental,GALLIFORMES,Numididae,MID
+Black Grouse,Lyrurus tetrix,,GALLIFORMES,Phasianidae,MID
+Caucasian Grouse,Lyrurus mlokosiewiczi,Near-threatened,GALLIFORMES,Phasianidae,MID
+Gray Partridge,Perdix perdix,,GALLIFORMES,Phasianidae,MID
+Ring-necked Pheasant,Phasianus colchicus,,GALLIFORMES,Phasianidae,MID
+Cheer Pheasant,Catreus wallichii,Vulnerable,GALLIFORMES,Phasianidae,MID
+Gray Francolin,Ortygornis pondicerianus,,GALLIFORMES,Phasianidae,MID
+Chinese Francolin,Francolinus pintadeanus,Introduced species,GALLIFORMES,Phasianidae,MID
+Black Francolin,Francolinus francolinus,,GALLIFORMES,Phasianidae,MID
+Caucasian Snowcock,Tetraogallus caucasicus,,GALLIFORMES,Phasianidae,MID
+Caspian Snowcock,Tetraogallus caspius,,GALLIFORMES,Phasianidae,MID
+Himalayan Snowcock,Tetraogallus himalayensis,,GALLIFORMES,Phasianidae,MID
+See-see Partridge,Ammoperdix griseogularis,,GALLIFORMES,Phasianidae,MID
+Sand Partridge,Ammoperdix heyi,,GALLIFORMES,Phasianidae,MID
+Common Quail,Coturnix coturnix,,GALLIFORMES,Phasianidae,MID
+Harlequin Quail,Coturnix delegorguei,,GALLIFORMES,Phasianidae,MID
+Barbary Partridge,Alectoris barbara,,GALLIFORMES,Phasianidae,MID
+Arabian Partridge,Alectoris melanocephala,,GALLIFORMES,Phasianidae,MID
+Chukar,Alectoris chukar,,GALLIFORMES,Phasianidae,MID
+Rock Partridge,Alectoris graeca,Near-threatened,GALLIFORMES,Phasianidae,MID
+Philby's Partridge,Alectoris philbyi,,GALLIFORMES,Phasianidae,MID
+Rock Pigeon,Columba livia,,COLUMBIFORMES,Columbidae,MID
+Speckled Pigeon,Columba guinea,Rare/Accidental,COLUMBIFORMES,Columbidae,MID
+Stock Dove,Columba oenas,,COLUMBIFORMES,Columbidae,MID
+Yellow-eyed Pigeon,Columba eversmanni,Vulnerable,COLUMBIFORMES,Columbidae,MID
+Common Wood-Pigeon,Columba palumbus,,COLUMBIFORMES,Columbidae,MID
+Rameron Pigeon,Columba arquatrix,Rare/Accidental,COLUMBIFORMES,Columbidae,MID
+European Turtle-Dove,Streptopelia turtur,Vulnerable,COLUMBIFORMES,Columbidae,MID
+Dusky Turtle-Dove,Streptopelia lugens,,COLUMBIFORMES,Columbidae,MID
+Oriental Turtle-Dove,Streptopelia orientalis,Rare/Accidental,COLUMBIFORMES,Columbidae,MID
+Eurasian Collared-Dove,Streptopelia decaocto,,COLUMBIFORMES,Columbidae,MID
+African Collared-Dove,Streptopelia roseogrisea,,COLUMBIFORMES,Columbidae,MID
+Red-eyed Dove,Streptopelia semitorquata,,COLUMBIFORMES,Columbidae,MID
+Red Collared-Dove,Streptopelia tranquebarica,Rare/Accidental,COLUMBIFORMES,Columbidae,MID
+Spotted Dove,Spilopelia chinensis,Introduced species,COLUMBIFORMES,Columbidae,MID
+Laughing Dove,Spilopelia senegalensis,,COLUMBIFORMES,Columbidae,MID
+Black-billed Wood-Dove,Turtur abyssinicus,Rare/Accidental,COLUMBIFORMES,Columbidae,MID
+Tambourine Dove,Turtur tympanistria,Rare/Accidental,COLUMBIFORMES,Columbidae,MID
+Namaqua Dove,Oena capensis,,COLUMBIFORMES,Columbidae,MID
+Zebra Dove,Geopelia striata,Introduced species,COLUMBIFORMES,Columbidae,MID
+Bruce's Green-Pigeon,Treron waalia,,COLUMBIFORMES,Columbidae,MID
+Pallas's Sandgrouse,Syrrhaptes paradoxus,Rare/Accidental,PTEROCLIFORMES,Pteroclidae,MID
+Pin-tailed Sandgrouse,Pterocles alchata,,PTEROCLIFORMES,Pteroclidae,MID
+Chestnut-bellied Sandgrouse,Pterocles exustus,,PTEROCLIFORMES,Pteroclidae,MID
+Spotted Sandgrouse,Pterocles senegallus,,PTEROCLIFORMES,Pteroclidae,MID
+Black-bellied Sandgrouse,Pterocles orientalis,,PTEROCLIFORMES,Pteroclidae,MID
+Crowned Sandgrouse,Pterocles coronatus,,PTEROCLIFORMES,Pteroclidae,MID
+Lichtenstein's Sandgrouse,Pterocles lichtensteinii,,PTEROCLIFORMES,Pteroclidae,MID
+Great Bustard,Otis tarda,Endangered,OTIDIFORMES,Otididae,MID
+Arabian Bustard,Ardeotis arabs,Near-threatened,OTIDIFORMES,Otididae,MID
+African Houbara,Chlamydotis undulata,Vulnerable,OTIDIFORMES,Otididae,MID
+Asian Houbara,Chlamydotis macqueenii,Vulnerable,OTIDIFORMES,Otididae,MID
+Little Bustard,Tetrax tetrax,Near-threatened,OTIDIFORMES,Otididae,MID
+Senegal Coucal,Centropus senegalensis,,CUCULIFORMES,Cuculidae,MID
+White-browed Coucal,Centropus superciliosus,,CUCULIFORMES,Cuculidae,MID
+Chestnut-winged Cuckoo,Clamator coromandus,Rare/Accidental,CUCULIFORMES,Cuculidae,MID
+Great Spotted Cuckoo,Clamator glandarius,,CUCULIFORMES,Cuculidae,MID
+Pied Cuckoo,Clamator jacobinus,,CUCULIFORMES,Cuculidae,MID
+Asian Koel,Eudynamys scolopaceus,Rare/Accidental,CUCULIFORMES,Cuculidae,MID
+Dideric Cuckoo,Chrysococcyx caprius,,CUCULIFORMES,Cuculidae,MID
+Klaas's Cuckoo,Chrysococcyx klaas,,CUCULIFORMES,Cuculidae,MID
+Plaintive Cuckoo,Cacomantis merulinus,,CUCULIFORMES,Cuculidae,MID
+Gray-bellied Cuckoo,Cacomantis passerinus,Rare/Accidental,CUCULIFORMES,Cuculidae,MID
+Common Hawk-Cuckoo,Hierococcyx varius,Rare/Accidental,CUCULIFORMES,Cuculidae,MID
+Lesser Cuckoo,Cuculus poliocephalus,Rare/Accidental,CUCULIFORMES,Cuculidae,MID
+Himalayan Cuckoo,Cuculus saturatus,Rare/Accidental,CUCULIFORMES,Cuculidae,MID
+Common Cuckoo,Cuculus canorus,,CUCULIFORMES,Cuculidae,MID
+Oriental Cuckoo,Cuculus optatus,Rare/Accidental,CUCULIFORMES,Cuculidae,MID
+Red-necked Nightjar,Caprimulgus ruficollis,Near-threatened,CAPRIMULGIFORMES,Caprimulgidae,MID
+Eurasian Nightjar,Caprimulgus europaeus,,CAPRIMULGIFORMES,Caprimulgidae,MID
+Egyptian Nightjar,Caprimulgus aegyptius,,CAPRIMULGIFORMES,Caprimulgidae,MID
+Nubian Nightjar,Caprimulgus nubicus,,CAPRIMULGIFORMES,Caprimulgidae,MID
+Sykes's Nightjar,Caprimulgus mahrattensis,,CAPRIMULGIFORMES,Caprimulgidae,MID
+Montane Nightjar,Caprimulgus poliocephalus,,CAPRIMULGIFORMES,Caprimulgidae,MID
+Indian Nightjar,Caprimulgus asiaticus,Rare/Accidental,CAPRIMULGIFORMES,Caprimulgidae,MID
+Plain Nightjar,Caprimulgus inornatus,,CAPRIMULGIFORMES,Caprimulgidae,MID
+Himalayan Swiftlet,Aerodramus brevirostris,Rare/Accidental,APODIFORMES,Apodidae,MID
+Alpine Swift,Tachymarptis melba,,APODIFORMES,Apodidae,MID
+Common Swift,Apus apus,,APODIFORMES,Apodidae,MID
+Plain Swift,Apus unicolor,,APODIFORMES,Apodidae,MID
+Pallid Swift,Apus pallidus,,APODIFORMES,Apodidae,MID
+Forbes-Watson's Swift,Apus berliozi,,APODIFORMES,Apodidae,MID
+Pacific Swift,Apus pacificus,Rare/Accidental,APODIFORMES,Apodidae,MID
+Little Swift,Apus affinis,,APODIFORMES,Apodidae,MID
+White-rumped Swift,Apus caffer,Rare/Accidental,APODIFORMES,Apodidae,MID
+African Palm Swift,Cypsiurus parvus,,APODIFORMES,Apodidae,MID
+Water Rail,Rallus aquaticus,,GRUIFORMES,Rallidae,MID
+Corn Crake,Crex crex,,GRUIFORMES,Rallidae,MID
+African Crake,Crecopsis egregia,Rare/Accidental,GRUIFORMES,Rallidae,MID
+Spotted Crake,Porzana porzana,,GRUIFORMES,Rallidae,MID
+Lesser Moorhen,Paragallinula angulata,Rare/Accidental,GRUIFORMES,Rallidae,MID
+Eurasian Moorhen,Gallinula chloropus,,GRUIFORMES,Rallidae,MID
+Eurasian Coot,Fulica atra,,GRUIFORMES,Rallidae,MID
+Red-knobbed Coot,Fulica cristata,,GRUIFORMES,Rallidae,MID
+Allen's Gallinule,Porphyrio alleni,Rare/Accidental,GRUIFORMES,Rallidae,MID
+Purple Gallinule,Porphyrio martinica,Rare/Accidental,GRUIFORMES,Rallidae,MID
+African Swamphen,Porphyrio madagascariensis,Rare/Accidental,GRUIFORMES,Rallidae,MID
+Gray-headed Swamphen,Porphyrio poliocephalus,,GRUIFORMES,Rallidae,MID
+Watercock,Gallicrex cinerea,Rare/Accidental,GRUIFORMES,Rallidae,MID
+White-breasted Waterhen,Amaurornis phoenicurus,Rare/Accidental,GRUIFORMES,Rallidae,MID
+Striped Crake,Aenigmatolimnas marginalis,,GRUIFORMES,Rallidae,MID
+Ruddy-breasted Crake,Zapornia fusca,Rare/Accidental,GRUIFORMES,Rallidae,MID
+Little Crake,Zapornia parva,,GRUIFORMES,Rallidae,MID
+Baillon's Crake,Zapornia pusilla,,GRUIFORMES,Rallidae,MID
+Demoiselle Crane,Anthropoides virgo,,GRUIFORMES,Gruidae,MID
+Siberian Crane,Leucogeranus leucogeranus,Critically endangered,GRUIFORMES,Gruidae,MID
+Common Crane,Grus grus,,GRUIFORMES,Gruidae,MID
+Great Thick-knee,Esacus recurvirostris,Near-threatened,CHARADRIIFORMES,Burhinidae,MID
+Spotted Thick-knee,Burhinus capensis,,CHARADRIIFORMES,Burhinidae,MID
+Eurasian Thick-knee,Burhinus oedicnemus,,CHARADRIIFORMES,Burhinidae,MID
+Senegal Thick-knee,Burhinus senegalensis,,CHARADRIIFORMES,Burhinidae,MID
+Egyptian Plover,Pluvianus aegyptius,Rare/Accidental,CHARADRIIFORMES,Pluvianidae,MID
+Black-winged Stilt,Himantopus himantopus,,CHARADRIIFORMES,Recurvirostridae,MID
+Pied Avocet,Recurvirostra avosetta,,CHARADRIIFORMES,Recurvirostridae,MID
+Eurasian Oystercatcher,Haematopus ostralegus,Near-threatened,CHARADRIIFORMES,Haematopodidae,MID
+Black-bellied Plover,Pluvialis squatarola,Vulnerable,CHARADRIIFORMES,Charadriidae,MID
+European Golden-Plover,Pluvialis apricaria,,CHARADRIIFORMES,Charadriidae,MID
+American Golden-Plover,Pluvialis dominica,,CHARADRIIFORMES,Charadriidae,MID
+Pacific Golden-Plover,Pluvialis fulva,,CHARADRIIFORMES,Charadriidae,MID
+Eurasian Dotterel,Eudromias morinellus,,CHARADRIIFORMES,Charadriidae,MID
+Common Ringed Plover,Charadrius hiaticula,,CHARADRIIFORMES,Charadriidae,MID
+Three-banded Plover,Thinornis tricollaris,Rare/Accidental,CHARADRIIFORMES,Charadriidae,MID
+Little Ringed Plover,Thinornis dubius,,CHARADRIIFORMES,Charadriidae,MID
+Northern Lapwing,Vanellus vanellus,Near-threatened,CHARADRIIFORMES,Charadriidae,MID
+Blacksmith Lapwing,Vanellus armatus,Rare/Accidental,CHARADRIIFORMES,Charadriidae,MID
+Spur-winged Lapwing,Vanellus spinosus,,CHARADRIIFORMES,Charadriidae,MID
+River Lapwing,Vanellus duvaucelii,Near-threatened,CHARADRIIFORMES,Charadriidae,MID
+Black-headed Lapwing,Vanellus tectus,Rare/Accidental,CHARADRIIFORMES,Charadriidae,MID
+Black-winged Lapwing,Vanellus melanopterus,,CHARADRIIFORMES,Charadriidae,MID
+Gray-headed Lapwing,Vanellus cinereus,Rare/Accidental,CHARADRIIFORMES,Charadriidae,MID
+Red-wattled Lapwing,Vanellus indicus,,CHARADRIIFORMES,Charadriidae,MID
+Sociable Lapwing,Vanellus gregarius,Critically endangered,CHARADRIIFORMES,Charadriidae,MID
+White-tailed Lapwing,Vanellus leucurus,,CHARADRIIFORMES,Charadriidae,MID
+Caspian Plover,Anarhynchus asiaticus,,CHARADRIIFORMES,Charadriidae,MID
+Siberian Sand-Plover,Anarhynchus mongolus,Endangered,CHARADRIIFORMES,Charadriidae,MID
+Tibetan Sand-Plover,Anarhynchus atrifrons,,CHARADRIIFORMES,Charadriidae,MID
+Greater Sand-Plover,Anarhynchus leschenaultii,,CHARADRIIFORMES,Charadriidae,MID
+Kittlitz's Plover,Anarhynchus pecuarius,Rare/Accidental,CHARADRIIFORMES,Charadriidae,MID
+Kentish Plover,Anarhynchus alexandrinus,,CHARADRIIFORMES,Charadriidae,MID
+Greater Painted-Snipe,Rostratula benghalensis,Rare/Accidental,CHARADRIIFORMES,Rostratulidae,MID
+Pheasant-tailed Jacana,Hydrophasianus chirurgus,Rare/Accidental,CHARADRIIFORMES,Jacanidae,MID
+Whimbrel,Numenius phaeopus,,CHARADRIIFORMES,Scolopacidae,MID
+Little Curlew,Numenius minutus,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,MID
+Far Eastern Curlew,Numenius madagascariensis,Rare/Accidental Endangered,CHARADRIIFORMES,Scolopacidae,MID
+Slender-billed Curlew,Numenius tenuirostris,Rare/Accidental Critically endangered,CHARADRIIFORMES,Scolopacidae,MID
+Eurasian Curlew,Numenius arquata,Near-threatened,CHARADRIIFORMES,Scolopacidae,MID
+Bar-tailed Godwit,Limosa lapponica,Near-threatened,CHARADRIIFORMES,Scolopacidae,MID
+Black-tailed Godwit,Limosa limosa,Near-threatened,CHARADRIIFORMES,Scolopacidae,MID
+Asian Dowitcher,Limnodromus semipalmatus,Rare/Accidental Near-threatened,CHARADRIIFORMES,Scolopacidae,MID
+Long-billed Dowitcher,Limnodromus scolopaceus,Rare/Accidental Near-threatened,CHARADRIIFORMES,Scolopacidae,MID
+Jack Snipe,Lymnocryptes minimus,,CHARADRIIFORMES,Scolopacidae,MID
+Eurasian Woodcock,Scolopax rusticola,,CHARADRIIFORMES,Scolopacidae,MID
+Solitary Snipe,Gallinago solitaria,,CHARADRIIFORMES,Scolopacidae,MID
+Great Snipe,Gallinago media,Near-threatened,CHARADRIIFORMES,Scolopacidae,MID
+Swinhoe's Snipe,Gallinago megala,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,MID
+Pin-tailed Snipe,Gallinago stenura,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,MID
+Common Snipe,Gallinago gallinago,,CHARADRIIFORMES,Scolopacidae,MID
+Wilson's Phalarope,Phalaropus tricolor,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,MID
+Red Phalarope,Phalaropus fulicarius,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,MID
+Red-necked Phalarope,Phalaropus lobatus,,CHARADRIIFORMES,Scolopacidae,MID
+Terek Sandpiper,Xenus cinereus,,CHARADRIIFORMES,Scolopacidae,MID
+Common Sandpiper,Actitis hypoleucos,,CHARADRIIFORMES,Scolopacidae,MID
+Spotted Sandpiper,Actitis macularius,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,MID
+Green Sandpiper,Tringa ochropus,,CHARADRIIFORMES,Scolopacidae,MID
+Gray-tailed Tattler,Tringa brevipes,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,MID
+Marsh Sandpiper,Tringa stagnatilis,,CHARADRIIFORMES,Scolopacidae,MID
+Wood Sandpiper,Tringa glareola,,CHARADRIIFORMES,Scolopacidae,MID
+Common Redshank,Tringa totanus,,CHARADRIIFORMES,Scolopacidae,MID
+Lesser Yellowlegs,Tringa flavipes,Rare/Accidental Vulnerable,CHARADRIIFORMES,Scolopacidae,MID
+Spotted Redshank,Tringa erythropus,,CHARADRIIFORMES,Scolopacidae,MID
+Common Greenshank,Tringa nebularia,,CHARADRIIFORMES,Scolopacidae,MID
+Ruddy Turnstone,Arenaria interpres,Near-threatened,CHARADRIIFORMES,Scolopacidae,MID
+Great Knot,Calidris tenuirostris,Endangered,CHARADRIIFORMES,Scolopacidae,MID
+Red Knot,Calidris canutus,Near-threatened,CHARADRIIFORMES,Scolopacidae,MID
+Ruff,Calidris pugnax,,CHARADRIIFORMES,Scolopacidae,MID
+Broad-billed Sandpiper,Calidris falcinellus,Vulnerable,CHARADRIIFORMES,Scolopacidae,MID
+Sharp-tailed Sandpiper,Calidris acuminata,Rare/Accidental Vulnerable,CHARADRIIFORMES,Scolopacidae,MID
+Curlew Sandpiper,Calidris ferruginea,Vulnerable,CHARADRIIFORMES,Scolopacidae,MID
+Temminck's Stint,Calidris temminckii,,CHARADRIIFORMES,Scolopacidae,MID
+Long-toed Stint,Calidris subminuta,,CHARADRIIFORMES,Scolopacidae,MID
+Red-necked Stint,Calidris ruficollis,Rare/Accidental Near-threatened,CHARADRIIFORMES,Scolopacidae,MID
+Buff-breasted Sandpiper,Calidris subruficollis,Rare/Accidental Vulnerable,CHARADRIIFORMES,Scolopacidae,MID
+Sanderling,Calidris alba,,CHARADRIIFORMES,Scolopacidae,MID
+Dunlin,Calidris alpina,Near-threatened,CHARADRIIFORMES,Scolopacidae,MID
+Purple Sandpiper,Calidris maritima,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,MID
+Baird's Sandpiper,Calidris bairdii,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,MID
+Little Stint,Calidris minuta,,CHARADRIIFORMES,Scolopacidae,MID
+White-rumped Sandpiper,Calidris fuscicollis,Rare/Accidental Vulnerable,CHARADRIIFORMES,Scolopacidae,MID
+Pectoral Sandpiper,Calidris melanotos,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,MID
+Semipalmated Sandpiper,Calidris pusilla,Rare/Accidental Near-threatened,CHARADRIIFORMES,Scolopacidae,MID
+Small Buttonquail,Turnix sylvaticus,Rare/Accidental,CHARADRIIFORMES,Turnicidae,MID
+Crab-Plover,Dromas ardeola,,CHARADRIIFORMES,Dromadidae,MID
+Bronze-winged Courser,Rhinoptilus chalcopterus,,CHARADRIIFORMES,Glareolidae,MID
+Cream-colored Courser,Cursorius cursor,,CHARADRIIFORMES,Glareolidae,MID
+Small Pratincole,Glareola lactea,Rare/Accidental,CHARADRIIFORMES,Glareolidae,MID
+Collared Pratincole,Glareola pratincola,,CHARADRIIFORMES,Glareolidae,MID
+Black-winged Pratincole,Glareola nordmanni,Near-threatened,CHARADRIIFORMES,Glareolidae,MID
+Oriental Pratincole,Glareola maldivarum,Rare/Accidental,CHARADRIIFORMES,Glareolidae,MID
+Long-tailed Jaeger,Stercorarius longicaudus,Rare/Accidental,CHARADRIIFORMES,Stercorariidae,MID
+Parasitic Jaeger,Stercorarius parasiticus,,CHARADRIIFORMES,Stercorariidae,MID
+Pomarine Jaeger,Stercorarius pomarinus,,CHARADRIIFORMES,Stercorariidae,MID
+Great Skua,Stercorarius skua,Rare/Accidental,CHARADRIIFORMES,Stercorariidae,MID
+Brown Skua,Stercorarius antarcticus,Rare/Accidental,CHARADRIIFORMES,Stercorariidae,MID
+South Polar Skua,Stercorarius maccormicki,Rare/Accidental,CHARADRIIFORMES,Stercorariidae,MID
+Atlantic Puffin,Fratercula arctica,Rare/Accidental Vulnerable,CHARADRIIFORMES,Alcidae,MID
+Little Gull,Hydrocoloeus minutus,,CHARADRIIFORMES,Laridae,MID
+Black-legged Kittiwake,Rissa tridactyla,Rare/Accidental Vulnerable,CHARADRIIFORMES,Laridae,MID
+Sabine's Gull,Xema sabini,Rare/Accidental,CHARADRIIFORMES,Laridae,MID
+Slender-billed Gull,Chroicocephalus genei,,CHARADRIIFORMES,Laridae,MID
+Bonaparte's Gull,Chroicocephalus philadelphia,,CHARADRIIFORMES,Laridae,MID
+Black-headed Gull,Chroicocephalus ridibundus,,CHARADRIIFORMES,Laridae,MID
+Brown-headed Gull,Chroicocephalus brunnicephalus,Rare/Accidental,CHARADRIIFORMES,Laridae,MID
+Gray-hooded Gull,Chroicocephalus cirrocephalus,Rare/Accidental,CHARADRIIFORMES,Laridae,MID
+Laughing Gull,Leucophaeus atricilla,Rare/Accidental,CHARADRIIFORMES,Laridae,MID
+Franklin's Gull,Leucophaeus pipixcan,Rare/Accidental,CHARADRIIFORMES,Laridae,MID
+Pallas's Gull,Ichthyaetus ichthyaetus,,CHARADRIIFORMES,Laridae,MID
+Relict Gull,Ichthyaetus relictus,Rare/Accidental Vulnerable,CHARADRIIFORMES,Laridae,MID
+Audouin's Gull,Ichthyaetus audouinii,Vulnerable,CHARADRIIFORMES,Laridae,MID
+Mediterranean Gull,Ichthyaetus melanocephalus,,CHARADRIIFORMES,Laridae,MID
+Sooty Gull,Ichthyaetus hemprichii,,CHARADRIIFORMES,Laridae,MID
+White-eyed Gull,Ichthyaetus leucophthalmus,,CHARADRIIFORMES,Laridae,MID
+Common Gull,Larus canus,,CHARADRIIFORMES,Laridae,MID
+Caspian Gull,Larus cachinnans,,CHARADRIIFORMES,Laridae,MID
+Mongolian Gull,Larus mongolicus,Rare/Accidental,CHARADRIIFORMES,Laridae,MID
+European Herring Gull,Larus argentatus,,CHARADRIIFORMES,Laridae,MID
+Yellow-legged Gull,Larus michahellis,,CHARADRIIFORMES,Laridae,MID
+Armenian Gull,Larus armenicus,,CHARADRIIFORMES,Laridae,MID
+Great Black-backed Gull,Larus marinus,Rare/Accidental,CHARADRIIFORMES,Laridae,MID
+Glaucous Gull,Larus hyperboreus,Rare/Accidental,CHARADRIIFORMES,Laridae,MID
+Lesser Black-backed Gull,Larus fuscus,,CHARADRIIFORMES,Laridae,MID
+African Skimmer,Rynchops flavirostris,Rare/Accidental,CHARADRIIFORMES,Laridae,MID
+Indian Skimmer,Rynchops albicollis,Rare/Accidental Endangered,CHARADRIIFORMES,Laridae,MID
+Brown Noddy,Anous stolidus,,CHARADRIIFORMES,Laridae,MID
+Lesser Noddy,Anous tenuirostris,,CHARADRIIFORMES,Laridae,MID
+Sooty Tern,Onychoprion fuscatus,,CHARADRIIFORMES,Laridae,MID
+Bridled Tern,Onychoprion anaethetus,,CHARADRIIFORMES,Laridae,MID
+Little Tern,Sternula albifrons,,CHARADRIIFORMES,Laridae,MID
+Saunders's Tern,Sternula saundersi,,CHARADRIIFORMES,Laridae,MID
+Gull-billed Tern,Gelochelidon nilotica,,CHARADRIIFORMES,Laridae,MID
+Caspian Tern,Hydroprogne caspia,,CHARADRIIFORMES,Laridae,MID
+Whiskered Tern,Chlidonias hybrida,,CHARADRIIFORMES,Laridae,MID
+Black Tern,Chlidonias niger,,CHARADRIIFORMES,Laridae,MID
+White-winged Tern,Chlidonias leucopterus,,CHARADRIIFORMES,Laridae,MID
+River Tern,Sterna aurantia,Rare/Accidental Vulnerable,CHARADRIIFORMES,Laridae,MID
+Arctic Tern,Sterna paradisaea,Rare/Accidental,CHARADRIIFORMES,Laridae,MID
+Common Tern,Sterna hirundo,,CHARADRIIFORMES,Laridae,MID
+White-cheeked Tern,Sterna repressa,,CHARADRIIFORMES,Laridae,MID
+Roseate Tern,Sterna dougallii,,CHARADRIIFORMES,Laridae,MID
+Sandwich Tern,Thalasseus sandvicensis,,CHARADRIIFORMES,Laridae,MID
+Lesser Crested Tern,Thalasseus bengalensis,,CHARADRIIFORMES,Laridae,MID
+West African Crested Tern,Thalasseus albididorsalis,Rare/Accidental,CHARADRIIFORMES,Laridae,MID
+Great Crested Tern,Thalasseus bergii,,CHARADRIIFORMES,Laridae,MID
+Greater Flamingo,Phoenicopterus roseus,,PHOENICOPTERIFORMES,Phoenicopteridae,MID
+Lesser Flamingo,Phoeniconaias minor,Near-threatened,PHOENICOPTERIFORMES,Phoenicopteridae,MID
+Little Grebe,Tachybaptus ruficollis,,PODICIPEDIFORMES,Podicipedidae,MID
+Horned Grebe,Podiceps auritus,Vulnerable,PODICIPEDIFORMES,Podicipedidae,MID
+Red-necked Grebe,Podiceps grisegena,,PODICIPEDIFORMES,Podicipedidae,MID
+Great Crested Grebe,Podiceps cristatus,,PODICIPEDIFORMES,Podicipedidae,MID
+Eared Grebe,Podiceps nigricollis,,PODICIPEDIFORMES,Podicipedidae,MID
+White-tailed Tropicbird,Phaethon lepturus,Rare/Accidental,PHAETHONTIFORMES,Phaethontidae,MID
+Red-billed Tropicbird,Phaethon aethereus,,PHAETHONTIFORMES,Phaethontidae,MID
+Red-throated Loon,Gavia stellata,Rare/Accidental,GAVIIFORMES,Gaviidae,MID
+Arctic Loon,Gavia arctica,,GAVIIFORMES,Gaviidae,MID
+Pacific Loon,Gavia pacifica,Rare/Accidental,GAVIIFORMES,Gaviidae,MID
+Common Loon,Gavia immer,,GAVIIFORMES,Gaviidae,MID
+White-capped Albatross,Thalassarche cauta,Rare/Accidental,PROCELLARIIFORMES,Diomedeidae,MID
+Wilson's Storm-Petrel,Oceanites oceanicus,,PROCELLARIIFORMES,Oceanitidae,MID
+White-faced Storm-Petrel,Pelagodroma marina,,PROCELLARIIFORMES,Oceanitidae,MID
+White-bellied Storm-Petrel,Fregetta grallaria,Rare/Accidental,PROCELLARIIFORMES,Oceanitidae,MID
+Black-bellied Storm-Petrel,Fregetta tropica,,PROCELLARIIFORMES,Oceanitidae,MID
+European Storm-Petrel,Hydrobates pelagicus,Rare/Accidental,PROCELLARIIFORMES,Hydrobatidae,MID
+Leach's Storm-Petrel,Hydrobates leucorhous,Rare/Accidental Vulnerable,PROCELLARIIFORMES,Hydrobatidae,MID
+Swinhoe's Storm-Petrel,Hydrobates monorhis,Rare/Accidental Near-threatened,PROCELLARIIFORMES,Hydrobatidae,MID
+Band-rumped Storm-Petrel,Hydrobates castro,Rare/Accidental,PROCELLARIIFORMES,Hydrobatidae,MID
+Matsudaira's Storm-Petrel,Hydrobates matsudairae,Rare/Accidental Vulnerable,PROCELLARIIFORMES,Hydrobatidae,MID
+Northern Giant-Petrel,Macronectes halli,Rare/Accidental,PROCELLARIIFORMES,Procellariidae,MID
+Pintado Petrel,Daption capense,Rare/Accidental,PROCELLARIIFORMES,Procellariidae,MID
+Trindade Petrel,Pterodroma arminjoniana,Rare/Accidental Vulnerable,PROCELLARIIFORMES,Procellariidae,MID
+Fea's Petrel,Pterodroma feae,Rare/Accidental,PROCELLARIIFORMES,Procellariidae,MID
+Soft-plumaged Petrel,Pterodroma mollis,Rare/Accidental,PROCELLARIIFORMES,Procellariidae,MID
+Atlantic Petrel,Pterodroma incerta,Rare/Accidental Endangered,PROCELLARIIFORMES,Procellariidae,MID
+Bulwer's Petrel,Bulweria bulwerii,Rare/Accidental,PROCELLARIIFORMES,Procellariidae,MID
+Jouanin's Petrel,Bulweria fallax,Near-threatened,PROCELLARIIFORMES,Procellariidae,MID
+Tahiti Petrel,Pseudobulweria rostrata,Rare/Accidental Near-threatened,PROCELLARIIFORMES,Procellariidae,MID
+Streaked Shearwater,Calonectris leucomelas,Rare/Accidental Near-threatened,PROCELLARIIFORMES,Procellariidae,MID
+Cory's Shearwater,Calonectris borealis,Rare/Accidental,PROCELLARIIFORMES,Procellariidae,MID
+Scopoli's Shearwater,Calonectris diomedea,Rare/Accidental,PROCELLARIIFORMES,Procellariidae,MID
+Flesh-footed Shearwater,Ardenna carneipes,Rare/Accidental Near-threatened,PROCELLARIIFORMES,Procellariidae,MID
+Great Shearwater,Ardenna gravis,Rare/Accidental,PROCELLARIIFORMES,Procellariidae,MID
+Wedge-tailed Shearwater,Ardenna pacifica,Rare/Accidental,PROCELLARIIFORMES,Procellariidae,MID
+Sooty Shearwater,Ardenna grisea,Rare/Accidental Near-threatened,PROCELLARIIFORMES,Procellariidae,MID
+Short-tailed Shearwater,Ardenna tenuirostris,Rare/Accidental,PROCELLARIIFORMES,Procellariidae,MID
+Manx Shearwater,Puffinus puffinus,Rare/Accidental,PROCELLARIIFORMES,Procellariidae,MID
+Yelkouan Shearwater,Puffinus yelkouan,Vulnerable,PROCELLARIIFORMES,Procellariidae,MID
+Balearic Shearwater,Puffinus mauretanicus,Critically endangered,PROCELLARIIFORMES,Procellariidae,MID
+Subantarctic Shearwater,Puffinus elegans,Rare/Accidental,PROCELLARIIFORMES,Procellariidae,MID
+Barolo Shearwater,Puffinus baroli,Rare/Accidental,PROCELLARIIFORMES,Procellariidae,MID
+Tropical Shearwater,Puffinus bailloni,Rare/Accidental,PROCELLARIIFORMES,Procellariidae,MID
+Persian Shearwater,Puffinus persicus,Breeding endemic,PROCELLARIIFORMES,Procellariidae,MID
+African Openbill,Anastomus lamelligerus,Rare/Accidental,CICONIIFORMES,Ciconiidae,MID
+Black Stork,Ciconia nigra,,CICONIIFORMES,Ciconiidae,MID
+Abdim's Stork,Ciconia abdimii,,CICONIIFORMES,Ciconiidae,MID
+African Woolly-necked Stork,Ciconia microscelis,Rare/Accidental,CICONIIFORMES,Ciconiidae,MID
+Asian Woolly-necked Stork,Ciconia episcopus,Rare/Accidental Near-threatened,CICONIIFORMES,Ciconiidae,MID
+White Stork,Ciconia ciconia,,CICONIIFORMES,Ciconiidae,MID
+Marabou Stork,Leptoptilos crumenifer,Rare/Accidental,CICONIIFORMES,Ciconiidae,MID
+Yellow-billed Stork,Mycteria ibis,Rare/Accidental,CICONIIFORMES,Ciconiidae,MID
+Magnificent Frigatebird,Fregata magnificens,Rare/Accidental,SULIFORMES,Fregatidae,MID
+Lesser Frigatebird,Fregata ariel,Rare/Accidental,SULIFORMES,Fregatidae,MID
+Great Frigatebird,Fregata minor,Rare/Accidental,SULIFORMES,Fregatidae,MID
+Christmas Island Frigatebird,Fregata andrewsi,Rare/Accidental Vulnerable,SULIFORMES,Fregatidae,MID
+Northern Gannet,Morus bassanus,Rare/Accidental,SULIFORMES,Sulidae,MID
+Cape Gannet,Morus capensis,Rare/Accidental Endangered,SULIFORMES,Sulidae,MID
+Red-footed Booby,Sula sula,Rare/Accidental,SULIFORMES,Sulidae,MID
+Brown Booby,Sula leucogaster,,SULIFORMES,Sulidae,MID
+Masked Booby,Sula dactylatra,,SULIFORMES,Sulidae,MID
+African Darter,Anhinga rufa,,SULIFORMES,Anhingidae,MID
+Oriental Darter,Anhinga melanogaster,,SULIFORMES,Anhingidae,MID
+Reed Cormorant,Microcarbo africanus,Rare/Accidental,SULIFORMES,Phalacrocoracidae,MID
+Pygmy Cormorant,Microcarbo pygmaeus,,SULIFORMES,Phalacrocoracidae,MID
+Great Cormorant,Phalacrocorax carbo,,SULIFORMES,Phalacrocoracidae,MID
+Socotra Cormorant,Phalacrocorax nigrogularis,Vulnerable,SULIFORMES,Phalacrocoracidae,MID
+European Shag,Gulosus aristotelis,,SULIFORMES,Phalacrocoracidae,MID
+Scarlet Ibis,Eudocimus ruber,Rare/Accidental,PELECANIFORMES,Threskiornithidae,MID
+Glossy Ibis,Plegadis falcinellus,,PELECANIFORMES,Threskiornithidae,MID
+African Sacred Ibis,Threskiornis aethiopicus,,PELECANIFORMES,Threskiornithidae,MID
+Northern Bald Ibis,Geronticus eremita,Endangered,PELECANIFORMES,Threskiornithidae,MID
+Eurasian Spoonbill,Platalea leucorodia,,PELECANIFORMES,Threskiornithidae,MID
+African Spoonbill,Platalea alba,Rare/Accidental,PELECANIFORMES,Threskiornithidae,MID
+Great White Pelican,Pelecanus onocrotalus,,PELECANIFORMES,Pelecanidae,MID
+Pink-backed Pelican,Pelecanus rufescens,,PELECANIFORMES,Pelecanidae,MID
+Dalmatian Pelican,Pelecanus crispus,Near-threatened,PELECANIFORMES,Pelecanidae,MID
+Hamerkop,Scopus umbretta,,PELECANIFORMES,Scopidae,MID
+Eurasian Bittern,Botaurus stellaris,,PELECANIFORMES,Ardeidae,MID
+Cinnamon Bittern,Botaurus cinnamomeus,Rare/Accidental,PELECANIFORMES,Ardeidae,MID
+Dwarf Bittern,Botaurus sturmii,Rare/Accidental,PELECANIFORMES,Ardeidae,MID
+Little Bittern,Botaurus minutus,,PELECANIFORMES,Ardeidae,MID
+Yellow Bittern,Botaurus sinensis,Rare/Accidental,PELECANIFORMES,Ardeidae,MID
+Black-crowned Night Heron,Nycticorax nycticorax,,PELECANIFORMES,Ardeidae,MID
+Black Heron,Egretta ardesiaca,Rare/Accidental,PELECANIFORMES,Ardeidae,MID
+Little Egret,Egretta garzetta,,PELECANIFORMES,Ardeidae,MID
+Western Reef-Heron,Egretta gularis,,PELECANIFORMES,Ardeidae,MID
+Striated Heron,Butorides striata,,PELECANIFORMES,Ardeidae,MID
+Squacco Heron,Ardeola ralloides,,PELECANIFORMES,Ardeidae,MID
+Malagasy Pond-Heron,Ardeola idae,Rare/Accidental Endangered,PELECANIFORMES,Ardeidae,MID
+Indian Pond-Heron,Ardeola grayii,,PELECANIFORMES,Ardeidae,MID
+Chinese Pond-Heron,Ardeola bacchus,Rare/Accidental,PELECANIFORMES,Ardeidae,MID
+Western Cattle-Egret,Ardea ibis,,PELECANIFORMES,Ardeidae,MID
+Eastern Cattle-Egret,Ardea coromanda,Rare/Accidental,PELECANIFORMES,Ardeidae,MID
+Great Egret,Ardea alba,,PELECANIFORMES,Ardeidae,MID
+Yellow-billed Egret,Ardea brachyrhyncha,Rare/Accidental,PELECANIFORMES,Ardeidae,MID
+Medium Egret,Ardea intermedia,,PELECANIFORMES,Ardeidae,MID
+Gray Heron,Ardea cinerea,,PELECANIFORMES,Ardeidae,MID
+Purple Heron,Ardea purpurea,,PELECANIFORMES,Ardeidae,MID
+Black-headed Heron,Ardea melanocephala,Rare/Accidental,PELECANIFORMES,Ardeidae,MID
+Goliath Heron,Ardea goliath,,PELECANIFORMES,Ardeidae,MID
+Osprey,Pandion haliaetus,,ACCIPITRIFORMES,Pandionidae,MID
+Scissor-tailed Kite,Chelictinia riocourii,Rare/Accidental Vulnerable,ACCIPITRIFORMES,Accipitridae,MID
+Black-winged Kite,Elanus caeruleus,,ACCIPITRIFORMES,Accipitridae,MID
+Bearded Vulture,Gypaetus barbatus,Near-threatened,ACCIPITRIFORMES,Accipitridae,MID
+Egyptian Vulture,Neophron percnopterus,Endangered,ACCIPITRIFORMES,Accipitridae,MID
+European Honey-buzzard,Pernis apivorus,,ACCIPITRIFORMES,Accipitridae,MID
+Oriental Honey-buzzard,Pernis ptilorhynchus,,ACCIPITRIFORMES,Accipitridae,MID
+Cinereous Vulture,Aegypius monachus,Near-threatened,ACCIPITRIFORMES,Accipitridae,MID
+Lappet-faced Vulture,Torgos tracheliotos,Endangered,ACCIPITRIFORMES,Accipitridae,MID
+Hooded Vulture,Necrosyrtes monachus,Rare/Accidental Critically endangered,ACCIPITRIFORMES,Accipitridae,MID
+Himalayan Griffon,Gyps himalayensis,Rare/Accidental Near-threatened,ACCIPITRIFORMES,Accipitridae,MID
+White-rumped Vulture,Gyps bengalensis,Critically endangered,ACCIPITRIFORMES,Accipitridae,MID
+White-backed Vulture,Gyps africanus,Rare/Accidental Critically endangered,ACCIPITRIFORMES,Accipitridae,MID
+Rüppell's Griffon,Gyps rueppelli,Rare/Accidental Critically endangered,ACCIPITRIFORMES,Accipitridae,MID
+Eurasian Griffon,Gyps fulvus,,ACCIPITRIFORMES,Accipitridae,MID
+Bateleur,Terathopius ecaudatus,Endangered,ACCIPITRIFORMES,Accipitridae,MID
+Short-toed Snake-Eagle,Circaetus gallicus,,ACCIPITRIFORMES,Accipitridae,MID
+Lesser Spotted Eagle,Clanga pomarina,,ACCIPITRIFORMES,Accipitridae,MID
+Greater Spotted Eagle,Clanga clanga,Vulnerable,ACCIPITRIFORMES,Accipitridae,MID
+Booted Eagle,Hieraaetus pennatus,,ACCIPITRIFORMES,Accipitridae,MID
+Steppe Eagle,Aquila nipalensis,Endangered,ACCIPITRIFORMES,Accipitridae,MID
+Imperial Eagle,Aquila heliaca,Vulnerable,ACCIPITRIFORMES,Accipitridae,MID
+Tawny Eagle,Aquila rapax,Vulnerable,ACCIPITRIFORMES,Accipitridae,MID
+Golden Eagle,Aquila chrysaetos,,ACCIPITRIFORMES,Accipitridae,MID
+Verreaux's Eagle,Aquila verreauxii,,ACCIPITRIFORMES,Accipitridae,MID
+Bonelli's Eagle,Aquila fasciata,,ACCIPITRIFORMES,Accipitridae,MID
+Gabar Goshawk,Micronisus gabar,,ACCIPITRIFORMES,Accipitridae,MID
+Dark Chanting-Goshawk,Melierax metabates,,ACCIPITRIFORMES,Accipitridae,MID
+Eastern Chanting-Goshawk,Melierax poliopterus,Rare/Accidental,ACCIPITRIFORMES,Accipitridae,MID
+Shikra,Tachyspiza badia,,ACCIPITRIFORMES,Accipitridae,MID
+Levant Sparrowhawk,Tachyspiza brevipes,,ACCIPITRIFORMES,Accipitridae,MID
+Eurasian Sparrowhawk,Accipiter nisus,,ACCIPITRIFORMES,Accipitridae,MID
+Eurasian Goshawk,Astur gentilis,,ACCIPITRIFORMES,Accipitridae,MID
+Western Marsh Harrier,Circus aeruginosus,,ACCIPITRIFORMES,Accipitridae,MID
+Eastern Marsh Harrier,Circus spilonotus,Rare/Accidental,ACCIPITRIFORMES,Accipitridae,MID
+Hen Harrier,Circus cyaneus,,ACCIPITRIFORMES,Accipitridae,MID
+Pallid Harrier,Circus macrourus,Near-threatened,ACCIPITRIFORMES,Accipitridae,MID
+Montagu's Harrier,Circus pygargus,,ACCIPITRIFORMES,Accipitridae,MID
+Red Kite,Milvus milvus,,ACCIPITRIFORMES,Accipitridae,MID
+Black Kite,Milvus migrans,,ACCIPITRIFORMES,Accipitridae,MID
+Brahminy Kite,Haliastur indus,,ACCIPITRIFORMES,Accipitridae,MID
+White-tailed Eagle,Haliaeetus albicilla,,ACCIPITRIFORMES,Accipitridae,MID
+Pallas's Fish-Eagle,Haliaeetus leucoryphus,Rare/Accidental Endangered,ACCIPITRIFORMES,Accipitridae,MID
+White-eyed Buzzard,Butastur teesa,,ACCIPITRIFORMES,Accipitridae,MID
+Rough-legged Hawk,Buteo lagopus,,ACCIPITRIFORMES,Accipitridae,MID
+Common Buzzard,Buteo buteo,,ACCIPITRIFORMES,Accipitridae,MID
+Socotra Buzzard,Buteo socotraensis,Vulnerable,ACCIPITRIFORMES,Accipitridae,MID
+Long-legged Buzzard,Buteo rufinus,,ACCIPITRIFORMES,Accipitridae,MID
+Upland Buzzard,Buteo hemilasius,Rare/Accidental,ACCIPITRIFORMES,Accipitridae,MID
+Western Barn Owl,Tyto alba,,STRIGIFORMES,Tytonidae,MID
+Indian Scops-Owl,Otus bakkamoena,,STRIGIFORMES,Strigidae,MID
+Arabian Scops-Owl,Otus pamelae,,STRIGIFORMES,Strigidae,MID
+Eurasian Scops-Owl,Otus scops,,STRIGIFORMES,Strigidae,MID
+Cyprus Scops-Owl,Otus cyprius,Endemic,STRIGIFORMES,Strigidae,MID
+African Scops-Owl,Otus senegalensis,Rare/Accidental,STRIGIFORMES,Strigidae,MID
+Pallid Scops-Owl,Otus brucei,,STRIGIFORMES,Strigidae,MID
+Oriental Scops-Owl,Otus sunia,Rare/Accidental,STRIGIFORMES,Strigidae,MID
+Socotra Scops-Owl,Otus socotranus,,STRIGIFORMES,Strigidae,MID
+Snowy Owl,Bubo scandiacus,Rare/Accidental Vulnerable,STRIGIFORMES,Strigidae,MID
+Arabian Eagle-Owl,Bubo milesi,,STRIGIFORMES,Strigidae,MID
+Pharaoh Eagle-Owl,Bubo ascalaphus,,STRIGIFORMES,Strigidae,MID
+Eurasian Eagle-Owl,Bubo bubo,,STRIGIFORMES,Strigidae,MID
+Brown Fish-Owl,Ketupa zeylonensis,,STRIGIFORMES,Strigidae,MID
+Spotted Owlet,Athene brama,,STRIGIFORMES,Strigidae,MID
+Little Owl,Athene noctua,,STRIGIFORMES,Strigidae,MID
+Tawny Owl,Strix aluco,,STRIGIFORMES,Strigidae,MID
+Maghreb Owl,Strix mauritanica,,STRIGIFORMES,Strigidae,MID
+Desert Owl,Strix hadorami,,STRIGIFORMES,Strigidae,MID
+Omani Owl,Strix butleri,,STRIGIFORMES,Strigidae,MID
+Long-eared Owl,Asio otus,,STRIGIFORMES,Strigidae,MID
+Short-eared Owl,Asio flammeus,,STRIGIFORMES,Strigidae,MID
+Marsh Owl,Asio capensis,,STRIGIFORMES,Strigidae,MID
+Boreal Owl,Aegolius funereus,,STRIGIFORMES,Strigidae,MID
+Eurasian Hoopoe,Upupa epops,,BUCEROTIFORMES,Upupidae,MID
+African Gray Hornbill,Lophoceros nasutus,,BUCEROTIFORMES,Bucerotidae,MID
+Northern Red-billed Hornbill,Tockus erythrorhynchus,Uncertain origin,BUCEROTIFORMES,Bucerotidae,MID
+Somali Bee-eater,Merops revoilii,Rare/Accidental,CORACIIFORMES,Meropidae,MID
+White-throated Bee-eater,Merops albicollis,,CORACIIFORMES,Meropidae,MID
+African Green Bee-eater,Merops viridissimus,,CORACIIFORMES,Meropidae,MID
+Arabian Green Bee-eater,Merops cyanophrys,,CORACIIFORMES,Meropidae,MID
+Asian Green Bee-eater,Merops orientalis,,CORACIIFORMES,Meropidae,MID
+Blue-cheeked Bee-eater,Merops persicus,,CORACIIFORMES,Meropidae,MID
+European Bee-eater,Merops apiaster,,CORACIIFORMES,Meropidae,MID
+Common Kingfisher,Alcedo atthis,,CORACIIFORMES,Alcedinidae,MID
+Malachite Kingfisher,Corythornis cristatus,Rare/Accidental,CORACIIFORMES,Alcedinidae,MID
+White-throated Kingfisher,Halcyon smyrnensis,,CORACIIFORMES,Alcedinidae,MID
+Gray-headed Kingfisher,Halcyon leucocephala,,CORACIIFORMES,Alcedinidae,MID
+Collared Kingfisher,Todiramphus chloris,,CORACIIFORMES,Alcedinidae,MID
+Pied Kingfisher,Ceryle rudis,,CORACIIFORMES,Alcedinidae,MID
+European Roller,Coracias garrulus,,CORACIIFORMES,Coraciidae,MID
+Abyssinian Roller,Coracias abyssinicus,,CORACIIFORMES,Coraciidae,MID
+Lilac-breasted Roller,Coracias caudatus,Rare/Accidental,CORACIIFORMES,Coraciidae,MID
+Purple Roller,Coracias naevius,Rare/Accidental,CORACIIFORMES,Coraciidae,MID
+Indian Roller,Coracias benghalensis,,CORACIIFORMES,Coraciidae,MID
+Broad-billed Roller,Eurystomus glaucurus,Rare/Accidental,CORACIIFORMES,Coraciidae,MID
+Eurasian Wryneck,Jynx torquilla,,PICIFORMES,Picidae,MID
+Middle Spotted Woodpecker,Dendrocoptes medius,,PICIFORMES,Picidae,MID
+Arabian Woodpecker,Dendrocoptes dorae,Near-threatened,PICIFORMES,Picidae,MID
+White-backed Woodpecker,Dendrocopos leucotos,,PICIFORMES,Picidae,MID
+Great Spotted Woodpecker,Dendrocopos major,,PICIFORMES,Picidae,MID
+White-winged Woodpecker,Dendrocopos leucopterus,Rare/Accidental,PICIFORMES,Picidae,MID
+Syrian Woodpecker,Dendrocopos syriacus,,PICIFORMES,Picidae,MID
+Sind Woodpecker,Dendrocopos assimilis,,PICIFORMES,Picidae,MID
+Lesser Spotted Woodpecker,Dryobates minor,,PICIFORMES,Picidae,MID
+Scaly-bellied Woodpecker,Picus squamatus,Extirpated,PICIFORMES,Picidae,MID
+Gray-headed Woodpecker,Picus canus,Rare/Accidental,PICIFORMES,Picidae,MID
+Levaillant's Woodpecker,Picus vaillantii,,PICIFORMES,Picidae,MID
+Eurasian Green Woodpecker,Picus viridis,,PICIFORMES,Picidae,MID
+Black Woodpecker,Dryocopus martius,,PICIFORMES,Picidae,MID
+Lesser Kestrel,Falco naumanni,,FALCONIFORMES,Falconidae,MID
+Eurasian Kestrel,Falco tinnunculus,,FALCONIFORMES,Falconidae,MID
+Red-necked Falcon,Falco chicquera,,FALCONIFORMES,Falconidae,MID
+Red-footed Falcon,Falco vespertinus,Vulnerable,FALCONIFORMES,Falconidae,MID
+Amur Falcon,Falco amurensis,,FALCONIFORMES,Falconidae,MID
+Eleonora's Falcon,Falco eleonorae,,FALCONIFORMES,Falconidae,MID
+Sooty Falcon,Falco concolor,Vulnerable,FALCONIFORMES,Falconidae,MID
+Merlin,Falco columbarius,,FALCONIFORMES,Falconidae,MID
+Eurasian Hobby,Falco subbuteo,,FALCONIFORMES,Falconidae,MID
+Lanner Falcon,Falco biarmicus,,FALCONIFORMES,Falconidae,MID
+Laggar Falcon,Falco jugger,Near-threatened,FALCONIFORMES,Falconidae,MID
+Saker Falcon,Falco cherrug,Endangered,FALCONIFORMES,Falconidae,MID
+Gyrfalcon,Falco rusticolus,Rare/Accidental,FALCONIFORMES,Falconidae,MID
+Peregrine Falcon,Falco peregrinus,,FALCONIFORMES,Falconidae,MID
+Alexandrine Parakeet,Psittacula eupatria,Near-threatened,PSITTACIFORMES,Psittaculidae,MID
+Rose-ringed Parakeet,Psittacula krameri,Introduced species,PSITTACIFORMES,Psittaculidae,MID
+Yellow-collared Lovebird,Agapornis personatus,Introduced species,PSITTACIFORMES,Psittaculidae,MID
+Monk Parakeet,Myiopsitta monachus,Introduced species,PSITTACIFORMES,Psittacidae,MID
+Nanday Parakeet,Aratinga nenday,Introduced species,PSITTACIFORMES,Psittacidae,MID
+Black-headed Cuckooshrike,Lalage melanoptera,Rare/Accidental,PASSERIFORMES,Campephagidae,MID
+Eurasian Golden Oriole,Oriolus oriolus,,PASSERIFORMES,Oriolidae,MID
+Indian Golden Oriole,Oriolus kundoo,Rare/Accidental,PASSERIFORMES,Oriolidae,MID
+Black-naped Oriole,Oriolus chinensis,Rare/Accidental,PASSERIFORMES,Oriolidae,MID
+Black-crowned Tchagra,Tchagra senegalus,,PASSERIFORMES,Malaconotidae,MID
+Fork-tailed Drongo,Dicrurus adsimilis,Rare/Accidental,PASSERIFORMES,Dicruridae,MID
+Black Drongo,Dicrurus macrocercus,,PASSERIFORMES,Dicruridae,MID
+Ashy Drongo,Dicrurus leucophaeus,Rare/Accidental,PASSERIFORMES,Dicruridae,MID
+Black-naped Monarch,Hypothymis azurea,Rare/Accidental,PASSERIFORMES,Monarchidae,MID
+Indian Paradise-Flycatcher,Terpsiphone paradisi,Rare/Accidental,PASSERIFORMES,Monarchidae,MID
+African Paradise-Flycatcher,Terpsiphone viridis,,PASSERIFORMES,Monarchidae,MID
+Red-backed Shrike,Lanius collurio,,PASSERIFORMES,Laniidae,MID
+Red-tailed Shrike,Lanius phoenicuroides,,PASSERIFORMES,Laniidae,MID
+Isabelline Shrike,Lanius isabellinus,,PASSERIFORMES,Laniidae,MID
+Brown Shrike,Lanius cristatus,,PASSERIFORMES,Laniidae,MID
+Bay-backed Shrike,Lanius vittatus,,PASSERIFORMES,Laniidae,MID
+Long-tailed Shrike,Lanius schach,Rare/Accidental,PASSERIFORMES,Laniidae,MID
+Great Gray Shrike,Lanius excubitor,,PASSERIFORMES,Laniidae,MID
+Lesser Gray Shrike,Lanius minor,,PASSERIFORMES,Laniidae,MID
+Somali Fiscal,Lanius somalicus,Rare/Accidental,PASSERIFORMES,Laniidae,MID
+Masked Shrike,Lanius nubicus,,PASSERIFORMES,Laniidae,MID
+Woodchat Shrike,Lanius senator,Near-threatened,PASSERIFORMES,Laniidae,MID
+Eurasian Jay,Garrulus glandarius,,PASSERIFORMES,Corvidae,MID
+Asir Magpie,Pica asirensis,Endangered,PASSERIFORMES,Corvidae,MID
+Eurasian Magpie,Pica pica,,PASSERIFORMES,Corvidae,MID
+Iranian Ground-Jay,Podoces pleskei,,PASSERIFORMES,Corvidae,MID
+Northern Nutcracker,Nucifraga caryocatactes,,PASSERIFORMES,Corvidae,MID
+Red-billed Chough,Pyrrhocorax pyrrhocorax,,PASSERIFORMES,Corvidae,MID
+Yellow-billed Chough,Pyrrhocorax graculus,,PASSERIFORMES,Corvidae,MID
+Eurasian Jackdaw,Coloeus monedula,,PASSERIFORMES,Corvidae,MID
+House Crow,Corvus splendens,,PASSERIFORMES,Corvidae,MID
+Rook,Corvus frugilegus,,PASSERIFORMES,Corvidae,MID
+Carrion Crow,Corvus corone,,PASSERIFORMES,Corvidae,MID
+Hooded Crow,Corvus cornix,,PASSERIFORMES,Corvidae,MID
+Large-billed Crow,Corvus macrorhynchos,,PASSERIFORMES,Corvidae,MID
+Pied Crow,Corvus albus,,PASSERIFORMES,Corvidae,MID
+Brown-necked Raven,Corvus ruficollis,,PASSERIFORMES,Corvidae,MID
+Fan-tailed Raven,Corvus rhipidurus,,PASSERIFORMES,Corvidae,MID
+Common Raven,Corvus corax,,PASSERIFORMES,Corvidae,MID
+Coal Tit,Periparus ater,,PASSERIFORMES,Paridae,MID
+Crested Tit,Lophophanes cristatus,,PASSERIFORMES,Paridae,MID
+Sombre Tit,Poecile lugubris,,PASSERIFORMES,Paridae,MID
+Marsh Tit,Poecile palustris,,PASSERIFORMES,Paridae,MID
+Caspian Tit,Poecile hyrcanus,Rare/Accidental,PASSERIFORMES,Paridae,MID
+Willow Tit,Poecile montanus,Rare/Accidental,PASSERIFORMES,Paridae,MID
+Eurasian Blue Tit,Cyanistes caeruleus,,PASSERIFORMES,Paridae,MID
+Azure Tit,Cyanistes cyanus,,PASSERIFORMES,Paridae,MID
+Great Tit,Parus major,,PASSERIFORMES,Paridae,MID
+Asian Tit,Parus cinereus,,PASSERIFORMES,Paridae,MID
+Eurasian Penduline-Tit,Remiz pendulinus,,PASSERIFORMES,Remizidae,MID
+Black-headed Penduline-Tit,Remiz macronyx,,PASSERIFORMES,Remizidae,MID
+White-crowned Penduline-Tit,Remiz coronatus,,PASSERIFORMES,Remizidae,MID
+Greater Hoopoe-Lark,Alaemon alaudipes,,PASSERIFORMES,Alaudidae,MID
+Thick-billed Lark,Ramphocoris clotbey,,PASSERIFORMES,Alaudidae,MID
+Bar-tailed Lark,Ammomanes cinctura,,PASSERIFORMES,Alaudidae,MID
+Desert Lark,Ammomanes deserti,,PASSERIFORMES,Alaudidae,MID
+Black-crowned Sparrow-Lark,Eremopterix nigriceps,,PASSERIFORMES,Alaudidae,MID
+Chestnut-headed Sparrow-Lark,Eremopterix signatus,Rare/Accidental,PASSERIFORMES,Alaudidae,MID
+Singing Bushlark,Mirafra javanica,,PASSERIFORMES,Alaudidae,MID
+Wood Lark,Lullula arborea,,PASSERIFORMES,Alaudidae,MID
+White-winged Lark,Alauda leucoptera,,PASSERIFORMES,Alaudidae,MID
+Eurasian Skylark,Alauda arvensis,,PASSERIFORMES,Alaudidae,MID
+Oriental Skylark,Alauda gulgula,,PASSERIFORMES,Alaudidae,MID
+Thekla's Lark,Galerida theklae,,PASSERIFORMES,Alaudidae,MID
+Crested Lark,Galerida cristata,,PASSERIFORMES,Alaudidae,MID
+Horned Lark,Eremophila alpestris,,PASSERIFORMES,Alaudidae,MID
+Temminck's Lark,Eremophila bilopha,,PASSERIFORMES,Alaudidae,MID
+Rufous-capped Lark,Calandrella eremica,,PASSERIFORMES,Alaudidae,MID
+Greater Short-toed Lark,Calandrella brachydactyla,,PASSERIFORMES,Alaudidae,MID
+Hume's Lark,Calandrella acutirostris,,PASSERIFORMES,Alaudidae,MID
+Mongolian Short-toed Lark,Calandrella dukhunensis,Rare/Accidental,PASSERIFORMES,Alaudidae,MID
+Bimaculated Lark,Melanocorypha bimaculata,,PASSERIFORMES,Alaudidae,MID
+Calandra Lark,Melanocorypha calandra,,PASSERIFORMES,Alaudidae,MID
+Black Lark,Melanocorypha yeltoniensis,,PASSERIFORMES,Alaudidae,MID
+Dupont's Lark,Chersophilus duponti,Vulnerable,PASSERIFORMES,Alaudidae,MID
+Dunn's Lark,Eremalauda dunni,Rare/Accidental,PASSERIFORMES,Alaudidae,MID
+Arabian Lark,Eremalauda eremodites,,PASSERIFORMES,Alaudidae,MID
+Asian Short-toed Lark,Alaudala cheleensis,,PASSERIFORMES,Alaudidae,MID
+Mediterranean Short-toed Lark,Alaudala rufescens,,PASSERIFORMES,Alaudidae,MID
+Turkestan Short-toed Lark,Alaudala heinei,,PASSERIFORMES,Alaudidae,MID
+Sand Lark,Alaudala raytal,,PASSERIFORMES,Alaudidae,MID
+Bearded Reedling,Panurus biarmicus,,PASSERIFORMES,Panuridae,MID
+Graceful Prinia,Prinia gracilis,,PASSERIFORMES,Cisticolidae,MID
+Delicate Prinia,Prinia lepida,,PASSERIFORMES,Cisticolidae,MID
+Socotra Warbler,Incana incana,,PASSERIFORMES,Cisticolidae,MID
+Zitting Cisticola,Cisticola juncidis,,PASSERIFORMES,Cisticolidae,MID
+Socotra Cisticola,Cisticola haesitatus,,PASSERIFORMES,Cisticolidae,MID
+Thick-billed Warbler,Arundinax aedon,Rare/Accidental,PASSERIFORMES,Acrocephalidae,MID
+Booted Warbler,Iduna caligata,,PASSERIFORMES,Acrocephalidae,MID
+Sykes's Warbler,Iduna rama,,PASSERIFORMES,Acrocephalidae,MID
+Eastern Olivaceous Warbler,Iduna pallida,,PASSERIFORMES,Acrocephalidae,MID
+Western Olivaceous Warbler,Iduna opaca,,PASSERIFORMES,Acrocephalidae,MID
+Upcher's Warbler,Hippolais languida,,PASSERIFORMES,Acrocephalidae,MID
+Olive-tree Warbler,Hippolais olivetorum,,PASSERIFORMES,Acrocephalidae,MID
+Melodious Warbler,Hippolais polyglotta,,PASSERIFORMES,Acrocephalidae,MID
+Icterine Warbler,Hippolais icterina,,PASSERIFORMES,Acrocephalidae,MID
+Aquatic Warbler,Acrocephalus paludicola,Rare/Accidental Vulnerable,PASSERIFORMES,Acrocephalidae,MID
+Moustached Warbler,Acrocephalus melanopogon,,PASSERIFORMES,Acrocephalidae,MID
+Sedge Warbler,Acrocephalus schoenobaenus,,PASSERIFORMES,Acrocephalidae,MID
+Paddyfield Warbler,Acrocephalus agricola,,PASSERIFORMES,Acrocephalidae,MID
+Blyth's Reed Warbler,Acrocephalus dumetorum,,PASSERIFORMES,Acrocephalidae,MID
+Marsh Warbler,Acrocephalus palustris,,PASSERIFORMES,Acrocephalidae,MID
+Common Reed Warbler,Acrocephalus scirpaceus,,PASSERIFORMES,Acrocephalidae,MID
+Basra Reed Warbler,Acrocephalus griseldis,Endangered,PASSERIFORMES,Acrocephalidae,MID
+Great Reed Warbler,Acrocephalus arundinaceus,,PASSERIFORMES,Acrocephalidae,MID
+Oriental Reed Warbler,Acrocephalus orientalis,Rare/Accidental,PASSERIFORMES,Acrocephalidae,MID
+Clamorous Reed Warbler,Acrocephalus stentoreus,,PASSERIFORMES,Acrocephalidae,MID
+Pallas's Grasshopper Warbler,Helopsaltes certhiola,Rare/Accidental,PASSERIFORMES,Locustellidae,MID
+Lanceolated Warbler,Locustella lanceolata,Rare/Accidental,PASSERIFORMES,Locustellidae,MID
+River Warbler,Locustella fluviatilis,,PASSERIFORMES,Locustellidae,MID
+Savi's Warbler,Locustella luscinioides,,PASSERIFORMES,Locustellidae,MID
+Common Grasshopper Warbler,Locustella naevia,,PASSERIFORMES,Locustellidae,MID
+Banded Martin,Neophedina cincta,Rare/Accidental,PASSERIFORMES,Hirundinidae,MID
+Plain Martin,Riparia paludicola,Rare/Accidental,PASSERIFORMES,Hirundinidae,MID
+Gray-throated Martin,Riparia chinensis,,PASSERIFORMES,Hirundinidae,MID
+Bank Swallow,Riparia riparia,,PASSERIFORMES,Hirundinidae,MID
+Pale Martin,Riparia diluta,,PASSERIFORMES,Hirundinidae,MID
+Eurasian Crag-Martin,Ptyonoprogne rupestris,,PASSERIFORMES,Hirundinidae,MID
+Pale Crag-Martin,Ptyonoprogne obsoleta,,PASSERIFORMES,Hirundinidae,MID
+Red-throated Crag-Martin,Ptyonoprogne rufigula,,PASSERIFORMES,Hirundinidae,MID
+Barn Swallow,Hirundo rustica,,PASSERIFORMES,Hirundinidae,MID
+Ethiopian Swallow,Hirundo aethiopica,Rare/Accidental,PASSERIFORMES,Hirundinidae,MID
+White-throated Swallow,Hirundo albigularis,Rare/Accidental,PASSERIFORMES,Hirundinidae,MID
+Wire-tailed Swallow,Hirundo smithii,Rare/Accidental,PASSERIFORMES,Hirundinidae,MID
+Western House-Martin,Delichon urbicum,,PASSERIFORMES,Hirundinidae,MID
+Siberian House-Martin,Delichon lagopodum,,PASSERIFORMES,Hirundinidae,MID
+Asian House-Martin,Delichon dasypus,,PASSERIFORMES,Hirundinidae,MID
+European Red-rumped Swallow,Cecropis rufula,,PASSERIFORMES,Hirundinidae,MID
+Eastern Red-rumped Swallow,Cecropis daurica,Rare/Accidental,PASSERIFORMES,Hirundinidae,MID
+Lesser Striped Swallow,Cecropis abyssinica,,PASSERIFORMES,Hirundinidae,MID
+Streak-throated Swallow,Petrochelidon fluvicola,,PASSERIFORMES,Hirundinidae,MID
+Common Bulbul,Pycnonotus barbatus,,PASSERIFORMES,Pycnonotidae,MID
+Red-whiskered Bulbul,Pycnonotus jocosus,Introduced species,PASSERIFORMES,Pycnonotidae,MID
+Red-vented Bulbul,Pycnonotus cafer,Introduced species,PASSERIFORMES,Pycnonotidae,MID
+White-eared Bulbul,Pycnonotus leucotis,,PASSERIFORMES,Pycnonotidae,MID
+White-spectacled Bulbul,Pycnonotus xanthopygos,,PASSERIFORMES,Pycnonotidae,MID
+Wood Warbler,Phylloscopus sibilatrix,,PASSERIFORMES,Phylloscopidae,MID
+Eastern Bonelli's Warbler,Phylloscopus orientalis,,PASSERIFORMES,Phylloscopidae,MID
+Yellow-browed Warbler,Phylloscopus inornatus,,PASSERIFORMES,Phylloscopidae,MID
+Hume's Warbler,Phylloscopus humei,,PASSERIFORMES,Phylloscopidae,MID
+Brooks's Leaf Warbler,Phylloscopus subviridis,,PASSERIFORMES,Phylloscopidae,MID
+Pallas's Leaf Warbler,Phylloscopus proregulus,,PASSERIFORMES,Phylloscopidae,MID
+Radde's Warbler,Phylloscopus schwarzi,Rare/Accidental,PASSERIFORMES,Phylloscopidae,MID
+Sulphur-bellied Warbler,Phylloscopus griseolus,,PASSERIFORMES,Phylloscopidae,MID
+Dusky Warbler,Phylloscopus fuscatus,Rare/Accidental,PASSERIFORMES,Phylloscopidae,MID
+Plain Leaf Warbler,Phylloscopus neglectus,,PASSERIFORMES,Phylloscopidae,MID
+Willow Warbler,Phylloscopus trochilus,,PASSERIFORMES,Phylloscopidae,MID
+Mountain Chiffchaff,Phylloscopus sindianus,,PASSERIFORMES,Phylloscopidae,MID
+Common Chiffchaff,Phylloscopus collybita,,PASSERIFORMES,Phylloscopidae,MID
+Iberian Chiffchaff,Phylloscopus ibericus,Rare/Accidental,PASSERIFORMES,Phylloscopidae,MID
+Brown Woodland-Warbler,Phylloscopus umbrovirens,,PASSERIFORMES,Phylloscopidae,MID
+Green Warbler,Phylloscopus nitidus,,PASSERIFORMES,Phylloscopidae,MID
+Greenish Warbler,Phylloscopus trochiloides,Rare/Accidental,PASSERIFORMES,Phylloscopidae,MID
+Large-billed Leaf Warbler,Phylloscopus magnirostris,Rare/Accidental,PASSERIFORMES,Phylloscopidae,MID
+Arctic Warbler,Phylloscopus borealis,Rare/Accidental,PASSERIFORMES,Phylloscopidae,MID
+Western Crowned Warbler,Phylloscopus occipitalis,,PASSERIFORMES,Phylloscopidae,MID
+Scrub Warbler,Scotocerca inquieta,,PASSERIFORMES,Scotocercidae,MID
+Cetti's Warbler,Cettia cetti,,PASSERIFORMES,Scotocercidae,MID
+Long-tailed Tit,Aegithalos caudatus,,PASSERIFORMES,Aegithalidae,MID
+Eurasian Blackcap,Sylvia atricapilla,,PASSERIFORMES,Sylviidae,MID
+Garden Warbler,Sylvia borin,,PASSERIFORMES,Sylviidae,MID
+Barred Warbler,Curruca nisoria,,PASSERIFORMES,Sylviidae,MID
+Lesser Whitethroat,Curruca curruca,,PASSERIFORMES,Sylviidae,MID
+Yemen Warbler,Curruca buryi,Near-threatened,PASSERIFORMES,Sylviidae,MID
+Arabian Warbler,Curruca leucomelaena,,PASSERIFORMES,Sylviidae,MID
+Western Orphean Warbler,Curruca hortensis,,PASSERIFORMES,Sylviidae,MID
+Eastern Orphean Warbler,Curruca crassirostris,,PASSERIFORMES,Sylviidae,MID
+Asian Desert Warbler,Curruca nana,,PASSERIFORMES,Sylviidae,MID
+Tristram's Warbler,Curruca deserticola,,PASSERIFORMES,Sylviidae,MID
+Menetries's Warbler,Curruca mystacea,,PASSERIFORMES,Sylviidae,MID
+Rüppell's Warbler,Curruca ruppeli,,PASSERIFORMES,Sylviidae,MID
+Cyprus Warbler,Curruca melanothorax,,PASSERIFORMES,Sylviidae,MID
+Sardinian Warbler,Curruca melanocephala,,PASSERIFORMES,Sylviidae,MID
+Moltoni's Warbler,Curruca subalpina,Rare/Accidental,PASSERIFORMES,Sylviidae,MID
+Western Subalpine Warbler,Curruca iberiae,Rare/Accidental,PASSERIFORMES,Sylviidae,MID
+Eastern Subalpine Warbler,Curruca cantillans,,PASSERIFORMES,Sylviidae,MID
+Greater Whitethroat,Curruca communis,,PASSERIFORMES,Sylviidae,MID
+Spectacled Warbler,Curruca conspicillata,,PASSERIFORMES,Sylviidae,MID
+Marmora's Warbler,Curruca sarda,,PASSERIFORMES,Sylviidae,MID
+Dartford Warbler,Curruca undata,Near-threatened,PASSERIFORMES,Sylviidae,MID
+Indian White-eye,Zosterops palpebrosus,,PASSERIFORMES,Zosteropidae,MID
+Abyssinian White-eye,Zosterops abyssinicus,,PASSERIFORMES,Zosteropidae,MID
+Socotra White-eye,Zosterops socotranus,,PASSERIFORMES,Zosteropidae,MID
+Iraq Babbler,Argya altirostris,,PASSERIFORMES,Leiothrichidae,MID
+Afghan Babbler,Argya huttoni,,PASSERIFORMES,Leiothrichidae,MID
+Fulvous Chatterer,Argya fulva,,PASSERIFORMES,Leiothrichidae,MID
+Arabian Babbler,Argya squamiceps,,PASSERIFORMES,Leiothrichidae,MID
+Goldcrest,Regulus regulus,,PASSERIFORMES,Regulidae,MID
+Common Firecrest,Regulus ignicapilla,,PASSERIFORMES,Regulidae,MID
+Wallcreeper,Tichodroma muraria,,PASSERIFORMES,Tichodromidae,MID
+Krüper's Nuthatch,Sitta krueperi,,PASSERIFORMES,Sittidae,MID
+Western Rock Nuthatch,Sitta neumayer,,PASSERIFORMES,Sittidae,MID
+Eastern Rock Nuthatch,Sitta tephronota,,PASSERIFORMES,Sittidae,MID
+Eurasian Nuthatch,Sitta europaea,,PASSERIFORMES,Sittidae,MID
+Eurasian Treecreeper,Certhia familiaris,,PASSERIFORMES,Certhiidae,MID
+Short-toed Treecreeper,Certhia brachydactyla,,PASSERIFORMES,Certhiidae,MID
+Eurasian Wren,Troglodytes troglodytes,,PASSERIFORMES,Troglodytidae,MID
+Winter Wren,Troglodytes hiemalis,,PASSERIFORMES,Troglodytidae,MID
+White-throated Dipper,Cinclus cinclus,,PASSERIFORMES,Cinclidae,MID
+Red-billed Oxpecker,Buphagus erythroryncha,Rare/Accidental,PASSERIFORMES,Buphagidae,MID
+European Starling,Sturnus vulgaris,,PASSERIFORMES,Sturnidae,MID
+Spotless Starling,Sturnus unicolor,,PASSERIFORMES,Sturnidae,MID
+Wattled Starling,Creatophora cinerea,Rare/Accidental,PASSERIFORMES,Sturnidae,MID
+Rosy Starling,Pastor roseus,,PASSERIFORMES,Sturnidae,MID
+Daurian Starling,Agropsar sturninus,,PASSERIFORMES,Sturnidae,MID
+Brahminy Starling,Sturnia pagodarum,,PASSERIFORMES,Sturnidae,MID
+Chestnut-tailed Starling,Sturnia malabarica,Rare/Accidental,PASSERIFORMES,Sturnidae,MID
+Common Myna,Acridotheres tristis,,PASSERIFORMES,Sturnidae,MID
+Bank Myna,Acridotheres ginginianus,Introduced species,PASSERIFORMES,Sturnidae,MID
+Vinous-breasted Myna,Acridotheres leucocephalus,Introduced species,PASSERIFORMES,Sturnidae,MID
+Javan Myna,Acridotheres javanicus,Introduced species Vulnerable,PASSERIFORMES,Sturnidae,MID
+Violet-backed Starling,Cinnyricinclus leucogaster,,PASSERIFORMES,Sturnidae,MID
+Tristram's Starling,Onychognathus tristramii,,PASSERIFORMES,Sturnidae,MID
+Somali Starling,Onychognathus blythii,,PASSERIFORMES,Sturnidae,MID
+Socotra Starling,Onychognathus frater,,PASSERIFORMES,Sturnidae,MID
+Superb Starling,Lamprotornis superbus,Introduced species,PASSERIFORMES,Sturnidae,MID
+White's Thrush,Zoothera aurea,Rare/Accidental,PASSERIFORMES,Turdidae,MID
+Siberian Thrush,Geokichla sibirica,Rare/Accidental,PASSERIFORMES,Turdidae,MID
+Mistle Thrush,Turdus viscivorus,,PASSERIFORMES,Turdidae,MID
+Song Thrush,Turdus philomelos,,PASSERIFORMES,Turdidae,MID
+Yemen Thrush,Turdus menachensis,Near-threatened,PASSERIFORMES,Turdidae,MID
+Redwing,Turdus iliacus,Near-threatened,PASSERIFORMES,Turdidae,MID
+Eurasian Blackbird,Turdus merula,,PASSERIFORMES,Turdidae,MID
+Eyebrowed Thrush,Turdus obscurus,Rare/Accidental,PASSERIFORMES,Turdidae,MID
+Fieldfare,Turdus pilaris,,PASSERIFORMES,Turdidae,MID
+Ring Ouzel,Turdus torquatus,,PASSERIFORMES,Turdidae,MID
+Black-throated Thrush,Turdus atrogularis,,PASSERIFORMES,Turdidae,MID
+Red-throated Thrush,Turdus ruficollis,Rare/Accidental,PASSERIFORMES,Turdidae,MID
+Dusky Thrush,Turdus eunomus,Rare/Accidental,PASSERIFORMES,Turdidae,MID
+Naumann's Thrush,Turdus naumanni,Rare/Accidental,PASSERIFORMES,Turdidae,MID
+Asian Brown Flycatcher,Muscicapa dauurica,Rare/Accidental,PASSERIFORMES,Muscicapidae,MID
+Spotted Flycatcher,Muscicapa striata,,PASSERIFORMES,Muscicapidae,MID
+Gambaga Flycatcher,Muscicapa gambagae,,PASSERIFORMES,Muscicapidae,MID
+Black Scrub-Robin,Cercotrichas podobe,,PASSERIFORMES,Muscicapidae,MID
+Rufous-tailed Scrub-Robin,Cercotrichas galactotes,,PASSERIFORMES,Muscicapidae,MID
+Blue-and-white Flycatcher,Cyanoptila cyanomelana,Rare/Accidental,PASSERIFORMES,Muscicapidae,MID
+Verditer Flycatcher,Eumyias thalassinus,Rare/Accidental,PASSERIFORMES,Muscicapidae,MID
+European Robin,Erithacus rubecula,,PASSERIFORMES,Muscicapidae,MID
+White-throated Robin,Irania gutturalis,,PASSERIFORMES,Muscicapidae,MID
+Thrush Nightingale,Luscinia luscinia,,PASSERIFORMES,Muscicapidae,MID
+Common Nightingale,Luscinia megarhynchos,,PASSERIFORMES,Muscicapidae,MID
+Bluethroat,Luscinia svecica,,PASSERIFORMES,Muscicapidae,MID
+Blue Whistling-Thrush,Myophonus caeruleus,Rare/Accidental,PASSERIFORMES,Muscicapidae,MID
+Red-flanked Bluetail,Tarsiger cyanurus,Rare/Accidental,PASSERIFORMES,Muscicapidae,MID
+Ultramarine Flycatcher,Ficedula superciliaris,Rare/Accidental,PASSERIFORMES,Muscicapidae,MID
+Taiga Flycatcher,Ficedula albicilla,Rare/Accidental,PASSERIFORMES,Muscicapidae,MID
+Red-breasted Flycatcher,Ficedula parva,,PASSERIFORMES,Muscicapidae,MID
+Semicollared Flycatcher,Ficedula semitorquata,,PASSERIFORMES,Muscicapidae,MID
+European Pied Flycatcher,Ficedula hypoleuca,,PASSERIFORMES,Muscicapidae,MID
+Collared Flycatcher,Ficedula albicollis,,PASSERIFORMES,Muscicapidae,MID
+Rufous-backed Redstart,Phoenicurus erythronotus,,PASSERIFORMES,Muscicapidae,MID
+Moussier's Redstart,Phoenicurus moussieri,,PASSERIFORMES,Muscicapidae,MID
+Common Redstart,Phoenicurus phoenicurus,,PASSERIFORMES,Muscicapidae,MID
+White-winged Redstart,Phoenicurus erythrogastrus,Rare/Accidental,PASSERIFORMES,Muscicapidae,MID
+Black Redstart,Phoenicurus ochruros,,PASSERIFORMES,Muscicapidae,MID
+Little Rock-Thrush,Monticola rufocinereus,,PASSERIFORMES,Muscicapidae,MID
+Rufous-tailed Rock-Thrush,Monticola saxatilis,,PASSERIFORMES,Muscicapidae,MID
+Blue Rock-Thrush,Monticola solitarius,,PASSERIFORMES,Muscicapidae,MID
+Whinchat,Saxicola rubetra,,PASSERIFORMES,Muscicapidae,MID
+European Stonechat,Saxicola rubicola,,PASSERIFORMES,Muscicapidae,MID
+Siberian Stonechat,Saxicola maurus,,PASSERIFORMES,Muscicapidae,MID
+Amur Stonechat,Saxicola stejnegeri,Rare/Accidental,PASSERIFORMES,Muscicapidae,MID
+African Stonechat,Saxicola torquatus,,PASSERIFORMES,Muscicapidae,MID
+Pied Bushchat,Saxicola caprata,,PASSERIFORMES,Muscicapidae,MID
+Northern Wheatear,Oenanthe oenanthe,,PASSERIFORMES,Muscicapidae,MID
+Atlas Wheatear,Oenanthe seebohmi,Rare/Accidental,PASSERIFORMES,Muscicapidae,MID
+Buff-breasted Wheatear,Oenanthe bottae,,PASSERIFORMES,Muscicapidae,MID
+Isabelline Wheatear,Oenanthe isabellina,,PASSERIFORMES,Muscicapidae,MID
+Heuglin's Wheatear,Oenanthe heuglinii,,PASSERIFORMES,Muscicapidae,MID
+Hooded Wheatear,Oenanthe monacha,,PASSERIFORMES,Muscicapidae,MID
+Desert Wheatear,Oenanthe deserti,,PASSERIFORMES,Muscicapidae,MID
+Cyprus Wheatear,Oenanthe cypriaca,,PASSERIFORMES,Muscicapidae,MID
+Eastern Black-eared Wheatear,Oenanthe melanoleuca,,PASSERIFORMES,Muscicapidae,MID
+Pied Wheatear,Oenanthe pleschanka,,PASSERIFORMES,Muscicapidae,MID
+Red-rumped Wheatear,Oenanthe moesta,,PASSERIFORMES,Muscicapidae,MID
+Blackstart,Oenanthe melanura,,PASSERIFORMES,Muscicapidae,MID
+Familiar Chat,Oenanthe familiaris,Rare/Accidental,PASSERIFORMES,Muscicapidae,MID
+Variable Wheatear,Oenanthe picata,,PASSERIFORMES,Muscicapidae,MID
+Black Wheatear,Oenanthe leucura,,PASSERIFORMES,Muscicapidae,MID
+Hume's Wheatear,Oenanthe albonigra,,PASSERIFORMES,Muscicapidae,MID
+White-crowned Wheatear,Oenanthe leucopyga,,PASSERIFORMES,Muscicapidae,MID
+Arabian Wheatear,Oenanthe lugentoides,,PASSERIFORMES,Muscicapidae,MID
+Abyssinian Wheatear,Oenanthe lugubris,,PASSERIFORMES,Muscicapidae,MID
+Finsch's Wheatear,Oenanthe finschii,,PASSERIFORMES,Muscicapidae,MID
+Mourning Wheatear,Oenanthe lugens,,PASSERIFORMES,Muscicapidae,MID
+Kurdish Wheatear,Oenanthe xanthoprymna,,PASSERIFORMES,Muscicapidae,MID
+Persian Wheatear,Oenanthe chrysopygia,,PASSERIFORMES,Muscicapidae,MID
+Bohemian Waxwing,Bombycilla garrulus,Rare/Accidental,PASSERIFORMES,Bombycillidae,MID
+Hypocolius,Hypocolius ampelinus,,PASSERIFORMES,Hypocoliidae,MID
+Pygmy Sunbird,Hedydipna platura,,PASSERIFORMES,Nectariniidae,MID
+Nile Valley Sunbird,Hedydipna metallica,,PASSERIFORMES,Nectariniidae,MID
+Socotra Sunbird,Chalcomitra balfouri,,PASSERIFORMES,Nectariniidae,MID
+Palestine Sunbird,Cinnyris osea,,PASSERIFORMES,Nectariniidae,MID
+Abyssinian Sunbird,Cinnyris habessinicus,,PASSERIFORMES,Nectariniidae,MID
+Arabian Sunbird,Cinnyris hellmayri,,PASSERIFORMES,Nectariniidae,MID
+Purple Sunbird,Cinnyris asiaticus,,PASSERIFORMES,Nectariniidae,MID
+Lesser Masked-Weaver,Ploceus intermedius,,PASSERIFORMES,Ploceidae,MID
+Southern Masked-Weaver,Ploceus velatus,Introduced species,PASSERIFORMES,Ploceidae,MID
+Rüppell's Weaver,Ploceus galbula,,PASSERIFORMES,Ploceidae,MID
+Village Weaver,Ploceus cucullatus,Introduced species,PASSERIFORMES,Ploceidae,MID
+Golden-backed Weaver,Ploceus jacksoni,Introduced species,PASSERIFORMES,Ploceidae,MID
+Streaked Weaver,Ploceus manyar,Introduced species,PASSERIFORMES,Ploceidae,MID
+Baya Weaver,Ploceus philippinus,Introduced species,PASSERIFORMES,Ploceidae,MID
+Black-breasted Weaver,Ploceus benghalensis,Introduced species,PASSERIFORMES,Ploceidae,MID
+Red-billed Quelea,Quelea quelea,Rare/Accidental,PASSERIFORMES,Ploceidae,MID
+Red Fody,Foudia madagascariensis,Introduced species,PASSERIFORMES,Ploceidae,MID
+Southern Red Bishop,Euplectes orix,Introduced species,PASSERIFORMES,Ploceidae,MID
+Yellow-crowned Bishop,Euplectes afer,Introduced species,PASSERIFORMES,Ploceidae,MID
+Black-and-white Mannikin,Spermestes bicolor,,PASSERIFORMES,Estrildidae,MID
+African Silverbill,Euodice cantans,,PASSERIFORMES,Estrildidae,MID
+Indian Silverbill,Euodice malabarica,,PASSERIFORMES,Estrildidae,MID
+Scaly-breasted Munia,Lonchura punctulata,Introduced species,PASSERIFORMES,Estrildidae,MID
+Tricolored Munia,Lonchura malacca,Rare/Accidental,PASSERIFORMES,Estrildidae,MID
+Lavender Waxbill,Glaucestrilda caerulescens,Rare/Accidental,PASSERIFORMES,Estrildidae,MID
+Arabian Waxbill,Estrilda rufibarba,,PASSERIFORMES,Estrildidae,MID
+Zebra Waxbill,Amandava subflava,,PASSERIFORMES,Estrildidae,MID
+Red Avadavat,Amandava amandava,Introduced species,PASSERIFORMES,Estrildidae,MID
+Green-winged Pytilia,Pytilia melba,,PASSERIFORMES,Estrildidae,MID
+Pin-tailed Whydah,Vidua macroura,Rare/Accidental,PASSERIFORMES,Viduidae,MID
+Alpine Accentor,Prunella collaris,,PASSERIFORMES,Prunellidae,MID
+Siberian Accentor,Prunella montanella,Rare/Accidental,PASSERIFORMES,Prunellidae,MID
+Radde's Accentor,Prunella ocularis,,PASSERIFORMES,Prunellidae,MID
+Black-throated Accentor,Prunella atrogularis,Rare/Accidental,PASSERIFORMES,Prunellidae,MID
+Dunnock,Prunella modularis,,PASSERIFORMES,Prunellidae,MID
+Saxaul Sparrow,Passer ammodendri,,PASSERIFORMES,Passeridae,MID
+House Sparrow,Passer domesticus,,PASSERIFORMES,Passeridae,MID
+Spanish Sparrow,Passer hispaniolensis,,PASSERIFORMES,Passeridae,MID
+Sind Sparrow,Passer pyrrhonotus,,PASSERIFORMES,Passeridae,MID
+Dead Sea Sparrow,Passer moabiticus,,PASSERIFORMES,Passeridae,MID
+Abd al Kuri Sparrow,Passer hemileucus,Vulnerable,PASSERIFORMES,Passeridae,MID
+Socotra Sparrow,Passer insularis,,PASSERIFORMES,Passeridae,MID
+Zarudny's Sparrow,Passer zarudnyi,Rare/Accidental,PASSERIFORMES,Passeridae,MID
+Eurasian Tree Sparrow,Passer montanus,,PASSERIFORMES,Passeridae,MID
+Sudan Golden Sparrow,Passer luteus,Rare/Accidental,PASSERIFORMES,Passeridae,MID
+Arabian Golden Sparrow,Passer euchlorus,,PASSERIFORMES,Passeridae,MID
+Yellow-throated Sparrow,Gymnoris xanthocollis,,PASSERIFORMES,Passeridae,MID
+Yellow-throated Bush Sparrow,Gymnoris superciliaris,Rare/Accidental,PASSERIFORMES,Passeridae,MID
+Sahel Bush Sparrow,Gymnoris dentata,,PASSERIFORMES,Passeridae,MID
+Rock Sparrow,Petronia petronia,,PASSERIFORMES,Passeridae,MID
+Pale Rockfinch,Carpospiza brachydactyla,,PASSERIFORMES,Passeridae,MID
+White-winged Snowfinch,Montifringilla nivalis,,PASSERIFORMES,Passeridae,MID
+Forest Wagtail,Dendronanthus indicus,,PASSERIFORMES,Motacillidae,MID
+Gray Wagtail,Motacilla cinerea,,PASSERIFORMES,Motacillidae,MID
+Western Yellow Wagtail,Motacilla flava,,PASSERIFORMES,Motacillidae,MID
+Eastern Yellow Wagtail,Motacilla tschutschensis,Rare/Accidental,PASSERIFORMES,Motacillidae,MID
+Citrine Wagtail,Motacilla citreola,,PASSERIFORMES,Motacillidae,MID
+African Pied Wagtail,Motacilla aguimp,Rare/Accidental,PASSERIFORMES,Motacillidae,MID
+White Wagtail,Motacilla alba,,PASSERIFORMES,Motacillidae,MID
+Richard's Pipit,Anthus richardi,,PASSERIFORMES,Motacillidae,MID
+Paddyfield Pipit,Anthus rufulus,Rare/Accidental,PASSERIFORMES,Motacillidae,MID
+African Pipit,Anthus cinnamomeus,,PASSERIFORMES,Motacillidae,MID
+Long-billed Pipit,Anthus similis,,PASSERIFORMES,Motacillidae,MID
+Blyth's Pipit,Anthus godlewskii,,PASSERIFORMES,Motacillidae,MID
+Tawny Pipit,Anthus campestris,,PASSERIFORMES,Motacillidae,MID
+Buffy Pipit,Anthus vaalensis,Rare/Accidental,PASSERIFORMES,Motacillidae,MID
+Meadow Pipit,Anthus pratensis,,PASSERIFORMES,Motacillidae,MID
+Tree Pipit,Anthus trivialis,,PASSERIFORMES,Motacillidae,MID
+Olive-backed Pipit,Anthus hodgsoni,Rare/Accidental,PASSERIFORMES,Motacillidae,MID
+Pechora Pipit,Anthus gustavi,,PASSERIFORMES,Motacillidae,MID
+Red-throated Pipit,Anthus cervinus,,PASSERIFORMES,Motacillidae,MID
+Water Pipit,Anthus spinoletta,,PASSERIFORMES,Motacillidae,MID
+Siberian Pipit,Anthus japonicus,,PASSERIFORMES,Motacillidae,MID
+American Pipit,Anthus rubescens,Rare/Accidental,PASSERIFORMES,Motacillidae,MID
+Golden Pipit,Tmetothylacus tenellus,Rare/Accidental,PASSERIFORMES,Motacillidae,MID
+Common Chaffinch,Fringilla coelebs,,PASSERIFORMES,Fringillidae,MID
+Brambling,Fringilla montifringilla,,PASSERIFORMES,Fringillidae,MID
+White-winged Grosbeak,Mycerobas carnipes,,PASSERIFORMES,Fringillidae,MID
+Hawfinch,Coccothraustes coccothraustes,,PASSERIFORMES,Fringillidae,MID
+Common Rosefinch,Carpodacus erythrinus,,PASSERIFORMES,Fringillidae,MID
+Sinai Rosefinch,Carpodacus synoicus,,PASSERIFORMES,Fringillidae,MID
+Great Rosefinch,Carpodacus rubicilla,Rare/Accidental,PASSERIFORMES,Fringillidae,MID
+Long-tailed Rosefinch,Carpodacus sibiricus,Rare/Accidental,PASSERIFORMES,Fringillidae,MID
+Red-fronted Rosefinch,Carpodacus puniceus,,PASSERIFORMES,Fringillidae,MID
+Eurasian Bullfinch,Pyrrhula pyrrhula,,PASSERIFORMES,Fringillidae,MID
+Crimson-winged Finch,Rhodopechys sanguineus,,PASSERIFORMES,Fringillidae,MID
+Trumpeter Finch,Bucanetes githagineus,,PASSERIFORMES,Fringillidae,MID
+Mongolian Finch,Bucanetes mongolicus,,PASSERIFORMES,Fringillidae,MID
+Desert Finch,Rhodospiza obsoleta,,PASSERIFORMES,Fringillidae,MID
+Arabian Grosbeak,Rhynchostruthus percivali,Near-threatened,PASSERIFORMES,Fringillidae,MID
+Socotra Grosbeak,Rhynchostruthus socotranus,,PASSERIFORMES,Fringillidae,MID
+European Greenfinch,Chloris chloris,,PASSERIFORMES,Fringillidae,MID
+Arabian Serin,Crithagra rothschildi,,PASSERIFORMES,Fringillidae,MID
+Yemen Serin,Crithagra menachensis,,PASSERIFORMES,Fringillidae,MID
+Twite,Linaria flavirostris,,PASSERIFORMES,Fringillidae,MID
+Eurasian Linnet,Linaria cannabina,,PASSERIFORMES,Fringillidae,MID
+Yemen Linnet,Linaria yemenensis,,PASSERIFORMES,Fringillidae,MID
+Redpoll,Acanthis flammea,Rare/Accidental,PASSERIFORMES,Fringillidae,MID
+Red Crossbill,Loxia curvirostra,,PASSERIFORMES,Fringillidae,MID
+European Goldfinch,Carduelis carduelis,,PASSERIFORMES,Fringillidae,MID
+Gray-crowned Goldfinch,Carduelis caniceps,,PASSERIFORMES,Fringillidae,MID
+European Serin,Serinus serinus,,PASSERIFORMES,Fringillidae,MID
+Fire-fronted Serin,Serinus pusillus,,PASSERIFORMES,Fringillidae,MID
+Syrian Serin,Serinus syriacus,Vulnerable,PASSERIFORMES,Fringillidae,MID
+Eurasian Siskin,Spinus spinus,,PASSERIFORMES,Fringillidae,MID
+Lapland Longspur,Calcarius lapponicus,,PASSERIFORMES,Calcariidae,MID
+Snow Bunting,Plectrophenax nivalis,Rare/Accidental,PASSERIFORMES,Calcariidae,MID
+Black-headed Bunting,Emberiza melanocephala,,PASSERIFORMES,Emberizidae,MID
+Red-headed Bunting,Emberiza bruniceps,,PASSERIFORMES,Emberizidae,MID
+Corn Bunting,Emberiza calandra,,PASSERIFORMES,Emberizidae,MID
+Rock Bunting,Emberiza cia,,PASSERIFORMES,Emberizidae,MID
+Cirl Bunting,Emberiza cirlus,,PASSERIFORMES,Emberizidae,MID
+White-capped Bunting,Emberiza stewarti,Rare/Accidental,PASSERIFORMES,Emberizidae,MID
+Yellowhammer,Emberiza citrinella,,PASSERIFORMES,Emberizidae,MID
+Pine Bunting,Emberiza leucocephalos,,PASSERIFORMES,Emberizidae,MID
+Gray-necked Bunting,Emberiza buchanani,,PASSERIFORMES,Emberizidae,MID
+Cinereous Bunting,Emberiza cineracea,Near-threatened,PASSERIFORMES,Emberizidae,MID
+Ortolan Bunting,Emberiza hortulana,,PASSERIFORMES,Emberizidae,MID
+Cretzschmar's Bunting,Emberiza caesia,,PASSERIFORMES,Emberizidae,MID
+Socotra Bunting,Emberiza socotrana,Near-threatened,PASSERIFORMES,Emberizidae,MID
+Cinnamon-breasted Bunting,Emberiza tahapisi,,PASSERIFORMES,Emberizidae,MID
+Striolated Bunting,Emberiza striolata,,PASSERIFORMES,Emberizidae,MID
+Reed Bunting,Emberiza schoeniclus,,PASSERIFORMES,Emberizidae,MID
+Yellow-breasted Bunting,Emberiza aureola,Rare/Accidental Critically endangered,PASSERIFORMES,Emberizidae,MID
+Little Bunting,Emberiza pusilla,Rare/Accidental,PASSERIFORMES,Emberizidae,MID
+Rustic Bunting,Emberiza rustica,Rare/Accidental Vulnerable,PASSERIFORMES,Emberizidae,MID
+Black-faced Bunting,Emberiza spodocephala,Rare/Accidental,PASSERIFORMES,Emberizidae,MID
+Chestnut Bunting,Emberiza rutila,Rare/Accidental,PASSERIFORMES,Emberizidae,MID

@@ -1,0 +1,38 @@
+type_of_interaction,asymmetric,species 1 or 2,species 2 or 1,definition
+amensalism,yes,-1,0,"one species causes harm to another species without any cost or benefits to itself (e.g. flushing from nest in response to perceived predator, accidental destruction of eggs); harmful species = 0, harmed species = -1"
+accidental killing,yes,-1,0,"when one species accidentally kills another, but has no intent on doing so (e.g., no intent on preying on the dead species or competing with the dead species); species killed = -1, species who cuases the death = 0"
+brood parasitism,yes,1,-1,one species places its egg in another species' nest so the nesting species has to raise a conspecific (includes egg-dumping). species that lays egg in another species nest = 1; species that has to care for the conspecific young = -1.
+co-occur,no,0,0,occur together but not clear what the interaction is. each species = 0. Two non-migratory species that co-occur can be assumed to do so year-round.
+commensalism,yes,1,0,"one species benefits and the other receives no effect (example: cavities are constructed by primary cavity nesting bird like a woodpecker, and later used by another bird for its own nest (without any conflict). species that benefits from the interaction = 1; species that provides the benefit = 0."
+commensalism-call mimicry,yes,0,1,"when one species copies the call/song of another; species that is mimicking = 1, species that is being mimicked = 0"
+commensalism-chick adoption,yes,0,1,when one species adopts another species' chicks/eggs. Species that is adopting = 0 Species that is adopted = 1
+commensalism-scavenge,yes,1,0,case of commensalism in which a bird consumes/scavanges a previously deceased bird or deserted/addled eggs: scavenger=1; dead bird=0
+communal nesting,no,1,1,"nesting together, usually during breeding season. both species = 1"
+communal roosting,no,1,1,"roosting together, typically during nonbreeding season (indicate in ""nonbreedingseason"" column). both species = 1"
+competition-nest,no,-1,-1,competing over nest site or nest space or nest material. both species = -1
+competition-food,no,-1,-1,competing over food. both species = -1
+competition-territory,no,-1,-1,competing over territory. both species = -1
+competition-,no,-1,-1,"competing over something other than food, nest, or territory; indicate what the competition is over, with a word after ""competition-"". both species = -1"
+copulation,no,0,0,mating across species (whether successful or not); could result in hybridization; both species = 0
+courtship,no,0,0,one species attempts to court another; both species = 0
+facilitation,no,1,1,"where both species benefit (if we do not have a specific interaction for it), e.g., mutual allopreening. both species = 1"
+facilitation-comigration,no,1,1,special case of facilitation where species migrate together. both species = 1
+facilitation-creching,no,1,1,"for multi-species interactions, this occurs when adult parents (usually mothers) care for a group of young from different species; essentially providing childcare to a group. The young and adults of all species involved benefit. both species = 1Ê"
+facilitation-distress calls,no,1,1,"distress calls by young or adults of one species when restrained (by predator, mist net, handling), and this elicits a vocal response by another species. Both species = 1."
+facilitation-feeding,no,1,1,"case of facilitation when both species feed together, either in mixed-flocks or feeding aggregations; both species = 1"
+facilitation-foraging,no,1,1,shared foraging for food (seeking food); both species = 1
+facilitation-mixed flocking,no,1,1,"where both species benefit by being in a group, both species = 1"
+facilitation-pest reduction,no,1,1,"where one or both species contribute to pest reduction or consumption in a shared environment, both species = 1"
+hybridization,no,0,0,when species successfully mate and produce hybrid offspring; includes intergrades (hybrids of subspecies). both species = 0
+kleptoparasitism-food,yes,1,-1,one species steals food from another species. species that steals and benefits = 1; species that is stolen from = -1
+kleptoparasitism-nest material,yes,1,-1,"when one species steals nest material from another species; species who steals = 1, species who loses nest material = -1."
+mobbing,yes,-1,1,"usually indicative of predation, where the smaller bird mobs the bigger bird. The species doing the mobbing (usually potential prey) = 1; the species receiving the mobbing = -1 (the potential predator). This is because mobbing is almost always deterring a predator, so the predator loses out."
+nest parasitism,yes,1,-1,"similar to brood parasitism where one species parasitizes the nest of another species; species whose nest is parasitized =-1, species who parasitizes the nest = 1."
+nest predation,yes,1,-1,where one species preys upon or consumes the young in a nest of another species; species that consumes = 1; species who is prey = -1
+nest takeover,yes,1,-1,"where one species takes over (steals) the nest of another species, sometimes kicking out the existing eggs. species that takes over = 1; species whose nest is stolen = -1"
+play,no,0,0,species play with each other; both species = 0
+predation,yes,-1,1,predator eats prey. predator = 1; prey = -1
+shared scolding,no,1,1,"usually indicative of predation, where the smaller birds vocally scold a predator. The species doing the shared scolding are usually potential prey = 1."
+-artificial,yes/no,-1/0/1,-1/0/1,"modifier attached to then end of interaction (e.g. courtship-artificial) when interaction is induced by humans through lab experiments, playback, in captivity, or with domesticated birds. Symmetry and impact on species depend on the interaction being modified."
+
+

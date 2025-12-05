@@ -1,0 +1,364 @@
+common_name,scientific_name,status,order,family,region
+Black-bellied Whistling-Duck,Dendrocygna autumnalis,,ANSERIFORMES,Anatidae,UShi
+Fulvous Whistling-Duck,Dendrocygna bicolor,Rare/Accidental,ANSERIFORMES,Anatidae,UShi
+Emperor Goose,Anser canagicus,Rare/Accidental,ANSERIFORMES,Anatidae,UShi
+Snow Goose,Anser caerulescens,Rare/Accidental,ANSERIFORMES,Anatidae,UShi
+Greater White-fronted Goose,Anser albifrons,Rare/Accidental,ANSERIFORMES,Anatidae,UShi
+Brant,Branta bernicla,Rare/Accidental,ANSERIFORMES,Anatidae,UShi
+Cackling Goose,Branta hutchinsii,Rare/Accidental,ANSERIFORMES,Anatidae,UShi
+Canada Goose,Branta canadensis,Rare/Accidental,ANSERIFORMES,Anatidae,UShi
+Hawaiian Goose,Branta sandvicensis,Endemic Near-threatened,ANSERIFORMES,Anatidae,UShi
+Tundra Swan,Cygnus columbianus,Rare/Accidental,ANSERIFORMES,Anatidae,UShi
+Baikal Teal,Sibirionetta formosa,Rare/Accidental,ANSERIFORMES,Anatidae,UShi
+Garganey,Spatula querquedula,Rare/Accidental,ANSERIFORMES,Anatidae,UShi
+Blue-winged Teal,Spatula discors,,ANSERIFORMES,Anatidae,UShi
+Cinnamon Teal,Spatula cyanoptera,Rare/Accidental,ANSERIFORMES,Anatidae,UShi
+Northern Shoveler,Spatula clypeata,,ANSERIFORMES,Anatidae,UShi
+Gadwall,Mareca strepera,,ANSERIFORMES,Anatidae,UShi
+Falcated Duck,Mareca falcata,Rare/Accidental,ANSERIFORMES,Anatidae,UShi
+Eurasian Wigeon,Mareca penelope,Rare/Accidental,ANSERIFORMES,Anatidae,UShi
+American Wigeon,Mareca americana,,ANSERIFORMES,Anatidae,UShi
+Laysan Duck,Anas laysanensis,Endemic Critically endangered,ANSERIFORMES,Anatidae,UShi
+Hawaiian Duck,Anas wyvilliana,Endemic Vulnerable,ANSERIFORMES,Anatidae,UShi
+Mallard,Anas platyrhynchos,Introduced species,ANSERIFORMES,Anatidae,UShi
+Northern Pintail,Anas acuta,,ANSERIFORMES,Anatidae,UShi
+Green-winged Teal,Anas crecca,,ANSERIFORMES,Anatidae,UShi
+Canvasback,Aythya valisineria,Rare/Accidental,ANSERIFORMES,Anatidae,UShi
+Redhead,Aythya americana,Rare/Accidental,ANSERIFORMES,Anatidae,UShi
+Common Pochard,Aythya ferina,Rare/Accidental Vulnerable,ANSERIFORMES,Anatidae,UShi
+Ring-necked Duck,Aythya collaris,,ANSERIFORMES,Anatidae,UShi
+Tufted Duck,Aythya fuligula,Rare/Accidental,ANSERIFORMES,Anatidae,UShi
+Greater Scaup,Aythya marila,Rare/Accidental,ANSERIFORMES,Anatidae,UShi
+Lesser Scaup,Aythya affinis,,ANSERIFORMES,Anatidae,UShi
+Harlequin Duck,Histrionicus histrionicus,Rare/Accidental,ANSERIFORMES,Anatidae,UShi
+Surf Scoter,Melanitta perspicillata,Rare/Accidental,ANSERIFORMES,Anatidae,UShi
+Black Scoter,Melanitta americana,Rare/Accidental Near-threatened,ANSERIFORMES,Anatidae,UShi
+Long-tailed Duck,Clangula hyemalis,Rare/Accidental Vulnerable,ANSERIFORMES,Anatidae,UShi
+Bufflehead,Bucephala albeola,Rare/Accidental,ANSERIFORMES,Anatidae,UShi
+Common Goldeneye,Bucephala clangula,Rare/Accidental,ANSERIFORMES,Anatidae,UShi
+Barrow's Goldeneye,Bucephala islandica,Rare/Accidental,ANSERIFORMES,Anatidae,UShi
+Hooded Merganser,Lophodytes cucullatus,Rare/Accidental,ANSERIFORMES,Anatidae,UShi
+Common Merganser,Mergus merganser,Rare/Accidental,ANSERIFORMES,Anatidae,UShi
+Red-breasted Merganser,Mergus serrator,Rare/Accidental,ANSERIFORMES,Anatidae,UShi
+Ruddy Duck,Oxyura jamaicensis,Rare/Accidental,ANSERIFORMES,Anatidae,UShi
+California Quail,Callipepla californica,Introduced species,GALLIFORMES,Odontophoridae,UShi
+Gambel's Quail,Callipepla gambelii,Introduced species,GALLIFORMES,Odontophoridae,UShi
+Wild Turkey,Meleagris gallopavo,Introduced species,GALLIFORMES,Phasianidae,UShi
+Ring-necked Pheasant,Phasianus colchicus,Introduced species,GALLIFORMES,Phasianidae,UShi
+Green Pheasant,Phasianus versicolor,Introduced species,GALLIFORMES,Phasianidae,UShi
+Kalij Pheasant,Lophura leucomelanos,Introduced species,GALLIFORMES,Phasianidae,UShi
+Indian Peafowl,Pavo cristatus,Introduced species,GALLIFORMES,Phasianidae,UShi
+Chinese Bamboo-Partridge,Bambusicola thoracicus,Extirpated,GALLIFORMES,Phasianidae,UShi
+Red Junglefowl,Gallus gallus,Introduced species,GALLIFORMES,Phasianidae,UShi
+Gray Francolin,Ortygornis pondicerianus,Introduced species,GALLIFORMES,Phasianidae,UShi
+Black Francolin,Francolinus francolinus,Introduced species,GALLIFORMES,Phasianidae,UShi
+Japanese Quail,Coturnix japonica,Introduced species Near-threatened,GALLIFORMES,Phasianidae,UShi
+Chukar,Alectoris chukar,Introduced species,GALLIFORMES,Phasianidae,UShi
+Erckel's Spurfowl,Pternistis erckelii,Introduced species,GALLIFORMES,Phasianidae,UShi
+Rock Pigeon,Columba livia,Introduced species,COLUMBIFORMES,Columbidae,UShi
+Spotted Dove,Spilopelia chinensis,Introduced species,COLUMBIFORMES,Columbidae,UShi
+Zebra Dove,Geopelia striata,Introduced species,COLUMBIFORMES,Columbidae,UShi
+Mourning Dove,Zenaida macroura,Introduced species,COLUMBIFORMES,Columbidae,UShi
+Chestnut-bellied Sandgrouse,Pterocles exustus,Introduced species,PTEROCLIFORMES,Pteroclidae,UShi
+Yellow-billed Cuckoo,Coccyzus americanus,Rare/Accidental,CUCULIFORMES,Cuculidae,UShi
+Common Cuckoo,Cuculus canorus,Rare/Accidental,CUCULIFORMES,Cuculidae,UShi
+Common Nighthawk,Chordeiles minor,Rare/Accidental,CAPRIMULGIFORMES,Caprimulgidae,UShi
+Mariana Swiftlet,Aerodramus bartschi,Introduced species Vulnerable,APODIFORMES,Apodidae,UShi
+Pacific Swift,Apus pacificus,Rare/Accidental,APODIFORMES,Apodidae,UShi
+Sora,Porzana carolina,Rare/Accidental,GRUIFORMES,Rallidae,UShi
+Common Gallinule,Gallinula galeata,,GRUIFORMES,Rallidae,UShi
+Hawaiian Coot,Fulica alai,Endemic Near-threatened,GRUIFORMES,Rallidae,UShi
+American Coot,Fulica americana,Rare/Accidental,GRUIFORMES,Rallidae,UShi
+Purple Gallinule,Porphyrio martinica,Rare/Accidental,GRUIFORMES,Rallidae,UShi
+Laysan Rail,Zapornia palmeri,Endemic Extinct,GRUIFORMES,Rallidae,UShi
+Hawaiian Rail,Zapornia sandwichensis,Endemic Extinct,GRUIFORMES,Rallidae,UShi
+Sandhill Crane,Antigone canadensis,Rare/Accidental,GRUIFORMES,Gruidae,UShi
+Black-winged Stilt,Himantopus himantopus,Rare/Accidental,CHARADRIIFORMES,Recurvirostridae,UShi
+Black-necked Stilt,Himantopus mexicanus,,CHARADRIIFORMES,Recurvirostridae,UShi
+American Avocet,Recurvirostra americana,Rare/Accidental,CHARADRIIFORMES,Recurvirostridae,UShi
+Black-bellied Plover,Pluvialis squatarola,Vulnerable,CHARADRIIFORMES,Charadriidae,UShi
+Pacific Golden-Plover,Pluvialis fulva,,CHARADRIIFORMES,Charadriidae,UShi
+Eurasian Dotterel,Eudromias morinellus,Rare/Accidental,CHARADRIIFORMES,Charadriidae,UShi
+Killdeer,Charadrius vociferus,Rare/Accidental Near-threatened,CHARADRIIFORMES,Charadriidae,UShi
+Common Ringed Plover,Charadrius hiaticula,Rare/Accidental,CHARADRIIFORMES,Charadriidae,UShi
+Semipalmated Plover,Charadrius semipalmatus,Rare/Accidental,CHARADRIIFORMES,Charadriidae,UShi
+Siberian Sand-Plover,Anarhynchus mongolus,Rare/Accidental Endangered,CHARADRIIFORMES,Charadriidae,UShi
+Bristle-thighed Curlew,Numenius tahitiensis,Near-threatened,CHARADRIIFORMES,Scolopacidae,UShi
+Whimbrel,Numenius phaeopus,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,UShi
+Far Eastern Curlew,Numenius madagascariensis,Rare/Accidental Endangered,CHARADRIIFORMES,Scolopacidae,UShi
+Bar-tailed Godwit,Limosa lapponica,Near-threatened,CHARADRIIFORMES,Scolopacidae,UShi
+Black-tailed Godwit,Limosa limosa,Rare/Accidental Near-threatened,CHARADRIIFORMES,Scolopacidae,UShi
+Hudsonian Godwit,Limosa haemastica,Rare/Accidental Vulnerable,CHARADRIIFORMES,Scolopacidae,UShi
+Marbled Godwit,Limosa fedoa,Rare/Accidental Vulnerable,CHARADRIIFORMES,Scolopacidae,UShi
+Short-billed Dowitcher,Limnodromus griseus,Rare/Accidental Vulnerable,CHARADRIIFORMES,Scolopacidae,UShi
+Long-billed Dowitcher,Limnodromus scolopaceus,Near-threatened,CHARADRIIFORMES,Scolopacidae,UShi
+Pin-tailed Snipe,Gallinago stenura,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,UShi
+Common Snipe,Gallinago gallinago,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,UShi
+Wilson's Snipe,Gallinago delicata,,CHARADRIIFORMES,Scolopacidae,UShi
+Wilson's Phalarope,Phalaropus tricolor,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,UShi
+Red Phalarope,Phalaropus fulicarius,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,UShi
+Red-necked Phalarope,Phalaropus lobatus,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,UShi
+Terek Sandpiper,Xenus cinereus,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,UShi
+Common Sandpiper,Actitis hypoleucos,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,UShi
+Spotted Sandpiper,Actitis macularius,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,UShi
+Solitary Sandpiper,Tringa solitaria,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,UShi
+Gray-tailed Tattler,Tringa brevipes,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,UShi
+Wandering Tattler,Tringa incana,,CHARADRIIFORMES,Scolopacidae,UShi
+Marsh Sandpiper,Tringa stagnatilis,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,UShi
+Wood Sandpiper,Tringa glareola,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,UShi
+Lesser Yellowlegs,Tringa flavipes,Vulnerable,CHARADRIIFORMES,Scolopacidae,UShi
+Willet,Tringa semipalmata,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,UShi
+Spotted Redshank,Tringa erythropus,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,UShi
+Greater Yellowlegs,Tringa melanoleuca,Rare/Accidental Near-threatened,CHARADRIIFORMES,Scolopacidae,UShi
+Ruddy Turnstone,Arenaria interpres,Near-threatened,CHARADRIIFORMES,Scolopacidae,UShi
+Red Knot,Calidris canutus,Rare/Accidental Near-threatened,CHARADRIIFORMES,Scolopacidae,UShi
+Surfbird,Calidris virgata,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,UShi
+Ruff,Calidris pugnax,,CHARADRIIFORMES,Scolopacidae,UShi
+Sharp-tailed Sandpiper,Calidris acuminata,Vulnerable,CHARADRIIFORMES,Scolopacidae,UShi
+Curlew Sandpiper,Calidris ferruginea,Rare/Accidental Vulnerable,CHARADRIIFORMES,Scolopacidae,UShi
+Stilt Sandpiper,Calidris himantopus,Rare/Accidental Near-threatened,CHARADRIIFORMES,Scolopacidae,UShi
+Long-toed Stint,Calidris subminuta,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,UShi
+Red-necked Stint,Calidris ruficollis,Rare/Accidental Near-threatened,CHARADRIIFORMES,Scolopacidae,UShi
+Buff-breasted Sandpiper,Calidris subruficollis,Rare/Accidental Vulnerable,CHARADRIIFORMES,Scolopacidae,UShi
+Sanderling,Calidris alba,,CHARADRIIFORMES,Scolopacidae,UShi
+Dunlin,Calidris alpina,Near-threatened,CHARADRIIFORMES,Scolopacidae,UShi
+Baird's Sandpiper,Calidris bairdii,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,UShi
+Little Stint,Calidris minuta,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,UShi
+White-rumped Sandpiper,Calidris fuscicollis,Rare/Accidental Vulnerable,CHARADRIIFORMES,Scolopacidae,UShi
+Least Sandpiper,Calidris minutilla,Rare/Accidental Near-threatened,CHARADRIIFORMES,Scolopacidae,UShi
+Pectoral Sandpiper,Calidris melanotos,,CHARADRIIFORMES,Scolopacidae,UShi
+Western Sandpiper,Calidris mauri,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,UShi
+Semipalmated Sandpiper,Calidris pusilla,Rare/Accidental Near-threatened,CHARADRIIFORMES,Scolopacidae,UShi
+Long-tailed Jaeger,Stercorarius longicaudus,,CHARADRIIFORMES,Stercorariidae,UShi
+Parasitic Jaeger,Stercorarius parasiticus,,CHARADRIIFORMES,Stercorariidae,UShi
+Pomarine Jaeger,Stercorarius pomarinus,,CHARADRIIFORMES,Stercorariidae,UShi
+South Polar Skua,Stercorarius maccormicki,,CHARADRIIFORMES,Stercorariidae,UShi
+Rhinoceros Auklet,Cerorhinca monocerata,Rare/Accidental,CHARADRIIFORMES,Alcidae,UShi
+Tufted Puffin,Fratercula cirrhata,Rare/Accidental,CHARADRIIFORMES,Alcidae,UShi
+Horned Puffin,Fratercula corniculata,Rare/Accidental,CHARADRIIFORMES,Alcidae,UShi
+Cassin's Auklet,Ptychoramphus aleuticus,Rare/Accidental Near-threatened,CHARADRIIFORMES,Alcidae,UShi
+Parakeet Auklet,Aethia psittacula,Rare/Accidental,CHARADRIIFORMES,Alcidae,UShi
+Ancient Murrelet,Synthliboramphus antiquus,Rare/Accidental,CHARADRIIFORMES,Alcidae,UShi
+Black-legged Kittiwake,Rissa tridactyla,Rare/Accidental Vulnerable,CHARADRIIFORMES,Laridae,UShi
+Bonaparte's Gull,Chroicocephalus philadelphia,Rare/Accidental,CHARADRIIFORMES,Laridae,UShi
+Black-headed Gull,Chroicocephalus ridibundus,Rare/Accidental,CHARADRIIFORMES,Laridae,UShi
+Laughing Gull,Leucophaeus atricilla,,CHARADRIIFORMES,Laridae,UShi
+Franklin's Gull,Leucophaeus pipixcan,,CHARADRIIFORMES,Laridae,UShi
+Common Gull,Larus canus,,CHARADRIIFORMES,Laridae,UShi
+Short-billed Gull,Larus brachyrhynchus,Rare/Accidental,CHARADRIIFORMES,Laridae,UShi
+Ring-billed Gull,Larus delawarensis,,CHARADRIIFORMES,Laridae,UShi
+Western Gull,Larus occidentalis,Rare/Accidental,CHARADRIIFORMES,Laridae,UShi
+American Herring Gull,Larus smithsonianus,Rare/Accidental,CHARADRIIFORMES,Laridae,UShi
+Glaucous Gull,Larus hyperboreus,Rare/Accidental,CHARADRIIFORMES,Laridae,UShi
+Lesser Black-backed Gull,Larus fuscus,Rare/Accidental,CHARADRIIFORMES,Laridae,UShi
+California Gull,Larus californicus,Rare/Accidental,CHARADRIIFORMES,Laridae,UShi
+Glaucous-winged Gull,Larus glaucescens,,CHARADRIIFORMES,Laridae,UShi
+Slaty-backed Gull,Larus schistisagus,Rare/Accidental,CHARADRIIFORMES,Laridae,UShi
+White Tern,Gygis alba,,CHARADRIIFORMES,Laridae,UShi
+Brown Noddy,Anous stolidus,,CHARADRIIFORMES,Laridae,UShi
+Black Noddy,Anous minutus,,CHARADRIIFORMES,Laridae,UShi
+Blue-gray Noddy,Anous ceruleus,,CHARADRIIFORMES,Laridae,UShi
+Sooty Tern,Onychoprion fuscatus,,CHARADRIIFORMES,Laridae,UShi
+Bridled Tern,Onychoprion anaethetus,Rare/Accidental,CHARADRIIFORMES,Laridae,UShi
+Gray-backed Tern,Onychoprion lunatus,,CHARADRIIFORMES,Laridae,UShi
+Little Tern,Sternula albifrons,Rare/Accidental,CHARADRIIFORMES,Laridae,UShi
+Least Tern,Sternula antillarum,,CHARADRIIFORMES,Laridae,UShi
+Gull-billed Tern,Gelochelidon nilotica,Rare/Accidental,CHARADRIIFORMES,Laridae,UShi
+Caspian Tern,Hydroprogne caspia,Rare/Accidental,CHARADRIIFORMES,Laridae,UShi
+Inca Tern,Larosterna inca,Rare/Accidental Near-threatened,CHARADRIIFORMES,Laridae,UShi
+Whiskered Tern,Chlidonias hybrida,Rare/Accidental,CHARADRIIFORMES,Laridae,UShi
+Black Tern,Chlidonias niger,Rare/Accidental,CHARADRIIFORMES,Laridae,UShi
+White-winged Tern,Chlidonias leucopterus,Rare/Accidental,CHARADRIIFORMES,Laridae,UShi
+Arctic Tern,Sterna paradisaea,,CHARADRIIFORMES,Laridae,UShi
+Common Tern,Sterna hirundo,Rare/Accidental,CHARADRIIFORMES,Laridae,UShi
+Sandwich Tern,Thalasseus sandvicensis,Rare/Accidental,CHARADRIIFORMES,Laridae,UShi
+Elegant Tern,Thalasseus elegans,Rare/Accidental Near-threatened,CHARADRIIFORMES,Laridae,UShi
+Great Crested Tern,Thalasseus bergii,Rare/Accidental,CHARADRIIFORMES,Laridae,UShi
+Pied-billed Grebe,Podilymbus podiceps,Rare/Accidental,PODICIPEDIFORMES,Podicipedidae,UShi
+Horned Grebe,Podiceps auritus,Rare/Accidental Vulnerable,PODICIPEDIFORMES,Podicipedidae,UShi
+Red-necked Grebe,Podiceps grisegena,Rare/Accidental,PODICIPEDIFORMES,Podicipedidae,UShi
+Eared Grebe,Podiceps nigricollis,Rare/Accidental,PODICIPEDIFORMES,Podicipedidae,UShi
+White-tailed Tropicbird,Phaethon lepturus,,PHAETHONTIFORMES,Phaethontidae,UShi
+Red-billed Tropicbird,Phaethon aethereus,Rare/Accidental,PHAETHONTIFORMES,Phaethontidae,UShi
+Red-tailed Tropicbird,Phaethon rubricauda,,PHAETHONTIFORMES,Phaethontidae,UShi
+Pacific Loon,Gavia pacifica,Rare/Accidental,GAVIIFORMES,Gaviidae,UShi
+Laysan Albatross,Phoebastria immutabilis,Near-threatened,PROCELLARIIFORMES,Diomedeidae,UShi
+Black-footed Albatross,Phoebastria nigripes,Near-threatened,PROCELLARIIFORMES,Diomedeidae,UShi
+Short-tailed Albatross,Phoebastria albatrus,Vulnerable,PROCELLARIIFORMES,Diomedeidae,UShi
+Wilson's Storm-Petrel,Oceanites oceanicus,,PROCELLARIIFORMES,Oceanitidae,UShi
+Fork-tailed Storm-Petrel,Hydrobates furcatus,Rare/Accidental,PROCELLARIIFORMES,Hydrobatidae,UShi
+Leach's Storm-Petrel,Hydrobates leucorhous,Vulnerable,PROCELLARIIFORMES,Hydrobatidae,UShi
+Band-rumped Storm-Petrel,Hydrobates castro,,PROCELLARIIFORMES,Hydrobatidae,UShi
+Tristram's Storm-Petrel,Hydrobates tristrami,,PROCELLARIIFORMES,Hydrobatidae,UShi
+Northern Fulmar,Fulmarus glacialis,,PROCELLARIIFORMES,Procellariidae,UShi
+Kermadec Petrel,Pterodroma neglecta,,PROCELLARIIFORMES,Procellariidae,UShi
+Trindade Petrel,Pterodroma arminjoniana,Rare/Accidental Vulnerable,PROCELLARIIFORMES,Procellariidae,UShi
+Herald Petrel,Pterodroma heraldica,,PROCELLARIIFORMES,Procellariidae,UShi
+Murphy's Petrel,Pterodroma ultima,,PROCELLARIIFORMES,Procellariidae,UShi
+Mottled Petrel,Pterodroma inexpectata,Near-threatened,PROCELLARIIFORMES,Procellariidae,UShi
+Juan Fernandez Petrel,Pterodroma externa,Vulnerable,PROCELLARIIFORMES,Procellariidae,UShi
+Hawaiian Petrel,Pterodroma sandwichensis,Breeding endemic Endangered,PROCELLARIIFORMES,Procellariidae,UShi
+White-necked Petrel,Pterodroma cervicalis,Rare/Accidental,PROCELLARIIFORMES,Procellariidae,UShi
+Bonin Petrel,Pterodroma hypoleuca,,PROCELLARIIFORMES,Procellariidae,UShi
+Black-winged Petrel,Pterodroma nigripennis,,PROCELLARIIFORMES,Procellariidae,UShi
+Cook's Petrel,Pterodroma cookii,Vulnerable,PROCELLARIIFORMES,Procellariidae,UShi
+Stejneger's Petrel,Pterodroma longirostris,Vulnerable,PROCELLARIIFORMES,Procellariidae,UShi
+Bulwer's Petrel,Bulweria bulwerii,,PROCELLARIIFORMES,Procellariidae,UShi
+Jouanin's Petrel,Bulweria fallax,Rare/Accidental Near-threatened,PROCELLARIIFORMES,Procellariidae,UShi
+Tahiti Petrel,Pseudobulweria rostrata,Rare/Accidental Near-threatened,PROCELLARIIFORMES,Procellariidae,UShi
+Streaked Shearwater,Calonectris leucomelas,Rare/Accidental Near-threatened,PROCELLARIIFORMES,Procellariidae,UShi
+Pink-footed Shearwater,Ardenna creatopus,Rare/Accidental Vulnerable,PROCELLARIIFORMES,Procellariidae,UShi
+Flesh-footed Shearwater,Ardenna carneipes,Near-threatened,PROCELLARIIFORMES,Procellariidae,UShi
+Wedge-tailed Shearwater,Ardenna pacifica,,PROCELLARIIFORMES,Procellariidae,UShi
+Buller's Shearwater,Ardenna bulleri,Vulnerable,PROCELLARIIFORMES,Procellariidae,UShi
+Sooty Shearwater,Ardenna grisea,Near-threatened,PROCELLARIIFORMES,Procellariidae,UShi
+Short-tailed Shearwater,Ardenna tenuirostris,,PROCELLARIIFORMES,Procellariidae,UShi
+Christmas Shearwater,Puffinus nativitatis,,PROCELLARIIFORMES,Procellariidae,UShi
+Newell's Shearwater,Puffinus newelli,Breeding endemic Critically endangered,PROCELLARIIFORMES,Procellariidae,UShi
+Bryan's Shearwater,Puffinus bryani,Rare/Accidental Critically endangered,PROCELLARIIFORMES,Procellariidae,UShi
+Magnificent Frigatebird,Fregata magnificens,Rare/Accidental,SULIFORMES,Fregatidae,UShi
+Lesser Frigatebird,Fregata ariel,Rare/Accidental,SULIFORMES,Fregatidae,UShi
+Great Frigatebird,Fregata minor,,SULIFORMES,Fregatidae,UShi
+Red-footed Booby,Sula sula,,SULIFORMES,Sulidae,UShi
+Brown Booby,Sula leucogaster,,SULIFORMES,Sulidae,UShi
+Cocos Booby,Sula brewsteri,Rare/Accidental,SULIFORMES,Sulidae,UShi
+Masked Booby,Sula dactylatra,,SULIFORMES,Sulidae,UShi
+Nazca Booby,Sula granti,Rare/Accidental,SULIFORMES,Sulidae,UShi
+Pelagic Cormorant,Urile pelagicus,Rare/Accidental,SULIFORMES,Phalacrocoracidae,UShi
+White-faced Ibis,Plegadis chihi,Rare/Accidental,PELECANIFORMES,Threskiornithidae,UShi
+American Bittern,Botaurus lentiginosus,Rare/Accidental,PELECANIFORMES,Ardeidae,UShi
+Black-crowned Night Heron,Nycticorax nycticorax,,PELECANIFORMES,Ardeidae,UShi
+Little Blue Heron,Egretta caerulea,Rare/Accidental,PELECANIFORMES,Ardeidae,UShi
+Snowy Egret,Egretta thula,Rare/Accidental,PELECANIFORMES,Ardeidae,UShi
+Green Heron,Butorides virescens,Rare/Accidental,PELECANIFORMES,Ardeidae,UShi
+Western Cattle-Egret,Ardea ibis,Introduced species,PELECANIFORMES,Ardeidae,UShi
+Great Egret,Ardea alba,Rare/Accidental,PELECANIFORMES,Ardeidae,UShi
+Yellow-billed Egret,Ardea brachyrhyncha,Rare/Accidental,PELECANIFORMES,Ardeidae,UShi
+Gray Heron,Ardea cinerea,Rare/Accidental,PELECANIFORMES,Ardeidae,UShi
+Great Blue Heron,Ardea herodias,Rare/Accidental,PELECANIFORMES,Ardeidae,UShi
+Osprey,Pandion haliaetus,Rare/Accidental,ACCIPITRIFORMES,Pandionidae,UShi
+Golden Eagle,Aquila chrysaetos,Rare/Accidental,ACCIPITRIFORMES,Accipitridae,UShi
+Chinese Sparrowhawk,Tachyspiza soloensis,Rare/Accidental,ACCIPITRIFORMES,Accipitridae,UShi
+Northern Harrier,Circus hudsonius,Rare/Accidental,ACCIPITRIFORMES,Accipitridae,UShi
+Black Kite,Milvus migrans,Rare/Accidental,ACCIPITRIFORMES,Accipitridae,UShi
+White-tailed Eagle,Haliaeetus albicilla,Rare/Accidental,ACCIPITRIFORMES,Accipitridae,UShi
+Steller's Sea-Eagle,Haliaeetus pelagicus,Rare/Accidental Vulnerable,ACCIPITRIFORMES,Accipitridae,UShi
+Hawaiian Hawk,Buteo solitarius,Endemic Near-threatened,ACCIPITRIFORMES,Accipitridae,UShi
+Rough-legged Hawk,Buteo lagopus,Rare/Accidental,ACCIPITRIFORMES,Accipitridae,UShi
+American Barn Owl,Tyto furcata,Introduced species,STRIGIFORMES,Tytonidae,UShi
+Snowy Owl,Bubo scandiacus,Rare/Accidental Vulnerable,STRIGIFORMES,Strigidae,UShi
+Short-eared Owl,Asio flammeus,,STRIGIFORMES,Strigidae,UShi
+Belted Kingfisher,Megaceryle alcyon,Rare/Accidental,CORACIIFORMES,Alcedinidae,UShi
+Merlin,Falco columbarius,Rare/Accidental,FALCONIFORMES,Falconidae,UShi
+Peregrine Falcon,Falco peregrinus,,FALCONIFORMES,Falconidae,UShi
+Rose-ringed Parakeet,Psittacula krameri,Introduced species,PSITTACIFORMES,Psittaculidae,UShi
+Pale-headed Rosella,Platycercus adscitus,Extirpated,PSITTACIFORMES,Psittaculidae,UShi
+Red-crowned Amazon,Amazona viridigenalis,Introduced species Endangered,PSITTACIFORMES,Psittacidae,UShi
+Lilac-crowned Amazon,Amazona finschi,Introduced species Endangered,PSITTACIFORMES,Psittacidae,UShi
+Mitred Parakeet,Psittacara mitratus,Introduced species,PSITTACIFORMES,Psittacidae,UShi
+Red-masked Parakeet,Psittacara erythrogenys,Introduced species Near-threatened,PSITTACIFORMES,Psittacidae,UShi
+Hawaii Elepaio,Chasiempis sandwichensis,Endemic Near-threatened,PASSERIFORMES,Monarchidae,UShi
+Kauai Elepaio,Chasiempis sclateri,Endemic Near-threatened,PASSERIFORMES,Monarchidae,UShi
+Oahu Elepaio,Chasiempis ibidis,Endemic Vulnerable,PASSERIFORMES,Monarchidae,UShi
+Hawaiian Crow,Corvus hawaiiensis,Endemic Extinct in the wild,PASSERIFORMES,Corvidae,UShi
+Common Raven,Corvus corax,Rare/Accidental,PASSERIFORMES,Corvidae,UShi
+Varied Tit,Sittiparus varius,Extirpated,PASSERIFORMES,Paridae,UShi
+Eurasian Skylark,Alauda arvensis,Introduced species,PASSERIFORMES,Alaudidae,UShi
+Millerbird,Acrocephalus familiaris,Endemic Endangered,PASSERIFORMES,Acrocephalidae,UShi
+Barn Swallow,Hirundo rustica,Rare/Accidental,PASSERIFORMES,Hirundinidae,UShi
+Cliff Swallow,Petrochelidon pyrrhonota,Rare/Accidental,PASSERIFORMES,Hirundinidae,UShi
+Red-whiskered Bulbul,Pycnonotus jocosus,Introduced species,PASSERIFORMES,Pycnonotidae,UShi
+Red-vented Bulbul,Pycnonotus cafer,Introduced species,PASSERIFORMES,Pycnonotidae,UShi
+Japanese Bush Warbler,Horornis diphone,Introduced species,PASSERIFORMES,Scotocercidae,UShi
+Warbling White-eye,Zosterops japonicus,Introduced species,PASSERIFORMES,Zosteropidae,UShi
+Red-billed Leiothrix,Leiothrix lutea,Introduced species,PASSERIFORMES,Leiothrichidae,UShi
+Chinese Hwamei,Garrulax canorus,Introduced species,PASSERIFORMES,Leiothrichidae,UShi
+Greater Necklaced Laughingthrush,Pterorhinus pectoralis,Introduced species,PASSERIFORMES,Leiothrichidae,UShi
+Gray-sided Laughingthrush,Pterorhinus caerulatus,Extirpated,PASSERIFORMES,Leiothrichidae,UShi
+European Starling,Sturnus vulgaris,Introduced species,PASSERIFORMES,Sturnidae,UShi
+Common Myna,Acridotheres tristis,Introduced species,PASSERIFORMES,Sturnidae,UShi
+Northern Mockingbird,Mimus polyglottos,Introduced species,PASSERIFORMES,Mimidae,UShi
+Kamao,Myadestes myadestinus,Endemic Extinct,PASSERIFORMES,Turdidae,UShi
+Amaui,Myadestes woahensis,Endemic Extinct,PASSERIFORMES,Turdidae,UShi
+Olomao,Myadestes lanaiensis,Endemic Critically endangered (possibly extinct),PASSERIFORMES,Turdidae,UShi
+Omao,Myadestes obscurus,Endemic Near-threatened,PASSERIFORMES,Turdidae,UShi
+Puaiohi,Myadestes palmeri,Endemic Critically endangered,PASSERIFORMES,Turdidae,UShi
+Eyebrowed Thrush,Turdus obscurus,Rare/Accidental,PASSERIFORMES,Turdidae,UShi
+White-rumped Shama,Copsychus malabaricus,Introduced species,PASSERIFORMES,Muscicapidae,UShi
+Bohemian Waxwing,Bombycilla garrulus,Rare/Accidental,PASSERIFORMES,Bombycillidae,UShi
+Kauai Oo,Moho braccatus,Endemic Extinct,PASSERIFORMES,Mohoidae,UShi
+Oahu Oo,Moho apicalis,Endemic Extinct,PASSERIFORMES,Mohoidae,UShi
+Bishop's Oo,Moho bishopi,Endemic Extinct,PASSERIFORMES,Mohoidae,UShi
+Hawaii Oo,Moho nobilis,Endemic Extinct,PASSERIFORMES,Mohoidae,UShi
+Kioea,Chaetoptila angustipluma,Endemic Extinct,PASSERIFORMES,Mohoidae,UShi
+Northern Red Bishop,Euplectes franciscanus,Introduced species,PASSERIFORMES,Ploceidae,UShi
+African Silverbill,Euodice cantans,Introduced species,PASSERIFORMES,Estrildidae,UShi
+Java Sparrow,Padda oryzivora,Introduced species Endangered,PASSERIFORMES,Estrildidae,UShi
+Scaly-breasted Munia,Lonchura punctulata,Introduced species,PASSERIFORMES,Estrildidae,UShi
+Chestnut Munia,Lonchura atricapilla,Introduced species,PASSERIFORMES,Estrildidae,UShi
+Lavender Waxbill,Glaucestrilda caerulescens,Introduced species,PASSERIFORMES,Estrildidae,UShi
+Orange-cheeked Waxbill,Estrilda melpoda,Introduced species,PASSERIFORMES,Estrildidae,UShi
+Common Waxbill,Estrilda astrild,Introduced species,PASSERIFORMES,Estrildidae,UShi
+Black-rumped Waxbill,Estrilda troglodytes,Introduced species,PASSERIFORMES,Estrildidae,UShi
+Red Avadavat,Amandava amandava,Introduced species,PASSERIFORMES,Estrildidae,UShi
+Red-cheeked Cordonbleu,Uraeginthus bengalus,Introduced species,PASSERIFORMES,Estrildidae,UShi
+House Sparrow,Passer domesticus,Introduced species,PASSERIFORMES,Passeridae,UShi
+White Wagtail,Motacilla alba,,PASSERIFORMES,Motacillidae,UShi
+Olive-backed Pipit,Anthus hodgsoni,Rare/Accidental,PASSERIFORMES,Motacillidae,UShi
+Red-throated Pipit,Anthus cervinus,Rare/Accidental,PASSERIFORMES,Motacillidae,UShi
+Siberian Pipit,Anthus japonicus,Rare/Accidental,PASSERIFORMES,Motacillidae,UShi
+American Pipit,Anthus rubescens,Rare/Accidental,PASSERIFORMES,Motacillidae,UShi
+Brambling,Fringilla montifringilla,Rare/Accidental,PASSERIFORMES,Fringillidae,UShi
+Poo-uli,Melamprosops phaeosoma,Endemic Extinct,PASSERIFORMES,Fringillidae,UShi
+Akikiki,Oreomystis bairdi,Endemic Critically endangered,PASSERIFORMES,Fringillidae,UShi
+Oahu Alauahio,Paroreomyza maculata,Endemic Critically endangered,PASSERIFORMES,Fringillidae,UShi
+Kakawahie,Paroreomyza flammea,Endemic Extinct,PASSERIFORMES,Fringillidae,UShi
+Maui Alauahio,Paroreomyza montana,Endemic Endangered,PASSERIFORMES,Fringillidae,UShi
+Palila,Loxioides bailleui,Endemic Critically endangered,PASSERIFORMES,Fringillidae,UShi
+Laysan Finch,Telespiza cantans,Endemic Vulnerable,PASSERIFORMES,Fringillidae,UShi
+Nihoa Finch,Telespiza ultima,Endemic Critically endangered,PASSERIFORMES,Fringillidae,UShi
+Kona Grosbeak,Chloridops kona,Endemic Extinct,PASSERIFORMES,Fringillidae,UShi
+Lesser Koa-Finch,Rhodacanthis flaviceps,Endemic Extinct,PASSERIFORMES,Fringillidae,UShi
+Greater Koa-Finch,Rhodacanthis palmeri,Endemic Extinct,PASSERIFORMES,Fringillidae,UShi
+Ula-ai-hawane,Ciridops anna,Endemic Extinct,PASSERIFORMES,Fringillidae,UShi
+Akohekohe,Palmeria dolei,Endemic Critically endangered,PASSERIFORMES,Fringillidae,UShi
+Laysan Honeycreeper,Himatione fraithii,Endemic Extinct,PASSERIFORMES,Fringillidae,UShi
+Apapane,Himatione sanguinea,Endemic,PASSERIFORMES,Fringillidae,UShi
+Iiwi,Drepanis coccinea,Endemic Vulnerable,PASSERIFORMES,Fringillidae,UShi
+Hawaii Mamo,Drepanis pacifica,Endemic Extinct,PASSERIFORMES,Fringillidae,UShi
+Black Mamo,Drepanis funerea,Endemic Extinct,PASSERIFORMES,Fringillidae,UShi
+Ou,Psittirostra psittacea,Endemic Extinct,PASSERIFORMES,Fringillidae,UShi
+Lanai Hookbill,Dysmorodrepanis munroi,Endemic Extinct,PASSERIFORMES,Fringillidae,UShi
+Maui Parrotbill,Pseudonestor xanthophrys,Endemic Critically endangered,PASSERIFORMES,Fringillidae,UShi
+Kauai Nukupuu,Hemignathus hanapepe,Endemic Extinct,PASSERIFORMES,Fringillidae,UShi
+Oahu Nukupuu,Hemignathus lucidus,Endemic Extinct,PASSERIFORMES,Fringillidae,UShi
+Maui Nukupuu,Hemignathus affinis,Endemic Extinct,PASSERIFORMES,Fringillidae,UShi
+Akiapolaau,Hemignathus wilsoni,Endemic Endangered,PASSERIFORMES,Fringillidae,UShi
+Lesser Akialoa,Akialoa obscura,Endemic Extinct,PASSERIFORMES,Fringillidae,UShi
+Oahu Akialoa,Akialoa ellisiana,Endemic Extinct,PASSERIFORMES,Fringillidae,UShi
+Kauai Akialoa,Akialoa stejnegeri,Endemic Extinct,PASSERIFORMES,Fringillidae,UShi
+Maui-nui Akialoa,Akialoa lanaiensis,Endemic Extinct,PASSERIFORMES,Fringillidae,UShi
+Anianiau,Magumma parva,Endemic Endangered,PASSERIFORMES,Fringillidae,UShi
+Hawaii Amakihi,Chlorodrepanis virens,Endemic,PASSERIFORMES,Fringillidae,UShi
+Oahu Amakihi,Chlorodrepanis flava,Endemic Near-threatened,PASSERIFORMES,Fringillidae,UShi
+Kauai Amakihi,Chlorodrepanis stejnegeri,Endemic Endangered,PASSERIFORMES,Fringillidae,UShi
+Greater Amakihi,Viridonia sagittirostris,Endemic Extinct,PASSERIFORMES,Fringillidae,UShi
+Hawaii Creeper,Loxops mana,Endemic Endangered,PASSERIFORMES,Fringillidae,UShi
+Akekee,Loxops caeruleirostris,Endemic Critically endangered,PASSERIFORMES,Fringillidae,UShi
+Hawaii Akepa,Loxops coccineus,Endemic Endangered,PASSERIFORMES,Fringillidae,UShi
+Oahu Akepa,Loxops wolstenholmei,Endemic Extinct,PASSERIFORMES,Fringillidae,UShi
+Maui Akepa,Loxops ochraceus,Endemic Extinct,PASSERIFORMES,Fringillidae,UShi
+House Finch,Haemorhous mexicanus,Introduced species,PASSERIFORMES,Fringillidae,UShi
+Yellow-fronted Canary,Crithagra mozambica,Introduced species,PASSERIFORMES,Fringillidae,UShi
+Redpoll,Acanthis flammea,Rare/Accidental,PASSERIFORMES,Fringillidae,UShi
+Island Canary,Serinus canaria,Introduced species,PASSERIFORMES,Fringillidae,UShi
+Snow Bunting,Plectrophenax nivalis,Rare/Accidental,PASSERIFORMES,Calcariidae,UShi
+Savannah Sparrow,Passerculus sandwichensis,Rare/Accidental,PASSERIFORMES,Passerellidae,UShi
+Western Meadowlark,Sturnella neglecta,Introduced species,PASSERIFORMES,Icteridae,UShi
+Eastern Meadowlark,Sturnella magna,Introduced species,PASSERIFORMES,Icteridae,UShi
+Great-tailed Grackle,Quiscalus mexicanus,Rare/Accidental,PASSERIFORMES,Icteridae,UShi
+Northern Cardinal,Cardinalis cardinalis,Introduced species,PASSERIFORMES,Cardinalidae,UShi
+Red-crested Cardinal,Paroaria coronata,Introduced species,PASSERIFORMES,Thraupidae,UShi
+Yellow-billed Cardinal,Paroaria capitata,Introduced species,PASSERIFORMES,Thraupidae,UShi
+Saffron Finch,Sicalis flaveola,Introduced species,PASSERIFORMES,Thraupidae,UShi
+Yellow-faced Grassquit,Tiaris olivaceus,Introduced species,PASSERIFORMES,Thraupidae,UShi

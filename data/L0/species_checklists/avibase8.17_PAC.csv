@@ -1,0 +1,747 @@
+common_name,scientific_name,status,order,family,region
+Fulvous Whistling-Duck,Dendrocygna bicolor,,ANSERIFORMES,Anatidae,PAC
+Wandering Whistling-Duck,Dendrocygna arcuata,,ANSERIFORMES,Anatidae,PAC
+Emperor Goose,Anser canagicus,,ANSERIFORMES,Anatidae,PAC
+Snow Goose,Anser caerulescens,,ANSERIFORMES,Anatidae,PAC
+Greater White-fronted Goose,Anser albifrons,,ANSERIFORMES,Anatidae,PAC
+Brant,Branta bernicla,,ANSERIFORMES,Anatidae,PAC
+Cackling Goose,Branta hutchinsii,,ANSERIFORMES,Anatidae,PAC
+Canada Goose,Branta canadensis,,ANSERIFORMES,Anatidae,PAC
+Hawaiian Goose,Branta sandvicensis,Near-threatened,ANSERIFORMES,Anatidae,PAC
+Tundra Swan,Cygnus columbianus,,ANSERIFORMES,Anatidae,PAC
+Australian Shelduck,Tadorna tadornoides,Rare/Accidental,ANSERIFORMES,Anatidae,PAC
+Baikal Teal,Sibirionetta formosa,Rare/Accidental,ANSERIFORMES,Anatidae,PAC
+Garganey,Spatula querquedula,,ANSERIFORMES,Anatidae,PAC
+Blue-winged Teal,Spatula discors,,ANSERIFORMES,Anatidae,PAC
+Cinnamon Teal,Spatula cyanoptera,,ANSERIFORMES,Anatidae,PAC
+Northern Shoveler,Spatula clypeata,,ANSERIFORMES,Anatidae,PAC
+Gadwall,Mareca strepera,,ANSERIFORMES,Anatidae,PAC
+Falcated Duck,Mareca falcata,Rare/Accidental,ANSERIFORMES,Anatidae,PAC
+Eurasian Wigeon,Mareca penelope,,ANSERIFORMES,Anatidae,PAC
+American Wigeon,Mareca americana,,ANSERIFORMES,Anatidae,PAC
+Pacific Black Duck,Anas superciliosa,,ANSERIFORMES,Anatidae,PAC
+Laysan Duck,Anas laysanensis,Critically endangered,ANSERIFORMES,Anatidae,PAC
+Hawaiian Duck,Anas wyvilliana,Vulnerable,ANSERIFORMES,Anatidae,PAC
+Eastern Spot-billed Duck,Anas zonorhyncha,Rare/Accidental,ANSERIFORMES,Anatidae,PAC
+Mallard,Anas platyrhynchos,,ANSERIFORMES,Anatidae,PAC
+Northern Pintail,Anas acuta,,ANSERIFORMES,Anatidae,PAC
+Green-winged Teal,Anas crecca,,ANSERIFORMES,Anatidae,PAC
+Canvasback,Aythya valisineria,,ANSERIFORMES,Anatidae,PAC
+Redhead,Aythya americana,,ANSERIFORMES,Anatidae,PAC
+Common Pochard,Aythya ferina,Vulnerable,ANSERIFORMES,Anatidae,PAC
+Ring-necked Duck,Aythya collaris,,ANSERIFORMES,Anatidae,PAC
+Baer's Pochard,Aythya baeri,Rare/Accidental Critically endangered,ANSERIFORMES,Anatidae,PAC
+Tufted Duck,Aythya fuligula,,ANSERIFORMES,Anatidae,PAC
+Greater Scaup,Aythya marila,,ANSERIFORMES,Anatidae,PAC
+Lesser Scaup,Aythya affinis,,ANSERIFORMES,Anatidae,PAC
+Harlequin Duck,Histrionicus histrionicus,,ANSERIFORMES,Anatidae,PAC
+Surf Scoter,Melanitta perspicillata,,ANSERIFORMES,Anatidae,PAC
+Black Scoter,Melanitta americana,Near-threatened,ANSERIFORMES,Anatidae,PAC
+Long-tailed Duck,Clangula hyemalis,Vulnerable,ANSERIFORMES,Anatidae,PAC
+Bufflehead,Bucephala albeola,,ANSERIFORMES,Anatidae,PAC
+Common Goldeneye,Bucephala clangula,Rare/Accidental,ANSERIFORMES,Anatidae,PAC
+Hooded Merganser,Lophodytes cucullatus,,ANSERIFORMES,Anatidae,PAC
+Common Merganser,Mergus merganser,Rare/Accidental,ANSERIFORMES,Anatidae,PAC
+Red-breasted Merganser,Mergus serrator,,ANSERIFORMES,Anatidae,PAC
+Tongan Megapode,Megapodius pritchardii,Vulnerable,GALLIFORMES,Megapodiidae,PAC
+Micronesian Megapode,Megapodius laperouse,Endemic Near-threatened,GALLIFORMES,Megapodiidae,PAC
+Melanesian Megapode,Megapodius eremita,Rare/Accidental,GALLIFORMES,Megapodiidae,PAC
+Helmeted Guineafowl,Numida meleagris,Extirpated,GALLIFORMES,Numididae,PAC
+California Quail,Callipepla californica,Introduced species,GALLIFORMES,Odontophoridae,PAC
+Gambel's Quail,Callipepla gambelii,Introduced species,GALLIFORMES,Odontophoridae,PAC
+Wild Turkey,Meleagris gallopavo,Introduced species,GALLIFORMES,Phasianidae,PAC
+Ring-necked Pheasant,Phasianus colchicus,,GALLIFORMES,Phasianidae,PAC
+Green Pheasant,Phasianus versicolor,,GALLIFORMES,Phasianidae,PAC
+Kalij Pheasant,Lophura leucomelanos,,GALLIFORMES,Phasianidae,PAC
+Indian Peafowl,Pavo cristatus,,GALLIFORMES,Phasianidae,PAC
+Red Junglefowl,Gallus gallus,,GALLIFORMES,Phasianidae,PAC
+Gray Francolin,Ortygornis pondicerianus,,GALLIFORMES,Phasianidae,PAC
+Black Francolin,Francolinus francolinus,,GALLIFORMES,Phasianidae,PAC
+Brown Quail,Synoicus ypsilophorus,,GALLIFORMES,Phasianidae,PAC
+Blue-breasted Quail,Synoicus chinensis,,GALLIFORMES,Phasianidae,PAC
+Japanese Quail,Coturnix japonica,Near-threatened,GALLIFORMES,Phasianidae,PAC
+Chukar,Alectoris chukar,Introduced species,GALLIFORMES,Phasianidae,PAC
+Erckel's Spurfowl,Pternistis erckelii,,GALLIFORMES,Phasianidae,PAC
+Rock Pigeon,Columba livia,,COLUMBIFORMES,Columbidae,PAC
+Metallic Pigeon,Columba vitiensis,,COLUMBIFORMES,Columbidae,PAC
+Scaly-naped Pigeon,Patagioenas squamosa,,COLUMBIFORMES,Columbidae,PAC
+White-crowned Pigeon,Patagioenas leucocephala,Near-threatened,COLUMBIFORMES,Columbidae,PAC
+Plain Pigeon,Patagioenas inornata,Near-threatened,COLUMBIFORMES,Columbidae,PAC
+Philippine Collared-Dove,Streptopelia dusumieri,Introduced species Vulnerable,COLUMBIFORMES,Columbidae,PAC
+Spotted Dove,Spilopelia chinensis,,COLUMBIFORMES,Columbidae,PAC
+Pacific Emerald Dove,Chalcophaps longirostris,,COLUMBIFORMES,Columbidae,PAC
+Shy Ground Dove,Pampusana stairi,,COLUMBIFORMES,Columbidae,PAC
+Palau Ground Dove,Pampusana canifrons,Endangered,COLUMBIFORMES,Columbidae,PAC
+Marquesan Ground Dove,Pampusana rubescens,Endangered,COLUMBIFORMES,Columbidae,PAC
+Caroline Islands Ground Dove,Pampusana kubaryi,Endangered,COLUMBIFORMES,Columbidae,PAC
+Polynesian Ground Dove,Pampusana erythroptera,Critically endangered,COLUMBIFORMES,Columbidae,PAC
+White-throated Ground Dove,Pampusana xanthonura,Near-threatened,COLUMBIFORMES,Columbidae,PAC
+Zebra Dove,Geopelia striata,,COLUMBIFORMES,Columbidae,PAC
+Common Ground Dove,Columbina passerina,,COLUMBIFORMES,Columbidae,PAC
+White-winged Dove,Zenaida asiatica,,COLUMBIFORMES,Columbidae,PAC
+Mourning Dove,Zenaida macroura,,COLUMBIFORMES,Columbidae,PAC
+Nicobar Pigeon,Caloenas nicobarica,Near-threatened,COLUMBIFORMES,Columbidae,PAC
+Spotted Green Pigeon,Caloenas maculata,Extinct,COLUMBIFORMES,Columbidae,PAC
+Tooth-billed Pigeon,Didunculus strigirostris,Critically endangered,COLUMBIFORMES,Columbidae,PAC
+Many-colored Fruit-Dove,Ptilinopus perousii,,COLUMBIFORMES,Columbidae,PAC
+Purple-capped Fruit-Dove,Ptilinopus ponapensis,,COLUMBIFORMES,Columbidae,PAC
+Kosrae Fruit-Dove,Ptilinopus hernsheimi,,COLUMBIFORMES,Columbidae,PAC
+Crimson-crowned Fruit-Dove,Ptilinopus porphyraceus,,COLUMBIFORMES,Columbidae,PAC
+Palau Fruit-Dove,Ptilinopus pelewensis,,COLUMBIFORMES,Columbidae,PAC
+Cook Islands Fruit-Dove,Ptilinopus rarotongensis,Near-threatened,COLUMBIFORMES,Columbidae,PAC
+Mariana Fruit-Dove,Ptilinopus roseicapilla,Near-threatened,COLUMBIFORMES,Columbidae,PAC
+Raiatea Fruit-Dove,Ptilinopus chrysogaster,Endangered,COLUMBIFORMES,Columbidae,PAC
+Gray-green Fruit-Dove,Ptilinopus purpuratus,,COLUMBIFORMES,Columbidae,PAC
+Makatea Fruit-Dove,Ptilinopus chalcurus,Vulnerable,COLUMBIFORMES,Columbidae,PAC
+Atoll Fruit-Dove,Ptilinopus coralensis,Near-threatened,COLUMBIFORMES,Columbidae,PAC
+Rapa Fruit-Dove,Ptilinopus huttoni,Critically endangered,COLUMBIFORMES,Columbidae,PAC
+White-capped Fruit-Dove,Ptilinopus dupetithouarsii,,COLUMBIFORMES,Columbidae,PAC
+Red-moustached Fruit-Dove,Ptilinopus mercierii,Extinct,COLUMBIFORMES,Columbidae,PAC
+Henderson Island Fruit-Dove,Ptilinopus insularis,Vulnerable,COLUMBIFORMES,Columbidae,PAC
+Claret-breasted Fruit-Dove,Ptilinopus viridis,,COLUMBIFORMES,Columbidae,PAC
+Orange Dove,Ptilinopus victor,,COLUMBIFORMES,Columbidae,PAC
+Golden Dove,Ptilinopus luteovirens,,COLUMBIFORMES,Columbidae,PAC
+Whistling Dove,Ptilinopus layardi,Near-threatened,COLUMBIFORMES,Columbidae,PAC
+Pacific Imperial-Pigeon,Ducula pacifica,,COLUMBIFORMES,Columbidae,PAC
+Micronesian Imperial-Pigeon,Ducula oceanica,Vulnerable,COLUMBIFORMES,Columbidae,PAC
+Polynesian Imperial-Pigeon,Ducula aurorae,Endangered,COLUMBIFORMES,Columbidae,PAC
+Nuku Hiva Imperial-Pigeon,Ducula galeata,Endangered,COLUMBIFORMES,Columbidae,PAC
+Barking Imperial-Pigeon,Ducula latrans,,COLUMBIFORMES,Columbidae,PAC
+Chestnut-bellied Sandgrouse,Pterocles exustus,,PTEROCLIFORMES,Pteroclidae,PAC
+Smooth-billed Ani,Crotophaga ani,,CUCULIFORMES,Cuculidae,PAC
+Chestnut-winged Cuckoo,Clamator coromandus,,CUCULIFORMES,Cuculidae,PAC
+Yellow-billed Cuckoo,Coccyzus americanus,,CUCULIFORMES,Cuculidae,PAC
+Mangrove Cuckoo,Coccyzus minor,,CUCULIFORMES,Cuculidae,PAC
+Pacific Koel,Eudynamys orientalis,,CUCULIFORMES,Cuculidae,PAC
+Long-tailed Koel,Urodynamis taitensis,,CUCULIFORMES,Cuculidae,PAC
+Channel-billed Cuckoo,Scythrops novaehollandiae,Rare/Accidental,CUCULIFORMES,Cuculidae,PAC
+Shining Bronze-Cuckoo,Chalcites lucidus,,CUCULIFORMES,Cuculidae,PAC
+Fan-tailed Cuckoo,Cacomantis flabelliformis,,CUCULIFORMES,Cuculidae,PAC
+Sahul Brush Cuckoo,Cacomantis variolosus,Rare/Accidental,CUCULIFORMES,Cuculidae,PAC
+Northern Hawk-Cuckoo,Hierococcyx hyperythrus,,CUCULIFORMES,Cuculidae,PAC
+Hodgson's Hawk-Cuckoo,Hierococcyx nisicolor,,CUCULIFORMES,Cuculidae,PAC
+Common Cuckoo,Cuculus canorus,,CUCULIFORMES,Cuculidae,PAC
+Oriental Cuckoo,Cuculus optatus,,CUCULIFORMES,Cuculidae,PAC
+Common Nighthawk,Chordeiles minor,Rare/Accidental,CAPRIMULGIFORMES,Caprimulgidae,PAC
+Chuck-will's-widow,Antrostomus carolinensis,Rare/Accidental Near-threatened,CAPRIMULGIFORMES,Caprimulgidae,PAC
+Gray Nightjar,Caprimulgus jotaka,,CAPRIMULGIFORMES,Caprimulgidae,PAC
+Palau Nightjar,Caprimulgus phalaena,,CAPRIMULGIFORMES,Caprimulgidae,PAC
+Marbled Frogmouth,Podargus ocellatus,,PODARGIFORMES,Podargidae,PAC
+Chimney Swift,Chaetura pelagica,Rare/Accidental Vulnerable,APODIFORMES,Apodidae,PAC
+White-throated Needletail,Hirundapus caudacutus,,APODIFORMES,Apodidae,PAC
+Glossy Swiftlet,Collocalia esculenta,,APODIFORMES,Apodidae,PAC
+White-rumped Swiftlet,Aerodramus spodiopygius,,APODIFORMES,Apodidae,PAC
+Uniform Swiftlet,Aerodramus vanikorensis,,APODIFORMES,Apodidae,PAC
+Palau Swiftlet,Aerodramus pelewensis,,APODIFORMES,Apodidae,PAC
+Mariana Swiftlet,Aerodramus bartschi,Vulnerable,APODIFORMES,Apodidae,PAC
+Caroline Islands Swiftlet,Aerodramus inquietus,,APODIFORMES,Apodidae,PAC
+Atiu Swiftlet,Aerodramus sawtelli,Vulnerable,APODIFORMES,Apodidae,PAC
+Tahiti Swiftlet,Aerodramus leucophaeus,,APODIFORMES,Apodidae,PAC
+Marquesan Swiftlet,Aerodramus ocistus,,APODIFORMES,Apodidae,PAC
+Pacific Swift,Apus pacificus,,APODIFORMES,Apodidae,PAC
+Tahiti Rail,Gallirallus pacificus,Extinct,GRUIFORMES,Rallidae,PAC
+Buff-banded Rail,Gallirallus philippensis,,GRUIFORMES,Rallidae,PAC
+Bar-winged Rail,Gallirallus poecilopterus,Extinct,GRUIFORMES,Rallidae,PAC
+Guam Rail,Gallirallus owstoni,Critically endangered,GRUIFORMES,Rallidae,PAC
+Wake Island Rail,Gallirallus wakensis,Extinct,GRUIFORMES,Rallidae,PAC
+Eurasian Moorhen,Gallinula chloropus,,GRUIFORMES,Rallidae,PAC
+Common Gallinule,Gallinula galeata,,GRUIFORMES,Rallidae,PAC
+Samoan Moorhen,Gallinula pacifica,Critically endangered (possibly extinct),GRUIFORMES,Rallidae,PAC
+Eurasian Coot,Fulica atra,,GRUIFORMES,Rallidae,PAC
+Hawaiian Coot,Fulica alai,Near-threatened,GRUIFORMES,Rallidae,PAC
+Marquesan Swamphen,Porphyrio paepae,Extinct,GRUIFORMES,Rallidae,PAC
+Black-backed Swamphen,Porphyrio indicus,,GRUIFORMES,Rallidae,PAC
+Australasian Swamphen,Porphyrio melanotus,,GRUIFORMES,Rallidae,PAC
+White-browed Crake,Poliolimnas cinereus,,GRUIFORMES,Rallidae,PAC
+Watercock,Gallicrex cinerea,Rare/Accidental,GRUIFORMES,Rallidae,PAC
+White-breasted Waterhen,Amaurornis phoenicurus,Rare/Accidental,GRUIFORMES,Rallidae,PAC
+Pale-vented Bush-hen,Amaurornis moluccana,,GRUIFORMES,Rallidae,PAC
+Red-legged Crake,Rallina fasciata,,GRUIFORMES,Rallidae,PAC
+Slaty-legged Crake,Rallina eurizonoides,,GRUIFORMES,Rallidae,PAC
+Laysan Rail,Zapornia palmeri,Extinct,GRUIFORMES,Rallidae,PAC
+Hawaiian Rail,Zapornia sandwichensis,Extinct,GRUIFORMES,Rallidae,PAC
+Miller's Rail,Zapornia nigra,Extinct,GRUIFORMES,Rallidae,PAC
+Henderson Island Crake,Zapornia atra,Vulnerable,GRUIFORMES,Rallidae,PAC
+Spotless Crake,Zapornia tabuensis,,GRUIFORMES,Rallidae,PAC
+Kosrae Crake,Zapornia monasa,Extinct,GRUIFORMES,Rallidae,PAC
+Common Crane,Grus grus,Rare/Accidental,GRUIFORMES,Gruidae,PAC
+Black-winged Stilt,Himantopus himantopus,,CHARADRIIFORMES,Recurvirostridae,PAC
+Pied Stilt,Himantopus leucocephalus,,CHARADRIIFORMES,Recurvirostridae,PAC
+Black-necked Stilt,Himantopus mexicanus,,CHARADRIIFORMES,Recurvirostridae,PAC
+Eurasian Oystercatcher,Haematopus ostralegus,Near-threatened,CHARADRIIFORMES,Haematopodidae,PAC
+Black-bellied Plover,Pluvialis squatarola,Vulnerable,CHARADRIIFORMES,Charadriidae,PAC
+American Golden-Plover,Pluvialis dominica,Rare/Accidental,CHARADRIIFORMES,Charadriidae,PAC
+Pacific Golden-Plover,Pluvialis fulva,,CHARADRIIFORMES,Charadriidae,PAC
+Eurasian Dotterel,Eudromias morinellus,,CHARADRIIFORMES,Charadriidae,PAC
+Killdeer,Charadrius vociferus,Near-threatened,CHARADRIIFORMES,Charadriidae,PAC
+Common Ringed Plover,Charadrius hiaticula,,CHARADRIIFORMES,Charadriidae,PAC
+Semipalmated Plover,Charadrius semipalmatus,,CHARADRIIFORMES,Charadriidae,PAC
+Little Ringed Plover,Thinornis dubius,,CHARADRIIFORMES,Charadriidae,PAC
+Long-billed Plover,Thinornis placidus,Rare/Accidental,CHARADRIIFORMES,Charadriidae,PAC
+Northern Lapwing,Vanellus vanellus,Rare/Accidental Near-threatened,CHARADRIIFORMES,Charadriidae,PAC
+Masked Lapwing,Vanellus miles,Rare/Accidental,CHARADRIIFORMES,Charadriidae,PAC
+Red-kneed Dotterel,Erythrogonys cinctus,Rare/Accidental,CHARADRIIFORMES,Charadriidae,PAC
+Oriental Plover,Anarhynchus veredus,,CHARADRIIFORMES,Charadriidae,PAC
+Siberian Sand-Plover,Anarhynchus mongolus,Endangered,CHARADRIIFORMES,Charadriidae,PAC
+Tibetan Sand-Plover,Anarhynchus atrifrons,Rare/Accidental,CHARADRIIFORMES,Charadriidae,PAC
+Greater Sand-Plover,Anarhynchus leschenaultii,,CHARADRIIFORMES,Charadriidae,PAC
+Double-banded Plover,Anarhynchus bicinctus,Near-threatened,CHARADRIIFORMES,Charadriidae,PAC
+Kentish Plover,Anarhynchus alexandrinus,,CHARADRIIFORMES,Charadriidae,PAC
+Pheasant-tailed Jacana,Hydrophasianus chirurgus,Rare/Accidental,CHARADRIIFORMES,Jacanidae,PAC
+Bristle-thighed Curlew,Numenius tahitiensis,Near-threatened,CHARADRIIFORMES,Scolopacidae,PAC
+Whimbrel,Numenius phaeopus,,CHARADRIIFORMES,Scolopacidae,PAC
+Little Curlew,Numenius minutus,,CHARADRIIFORMES,Scolopacidae,PAC
+Far Eastern Curlew,Numenius madagascariensis,Endangered,CHARADRIIFORMES,Scolopacidae,PAC
+Eurasian Curlew,Numenius arquata,Near-threatened,CHARADRIIFORMES,Scolopacidae,PAC
+Bar-tailed Godwit,Limosa lapponica,Near-threatened,CHARADRIIFORMES,Scolopacidae,PAC
+Black-tailed Godwit,Limosa limosa,Near-threatened,CHARADRIIFORMES,Scolopacidae,PAC
+Hudsonian Godwit,Limosa haemastica,Vulnerable,CHARADRIIFORMES,Scolopacidae,PAC
+Marbled Godwit,Limosa fedoa,Vulnerable,CHARADRIIFORMES,Scolopacidae,PAC
+Asian Dowitcher,Limnodromus semipalmatus,Rare/Accidental Near-threatened,CHARADRIIFORMES,Scolopacidae,PAC
+Short-billed Dowitcher,Limnodromus griseus,Rare/Accidental Vulnerable,CHARADRIIFORMES,Scolopacidae,PAC
+Long-billed Dowitcher,Limnodromus scolopaceus,Near-threatened,CHARADRIIFORMES,Scolopacidae,PAC
+Jack Snipe,Lymnocryptes minimus,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,PAC
+Swinhoe's Snipe,Gallinago megala,,CHARADRIIFORMES,Scolopacidae,PAC
+Pin-tailed Snipe,Gallinago stenura,,CHARADRIIFORMES,Scolopacidae,PAC
+Latham's Snipe,Gallinago hardwickii,Near-threatened,CHARADRIIFORMES,Scolopacidae,PAC
+Common Snipe,Gallinago gallinago,,CHARADRIIFORMES,Scolopacidae,PAC
+Wilson's Snipe,Gallinago delicata,,CHARADRIIFORMES,Scolopacidae,PAC
+Wilson's Phalarope,Phalaropus tricolor,,CHARADRIIFORMES,Scolopacidae,PAC
+Red Phalarope,Phalaropus fulicarius,,CHARADRIIFORMES,Scolopacidae,PAC
+Red-necked Phalarope,Phalaropus lobatus,,CHARADRIIFORMES,Scolopacidae,PAC
+Terek Sandpiper,Xenus cinereus,,CHARADRIIFORMES,Scolopacidae,PAC
+Common Sandpiper,Actitis hypoleucos,,CHARADRIIFORMES,Scolopacidae,PAC
+Spotted Sandpiper,Actitis macularius,,CHARADRIIFORMES,Scolopacidae,PAC
+Green Sandpiper,Tringa ochropus,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,PAC
+Solitary Sandpiper,Tringa solitaria,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,PAC
+Gray-tailed Tattler,Tringa brevipes,,CHARADRIIFORMES,Scolopacidae,PAC
+Wandering Tattler,Tringa incana,,CHARADRIIFORMES,Scolopacidae,PAC
+Marsh Sandpiper,Tringa stagnatilis,,CHARADRIIFORMES,Scolopacidae,PAC
+Wood Sandpiper,Tringa glareola,,CHARADRIIFORMES,Scolopacidae,PAC
+Common Redshank,Tringa totanus,,CHARADRIIFORMES,Scolopacidae,PAC
+Lesser Yellowlegs,Tringa flavipes,Rare/Accidental Vulnerable,CHARADRIIFORMES,Scolopacidae,PAC
+Nordmann's Greenshank,Tringa guttifer,Endangered,CHARADRIIFORMES,Scolopacidae,PAC
+Willet,Tringa semipalmata,,CHARADRIIFORMES,Scolopacidae,PAC
+Spotted Redshank,Tringa erythropus,,CHARADRIIFORMES,Scolopacidae,PAC
+Common Greenshank,Tringa nebularia,,CHARADRIIFORMES,Scolopacidae,PAC
+Greater Yellowlegs,Tringa melanoleuca,Near-threatened,CHARADRIIFORMES,Scolopacidae,PAC
+Kiritimati Sandpiper,Prosobonia cancellata,Extinct,CHARADRIIFORMES,Scolopacidae,PAC
+White-winged Sandpiper,Prosobonia leucoptera,Extinct,CHARADRIIFORMES,Scolopacidae,PAC
+Moorea Sandpiper,Prosobonia ellisi,Extinct,CHARADRIIFORMES,Scolopacidae,PAC
+Tuamotu Sandpiper,Prosobonia parvirostris,Endangered,CHARADRIIFORMES,Scolopacidae,PAC
+Ruddy Turnstone,Arenaria interpres,Near-threatened,CHARADRIIFORMES,Scolopacidae,PAC
+Great Knot,Calidris tenuirostris,Endangered,CHARADRIIFORMES,Scolopacidae,PAC
+Red Knot,Calidris canutus,Near-threatened,CHARADRIIFORMES,Scolopacidae,PAC
+Ruff,Calidris pugnax,,CHARADRIIFORMES,Scolopacidae,PAC
+Broad-billed Sandpiper,Calidris falcinellus,Vulnerable,CHARADRIIFORMES,Scolopacidae,PAC
+Sharp-tailed Sandpiper,Calidris acuminata,Vulnerable,CHARADRIIFORMES,Scolopacidae,PAC
+Curlew Sandpiper,Calidris ferruginea,Vulnerable,CHARADRIIFORMES,Scolopacidae,PAC
+Temminck's Stint,Calidris temminckii,,CHARADRIIFORMES,Scolopacidae,PAC
+Long-toed Stint,Calidris subminuta,,CHARADRIIFORMES,Scolopacidae,PAC
+Red-necked Stint,Calidris ruficollis,Near-threatened,CHARADRIIFORMES,Scolopacidae,PAC
+Buff-breasted Sandpiper,Calidris subruficollis,Vulnerable,CHARADRIIFORMES,Scolopacidae,PAC
+Sanderling,Calidris alba,,CHARADRIIFORMES,Scolopacidae,PAC
+Dunlin,Calidris alpina,Near-threatened,CHARADRIIFORMES,Scolopacidae,PAC
+Baird's Sandpiper,Calidris bairdii,,CHARADRIIFORMES,Scolopacidae,PAC
+Little Stint,Calidris minuta,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,PAC
+White-rumped Sandpiper,Calidris fuscicollis,Rare/Accidental Vulnerable,CHARADRIIFORMES,Scolopacidae,PAC
+Least Sandpiper,Calidris minutilla,Rare/Accidental Near-threatened,CHARADRIIFORMES,Scolopacidae,PAC
+Pectoral Sandpiper,Calidris melanotos,,CHARADRIIFORMES,Scolopacidae,PAC
+Western Sandpiper,Calidris mauri,,CHARADRIIFORMES,Scolopacidae,PAC
+Semipalmated Sandpiper,Calidris pusilla,Near-threatened,CHARADRIIFORMES,Scolopacidae,PAC
+New Caledonian Buttonquail,Turnix novaecaledoniae,Critically endangered,CHARADRIIFORMES,Turnicidae,PAC
+Oriental Pratincole,Glareola maldivarum,,CHARADRIIFORMES,Glareolidae,PAC
+Long-tailed Jaeger,Stercorarius longicaudus,,CHARADRIIFORMES,Stercorariidae,PAC
+Parasitic Jaeger,Stercorarius parasiticus,,CHARADRIIFORMES,Stercorariidae,PAC
+Pomarine Jaeger,Stercorarius pomarinus,,CHARADRIIFORMES,Stercorariidae,PAC
+Brown Skua,Stercorarius antarcticus,Rare/Accidental,CHARADRIIFORMES,Stercorariidae,PAC
+South Polar Skua,Stercorarius maccormicki,,CHARADRIIFORMES,Stercorariidae,PAC
+Tufted Puffin,Fratercula cirrhata,,CHARADRIIFORMES,Alcidae,PAC
+Horned Puffin,Fratercula corniculata,,CHARADRIIFORMES,Alcidae,PAC
+Parakeet Auklet,Aethia psittacula,,CHARADRIIFORMES,Alcidae,PAC
+Japanese Murrelet,Synthliboramphus wumizusume,Rare/Accidental Vulnerable,CHARADRIIFORMES,Alcidae,PAC
+Black-legged Kittiwake,Rissa tridactyla,Vulnerable,CHARADRIIFORMES,Laridae,PAC
+Bonaparte's Gull,Chroicocephalus philadelphia,,CHARADRIIFORMES,Laridae,PAC
+Silver Gull,Chroicocephalus novaehollandiae,Rare/Accidental,CHARADRIIFORMES,Laridae,PAC
+Black-headed Gull,Chroicocephalus ridibundus,,CHARADRIIFORMES,Laridae,PAC
+Laughing Gull,Leucophaeus atricilla,,CHARADRIIFORMES,Laridae,PAC
+Franklin's Gull,Leucophaeus pipixcan,Rare/Accidental,CHARADRIIFORMES,Laridae,PAC
+Black-tailed Gull,Larus crassirostris,Rare/Accidental,CHARADRIIFORMES,Laridae,PAC
+Common Gull,Larus canus,Rare/Accidental,CHARADRIIFORMES,Laridae,PAC
+Ring-billed Gull,Larus delawarensis,,CHARADRIIFORMES,Laridae,PAC
+Western Gull,Larus occidentalis,,CHARADRIIFORMES,Laridae,PAC
+Kelp Gull,Larus dominicanus,Rare/Accidental,CHARADRIIFORMES,Laridae,PAC
+American Herring Gull,Larus smithsonianus,Rare/Accidental,CHARADRIIFORMES,Laridae,PAC
+Vega Gull,Larus vegae,Rare/Accidental,CHARADRIIFORMES,Laridae,PAC
+Glaucous Gull,Larus hyperboreus,,CHARADRIIFORMES,Laridae,PAC
+Lesser Black-backed Gull,Larus fuscus,Rare/Accidental,CHARADRIIFORMES,Laridae,PAC
+California Gull,Larus californicus,,CHARADRIIFORMES,Laridae,PAC
+Glaucous-winged Gull,Larus glaucescens,,CHARADRIIFORMES,Laridae,PAC
+Slaty-backed Gull,Larus schistisagus,,CHARADRIIFORMES,Laridae,PAC
+Iceland Gull,Larus glaucoides,Rare/Accidental,CHARADRIIFORMES,Laridae,PAC
+White Tern,Gygis alba,,CHARADRIIFORMES,Laridae,PAC
+Brown Noddy,Anous stolidus,,CHARADRIIFORMES,Laridae,PAC
+Lesser Noddy,Anous tenuirostris,,CHARADRIIFORMES,Laridae,PAC
+Black Noddy,Anous minutus,,CHARADRIIFORMES,Laridae,PAC
+Gray Noddy,Anous albivitta,,CHARADRIIFORMES,Laridae,PAC
+Blue-gray Noddy,Anous ceruleus,,CHARADRIIFORMES,Laridae,PAC
+Sooty Tern,Onychoprion fuscatus,,CHARADRIIFORMES,Laridae,PAC
+Bridled Tern,Onychoprion anaethetus,,CHARADRIIFORMES,Laridae,PAC
+Gray-backed Tern,Onychoprion lunatus,,CHARADRIIFORMES,Laridae,PAC
+Little Tern,Sternula albifrons,,CHARADRIIFORMES,Laridae,PAC
+Least Tern,Sternula antillarum,,CHARADRIIFORMES,Laridae,PAC
+Gull-billed Tern,Gelochelidon nilotica,Rare/Accidental,CHARADRIIFORMES,Laridae,PAC
+Australian Tern,Gelochelidon macrotarsa,Rare/Accidental,CHARADRIIFORMES,Laridae,PAC
+Caspian Tern,Hydroprogne caspia,,CHARADRIIFORMES,Laridae,PAC
+Whiskered Tern,Chlidonias hybrida,,CHARADRIIFORMES,Laridae,PAC
+Black Tern,Chlidonias niger,,CHARADRIIFORMES,Laridae,PAC
+White-winged Tern,Chlidonias leucopterus,,CHARADRIIFORMES,Laridae,PAC
+Arctic Tern,Sterna paradisaea,,CHARADRIIFORMES,Laridae,PAC
+Common Tern,Sterna hirundo,,CHARADRIIFORMES,Laridae,PAC
+Black-naped Tern,Sterna sumatrana,,CHARADRIIFORMES,Laridae,PAC
+Roseate Tern,Sterna dougallii,Rare/Accidental,CHARADRIIFORMES,Laridae,PAC
+Elegant Tern,Thalasseus elegans,Near-threatened,CHARADRIIFORMES,Laridae,PAC
+Great Crested Tern,Thalasseus bergii,,CHARADRIIFORMES,Laridae,PAC
+Little Grebe,Tachybaptus ruficollis,Rare/Accidental,PODICIPEDIFORMES,Podicipedidae,PAC
+Pied-billed Grebe,Podilymbus podiceps,Rare/Accidental,PODICIPEDIFORMES,Podicipedidae,PAC
+Horned Grebe,Podiceps auritus,Vulnerable,PODICIPEDIFORMES,Podicipedidae,PAC
+Eared Grebe,Podiceps nigricollis,,PODICIPEDIFORMES,Podicipedidae,PAC
+White-tailed Tropicbird,Phaethon lepturus,,PHAETHONTIFORMES,Phaethontidae,PAC
+Red-billed Tropicbird,Phaethon aethereus,,PHAETHONTIFORMES,Phaethontidae,PAC
+Red-tailed Tropicbird,Phaethon rubricauda,,PHAETHONTIFORMES,Phaethontidae,PAC
+Pacific Loon,Gavia pacifica,,GAVIIFORMES,Gaviidae,PAC
+Northern Royal Albatross,Diomedea sanfordi,Endangered,PROCELLARIIFORMES,Diomedeidae,PAC
+Southern Royal Albatross,Diomedea epomophora,Vulnerable,PROCELLARIIFORMES,Diomedeidae,PAC
+Snowy Albatross,Diomedea exulans,Vulnerable,PROCELLARIIFORMES,Diomedeidae,PAC
+Antipodean Albatross,Diomedea antipodensis,Rare/Accidental Endangered,PROCELLARIIFORMES,Diomedeidae,PAC
+Laysan Albatross,Phoebastria immutabilis,Near-threatened,PROCELLARIIFORMES,Diomedeidae,PAC
+Black-footed Albatross,Phoebastria nigripes,Near-threatened,PROCELLARIIFORMES,Diomedeidae,PAC
+Short-tailed Albatross,Phoebastria albatrus,Vulnerable,PROCELLARIIFORMES,Diomedeidae,PAC
+Light-mantled Albatross,Phoebetria palpebrata,Near-threatened,PROCELLARIIFORMES,Diomedeidae,PAC
+Gray-headed Albatross,Thalassarche chrysostoma,Endangered,PROCELLARIIFORMES,Diomedeidae,PAC
+Buller's Albatross,Thalassarche bulleri,Near-threatened,PROCELLARIIFORMES,Diomedeidae,PAC
+Salvin's Albatross,Thalassarche salvini,Rare/Accidental Vulnerable,PROCELLARIIFORMES,Diomedeidae,PAC
+Chatham Albatross,Thalassarche eremita,Rare/Accidental Vulnerable,PROCELLARIIFORMES,Diomedeidae,PAC
+Black-browed Albatross,Thalassarche melanophris,,PROCELLARIIFORMES,Diomedeidae,PAC
+Wilson's Storm-Petrel,Oceanites oceanicus,,PROCELLARIIFORMES,Oceanitidae,PAC
+White-faced Storm-Petrel,Pelagodroma marina,,PROCELLARIIFORMES,Oceanitidae,PAC
+White-bellied Storm-Petrel,Fregetta grallaria,,PROCELLARIIFORMES,Oceanitidae,PAC
+Black-bellied Storm-Petrel,Fregetta tropica,,PROCELLARIIFORMES,Oceanitidae,PAC
+Polynesian Storm-Petrel,Nesofregetta fuliginosa,Endangered,PROCELLARIIFORMES,Oceanitidae,PAC
+Fork-tailed Storm-Petrel,Hydrobates furcatus,,PROCELLARIIFORMES,Hydrobatidae,PAC
+Leach's Storm-Petrel,Hydrobates leucorhous,Vulnerable,PROCELLARIIFORMES,Hydrobatidae,PAC
+Band-rumped Storm-Petrel,Hydrobates castro,,PROCELLARIIFORMES,Hydrobatidae,PAC
+Matsudaira's Storm-Petrel,Hydrobates matsudairae,Vulnerable,PROCELLARIIFORMES,Hydrobatidae,PAC
+Tristram's Storm-Petrel,Hydrobates tristrami,,PROCELLARIIFORMES,Hydrobatidae,PAC
+Southern Giant-Petrel,Macronectes giganteus,,PROCELLARIIFORMES,Procellariidae,PAC
+Northern Giant-Petrel,Macronectes halli,,PROCELLARIIFORMES,Procellariidae,PAC
+Northern Fulmar,Fulmarus glacialis,,PROCELLARIIFORMES,Procellariidae,PAC
+Antarctic Petrel,Thalassoica antarctica,,PROCELLARIIFORMES,Procellariidae,PAC
+Pintado Petrel,Daption capense,,PROCELLARIIFORMES,Procellariidae,PAC
+Snow Petrel,Pagodroma nivea,,PROCELLARIIFORMES,Procellariidae,PAC
+Gray-faced Petrel,Pterodroma gouldi,,PROCELLARIIFORMES,Procellariidae,PAC
+Kermadec Petrel,Pterodroma neglecta,,PROCELLARIIFORMES,Procellariidae,PAC
+Herald Petrel,Pterodroma heraldica,,PROCELLARIIFORMES,Procellariidae,PAC
+Murphy's Petrel,Pterodroma ultima,,PROCELLARIIFORMES,Procellariidae,PAC
+Providence Petrel,Pterodroma solandri,,PROCELLARIIFORMES,Procellariidae,PAC
+Henderson Petrel,Pterodroma atrata,Endangered,PROCELLARIIFORMES,Procellariidae,PAC
+Soft-plumaged Petrel,Pterodroma mollis,,PROCELLARIIFORMES,Procellariidae,PAC
+White-headed Petrel,Pterodroma lessonii,,PROCELLARIIFORMES,Procellariidae,PAC
+Mottled Petrel,Pterodroma inexpectata,Near-threatened,PROCELLARIIFORMES,Procellariidae,PAC
+Black-capped Petrel,Pterodroma hasitata,Rare/Accidental Endangered,PROCELLARIIFORMES,Procellariidae,PAC
+Juan Fernandez Petrel,Pterodroma externa,Vulnerable,PROCELLARIIFORMES,Procellariidae,PAC
+Hawaiian Petrel,Pterodroma sandwichensis,Endangered,PROCELLARIIFORMES,Procellariidae,PAC
+White-necked Petrel,Pterodroma cervicalis,,PROCELLARIIFORMES,Procellariidae,PAC
+Bonin Petrel,Pterodroma hypoleuca,,PROCELLARIIFORMES,Procellariidae,PAC
+Black-winged Petrel,Pterodroma nigripennis,,PROCELLARIIFORMES,Procellariidae,PAC
+Cook's Petrel,Pterodroma cookii,Vulnerable,PROCELLARIIFORMES,Procellariidae,PAC
+Gould's Petrel,Pterodroma leucoptera,Vulnerable,PROCELLARIIFORMES,Procellariidae,PAC
+Collared Petrel,Pterodroma brevipes,Vulnerable,PROCELLARIIFORMES,Procellariidae,PAC
+Stejneger's Petrel,Pterodroma longirostris,Vulnerable,PROCELLARIIFORMES,Procellariidae,PAC
+Pycroft's Petrel,Pterodroma pycrofti,Rare/Accidental Vulnerable,PROCELLARIIFORMES,Procellariidae,PAC
+Phoenix Petrel,Pterodroma alba,Vulnerable,PROCELLARIIFORMES,Procellariidae,PAC
+Vanuatu Petrel,Pterodroma occulta,,PROCELLARIIFORMES,Procellariidae,PAC
+Blue Petrel,Halobaena caerulea,,PROCELLARIIFORMES,Procellariidae,PAC
+Bulwer's Petrel,Bulweria bulwerii,,PROCELLARIIFORMES,Procellariidae,PAC
+Jouanin's Petrel,Bulweria fallax,Near-threatened,PROCELLARIIFORMES,Procellariidae,PAC
+Fiji Petrel,Pseudobulweria macgillivrayi,Critically endangered (possibly extinct),PROCELLARIIFORMES,Procellariidae,PAC
+Tahiti Petrel,Pseudobulweria rostrata,Near-threatened,PROCELLARIIFORMES,Procellariidae,PAC
+Gray Petrel,Procellaria cinerea,Near-threatened,PROCELLARIIFORMES,Procellariidae,PAC
+White-chinned Petrel,Procellaria aequinoctialis,Vulnerable,PROCELLARIIFORMES,Procellariidae,PAC
+Parkinson's Petrel,Procellaria parkinsoni,Vulnerable,PROCELLARIIFORMES,Procellariidae,PAC
+Streaked Shearwater,Calonectris leucomelas,Near-threatened,PROCELLARIIFORMES,Procellariidae,PAC
+Cory's Shearwater,Calonectris borealis,Rare/Accidental,PROCELLARIIFORMES,Procellariidae,PAC
+Pink-footed Shearwater,Ardenna creatopus,Vulnerable,PROCELLARIIFORMES,Procellariidae,PAC
+Flesh-footed Shearwater,Ardenna carneipes,Near-threatened,PROCELLARIIFORMES,Procellariidae,PAC
+Wedge-tailed Shearwater,Ardenna pacifica,,PROCELLARIIFORMES,Procellariidae,PAC
+Buller's Shearwater,Ardenna bulleri,Vulnerable,PROCELLARIIFORMES,Procellariidae,PAC
+Sooty Shearwater,Ardenna grisea,Near-threatened,PROCELLARIIFORMES,Procellariidae,PAC
+Short-tailed Shearwater,Ardenna tenuirostris,,PROCELLARIIFORMES,Procellariidae,PAC
+Christmas Shearwater,Puffinus nativitatis,,PROCELLARIIFORMES,Procellariidae,PAC
+Bannerman's Shearwater,Puffinus bannermani,Endangered,PROCELLARIIFORMES,Procellariidae,PAC
+Townsend's Shearwater,Puffinus auricularis,Critically endangered,PROCELLARIIFORMES,Procellariidae,PAC
+Newell's Shearwater,Puffinus newelli,Critically endangered,PROCELLARIIFORMES,Procellariidae,PAC
+Rapa Shearwater,Puffinus myrtae,Critically endangered,PROCELLARIIFORMES,Procellariidae,PAC
+Bryan's Shearwater,Puffinus bryani,Critically endangered,PROCELLARIIFORMES,Procellariidae,PAC
+Tropical Shearwater,Puffinus bailloni,,PROCELLARIIFORMES,Procellariidae,PAC
+Magnificent Frigatebird,Fregata magnificens,,SULIFORMES,Fregatidae,PAC
+Lesser Frigatebird,Fregata ariel,,SULIFORMES,Fregatidae,PAC
+Great Frigatebird,Fregata minor,,SULIFORMES,Fregatidae,PAC
+Abbott's Booby,Papasula abbotti,Rare/Accidental Endangered,SULIFORMES,Sulidae,PAC
+Red-footed Booby,Sula sula,,SULIFORMES,Sulidae,PAC
+Brown Booby,Sula leucogaster,,SULIFORMES,Sulidae,PAC
+Cocos Booby,Sula brewsteri,,SULIFORMES,Sulidae,PAC
+Masked Booby,Sula dactylatra,,SULIFORMES,Sulidae,PAC
+Nazca Booby,Sula granti,Rare/Accidental,SULIFORMES,Sulidae,PAC
+Blue-footed Booby,Sula nebouxii,,SULIFORMES,Sulidae,PAC
+Little Pied Cormorant,Microcarbo melanoleucos,,SULIFORMES,Phalacrocoracidae,PAC
+Pelagic Cormorant,Urile pelagicus,,SULIFORMES,Phalacrocoracidae,PAC
+Great Cormorant,Phalacrocorax carbo,Rare/Accidental,SULIFORMES,Phalacrocoracidae,PAC
+Little Black Cormorant,Phalacrocorax sulcirostris,Rare/Accidental,SULIFORMES,Phalacrocoracidae,PAC
+Glossy Ibis,Plegadis falcinellus,,PELECANIFORMES,Threskiornithidae,PAC
+White-faced Ibis,Plegadis chihi,,PELECANIFORMES,Threskiornithidae,PAC
+Black-faced Spoonbill,Platalea minor,Rare/Accidental Endangered,PELECANIFORMES,Threskiornithidae,PAC
+Brown Pelican,Pelecanus occidentalis,,PELECANIFORMES,Pelecanidae,PAC
+Australian Pelican,Pelecanus conspicillatus,,PELECANIFORMES,Pelecanidae,PAC
+Black Bittern,Botaurus flavicollis,,PELECANIFORMES,Ardeidae,PAC
+Cinnamon Bittern,Botaurus cinnamomeus,Rare/Accidental,PELECANIFORMES,Ardeidae,PAC
+Schrenck's Bittern,Botaurus eurhythmus,,PELECANIFORMES,Ardeidae,PAC
+Yellow Bittern,Botaurus sinensis,,PELECANIFORMES,Ardeidae,PAC
+Black-crowned Night Heron,Nycticorax nycticorax,,PELECANIFORMES,Ardeidae,PAC
+Nankeen Night Heron,Nycticorax caledonicus,,PELECANIFORMES,Ardeidae,PAC
+Malayan Night Heron,Gorsachius melanolophus,,PELECANIFORMES,Ardeidae,PAC
+Japanese Night Heron,Gorsachius goisagi,Vulnerable,PELECANIFORMES,Ardeidae,PAC
+Little Blue Heron,Egretta caerulea,,PELECANIFORMES,Ardeidae,PAC
+Pacific Reef-Heron,Egretta sacra,,PELECANIFORMES,Ardeidae,PAC
+Little Egret,Egretta garzetta,,PELECANIFORMES,Ardeidae,PAC
+Pied Heron,Egretta picata,Rare/Accidental,PELECANIFORMES,Ardeidae,PAC
+White-faced Heron,Egretta novaehollandiae,,PELECANIFORMES,Ardeidae,PAC
+Striated Heron,Butorides striata,,PELECANIFORMES,Ardeidae,PAC
+Green Heron,Butorides virescens,,PELECANIFORMES,Ardeidae,PAC
+Chinese Pond-Heron,Ardeola bacchus,Rare/Accidental,PELECANIFORMES,Ardeidae,PAC
+Western Cattle-Egret,Ardea ibis,,PELECANIFORMES,Ardeidae,PAC
+Eastern Cattle-Egret,Ardea coromanda,,PELECANIFORMES,Ardeidae,PAC
+Great Egret,Ardea alba,,PELECANIFORMES,Ardeidae,PAC
+Medium Egret,Ardea intermedia,,PELECANIFORMES,Ardeidae,PAC
+Plumed Egret,Ardea plumifera,,PELECANIFORMES,Ardeidae,PAC
+Gray Heron,Ardea cinerea,,PELECANIFORMES,Ardeidae,PAC
+Great Blue Heron,Ardea herodias,,PELECANIFORMES,Ardeidae,PAC
+Osprey,Pandion haliaetus,,ACCIPITRIFORMES,Pandionidae,PAC
+Himalayan Griffon,Gyps himalayensis,Rare/Accidental Near-threatened,ACCIPITRIFORMES,Accipitridae,PAC
+Golden Eagle,Aquila chrysaetos,,ACCIPITRIFORMES,Accipitridae,PAC
+Japanese Sparrowhawk,Tachyspiza gularis,,ACCIPITRIFORMES,Accipitridae,PAC
+Chinese Sparrowhawk,Tachyspiza soloensis,,ACCIPITRIFORMES,Accipitridae,PAC
+Fiji Goshawk,Tachyspiza rufitorques,,ACCIPITRIFORMES,Accipitridae,PAC
+Brown Goshawk,Tachyspiza fasciata,,ACCIPITRIFORMES,Accipitridae,PAC
+Eastern Marsh Harrier,Circus spilonotus,Rare/Accidental,ACCIPITRIFORMES,Accipitridae,PAC
+Swamp Harrier,Circus approximans,,ACCIPITRIFORMES,Accipitridae,PAC
+Northern Harrier,Circus hudsonius,,ACCIPITRIFORMES,Accipitridae,PAC
+Black Kite,Milvus migrans,Rare/Accidental,ACCIPITRIFORMES,Accipitridae,PAC
+Brahminy Kite,Haliastur indus,,ACCIPITRIFORMES,Accipitridae,PAC
+White-tailed Eagle,Haliaeetus albicilla,Rare/Accidental,ACCIPITRIFORMES,Accipitridae,PAC
+Steller's Sea-Eagle,Haliaeetus pelagicus,Vulnerable,ACCIPITRIFORMES,Accipitridae,PAC
+Gray-faced Buzzard,Butastur indicus,Rare/Accidental,ACCIPITRIFORMES,Accipitridae,PAC
+Hawaiian Hawk,Buteo solitarius,Near-threatened,ACCIPITRIFORMES,Accipitridae,PAC
+Red-tailed Hawk,Buteo jamaicensis,Rare/Accidental,ACCIPITRIFORMES,Accipitridae,PAC
+Rough-legged Hawk,Buteo lagopus,Rare/Accidental,ACCIPITRIFORMES,Accipitridae,PAC
+Common Buzzard,Buteo buteo,,ACCIPITRIFORMES,Accipitridae,PAC
+Eastern Buzzard,Buteo japonicus,Rare/Accidental,ACCIPITRIFORMES,Accipitridae,PAC
+Australian Masked-Owl,Tyto novaehollandiae,,STRIGIFORMES,Tytonidae,PAC
+Australasian Grass-Owl,Tyto longimembris,,STRIGIFORMES,Tytonidae,PAC
+Eastern Barn Owl,Tyto javanica,,STRIGIFORMES,Tytonidae,PAC
+Palau Scops-Owl,Otus podarginus,,STRIGIFORMES,Strigidae,PAC
+Great Horned Owl,Bubo virginianus,Introduced species,STRIGIFORMES,Strigidae,PAC
+Striped Owl,Asio clamator,,STRIGIFORMES,Strigidae,PAC
+Short-eared Owl,Asio flammeus,,STRIGIFORMES,Strigidae,PAC
+Eurasian Hoopoe,Upupa epops,Rare/Accidental,BUCEROTIFORMES,Upupidae,PAC
+Rainbow Bee-eater,Merops ornatus,,CORACIIFORMES,Meropidae,PAC
+Common Kingfisher,Alcedo atthis,Rare/Accidental,CORACIIFORMES,Alcedinidae,PAC
+Ruddy Kingfisher,Halcyon coromanda,Rare/Accidental,CORACIIFORMES,Alcedinidae,PAC
+Marquesan Kingfisher,Todiramphus godeffroyi,Critically endangered,CORACIIFORMES,Alcedinidae,PAC
+Mewing Kingfisher,Todiramphus ruficollaris,,CORACIIFORMES,Alcedinidae,PAC
+Society Kingfisher,Todiramphus veneratus,,CORACIIFORMES,Alcedinidae,PAC
+Tuamotu Kingfisher,Todiramphus gambieri,Critically endangered,CORACIIFORMES,Alcedinidae,PAC
+Chattering Kingfisher,Todiramphus tutus,Near-threatened,CORACIIFORMES,Alcedinidae,PAC
+Pacific Kingfisher,Todiramphus sacer,,CORACIIFORMES,Alcedinidae,PAC
+Palau Kingfisher,Todiramphus pelewensis,Near-threatened,CORACIIFORMES,Alcedinidae,PAC
+Guam Kingfisher,Todiramphus cinnamominus,Extinct in the wild,CORACIIFORMES,Alcedinidae,PAC
+Pohnpei Kingfisher,Todiramphus reichenbachii,Vulnerable,CORACIIFORMES,Alcedinidae,PAC
+Flat-billed Kingfisher,Todiramphus recurvirostris,,CORACIIFORMES,Alcedinidae,PAC
+Sacred Kingfisher,Todiramphus sanctus,,CORACIIFORMES,Alcedinidae,PAC
+Collared Kingfisher,Todiramphus chloris,,CORACIIFORMES,Alcedinidae,PAC
+Mariana Kingfisher,Todiramphus albicilla,,CORACIIFORMES,Alcedinidae,PAC
+Belted Kingfisher,Megaceryle alcyon,,CORACIIFORMES,Alcedinidae,PAC
+Dollarbird,Eurystomus orientalis,,CORACIIFORMES,Coraciidae,PAC
+Eurasian Kestrel,Falco tinnunculus,,FALCONIFORMES,Falconidae,PAC
+American Kestrel,Falco sparverius,,FALCONIFORMES,Falconidae,PAC
+Amur Falcon,Falco amurensis,,FALCONIFORMES,Falconidae,PAC
+Merlin,Falco columbarius,Rare/Accidental,FALCONIFORMES,Falconidae,PAC
+Aplomado Falcon,Falco femoralis,Rare/Accidental,FALCONIFORMES,Falconidae,PAC
+Peregrine Falcon,Falco peregrinus,,FALCONIFORMES,Falconidae,PAC
+Sulphur-crested Cockatoo,Cacatua galerita,,PSITTACIFORMES,Cacatuidae,PAC
+Papuan Eclectus,Eclectus polychloros,Introduced species,PSITTACIFORMES,Psittaculidae,PAC
+Oceanic Eclectus,Eclectus infectus,Extirpated Extinct,PSITTACIFORMES,Psittaculidae,PAC
+Rose-ringed Parakeet,Psittacula krameri,Introduced species,PSITTACIFORMES,Psittaculidae,PAC
+Crimson Shining-Parrot,Prosopeia splendens,Near-threatened,PSITTACIFORMES,Psittaculidae,PAC
+Red Shining-Parrot,Prosopeia tabuensis,,PSITTACIFORMES,Psittaculidae,PAC
+Masked Shining-Parrot,Prosopeia personata,Near-threatened,PSITTACIFORMES,Psittaculidae,PAC
+Raiatea Parakeet,Cyanoramphus ulietanus,Extinct,PSITTACIFORMES,Psittaculidae,PAC
+Black-fronted Parakeet,Cyanoramphus zealandicus,Extinct,PSITTACIFORMES,Psittaculidae,PAC
+Red-throated Lorikeet,Vini amabilis,Critically endangered,PSITTACIFORMES,Psittaculidae,PAC
+Collared Lory,Vini solitaria,,PSITTACIFORMES,Psittaculidae,PAC
+Blue-crowned Lorikeet,Vini australis,,PSITTACIFORMES,Psittaculidae,PAC
+Ultramarine Lorikeet,Vini ultramarina,Critically endangered,PSITTACIFORMES,Psittaculidae,PAC
+Stephen's Lorikeet,Vini stepheni,Vulnerable,PSITTACIFORMES,Psittaculidae,PAC
+Kuhl's Lorikeet,Vini kuhlii,Endangered,PSITTACIFORMES,Psittaculidae,PAC
+Blue Lorikeet,Vini peruviana,Vulnerable,PSITTACIFORMES,Psittaculidae,PAC
+Pohnpei Lorikeet,Trichoglossus rubiginosus,Near-threatened,PSITTACIFORMES,Psittaculidae,PAC
+Gray Kingbird,Tyrannus dominicensis,,PASSERIFORMES,Tyrannidae,PAC
+Micronesian Myzomela,Myzomela rubratra,,PASSERIFORMES,Meliphagidae,PAC
+Samoan Myzomela,Myzomela nigriventris,,PASSERIFORMES,Meliphagidae,PAC
+Rotuma Myzomela,Myzomela chermesina,Vulnerable,PASSERIFORMES,Meliphagidae,PAC
+Sulphur-breasted Myzomela,Myzomela jugularis,,PASSERIFORMES,Meliphagidae,PAC
+Kadavu Honeyeater,Meliphacator provocator,,PASSERIFORMES,Meliphagidae,PAC
+Mao,Gymnomyza samoensis,Endangered,PASSERIFORMES,Meliphagidae,PAC
+Eastern Wattled-Honeyeater,Foulehaio carunculatus,,PASSERIFORMES,Meliphagidae,PAC
+Ashy Minivet,Pericrocotus divaricatus,Rare/Accidental,PASSERIFORMES,Campephagidae,PAC
+White-bellied Cuckooshrike,Coracina papuensis,,PASSERIFORMES,Campephagidae,PAC
+Polynesian Triller,Lalage maculosa,,PASSERIFORMES,Campephagidae,PAC
+Samoan Triller,Lalage sharpei,Near-threatened,PASSERIFORMES,Campephagidae,PAC
+Pohnpei Cicadabird,Edolisoma insperatum,Endangered,PASSERIFORMES,Campephagidae,PAC
+Palau Cicadabird,Edolisoma monacha,,PASSERIFORMES,Campephagidae,PAC
+Yap Cicadabird,Edolisoma nesiotis,Endangered,PASSERIFORMES,Campephagidae,PAC
+White-eyed Vireo,Vireo griseus,Rare/Accidental,PASSERIFORMES,Vireonidae,PAC
+Red-eyed Vireo,Vireo olivaceus,,PASSERIFORMES,Vireonidae,PAC
+Black-whiskered Vireo,Vireo altiloquus,,PASSERIFORMES,Vireonidae,PAC
+Samoan Whistler,Pachycephala flavifrons,,PASSERIFORMES,Pachycephalidae,PAC
+Tongan Whistler,Pachycephala jacquinoti,Near-threatened,PASSERIFORMES,Pachycephalidae,PAC
+Black-tailed Whistler,Pachycephala melanura,,PASSERIFORMES,Pachycephalidae,PAC
+Morningbird,Pachycephala tenebrosa,,PASSERIFORMES,Pachycephalidae,PAC
+Fiji Woodswallow,Artamus mentalis,,PASSERIFORMES,Artamidae,PAC
+White-breasted Woodswallow,Artamus leucorynchus,,PASSERIFORMES,Artamidae,PAC
+Australian Magpie,Gymnorhina tibicen,Introduced species,PASSERIFORMES,Artamidae,PAC
+Palau Fantail,Rhipidura lepida,,PASSERIFORMES,Rhipiduridae,PAC
+Micronesian Rufous Fantail,Rhipidura versicolor,,PASSERIFORMES,Rhipiduridae,PAC
+Pohnpei Fantail,Rhipidura kubaryi,,PASSERIFORMES,Rhipiduridae,PAC
+Kadavu Fantail,Rhipidura personata,Near-threatened,PASSERIFORMES,Rhipiduridae,PAC
+Samoan Fantail,Rhipidura nebulosa,,PASSERIFORMES,Rhipiduridae,PAC
+Black Drongo,Dicrurus macrocercus,,PASSERIFORMES,Dicruridae,PAC
+Tahiti Monarch,Pomarea nigra,Critically endangered,PASSERIFORMES,Monarchidae,PAC
+Maupiti Monarch,Pomarea maupitiensis,Endemic Extinct,PASSERIFORMES,Monarchidae,PAC
+Rarotonga Monarch,Pomarea dimidiata,Vulnerable,PASSERIFORMES,Monarchidae,PAC
+Eiao Monarch,Pomarea fluxa,Extinct,PASSERIFORMES,Monarchidae,PAC
+Nuku Hiva Monarch,Pomarea nukuhivae,Extinct,PASSERIFORMES,Monarchidae,PAC
+Iphis Monarch,Pomarea iphis,Critically endangered,PASSERIFORMES,Monarchidae,PAC
+Ua Pou Monarch,Pomarea mira,Critically endangered,PASSERIFORMES,Monarchidae,PAC
+Marquesan Monarch,Pomarea mendozae,Endangered,PASSERIFORMES,Monarchidae,PAC
+Fatu Hiva Monarch,Pomarea whitneyi,Critically endangered,PASSERIFORMES,Monarchidae,PAC
+Ogea Monarch,Mayrornis versicolor,Near-threatened,PASSERIFORMES,Monarchidae,PAC
+Slaty Monarch,Mayrornis lessoni,,PASSERIFORMES,Monarchidae,PAC
+Fiji Shrikebill,Clytorhynchus vitiensis,,PASSERIFORMES,Monarchidae,PAC
+Chuuk Monarch,Metabolus rugensis,Endangered,PASSERIFORMES,Monarchidae,PAC
+Yap Monarch,Monarcha godeffroyi,Near-threatened,PASSERIFORMES,Monarchidae,PAC
+Tinian Monarch,Monarcha takatsukasae,Near-threatened,PASSERIFORMES,Monarchidae,PAC
+Palau Flycatcher,Myiagra erythrops,,PASSERIFORMES,Monarchidae,PAC
+Guam Flycatcher,Myiagra freycineti,Extinct,PASSERIFORMES,Monarchidae,PAC
+Pohnpei Flycatcher,Myiagra pluto,,PASSERIFORMES,Monarchidae,PAC
+Chuuk Flycatcher,Myiagra oceanica,,PASSERIFORMES,Monarchidae,PAC
+Vanikoro Flycatcher,Myiagra vanikorensis,,PASSERIFORMES,Monarchidae,PAC
+Samoan Flycatcher,Myiagra albiventris,,PASSERIFORMES,Monarchidae,PAC
+Brown Shrike,Lanius cristatus,,PASSERIFORMES,Laniidae,PAC
+Red-billed Blue-Magpie,Urocissa erythroryncha,,PASSERIFORMES,Corvidae,PAC
+Mariana Crow,Corvus kubaryi,Critically endangered,PASSERIFORMES,Corvidae,PAC
+White-necked Crow,Corvus leucognaphalus,Vulnerable,PASSERIFORMES,Corvidae,PAC
+Hawaiian Crow,Corvus hawaiiensis,Extinct in the wild,PASSERIFORMES,Corvidae,PAC
+Pacific Robin,Petroica pusilla,,PASSERIFORMES,Petroicidae,PAC
+Scarlet Robin,Petroica boodang,,PASSERIFORMES,Petroicidae,PAC
+Eurasian Skylark,Alauda arvensis,,PASSERIFORMES,Alaudidae,PAC
+Oriental Reed Warbler,Acrocephalus orientalis,Rare/Accidental,PASSERIFORMES,Acrocephalidae,PAC
+Nightingale Reed Warbler,Acrocephalus luscinius,Endemic Extinct,PASSERIFORMES,Acrocephalidae,PAC
+Saipan Reed Warbler,Acrocephalus hiwae,Endemic Endangered,PASSERIFORMES,Acrocephalidae,PAC
+Caroline Reed Warbler,Acrocephalus syrinx,,PASSERIFORMES,Acrocephalidae,PAC
+Aguiguan Reed Warbler,Acrocephalus nijoi,Endemic Extinct,PASSERIFORMES,Acrocephalidae,PAC
+Kiritimati Reed Warbler,Acrocephalus aequinoctialis,Endangered,PASSERIFORMES,Acrocephalidae,PAC
+Southern Marquesan Reed Warbler,Acrocephalus mendanae,,PASSERIFORMES,Acrocephalidae,PAC
+Pagan Reed Warbler,Acrocephalus yamashinae,Endemic Extinct,PASSERIFORMES,Acrocephalidae,PAC
+Nauru Reed Warbler,Acrocephalus rehsei,Near-threatened,PASSERIFORMES,Acrocephalidae,PAC
+Millerbird,Acrocephalus familiaris,Endangered,PASSERIFORMES,Acrocephalidae,PAC
+Pitcairn Reed Warbler,Acrocephalus vaughani,Endangered,PASSERIFORMES,Acrocephalidae,PAC
+Henderson Island Reed Warbler,Acrocephalus taiti,Vulnerable,PASSERIFORMES,Acrocephalidae,PAC
+Cook Islands Reed Warbler,Acrocephalus kerearako,,PASSERIFORMES,Acrocephalidae,PAC
+Rimatara Reed Warbler,Acrocephalus rimitarae,Critically endangered,PASSERIFORMES,Acrocephalidae,PAC
+Society Islands Reed Warbler,Acrocephalus musae,Extinct,PASSERIFORMES,Acrocephalidae,PAC
+Tahiti Reed Warbler,Acrocephalus caffer,Vulnerable,PASSERIFORMES,Acrocephalidae,PAC
+Moorea Reed Warbler,Acrocephalus longirostris,Critically endangered,PASSERIFORMES,Acrocephalidae,PAC
+Northern Marquesan Reed Warbler,Acrocephalus percernis,,PASSERIFORMES,Acrocephalidae,PAC
+Tuamotu Reed Warbler,Acrocephalus atyphus,,PASSERIFORMES,Acrocephalidae,PAC
+Mangareva Reed Warbler,Acrocephalus astrolabii,Endemic Extinct,PASSERIFORMES,Acrocephalidae,PAC
+Lanceolated Warbler,Locustella lanceolata,,PASSERIFORMES,Locustellidae,PAC
+Long-legged Thicketbird,Cincloramphus rufus,Endangered,PASSERIFORMES,Locustellidae,PAC
+Bank Swallow,Riparia riparia,,PASSERIFORMES,Hirundinidae,PAC
+Caribbean Martin,Progne dominicensis,,PASSERIFORMES,Hirundinidae,PAC
+Dusky Crag-Martin,Ptyonoprogne concolor,,PASSERIFORMES,Hirundinidae,PAC
+Pacific Swallow,Hirundo javanica,,PASSERIFORMES,Hirundinidae,PAC
+Tahiti Swallow,Hirundo tahitica,,PASSERIFORMES,Hirundinidae,PAC
+Barn Swallow,Hirundo rustica,,PASSERIFORMES,Hirundinidae,PAC
+Asian House-Martin,Delichon dasypus,,PASSERIFORMES,Hirundinidae,PAC
+Eastern Red-rumped Swallow,Cecropis daurica,,PASSERIFORMES,Hirundinidae,PAC
+Tree Martin,Petrochelidon nigricans,Rare/Accidental,PASSERIFORMES,Hirundinidae,PAC
+Cliff Swallow,Petrochelidon pyrrhonota,,PASSERIFORMES,Hirundinidae,PAC
+Red-whiskered Bulbul,Pycnonotus jocosus,,PASSERIFORMES,Pycnonotidae,PAC
+Red-vented Bulbul,Pycnonotus cafer,,PASSERIFORMES,Pycnonotidae,PAC
+Island Leaf Warbler,Phylloscopus poliocephalus,,PASSERIFORMES,Phylloscopidae,PAC
+Palau Bush Warbler,Horornis annae,,PASSERIFORMES,Scotocercidae,PAC
+Fiji Bush Warbler,Horornis ruficapilla,,PASSERIFORMES,Scotocercidae,PAC
+Golden White-eye,Cleptornis marchei,Endangered,PASSERIFORMES,Zosteropidae,PAC
+Teardrop White-eye,Rukia ruki,Endangered,PASSERIFORMES,Zosteropidae,PAC
+Long-billed White-eye,Rukia longirostra,Near-threatened,PASSERIFORMES,Zosteropidae,PAC
+Giant White-eye,Megazosterops palauensis,Near-threatened,PASSERIFORMES,Zosteropidae,PAC
+Swinhoe's White-eye,Zosterops simplex,Rare/Accidental,PASSERIFORMES,Zosteropidae,PAC
+Silvereye,Zosterops lateralis,,PASSERIFORMES,Zosteropidae,PAC
+Fiji White-eye,Zosterops explorator,,PASSERIFORMES,Zosteropidae,PAC
+Yap White-eye,Zosterops oleagineus,Near-threatened,PASSERIFORMES,Zosteropidae,PAC
+Dusky White-eye,Zosterops finschii,,PASSERIFORMES,Zosteropidae,PAC
+Pohnpei White-eye,Zosterops ponapensis,,PASSERIFORMES,Zosteropidae,PAC
+Kosrae White-eye,Zosterops cinereus,,PASSERIFORMES,Zosteropidae,PAC
+Rota White-eye,Zosterops rotensis,Critically endangered,PASSERIFORMES,Zosteropidae,PAC
+Bridled White-eye,Zosterops conspicillatus,,PASSERIFORMES,Zosteropidae,PAC
+Caroline Islands White-eye,Zosterops semperi,,PASSERIFORMES,Zosteropidae,PAC
+Plain White-eye,Zosterops hypolais,Near-threatened,PASSERIFORMES,Zosteropidae,PAC
+Samoan White-eye,Zosterops samoensis,Near-threatened,PASSERIFORMES,Zosteropidae,PAC
+Red-billed Leiothrix,Leiothrix lutea,,PASSERIFORMES,Leiothrichidae,PAC
+Chinese Hwamei,Garrulax canorus,,PASSERIFORMES,Leiothrichidae,PAC
+Greater Necklaced Laughingthrush,Pterorhinus pectoralis,,PASSERIFORMES,Leiothrichidae,PAC
+Gray-sided Laughingthrush,Pterorhinus caerulatus,,PASSERIFORMES,Leiothrichidae,PAC
+Striated Starling,Aplonis striata,,PASSERIFORMES,Sturnidae,PAC
+Pohnpei Starling,Aplonis pelzelni,Critically endangered (possibly extinct),PASSERIFORMES,Sturnidae,PAC
+Micronesian Starling,Aplonis opaca,,PASSERIFORMES,Sturnidae,PAC
+Polynesian Starling,Aplonis tabuensis,,PASSERIFORMES,Sturnidae,PAC
+Samoan Starling,Aplonis atrifusca,,PASSERIFORMES,Sturnidae,PAC
+Kosrae Starling,Aplonis corvina,Extinct,PASSERIFORMES,Sturnidae,PAC
+Rarotonga Starling,Aplonis cinerascens,Near-threatened,PASSERIFORMES,Sturnidae,PAC
+Mysterious Starling,Aplonis mavornata,Extinct,PASSERIFORMES,Sturnidae,PAC
+Raiatea Starling,Aplonis ulietensis,Extinct,PASSERIFORMES,Sturnidae,PAC
+Common Hill Myna,Gracula religiosa,,PASSERIFORMES,Sturnidae,PAC
+European Starling,Sturnus vulgaris,,PASSERIFORMES,Sturnidae,PAC
+Chestnut-cheeked Starling,Agropsar philippensis,,PASSERIFORMES,Sturnidae,PAC
+White-cheeked Starling,Spodiopsar cineraceus,,PASSERIFORMES,Sturnidae,PAC
+Common Myna,Acridotheres tristis,,PASSERIFORMES,Sturnidae,PAC
+Jungle Myna,Acridotheres fuscus,,PASSERIFORMES,Sturnidae,PAC
+Gray Catbird,Dumetella carolinensis,,PASSERIFORMES,Mimidae,PAC
+Northern Mockingbird,Mimus polyglottos,Rare/Accidental,PASSERIFORMES,Mimidae,PAC
+Kamao,Myadestes myadestinus,Extinct,PASSERIFORMES,Turdidae,PAC
+Amaui,Myadestes woahensis,Extinct,PASSERIFORMES,Turdidae,PAC
+Olomao,Myadestes lanaiensis,Critically endangered (possibly extinct),PASSERIFORMES,Turdidae,PAC
+Omao,Myadestes obscurus,Near-threatened,PASSERIFORMES,Turdidae,PAC
+Puaiohi,Myadestes palmeri,Critically endangered,PASSERIFORMES,Turdidae,PAC
+Scaly Thrush,Zoothera dauma,Rare/Accidental,PASSERIFORMES,Turdidae,PAC
+Russet-tailed Thrush,Zoothera heinei,,PASSERIFORMES,Turdidae,PAC
+Eyebrowed Thrush,Turdus obscurus,,PASSERIFORMES,Turdidae,PAC
+New Caledonian Island-Thrush,Turdus xanthopus,,PASSERIFORMES,Turdidae,PAC
+Samoan Island-Thrush,Turdus samoensis,,PASSERIFORMES,Turdidae,PAC
+Dusky Thrush,Turdus eunomus,Rare/Accidental,PASSERIFORMES,Turdidae,PAC
+Gray-streaked Flycatcher,Muscicapa griseisticta,,PASSERIFORMES,Muscicapidae,PAC
+Blue-and-white Flycatcher,Cyanoptila cyanomelana,Rare/Accidental,PASSERIFORMES,Muscicapidae,PAC
+Siberian Rubythroat,Calliope calliope,,PASSERIFORMES,Muscicapidae,PAC
+Narcissus Flycatcher,Ficedula narcissina,Rare/Accidental,PASSERIFORMES,Muscicapidae,PAC
+Blue Rock-Thrush,Monticola solitarius,,PASSERIFORMES,Muscicapidae,PAC
+Northern Wheatear,Oenanthe oenanthe,,PASSERIFORMES,Muscicapidae,PAC
+Isabelline Wheatear,Oenanthe isabellina,Rare/Accidental,PASSERIFORMES,Muscicapidae,PAC
+Bohemian Waxwing,Bombycilla garrulus,Rare/Accidental,PASSERIFORMES,Bombycillidae,PAC
+Kauai Oo,Moho braccatus,Extinct,PASSERIFORMES,Mohoidae,PAC
+Oahu Oo,Moho apicalis,Extinct,PASSERIFORMES,Mohoidae,PAC
+Bishop's Oo,Moho bishopi,Extinct,PASSERIFORMES,Mohoidae,PAC
+Hawaii Oo,Moho nobilis,Extinct,PASSERIFORMES,Mohoidae,PAC
+Kioea,Chaetoptila angustipluma,Extinct,PASSERIFORMES,Mohoidae,PAC
+Sahul Sunbird,Cinnyris frenatus,,PASSERIFORMES,Nectariniidae,PAC
+Black-headed Weaver,Ploceus melanocephalus,Introduced species,PASSERIFORMES,Ploceidae,PAC
+Red-browed Firetail,Neochmia temporalis,Introduced species,PASSERIFORMES,Estrildidae,PAC
+Zebra Finch,Taeniopygia guttata,Extirpated,PASSERIFORMES,Estrildidae,PAC
+Indian Silverbill,Euodice malabarica,,PASSERIFORMES,Estrildidae,PAC
+Java Sparrow,Padda oryzivora,Introduced species Endangered,PASSERIFORMES,Estrildidae,PAC
+Scaly-breasted Munia,Lonchura punctulata,,PASSERIFORMES,Estrildidae,PAC
+Chestnut Munia,Lonchura atricapilla,,PASSERIFORMES,Estrildidae,PAC
+Mottled Munia,Lonchura hunsteini,,PASSERIFORMES,Estrildidae,PAC
+Chestnut-breasted Munia,Lonchura castaneothorax,,PASSERIFORMES,Estrildidae,PAC
+Fiji Parrotfinch,Erythrura pealii,,PASSERIFORMES,Estrildidae,PAC
+Royal Parrotfinch,Erythrura cyaneovirens,,PASSERIFORMES,Estrildidae,PAC
+Pink-billed Parrotfinch,Erythrura kleinschmidti,Vulnerable,PASSERIFORMES,Estrildidae,PAC
+Blue-faced Parrotfinch,Erythrura trichroa,,PASSERIFORMES,Estrildidae,PAC
+Lavender Waxbill,Glaucestrilda caerulescens,,PASSERIFORMES,Estrildidae,PAC
+Orange-cheeked Waxbill,Estrilda melpoda,,PASSERIFORMES,Estrildidae,PAC
+Common Waxbill,Estrilda astrild,,PASSERIFORMES,Estrildidae,PAC
+Black-rumped Waxbill,Estrilda troglodytes,,PASSERIFORMES,Estrildidae,PAC
+Red Avadavat,Amandava amandava,,PASSERIFORMES,Estrildidae,PAC
+Red-cheeked Cordonbleu,Uraeginthus bengalus,,PASSERIFORMES,Estrildidae,PAC
+African Firefinch,Lagonosticta rubricata,,PASSERIFORMES,Estrildidae,PAC
+House Sparrow,Passer domesticus,Introduced species,PASSERIFORMES,Passeridae,PAC
+Eurasian Tree Sparrow,Passer montanus,,PASSERIFORMES,Passeridae,PAC
+Gray Wagtail,Motacilla cinerea,,PASSERIFORMES,Motacillidae,PAC
+Western Yellow Wagtail,Motacilla flava,,PASSERIFORMES,Motacillidae,PAC
+Eastern Yellow Wagtail,Motacilla tschutschensis,,PASSERIFORMES,Motacillidae,PAC
+White Wagtail,Motacilla alba,Rare/Accidental,PASSERIFORMES,Motacillidae,PAC
+Blyth's Pipit,Anthus godlewskii,Rare/Accidental,PASSERIFORMES,Motacillidae,PAC
+Olive-backed Pipit,Anthus hodgsoni,,PASSERIFORMES,Motacillidae,PAC
+Red-throated Pipit,Anthus cervinus,,PASSERIFORMES,Motacillidae,PAC
+Siberian Pipit,Anthus japonicus,Rare/Accidental,PASSERIFORMES,Motacillidae,PAC
+Brambling,Fringilla montifringilla,Rare/Accidental,PASSERIFORMES,Fringillidae,PAC
+Poo-uli,Melamprosops phaeosoma,Extinct,PASSERIFORMES,Fringillidae,PAC
+Akikiki,Oreomystis bairdi,Critically endangered,PASSERIFORMES,Fringillidae,PAC
+Oahu Alauahio,Paroreomyza maculata,Critically endangered,PASSERIFORMES,Fringillidae,PAC
+Kakawahie,Paroreomyza flammea,Extinct,PASSERIFORMES,Fringillidae,PAC
+Maui Alauahio,Paroreomyza montana,Endangered,PASSERIFORMES,Fringillidae,PAC
+Palila,Loxioides bailleui,Critically endangered,PASSERIFORMES,Fringillidae,PAC
+Laysan Finch,Telespiza cantans,Vulnerable,PASSERIFORMES,Fringillidae,PAC
+Nihoa Finch,Telespiza ultima,Critically endangered,PASSERIFORMES,Fringillidae,PAC
+Kona Grosbeak,Chloridops kona,Extinct,PASSERIFORMES,Fringillidae,PAC
+Lesser Koa-Finch,Rhodacanthis flaviceps,Extinct,PASSERIFORMES,Fringillidae,PAC
+Greater Koa-Finch,Rhodacanthis palmeri,Extinct,PASSERIFORMES,Fringillidae,PAC
+Ula-ai-hawane,Ciridops anna,Extinct,PASSERIFORMES,Fringillidae,PAC
+Akohekohe,Palmeria dolei,Critically endangered,PASSERIFORMES,Fringillidae,PAC
+Laysan Honeycreeper,Himatione fraithii,Extinct,PASSERIFORMES,Fringillidae,PAC
+Apapane,Himatione sanguinea,,PASSERIFORMES,Fringillidae,PAC
+Iiwi,Drepanis coccinea,Vulnerable,PASSERIFORMES,Fringillidae,PAC
+Hawaii Mamo,Drepanis pacifica,Extinct,PASSERIFORMES,Fringillidae,PAC
+Black Mamo,Drepanis funerea,Extinct,PASSERIFORMES,Fringillidae,PAC
+Ou,Psittirostra psittacea,Extinct,PASSERIFORMES,Fringillidae,PAC
+Lanai Hookbill,Dysmorodrepanis munroi,Extinct,PASSERIFORMES,Fringillidae,PAC
+Maui Parrotbill,Pseudonestor xanthophrys,Critically endangered,PASSERIFORMES,Fringillidae,PAC
+Akiapolaau,Hemignathus wilsoni,Endangered,PASSERIFORMES,Fringillidae,PAC
+Lesser Akialoa,Akialoa obscura,Extinct,PASSERIFORMES,Fringillidae,PAC
+Anianiau,Magumma parva,Endangered,PASSERIFORMES,Fringillidae,PAC
+Oahu Amakihi,Chlorodrepanis flava,Near-threatened,PASSERIFORMES,Fringillidae,PAC
+Kauai Amakihi,Chlorodrepanis stejnegeri,Endangered,PASSERIFORMES,Fringillidae,PAC
+Greater Amakihi,Viridonia sagittirostris,Extinct,PASSERIFORMES,Fringillidae,PAC
+Hawaii Creeper,Loxops mana,Endangered,PASSERIFORMES,Fringillidae,PAC
+Akekee,Loxops caeruleirostris,Critically endangered,PASSERIFORMES,Fringillidae,PAC
+Hawaii Akepa,Loxops coccineus,Endangered,PASSERIFORMES,Fringillidae,PAC
+Oahu Akepa,Loxops wolstenholmei,Extinct,PASSERIFORMES,Fringillidae,PAC
+Maui Akepa,Loxops ochraceus,Extinct,PASSERIFORMES,Fringillidae,PAC
+House Finch,Haemorhous mexicanus,,PASSERIFORMES,Fringillidae,PAC
+Yellow-fronted Canary,Crithagra mozambica,,PASSERIFORMES,Fringillidae,PAC
+Redpoll,Acanthis flammea,,PASSERIFORMES,Fringillidae,PAC
+Island Canary,Serinus canaria,,PASSERIFORMES,Fringillidae,PAC
+Snow Bunting,Plectrophenax nivalis,,PASSERIFORMES,Calcariidae,PAC
+Black-headed Bunting,Emberiza melanocephala,Rare/Accidental,PASSERIFORMES,Emberizidae,PAC
+Little Bunting,Emberiza pusilla,Rare/Accidental,PASSERIFORMES,Emberizidae,PAC
+Savannah Sparrow,Passerculus sandwichensis,,PASSERIFORMES,Passerellidae,PAC
+Western Meadowlark,Sturnella neglecta,,PASSERIFORMES,Icteridae,PAC
+Ovenbird,Seiurus aurocapilla,,PASSERIFORMES,Parulidae,PAC
+Louisiana Waterthrush,Parkesia motacilla,,PASSERIFORMES,Parulidae,PAC
+Northern Waterthrush,Parkesia noveboracensis,,PASSERIFORMES,Parulidae,PAC
+Black-and-white Warbler,Mniotilta varia,,PASSERIFORMES,Parulidae,PAC
+Nashville Warbler,Leiothlypis ruficapilla,,PASSERIFORMES,Parulidae,PAC
+Mourning Warbler,Geothlypis philadelphia,,PASSERIFORMES,Parulidae,PAC
+American Redstart,Setophaga ruticilla,,PASSERIFORMES,Parulidae,PAC
+Cape May Warbler,Setophaga tigrina,,PASSERIFORMES,Parulidae,PAC
+Northern Parula,Setophaga americana,,PASSERIFORMES,Parulidae,PAC
+Black-throated Blue Warbler,Setophaga caerulescens,,PASSERIFORMES,Parulidae,PAC
+Palm Warbler,Setophaga palmarum,,PASSERIFORMES,Parulidae,PAC
+Pine Warbler,Setophaga pinus,,PASSERIFORMES,Parulidae,PAC
+Prairie Warbler,Setophaga discolor,,PASSERIFORMES,Parulidae,PAC
+Northern Cardinal,Cardinalis cardinalis,,PASSERIFORMES,Cardinalidae,PAC
+Red-crested Cardinal,Paroaria coronata,,PASSERIFORMES,Thraupidae,PAC
+Crimson-backed Tanager,Ramphocelus dimidiatus,Introduced species,PASSERIFORMES,Thraupidae,PAC
+Bananaquit,Coereba flaveola,,PASSERIFORMES,Thraupidae,PAC
+Yellow-faced Grassquit,Tiaris olivaceus,,PASSERIFORMES,Thraupidae,PAC
+Black-faced Grassquit,Melanospiza bicolor,,PASSERIFORMES,Thraupidae,PAC

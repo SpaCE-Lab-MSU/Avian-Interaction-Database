@@ -1,0 +1,42 @@
+common_name,scientific_name,status,order,family,region
+Common Eider,Somateria mollissima,Near-threatened,ANSERIFORMES,Anatidae,oat
+Harlequin Duck,Histrionicus histrionicus,,ANSERIFORMES,Anatidae,oat
+Common Scoter,Melanitta nigra,,ANSERIFORMES,Anatidae,oat
+Black Scoter,Melanitta americana,Near-threatened,ANSERIFORMES,Anatidae,oat
+Kentish Plover,Anarhynchus alexandrinus,,CHARADRIIFORMES,Charadriidae,oat
+Great Skua,Stercorarius skua,,CHARADRIIFORMES,Stercorariidae,oat
+South Polar Skua,Stercorarius maccormicki,,CHARADRIIFORMES,Stercorariidae,oat
+Atlantic Puffin,Fratercula arctica,Vulnerable,CHARADRIIFORMES,Alcidae,oat
+Great Auk,Pinguinus impennis,Extinct,CHARADRIIFORMES,Alcidae,oat
+Dovekie,Alle alle,,CHARADRIIFORMES,Alcidae,oat
+Thick-billed Murre,Uria lomvia,,CHARADRIIFORMES,Alcidae,oat
+Black-legged Kittiwake,Rissa tridactyla,Vulnerable,CHARADRIIFORMES,Laridae,oat
+White Tern,Gygis alba,,CHARADRIIFORMES,Laridae,oat
+Brown Noddy,Anous stolidus,,CHARADRIIFORMES,Laridae,oat
+Black Noddy,Anous minutus,,CHARADRIIFORMES,Laridae,oat
+Sooty Tern,Onychoprion fuscatus,,CHARADRIIFORMES,Laridae,oat
+Roseate Tern,Sterna dougallii,,CHARADRIIFORMES,Laridae,oat
+White-tailed Tropicbird,Phaethon lepturus,,PHAETHONTIFORMES,Phaethontidae,oat
+Red-billed Tropicbird,Phaethon aethereus,,PHAETHONTIFORMES,Phaethontidae,oat
+Chinstrap Penguin,Pygoscelis antarcticus,,SPHENISCIFORMES,Spheniscidae,oat
+Tristan Albatross,Diomedea dabbenena,Critically endangered,PROCELLARIIFORMES,Diomedeidae,oat
+Atlantic Yellow-nosed Albatross,Thalassarche chlororhynchos,Endangered,PROCELLARIIFORMES,Diomedeidae,oat
+Indian Yellow-nosed Albatross,Thalassarche carteri,Endangered,PROCELLARIIFORMES,Diomedeidae,oat
+White-faced Storm-Petrel,Pelagodroma marina,,PROCELLARIIFORMES,Oceanitidae,oat
+Black-bellied Storm-Petrel,Fregetta tropica,,PROCELLARIIFORMES,Oceanitidae,oat
+European Storm-Petrel,Hydrobates pelagicus,,PROCELLARIIFORMES,Hydrobatidae,oat
+Leach's Storm-Petrel,Hydrobates leucorhous,Vulnerable,PROCELLARIIFORMES,Hydrobatidae,oat
+Band-rumped Storm-Petrel,Hydrobates castro,,PROCELLARIIFORMES,Hydrobatidae,oat
+Northern Fulmar,Fulmarus glacialis,,PROCELLARIIFORMES,Procellariidae,oat
+Soft-plumaged Petrel,Pterodroma mollis,,PROCELLARIIFORMES,Procellariidae,oat
+Atlantic Petrel,Pterodroma incerta,Endangered,PROCELLARIIFORMES,Procellariidae,oat
+Bulwer's Petrel,Bulweria bulwerii,,PROCELLARIIFORMES,Procellariidae,oat
+Cory's Shearwater,Calonectris borealis,,PROCELLARIIFORMES,Procellariidae,oat
+Scopoli's Shearwater,Calonectris diomedea,,PROCELLARIIFORMES,Procellariidae,oat
+Great Shearwater,Ardenna gravis,,PROCELLARIIFORMES,Procellariidae,oat
+Sooty Shearwater,Ardenna grisea,Near-threatened,PROCELLARIIFORMES,Procellariidae,oat
+Manx Shearwater,Puffinus puffinus,,PROCELLARIIFORMES,Procellariidae,oat
+Balearic Shearwater,Puffinus mauretanicus,Critically endangered,PROCELLARIIFORMES,Procellariidae,oat
+Great Frigatebird,Fregata minor,,SULIFORMES,Fregatidae,oat
+Brown Booby,Sula leucogaster,,SULIFORMES,Sulidae,oat
+Double-crested Cormorant,Nannopterum auritum,,SULIFORMES,Phalacrocoracidae,oat

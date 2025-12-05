@@ -1,0 +1,57 @@
+common_name,scientific_name,status,order,family,region
+Copper Pheasant,Syrmaticus soemmerringii,Near-threatened,GALLIFORMES,Phasianidae,opa
+Rhinoceros Auklet,Cerorhinca monocerata,,CHARADRIIFORMES,Alcidae,opa
+Tufted Puffin,Fratercula cirrhata,,CHARADRIIFORMES,Alcidae,opa
+Horned Puffin,Fratercula corniculata,,CHARADRIIFORMES,Alcidae,opa
+Least Auklet,Aethia pusilla,,CHARADRIIFORMES,Alcidae,opa
+Crested Auklet,Aethia cristatella,,CHARADRIIFORMES,Alcidae,opa
+Parakeet Auklet,Aethia psittacula,,CHARADRIIFORMES,Alcidae,opa
+Black-legged Kittiwake,Rissa tridactyla,Vulnerable,CHARADRIIFORMES,Laridae,opa
+Red-legged Kittiwake,Rissa brevirostris,Vulnerable,CHARADRIIFORMES,Laridae,opa
+Brown Noddy,Anous stolidus,,CHARADRIIFORMES,Laridae,opa
+Black-naped Tern,Sterna sumatrana,,CHARADRIIFORMES,Laridae,opa
+Northern Royal Albatross,Diomedea sanfordi,Endangered,PROCELLARIIFORMES,Diomedeidae,opa
+Antipodean Albatross,Diomedea antipodensis,Endangered,PROCELLARIIFORMES,Diomedeidae,opa
+Waved Albatross,Phoebastria irrorata,Critically endangered,PROCELLARIIFORMES,Diomedeidae,opa
+Laysan Albatross,Phoebastria immutabilis,Near-threatened,PROCELLARIIFORMES,Diomedeidae,opa
+Black-footed Albatross,Phoebastria nigripes,Near-threatened,PROCELLARIIFORMES,Diomedeidae,opa
+Short-tailed Albatross,Phoebastria albatrus,Vulnerable,PROCELLARIIFORMES,Diomedeidae,opa
+Buller's Albatross,Thalassarche bulleri,Near-threatened,PROCELLARIIFORMES,Diomedeidae,opa
+Salvin's Albatross,Thalassarche salvini,Vulnerable,PROCELLARIIFORMES,Diomedeidae,opa
+Black-browed Albatross,Thalassarche melanophris,,PROCELLARIIFORMES,Diomedeidae,opa
+Elliot's Storm-Petrel,Oceanites gracilis,Data deficient,PROCELLARIIFORMES,Oceanitidae,opa
+White-faced Storm-Petrel,Pelagodroma marina,,PROCELLARIIFORMES,Oceanitidae,opa
+Black-bellied Storm-Petrel,Fregetta tropica,,PROCELLARIIFORMES,Oceanitidae,opa
+Fork-tailed Storm-Petrel,Hydrobates furcatus,,PROCELLARIIFORMES,Hydrobatidae,opa
+Ringed Storm-Petrel,Hydrobates hornbyi,Endemic Near-threatened,PROCELLARIIFORMES,Hydrobatidae,opa
+Leach's Storm-Petrel,Hydrobates leucorhous,Vulnerable,PROCELLARIIFORMES,Hydrobatidae,opa
+Wedge-rumped Storm-Petrel,Hydrobates tethys,,PROCELLARIIFORMES,Hydrobatidae,opa
+Markham's Storm-Petrel,Hydrobates markhami,Near-threatened,PROCELLARIIFORMES,Hydrobatidae,opa
+Northern Fulmar,Fulmarus glacialis,,PROCELLARIIFORMES,Procellariidae,opa
+Kermadec Petrel,Pterodroma neglecta,,PROCELLARIIFORMES,Procellariidae,opa
+Murphy's Petrel,Pterodroma ultima,,PROCELLARIIFORMES,Procellariidae,opa
+Providence Petrel,Pterodroma solandri,,PROCELLARIIFORMES,Procellariidae,opa
+Mottled Petrel,Pterodroma inexpectata,Near-threatened,PROCELLARIIFORMES,Procellariidae,opa
+Galapagos Petrel,Pterodroma phaeopygia,Critically endangered,PROCELLARIIFORMES,Procellariidae,opa
+Hawaiian Petrel,Pterodroma sandwichensis,Endangered,PROCELLARIIFORMES,Procellariidae,opa
+Bonin Petrel,Pterodroma hypoleuca,,PROCELLARIIFORMES,Procellariidae,opa
+Cook's Petrel,Pterodroma cookii,Vulnerable,PROCELLARIIFORMES,Procellariidae,opa
+Masatierra Petrel,Pterodroma defilippiana,Vulnerable,PROCELLARIIFORMES,Procellariidae,opa
+Gould's Petrel,Pterodroma leucoptera,Vulnerable,PROCELLARIIFORMES,Procellariidae,opa
+Collared Petrel,Pterodroma brevipes,Vulnerable,PROCELLARIIFORMES,Procellariidae,opa
+Phoenix Petrel,Pterodroma alba,Vulnerable,PROCELLARIIFORMES,Procellariidae,opa
+Vanuatu Petrel,Pterodroma occulta,,PROCELLARIIFORMES,Procellariidae,opa
+Bulwer's Petrel,Bulweria bulwerii,,PROCELLARIIFORMES,Procellariidae,opa
+Tahiti Petrel,Pseudobulweria rostrata,Near-threatened,PROCELLARIIFORMES,Procellariidae,opa
+Parkinson's Petrel,Procellaria parkinsoni,Vulnerable,PROCELLARIIFORMES,Procellariidae,opa
+Streaked Shearwater,Calonectris leucomelas,Near-threatened,PROCELLARIIFORMES,Procellariidae,opa
+Pink-footed Shearwater,Ardenna creatopus,Vulnerable,PROCELLARIIFORMES,Procellariidae,opa
+Flesh-footed Shearwater,Ardenna carneipes,Near-threatened,PROCELLARIIFORMES,Procellariidae,opa
+Wedge-tailed Shearwater,Ardenna pacifica,,PROCELLARIIFORMES,Procellariidae,opa
+Buller's Shearwater,Ardenna bulleri,Vulnerable,PROCELLARIIFORMES,Procellariidae,opa
+Short-tailed Shearwater,Ardenna tenuirostris,,PROCELLARIIFORMES,Procellariidae,opa
+Lesser Frigatebird,Fregata ariel,,SULIFORMES,Fregatidae,opa
+Great Frigatebird,Fregata minor,,SULIFORMES,Fregatidae,opa
+Red-footed Booby,Sula sula,,SULIFORMES,Sulidae,opa
+Brown Booby,Sula leucogaster,,SULIFORMES,Sulidae,opa
+Masked Booby,Sula dactylatra,,SULIFORMES,Sulidae,opa

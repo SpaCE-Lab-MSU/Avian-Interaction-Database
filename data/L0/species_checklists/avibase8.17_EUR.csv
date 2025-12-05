@@ -1,0 +1,983 @@
+common_name,scientific_name,status,order,family,region
+White-faced Whistling-Duck,Dendrocygna viduata,Rare/Accidental,ANSERIFORMES,Anatidae,EUR
+Fulvous Whistling-Duck,Dendrocygna bicolor,Uncertain origin,ANSERIFORMES,Anatidae,EUR
+Bar-headed Goose,Anser indicus,Introduced species,ANSERIFORMES,Anatidae,EUR
+Snow Goose,Anser caerulescens,Rare/Accidental,ANSERIFORMES,Anatidae,EUR
+Ross's Goose,Anser rossii,Rare/Accidental,ANSERIFORMES,Anatidae,EUR
+Graylag Goose,Anser anser,,ANSERIFORMES,Anatidae,EUR
+Greater White-fronted Goose,Anser albifrons,,ANSERIFORMES,Anatidae,EUR
+Lesser White-fronted Goose,Anser erythropus,Vulnerable,ANSERIFORMES,Anatidae,EUR
+Taiga Bean-Goose,Anser fabalis,,ANSERIFORMES,Anatidae,EUR
+Tundra Bean-Goose,Anser serrirostris,,ANSERIFORMES,Anatidae,EUR
+Pink-footed Goose,Anser brachyrhynchus,,ANSERIFORMES,Anatidae,EUR
+Brant,Branta bernicla,,ANSERIFORMES,Anatidae,EUR
+Barnacle Goose,Branta leucopsis,,ANSERIFORMES,Anatidae,EUR
+Cackling Goose,Branta hutchinsii,Rare/Accidental,ANSERIFORMES,Anatidae,EUR
+Canada Goose,Branta canadensis,Introduced species,ANSERIFORMES,Anatidae,EUR
+Red-breasted Goose,Branta ruficollis,Vulnerable,ANSERIFORMES,Anatidae,EUR
+Mute Swan,Cygnus olor,,ANSERIFORMES,Anatidae,EUR
+Tundra Swan,Cygnus columbianus,,ANSERIFORMES,Anatidae,EUR
+Whooper Swan,Cygnus cygnus,,ANSERIFORMES,Anatidae,EUR
+Egyptian Goose,Alopochen aegyptiaca,,ANSERIFORMES,Anatidae,EUR
+Ruddy Shelduck,Tadorna ferruginea,,ANSERIFORMES,Anatidae,EUR
+Common Shelduck,Tadorna tadorna,,ANSERIFORMES,Anatidae,EUR
+Wood Duck,Aix sponsa,Introduced species,ANSERIFORMES,Anatidae,EUR
+Mandarin Duck,Aix galericulata,Introduced species,ANSERIFORMES,Anatidae,EUR
+Baikal Teal,Sibirionetta formosa,,ANSERIFORMES,Anatidae,EUR
+Garganey,Spatula querquedula,,ANSERIFORMES,Anatidae,EUR
+Blue-winged Teal,Spatula discors,Rare/Accidental,ANSERIFORMES,Anatidae,EUR
+Northern Shoveler,Spatula clypeata,,ANSERIFORMES,Anatidae,EUR
+Gadwall,Mareca strepera,,ANSERIFORMES,Anatidae,EUR
+Falcated Duck,Mareca falcata,,ANSERIFORMES,Anatidae,EUR
+Eurasian Wigeon,Mareca penelope,,ANSERIFORMES,Anatidae,EUR
+American Wigeon,Mareca americana,Rare/Accidental,ANSERIFORMES,Anatidae,EUR
+Eastern Spot-billed Duck,Anas zonorhyncha,Uncertain origin,ANSERIFORMES,Anatidae,EUR
+Mallard,Anas platyrhynchos,,ANSERIFORMES,Anatidae,EUR
+American Black Duck,Anas rubripes,Rare/Accidental,ANSERIFORMES,Anatidae,EUR
+Northern Pintail,Anas acuta,,ANSERIFORMES,Anatidae,EUR
+Green-winged Teal,Anas crecca,,ANSERIFORMES,Anatidae,EUR
+Marbled Duck,Marmaronetta angustirostris,Near-threatened,ANSERIFORMES,Anatidae,EUR
+Red-crested Pochard,Netta rufina,,ANSERIFORMES,Anatidae,EUR
+Canvasback,Aythya valisineria,Rare/Accidental,ANSERIFORMES,Anatidae,EUR
+Redhead,Aythya americana,Rare/Accidental,ANSERIFORMES,Anatidae,EUR
+Common Pochard,Aythya ferina,Vulnerable,ANSERIFORMES,Anatidae,EUR
+Ring-necked Duck,Aythya collaris,Rare/Accidental,ANSERIFORMES,Anatidae,EUR
+Ferruginous Duck,Aythya nyroca,Near-threatened,ANSERIFORMES,Anatidae,EUR
+Tufted Duck,Aythya fuligula,,ANSERIFORMES,Anatidae,EUR
+Greater Scaup,Aythya marila,,ANSERIFORMES,Anatidae,EUR
+Lesser Scaup,Aythya affinis,Rare/Accidental,ANSERIFORMES,Anatidae,EUR
+Steller's Eider,Polysticta stelleri,Vulnerable,ANSERIFORMES,Anatidae,EUR
+Spectacled Eider,Somateria fischeri,Rare/Accidental Near-threatened,ANSERIFORMES,Anatidae,EUR
+King Eider,Somateria spectabilis,,ANSERIFORMES,Anatidae,EUR
+Common Eider,Somateria mollissima,Near-threatened,ANSERIFORMES,Anatidae,EUR
+Harlequin Duck,Histrionicus histrionicus,,ANSERIFORMES,Anatidae,EUR
+Surf Scoter,Melanitta perspicillata,Rare/Accidental,ANSERIFORMES,Anatidae,EUR
+Velvet Scoter,Melanitta fusca,Vulnerable,ANSERIFORMES,Anatidae,EUR
+White-winged Scoter,Melanitta deglandi,,ANSERIFORMES,Anatidae,EUR
+Stejneger's Scoter,Melanitta stejnegeri,,ANSERIFORMES,Anatidae,EUR
+Common Scoter,Melanitta nigra,,ANSERIFORMES,Anatidae,EUR
+Black Scoter,Melanitta americana,Near-threatened,ANSERIFORMES,Anatidae,EUR
+Long-tailed Duck,Clangula hyemalis,Vulnerable,ANSERIFORMES,Anatidae,EUR
+Bufflehead,Bucephala albeola,Rare/Accidental,ANSERIFORMES,Anatidae,EUR
+Common Goldeneye,Bucephala clangula,,ANSERIFORMES,Anatidae,EUR
+Barrow's Goldeneye,Bucephala islandica,,ANSERIFORMES,Anatidae,EUR
+Smew,Mergellus albellus,,ANSERIFORMES,Anatidae,EUR
+Hooded Merganser,Lophodytes cucullatus,Rare/Accidental,ANSERIFORMES,Anatidae,EUR
+Common Merganser,Mergus merganser,,ANSERIFORMES,Anatidae,EUR
+Red-breasted Merganser,Mergus serrator,,ANSERIFORMES,Anatidae,EUR
+Ruddy Duck,Oxyura jamaicensis,,ANSERIFORMES,Anatidae,EUR
+White-headed Duck,Oxyura leucocephala,Endangered,ANSERIFORMES,Anatidae,EUR
+Helmeted Guineafowl,Numida meleagris,Introduced species,GALLIFORMES,Numididae,EUR
+Northern Bobwhite,Colinus virginianus,Introduced species Near-threatened,GALLIFORMES,Odontophoridae,EUR
+California Quail,Callipepla californica,Introduced species,GALLIFORMES,Odontophoridae,EUR
+Hazel Grouse,Tetrastes bonasia,,GALLIFORMES,Phasianidae,EUR
+Willow Ptarmigan,Lagopus lagopus,,GALLIFORMES,Phasianidae,EUR
+Rock Ptarmigan,Lagopus muta,,GALLIFORMES,Phasianidae,EUR
+Western Capercaillie,Tetrao urogallus,,GALLIFORMES,Phasianidae,EUR
+Black Grouse,Lyrurus tetrix,,GALLIFORMES,Phasianidae,EUR
+Caucasian Grouse,Lyrurus mlokosiewiczi,Near-threatened,GALLIFORMES,Phasianidae,EUR
+Gray Partridge,Perdix perdix,,GALLIFORMES,Phasianidae,EUR
+Reeves's Pheasant,Syrmaticus reevesii,Introduced species Vulnerable,GALLIFORMES,Phasianidae,EUR
+Golden Pheasant,Chrysolophus pictus,Introduced species,GALLIFORMES,Phasianidae,EUR
+Lady Amherst's Pheasant,Chrysolophus amherstiae,Introduced species,GALLIFORMES,Phasianidae,EUR
+Ring-necked Pheasant,Phasianus colchicus,Introduced species,GALLIFORMES,Phasianidae,EUR
+Black Francolin,Francolinus francolinus,Extirpated,GALLIFORMES,Phasianidae,EUR
+Caucasian Snowcock,Tetraogallus caucasicus,,GALLIFORMES,Phasianidae,EUR
+Common Quail,Coturnix coturnix,,GALLIFORMES,Phasianidae,EUR
+Barbary Partridge,Alectoris barbara,,GALLIFORMES,Phasianidae,EUR
+Red-legged Partridge,Alectoris rufa,Near-threatened,GALLIFORMES,Phasianidae,EUR
+Chukar,Alectoris chukar,,GALLIFORMES,Phasianidae,EUR
+Rock Partridge,Alectoris graeca,Near-threatened,GALLIFORMES,Phasianidae,EUR
+Rock Pigeon,Columba livia,,COLUMBIFORMES,Columbidae,EUR
+Stock Dove,Columba oenas,,COLUMBIFORMES,Columbidae,EUR
+Common Wood-Pigeon,Columba palumbus,,COLUMBIFORMES,Columbidae,EUR
+Trocaz Pigeon,Columba trocaz,,COLUMBIFORMES,Columbidae,EUR
+Bolle's Pigeon,Columba bollii,,COLUMBIFORMES,Columbidae,EUR
+Laurel Pigeon,Columba junoniae,Near-threatened,COLUMBIFORMES,Columbidae,EUR
+Passenger Pigeon,Ectopistes migratorius,Extinct,COLUMBIFORMES,Columbidae,EUR
+European Turtle-Dove,Streptopelia turtur,Vulnerable,COLUMBIFORMES,Columbidae,EUR
+Oriental Turtle-Dove,Streptopelia orientalis,Rare/Accidental,COLUMBIFORMES,Columbidae,EUR
+Eurasian Collared-Dove,Streptopelia decaocto,,COLUMBIFORMES,Columbidae,EUR
+African Collared-Dove,Streptopelia roseogrisea,Introduced species,COLUMBIFORMES,Columbidae,EUR
+Laughing Dove,Spilopelia senegalensis,,COLUMBIFORMES,Columbidae,EUR
+Namaqua Dove,Oena capensis,Rare/Accidental,COLUMBIFORMES,Columbidae,EUR
+Zenaida Dove,Zenaida aurita,Rare/Accidental,COLUMBIFORMES,Columbidae,EUR
+Mourning Dove,Zenaida macroura,Rare/Accidental,COLUMBIFORMES,Columbidae,EUR
+Pallas's Sandgrouse,Syrrhaptes paradoxus,Rare/Accidental,PTEROCLIFORMES,Pteroclidae,EUR
+Pin-tailed Sandgrouse,Pterocles alchata,,PTEROCLIFORMES,Pteroclidae,EUR
+Spotted Sandgrouse,Pterocles senegallus,Uncertain origin,PTEROCLIFORMES,Pteroclidae,EUR
+Black-bellied Sandgrouse,Pterocles orientalis,,PTEROCLIFORMES,Pteroclidae,EUR
+Great Bustard,Otis tarda,Endangered,OTIDIFORMES,Otididae,EUR
+African Houbara,Chlamydotis undulata,Rare/Accidental Vulnerable,OTIDIFORMES,Otididae,EUR
+Asian Houbara,Chlamydotis macqueenii,Rare/Accidental Vulnerable,OTIDIFORMES,Otididae,EUR
+Little Bustard,Tetrax tetrax,Near-threatened,OTIDIFORMES,Otididae,EUR
+Great Spotted Cuckoo,Clamator glandarius,,CUCULIFORMES,Cuculidae,EUR
+Yellow-billed Cuckoo,Coccyzus americanus,Rare/Accidental,CUCULIFORMES,Cuculidae,EUR
+Black-billed Cuckoo,Coccyzus erythropthalmus,Rare/Accidental,CUCULIFORMES,Cuculidae,EUR
+Northern Hawk-Cuckoo,Hierococcyx hyperythrus,Rare/Accidental,CUCULIFORMES,Cuculidae,EUR
+Himalayan Cuckoo,Cuculus saturatus,Rare/Accidental,CUCULIFORMES,Cuculidae,EUR
+Common Cuckoo,Cuculus canorus,,CUCULIFORMES,Cuculidae,EUR
+Oriental Cuckoo,Cuculus optatus,Rare/Accidental,CUCULIFORMES,Cuculidae,EUR
+Common Nighthawk,Chordeiles minor,Rare/Accidental,CAPRIMULGIFORMES,Caprimulgidae,EUR
+Red-necked Nightjar,Caprimulgus ruficollis,Near-threatened,CAPRIMULGIFORMES,Caprimulgidae,EUR
+Eurasian Nightjar,Caprimulgus europaeus,,CAPRIMULGIFORMES,Caprimulgidae,EUR
+Egyptian Nightjar,Caprimulgus aegyptius,Rare/Accidental,CAPRIMULGIFORMES,Caprimulgidae,EUR
+Sabine's Spinetail,Rhaphidura sabini,Uncertain origin,APODIFORMES,Apodidae,EUR
+Chimney Swift,Chaetura pelagica,Rare/Accidental Vulnerable,APODIFORMES,Apodidae,EUR
+White-throated Needletail,Hirundapus caudacutus,Rare/Accidental,APODIFORMES,Apodidae,EUR
+Alpine Swift,Tachymarptis melba,,APODIFORMES,Apodidae,EUR
+Common Swift,Apus apus,,APODIFORMES,Apodidae,EUR
+Plain Swift,Apus unicolor,,APODIFORMES,Apodidae,EUR
+Pallid Swift,Apus pallidus,,APODIFORMES,Apodidae,EUR
+Pacific Swift,Apus pacificus,Rare/Accidental,APODIFORMES,Apodidae,EUR
+Little Swift,Apus affinis,,APODIFORMES,Apodidae,EUR
+Horus Swift,Apus horus,Rare/Accidental,APODIFORMES,Apodidae,EUR
+White-rumped Swift,Apus caffer,,APODIFORMES,Apodidae,EUR
+Virginia Rail,Rallus limicola,Rare/Accidental,GRUIFORMES,Rallidae,EUR
+Water Rail,Rallus aquaticus,,GRUIFORMES,Rallidae,EUR
+Corn Crake,Crex crex,,GRUIFORMES,Rallidae,EUR
+African Crake,Crecopsis egregia,Rare/Accidental,GRUIFORMES,Rallidae,EUR
+Sora,Porzana carolina,Rare/Accidental,GRUIFORMES,Rallidae,EUR
+Spotted Crake,Porzana porzana,,GRUIFORMES,Rallidae,EUR
+Lesser Moorhen,Paragallinula angulata,Rare/Accidental,GRUIFORMES,Rallidae,EUR
+Eurasian Moorhen,Gallinula chloropus,,GRUIFORMES,Rallidae,EUR
+Common Gallinule,Gallinula galeata,Rare/Accidental,GRUIFORMES,Rallidae,EUR
+Eurasian Coot,Fulica atra,,GRUIFORMES,Rallidae,EUR
+Red-knobbed Coot,Fulica cristata,,GRUIFORMES,Rallidae,EUR
+American Coot,Fulica americana,Rare/Accidental,GRUIFORMES,Rallidae,EUR
+Allen's Gallinule,Porphyrio alleni,Rare/Accidental,GRUIFORMES,Rallidae,EUR
+Purple Gallinule,Porphyrio martinica,Rare/Accidental,GRUIFORMES,Rallidae,EUR
+Western Swamphen,Porphyrio porphyrio,,GRUIFORMES,Rallidae,EUR
+African Swamphen,Porphyrio madagascariensis,Rare/Accidental,GRUIFORMES,Rallidae,EUR
+Gray-headed Swamphen,Porphyrio poliocephalus,Rare/Accidental,GRUIFORMES,Rallidae,EUR
+Watercock,Gallicrex cinerea,Rare/Accidental,GRUIFORMES,Rallidae,EUR
+Striped Crake,Aenigmatolimnas marginalis,Rare/Accidental,GRUIFORMES,Rallidae,EUR
+Little Crake,Zapornia parva,,GRUIFORMES,Rallidae,EUR
+Baillon's Crake,Zapornia pusilla,,GRUIFORMES,Rallidae,EUR
+Demoiselle Crane,Anthropoides virgo,,GRUIFORMES,Gruidae,EUR
+Siberian Crane,Leucogeranus leucogeranus,Critically endangered,GRUIFORMES,Gruidae,EUR
+Sandhill Crane,Antigone canadensis,Rare/Accidental,GRUIFORMES,Gruidae,EUR
+Common Crane,Grus grus,,GRUIFORMES,Gruidae,EUR
+Hooded Crane,Grus monacha,Rare/Accidental Vulnerable,GRUIFORMES,Gruidae,EUR
+Eurasian Thick-knee,Burhinus oedicnemus,,CHARADRIIFORMES,Burhinidae,EUR
+Egyptian Plover,Pluvianus aegyptius,Uncertain origin,CHARADRIIFORMES,Pluvianidae,EUR
+Black-winged Stilt,Himantopus himantopus,,CHARADRIIFORMES,Recurvirostridae,EUR
+Pied Avocet,Recurvirostra avosetta,,CHARADRIIFORMES,Recurvirostridae,EUR
+American Avocet,Recurvirostra americana,Rare/Accidental,CHARADRIIFORMES,Recurvirostridae,EUR
+Eurasian Oystercatcher,Haematopus ostralegus,Near-threatened,CHARADRIIFORMES,Haematopodidae,EUR
+American Oystercatcher,Haematopus palliatus,Rare/Accidental,CHARADRIIFORMES,Haematopodidae,EUR
+Canarian Oystercatcher,Haematopus meadewaldoi,Extinct,CHARADRIIFORMES,Haematopodidae,EUR
+Black-bellied Plover,Pluvialis squatarola,Vulnerable,CHARADRIIFORMES,Charadriidae,EUR
+European Golden-Plover,Pluvialis apricaria,,CHARADRIIFORMES,Charadriidae,EUR
+American Golden-Plover,Pluvialis dominica,Rare/Accidental,CHARADRIIFORMES,Charadriidae,EUR
+Pacific Golden-Plover,Pluvialis fulva,Rare/Accidental,CHARADRIIFORMES,Charadriidae,EUR
+Eurasian Dotterel,Eudromias morinellus,,CHARADRIIFORMES,Charadriidae,EUR
+Killdeer,Charadrius vociferus,Rare/Accidental Near-threatened,CHARADRIIFORMES,Charadriidae,EUR
+Common Ringed Plover,Charadrius hiaticula,,CHARADRIIFORMES,Charadriidae,EUR
+Semipalmated Plover,Charadrius semipalmatus,Rare/Accidental,CHARADRIIFORMES,Charadriidae,EUR
+Little Ringed Plover,Thinornis dubius,,CHARADRIIFORMES,Charadriidae,EUR
+Northern Lapwing,Vanellus vanellus,Near-threatened,CHARADRIIFORMES,Charadriidae,EUR
+Spur-winged Lapwing,Vanellus spinosus,,CHARADRIIFORMES,Charadriidae,EUR
+Gray-headed Lapwing,Vanellus cinereus,Rare/Accidental,CHARADRIIFORMES,Charadriidae,EUR
+Sociable Lapwing,Vanellus gregarius,Rare/Accidental Critically endangered,CHARADRIIFORMES,Charadriidae,EUR
+White-tailed Lapwing,Vanellus leucurus,Rare/Accidental,CHARADRIIFORMES,Charadriidae,EUR
+Caspian Plover,Anarhynchus asiaticus,Rare/Accidental,CHARADRIIFORMES,Charadriidae,EUR
+Oriental Plover,Anarhynchus veredus,Rare/Accidental,CHARADRIIFORMES,Charadriidae,EUR
+Siberian Sand-Plover,Anarhynchus mongolus,Endangered,CHARADRIIFORMES,Charadriidae,EUR
+Tibetan Sand-Plover,Anarhynchus atrifrons,,CHARADRIIFORMES,Charadriidae,EUR
+Greater Sand-Plover,Anarhynchus leschenaultii,,CHARADRIIFORMES,Charadriidae,EUR
+Kittlitz's Plover,Anarhynchus pecuarius,Rare/Accidental,CHARADRIIFORMES,Charadriidae,EUR
+Snowy Plover,Anarhynchus nivosus,Near-threatened,CHARADRIIFORMES,Charadriidae,EUR
+Kentish Plover,Anarhynchus alexandrinus,,CHARADRIIFORMES,Charadriidae,EUR
+Greater Painted-Snipe,Rostratula benghalensis,,CHARADRIIFORMES,Rostratulidae,EUR
+Upland Sandpiper,Bartramia longicauda,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,EUR
+Whimbrel,Numenius phaeopus,,CHARADRIIFORMES,Scolopacidae,EUR
+Little Curlew,Numenius minutus,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,EUR
+Eskimo Curlew,Numenius borealis,Rare/Accidental Critically endangered (possibly extinct),CHARADRIIFORMES,Scolopacidae,EUR
+Slender-billed Curlew,Numenius tenuirostris,Rare/Accidental Critically endangered,CHARADRIIFORMES,Scolopacidae,EUR
+Eurasian Curlew,Numenius arquata,Near-threatened,CHARADRIIFORMES,Scolopacidae,EUR
+Bar-tailed Godwit,Limosa lapponica,Near-threatened,CHARADRIIFORMES,Scolopacidae,EUR
+Black-tailed Godwit,Limosa limosa,Near-threatened,CHARADRIIFORMES,Scolopacidae,EUR
+Hudsonian Godwit,Limosa haemastica,Rare/Accidental Vulnerable,CHARADRIIFORMES,Scolopacidae,EUR
+Short-billed Dowitcher,Limnodromus griseus,Rare/Accidental Vulnerable,CHARADRIIFORMES,Scolopacidae,EUR
+Long-billed Dowitcher,Limnodromus scolopaceus,Rare/Accidental Near-threatened,CHARADRIIFORMES,Scolopacidae,EUR
+Jack Snipe,Lymnocryptes minimus,,CHARADRIIFORMES,Scolopacidae,EUR
+American Woodcock,Scolopax minor,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,EUR
+Eurasian Woodcock,Scolopax rusticola,,CHARADRIIFORMES,Scolopacidae,EUR
+Great Snipe,Gallinago media,Near-threatened,CHARADRIIFORMES,Scolopacidae,EUR
+Swinhoe's Snipe,Gallinago megala,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,EUR
+Pin-tailed Snipe,Gallinago stenura,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,EUR
+Common Snipe,Gallinago gallinago,,CHARADRIIFORMES,Scolopacidae,EUR
+Wilson's Snipe,Gallinago delicata,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,EUR
+Wilson's Phalarope,Phalaropus tricolor,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,EUR
+Red Phalarope,Phalaropus fulicarius,,CHARADRIIFORMES,Scolopacidae,EUR
+Red-necked Phalarope,Phalaropus lobatus,,CHARADRIIFORMES,Scolopacidae,EUR
+Terek Sandpiper,Xenus cinereus,,CHARADRIIFORMES,Scolopacidae,EUR
+Common Sandpiper,Actitis hypoleucos,,CHARADRIIFORMES,Scolopacidae,EUR
+Spotted Sandpiper,Actitis macularius,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,EUR
+Green Sandpiper,Tringa ochropus,,CHARADRIIFORMES,Scolopacidae,EUR
+Solitary Sandpiper,Tringa solitaria,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,EUR
+Gray-tailed Tattler,Tringa brevipes,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,EUR
+Marsh Sandpiper,Tringa stagnatilis,,CHARADRIIFORMES,Scolopacidae,EUR
+Wood Sandpiper,Tringa glareola,,CHARADRIIFORMES,Scolopacidae,EUR
+Common Redshank,Tringa totanus,,CHARADRIIFORMES,Scolopacidae,EUR
+Lesser Yellowlegs,Tringa flavipes,Rare/Accidental Vulnerable,CHARADRIIFORMES,Scolopacidae,EUR
+Willet,Tringa semipalmata,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,EUR
+Spotted Redshank,Tringa erythropus,,CHARADRIIFORMES,Scolopacidae,EUR
+Common Greenshank,Tringa nebularia,,CHARADRIIFORMES,Scolopacidae,EUR
+Greater Yellowlegs,Tringa melanoleuca,Rare/Accidental Near-threatened,CHARADRIIFORMES,Scolopacidae,EUR
+Ruddy Turnstone,Arenaria interpres,Near-threatened,CHARADRIIFORMES,Scolopacidae,EUR
+Great Knot,Calidris tenuirostris,Rare/Accidental Endangered,CHARADRIIFORMES,Scolopacidae,EUR
+Red Knot,Calidris canutus,Near-threatened,CHARADRIIFORMES,Scolopacidae,EUR
+Ruff,Calidris pugnax,,CHARADRIIFORMES,Scolopacidae,EUR
+Broad-billed Sandpiper,Calidris falcinellus,Vulnerable,CHARADRIIFORMES,Scolopacidae,EUR
+Sharp-tailed Sandpiper,Calidris acuminata,Rare/Accidental Vulnerable,CHARADRIIFORMES,Scolopacidae,EUR
+Curlew Sandpiper,Calidris ferruginea,Vulnerable,CHARADRIIFORMES,Scolopacidae,EUR
+Stilt Sandpiper,Calidris himantopus,Rare/Accidental Near-threatened,CHARADRIIFORMES,Scolopacidae,EUR
+Temminck's Stint,Calidris temminckii,,CHARADRIIFORMES,Scolopacidae,EUR
+Long-toed Stint,Calidris subminuta,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,EUR
+Red-necked Stint,Calidris ruficollis,Rare/Accidental Near-threatened,CHARADRIIFORMES,Scolopacidae,EUR
+Spoon-billed Sandpiper,Calidris pygmaea,Rare/Accidental Critically endangered,CHARADRIIFORMES,Scolopacidae,EUR
+Buff-breasted Sandpiper,Calidris subruficollis,Rare/Accidental Vulnerable,CHARADRIIFORMES,Scolopacidae,EUR
+Sanderling,Calidris alba,,CHARADRIIFORMES,Scolopacidae,EUR
+Dunlin,Calidris alpina,Near-threatened,CHARADRIIFORMES,Scolopacidae,EUR
+Purple Sandpiper,Calidris maritima,,CHARADRIIFORMES,Scolopacidae,EUR
+Baird's Sandpiper,Calidris bairdii,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,EUR
+Little Stint,Calidris minuta,,CHARADRIIFORMES,Scolopacidae,EUR
+White-rumped Sandpiper,Calidris fuscicollis,Rare/Accidental Vulnerable,CHARADRIIFORMES,Scolopacidae,EUR
+Least Sandpiper,Calidris minutilla,Rare/Accidental Near-threatened,CHARADRIIFORMES,Scolopacidae,EUR
+Pectoral Sandpiper,Calidris melanotos,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,EUR
+Western Sandpiper,Calidris mauri,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,EUR
+Semipalmated Sandpiper,Calidris pusilla,Rare/Accidental Near-threatened,CHARADRIIFORMES,Scolopacidae,EUR
+Small Buttonquail,Turnix sylvaticus,,CHARADRIIFORMES,Turnicidae,EUR
+Cream-colored Courser,Cursorius cursor,,CHARADRIIFORMES,Glareolidae,EUR
+Collared Pratincole,Glareola pratincola,,CHARADRIIFORMES,Glareolidae,EUR
+Black-winged Pratincole,Glareola nordmanni,Near-threatened,CHARADRIIFORMES,Glareolidae,EUR
+Oriental Pratincole,Glareola maldivarum,Rare/Accidental,CHARADRIIFORMES,Glareolidae,EUR
+Long-tailed Jaeger,Stercorarius longicaudus,,CHARADRIIFORMES,Stercorariidae,EUR
+Parasitic Jaeger,Stercorarius parasiticus,,CHARADRIIFORMES,Stercorariidae,EUR
+Pomarine Jaeger,Stercorarius pomarinus,,CHARADRIIFORMES,Stercorariidae,EUR
+Great Skua,Stercorarius skua,,CHARADRIIFORMES,Stercorariidae,EUR
+South Polar Skua,Stercorarius maccormicki,Rare/Accidental,CHARADRIIFORMES,Stercorariidae,EUR
+Tufted Puffin,Fratercula cirrhata,Rare/Accidental,CHARADRIIFORMES,Alcidae,EUR
+Atlantic Puffin,Fratercula arctica,Vulnerable,CHARADRIIFORMES,Alcidae,EUR
+Horned Puffin,Fratercula corniculata,Rare/Accidental,CHARADRIIFORMES,Alcidae,EUR
+Crested Auklet,Aethia cristatella,Rare/Accidental,CHARADRIIFORMES,Alcidae,EUR
+Parakeet Auklet,Aethia psittacula,Rare/Accidental,CHARADRIIFORMES,Alcidae,EUR
+Long-billed Murrelet,Brachyramphus perdix,Rare/Accidental Near-threatened,CHARADRIIFORMES,Alcidae,EUR
+Black Guillemot,Cepphus grylle,,CHARADRIIFORMES,Alcidae,EUR
+Spectacled Guillemot,Cepphus carbo,,CHARADRIIFORMES,Alcidae,EUR
+Pigeon Guillemot,Cepphus columba,,CHARADRIIFORMES,Alcidae,EUR
+Razorbill,Alca torda,,CHARADRIIFORMES,Alcidae,EUR
+Great Auk,Pinguinus impennis,Rare/Accidental Extinct,CHARADRIIFORMES,Alcidae,EUR
+Dovekie,Alle alle,,CHARADRIIFORMES,Alcidae,EUR
+Thick-billed Murre,Uria lomvia,,CHARADRIIFORMES,Alcidae,EUR
+Common Murre,Uria aalge,,CHARADRIIFORMES,Alcidae,EUR
+Ancient Murrelet,Synthliboramphus antiquus,Rare/Accidental,CHARADRIIFORMES,Alcidae,EUR
+Little Gull,Hydrocoloeus minutus,,CHARADRIIFORMES,Laridae,EUR
+Ross's Gull,Rhodostethia rosea,,CHARADRIIFORMES,Laridae,EUR
+Black-legged Kittiwake,Rissa tridactyla,Vulnerable,CHARADRIIFORMES,Laridae,EUR
+Ivory Gull,Pagophila eburnea,Rare/Accidental Near-threatened,CHARADRIIFORMES,Laridae,EUR
+Sabine's Gull,Xema sabini,,CHARADRIIFORMES,Laridae,EUR
+Slender-billed Gull,Chroicocephalus genei,Rare/Accidental,CHARADRIIFORMES,Laridae,EUR
+Bonaparte's Gull,Chroicocephalus philadelphia,Rare/Accidental,CHARADRIIFORMES,Laridae,EUR
+Black-headed Gull,Chroicocephalus ridibundus,,CHARADRIIFORMES,Laridae,EUR
+Gray-hooded Gull,Chroicocephalus cirrocephalus,Rare/Accidental,CHARADRIIFORMES,Laridae,EUR
+Laughing Gull,Leucophaeus atricilla,Rare/Accidental,CHARADRIIFORMES,Laridae,EUR
+Franklin's Gull,Leucophaeus pipixcan,Rare/Accidental,CHARADRIIFORMES,Laridae,EUR
+Pallas's Gull,Ichthyaetus ichthyaetus,Rare/Accidental,CHARADRIIFORMES,Laridae,EUR
+Relict Gull,Ichthyaetus relictus,Rare/Accidental Vulnerable,CHARADRIIFORMES,Laridae,EUR
+Audouin's Gull,Ichthyaetus audouinii,Vulnerable,CHARADRIIFORMES,Laridae,EUR
+Mediterranean Gull,Ichthyaetus melanocephalus,,CHARADRIIFORMES,Laridae,EUR
+White-eyed Gull,Ichthyaetus leucophthalmus,Rare/Accidental,CHARADRIIFORMES,Laridae,EUR
+Black-tailed Gull,Larus crassirostris,Rare/Accidental,CHARADRIIFORMES,Laridae,EUR
+Common Gull,Larus canus,,CHARADRIIFORMES,Laridae,EUR
+Short-billed Gull,Larus brachyrhynchus,,CHARADRIIFORMES,Laridae,EUR
+Ring-billed Gull,Larus delawarensis,Rare/Accidental,CHARADRIIFORMES,Laridae,EUR
+Caspian Gull,Larus cachinnans,,CHARADRIIFORMES,Laridae,EUR
+Kelp Gull,Larus dominicanus,Rare/Accidental,CHARADRIIFORMES,Laridae,EUR
+American Herring Gull,Larus smithsonianus,,CHARADRIIFORMES,Laridae,EUR
+Vega Gull,Larus vegae,Rare/Accidental,CHARADRIIFORMES,Laridae,EUR
+European Herring Gull,Larus argentatus,,CHARADRIIFORMES,Laridae,EUR
+Yellow-legged Gull,Larus michahellis,,CHARADRIIFORMES,Laridae,EUR
+Armenian Gull,Larus armenicus,,CHARADRIIFORMES,Laridae,EUR
+Great Black-backed Gull,Larus marinus,,CHARADRIIFORMES,Laridae,EUR
+Glaucous Gull,Larus hyperboreus,,CHARADRIIFORMES,Laridae,EUR
+Lesser Black-backed Gull,Larus fuscus,,CHARADRIIFORMES,Laridae,EUR
+Glaucous-winged Gull,Larus glaucescens,Rare/Accidental,CHARADRIIFORMES,Laridae,EUR
+Slaty-backed Gull,Larus schistisagus,Rare/Accidental,CHARADRIIFORMES,Laridae,EUR
+Iceland Gull,Larus glaucoides,,CHARADRIIFORMES,Laridae,EUR
+Black Skimmer,Rynchops niger,Rare/Accidental,CHARADRIIFORMES,Laridae,EUR
+White Tern,Gygis alba,Rare/Accidental,CHARADRIIFORMES,Laridae,EUR
+Brown Noddy,Anous stolidus,Rare/Accidental,CHARADRIIFORMES,Laridae,EUR
+Aleutian Tern,Onychoprion aleuticus,Rare/Accidental Vulnerable,CHARADRIIFORMES,Laridae,EUR
+Sooty Tern,Onychoprion fuscatus,Rare/Accidental,CHARADRIIFORMES,Laridae,EUR
+Bridled Tern,Onychoprion anaethetus,Rare/Accidental,CHARADRIIFORMES,Laridae,EUR
+Little Tern,Sternula albifrons,,CHARADRIIFORMES,Laridae,EUR
+Saunders's Tern,Sternula saundersi,Rare/Accidental,CHARADRIIFORMES,Laridae,EUR
+Least Tern,Sternula antillarum,Rare/Accidental,CHARADRIIFORMES,Laridae,EUR
+Gull-billed Tern,Gelochelidon nilotica,,CHARADRIIFORMES,Laridae,EUR
+Caspian Tern,Hydroprogne caspia,,CHARADRIIFORMES,Laridae,EUR
+Whiskered Tern,Chlidonias hybrida,,CHARADRIIFORMES,Laridae,EUR
+Black Tern,Chlidonias niger,,CHARADRIIFORMES,Laridae,EUR
+White-winged Tern,Chlidonias leucopterus,,CHARADRIIFORMES,Laridae,EUR
+Forster's Tern,Sterna forsteri,Rare/Accidental,CHARADRIIFORMES,Laridae,EUR
+Arctic Tern,Sterna paradisaea,,CHARADRIIFORMES,Laridae,EUR
+Common Tern,Sterna hirundo,,CHARADRIIFORMES,Laridae,EUR
+White-cheeked Tern,Sterna repressa,Rare/Accidental,CHARADRIIFORMES,Laridae,EUR
+Roseate Tern,Sterna dougallii,,CHARADRIIFORMES,Laridae,EUR
+Sandwich Tern,Thalasseus sandvicensis,,CHARADRIIFORMES,Laridae,EUR
+Elegant Tern,Thalasseus elegans,Rare/Accidental Near-threatened,CHARADRIIFORMES,Laridae,EUR
+Lesser Crested Tern,Thalasseus bengalensis,Rare/Accidental,CHARADRIIFORMES,Laridae,EUR
+West African Crested Tern,Thalasseus albididorsalis,,CHARADRIIFORMES,Laridae,EUR
+Royal Tern,Thalasseus maximus,,CHARADRIIFORMES,Laridae,EUR
+Chilean Flamingo,Phoenicopterus chilensis,Introduced species Near-threatened,PHOENICOPTERIFORMES,Phoenicopteridae,EUR
+American Flamingo,Phoenicopterus ruber,Rare/Accidental,PHOENICOPTERIFORMES,Phoenicopteridae,EUR
+Greater Flamingo,Phoenicopterus roseus,,PHOENICOPTERIFORMES,Phoenicopteridae,EUR
+Lesser Flamingo,Phoeniconaias minor,Rare/Accidental Near-threatened,PHOENICOPTERIFORMES,Phoenicopteridae,EUR
+Little Grebe,Tachybaptus ruficollis,,PODICIPEDIFORMES,Podicipedidae,EUR
+Pied-billed Grebe,Podilymbus podiceps,Rare/Accidental,PODICIPEDIFORMES,Podicipedidae,EUR
+Horned Grebe,Podiceps auritus,Vulnerable,PODICIPEDIFORMES,Podicipedidae,EUR
+Red-necked Grebe,Podiceps grisegena,,PODICIPEDIFORMES,Podicipedidae,EUR
+Great Crested Grebe,Podiceps cristatus,,PODICIPEDIFORMES,Podicipedidae,EUR
+Eared Grebe,Podiceps nigricollis,,PODICIPEDIFORMES,Podicipedidae,EUR
+White-tailed Tropicbird,Phaethon lepturus,Rare/Accidental,PHAETHONTIFORMES,Phaethontidae,EUR
+Red-billed Tropicbird,Phaethon aethereus,Rare/Accidental,PHAETHONTIFORMES,Phaethontidae,EUR
+Red-throated Loon,Gavia stellata,,GAVIIFORMES,Gaviidae,EUR
+Arctic Loon,Gavia arctica,,GAVIIFORMES,Gaviidae,EUR
+Pacific Loon,Gavia pacifica,Rare/Accidental,GAVIIFORMES,Gaviidae,EUR
+Common Loon,Gavia immer,,GAVIIFORMES,Gaviidae,EUR
+Yellow-billed Loon,Gavia adamsii,Near-threatened,GAVIIFORMES,Gaviidae,EUR
+Snowy Albatross,Diomedea exulans,Vulnerable,PROCELLARIIFORMES,Diomedeidae,EUR
+Tristan Albatross,Diomedea dabbenena,Rare/Accidental Critically endangered,PROCELLARIIFORMES,Diomedeidae,EUR
+Atlantic Yellow-nosed Albatross,Thalassarche chlororhynchos,Rare/Accidental Endangered,PROCELLARIIFORMES,Diomedeidae,EUR
+Black-browed Albatross,Thalassarche melanophris,Rare/Accidental,PROCELLARIIFORMES,Diomedeidae,EUR
+Wilson's Storm-Petrel,Oceanites oceanicus,,PROCELLARIIFORMES,Oceanitidae,EUR
+White-faced Storm-Petrel,Pelagodroma marina,,PROCELLARIIFORMES,Oceanitidae,EUR
+Black-bellied Storm-Petrel,Fregetta tropica,Rare/Accidental,PROCELLARIIFORMES,Oceanitidae,EUR
+European Storm-Petrel,Hydrobates pelagicus,,PROCELLARIIFORMES,Hydrobatidae,EUR
+Leach's Storm-Petrel,Hydrobates leucorhous,Vulnerable,PROCELLARIIFORMES,Hydrobatidae,EUR
+Swinhoe's Storm-Petrel,Hydrobates monorhis,Rare/Accidental Near-threatened,PROCELLARIIFORMES,Hydrobatidae,EUR
+Band-rumped Storm-Petrel,Hydrobates castro,,PROCELLARIIFORMES,Hydrobatidae,EUR
+Monteiro's Storm-Petrel,Hydrobates monteiroi,Vulnerable,PROCELLARIIFORMES,Hydrobatidae,EUR
+Southern Giant-Petrel,Macronectes giganteus,Rare/Accidental,PROCELLARIIFORMES,Procellariidae,EUR
+Northern Fulmar,Fulmarus glacialis,,PROCELLARIIFORMES,Procellariidae,EUR
+Pintado Petrel,Daption capense,Rare/Accidental,PROCELLARIIFORMES,Procellariidae,EUR
+Great-winged Petrel,Pterodroma macroptera,Rare/Accidental,PROCELLARIIFORMES,Procellariidae,EUR
+Kermadec Petrel,Pterodroma neglecta,Rare/Accidental,PROCELLARIIFORMES,Procellariidae,EUR
+Trindade Petrel,Pterodroma arminjoniana,Vulnerable,PROCELLARIIFORMES,Procellariidae,EUR
+Zino's Petrel,Pterodroma madeira,Endangered,PROCELLARIIFORMES,Procellariidae,EUR
+Fea's Petrel,Pterodroma feae,,PROCELLARIIFORMES,Procellariidae,EUR
+Soft-plumaged Petrel,Pterodroma mollis,Rare/Accidental,PROCELLARIIFORMES,Procellariidae,EUR
+Barau's Petrel,Pterodroma baraui,Rare/Accidental Endangered,PROCELLARIIFORMES,Procellariidae,EUR
+Bermuda Petrel,Pterodroma cahow,Rare/Accidental Endangered,PROCELLARIIFORMES,Procellariidae,EUR
+Black-capped Petrel,Pterodroma hasitata,Rare/Accidental Endangered,PROCELLARIIFORMES,Procellariidae,EUR
+Atlantic Petrel,Pterodroma incerta,Endangered,PROCELLARIIFORMES,Procellariidae,EUR
+Bulwer's Petrel,Bulweria bulwerii,,PROCELLARIIFORMES,Procellariidae,EUR
+White-chinned Petrel,Procellaria aequinoctialis,Rare/Accidental Vulnerable,PROCELLARIIFORMES,Procellariidae,EUR
+Cory's Shearwater,Calonectris borealis,,PROCELLARIIFORMES,Procellariidae,EUR
+Scopoli's Shearwater,Calonectris diomedea,,PROCELLARIIFORMES,Procellariidae,EUR
+Cape Verde Shearwater,Calonectris edwardsii,Near-threatened,PROCELLARIIFORMES,Procellariidae,EUR
+Flesh-footed Shearwater,Ardenna carneipes,Rare/Accidental Near-threatened,PROCELLARIIFORMES,Procellariidae,EUR
+Great Shearwater,Ardenna gravis,,PROCELLARIIFORMES,Procellariidae,EUR
+Buller's Shearwater,Ardenna bulleri,Rare/Accidental Vulnerable,PROCELLARIIFORMES,Procellariidae,EUR
+Sooty Shearwater,Ardenna grisea,Near-threatened,PROCELLARIIFORMES,Procellariidae,EUR
+Short-tailed Shearwater,Ardenna tenuirostris,Rare/Accidental,PROCELLARIIFORMES,Procellariidae,EUR
+Manx Shearwater,Puffinus puffinus,,PROCELLARIIFORMES,Procellariidae,EUR
+Yelkouan Shearwater,Puffinus yelkouan,Vulnerable,PROCELLARIIFORMES,Procellariidae,EUR
+Balearic Shearwater,Puffinus mauretanicus,Critically endangered,PROCELLARIIFORMES,Procellariidae,EUR
+Barolo Shearwater,Puffinus baroli,,PROCELLARIIFORMES,Procellariidae,EUR
+Boyd's Shearwater,Puffinus boydi,Rare/Accidental,PROCELLARIIFORMES,Procellariidae,EUR
+Black Stork,Ciconia nigra,,CICONIIFORMES,Ciconiidae,EUR
+White Stork,Ciconia ciconia,,CICONIIFORMES,Ciconiidae,EUR
+Marabou Stork,Leptoptilos crumenifer,,CICONIIFORMES,Ciconiidae,EUR
+Yellow-billed Stork,Mycteria ibis,,CICONIIFORMES,Ciconiidae,EUR
+Ascension Frigatebird,Fregata aquila,Rare/Accidental Vulnerable,SULIFORMES,Fregatidae,EUR
+Magnificent Frigatebird,Fregata magnificens,Rare/Accidental,SULIFORMES,Fregatidae,EUR
+Northern Gannet,Morus bassanus,,SULIFORMES,Sulidae,EUR
+Cape Gannet,Morus capensis,Rare/Accidental Endangered,SULIFORMES,Sulidae,EUR
+Red-footed Booby,Sula sula,Rare/Accidental,SULIFORMES,Sulidae,EUR
+Brown Booby,Sula leucogaster,,SULIFORMES,Sulidae,EUR
+Masked Booby,Sula dactylatra,Rare/Accidental,SULIFORMES,Sulidae,EUR
+Reed Cormorant,Microcarbo africanus,Rare/Accidental,SULIFORMES,Phalacrocoracidae,EUR
+Pygmy Cormorant,Microcarbo pygmaeus,,SULIFORMES,Phalacrocoracidae,EUR
+Pallas's Cormorant,Urile perspicillatus,Endemic (country/region) Extinct,SULIFORMES,Phalacrocoracidae,EUR
+Great Cormorant,Phalacrocorax carbo,,SULIFORMES,Phalacrocoracidae,EUR
+European Shag,Gulosus aristotelis,,SULIFORMES,Phalacrocoracidae,EUR
+Double-crested Cormorant,Nannopterum auritum,Rare/Accidental,SULIFORMES,Phalacrocoracidae,EUR
+Glossy Ibis,Plegadis falcinellus,,PELECANIFORMES,Threskiornithidae,EUR
+African Sacred Ibis,Threskiornis aethiopicus,Introduced species,PELECANIFORMES,Threskiornithidae,EUR
+Northern Bald Ibis,Geronticus eremita,Endangered,PELECANIFORMES,Threskiornithidae,EUR
+Eurasian Spoonbill,Platalea leucorodia,,PELECANIFORMES,Threskiornithidae,EUR
+African Spoonbill,Platalea alba,,PELECANIFORMES,Threskiornithidae,EUR
+Great White Pelican,Pelecanus onocrotalus,,PELECANIFORMES,Pelecanidae,EUR
+Pink-backed Pelican,Pelecanus rufescens,Rare/Accidental,PELECANIFORMES,Pelecanidae,EUR
+Dalmatian Pelican,Pelecanus crispus,Near-threatened,PELECANIFORMES,Pelecanidae,EUR
+Eurasian Bittern,Botaurus stellaris,,PELECANIFORMES,Ardeidae,EUR
+American Bittern,Botaurus lentiginosus,Rare/Accidental,PELECANIFORMES,Ardeidae,EUR
+Least Bittern,Botaurus exilis,Rare/Accidental,PELECANIFORMES,Ardeidae,EUR
+Schrenck's Bittern,Botaurus eurhythmus,Rare/Accidental,PELECANIFORMES,Ardeidae,EUR
+Dwarf Bittern,Botaurus sturmii,Rare/Accidental,PELECANIFORMES,Ardeidae,EUR
+Little Bittern,Botaurus minutus,,PELECANIFORMES,Ardeidae,EUR
+Yellow-crowned Night Heron,Nyctanassa violacea,Rare/Accidental,PELECANIFORMES,Ardeidae,EUR
+Black-crowned Night Heron,Nycticorax nycticorax,,PELECANIFORMES,Ardeidae,EUR
+Little Blue Heron,Egretta caerulea,Rare/Accidental,PELECANIFORMES,Ardeidae,EUR
+Tricolored Heron,Egretta tricolor,Rare/Accidental,PELECANIFORMES,Ardeidae,EUR
+Black Heron,Egretta ardesiaca,Rare/Accidental,PELECANIFORMES,Ardeidae,EUR
+Snowy Egret,Egretta thula,Rare/Accidental,PELECANIFORMES,Ardeidae,EUR
+Little Egret,Egretta garzetta,,PELECANIFORMES,Ardeidae,EUR
+Western Reef-Heron,Egretta gularis,,PELECANIFORMES,Ardeidae,EUR
+Striated Heron,Butorides striata,,PELECANIFORMES,Ardeidae,EUR
+Green Heron,Butorides virescens,Rare/Accidental,PELECANIFORMES,Ardeidae,EUR
+Squacco Heron,Ardeola ralloides,,PELECANIFORMES,Ardeidae,EUR
+Indian Pond-Heron,Ardeola grayii,Rare/Accidental,PELECANIFORMES,Ardeidae,EUR
+Chinese Pond-Heron,Ardeola bacchus,Rare/Accidental,PELECANIFORMES,Ardeidae,EUR
+Western Cattle-Egret,Ardea ibis,,PELECANIFORMES,Ardeidae,EUR
+Great Egret,Ardea alba,,PELECANIFORMES,Ardeidae,EUR
+Yellow-billed Egret,Ardea brachyrhyncha,Rare/Accidental,PELECANIFORMES,Ardeidae,EUR
+Medium Egret,Ardea intermedia,Uncertain origin,PELECANIFORMES,Ardeidae,EUR
+Gray Heron,Ardea cinerea,,PELECANIFORMES,Ardeidae,EUR
+Great Blue Heron,Ardea herodias,Rare/Accidental,PELECANIFORMES,Ardeidae,EUR
+Purple Heron,Ardea purpurea,,PELECANIFORMES,Ardeidae,EUR
+Black-headed Heron,Ardea melanocephala,,PELECANIFORMES,Ardeidae,EUR
+Osprey,Pandion haliaetus,,ACCIPITRIFORMES,Pandionidae,EUR
+Black-winged Kite,Elanus caeruleus,,ACCIPITRIFORMES,Accipitridae,EUR
+Bearded Vulture,Gypaetus barbatus,Near-threatened,ACCIPITRIFORMES,Accipitridae,EUR
+Egyptian Vulture,Neophron percnopterus,Rare/Accidental Endangered,ACCIPITRIFORMES,Accipitridae,EUR
+European Honey-buzzard,Pernis apivorus,,ACCIPITRIFORMES,Accipitridae,EUR
+Oriental Honey-buzzard,Pernis ptilorhynchus,,ACCIPITRIFORMES,Accipitridae,EUR
+Swallow-tailed Kite,Elanoides forficatus,Rare/Accidental,ACCIPITRIFORMES,Accipitridae,EUR
+Cinereous Vulture,Aegypius monachus,Near-threatened,ACCIPITRIFORMES,Accipitridae,EUR
+Lappet-faced Vulture,Torgos tracheliotos,Rare/Accidental Endangered,ACCIPITRIFORMES,Accipitridae,EUR
+Hooded Vulture,Necrosyrtes monachus,Uncertain origin Critically endangered,ACCIPITRIFORMES,Accipitridae,EUR
+Himalayan Griffon,Gyps himalayensis,Rare/Accidental Near-threatened,ACCIPITRIFORMES,Accipitridae,EUR
+White-backed Vulture,Gyps africanus,Critically endangered,ACCIPITRIFORMES,Accipitridae,EUR
+Rüppell's Griffon,Gyps rueppelli,Critically endangered,ACCIPITRIFORMES,Accipitridae,EUR
+Eurasian Griffon,Gyps fulvus,,ACCIPITRIFORMES,Accipitridae,EUR
+Bateleur,Terathopius ecaudatus,Rare/Accidental Endangered,ACCIPITRIFORMES,Accipitridae,EUR
+Short-toed Snake-Eagle,Circaetus gallicus,,ACCIPITRIFORMES,Accipitridae,EUR
+Lesser Spotted Eagle,Clanga pomarina,,ACCIPITRIFORMES,Accipitridae,EUR
+Greater Spotted Eagle,Clanga clanga,Vulnerable,ACCIPITRIFORMES,Accipitridae,EUR
+Booted Eagle,Hieraaetus pennatus,,ACCIPITRIFORMES,Accipitridae,EUR
+Steppe Eagle,Aquila nipalensis,Endangered,ACCIPITRIFORMES,Accipitridae,EUR
+Imperial Eagle,Aquila heliaca,Vulnerable,ACCIPITRIFORMES,Accipitridae,EUR
+Spanish Eagle,Aquila adalberti,Vulnerable,ACCIPITRIFORMES,Accipitridae,EUR
+Golden Eagle,Aquila chrysaetos,,ACCIPITRIFORMES,Accipitridae,EUR
+Bonelli's Eagle,Aquila fasciata,,ACCIPITRIFORMES,Accipitridae,EUR
+Dark Chanting-Goshawk,Melierax metabates,Uncertain origin,ACCIPITRIFORMES,Accipitridae,EUR
+Levant Sparrowhawk,Tachyspiza brevipes,,ACCIPITRIFORMES,Accipitridae,EUR
+Eurasian Sparrowhawk,Accipiter nisus,,ACCIPITRIFORMES,Accipitridae,EUR
+Eurasian Goshawk,Astur gentilis,,ACCIPITRIFORMES,Accipitridae,EUR
+American Goshawk,Astur atricapillus,Rare/Accidental,ACCIPITRIFORMES,Accipitridae,EUR
+Western Marsh Harrier,Circus aeruginosus,,ACCIPITRIFORMES,Accipitridae,EUR
+Hen Harrier,Circus cyaneus,,ACCIPITRIFORMES,Accipitridae,EUR
+Northern Harrier,Circus hudsonius,Rare/Accidental,ACCIPITRIFORMES,Accipitridae,EUR
+Pallid Harrier,Circus macrourus,Near-threatened,ACCIPITRIFORMES,Accipitridae,EUR
+Montagu's Harrier,Circus pygargus,,ACCIPITRIFORMES,Accipitridae,EUR
+Red Kite,Milvus milvus,,ACCIPITRIFORMES,Accipitridae,EUR
+Black Kite,Milvus migrans,,ACCIPITRIFORMES,Accipitridae,EUR
+White-tailed Eagle,Haliaeetus albicilla,,ACCIPITRIFORMES,Accipitridae,EUR
+Bald Eagle,Haliaeetus leucocephalus,Rare/Accidental,ACCIPITRIFORMES,Accipitridae,EUR
+Pallas's Fish-Eagle,Haliaeetus leucoryphus,Rare/Accidental Endangered,ACCIPITRIFORMES,Accipitridae,EUR
+Steller's Sea-Eagle,Haliaeetus pelagicus,Uncertain origin Vulnerable,ACCIPITRIFORMES,Accipitridae,EUR
+Swainson's Hawk,Buteo swainsoni,Uncertain origin,ACCIPITRIFORMES,Accipitridae,EUR
+Rough-legged Hawk,Buteo lagopus,,ACCIPITRIFORMES,Accipitridae,EUR
+Common Buzzard,Buteo buteo,,ACCIPITRIFORMES,Accipitridae,EUR
+Long-legged Buzzard,Buteo rufinus,,ACCIPITRIFORMES,Accipitridae,EUR
+Upland Buzzard,Buteo hemilasius,Rare/Accidental,ACCIPITRIFORMES,Accipitridae,EUR
+Eastern Buzzard,Buteo japonicus,,ACCIPITRIFORMES,Accipitridae,EUR
+Western Barn Owl,Tyto alba,,STRIGIFORMES,Tytonidae,EUR
+Eastern Barn Owl,Tyto javanica,,STRIGIFORMES,Tytonidae,EUR
+Eurasian Scops-Owl,Otus scops,,STRIGIFORMES,Strigidae,EUR
+Snowy Owl,Bubo scandiacus,Vulnerable,STRIGIFORMES,Strigidae,EUR
+Eurasian Eagle-Owl,Bubo bubo,,STRIGIFORMES,Strigidae,EUR
+Northern Hawk Owl,Surnia ulula,,STRIGIFORMES,Strigidae,EUR
+Eurasian Pygmy-Owl,Glaucidium passerinum,,STRIGIFORMES,Strigidae,EUR
+Little Owl,Athene noctua,,STRIGIFORMES,Strigidae,EUR
+Tawny Owl,Strix aluco,,STRIGIFORMES,Strigidae,EUR
+Maghreb Owl,Strix mauritanica,,STRIGIFORMES,Strigidae,EUR
+Ural Owl,Strix uralensis,,STRIGIFORMES,Strigidae,EUR
+Great Gray Owl,Strix nebulosa,,STRIGIFORMES,Strigidae,EUR
+Long-eared Owl,Asio otus,,STRIGIFORMES,Strigidae,EUR
+Short-eared Owl,Asio flammeus,,STRIGIFORMES,Strigidae,EUR
+Marsh Owl,Asio capensis,Rare/Accidental,STRIGIFORMES,Strigidae,EUR
+Boreal Owl,Aegolius funereus,,STRIGIFORMES,Strigidae,EUR
+Brown Boobook,Ninox scutulata,,STRIGIFORMES,Strigidae,EUR
+Northern Boobook,Ninox japonica,,STRIGIFORMES,Strigidae,EUR
+Eurasian Hoopoe,Upupa epops,,BUCEROTIFORMES,Upupidae,EUR
+Arabian Green Bee-eater,Merops cyanophrys,Rare/Accidental,CORACIIFORMES,Meropidae,EUR
+Asian Green Bee-eater,Merops orientalis,Rare/Accidental,CORACIIFORMES,Meropidae,EUR
+Blue-cheeked Bee-eater,Merops persicus,Rare/Accidental,CORACIIFORMES,Meropidae,EUR
+European Bee-eater,Merops apiaster,,CORACIIFORMES,Meropidae,EUR
+Common Kingfisher,Alcedo atthis,,CORACIIFORMES,Alcedinidae,EUR
+White-throated Kingfisher,Halcyon smyrnensis,Rare/Accidental,CORACIIFORMES,Alcedinidae,EUR
+Belted Kingfisher,Megaceryle alcyon,Rare/Accidental,CORACIIFORMES,Alcedinidae,EUR
+Pied Kingfisher,Ceryle rudis,Rare/Accidental,CORACIIFORMES,Alcedinidae,EUR
+European Roller,Coracias garrulus,,CORACIIFORMES,Coraciidae,EUR
+Abyssinian Roller,Coracias abyssinicus,Rare/Accidental,CORACIIFORMES,Coraciidae,EUR
+Eurasian Wryneck,Jynx torquilla,,PICIFORMES,Picidae,EUR
+Yellow-bellied Sapsucker,Sphyrapicus varius,Rare/Accidental,PICIFORMES,Picidae,EUR
+Eurasian Three-toed Woodpecker,Picoides tridactylus,,PICIFORMES,Picidae,EUR
+Middle Spotted Woodpecker,Dendrocoptes medius,,PICIFORMES,Picidae,EUR
+White-backed Woodpecker,Dendrocopos leucotos,,PICIFORMES,Picidae,EUR
+Great Spotted Woodpecker,Dendrocopos major,,PICIFORMES,Picidae,EUR
+Syrian Woodpecker,Dendrocopos syriacus,,PICIFORMES,Picidae,EUR
+Lesser Spotted Woodpecker,Dryobates minor,,PICIFORMES,Picidae,EUR
+Gray-headed Woodpecker,Picus canus,,PICIFORMES,Picidae,EUR
+Eurasian Green Woodpecker,Picus viridis,,PICIFORMES,Picidae,EUR
+Iberian Green Woodpecker,Picus sharpei,,PICIFORMES,Picidae,EUR
+Black Woodpecker,Dryocopus martius,,PICIFORMES,Picidae,EUR
+Northern Flicker,Colaptes auratus,,PICIFORMES,Picidae,EUR
+Lesser Kestrel,Falco naumanni,,FALCONIFORMES,Falconidae,EUR
+Eurasian Kestrel,Falco tinnunculus,,FALCONIFORMES,Falconidae,EUR
+American Kestrel,Falco sparverius,Rare/Accidental,FALCONIFORMES,Falconidae,EUR
+Red-footed Falcon,Falco vespertinus,Vulnerable,FALCONIFORMES,Falconidae,EUR
+Amur Falcon,Falco amurensis,Rare/Accidental,FALCONIFORMES,Falconidae,EUR
+Eleonora's Falcon,Falco eleonorae,,FALCONIFORMES,Falconidae,EUR
+Sooty Falcon,Falco concolor,Rare/Accidental Vulnerable,FALCONIFORMES,Falconidae,EUR
+Merlin,Falco columbarius,,FALCONIFORMES,Falconidae,EUR
+Eurasian Hobby,Falco subbuteo,,FALCONIFORMES,Falconidae,EUR
+Lanner Falcon,Falco biarmicus,,FALCONIFORMES,Falconidae,EUR
+Saker Falcon,Falco cherrug,Endangered,FALCONIFORMES,Falconidae,EUR
+Gyrfalcon,Falco rusticolus,,FALCONIFORMES,Falconidae,EUR
+Peregrine Falcon,Falco peregrinus,,FALCONIFORMES,Falconidae,EUR
+Rose-ringed Parakeet,Psittacula krameri,Introduced species,PSITTACIFORMES,Psittaculidae,EUR
+Monk Parakeet,Myiopsitta monachus,Introduced species,PSITTACIFORMES,Psittacidae,EUR
+Olive-sided Flycatcher,Contopus cooperi,Rare/Accidental Near-threatened,PASSERIFORMES,Tyrannidae,EUR
+Eastern Wood-Pewee,Contopus virens,Rare/Accidental,PASSERIFORMES,Tyrannidae,EUR
+Yellow-bellied Flycatcher,Empidonax flaviventris,Rare/Accidental,PASSERIFORMES,Tyrannidae,EUR
+Acadian Flycatcher,Empidonax virescens,Rare/Accidental,PASSERIFORMES,Tyrannidae,EUR
+Alder Flycatcher,Empidonax alnorum,Rare/Accidental,PASSERIFORMES,Tyrannidae,EUR
+Willow Flycatcher,Empidonax traillii,Rare/Accidental,PASSERIFORMES,Tyrannidae,EUR
+Least Flycatcher,Empidonax minimus,Rare/Accidental,PASSERIFORMES,Tyrannidae,EUR
+Eastern Phoebe,Sayornis phoebe,Rare/Accidental,PASSERIFORMES,Tyrannidae,EUR
+Western Kingbird,Tyrannus verticalis,Rare/Accidental,PASSERIFORMES,Tyrannidae,EUR
+Eastern Kingbird,Tyrannus tyrannus,Rare/Accidental,PASSERIFORMES,Tyrannidae,EUR
+Fork-tailed Flycatcher,Tyrannus savana,Rare/Accidental,PASSERIFORMES,Tyrannidae,EUR
+White-eyed Vireo,Vireo griseus,Rare/Accidental,PASSERIFORMES,Vireonidae,EUR
+Yellow-throated Vireo,Vireo flavifrons,Rare/Accidental,PASSERIFORMES,Vireonidae,EUR
+Blue-headed Vireo,Vireo solitarius,Rare/Accidental,PASSERIFORMES,Vireonidae,EUR
+Philadelphia Vireo,Vireo philadelphicus,Rare/Accidental,PASSERIFORMES,Vireonidae,EUR
+Red-eyed Vireo,Vireo olivaceus,Rare/Accidental,PASSERIFORMES,Vireonidae,EUR
+Eurasian Golden Oriole,Oriolus oriolus,,PASSERIFORMES,Oriolidae,EUR
+Indian Golden Oriole,Oriolus kundoo,Rare/Accidental,PASSERIFORMES,Oriolidae,EUR
+Ashy Drongo,Dicrurus leucophaeus,Uncertain origin,PASSERIFORMES,Dicruridae,EUR
+Red-backed Shrike,Lanius collurio,,PASSERIFORMES,Laniidae,EUR
+Red-tailed Shrike,Lanius phoenicuroides,Rare/Accidental,PASSERIFORMES,Laniidae,EUR
+Isabelline Shrike,Lanius isabellinus,Rare/Accidental,PASSERIFORMES,Laniidae,EUR
+Brown Shrike,Lanius cristatus,Rare/Accidental,PASSERIFORMES,Laniidae,EUR
+Long-tailed Shrike,Lanius schach,Rare/Accidental,PASSERIFORMES,Laniidae,EUR
+Northern Shrike,Lanius borealis,Rare/Accidental,PASSERIFORMES,Laniidae,EUR
+Iberian Gray Shrike,Lanius meridionalis,Vulnerable,PASSERIFORMES,Laniidae,EUR
+Great Gray Shrike,Lanius excubitor,,PASSERIFORMES,Laniidae,EUR
+Lesser Gray Shrike,Lanius minor,,PASSERIFORMES,Laniidae,EUR
+Masked Shrike,Lanius nubicus,,PASSERIFORMES,Laniidae,EUR
+Woodchat Shrike,Lanius senator,Near-threatened,PASSERIFORMES,Laniidae,EUR
+Siberian Jay,Perisoreus infaustus,,PASSERIFORMES,Corvidae,EUR
+Eurasian Jay,Garrulus glandarius,,PASSERIFORMES,Corvidae,EUR
+Iberian Magpie,Cyanopica cooki,,PASSERIFORMES,Corvidae,EUR
+Eurasian Magpie,Pica pica,,PASSERIFORMES,Corvidae,EUR
+Northern Nutcracker,Nucifraga caryocatactes,,PASSERIFORMES,Corvidae,EUR
+Southern Nutcracker,Nucifraga hemispila,,PASSERIFORMES,Corvidae,EUR
+Red-billed Chough,Pyrrhocorax pyrrhocorax,,PASSERIFORMES,Corvidae,EUR
+Yellow-billed Chough,Pyrrhocorax graculus,,PASSERIFORMES,Corvidae,EUR
+Eurasian Jackdaw,Coloeus monedula,,PASSERIFORMES,Corvidae,EUR
+Daurian Jackdaw,Coloeus dauuricus,Rare/Accidental,PASSERIFORMES,Corvidae,EUR
+House Crow,Corvus splendens,Rare/Accidental,PASSERIFORMES,Corvidae,EUR
+Rook,Corvus frugilegus,,PASSERIFORMES,Corvidae,EUR
+Carrion Crow,Corvus corone,,PASSERIFORMES,Corvidae,EUR
+Hooded Crow,Corvus cornix,,PASSERIFORMES,Corvidae,EUR
+Fan-tailed Raven,Corvus rhipidurus,Rare/Accidental,PASSERIFORMES,Corvidae,EUR
+Common Raven,Corvus corax,,PASSERIFORMES,Corvidae,EUR
+Coal Tit,Periparus ater,,PASSERIFORMES,Paridae,EUR
+Crested Tit,Lophophanes cristatus,,PASSERIFORMES,Paridae,EUR
+Sombre Tit,Poecile lugubris,,PASSERIFORMES,Paridae,EUR
+Marsh Tit,Poecile palustris,,PASSERIFORMES,Paridae,EUR
+Willow Tit,Poecile montanus,,PASSERIFORMES,Paridae,EUR
+Gray-headed Chickadee,Poecile cinctus,,PASSERIFORMES,Paridae,EUR
+Eurasian Blue Tit,Cyanistes caeruleus,,PASSERIFORMES,Paridae,EUR
+African Blue Tit,Cyanistes teneriffae,,PASSERIFORMES,Paridae,EUR
+Azure Tit,Cyanistes cyanus,,PASSERIFORMES,Paridae,EUR
+Great Tit,Parus major,,PASSERIFORMES,Paridae,EUR
+Eurasian Penduline-Tit,Remiz pendulinus,,PASSERIFORMES,Remizidae,EUR
+Greater Hoopoe-Lark,Alaemon alaudipes,Rare/Accidental,PASSERIFORMES,Alaudidae,EUR
+Thick-billed Lark,Ramphocoris clotbey,Rare/Accidental,PASSERIFORMES,Alaudidae,EUR
+Bar-tailed Lark,Ammomanes cinctura,Rare/Accidental,PASSERIFORMES,Alaudidae,EUR
+Desert Lark,Ammomanes deserti,Rare/Accidental,PASSERIFORMES,Alaudidae,EUR
+Wood Lark,Lullula arborea,,PASSERIFORMES,Alaudidae,EUR
+White-winged Lark,Alauda leucoptera,Rare/Accidental,PASSERIFORMES,Alaudidae,EUR
+Eurasian Skylark,Alauda arvensis,,PASSERIFORMES,Alaudidae,EUR
+Oriental Skylark,Alauda gulgula,Rare/Accidental,PASSERIFORMES,Alaudidae,EUR
+Thekla's Lark,Galerida theklae,Rare/Accidental,PASSERIFORMES,Alaudidae,EUR
+Crested Lark,Galerida cristata,,PASSERIFORMES,Alaudidae,EUR
+Horned Lark,Eremophila alpestris,,PASSERIFORMES,Alaudidae,EUR
+Temminck's Lark,Eremophila bilopha,Rare/Accidental,PASSERIFORMES,Alaudidae,EUR
+Greater Short-toed Lark,Calandrella brachydactyla,,PASSERIFORMES,Alaudidae,EUR
+Bimaculated Lark,Melanocorypha bimaculata,Rare/Accidental,PASSERIFORMES,Alaudidae,EUR
+Calandra Lark,Melanocorypha calandra,Rare/Accidental,PASSERIFORMES,Alaudidae,EUR
+Black Lark,Melanocorypha yeltoniensis,Rare/Accidental,PASSERIFORMES,Alaudidae,EUR
+Dupont's Lark,Chersophilus duponti,Vulnerable,PASSERIFORMES,Alaudidae,EUR
+Asian Short-toed Lark,Alaudala cheleensis,Rare/Accidental,PASSERIFORMES,Alaudidae,EUR
+Mediterranean Short-toed Lark,Alaudala rufescens,,PASSERIFORMES,Alaudidae,EUR
+Turkestan Short-toed Lark,Alaudala heinei,,PASSERIFORMES,Alaudidae,EUR
+Bearded Reedling,Panurus biarmicus,,PASSERIFORMES,Panuridae,EUR
+Zitting Cisticola,Cisticola juncidis,,PASSERIFORMES,Cisticolidae,EUR
+Thick-billed Warbler,Arundinax aedon,Rare/Accidental,PASSERIFORMES,Acrocephalidae,EUR
+Booted Warbler,Iduna caligata,Rare/Accidental,PASSERIFORMES,Acrocephalidae,EUR
+Sykes's Warbler,Iduna rama,,PASSERIFORMES,Acrocephalidae,EUR
+Eastern Olivaceous Warbler,Iduna pallida,,PASSERIFORMES,Acrocephalidae,EUR
+Western Olivaceous Warbler,Iduna opaca,,PASSERIFORMES,Acrocephalidae,EUR
+Upcher's Warbler,Hippolais languida,,PASSERIFORMES,Acrocephalidae,EUR
+Olive-tree Warbler,Hippolais olivetorum,,PASSERIFORMES,Acrocephalidae,EUR
+Melodious Warbler,Hippolais polyglotta,,PASSERIFORMES,Acrocephalidae,EUR
+Icterine Warbler,Hippolais icterina,,PASSERIFORMES,Acrocephalidae,EUR
+Aquatic Warbler,Acrocephalus paludicola,Vulnerable,PASSERIFORMES,Acrocephalidae,EUR
+Moustached Warbler,Acrocephalus melanopogon,,PASSERIFORMES,Acrocephalidae,EUR
+Sedge Warbler,Acrocephalus schoenobaenus,,PASSERIFORMES,Acrocephalidae,EUR
+Paddyfield Warbler,Acrocephalus agricola,Rare/Accidental,PASSERIFORMES,Acrocephalidae,EUR
+Blyth's Reed Warbler,Acrocephalus dumetorum,,PASSERIFORMES,Acrocephalidae,EUR
+Marsh Warbler,Acrocephalus palustris,,PASSERIFORMES,Acrocephalidae,EUR
+Common Reed Warbler,Acrocephalus scirpaceus,,PASSERIFORMES,Acrocephalidae,EUR
+Great Reed Warbler,Acrocephalus arundinaceus,,PASSERIFORMES,Acrocephalidae,EUR
+Clamorous Reed Warbler,Acrocephalus stentoreus,Rare/Accidental,PASSERIFORMES,Acrocephalidae,EUR
+Gray's Grasshopper Warbler,Helopsaltes fasciolatus,Rare/Accidental,PASSERIFORMES,Locustellidae,EUR
+Pallas's Grasshopper Warbler,Helopsaltes certhiola,Rare/Accidental,PASSERIFORMES,Locustellidae,EUR
+Lanceolated Warbler,Locustella lanceolata,Rare/Accidental,PASSERIFORMES,Locustellidae,EUR
+River Warbler,Locustella fluviatilis,,PASSERIFORMES,Locustellidae,EUR
+Savi's Warbler,Locustella luscinioides,,PASSERIFORMES,Locustellidae,EUR
+Common Grasshopper Warbler,Locustella naevia,,PASSERIFORMES,Locustellidae,EUR
+Plain Martin,Riparia paludicola,Rare/Accidental,PASSERIFORMES,Hirundinidae,EUR
+Bank Swallow,Riparia riparia,,PASSERIFORMES,Hirundinidae,EUR
+Pale Martin,Riparia diluta,,PASSERIFORMES,Hirundinidae,EUR
+Tree Swallow,Tachycineta bicolor,Rare/Accidental,PASSERIFORMES,Hirundinidae,EUR
+Purple Martin,Progne subis,Rare/Accidental,PASSERIFORMES,Hirundinidae,EUR
+Northern Rough-winged Swallow,Stelgidopteryx serripennis,Rare/Accidental,PASSERIFORMES,Hirundinidae,EUR
+Eurasian Crag-Martin,Ptyonoprogne rupestris,,PASSERIFORMES,Hirundinidae,EUR
+Pale Crag-Martin,Ptyonoprogne obsoleta,Rare/Accidental,PASSERIFORMES,Hirundinidae,EUR
+Barn Swallow,Hirundo rustica,,PASSERIFORMES,Hirundinidae,EUR
+Western House-Martin,Delichon urbicum,,PASSERIFORMES,Hirundinidae,EUR
+Siberian House-Martin,Delichon lagopodum,,PASSERIFORMES,Hirundinidae,EUR
+European Red-rumped Swallow,Cecropis rufula,,PASSERIFORMES,Hirundinidae,EUR
+Eastern Red-rumped Swallow,Cecropis daurica,Rare/Accidental,PASSERIFORMES,Hirundinidae,EUR
+Rufous-chested Swallow,Cecropis semirufa,Rare/Accidental,PASSERIFORMES,Hirundinidae,EUR
+Cliff Swallow,Petrochelidon pyrrhonota,Rare/Accidental,PASSERIFORMES,Hirundinidae,EUR
+Common Bulbul,Pycnonotus barbatus,,PASSERIFORMES,Pycnonotidae,EUR
+White-eared Bulbul,Pycnonotus leucotis,,PASSERIFORMES,Pycnonotidae,EUR
+Wood Warbler,Phylloscopus sibilatrix,,PASSERIFORMES,Phylloscopidae,EUR
+Western Bonelli's Warbler,Phylloscopus bonelli,,PASSERIFORMES,Phylloscopidae,EUR
+Eastern Bonelli's Warbler,Phylloscopus orientalis,,PASSERIFORMES,Phylloscopidae,EUR
+Yellow-browed Warbler,Phylloscopus inornatus,Rare/Accidental,PASSERIFORMES,Phylloscopidae,EUR
+Hume's Warbler,Phylloscopus humei,Rare/Accidental,PASSERIFORMES,Phylloscopidae,EUR
+Brooks's Leaf Warbler,Phylloscopus subviridis,Rare/Accidental,PASSERIFORMES,Phylloscopidae,EUR
+Pallas's Leaf Warbler,Phylloscopus proregulus,Rare/Accidental,PASSERIFORMES,Phylloscopidae,EUR
+Radde's Warbler,Phylloscopus schwarzi,Rare/Accidental,PASSERIFORMES,Phylloscopidae,EUR
+Sulphur-bellied Warbler,Phylloscopus griseolus,Rare/Accidental,PASSERIFORMES,Phylloscopidae,EUR
+Dusky Warbler,Phylloscopus fuscatus,,PASSERIFORMES,Phylloscopidae,EUR
+Plain Leaf Warbler,Phylloscopus neglectus,Rare/Accidental,PASSERIFORMES,Phylloscopidae,EUR
+Willow Warbler,Phylloscopus trochilus,,PASSERIFORMES,Phylloscopidae,EUR
+Mountain Chiffchaff,Phylloscopus sindianus,Rare/Accidental,PASSERIFORMES,Phylloscopidae,EUR
+Canary Islands Chiffchaff,Phylloscopus canariensis,,PASSERIFORMES,Phylloscopidae,EUR
+Common Chiffchaff,Phylloscopus collybita,,PASSERIFORMES,Phylloscopidae,EUR
+Iberian Chiffchaff,Phylloscopus ibericus,,PASSERIFORMES,Phylloscopidae,EUR
+Eastern Crowned Warbler,Phylloscopus coronatus,Rare/Accidental,PASSERIFORMES,Phylloscopidae,EUR
+Brown Woodland-Warbler,Phylloscopus umbrovirens,Rare/Accidental,PASSERIFORMES,Phylloscopidae,EUR
+Green Warbler,Phylloscopus nitidus,,PASSERIFORMES,Phylloscopidae,EUR
+Greenish Warbler,Phylloscopus trochiloides,,PASSERIFORMES,Phylloscopidae,EUR
+Two-barred Warbler,Phylloscopus plumbeitarsus,,PASSERIFORMES,Phylloscopidae,EUR
+Large-billed Leaf Warbler,Phylloscopus magnirostris,Rare/Accidental,PASSERIFORMES,Phylloscopidae,EUR
+Pale-legged Leaf Warbler,Phylloscopus tenellipes,Rare/Accidental,PASSERIFORMES,Phylloscopidae,EUR
+Arctic Warbler,Phylloscopus borealis,,PASSERIFORMES,Phylloscopidae,EUR
+Kamchatka Leaf Warbler,Phylloscopus examinandus,Rare/Accidental,PASSERIFORMES,Phylloscopidae,EUR
+Cetti's Warbler,Cettia cetti,,PASSERIFORMES,Scotocercidae,EUR
+Long-tailed Tit,Aegithalos caudatus,,PASSERIFORMES,Aegithalidae,EUR
+Eurasian Blackcap,Sylvia atricapilla,,PASSERIFORMES,Sylviidae,EUR
+Garden Warbler,Sylvia borin,,PASSERIFORMES,Sylviidae,EUR
+Barred Warbler,Curruca nisoria,,PASSERIFORMES,Sylviidae,EUR
+Lesser Whitethroat,Curruca curruca,,PASSERIFORMES,Sylviidae,EUR
+Western Orphean Warbler,Curruca hortensis,,PASSERIFORMES,Sylviidae,EUR
+Eastern Orphean Warbler,Curruca crassirostris,,PASSERIFORMES,Sylviidae,EUR
+African Desert Warbler,Curruca deserti,Rare/Accidental,PASSERIFORMES,Sylviidae,EUR
+Asian Desert Warbler,Curruca nana,Rare/Accidental,PASSERIFORMES,Sylviidae,EUR
+Tristram's Warbler,Curruca deserticola,,PASSERIFORMES,Sylviidae,EUR
+Menetries's Warbler,Curruca mystacea,Rare/Accidental,PASSERIFORMES,Sylviidae,EUR
+Rüppell's Warbler,Curruca ruppeli,,PASSERIFORMES,Sylviidae,EUR
+Cyprus Warbler,Curruca melanothorax,,PASSERIFORMES,Sylviidae,EUR
+Sardinian Warbler,Curruca melanocephala,,PASSERIFORMES,Sylviidae,EUR
+Moltoni's Warbler,Curruca subalpina,,PASSERIFORMES,Sylviidae,EUR
+Western Subalpine Warbler,Curruca iberiae,,PASSERIFORMES,Sylviidae,EUR
+Eastern Subalpine Warbler,Curruca cantillans,,PASSERIFORMES,Sylviidae,EUR
+Greater Whitethroat,Curruca communis,,PASSERIFORMES,Sylviidae,EUR
+Spectacled Warbler,Curruca conspicillata,,PASSERIFORMES,Sylviidae,EUR
+Marmora's Warbler,Curruca sarda,,PASSERIFORMES,Sylviidae,EUR
+Dartford Warbler,Curruca undata,Near-threatened,PASSERIFORMES,Sylviidae,EUR
+Balearic Warbler,Curruca balearica,,PASSERIFORMES,Sylviidae,EUR
+Ashy-throated Parrotbill,Suthora alphonsiana,Introduced species,PASSERIFORMES,Paradoxornithidae,EUR
+Red-billed Leiothrix,Leiothrix lutea,Introduced species,PASSERIFORMES,Leiothrichidae,EUR
+Ruby-crowned Kinglet,Corthylio calendula,Rare/Accidental,PASSERIFORMES,Regulidae,EUR
+Goldcrest,Regulus regulus,,PASSERIFORMES,Regulidae,EUR
+Madeira Firecrest,Regulus madeirensis,,PASSERIFORMES,Regulidae,EUR
+Common Firecrest,Regulus ignicapilla,,PASSERIFORMES,Regulidae,EUR
+Wallcreeper,Tichodroma muraria,,PASSERIFORMES,Tichodromidae,EUR
+Krüper's Nuthatch,Sitta krueperi,,PASSERIFORMES,Sittidae,EUR
+Red-breasted Nuthatch,Sitta canadensis,Rare/Accidental,PASSERIFORMES,Sittidae,EUR
+Corsican Nuthatch,Sitta whiteheadi,Vulnerable,PASSERIFORMES,Sittidae,EUR
+Western Rock Nuthatch,Sitta neumayer,,PASSERIFORMES,Sittidae,EUR
+Eurasian Nuthatch,Sitta europaea,,PASSERIFORMES,Sittidae,EUR
+Eurasian Treecreeper,Certhia familiaris,,PASSERIFORMES,Certhiidae,EUR
+Short-toed Treecreeper,Certhia brachydactyla,,PASSERIFORMES,Certhiidae,EUR
+Eurasian Wren,Troglodytes troglodytes,,PASSERIFORMES,Troglodytidae,EUR
+Marsh Wren,Cistothorus palustris,,PASSERIFORMES,Troglodytidae,EUR
+White-throated Dipper,Cinclus cinclus,,PASSERIFORMES,Cinclidae,EUR
+European Starling,Sturnus vulgaris,,PASSERIFORMES,Sturnidae,EUR
+Spotless Starling,Sturnus unicolor,,PASSERIFORMES,Sturnidae,EUR
+Rosy Starling,Pastor roseus,,PASSERIFORMES,Sturnidae,EUR
+Daurian Starling,Agropsar sturninus,Rare/Accidental,PASSERIFORMES,Sturnidae,EUR
+Crested Myna,Acridotheres cristatellus,Introduced species,PASSERIFORMES,Sturnidae,EUR
+Gray Catbird,Dumetella carolinensis,Rare/Accidental,PASSERIFORMES,Mimidae,EUR
+Brown Thrasher,Toxostoma rufum,Rare/Accidental,PASSERIFORMES,Mimidae,EUR
+Tropical Mockingbird,Mimus gilvus,Uncertain origin,PASSERIFORMES,Mimidae,EUR
+Northern Mockingbird,Mimus polyglottos,Rare/Accidental,PASSERIFORMES,Mimidae,EUR
+White's Thrush,Zoothera aurea,,PASSERIFORMES,Turdidae,EUR
+Scaly Thrush,Zoothera dauma,Rare/Accidental,PASSERIFORMES,Turdidae,EUR
+Varied Thrush,Ixoreus naevius,Rare/Accidental,PASSERIFORMES,Turdidae,EUR
+Veery,Catharus fuscescens,Rare/Accidental,PASSERIFORMES,Turdidae,EUR
+Gray-cheeked Thrush,Catharus minimus,Rare/Accidental,PASSERIFORMES,Turdidae,EUR
+Swainson's Thrush,Catharus ustulatus,Rare/Accidental,PASSERIFORMES,Turdidae,EUR
+Hermit Thrush,Catharus guttatus,Rare/Accidental,PASSERIFORMES,Turdidae,EUR
+Wood Thrush,Hylocichla mustelina,Rare/Accidental,PASSERIFORMES,Turdidae,EUR
+Siberian Thrush,Geokichla sibirica,Rare/Accidental,PASSERIFORMES,Turdidae,EUR
+Mistle Thrush,Turdus viscivorus,,PASSERIFORMES,Turdidae,EUR
+Song Thrush,Turdus philomelos,,PASSERIFORMES,Turdidae,EUR
+Redwing,Turdus iliacus,Near-threatened,PASSERIFORMES,Turdidae,EUR
+Eurasian Blackbird,Turdus merula,,PASSERIFORMES,Turdidae,EUR
+American Robin,Turdus migratorius,Rare/Accidental,PASSERIFORMES,Turdidae,EUR
+Austral Thrush,Turdus falcklandii,Uncertain origin,PASSERIFORMES,Turdidae,EUR
+Tickell's Thrush,Turdus unicolor,Rare/Accidental,PASSERIFORMES,Turdidae,EUR
+Pale Thrush,Turdus pallidus,Uncertain origin,PASSERIFORMES,Turdidae,EUR
+Eyebrowed Thrush,Turdus obscurus,Rare/Accidental,PASSERIFORMES,Turdidae,EUR
+Fieldfare,Turdus pilaris,,PASSERIFORMES,Turdidae,EUR
+Ring Ouzel,Turdus torquatus,,PASSERIFORMES,Turdidae,EUR
+Black-throated Thrush,Turdus atrogularis,Rare/Accidental,PASSERIFORMES,Turdidae,EUR
+Red-throated Thrush,Turdus ruficollis,Rare/Accidental,PASSERIFORMES,Turdidae,EUR
+Dusky Thrush,Turdus eunomus,,PASSERIFORMES,Turdidae,EUR
+Naumann's Thrush,Turdus naumanni,Rare/Accidental,PASSERIFORMES,Turdidae,EUR
+Dark-sided Flycatcher,Muscicapa sibirica,Rare/Accidental,PASSERIFORMES,Muscicapidae,EUR
+Asian Brown Flycatcher,Muscicapa dauurica,Rare/Accidental,PASSERIFORMES,Muscicapidae,EUR
+Spotted Flycatcher,Muscicapa striata,,PASSERIFORMES,Muscicapidae,EUR
+Rufous-tailed Scrub-Robin,Cercotrichas galactotes,,PASSERIFORMES,Muscicapidae,EUR
+European Robin,Erithacus rubecula,,PASSERIFORMES,Muscicapidae,EUR
+Rufous-tailed Robin,Larvivora sibilans,Rare/Accidental,PASSERIFORMES,Muscicapidae,EUR
+Siberian Blue Robin,Larvivora cyane,Rare/Accidental,PASSERIFORMES,Muscicapidae,EUR
+White-throated Robin,Irania gutturalis,,PASSERIFORMES,Muscicapidae,EUR
+Thrush Nightingale,Luscinia luscinia,,PASSERIFORMES,Muscicapidae,EUR
+Common Nightingale,Luscinia megarhynchos,,PASSERIFORMES,Muscicapidae,EUR
+Bluethroat,Luscinia svecica,,PASSERIFORMES,Muscicapidae,EUR
+Siberian Rubythroat,Calliope calliope,Rare/Accidental,PASSERIFORMES,Muscicapidae,EUR
+Red-flanked Bluetail,Tarsiger cyanurus,Rare/Accidental,PASSERIFORMES,Muscicapidae,EUR
+Mugimaki Flycatcher,Ficedula mugimaki,Uncertain origin,PASSERIFORMES,Muscicapidae,EUR
+Taiga Flycatcher,Ficedula albicilla,Rare/Accidental,PASSERIFORMES,Muscicapidae,EUR
+Red-breasted Flycatcher,Ficedula parva,Rare/Accidental,PASSERIFORMES,Muscicapidae,EUR
+Semicollared Flycatcher,Ficedula semitorquata,,PASSERIFORMES,Muscicapidae,EUR
+European Pied Flycatcher,Ficedula hypoleuca,,PASSERIFORMES,Muscicapidae,EUR
+Atlas Flycatcher,Ficedula speculigera,Rare/Accidental,PASSERIFORMES,Muscicapidae,EUR
+Collared Flycatcher,Ficedula albicollis,,PASSERIFORMES,Muscicapidae,EUR
+Plumbeous Redstart,Phoenicurus fuliginosus,Rare/Accidental,PASSERIFORMES,Muscicapidae,EUR
+Rufous-backed Redstart,Phoenicurus erythronotus,,PASSERIFORMES,Muscicapidae,EUR
+Moussier's Redstart,Phoenicurus moussieri,Rare/Accidental,PASSERIFORMES,Muscicapidae,EUR
+Common Redstart,Phoenicurus phoenicurus,,PASSERIFORMES,Muscicapidae,EUR
+White-winged Redstart,Phoenicurus erythrogastrus,,PASSERIFORMES,Muscicapidae,EUR
+Black Redstart,Phoenicurus ochruros,,PASSERIFORMES,Muscicapidae,EUR
+Daurian Redstart,Phoenicurus auroreus,Uncertain origin,PASSERIFORMES,Muscicapidae,EUR
+Rufous-tailed Rock-Thrush,Monticola saxatilis,,PASSERIFORMES,Muscicapidae,EUR
+Blue Rock-Thrush,Monticola solitarius,,PASSERIFORMES,Muscicapidae,EUR
+Whinchat,Saxicola rubetra,,PASSERIFORMES,Muscicapidae,EUR
+Fuerteventura Stonechat,Saxicola dacotiae,Near-threatened,PASSERIFORMES,Muscicapidae,EUR
+European Stonechat,Saxicola rubicola,,PASSERIFORMES,Muscicapidae,EUR
+Siberian Stonechat,Saxicola maurus,,PASSERIFORMES,Muscicapidae,EUR
+Amur Stonechat,Saxicola stejnegeri,,PASSERIFORMES,Muscicapidae,EUR
+African Stonechat,Saxicola torquatus,,PASSERIFORMES,Muscicapidae,EUR
+Pied Bushchat,Saxicola caprata,Rare/Accidental,PASSERIFORMES,Muscicapidae,EUR
+Northern Wheatear,Oenanthe oenanthe,,PASSERIFORMES,Muscicapidae,EUR
+Atlas Wheatear,Oenanthe seebohmi,Rare/Accidental,PASSERIFORMES,Muscicapidae,EUR
+Isabelline Wheatear,Oenanthe isabellina,,PASSERIFORMES,Muscicapidae,EUR
+Desert Wheatear,Oenanthe deserti,Rare/Accidental,PASSERIFORMES,Muscicapidae,EUR
+Western Black-eared Wheatear,Oenanthe hispanica,,PASSERIFORMES,Muscicapidae,EUR
+Cyprus Wheatear,Oenanthe cypriaca,,PASSERIFORMES,Muscicapidae,EUR
+Eastern Black-eared Wheatear,Oenanthe melanoleuca,,PASSERIFORMES,Muscicapidae,EUR
+Pied Wheatear,Oenanthe pleschanka,,PASSERIFORMES,Muscicapidae,EUR
+Red-rumped Wheatear,Oenanthe moesta,Rare/Accidental,PASSERIFORMES,Muscicapidae,EUR
+Variable Wheatear,Oenanthe picata,Rare/Accidental,PASSERIFORMES,Muscicapidae,EUR
+Black Wheatear,Oenanthe leucura,,PASSERIFORMES,Muscicapidae,EUR
+White-crowned Wheatear,Oenanthe leucopyga,Rare/Accidental,PASSERIFORMES,Muscicapidae,EUR
+Finsch's Wheatear,Oenanthe finschii,Rare/Accidental,PASSERIFORMES,Muscicapidae,EUR
+Kurdish Wheatear,Oenanthe xanthoprymna,Rare/Accidental,PASSERIFORMES,Muscicapidae,EUR
+Bohemian Waxwing,Bombycilla garrulus,,PASSERIFORMES,Bombycillidae,EUR
+Cedar Waxwing,Bombycilla cedrorum,Rare/Accidental,PASSERIFORMES,Bombycillidae,EUR
+Copper Sunbird,Cinnyris cupreus,Uncertain origin,PASSERIFORMES,Nectariniidae,EUR
+Black-headed Weaver,Ploceus melanocephalus,Introduced species,PASSERIFORMES,Ploceidae,EUR
+Yellow-crowned Bishop,Euplectes afer,Introduced species,PASSERIFORMES,Ploceidae,EUR
+Indian Silverbill,Euodice malabarica,Introduced species,PASSERIFORMES,Estrildidae,EUR
+Scaly-breasted Munia,Lonchura punctulata,Introduced species,PASSERIFORMES,Estrildidae,EUR
+Tricolored Munia,Lonchura malacca,,PASSERIFORMES,Estrildidae,EUR
+Chestnut Munia,Lonchura atricapilla,Introduced species,PASSERIFORMES,Estrildidae,EUR
+Orange-cheeked Waxbill,Estrilda melpoda,Introduced species,PASSERIFORMES,Estrildidae,EUR
+Common Waxbill,Estrilda astrild,Introduced species,PASSERIFORMES,Estrildidae,EUR
+Red Avadavat,Amandava amandava,Introduced species,PASSERIFORMES,Estrildidae,EUR
+Alpine Accentor,Prunella collaris,,PASSERIFORMES,Prunellidae,EUR
+Siberian Accentor,Prunella montanella,Rare/Accidental,PASSERIFORMES,Prunellidae,EUR
+Radde's Accentor,Prunella ocularis,Rare/Accidental,PASSERIFORMES,Prunellidae,EUR
+Black-throated Accentor,Prunella atrogularis,Rare/Accidental,PASSERIFORMES,Prunellidae,EUR
+Dunnock,Prunella modularis,,PASSERIFORMES,Prunellidae,EUR
+House Sparrow,Passer domesticus,,PASSERIFORMES,Passeridae,EUR
+Italian Sparrow,Passer italiae,Vulnerable,PASSERIFORMES,Passeridae,EUR
+Spanish Sparrow,Passer hispaniolensis,,PASSERIFORMES,Passeridae,EUR
+Dead Sea Sparrow,Passer moabiticus,Rare/Accidental,PASSERIFORMES,Passeridae,EUR
+Cape Verde Sparrow,Passer iagoensis,Uncertain origin,PASSERIFORMES,Passeridae,EUR
+Eurasian Tree Sparrow,Passer montanus,,PASSERIFORMES,Passeridae,EUR
+Rock Sparrow,Petronia petronia,,PASSERIFORMES,Passeridae,EUR
+Pale Rockfinch,Carpospiza brachydactyla,Rare/Accidental,PASSERIFORMES,Passeridae,EUR
+White-winged Snowfinch,Montifringilla nivalis,,PASSERIFORMES,Passeridae,EUR
+Gray Wagtail,Motacilla cinerea,,PASSERIFORMES,Motacillidae,EUR
+Western Yellow Wagtail,Motacilla flava,,PASSERIFORMES,Motacillidae,EUR
+Eastern Yellow Wagtail,Motacilla tschutschensis,,PASSERIFORMES,Motacillidae,EUR
+Citrine Wagtail,Motacilla citreola,,PASSERIFORMES,Motacillidae,EUR
+White Wagtail,Motacilla alba,,PASSERIFORMES,Motacillidae,EUR
+Richard's Pipit,Anthus richardi,,PASSERIFORMES,Motacillidae,EUR
+Paddyfield Pipit,Anthus rufulus,Rare/Accidental,PASSERIFORMES,Motacillidae,EUR
+Long-billed Pipit,Anthus similis,Rare/Accidental,PASSERIFORMES,Motacillidae,EUR
+Blyth's Pipit,Anthus godlewskii,Rare/Accidental,PASSERIFORMES,Motacillidae,EUR
+Tawny Pipit,Anthus campestris,,PASSERIFORMES,Motacillidae,EUR
+Berthelot's Pipit,Anthus berthelotii,,PASSERIFORMES,Motacillidae,EUR
+Meadow Pipit,Anthus pratensis,,PASSERIFORMES,Motacillidae,EUR
+Tree Pipit,Anthus trivialis,,PASSERIFORMES,Motacillidae,EUR
+Olive-backed Pipit,Anthus hodgsoni,Rare/Accidental,PASSERIFORMES,Motacillidae,EUR
+Pechora Pipit,Anthus gustavi,Rare/Accidental,PASSERIFORMES,Motacillidae,EUR
+Red-throated Pipit,Anthus cervinus,,PASSERIFORMES,Motacillidae,EUR
+Water Pipit,Anthus spinoletta,,PASSERIFORMES,Motacillidae,EUR
+Rock Pipit,Anthus petrosus,,PASSERIFORMES,Motacillidae,EUR
+Siberian Pipit,Anthus japonicus,Rare/Accidental,PASSERIFORMES,Motacillidae,EUR
+American Pipit,Anthus rubescens,,PASSERIFORMES,Motacillidae,EUR
+Common Chaffinch,Fringilla coelebs,,PASSERIFORMES,Fringillidae,EUR
+Azores Chaffinch,Fringilla moreletti,,PASSERIFORMES,Fringillidae,EUR
+Madeira Chaffinch,Fringilla maderensis,,PASSERIFORMES,Fringillidae,EUR
+Canary Islands Chaffinch,Fringilla canariensis,,PASSERIFORMES,Fringillidae,EUR
+African Chaffinch,Fringilla spodiogenys,Rare/Accidental,PASSERIFORMES,Fringillidae,EUR
+Tenerife Blue Chaffinch,Fringilla teydea,Near-threatened,PASSERIFORMES,Fringillidae,EUR
+Gran Canaria Blue Chaffinch,Fringilla polatzeki,Endangered,PASSERIFORMES,Fringillidae,EUR
+Brambling,Fringilla montifringilla,,PASSERIFORMES,Fringillidae,EUR
+Evening Grosbeak,Coccothraustes vespertinus,Rare/Accidental Vulnerable,PASSERIFORMES,Fringillidae,EUR
+Hawfinch,Coccothraustes coccothraustes,,PASSERIFORMES,Fringillidae,EUR
+Common Rosefinch,Carpodacus erythrinus,,PASSERIFORMES,Fringillidae,EUR
+Great Rosefinch,Carpodacus rubicilla,Rare/Accidental,PASSERIFORMES,Fringillidae,EUR
+Pallas's Rosefinch,Carpodacus roseus,Rare/Accidental,PASSERIFORMES,Fringillidae,EUR
+Pine Grosbeak,Pinicola enucleator,,PASSERIFORMES,Fringillidae,EUR
+Azores Bullfinch,Pyrrhula murina,Vulnerable,PASSERIFORMES,Fringillidae,EUR
+Eurasian Bullfinch,Pyrrhula pyrrhula,,PASSERIFORMES,Fringillidae,EUR
+Trumpeter Finch,Bucanetes githagineus,,PASSERIFORMES,Fringillidae,EUR
+Mongolian Finch,Bucanetes mongolicus,,PASSERIFORMES,Fringillidae,EUR
+Gray-crowned Rosy-Finch,Leucosticte tephrocotis,,PASSERIFORMES,Fringillidae,EUR
+House Finch,Haemorhous mexicanus,Introduced species,PASSERIFORMES,Fringillidae,EUR
+Desert Finch,Rhodospiza obsoleta,Rare/Accidental,PASSERIFORMES,Fringillidae,EUR
+European Greenfinch,Chloris chloris,,PASSERIFORMES,Fringillidae,EUR
+Twite,Linaria flavirostris,,PASSERIFORMES,Fringillidae,EUR
+Eurasian Linnet,Linaria cannabina,,PASSERIFORMES,Fringillidae,EUR
+Redpoll,Acanthis flammea,,PASSERIFORMES,Fringillidae,EUR
+Parrot Crossbill,Loxia pytyopsittacus,,PASSERIFORMES,Fringillidae,EUR
+Scottish Crossbill,Loxia scotica,,PASSERIFORMES,Fringillidae,EUR
+Red Crossbill,Loxia curvirostra,,PASSERIFORMES,Fringillidae,EUR
+White-winged Crossbill,Loxia leucoptera,,PASSERIFORMES,Fringillidae,EUR
+European Goldfinch,Carduelis carduelis,,PASSERIFORMES,Fringillidae,EUR
+Gray-crowned Goldfinch,Carduelis caniceps,Rare/Accidental,PASSERIFORMES,Fringillidae,EUR
+Citril Finch,Carduelis citrinella,,PASSERIFORMES,Fringillidae,EUR
+Corsican Finch,Carduelis corsicana,,PASSERIFORMES,Fringillidae,EUR
+European Serin,Serinus serinus,,PASSERIFORMES,Fringillidae,EUR
+Island Canary,Serinus canaria,,PASSERIFORMES,Fringillidae,EUR
+Fire-fronted Serin,Serinus pusillus,Rare/Accidental,PASSERIFORMES,Fringillidae,EUR
+Eurasian Siskin,Spinus spinus,,PASSERIFORMES,Fringillidae,EUR
+Pine Siskin,Spinus pinus,Rare/Accidental,PASSERIFORMES,Fringillidae,EUR
+Lapland Longspur,Calcarius lapponicus,,PASSERIFORMES,Calcariidae,EUR
+Snow Bunting,Plectrophenax nivalis,,PASSERIFORMES,Calcariidae,EUR
+Black-headed Bunting,Emberiza melanocephala,,PASSERIFORMES,Emberizidae,EUR
+Red-headed Bunting,Emberiza bruniceps,Uncertain origin,PASSERIFORMES,Emberizidae,EUR
+Corn Bunting,Emberiza calandra,,PASSERIFORMES,Emberizidae,EUR
+Chestnut-eared Bunting,Emberiza fucata,Rare/Accidental,PASSERIFORMES,Emberizidae,EUR
+Rock Bunting,Emberiza cia,,PASSERIFORMES,Emberizidae,EUR
+Godlewski's Bunting,Emberiza godlewskii,Uncertain origin,PASSERIFORMES,Emberizidae,EUR
+Meadow Bunting,Emberiza cioides,Uncertain origin,PASSERIFORMES,Emberizidae,EUR
+Cirl Bunting,Emberiza cirlus,,PASSERIFORMES,Emberizidae,EUR
+Yellowhammer,Emberiza citrinella,,PASSERIFORMES,Emberizidae,EUR
+Pine Bunting,Emberiza leucocephalos,Rare/Accidental,PASSERIFORMES,Emberizidae,EUR
+Gray-necked Bunting,Emberiza buchanani,Rare/Accidental,PASSERIFORMES,Emberizidae,EUR
+Cinereous Bunting,Emberiza cineracea,Near-threatened,PASSERIFORMES,Emberizidae,EUR
+Ortolan Bunting,Emberiza hortulana,,PASSERIFORMES,Emberizidae,EUR
+Cretzschmar's Bunting,Emberiza caesia,,PASSERIFORMES,Emberizidae,EUR
+House Bunting,Emberiza sahari,Rare/Accidental,PASSERIFORMES,Emberizidae,EUR
+Striolated Bunting,Emberiza striolata,,PASSERIFORMES,Emberizidae,EUR
+Pallas's Bunting,Emberiza pallasi,Rare/Accidental,PASSERIFORMES,Emberizidae,EUR
+Reed Bunting,Emberiza schoeniclus,,PASSERIFORMES,Emberizidae,EUR
+Yellow-breasted Bunting,Emberiza aureola,Rare/Accidental Critically endangered,PASSERIFORMES,Emberizidae,EUR
+Little Bunting,Emberiza pusilla,,PASSERIFORMES,Emberizidae,EUR
+Rustic Bunting,Emberiza rustica,Vulnerable,PASSERIFORMES,Emberizidae,EUR
+Black-faced Bunting,Emberiza spodocephala,Rare/Accidental,PASSERIFORMES,Emberizidae,EUR
+Chestnut Bunting,Emberiza rutila,Rare/Accidental,PASSERIFORMES,Emberizidae,EUR
+Yellow-browed Bunting,Emberiza chrysophrys,Rare/Accidental,PASSERIFORMES,Emberizidae,EUR
+Lark Sparrow,Chondestes grammacus,Rare/Accidental,PASSERIFORMES,Passerellidae,EUR
+American Tree Sparrow,Spizelloides arborea,Rare/Accidental,PASSERIFORMES,Passerellidae,EUR
+Fox Sparrow,Passerella iliaca,Rare/Accidental,PASSERIFORMES,Passerellidae,EUR
+Dark-eyed Junco,Junco hyemalis,,PASSERIFORMES,Passerellidae,EUR
+White-crowned Sparrow,Zonotrichia leucophrys,Rare/Accidental,PASSERIFORMES,Passerellidae,EUR
+White-throated Sparrow,Zonotrichia albicollis,Rare/Accidental,PASSERIFORMES,Passerellidae,EUR
+Savannah Sparrow,Passerculus sandwichensis,Rare/Accidental,PASSERIFORMES,Passerellidae,EUR
+Song Sparrow,Melospiza melodia,Rare/Accidental,PASSERIFORMES,Passerellidae,EUR
+Lincoln's Sparrow,Melospiza lincolnii,Rare/Accidental,PASSERIFORMES,Passerellidae,EUR
+Eastern Towhee,Pipilo erythrophthalmus,Rare/Accidental,PASSERIFORMES,Passerellidae,EUR
+Yellow-breasted Chat,Icteria virens,Rare/Accidental,PASSERIFORMES,Icteriidae,EUR
+Yellow-headed Blackbird,Xanthocephalus xanthocephalus,Rare/Accidental,PASSERIFORMES,Icteridae,EUR
+Bobolink,Dolichonyx oryzivorus,Rare/Accidental,PASSERIFORMES,Icteridae,EUR
+Baltimore Oriole,Icterus galbula,Rare/Accidental,PASSERIFORMES,Icteridae,EUR
+Red-winged Blackbird,Agelaius phoeniceus,Rare/Accidental,PASSERIFORMES,Icteridae,EUR
+Brown-headed Cowbird,Molothrus ater,Rare/Accidental,PASSERIFORMES,Icteridae,EUR
+Rusty Blackbird,Euphagus carolinus,Rare/Accidental Vulnerable,PASSERIFORMES,Icteridae,EUR
+Brewer's Blackbird,Euphagus cyanocephalus,Uncertain origin,PASSERIFORMES,Icteridae,EUR
+Common Grackle,Quiscalus quiscula,Rare/Accidental Near-threatened,PASSERIFORMES,Icteridae,EUR
+Boat-tailed Grackle,Quiscalus major,Uncertain origin,PASSERIFORMES,Icteridae,EUR
+Ovenbird,Seiurus aurocapilla,Rare/Accidental,PASSERIFORMES,Parulidae,EUR
+Louisiana Waterthrush,Parkesia motacilla,Rare/Accidental,PASSERIFORMES,Parulidae,EUR
+Northern Waterthrush,Parkesia noveboracensis,Rare/Accidental,PASSERIFORMES,Parulidae,EUR
+Golden-winged Warbler,Vermivora chrysoptera,Rare/Accidental Near-threatened,PASSERIFORMES,Parulidae,EUR
+Blue-winged Warbler,Vermivora cyanoptera,Rare/Accidental,PASSERIFORMES,Parulidae,EUR
+Black-and-white Warbler,Mniotilta varia,Rare/Accidental,PASSERIFORMES,Parulidae,EUR
+Prothonotary Warbler,Protonotaria citrea,Rare/Accidental,PASSERIFORMES,Parulidae,EUR
+Tennessee Warbler,Leiothlypis peregrina,Rare/Accidental,PASSERIFORMES,Parulidae,EUR
+Orange-crowned Warbler,Leiothlypis celata,Rare/Accidental,PASSERIFORMES,Parulidae,EUR
+Nashville Warbler,Leiothlypis ruficapilla,Rare/Accidental,PASSERIFORMES,Parulidae,EUR
+Connecticut Warbler,Oporornis agilis,Rare/Accidental,PASSERIFORMES,Parulidae,EUR
+Mourning Warbler,Geothlypis philadelphia,Rare/Accidental,PASSERIFORMES,Parulidae,EUR
+Common Yellowthroat,Geothlypis trichas,Rare/Accidental,PASSERIFORMES,Parulidae,EUR
+Hooded Warbler,Setophaga citrina,Rare/Accidental,PASSERIFORMES,Parulidae,EUR
+American Redstart,Setophaga ruticilla,Rare/Accidental,PASSERIFORMES,Parulidae,EUR
+Cape May Warbler,Setophaga tigrina,Rare/Accidental,PASSERIFORMES,Parulidae,EUR
+Cerulean Warbler,Setophaga cerulea,Rare/Accidental Near-threatened,PASSERIFORMES,Parulidae,EUR
+Northern Parula,Setophaga americana,Rare/Accidental,PASSERIFORMES,Parulidae,EUR
+Magnolia Warbler,Setophaga magnolia,Rare/Accidental,PASSERIFORMES,Parulidae,EUR
+Bay-breasted Warbler,Setophaga castanea,Rare/Accidental,PASSERIFORMES,Parulidae,EUR
+Blackburnian Warbler,Setophaga fusca,Rare/Accidental,PASSERIFORMES,Parulidae,EUR
+Yellow Warbler,Setophaga petechia,Rare/Accidental,PASSERIFORMES,Parulidae,EUR
+Chestnut-sided Warbler,Setophaga pensylvanica,Rare/Accidental,PASSERIFORMES,Parulidae,EUR
+Blackpoll Warbler,Setophaga striata,Rare/Accidental Near-threatened,PASSERIFORMES,Parulidae,EUR
+Black-throated Blue Warbler,Setophaga caerulescens,Rare/Accidental,PASSERIFORMES,Parulidae,EUR
+Palm Warbler,Setophaga palmarum,Rare/Accidental,PASSERIFORMES,Parulidae,EUR
+Pine Warbler,Setophaga pinus,Rare/Accidental,PASSERIFORMES,Parulidae,EUR
+Yellow-rumped Warbler,Setophaga coronata,Rare/Accidental,PASSERIFORMES,Parulidae,EUR
+Yellow-throated Warbler,Setophaga dominica,Rare/Accidental,PASSERIFORMES,Parulidae,EUR
+Prairie Warbler,Setophaga discolor,Rare/Accidental,PASSERIFORMES,Parulidae,EUR
+Black-throated Green Warbler,Setophaga virens,Rare/Accidental,PASSERIFORMES,Parulidae,EUR
+Pale-legged Warbler,Myiothlypis signata,Rare/Accidental,PASSERIFORMES,Parulidae,EUR
+Canada Warbler,Cardellina canadensis,Rare/Accidental,PASSERIFORMES,Parulidae,EUR
+Wilson's Warbler,Cardellina pusilla,Rare/Accidental,PASSERIFORMES,Parulidae,EUR
+Summer Tanager,Piranga rubra,Rare/Accidental,PASSERIFORMES,Cardinalidae,EUR
+Scarlet Tanager,Piranga olivacea,Rare/Accidental,PASSERIFORMES,Cardinalidae,EUR
+Rose-breasted Grosbeak,Pheucticus ludovicianus,Rare/Accidental,PASSERIFORMES,Cardinalidae,EUR
+Blue Grosbeak,Passerina caerulea,Rare/Accidental,PASSERIFORMES,Cardinalidae,EUR
+Indigo Bunting,Passerina cyanea,Rare/Accidental,PASSERIFORMES,Cardinalidae,EUR
+Dickcissel,Spiza americana,Rare/Accidental,PASSERIFORMES,Cardinalidae,EUR

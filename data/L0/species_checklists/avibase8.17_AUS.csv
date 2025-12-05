@@ -1,0 +1,1901 @@
+common_name,scientific_name,status,order,family,region
+Common Ostrich,Struthio camelus,Introduced species,STRUTHIONIFORMES,Struthionidae,AUS
+Southern Cassowary,Casuarius casuarius,,CASUARIIFORMES,Casuariidae,AUS
+Dwarf Cassowary,Casuarius bennetti,,CASUARIIFORMES,Casuariidae,AUS
+Northern Cassowary,Casuarius unappendiculatus,,CASUARIIFORMES,Casuariidae,AUS
+Emu,Dromaius novaehollandiae,,CASUARIIFORMES,Casuariidae,AUS
+Southern Brown Kiwi,Apteryx australis,Vulnerable,APTERYGIFORMES,Apterygidae,AUS
+Okarito Brown Kiwi,Apteryx rowi,Vulnerable,APTERYGIFORMES,Apterygidae,AUS
+North Island Brown Kiwi,Apteryx mantelli,Vulnerable,APTERYGIFORMES,Apterygidae,AUS
+Little Spotted Kiwi,Apteryx owenii,Near-threatened,APTERYGIFORMES,Apterygidae,AUS
+Great Spotted Kiwi,Apteryx maxima,Vulnerable,APTERYGIFORMES,Apterygidae,AUS
+Magpie Goose,Anseranas semipalmata,,ANSERIFORMES,Anseranatidae,AUS
+Spotted Whistling-Duck,Dendrocygna guttata,,ANSERIFORMES,Anatidae,AUS
+Plumed Whistling-Duck,Dendrocygna eytoni,,ANSERIFORMES,Anatidae,AUS
+Wandering Whistling-Duck,Dendrocygna arcuata,,ANSERIFORMES,Anatidae,AUS
+Graylag Goose,Anser anser,Introduced species,ANSERIFORMES,Anatidae,AUS
+Greater White-fronted Goose,Anser albifrons,,ANSERIFORMES,Anatidae,AUS
+Canada Goose,Branta canadensis,Introduced species,ANSERIFORMES,Anatidae,AUS
+Cape Barren Goose,Cereopsis novaehollandiae,,ANSERIFORMES,Anatidae,AUS
+Freckled Duck,Stictonetta naevosa,,ANSERIFORMES,Anatidae,AUS
+Mute Swan,Cygnus olor,,ANSERIFORMES,Anatidae,AUS
+Black Swan,Cygnus atratus,,ANSERIFORMES,Anatidae,AUS
+Radjah Shelduck,Radjah radjah,,ANSERIFORMES,Anatidae,AUS
+Australian Shelduck,Tadorna tadornoides,,ANSERIFORMES,Anatidae,AUS
+Paradise Shelduck,Tadorna variegata,,ANSERIFORMES,Anatidae,AUS
+Muscovy Duck,Cairina moschata,,ANSERIFORMES,Anatidae,AUS
+Green Pygmy-Goose,Nettapus pulchellus,,ANSERIFORMES,Anatidae,AUS
+Cotton Pygmy-Goose,Nettapus coromandelianus,,ANSERIFORMES,Anatidae,AUS
+Maned Duck,Chenonetta jubata,,ANSERIFORMES,Anatidae,AUS
+Blue Duck,Hymenolaimus malacorhynchos,Endangered,ANSERIFORMES,Anatidae,AUS
+Salvadori's Teal,Salvadorina waigiuensis,,ANSERIFORMES,Anatidae,AUS
+Garganey,Spatula querquedula,,ANSERIFORMES,Anatidae,AUS
+Australasian Shoveler,Spatula rhynchotis,,ANSERIFORMES,Anatidae,AUS
+Northern Shoveler,Spatula clypeata,,ANSERIFORMES,Anatidae,AUS
+Eurasian Wigeon,Mareca penelope,,ANSERIFORMES,Anatidae,AUS
+Pacific Black Duck,Anas superciliosa,,ANSERIFORMES,Anatidae,AUS
+Eastern Spot-billed Duck,Anas zonorhyncha,,ANSERIFORMES,Anatidae,AUS
+Mallard,Anas platyrhynchos,,ANSERIFORMES,Anatidae,AUS
+Northern Pintail,Anas acuta,Rare/Accidental,ANSERIFORMES,Anatidae,AUS
+Green-winged Teal,Anas crecca,Rare/Accidental,ANSERIFORMES,Anatidae,AUS
+Sunda Teal,Anas gibberifrons,Near-threatened,ANSERIFORMES,Anatidae,AUS
+Gray Teal,Anas gracilis,,ANSERIFORMES,Anatidae,AUS
+Chestnut Teal,Anas castanea,,ANSERIFORMES,Anatidae,AUS
+Auckland Islands Teal,Anas aucklandica,Near-threatened,ANSERIFORMES,Anatidae,AUS
+Campbell Islands Teal,Anas nesiotis,Vulnerable,ANSERIFORMES,Anatidae,AUS
+Brown Teal,Anas chlorotis,Near-threatened,ANSERIFORMES,Anatidae,AUS
+Pink-eared Duck,Malacorhynchus membranaceus,,ANSERIFORMES,Anatidae,AUS
+Hardhead,Aythya australis,,ANSERIFORMES,Anatidae,AUS
+Tufted Duck,Aythya fuligula,Rare/Accidental,ANSERIFORMES,Anatidae,AUS
+New Zealand Scaup,Aythya novaeseelandiae,,ANSERIFORMES,Anatidae,AUS
+Auckland Islands Merganser,Mergus australis,Extinct,ANSERIFORMES,Anatidae,AUS
+Blue-billed Duck,Oxyura australis,,ANSERIFORMES,Anatidae,AUS
+Musk Duck,Biziura lobata,,ANSERIFORMES,Anatidae,AUS
+Australian Brushturkey,Alectura lathami,,GALLIFORMES,Megapodiidae,AUS
+Wattled Brushturkey,Aepypodius arfakianus,,GALLIFORMES,Megapodiidae,AUS
+Waigeo Brushturkey,Aepypodius bruijnii,Endangered,GALLIFORMES,Megapodiidae,AUS
+Red-billed Brushturkey,Talegalla cuvieri,,GALLIFORMES,Megapodiidae,AUS
+Yellow-legged Brushturkey,Talegalla fuscirostris,,GALLIFORMES,Megapodiidae,AUS
+Red-legged Brushturkey,Talegalla jobiensis,,GALLIFORMES,Megapodiidae,AUS
+Malleefowl,Leipoa ocellata,Vulnerable,GALLIFORMES,Megapodiidae,AUS
+Moluccan Megapode,Eulipoa wallacei,Vulnerable,GALLIFORMES,Megapodiidae,AUS
+Dusky Megapode,Megapodius freycinet,,GALLIFORMES,Megapodiidae,AUS
+Biak Megapode,Megapodius geelvinkianus,Near-threatened,GALLIFORMES,Megapodiidae,AUS
+Melanesian Megapode,Megapodius eremita,,GALLIFORMES,Megapodiidae,AUS
+Vanuatu Megapode,Megapodius layardi,,GALLIFORMES,Megapodiidae,AUS
+New Guinea Megapode,Megapodius decollatus,,GALLIFORMES,Megapodiidae,AUS
+Orange-footed Megapode,Megapodius reinwardt,,GALLIFORMES,Megapodiidae,AUS
+Helmeted Guineafowl,Numida meleagris,Introduced species,GALLIFORMES,Numididae,AUS
+Northern Bobwhite,Colinus virginianus,Introduced species Near-threatened,GALLIFORMES,Odontophoridae,AUS
+California Quail,Callipepla californica,Introduced species,GALLIFORMES,Odontophoridae,AUS
+Tacarcuna Wood-Quail,Odontophorus dialeucos,Rare/Accidental,GALLIFORMES,Odontophoridae,AUS
+Wild Turkey,Meleagris gallopavo,Introduced species,GALLIFORMES,Phasianidae,AUS
+Black Grouse,Lyrurus tetrix,Rare/Accidental,GALLIFORMES,Phasianidae,AUS
+Gray Partridge,Perdix perdix,Introduced species,GALLIFORMES,Phasianidae,AUS
+Ring-necked Pheasant,Phasianus colchicus,,GALLIFORMES,Phasianidae,AUS
+Indian Peafowl,Pavo cristatus,Introduced species,GALLIFORMES,Phasianidae,AUS
+Green Junglefowl,Gallus varius,Introduced species,GALLIFORMES,Phasianidae,AUS
+Red Junglefowl,Gallus gallus,Introduced species,GALLIFORMES,Phasianidae,AUS
+Brown Quail,Synoicus ypsilophorus,,GALLIFORMES,Phasianidae,AUS
+Snow Mountain Quail,Synoicus monorthonyx,,GALLIFORMES,Phasianidae,AUS
+Blue-breasted Quail,Synoicus chinensis,,GALLIFORMES,Phasianidae,AUS
+Stubble Quail,Coturnix pectoralis,,GALLIFORMES,Phasianidae,AUS
+New Zealand Quail,Coturnix novaezelandiae,Extinct,GALLIFORMES,Phasianidae,AUS
+Barbary Partridge,Alectoris barbara,Extirpated,GALLIFORMES,Phasianidae,AUS
+Red-legged Partridge,Alectoris rufa,Introduced species Near-threatened,GALLIFORMES,Phasianidae,AUS
+Chukar,Alectoris chukar,Introduced species,GALLIFORMES,Phasianidae,AUS
+Rock Pigeon,Columba livia,,COLUMBIFORMES,Columbidae,AUS
+Metallic Pigeon,Columba vitiensis,,COLUMBIFORMES,Columbidae,AUS
+White-headed Pigeon,Columba leucomela,,COLUMBIFORMES,Columbidae,AUS
+Yellow-legged Pigeon,Columba pallidiceps,Vulnerable,COLUMBIFORMES,Columbidae,AUS
+Oriental Turtle-Dove,Streptopelia orientalis,Rare/Accidental,COLUMBIFORMES,Columbidae,AUS
+African Collared-Dove,Streptopelia roseogrisea,,COLUMBIFORMES,Columbidae,AUS
+Red Collared-Dove,Streptopelia tranquebarica,Rare/Accidental,COLUMBIFORMES,Columbidae,AUS
+Spotted Dove,Spilopelia chinensis,,COLUMBIFORMES,Columbidae,AUS
+Laughing Dove,Spilopelia senegalensis,,COLUMBIFORMES,Columbidae,AUS
+Brown Cuckoo-Dove,Macropygia phasianella,Endemic,COLUMBIFORMES,Columbidae,AUS
+Amboyna Cuckoo-Dove,Macropygia amboinensis,,COLUMBIFORMES,Columbidae,AUS
+Sultan's Cuckoo-Dove,Macropygia doreya,,COLUMBIFORMES,Columbidae,AUS
+Black-billed Cuckoo-Dove,Macropygia nigrirostris,,COLUMBIFORMES,Columbidae,AUS
+Spot-breasted Cuckoo-Dove,Macropygia mackinlayi,,COLUMBIFORMES,Columbidae,AUS
+Great Cuckoo-Dove,Reinwardtoena reinwardti,,COLUMBIFORMES,Columbidae,AUS
+Pied Cuckoo-Dove,Reinwardtoena browni,Near-threatened,COLUMBIFORMES,Columbidae,AUS
+Crested Cuckoo-Dove,Reinwardtoena crassirostris,,COLUMBIFORMES,Columbidae,AUS
+Asian Emerald Dove,Chalcophaps indica,,COLUMBIFORMES,Columbidae,AUS
+Pacific Emerald Dove,Chalcophaps longirostris,,COLUMBIFORMES,Columbidae,AUS
+Stephan's Dove,Chalcophaps stephani,,COLUMBIFORMES,Columbidae,AUS
+New Guinea Bronzewing,Henicophaps albifrons,,COLUMBIFORMES,Columbidae,AUS
+New Britain Bronzewing,Henicophaps foersteri,Vulnerable,COLUMBIFORMES,Columbidae,AUS
+Shy Ground Dove,Pampusana stairi,,COLUMBIFORMES,Columbidae,AUS
+Santa Cruz Ground Dove,Pampusana sanctaecrucis,Endangered,COLUMBIFORMES,Columbidae,AUS
+Thick-billed Ground Dove,Pampusana salamonis,Extinct,COLUMBIFORMES,Columbidae,AUS
+Tanna Ground Dove,Pampusana ferruginea,Extinct,COLUMBIFORMES,Columbidae,AUS
+Bronze Ground Dove,Pampusana beccarii,,COLUMBIFORMES,Columbidae,AUS
+White-bibbed Ground Dove,Pampusana jobiensis,,COLUMBIFORMES,Columbidae,AUS
+Norfolk Ground Dove,Pampusana norfolkensis,,COLUMBIFORMES,Columbidae,AUS
+Common Bronzewing,Phaps chalcoptera,,COLUMBIFORMES,Columbidae,AUS
+Brush Bronzewing,Phaps elegans,,COLUMBIFORMES,Columbidae,AUS
+Flock Bronzewing,Phaps histrionica,,COLUMBIFORMES,Columbidae,AUS
+Crested Pigeon,Ocyphaps lophotes,,COLUMBIFORMES,Columbidae,AUS
+Spinifex Pigeon,Geophaps plumifera,,COLUMBIFORMES,Columbidae,AUS
+Squatter Pigeon,Geophaps scripta,,COLUMBIFORMES,Columbidae,AUS
+Partridge Pigeon,Geophaps smithii,,COLUMBIFORMES,Columbidae,AUS
+Chestnut-quilled Rock-Pigeon,Petrophassa rufipennis,,COLUMBIFORMES,Columbidae,AUS
+White-quilled Rock-Pigeon,Petrophassa albipennis,,COLUMBIFORMES,Columbidae,AUS
+Wonga Pigeon,Leucosarcia melanoleuca,,COLUMBIFORMES,Columbidae,AUS
+Diamond Dove,Geopelia cuneata,,COLUMBIFORMES,Columbidae,AUS
+Zebra Dove,Geopelia striata,,COLUMBIFORMES,Columbidae,AUS
+Peaceful Dove,Geopelia placida,,COLUMBIFORMES,Columbidae,AUS
+Bar-shouldered Dove,Geopelia humeralis,,COLUMBIFORMES,Columbidae,AUS
+Nicobar Pigeon,Caloenas nicobarica,Near-threatened,COLUMBIFORMES,Columbidae,AUS
+Cinnamon Ground Dove,Gallicolumba rufigula,,COLUMBIFORMES,Columbidae,AUS
+Choiseul Pigeon,Microgoura meeki,Extinct,COLUMBIFORMES,Columbidae,AUS
+Thick-billed Ground-Pigeon,Trugon terrestris,,COLUMBIFORMES,Columbidae,AUS
+Pheasant Pigeon,Otidiphaps nobilis,,COLUMBIFORMES,Columbidae,AUS
+Western Crowned-Pigeon,Goura cristata,Vulnerable,COLUMBIFORMES,Columbidae,AUS
+Sclater's Crowned-Pigeon,Goura sclaterii,Near-threatened,COLUMBIFORMES,Columbidae,AUS
+Scheepmaker's Crowned-Pigeon,Goura scheepmakeri,Vulnerable,COLUMBIFORMES,Columbidae,AUS
+Victoria Crowned-Pigeon,Goura victoria,Near-threatened,COLUMBIFORMES,Columbidae,AUS
+Black-banded Fruit-Dove,Ptilinopus alligator,,COLUMBIFORMES,Columbidae,AUS
+Wompoo Fruit-Dove,Ptilinopus magnificus,,COLUMBIFORMES,Columbidae,AUS
+Pink-spotted Fruit-Dove,Ptilinopus perlatus,,COLUMBIFORMES,Columbidae,AUS
+Ornate Fruit-Dove,Ptilinopus ornatus,,COLUMBIFORMES,Columbidae,AUS
+Tanna Fruit-Dove,Ptilinopus tannensis,,COLUMBIFORMES,Columbidae,AUS
+Orange-fronted Fruit-Dove,Ptilinopus aurantiifrons,,COLUMBIFORMES,Columbidae,AUS
+Wallace's Fruit-Dove,Ptilinopus wallacii,,COLUMBIFORMES,Columbidae,AUS
+Superb Fruit-Dove,Ptilinopus superbus,,COLUMBIFORMES,Columbidae,AUS
+Many-colored Fruit-Dove,Ptilinopus perousii,,COLUMBIFORMES,Columbidae,AUS
+Crimson-crowned Fruit-Dove,Ptilinopus porphyraceus,,COLUMBIFORMES,Columbidae,AUS
+Rose-crowned Fruit-Dove,Ptilinopus regina,,COLUMBIFORMES,Columbidae,AUS
+Silver-capped Fruit-Dove,Ptilinopus richardsii,,COLUMBIFORMES,Columbidae,AUS
+Red-bellied Fruit-Dove,Ptilinopus greyi,,COLUMBIFORMES,Columbidae,AUS
+Coroneted Fruit-Dove,Ptilinopus coronulatus,,COLUMBIFORMES,Columbidae,AUS
+Beautiful Fruit-Dove,Ptilinopus pulchellus,,COLUMBIFORMES,Columbidae,AUS
+White-breasted Fruit-Dove,Ptilinopus rivoli,,COLUMBIFORMES,Columbidae,AUS
+Geelvink Fruit-Dove,Ptilinopus speciosus,Endemic,COLUMBIFORMES,Columbidae,AUS
+Yellow-bibbed Fruit-Dove,Ptilinopus solomonensis,,COLUMBIFORMES,Columbidae,AUS
+Claret-breasted Fruit-Dove,Ptilinopus viridis,,COLUMBIFORMES,Columbidae,AUS
+White-headed Fruit-Dove,Ptilinopus eugeniae,,COLUMBIFORMES,Columbidae,AUS
+Orange-bellied Fruit-Dove,Ptilinopus iozonus,,COLUMBIFORMES,Columbidae,AUS
+Knob-billed Fruit-Dove,Ptilinopus insolitus,,COLUMBIFORMES,Columbidae,AUS
+Dwarf Fruit-Dove,Ptilinopus nainus,,COLUMBIFORMES,Columbidae,AUS
+Orange Dove,Ptilinopus victor,Endemic,COLUMBIFORMES,Columbidae,AUS
+Golden Dove,Ptilinopus luteovirens,Endemic,COLUMBIFORMES,Columbidae,AUS
+Whistling Dove,Ptilinopus layardi,Endemic Near-threatened,COLUMBIFORMES,Columbidae,AUS
+Cloven-feathered Dove,Drepanoptila holosericea,,COLUMBIFORMES,Columbidae,AUS
+Spectacled Imperial-Pigeon,Ducula perspicillata,,COLUMBIFORMES,Columbidae,AUS
+Elegant Imperial-Pigeon,Ducula concinna,,COLUMBIFORMES,Columbidae,AUS
+Pacific Imperial-Pigeon,Ducula pacifica,,COLUMBIFORMES,Columbidae,AUS
+Red-knobbed Imperial-Pigeon,Ducula rubricera,,COLUMBIFORMES,Columbidae,AUS
+Spice Imperial-Pigeon,Ducula myristicivora,,COLUMBIFORMES,Columbidae,AUS
+Geelvink Imperial-Pigeon,Ducula geelvinkiana,Endemic,COLUMBIFORMES,Columbidae,AUS
+Purple-tailed Imperial-Pigeon,Ducula rufigaster,,COLUMBIFORMES,Columbidae,AUS
+Finsch's Imperial-Pigeon,Ducula finschii,Near-threatened,COLUMBIFORMES,Columbidae,AUS
+Rufescent Imperial-Pigeon,Ducula chalconota,,COLUMBIFORMES,Columbidae,AUS
+Island Imperial-Pigeon,Ducula pistrinaria,,COLUMBIFORMES,Columbidae,AUS
+Christmas Island Imperial-Pigeon,Ducula whartoni,,COLUMBIFORMES,Columbidae,AUS
+Barking Imperial-Pigeon,Ducula latrans,Endemic,COLUMBIFORMES,Columbidae,AUS
+Chestnut-bellied Imperial-Pigeon,Ducula brenchleyi,Near-threatened,COLUMBIFORMES,Columbidae,AUS
+Baker's Imperial-Pigeon,Ducula bakeri,,COLUMBIFORMES,Columbidae,AUS
+New Caledonian Imperial-Pigeon,Ducula goliath,Near-threatened,COLUMBIFORMES,Columbidae,AUS
+Pinon's Imperial-Pigeon,Ducula pinon,,COLUMBIFORMES,Columbidae,AUS
+Bismarck Imperial-Pigeon,Ducula melanochroa,,COLUMBIFORMES,Columbidae,AUS
+Collared Imperial-Pigeon,Ducula mullerii,,COLUMBIFORMES,Columbidae,AUS
+Zoe's Imperial-Pigeon,Ducula zoeae,,COLUMBIFORMES,Columbidae,AUS
+Pied Imperial-Pigeon,Ducula bicolor,,COLUMBIFORMES,Columbidae,AUS
+Yellowish Imperial-Pigeon,Ducula subflavescens,Near-threatened,COLUMBIFORMES,Columbidae,AUS
+Torresian Imperial-Pigeon,Ducula spilorrhoa,,COLUMBIFORMES,Columbidae,AUS
+Topknot Pigeon,Lopholaimus antarcticus,,COLUMBIFORMES,Columbidae,AUS
+New Zealand Pigeon,Hemiphaga novaeseelandiae,,COLUMBIFORMES,Columbidae,AUS
+Chatham Islands Pigeon,Hemiphaga chathamensis,Vulnerable,COLUMBIFORMES,Columbidae,AUS
+Papuan Mountain-Pigeon,Gymnophaps albertisii,,COLUMBIFORMES,Columbidae,AUS
+Pale Mountain-Pigeon,Gymnophaps solomonensis,,COLUMBIFORMES,Columbidae,AUS
+Australian Bustard,Ardeotis australis,,OTIDIFORMES,Otididae,AUS
+Buff-headed Coucal,Centropus milo,,CUCULIFORMES,Cuculidae,AUS
+Pied Coucal,Centropus ateralbus,,CUCULIFORMES,Cuculidae,AUS
+Biak Coucal,Centropus chalybeus,Near-threatened,CUCULIFORMES,Cuculidae,AUS
+Greater Black Coucal,Centropus menbeki,,CUCULIFORMES,Cuculidae,AUS
+Lesser Coucal,Centropus bengalensis,Rare/Accidental,CUCULIFORMES,Cuculidae,AUS
+Violaceous Coucal,Centropus violaceus,,CUCULIFORMES,Cuculidae,AUS
+Lesser Black Coucal,Centropus bernsteini,,CUCULIFORMES,Cuculidae,AUS
+Pheasant Coucal,Centropus phasianinus,,CUCULIFORMES,Cuculidae,AUS
+Chestnut-winged Cuckoo,Clamator coromandus,Rare/Accidental,CUCULIFORMES,Cuculidae,AUS
+Dwarf Koel,Microdynamis parva,,CUCULIFORMES,Cuculidae,AUS
+Asian Koel,Eudynamys scolopaceus,,CUCULIFORMES,Cuculidae,AUS
+Pacific Koel,Eudynamys orientalis,,CUCULIFORMES,Cuculidae,AUS
+Long-tailed Koel,Urodynamis taitensis,,CUCULIFORMES,Cuculidae,AUS
+Channel-billed Cuckoo,Scythrops novaehollandiae,,CUCULIFORMES,Cuculidae,AUS
+Long-billed Cuckoo,Chalcites megarhynchus,,CUCULIFORMES,Cuculidae,AUS
+Horsfield's Bronze-Cuckoo,Chalcites basalis,,CUCULIFORMES,Cuculidae,AUS
+Black-eared Cuckoo,Chalcites osculans,,CUCULIFORMES,Cuculidae,AUS
+Rufous-throated Bronze-Cuckoo,Chalcites ruficollis,,CUCULIFORMES,Cuculidae,AUS
+Shining Bronze-Cuckoo,Chalcites lucidus,,CUCULIFORMES,Cuculidae,AUS
+White-eared Bronze-Cuckoo,Chalcites meyerii,,CUCULIFORMES,Cuculidae,AUS
+Little Bronze-Cuckoo,Chalcites minutillus,,CUCULIFORMES,Cuculidae,AUS
+Pallid Cuckoo,Heteroscenes pallidus,,CUCULIFORMES,Cuculidae,AUS
+White-crowned Cuckoo,Caliechthrus leucolophus,,CUCULIFORMES,Cuculidae,AUS
+Chestnut-breasted Cuckoo,Cacomantis castaneiventris,,CUCULIFORMES,Cuculidae,AUS
+Fan-tailed Cuckoo,Cacomantis flabelliformis,,CUCULIFORMES,Cuculidae,AUS
+Sahul Brush Cuckoo,Cacomantis variolosus,,CUCULIFORMES,Cuculidae,AUS
+Solomons Brush Cuckoo,Cacomantis addendus,,CUCULIFORMES,Cuculidae,AUS
+Manus Brush Cuckoo,Cacomantis blandus,,CUCULIFORMES,Cuculidae,AUS
+Square-tailed Drongo-Cuckoo,Surniculus lugubris,Rare/Accidental,CUCULIFORMES,Cuculidae,AUS
+Large Hawk-Cuckoo,Hierococcyx sparverioides,Rare/Accidental,CUCULIFORMES,Cuculidae,AUS
+Hodgson's Hawk-Cuckoo,Hierococcyx nisicolor,Rare/Accidental,CUCULIFORMES,Cuculidae,AUS
+Indian Cuckoo,Cuculus micropterus,Rare/Accidental,CUCULIFORMES,Cuculidae,AUS
+Himalayan Cuckoo,Cuculus saturatus,,CUCULIFORMES,Cuculidae,AUS
+Common Cuckoo,Cuculus canorus,Rare/Accidental,CUCULIFORMES,Cuculidae,AUS
+Oriental Cuckoo,Cuculus optatus,,CUCULIFORMES,Cuculidae,AUS
+Spotted Nightjar,Eurostopodus argus,,CAPRIMULGIFORMES,Caprimulgidae,AUS
+Solomons Nightjar,Eurostopodus nigripennis,Endemic (country/region) Vulnerable,CAPRIMULGIFORMES,Caprimulgidae,AUS
+New Caledonian Nightjar,Eurostopodus exul,Endemic Critically endangered,CAPRIMULGIFORMES,Caprimulgidae,AUS
+White-throated Nightjar,Eurostopodus mystacalis,,CAPRIMULGIFORMES,Caprimulgidae,AUS
+Papuan Nightjar,Eurostopodus papuensis,,CAPRIMULGIFORMES,Caprimulgidae,AUS
+Archbold's Nightjar,Eurostopodus archboldi,,CAPRIMULGIFORMES,Caprimulgidae,AUS
+Jungle Nightjar,Caprimulgus indicus,Rare/Accidental,CAPRIMULGIFORMES,Caprimulgidae,AUS
+Gray Nightjar,Caprimulgus jotaka,Rare/Accidental,CAPRIMULGIFORMES,Caprimulgidae,AUS
+Large-tailed Nightjar,Caprimulgus macrurus,,CAPRIMULGIFORMES,Caprimulgidae,AUS
+Savanna Nightjar,Caprimulgus affinis,,CAPRIMULGIFORMES,Caprimulgidae,AUS
+Tawny Frogmouth,Podargus strigoides,,PODARGIFORMES,Podargidae,AUS
+Marbled Frogmouth,Podargus ocellatus,,PODARGIFORMES,Podargidae,AUS
+Papuan Frogmouth,Podargus papuensis,,PODARGIFORMES,Podargidae,AUS
+Solomons Frogmouth,Rigidipenna inexpectata,Near-threatened,PODARGIFORMES,Podargidae,AUS
+New Caledonian Owlet-nightjar,Aegotheles savesi,Critically endangered (possibly extinct),AEGOTHELIFORMES,Aegothelidae,AUS
+Feline Owlet-nightjar,Aegotheles insignis,,AEGOTHELIFORMES,Aegothelidae,AUS
+Starry Owlet-nightjar,Aegotheles tatei,,AEGOTHELIFORMES,Aegothelidae,AUS
+Wallace's Owlet-nightjar,Aegotheles wallacii,,AEGOTHELIFORMES,Aegothelidae,AUS
+Mountain Owlet-nightjar,Aegotheles albertisi,,AEGOTHELIFORMES,Aegothelidae,AUS
+Australian Owlet-nightjar,Aegotheles cristatus,,AEGOTHELIFORMES,Aegothelidae,AUS
+Vogelkop Owlet-nightjar,Aegotheles affinis,Endemic Near-threatened,AEGOTHELIFORMES,Aegothelidae,AUS
+Barred Owlet-nightjar,Aegotheles bennettii,,AEGOTHELIFORMES,Aegothelidae,AUS
+Karimui Owlet-nightjar,Aegotheles terborghi,,AEGOTHELIFORMES,Aegothelidae,AUS
+Papuan Spinetail,Mearnsia novaeguineae,,APODIFORMES,Apodidae,AUS
+White-throated Needletail,Hirundapus caudacutus,,APODIFORMES,Apodidae,AUS
+Silver-backed Needletail,Hirundapus cochinchinensis,,APODIFORMES,Apodidae,AUS
+Christmas Island Swiftlet,Collocalia natalis,,APODIFORMES,Apodidae,AUS
+Cave Swiftlet,Collocalia linchi,,APODIFORMES,Apodidae,AUS
+Plume-toed Swiftlet,Collocalia affinis,,APODIFORMES,Apodidae,AUS
+Glossy Swiftlet,Collocalia esculenta,,APODIFORMES,Apodidae,AUS
+Satin Swiftlet,Collocalia uropygialis,,APODIFORMES,Apodidae,AUS
+Mountain Swiftlet,Aerodramus hirundinaceus,,APODIFORMES,Apodidae,AUS
+White-rumped Swiftlet,Aerodramus spodiopygius,,APODIFORMES,Apodidae,AUS
+Australian Swiftlet,Aerodramus terraereginae,,APODIFORMES,Apodidae,AUS
+Bare-legged Swiftlet,Aerodramus nuditarsus,,APODIFORMES,Apodidae,AUS
+Mayr's Swiftlet,Aerodramus orientalis,Data deficient,APODIFORMES,Apodidae,AUS
+Uniform Swiftlet,Aerodramus vanikorensis,,APODIFORMES,Apodidae,AUS
+Mossy-nest Swiftlet,Aerodramus salangana,,APODIFORMES,Apodidae,AUS
+Three-toed Swiftlet,Aerodramus papuensis,Data deficient,APODIFORMES,Apodidae,AUS
+Common Swift,Apus apus,Rare/Accidental,APODIFORMES,Apodidae,AUS
+Pacific Swift,Apus pacificus,,APODIFORMES,Apodidae,AUS
+House Swift,Apus nipalensis,Rare/Accidental,APODIFORMES,Apodidae,AUS
+Moustached Treeswift,Hemiprocne mystacea,,APODIFORMES,Hemiprocnidae,AUS
+Chestnut-headed Flufftail,Sarothrura lugens,Rare/Accidental,GRUIFORMES,Sarothruridae,AUS
+Chestnut Forest Rail,Rallicula rubra,,GRUIFORMES,Sarothruridae,AUS
+White-striped Forest Rail,Rallicula leucospila,,GRUIFORMES,Sarothruridae,AUS
+Forbes's Forest Rail,Rallicula forbesi,,GRUIFORMES,Sarothruridae,AUS
+Mayr's Forest Rail,Rallicula mayri,,GRUIFORMES,Sarothruridae,AUS
+Corn Crake,Crex crex,Rare/Accidental,GRUIFORMES,Rallidae,AUS
+Slaty-breasted Rail,Lewinia striata,Rare/Accidental,GRUIFORMES,Rallidae,AUS
+Lewin's Rail,Lewinia pectoralis,,GRUIFORMES,Rallidae,AUS
+Auckland Islands Rail,Lewinia muelleri,Vulnerable,GRUIFORMES,Rallidae,AUS
+Bare-eyed Rail,Gymnocrex plumbeiventris,,GRUIFORMES,Rallidae,AUS
+Chestnut Rail,Gallirallus castaneoventris,,GRUIFORMES,Rallidae,AUS
+Weka,Gallirallus australis,Vulnerable,GRUIFORMES,Rallidae,AUS
+New Caledonian Rail,Gallirallus lafresnayanus,Critically endangered (possibly extinct),GRUIFORMES,Rallidae,AUS
+Lord Howe Rail,Gallirallus sylvestris,Endangered,GRUIFORMES,Rallidae,AUS
+Buff-banded Rail,Gallirallus philippensis,,GRUIFORMES,Rallidae,AUS
+Chatham Islands Rail,Gallirallus modestus,Extinct,GRUIFORMES,Rallidae,AUS
+Dieffenbach's Rail,Gallirallus dieffenbachii,Extinct,GRUIFORMES,Rallidae,AUS
+New Britain Rail,Gallirallus insignis,Near-threatened,GRUIFORMES,Rallidae,AUS
+Woodford's Rail,Gallirallus woodfordi,,GRUIFORMES,Rallidae,AUS
+Bar-winged Rail,Gallirallus poecilopterus,Endemic Extinct,GRUIFORMES,Rallidae,AUS
+Barred Rail,Gallirallus torquatus,,GRUIFORMES,Rallidae,AUS
+Roviana Rail,Gallirallus rovianae,,GRUIFORMES,Rallidae,AUS
+Black-tailed Nativehen,Tribonyx ventralis,,GRUIFORMES,Rallidae,AUS
+Tasmanian Nativehen,Tribonyx mortierii,,GRUIFORMES,Rallidae,AUS
+Australian Crake,Porzana fluminea,,GRUIFORMES,Rallidae,AUS
+Lesser Moorhen,Paragallinula angulata,Rare/Accidental,GRUIFORMES,Rallidae,AUS
+Makira Moorhen,Gallinula silvestris,Critically endangered,GRUIFORMES,Rallidae,AUS
+Eurasian Moorhen,Gallinula chloropus,,GRUIFORMES,Rallidae,AUS
+Dusky Moorhen,Gallinula tenebrosa,,GRUIFORMES,Rallidae,AUS
+Eurasian Coot,Fulica atra,,GRUIFORMES,Rallidae,AUS
+New Caledonian Gallinule,Porphyrio kukwiedei,Endemic Extinct,GRUIFORMES,Rallidae,AUS
+Black-backed Swamphen,Porphyrio indicus,,GRUIFORMES,Rallidae,AUS
+South Island Takahe,Porphyrio hochstetteri,Endangered,GRUIFORMES,Rallidae,AUS
+North Island Takahe,Porphyrio mantelli,Extinct,GRUIFORMES,Rallidae,AUS
+Australasian Swamphen,Porphyrio melanotus,,GRUIFORMES,Rallidae,AUS
+Lord Howe Swamphen,Porphyrio albus,Extinct,GRUIFORMES,Rallidae,AUS
+White-browed Crake,Poliolimnas cinereus,,GRUIFORMES,Rallidae,AUS
+New Guinea Flightless Rail,Megacrex inepta,,GRUIFORMES,Rallidae,AUS
+Watercock,Gallicrex cinerea,,GRUIFORMES,Rallidae,AUS
+White-breasted Waterhen,Amaurornis phoenicurus,Rare/Accidental,GRUIFORMES,Rallidae,AUS
+Pale-vented Bush-hen,Amaurornis moluccana,,GRUIFORMES,Rallidae,AUS
+Red-necked Crake,Rallina tricolor,,GRUIFORMES,Rallidae,AUS
+Red-legged Crake,Rallina fasciata,,GRUIFORMES,Rallidae,AUS
+Ruddy-breasted Crake,Zapornia fusca,,GRUIFORMES,Rallidae,AUS
+Baillon's Crake,Zapornia pusilla,,GRUIFORMES,Rallidae,AUS
+Spotless Crake,Zapornia tabuensis,,GRUIFORMES,Rallidae,AUS
+Ocellated Crake,Rufirallus schomburgkii,Rare/Accidental,GRUIFORMES,Rallidae,AUS
+Sarus Crane,Antigone antigone,Vulnerable,GRUIFORMES,Gruidae,AUS
+Brolga,Antigone rubicunda,,GRUIFORMES,Gruidae,AUS
+Beach Thick-knee,Esacus magnirostris,Near-threatened,CHARADRIIFORMES,Burhinidae,AUS
+Bush Thick-knee,Burhinus grallarius,,CHARADRIIFORMES,Burhinidae,AUS
+Pied Stilt,Himantopus leucocephalus,,CHARADRIIFORMES,Recurvirostridae,AUS
+Black Stilt,Himantopus novaezelandiae,Critically endangered,CHARADRIIFORMES,Recurvirostridae,AUS
+Black-necked Stilt,Himantopus mexicanus,,CHARADRIIFORMES,Recurvirostridae,AUS
+Banded Stilt,Cladorhynchus leucocephalus,,CHARADRIIFORMES,Recurvirostridae,AUS
+Red-necked Avocet,Recurvirostra novaehollandiae,,CHARADRIIFORMES,Recurvirostridae,AUS
+Pied Oystercatcher,Haematopus longirostris,,CHARADRIIFORMES,Haematopodidae,AUS
+South Island Oystercatcher,Haematopus finschi,,CHARADRIIFORMES,Haematopodidae,AUS
+Chatham Islands Oystercatcher,Haematopus chathamensis,Endangered,CHARADRIIFORMES,Haematopodidae,AUS
+Variable Oystercatcher,Haematopus unicolor,,CHARADRIIFORMES,Haematopodidae,AUS
+Sooty Oystercatcher,Haematopus fuliginosus,,CHARADRIIFORMES,Haematopodidae,AUS
+Black-bellied Plover,Pluvialis squatarola,Vulnerable,CHARADRIIFORMES,Charadriidae,AUS
+European Golden-Plover,Pluvialis apricaria,,CHARADRIIFORMES,Charadriidae,AUS
+American Golden-Plover,Pluvialis dominica,,CHARADRIIFORMES,Charadriidae,AUS
+Pacific Golden-Plover,Pluvialis fulva,,CHARADRIIFORMES,Charadriidae,AUS
+Killdeer,Charadrius vociferus,Rare/Accidental Near-threatened,CHARADRIIFORMES,Charadriidae,AUS
+Common Ringed Plover,Charadrius hiaticula,Rare/Accidental,CHARADRIIFORMES,Charadriidae,AUS
+Semipalmated Plover,Charadrius semipalmatus,Rare/Accidental,CHARADRIIFORMES,Charadriidae,AUS
+Hooded Plover,Thinornis cucullatus,Vulnerable,CHARADRIIFORMES,Charadriidae,AUS
+Black-fronted Dotterel,Thinornis melanops,,CHARADRIIFORMES,Charadriidae,AUS
+Shore Plover,Thinornis novaeseelandiae,Endangered,CHARADRIIFORMES,Charadriidae,AUS
+Little Ringed Plover,Thinornis dubius,Rare/Accidental,CHARADRIIFORMES,Charadriidae,AUS
+Gray-headed Lapwing,Vanellus cinereus,Rare/Accidental,CHARADRIIFORMES,Charadriidae,AUS
+Banded Lapwing,Vanellus tricolor,,CHARADRIIFORMES,Charadriidae,AUS
+Masked Lapwing,Vanellus miles,,CHARADRIIFORMES,Charadriidae,AUS
+Red-kneed Dotterel,Erythrogonys cinctus,,CHARADRIIFORMES,Charadriidae,AUS
+Inland Dotterel,Peltohyas australis,,CHARADRIIFORMES,Charadriidae,AUS
+Caspian Plover,Anarhynchus asiaticus,,CHARADRIIFORMES,Charadriidae,AUS
+Oriental Plover,Anarhynchus veredus,,CHARADRIIFORMES,Charadriidae,AUS
+Siberian Sand-Plover,Anarhynchus mongolus,Endangered,CHARADRIIFORMES,Charadriidae,AUS
+Tibetan Sand-Plover,Anarhynchus atrifrons,,CHARADRIIFORMES,Charadriidae,AUS
+Greater Sand-Plover,Anarhynchus leschenaultii,,CHARADRIIFORMES,Charadriidae,AUS
+Double-banded Plover,Anarhynchus bicinctus,Near-threatened,CHARADRIIFORMES,Charadriidae,AUS
+Wrybill,Anarhynchus frontalis,Vulnerable,CHARADRIIFORMES,Charadriidae,AUS
+Red-breasted Dotterel,Anarhynchus obscurus,,CHARADRIIFORMES,Charadriidae,AUS
+Red-capped Plover,Anarhynchus ruficapillus,,CHARADRIIFORMES,Charadriidae,AUS
+Malaysian Plover,Anarhynchus peronii,Near-threatened,CHARADRIIFORMES,Charadriidae,AUS
+Kentish Plover,Anarhynchus alexandrinus,,CHARADRIIFORMES,Charadriidae,AUS
+Plains-wanderer,Pedionomus torquatus,Endangered,CHARADRIIFORMES,Pedionomidae,AUS
+Australian Painted-Snipe,Rostratula australis,Endemic (country/region) Endangered,CHARADRIIFORMES,Rostratulidae,AUS
+Pheasant-tailed Jacana,Hydrophasianus chirurgus,,CHARADRIIFORMES,Jacanidae,AUS
+Comb-crested Jacana,Irediparra gallinacea,,CHARADRIIFORMES,Jacanidae,AUS
+Upland Sandpiper,Bartramia longicauda,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,AUS
+Bristle-thighed Curlew,Numenius tahitiensis,Near-threatened,CHARADRIIFORMES,Scolopacidae,AUS
+Whimbrel,Numenius phaeopus,,CHARADRIIFORMES,Scolopacidae,AUS
+Little Curlew,Numenius minutus,,CHARADRIIFORMES,Scolopacidae,AUS
+Far Eastern Curlew,Numenius madagascariensis,Endangered,CHARADRIIFORMES,Scolopacidae,AUS
+Eurasian Curlew,Numenius arquata,Rare/Accidental Near-threatened,CHARADRIIFORMES,Scolopacidae,AUS
+Bar-tailed Godwit,Limosa lapponica,Near-threatened,CHARADRIIFORMES,Scolopacidae,AUS
+Black-tailed Godwit,Limosa limosa,Near-threatened,CHARADRIIFORMES,Scolopacidae,AUS
+Hudsonian Godwit,Limosa haemastica,Rare/Accidental Vulnerable,CHARADRIIFORMES,Scolopacidae,AUS
+Asian Dowitcher,Limnodromus semipalmatus,Near-threatened,CHARADRIIFORMES,Scolopacidae,AUS
+Short-billed Dowitcher,Limnodromus griseus,Rare/Accidental Vulnerable,CHARADRIIFORMES,Scolopacidae,AUS
+Long-billed Dowitcher,Limnodromus scolopaceus,Rare/Accidental Near-threatened,CHARADRIIFORMES,Scolopacidae,AUS
+New Guinea Woodcock,Scolopax rosenbergii,,CHARADRIIFORMES,Scolopacidae,AUS
+North Island Snipe,Coenocorypha barrierensis,Extinct,CHARADRIIFORMES,Scolopacidae,AUS
+South Island Snipe,Coenocorypha iredalei,Extinct,CHARADRIIFORMES,Scolopacidae,AUS
+Chatham Islands Snipe,Coenocorypha pusilla,Vulnerable,CHARADRIIFORMES,Scolopacidae,AUS
+Snares Snipe,Coenocorypha huegeli,Near-threatened,CHARADRIIFORMES,Scolopacidae,AUS
+Subantarctic Snipe,Coenocorypha aucklandica,Near-threatened,CHARADRIIFORMES,Scolopacidae,AUS
+Swinhoe's Snipe,Gallinago megala,,CHARADRIIFORMES,Scolopacidae,AUS
+Pin-tailed Snipe,Gallinago stenura,,CHARADRIIFORMES,Scolopacidae,AUS
+Latham's Snipe,Gallinago hardwickii,Near-threatened,CHARADRIIFORMES,Scolopacidae,AUS
+Wilson's Phalarope,Phalaropus tricolor,,CHARADRIIFORMES,Scolopacidae,AUS
+Red Phalarope,Phalaropus fulicarius,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,AUS
+Red-necked Phalarope,Phalaropus lobatus,,CHARADRIIFORMES,Scolopacidae,AUS
+Terek Sandpiper,Xenus cinereus,,CHARADRIIFORMES,Scolopacidae,AUS
+Common Sandpiper,Actitis hypoleucos,,CHARADRIIFORMES,Scolopacidae,AUS
+Green Sandpiper,Tringa ochropus,,CHARADRIIFORMES,Scolopacidae,AUS
+Solitary Sandpiper,Tringa solitaria,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,AUS
+Gray-tailed Tattler,Tringa brevipes,,CHARADRIIFORMES,Scolopacidae,AUS
+Wandering Tattler,Tringa incana,,CHARADRIIFORMES,Scolopacidae,AUS
+Marsh Sandpiper,Tringa stagnatilis,,CHARADRIIFORMES,Scolopacidae,AUS
+Wood Sandpiper,Tringa glareola,,CHARADRIIFORMES,Scolopacidae,AUS
+Common Redshank,Tringa totanus,,CHARADRIIFORMES,Scolopacidae,AUS
+Lesser Yellowlegs,Tringa flavipes,Rare/Accidental Vulnerable,CHARADRIIFORMES,Scolopacidae,AUS
+Nordmann's Greenshank,Tringa guttifer,Endangered,CHARADRIIFORMES,Scolopacidae,AUS
+Spotted Redshank,Tringa erythropus,,CHARADRIIFORMES,Scolopacidae,AUS
+Common Greenshank,Tringa nebularia,,CHARADRIIFORMES,Scolopacidae,AUS
+Ruddy Turnstone,Arenaria interpres,Near-threatened,CHARADRIIFORMES,Scolopacidae,AUS
+Great Knot,Calidris tenuirostris,Endangered,CHARADRIIFORMES,Scolopacidae,AUS
+Red Knot,Calidris canutus,Near-threatened,CHARADRIIFORMES,Scolopacidae,AUS
+Ruff,Calidris pugnax,,CHARADRIIFORMES,Scolopacidae,AUS
+Broad-billed Sandpiper,Calidris falcinellus,Vulnerable,CHARADRIIFORMES,Scolopacidae,AUS
+Sharp-tailed Sandpiper,Calidris acuminata,Vulnerable,CHARADRIIFORMES,Scolopacidae,AUS
+Curlew Sandpiper,Calidris ferruginea,Vulnerable,CHARADRIIFORMES,Scolopacidae,AUS
+Stilt Sandpiper,Calidris himantopus,Rare/Accidental Near-threatened,CHARADRIIFORMES,Scolopacidae,AUS
+Temminck's Stint,Calidris temminckii,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,AUS
+Long-toed Stint,Calidris subminuta,,CHARADRIIFORMES,Scolopacidae,AUS
+Red-necked Stint,Calidris ruficollis,Near-threatened,CHARADRIIFORMES,Scolopacidae,AUS
+Buff-breasted Sandpiper,Calidris subruficollis,Vulnerable,CHARADRIIFORMES,Scolopacidae,AUS
+Sanderling,Calidris alba,,CHARADRIIFORMES,Scolopacidae,AUS
+Dunlin,Calidris alpina,Rare/Accidental Near-threatened,CHARADRIIFORMES,Scolopacidae,AUS
+Baird's Sandpiper,Calidris bairdii,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,AUS
+Little Stint,Calidris minuta,,CHARADRIIFORMES,Scolopacidae,AUS
+White-rumped Sandpiper,Calidris fuscicollis,Rare/Accidental Vulnerable,CHARADRIIFORMES,Scolopacidae,AUS
+Least Sandpiper,Calidris minutilla,Rare/Accidental Near-threatened,CHARADRIIFORMES,Scolopacidae,AUS
+Pectoral Sandpiper,Calidris melanotos,,CHARADRIIFORMES,Scolopacidae,AUS
+Western Sandpiper,Calidris mauri,Rare/Accidental,CHARADRIIFORMES,Scolopacidae,AUS
+Semipalmated Sandpiper,Calidris pusilla,Near-threatened,CHARADRIIFORMES,Scolopacidae,AUS
+Red-backed Buttonquail,Turnix maculosus,,CHARADRIIFORMES,Turnicidae,AUS
+Little Buttonquail,Turnix velox,,CHARADRIIFORMES,Turnicidae,AUS
+Red-chested Buttonquail,Turnix pyrrhothorax,,CHARADRIIFORMES,Turnicidae,AUS
+Chestnut-backed Buttonquail,Turnix castanotus,,CHARADRIIFORMES,Turnicidae,AUS
+Buff-breasted Buttonquail,Turnix olivii,Critically endangered,CHARADRIIFORMES,Turnicidae,AUS
+Painted Buttonquail,Turnix varius,,CHARADRIIFORMES,Turnicidae,AUS
+New Caledonian Buttonquail,Turnix novaecaledoniae,Critically endangered,CHARADRIIFORMES,Turnicidae,AUS
+Black-breasted Buttonquail,Turnix melanogaster,Vulnerable,CHARADRIIFORMES,Turnicidae,AUS
+Australian Pratincole,Glareola isabella,,CHARADRIIFORMES,Glareolidae,AUS
+Collared Pratincole,Glareola pratincola,Rare/Accidental,CHARADRIIFORMES,Glareolidae,AUS
+Oriental Pratincole,Glareola maldivarum,,CHARADRIIFORMES,Glareolidae,AUS
+Long-tailed Jaeger,Stercorarius longicaudus,,CHARADRIIFORMES,Stercorariidae,AUS
+Parasitic Jaeger,Stercorarius parasiticus,,CHARADRIIFORMES,Stercorariidae,AUS
+Pomarine Jaeger,Stercorarius pomarinus,,CHARADRIIFORMES,Stercorariidae,AUS
+Brown Skua,Stercorarius antarcticus,,CHARADRIIFORMES,Stercorariidae,AUS
+South Polar Skua,Stercorarius maccormicki,,CHARADRIIFORMES,Stercorariidae,AUS
+Sabine's Gull,Xema sabini,,CHARADRIIFORMES,Laridae,AUS
+Silver Gull,Chroicocephalus novaehollandiae,,CHARADRIIFORMES,Laridae,AUS
+Black-billed Gull,Chroicocephalus bulleri,Near-threatened,CHARADRIIFORMES,Laridae,AUS
+Black-headed Gull,Chroicocephalus ridibundus,,CHARADRIIFORMES,Laridae,AUS
+Laughing Gull,Leucophaeus atricilla,,CHARADRIIFORMES,Laridae,AUS
+Franklin's Gull,Leucophaeus pipixcan,Rare/Accidental,CHARADRIIFORMES,Laridae,AUS
+Pacific Gull,Larus pacificus,,CHARADRIIFORMES,Laridae,AUS
+Black-tailed Gull,Larus crassirostris,,CHARADRIIFORMES,Laridae,AUS
+Common Gull,Larus canus,Rare/Accidental,CHARADRIIFORMES,Laridae,AUS
+Kelp Gull,Larus dominicanus,,CHARADRIIFORMES,Laridae,AUS
+Lesser Black-backed Gull,Larus fuscus,Rare/Accidental,CHARADRIIFORMES,Laridae,AUS
+Slaty-backed Gull,Larus schistisagus,Rare/Accidental,CHARADRIIFORMES,Laridae,AUS
+White Tern,Gygis alba,,CHARADRIIFORMES,Laridae,AUS
+Brown Noddy,Anous stolidus,,CHARADRIIFORMES,Laridae,AUS
+Lesser Noddy,Anous tenuirostris,,CHARADRIIFORMES,Laridae,AUS
+Black Noddy,Anous minutus,,CHARADRIIFORMES,Laridae,AUS
+Gray Noddy,Anous albivitta,,CHARADRIIFORMES,Laridae,AUS
+Blue-gray Noddy,Anous ceruleus,,CHARADRIIFORMES,Laridae,AUS
+Aleutian Tern,Onychoprion aleuticus,Rare/Accidental Vulnerable,CHARADRIIFORMES,Laridae,AUS
+Sooty Tern,Onychoprion fuscatus,,CHARADRIIFORMES,Laridae,AUS
+Bridled Tern,Onychoprion anaethetus,,CHARADRIIFORMES,Laridae,AUS
+Gray-backed Tern,Onychoprion lunatus,,CHARADRIIFORMES,Laridae,AUS
+Little Tern,Sternula albifrons,,CHARADRIIFORMES,Laridae,AUS
+Saunders's Tern,Sternula saundersi,,CHARADRIIFORMES,Laridae,AUS
+Australian Fairy Tern,Sternula nereis,Vulnerable,CHARADRIIFORMES,Laridae,AUS
+Gull-billed Tern,Gelochelidon nilotica,,CHARADRIIFORMES,Laridae,AUS
+Australian Tern,Gelochelidon macrotarsa,,CHARADRIIFORMES,Laridae,AUS
+Caspian Tern,Hydroprogne caspia,,CHARADRIIFORMES,Laridae,AUS
+Whiskered Tern,Chlidonias hybrida,,CHARADRIIFORMES,Laridae,AUS
+Black-fronted Tern,Chlidonias albostriatus,Endangered,CHARADRIIFORMES,Laridae,AUS
+Black Tern,Chlidonias niger,,CHARADRIIFORMES,Laridae,AUS
+White-winged Tern,Chlidonias leucopterus,,CHARADRIIFORMES,Laridae,AUS
+Arctic Tern,Sterna paradisaea,,CHARADRIIFORMES,Laridae,AUS
+Antarctic Tern,Sterna vittata,,CHARADRIIFORMES,Laridae,AUS
+Common Tern,Sterna hirundo,,CHARADRIIFORMES,Laridae,AUS
+Black-naped Tern,Sterna sumatrana,,CHARADRIIFORMES,Laridae,AUS
+Roseate Tern,Sterna dougallii,,CHARADRIIFORMES,Laridae,AUS
+White-fronted Tern,Sterna striata,Near-threatened,CHARADRIIFORMES,Laridae,AUS
+Lesser Crested Tern,Thalasseus bengalensis,,CHARADRIIFORMES,Laridae,AUS
+Great Crested Tern,Thalasseus bergii,,CHARADRIIFORMES,Laridae,AUS
+Greater Flamingo,Phoenicopterus roseus,,PHOENICOPTERIFORMES,Phoenicopteridae,AUS
+Little Grebe,Tachybaptus ruficollis,,PODICIPEDIFORMES,Podicipedidae,AUS
+Australasian Grebe,Tachybaptus novaehollandiae,,PODICIPEDIFORMES,Podicipedidae,AUS
+Hoary-headed Grebe,Poliocephalus poliocephalus,,PODICIPEDIFORMES,Podicipedidae,AUS
+New Zealand Grebe,Poliocephalus rufopectus,,PODICIPEDIFORMES,Podicipedidae,AUS
+Great Crested Grebe,Podiceps cristatus,,PODICIPEDIFORMES,Podicipedidae,AUS
+Kagu,Rhynochetos jubatus,Endangered,EURYPYGIFORMES,Rhynochetidae,AUS
+White-tailed Tropicbird,Phaethon lepturus,,PHAETHONTIFORMES,Phaethontidae,AUS
+Red-billed Tropicbird,Phaethon aethereus,Rare/Accidental,PHAETHONTIFORMES,Phaethontidae,AUS
+Red-tailed Tropicbird,Phaethon rubricauda,,PHAETHONTIFORMES,Phaethontidae,AUS
+Pacific Loon,Gavia pacifica,,GAVIIFORMES,Gaviidae,AUS
+King Penguin,Aptenodytes patagonicus,,SPHENISCIFORMES,Spheniscidae,AUS
+Emperor Penguin,Aptenodytes forsteri,Rare/Accidental Near-threatened,SPHENISCIFORMES,Spheniscidae,AUS
+Adelie Penguin,Pygoscelis adeliae,Rare/Accidental,SPHENISCIFORMES,Spheniscidae,AUS
+Gentoo Penguin,Pygoscelis papua,,SPHENISCIFORMES,Spheniscidae,AUS
+Chinstrap Penguin,Pygoscelis antarcticus,,SPHENISCIFORMES,Spheniscidae,AUS
+Yellow-eyed Penguin,Megadyptes antipodes,Endangered,SPHENISCIFORMES,Spheniscidae,AUS
+Little Penguin,Eudyptula minor,,SPHENISCIFORMES,Spheniscidae,AUS
+Magellanic Penguin,Spheniscus magellanicus,Rare/Accidental,SPHENISCIFORMES,Spheniscidae,AUS
+Fiordland Penguin,Eudyptes pachyrhynchus,Near-threatened,SPHENISCIFORMES,Spheniscidae,AUS
+Erect-crested Penguin,Eudyptes sclateri,Endangered,SPHENISCIFORMES,Spheniscidae,AUS
+Macaroni Penguin,Eudyptes chrysolophus,Vulnerable,SPHENISCIFORMES,Spheniscidae,AUS
+Royal Penguin,Eudyptes schlegeli,,SPHENISCIFORMES,Spheniscidae,AUS
+Southern Rockhopper Penguin,Eudyptes chrysocome,Vulnerable,SPHENISCIFORMES,Spheniscidae,AUS
+Moseley's Rockhopper Penguin,Eudyptes moseleyi,Endangered,SPHENISCIFORMES,Spheniscidae,AUS
+Snares Penguin,Eudyptes robustus,Vulnerable,SPHENISCIFORMES,Spheniscidae,AUS
+Northern Royal Albatross,Diomedea sanfordi,Endangered,PROCELLARIIFORMES,Diomedeidae,AUS
+Southern Royal Albatross,Diomedea epomophora,Vulnerable,PROCELLARIIFORMES,Diomedeidae,AUS
+Snowy Albatross,Diomedea exulans,Vulnerable,PROCELLARIIFORMES,Diomedeidae,AUS
+Tristan Albatross,Diomedea dabbenena,Critically endangered,PROCELLARIIFORMES,Diomedeidae,AUS
+Antipodean Albatross,Diomedea antipodensis,Endangered,PROCELLARIIFORMES,Diomedeidae,AUS
+Amsterdam Albatross,Diomedea amsterdamensis,Rare/Accidental Endangered,PROCELLARIIFORMES,Diomedeidae,AUS
+Laysan Albatross,Phoebastria immutabilis,Rare/Accidental Near-threatened,PROCELLARIIFORMES,Diomedeidae,AUS
+Black-footed Albatross,Phoebastria nigripes,Near-threatened,PROCELLARIIFORMES,Diomedeidae,AUS
+Sooty Albatross,Phoebetria fusca,Endangered,PROCELLARIIFORMES,Diomedeidae,AUS
+Light-mantled Albatross,Phoebetria palpebrata,Near-threatened,PROCELLARIIFORMES,Diomedeidae,AUS
+Atlantic Yellow-nosed Albatross,Thalassarche chlororhynchos,Endangered,PROCELLARIIFORMES,Diomedeidae,AUS
+Indian Yellow-nosed Albatross,Thalassarche carteri,Endangered,PROCELLARIIFORMES,Diomedeidae,AUS
+Gray-headed Albatross,Thalassarche chrysostoma,Endangered,PROCELLARIIFORMES,Diomedeidae,AUS
+Buller's Albatross,Thalassarche bulleri,Near-threatened,PROCELLARIIFORMES,Diomedeidae,AUS
+White-capped Albatross,Thalassarche cauta,,PROCELLARIIFORMES,Diomedeidae,AUS
+Salvin's Albatross,Thalassarche salvini,Vulnerable,PROCELLARIIFORMES,Diomedeidae,AUS
+Chatham Albatross,Thalassarche eremita,Vulnerable,PROCELLARIIFORMES,Diomedeidae,AUS
+Black-browed Albatross,Thalassarche melanophris,,PROCELLARIIFORMES,Diomedeidae,AUS
+Wilson's Storm-Petrel,Oceanites oceanicus,,PROCELLARIIFORMES,Oceanitidae,AUS
+Gray-backed Storm-Petrel,Garrodia nereis,,PROCELLARIIFORMES,Oceanitidae,AUS
+White-faced Storm-Petrel,Pelagodroma marina,,PROCELLARIIFORMES,Oceanitidae,AUS
+White-bellied Storm-Petrel,Fregetta grallaria,,PROCELLARIIFORMES,Oceanitidae,AUS
+New Zealand Storm-Petrel,Fregetta maoriana,Endemic Critically endangered (possibly extinct),PROCELLARIIFORMES,Oceanitidae,AUS
+New Caledonian Storm-Petrel,Fregetta lineata,Rare/Accidental Data deficient,PROCELLARIIFORMES,Oceanitidae,AUS
+Black-bellied Storm-Petrel,Fregetta tropica,,PROCELLARIIFORMES,Oceanitidae,AUS
+Polynesian Storm-Petrel,Nesofregetta fuliginosa,Endangered,PROCELLARIIFORMES,Oceanitidae,AUS
+Leach's Storm-Petrel,Hydrobates leucorhous,Vulnerable,PROCELLARIIFORMES,Hydrobatidae,AUS
+Swinhoe's Storm-Petrel,Hydrobates monorhis,Rare/Accidental Near-threatened,PROCELLARIIFORMES,Hydrobatidae,AUS
+Band-rumped Storm-Petrel,Hydrobates castro,Rare/Accidental,PROCELLARIIFORMES,Hydrobatidae,AUS
+Matsudaira's Storm-Petrel,Hydrobates matsudairae,Vulnerable,PROCELLARIIFORMES,Hydrobatidae,AUS
+Tristram's Storm-Petrel,Hydrobates tristrami,Rare/Accidental,PROCELLARIIFORMES,Hydrobatidae,AUS
+Southern Giant-Petrel,Macronectes giganteus,,PROCELLARIIFORMES,Procellariidae,AUS
+Northern Giant-Petrel,Macronectes halli,,PROCELLARIIFORMES,Procellariidae,AUS
+Northern Fulmar,Fulmarus glacialis,Rare/Accidental,PROCELLARIIFORMES,Procellariidae,AUS
+Southern Fulmar,Fulmarus glacialoides,,PROCELLARIIFORMES,Procellariidae,AUS
+Antarctic Petrel,Thalassoica antarctica,,PROCELLARIIFORMES,Procellariidae,AUS
+Pintado Petrel,Daption capense,,PROCELLARIIFORMES,Procellariidae,AUS
+Snow Petrel,Pagodroma nivea,,PROCELLARIIFORMES,Procellariidae,AUS
+Kerguelen Petrel,Aphrodroma brevirostris,,PROCELLARIIFORMES,Procellariidae,AUS
+Great-winged Petrel,Pterodroma macroptera,,PROCELLARIIFORMES,Procellariidae,AUS
+Gray-faced Petrel,Pterodroma gouldi,,PROCELLARIIFORMES,Procellariidae,AUS
+Kermadec Petrel,Pterodroma neglecta,,PROCELLARIIFORMES,Procellariidae,AUS
+Magenta Petrel,Pterodroma magentae,Critically endangered,PROCELLARIIFORMES,Procellariidae,AUS
+Trindade Petrel,Pterodroma arminjoniana,Rare/Accidental Vulnerable,PROCELLARIIFORMES,Procellariidae,AUS
+Herald Petrel,Pterodroma heraldica,,PROCELLARIIFORMES,Procellariidae,AUS
+Murphy's Petrel,Pterodroma ultima,Rare/Accidental,PROCELLARIIFORMES,Procellariidae,AUS
+Providence Petrel,Pterodroma solandri,,PROCELLARIIFORMES,Procellariidae,AUS
+Soft-plumaged Petrel,Pterodroma mollis,,PROCELLARIIFORMES,Procellariidae,AUS
+Barau's Petrel,Pterodroma baraui,Endangered,PROCELLARIIFORMES,Procellariidae,AUS
+White-headed Petrel,Pterodroma lessonii,,PROCELLARIIFORMES,Procellariidae,AUS
+Mottled Petrel,Pterodroma inexpectata,Near-threatened,PROCELLARIIFORMES,Procellariidae,AUS
+Juan Fernandez Petrel,Pterodroma externa,Vulnerable,PROCELLARIIFORMES,Procellariidae,AUS
+Atlantic Petrel,Pterodroma incerta,Rare/Accidental Endangered,PROCELLARIIFORMES,Procellariidae,AUS
+White-necked Petrel,Pterodroma cervicalis,,PROCELLARIIFORMES,Procellariidae,AUS
+Bonin Petrel,Pterodroma hypoleuca,,PROCELLARIIFORMES,Procellariidae,AUS
+Black-winged Petrel,Pterodroma nigripennis,,PROCELLARIIFORMES,Procellariidae,AUS
+Chatham Islands Petrel,Pterodroma axillaris,Vulnerable,PROCELLARIIFORMES,Procellariidae,AUS
+Cook's Petrel,Pterodroma cookii,Vulnerable,PROCELLARIIFORMES,Procellariidae,AUS
+Gould's Petrel,Pterodroma leucoptera,Vulnerable,PROCELLARIIFORMES,Procellariidae,AUS
+Collared Petrel,Pterodroma brevipes,Vulnerable,PROCELLARIIFORMES,Procellariidae,AUS
+Stejneger's Petrel,Pterodroma longirostris,Vulnerable,PROCELLARIIFORMES,Procellariidae,AUS
+Pycroft's Petrel,Pterodroma pycrofti,Vulnerable,PROCELLARIIFORMES,Procellariidae,AUS
+Phoenix Petrel,Pterodroma alba,Vulnerable,PROCELLARIIFORMES,Procellariidae,AUS
+Vanuatu Petrel,Pterodroma occulta,Rare/Accidental,PROCELLARIIFORMES,Procellariidae,AUS
+Blue Petrel,Halobaena caerulea,,PROCELLARIIFORMES,Procellariidae,AUS
+Fairy Prion,Pachyptila turtur,,PROCELLARIIFORMES,Procellariidae,AUS
+Broad-billed Prion,Pachyptila vittata,,PROCELLARIIFORMES,Procellariidae,AUS
+Salvin's Prion,Pachyptila salvini,,PROCELLARIIFORMES,Procellariidae,AUS
+MacGillivray's Prion,Pachyptila macgillivrayi,Critically endangered,PROCELLARIIFORMES,Procellariidae,AUS
+Antarctic Prion,Pachyptila desolata,,PROCELLARIIFORMES,Procellariidae,AUS
+Slender-billed Prion,Pachyptila belcheri,,PROCELLARIIFORMES,Procellariidae,AUS
+Fulmar Prion,Pachyptila crassirostris,Rare/Accidental,PROCELLARIIFORMES,Procellariidae,AUS
+Bulwer's Petrel,Bulweria bulwerii,,PROCELLARIIFORMES,Procellariidae,AUS
+Jouanin's Petrel,Bulweria fallax,Rare/Accidental Near-threatened,PROCELLARIIFORMES,Procellariidae,AUS
+Fiji Petrel,Pseudobulweria macgillivrayi,Endemic Critically endangered (possibly extinct),PROCELLARIIFORMES,Procellariidae,AUS
+Tahiti Petrel,Pseudobulweria rostrata,Near-threatened,PROCELLARIIFORMES,Procellariidae,AUS
+Beck's Petrel,Pseudobulweria becki,Critically endangered,PROCELLARIIFORMES,Procellariidae,AUS
+Gray Petrel,Procellaria cinerea,Near-threatened,PROCELLARIIFORMES,Procellariidae,AUS
+White-chinned Petrel,Procellaria aequinoctialis,Vulnerable,PROCELLARIIFORMES,Procellariidae,AUS
+Parkinson's Petrel,Procellaria parkinsoni,Vulnerable,PROCELLARIIFORMES,Procellariidae,AUS
+Westland Petrel,Procellaria westlandica,Endangered,PROCELLARIIFORMES,Procellariidae,AUS
+Streaked Shearwater,Calonectris leucomelas,Near-threatened,PROCELLARIIFORMES,Procellariidae,AUS
+Cory's Shearwater,Calonectris borealis,Rare/Accidental,PROCELLARIIFORMES,Procellariidae,AUS
+Scopoli's Shearwater,Calonectris diomedea,,PROCELLARIIFORMES,Procellariidae,AUS
+Pink-footed Shearwater,Ardenna creatopus,Vulnerable,PROCELLARIIFORMES,Procellariidae,AUS
+Flesh-footed Shearwater,Ardenna carneipes,Near-threatened,PROCELLARIIFORMES,Procellariidae,AUS
+Great Shearwater,Ardenna gravis,,PROCELLARIIFORMES,Procellariidae,AUS
+Wedge-tailed Shearwater,Ardenna pacifica,,PROCELLARIIFORMES,Procellariidae,AUS
+Buller's Shearwater,Ardenna bulleri,Vulnerable,PROCELLARIIFORMES,Procellariidae,AUS
+Sooty Shearwater,Ardenna grisea,Near-threatened,PROCELLARIIFORMES,Procellariidae,AUS
+Short-tailed Shearwater,Ardenna tenuirostris,,PROCELLARIIFORMES,Procellariidae,AUS
+Christmas Shearwater,Puffinus nativitatis,,PROCELLARIIFORMES,Procellariidae,AUS
+Manx Shearwater,Puffinus puffinus,,PROCELLARIIFORMES,Procellariidae,AUS
+Hutton's Shearwater,Puffinus huttoni,Endangered,PROCELLARIIFORMES,Procellariidae,AUS
+Newell's Shearwater,Puffinus newelli,Rare/Accidental Critically endangered,PROCELLARIIFORMES,Procellariidae,AUS
+Fluttering Shearwater,Puffinus gavia,,PROCELLARIIFORMES,Procellariidae,AUS
+Little Shearwater,Puffinus assimilis,,PROCELLARIIFORMES,Procellariidae,AUS
+Subantarctic Shearwater,Puffinus elegans,,PROCELLARIIFORMES,Procellariidae,AUS
+Tropical Shearwater,Puffinus bailloni,,PROCELLARIIFORMES,Procellariidae,AUS
+Persian Shearwater,Puffinus persicus,Rare/Accidental,PROCELLARIIFORMES,Procellariidae,AUS
+Heinroth's Shearwater,Puffinus heinrothi,Vulnerable,PROCELLARIIFORMES,Procellariidae,AUS
+Common Diving-Petrel,Pelecanoides urinatrix,,PROCELLARIIFORMES,Procellariidae,AUS
+South Georgia Diving-Petrel,Pelecanoides georgicus,,PROCELLARIIFORMES,Procellariidae,AUS
+Black-necked Stork,Ephippiorhynchus asiaticus,Near-threatened,CICONIIFORMES,Ciconiidae,AUS
+Lesser Frigatebird,Fregata ariel,,SULIFORMES,Fregatidae,AUS
+Great Frigatebird,Fregata minor,,SULIFORMES,Fregatidae,AUS
+Christmas Island Frigatebird,Fregata andrewsi,Breeding endemic Vulnerable,SULIFORMES,Fregatidae,AUS
+Abbott's Booby,Papasula abbotti,Endangered,SULIFORMES,Sulidae,AUS
+Cape Gannet,Morus capensis,Endangered,SULIFORMES,Sulidae,AUS
+Australasian Gannet,Morus serrator,,SULIFORMES,Sulidae,AUS
+Red-footed Booby,Sula sula,,SULIFORMES,Sulidae,AUS
+Brown Booby,Sula leucogaster,,SULIFORMES,Sulidae,AUS
+Masked Booby,Sula dactylatra,,SULIFORMES,Sulidae,AUS
+Nazca Booby,Sula granti,Rare/Accidental,SULIFORMES,Sulidae,AUS
+African Darter,Anhinga rufa,,SULIFORMES,Anhingidae,AUS
+Oriental Darter,Anhinga melanogaster,,SULIFORMES,Anhingidae,AUS
+Australasian Darter,Anhinga novaehollandiae,,SULIFORMES,Anhingidae,AUS
+Little Pied Cormorant,Microcarbo melanoleucos,,SULIFORMES,Phalacrocoracidae,AUS
+Great Cormorant,Phalacrocorax carbo,,SULIFORMES,Phalacrocoracidae,AUS
+Spotted Shag,Phalacrocorax punctatus,,SULIFORMES,Phalacrocoracidae,AUS
+Pitt Island Shag,Phalacrocorax featherstoni,Endangered,SULIFORMES,Phalacrocoracidae,AUS
+Little Black Cormorant,Phalacrocorax sulcirostris,,SULIFORMES,Phalacrocoracidae,AUS
+Pied Cormorant,Phalacrocorax varius,,SULIFORMES,Phalacrocoracidae,AUS
+Black-faced Cormorant,Phalacrocorax fuscescens,Endemic (country/region),SULIFORMES,Phalacrocoracidae,AUS
+Bounty Islands Shag,Leucocarbo ranfurlyi,Vulnerable,SULIFORMES,Phalacrocoracidae,AUS
+New Zealand King Shag,Leucocarbo carunculatus,Vulnerable,SULIFORMES,Phalacrocoracidae,AUS
+Stewart Island Shag,Leucocarbo chalconotus,Vulnerable,SULIFORMES,Phalacrocoracidae,AUS
+Chatham Islands Shag,Leucocarbo onslowi,Critically endangered,SULIFORMES,Phalacrocoracidae,AUS
+Auckland Islands Shag,Leucocarbo colensoi,Vulnerable,SULIFORMES,Phalacrocoracidae,AUS
+Campbell Islands Shag,Leucocarbo campbelli,Vulnerable,SULIFORMES,Phalacrocoracidae,AUS
+Imperial Cormorant,Leucocarbo atriceps,,SULIFORMES,Phalacrocoracidae,AUS
+Macquarie Shag,Leucocarbo purpurascens,,SULIFORMES,Phalacrocoracidae,AUS
+Glossy Ibis,Plegadis falcinellus,,PELECANIFORMES,Threskiornithidae,AUS
+African Sacred Ibis,Threskiornis aethiopicus,,PELECANIFORMES,Threskiornithidae,AUS
+Australian Ibis,Threskiornis molucca,,PELECANIFORMES,Threskiornithidae,AUS
+Straw-necked Ibis,Threskiornis spinicollis,,PELECANIFORMES,Threskiornithidae,AUS
+Royal Spoonbill,Platalea regia,,PELECANIFORMES,Threskiornithidae,AUS
+Yellow-billed Spoonbill,Platalea flavipes,,PELECANIFORMES,Threskiornithidae,AUS
+Australian Pelican,Pelecanus conspicillatus,,PELECANIFORMES,Pelecanidae,AUS
+Australasian Bittern,Botaurus poiciloptilus,Vulnerable,PELECANIFORMES,Ardeidae,AUS
+Black Bittern,Botaurus flavicollis,,PELECANIFORMES,Ardeidae,AUS
+Cinnamon Bittern,Botaurus cinnamomeus,Rare/Accidental,PELECANIFORMES,Ardeidae,AUS
+Schrenck's Bittern,Botaurus eurhythmus,Rare/Accidental,PELECANIFORMES,Ardeidae,AUS
+Yellow Bittern,Botaurus sinensis,,PELECANIFORMES,Ardeidae,AUS
+Black-backed Bittern,Botaurus dubius,,PELECANIFORMES,Ardeidae,AUS
+New Zealand Bittern,Botaurus novaezelandiae,Extinct,PELECANIFORMES,Ardeidae,AUS
+Black-crowned Night Heron,Nycticorax nycticorax,,PELECANIFORMES,Ardeidae,AUS
+Nankeen Night Heron,Nycticorax caledonicus,,PELECANIFORMES,Ardeidae,AUS
+Malayan Night Heron,Gorsachius melanolophus,,PELECANIFORMES,Ardeidae,AUS
+Japanese Night Heron,Gorsachius goisagi,Rare/Accidental Vulnerable,PELECANIFORMES,Ardeidae,AUS
+Pacific Reef-Heron,Egretta sacra,,PELECANIFORMES,Ardeidae,AUS
+Little Egret,Egretta garzetta,,PELECANIFORMES,Ardeidae,AUS
+Western Reef-Heron,Egretta gularis,Rare/Accidental,PELECANIFORMES,Ardeidae,AUS
+Pied Heron,Egretta picata,,PELECANIFORMES,Ardeidae,AUS
+White-faced Heron,Egretta novaehollandiae,,PELECANIFORMES,Ardeidae,AUS
+Striated Heron,Butorides striata,,PELECANIFORMES,Ardeidae,AUS
+Forest Bittern,Zonerodius heliosylus,Near-threatened,PELECANIFORMES,Ardeidae,AUS
+Chinese Pond-Heron,Ardeola bacchus,Rare/Accidental,PELECANIFORMES,Ardeidae,AUS
+Javan Pond-Heron,Ardeola speciosa,Rare/Accidental,PELECANIFORMES,Ardeidae,AUS
+Western Cattle-Egret,Ardea ibis,,PELECANIFORMES,Ardeidae,AUS
+Eastern Cattle-Egret,Ardea coromanda,,PELECANIFORMES,Ardeidae,AUS
+Pacific Heron,Ardea pacifica,,PELECANIFORMES,Ardeidae,AUS
+Great Egret,Ardea alba,,PELECANIFORMES,Ardeidae,AUS
+Medium Egret,Ardea intermedia,,PELECANIFORMES,Ardeidae,AUS
+Plumed Egret,Ardea plumifera,,PELECANIFORMES,Ardeidae,AUS
+Gray Heron,Ardea cinerea,,PELECANIFORMES,Ardeidae,AUS
+Purple Heron,Ardea purpurea,Rare/Accidental,PELECANIFORMES,Ardeidae,AUS
+Great-billed Heron,Ardea sumatrana,,PELECANIFORMES,Ardeidae,AUS
+Osprey,Pandion haliaetus,,ACCIPITRIFORMES,Pandionidae,AUS
+Black-winged Kite,Elanus caeruleus,,ACCIPITRIFORMES,Accipitridae,AUS
+Black-shouldered Kite,Elanus axillaris,,ACCIPITRIFORMES,Accipitridae,AUS
+Letter-winged Kite,Elanus scriptus,Near-threatened,ACCIPITRIFORMES,Accipitridae,AUS
+Pacific Baza,Aviceda subcristata,,ACCIPITRIFORMES,Accipitridae,AUS
+Oriental Honey-buzzard,Pernis ptilorhynchus,Rare/Accidental,ACCIPITRIFORMES,Accipitridae,AUS
+Black-breasted Kite,Hamirostra melanosternon,,ACCIPITRIFORMES,Accipitridae,AUS
+Square-tailed Kite,Lophoictinia isura,,ACCIPITRIFORMES,Accipitridae,AUS
+Long-tailed Honey-buzzard,Henicopernis longicauda,,ACCIPITRIFORMES,Accipitridae,AUS
+Black Honey-buzzard,Henicopernis infuscatus,Vulnerable,ACCIPITRIFORMES,Accipitridae,AUS
+Pygmy Eagle,Hieraaetus weiskei,,ACCIPITRIFORMES,Accipitridae,AUS
+Little Eagle,Hieraaetus morphnoides,,ACCIPITRIFORMES,Accipitridae,AUS
+Gurney's Eagle,Aquila gurneyi,Near-threatened,ACCIPITRIFORMES,Accipitridae,AUS
+Wedge-tailed Eagle,Aquila audax,,ACCIPITRIFORMES,Accipitridae,AUS
+New Guinea Eagle,Harpyopsis novaeguineae,Vulnerable,ACCIPITRIFORMES,Accipitridae,AUS
+Bat Hawk,Macheiramphus alcinus,,ACCIPITRIFORMES,Accipitridae,AUS
+Collared Sparrowhawk,Tachyspiza cirrocephala,,ACCIPITRIFORMES,Accipitridae,AUS
+New Britain Sparrowhawk,Tachyspiza brachyura,Vulnerable,ACCIPITRIFORMES,Accipitridae,AUS
+Japanese Sparrowhawk,Tachyspiza gularis,Rare/Accidental,ACCIPITRIFORMES,Accipitridae,AUS
+Chinese Sparrowhawk,Tachyspiza soloensis,,ACCIPITRIFORMES,Accipitridae,AUS
+Imitator Sparrowhawk,Tachyspiza imitator,Near-threatened,ACCIPITRIFORMES,Accipitridae,AUS
+Gray-headed Goshawk,Tachyspiza poliocephala,,ACCIPITRIFORMES,Accipitridae,AUS
+New Britain Goshawk,Tachyspiza princeps,Vulnerable,ACCIPITRIFORMES,Accipitridae,AUS
+Gray Goshawk,Tachyspiza novaehollandiae,,ACCIPITRIFORMES,Accipitridae,AUS
+Variable Goshawk,Tachyspiza hiogaster,,ACCIPITRIFORMES,Accipitridae,AUS
+Black-mantled Goshawk,Tachyspiza melanochlamys,,ACCIPITRIFORMES,Accipitridae,AUS
+Pied Goshawk,Tachyspiza albogularis,,ACCIPITRIFORMES,Accipitridae,AUS
+Fiji Goshawk,Tachyspiza rufitorques,Endemic,ACCIPITRIFORMES,Accipitridae,AUS
+Slaty-mantled Goshawk,Tachyspiza luteoschistacea,Vulnerable,ACCIPITRIFORMES,Accipitridae,AUS
+New Caledonian Goshawk,Tachyspiza haplochroa,Near-threatened,ACCIPITRIFORMES,Accipitridae,AUS
+Brown Goshawk,Tachyspiza fasciata,,ACCIPITRIFORMES,Accipitridae,AUS
+Chestnut-shouldered Goshawk,Erythrotriorchis buergersi,Near-threatened,ACCIPITRIFORMES,Accipitridae,AUS
+Red Goshawk,Erythrotriorchis radiatus,Endangered,ACCIPITRIFORMES,Accipitridae,AUS
+Meyer's Goshawk,Astur meyerianus,,ACCIPITRIFORMES,Accipitridae,AUS
+Doria's Hawk,Megatriorchis doriae,,ACCIPITRIFORMES,Accipitridae,AUS
+Papuan Harrier,Circus spilothorax,,ACCIPITRIFORMES,Accipitridae,AUS
+Swamp Harrier,Circus approximans,,ACCIPITRIFORMES,Accipitridae,AUS
+Spotted Harrier,Circus assimilis,,ACCIPITRIFORMES,Accipitridae,AUS
+Pied Harrier,Circus melanoleucos,,ACCIPITRIFORMES,Accipitridae,AUS
+Black Kite,Milvus migrans,,ACCIPITRIFORMES,Accipitridae,AUS
+Brahminy Kite,Haliastur indus,,ACCIPITRIFORMES,Accipitridae,AUS
+Whistling Kite,Haliastur sphenurus,,ACCIPITRIFORMES,Accipitridae,AUS
+White-bellied Sea-Eagle,Icthyophaga leucogaster,,ACCIPITRIFORMES,Accipitridae,AUS
+Sanford's Sea-Eagle,Icthyophaga sanfordi,Vulnerable,ACCIPITRIFORMES,Accipitridae,AUS
+Gray-faced Buzzard,Butastur indicus,,ACCIPITRIFORMES,Accipitridae,AUS
+Sooty Owl,Tyto tenebricosa,,STRIGIFORMES,Tytonidae,AUS
+Australian Masked-Owl,Tyto novaehollandiae,,STRIGIFORMES,Tytonidae,AUS
+Golden Masked-Owl,Tyto aurantia,Vulnerable,STRIGIFORMES,Tytonidae,AUS
+Manus Masked-Owl,Tyto manusi,,STRIGIFORMES,Tytonidae,AUS
+Australasian Grass-Owl,Tyto longimembris,,STRIGIFORMES,Tytonidae,AUS
+Eastern Barn Owl,Tyto javanica,,STRIGIFORMES,Tytonidae,AUS
+Moluccan Scops-Owl,Otus magicus,,STRIGIFORMES,Strigidae,AUS
+Biak Scops-Owl,Otus beccarii,Endemic Near-threatened,STRIGIFORMES,Strigidae,AUS
+Oriental Scops-Owl,Otus sunia,Rare/Accidental,STRIGIFORMES,Strigidae,AUS
+Buffy Fish-Owl,Ketupa ketupu,Rare/Accidental,STRIGIFORMES,Strigidae,AUS
+Little Owl,Athene noctua,,STRIGIFORMES,Strigidae,AUS
+West Solomons Owl,Athene jacquinoti,,STRIGIFORMES,Strigidae,AUS
+Guadalcanal Owl,Athene granti,Endemic Near-threatened,STRIGIFORMES,Strigidae,AUS
+Malaita Owl,Athene malaitae,Endemic Vulnerable,STRIGIFORMES,Strigidae,AUS
+Makira Owl,Athene roseoaxillaris,Endemic Vulnerable,STRIGIFORMES,Strigidae,AUS
+Fearful Owl,Asio solomonensis,Near-threatened,STRIGIFORMES,Strigidae,AUS
+Rufous Owl,Ninox rufa,,STRIGIFORMES,Strigidae,AUS
+Powerful Owl,Ninox strenua,,STRIGIFORMES,Strigidae,AUS
+Barking Owl,Ninox connivens,,STRIGIFORMES,Strigidae,AUS
+Australian Boobook,Ninox boobook,Rare/Accidental,STRIGIFORMES,Strigidae,AUS
+Timor Boobook,Ninox fusca,,STRIGIFORMES,Strigidae,AUS
+Tasmanian Boobook,Ninox leucopsis,,STRIGIFORMES,Strigidae,AUS
+Morepork,Ninox novaeseelandiae,,STRIGIFORMES,Strigidae,AUS
+Laughing Owl,Ninox albifacies,Extinct,STRIGIFORMES,Strigidae,AUS
+Brown Boobook,Ninox scutulata,,STRIGIFORMES,Strigidae,AUS
+Northern Boobook,Ninox japonica,Rare/Accidental,STRIGIFORMES,Strigidae,AUS
+Christmas Island Boobook,Ninox natalis,Endemic Vulnerable,STRIGIFORMES,Strigidae,AUS
+Papuan Boobook,Ninox theomacha,,STRIGIFORMES,Strigidae,AUS
+Manus Boobook,Ninox meeki,,STRIGIFORMES,Strigidae,AUS
+Bismarck Boobook,Ninox variegata,,STRIGIFORMES,Strigidae,AUS
+New Britain Boobook,Ninox odiosa,Vulnerable,STRIGIFORMES,Strigidae,AUS
+Papuan Owl,Uroglaux dimorpha,,STRIGIFORMES,Strigidae,AUS
+Eurasian Hoopoe,Upupa epops,Rare/Accidental,BUCEROTIFORMES,Upupidae,AUS
+Blyth's Hornbill,Rhyticeros plicatus,,BUCEROTIFORMES,Bucerotidae,AUS
+Blue-tailed Bee-eater,Merops philippinus,,CORACIIFORMES,Meropidae,AUS
+Rainbow Bee-eater,Merops ornatus,,CORACIIFORMES,Meropidae,AUS
+Common Kingfisher,Alcedo atthis,,CORACIIFORMES,Alcedinidae,AUS
+Azure Kingfisher,Ceyx azureus,,CORACIIFORMES,Alcedinidae,AUS
+Bismarck Kingfisher,Ceyx websteri,Vulnerable,CORACIIFORMES,Alcedinidae,AUS
+Little Kingfisher,Ceyx pusillus,,CORACIIFORMES,Alcedinidae,AUS
+Papuan Dwarf-Kingfisher,Ceyx solitarius,,CORACIIFORMES,Alcedinidae,AUS
+Manus Dwarf-Kingfisher,Ceyx dispar,Near-threatened,CORACIIFORMES,Alcedinidae,AUS
+New Ireland Dwarf-Kingfisher,Ceyx mulcatus,Endemic,CORACIIFORMES,Alcedinidae,AUS
+New Britain Dwarf-Kingfisher,Ceyx sacerdotis,,CORACIIFORMES,Alcedinidae,AUS
+New Georgia Dwarf-Kingfisher,Ceyx collectoris,Endemic,CORACIIFORMES,Alcedinidae,AUS
+North Solomons Dwarf-Kingfisher,Ceyx meeki,,CORACIIFORMES,Alcedinidae,AUS
+Guadalcanal Dwarf-Kingfisher,Ceyx nigromaxilla,,CORACIIFORMES,Alcedinidae,AUS
+Makira Dwarf-Kingfisher,Ceyx gentianus,Endemic,CORACIIFORMES,Alcedinidae,AUS
+Laughing Kookaburra,Dacelo novaeguineae,Endemic,CORACIIFORMES,Alcedinidae,AUS
+Blue-winged Kookaburra,Dacelo leachii,,CORACIIFORMES,Alcedinidae,AUS
+Spangled Kookaburra,Dacelo tyro,,CORACIIFORMES,Alcedinidae,AUS
+Rufous-bellied Kookaburra,Dacelo gaudichaud,,CORACIIFORMES,Alcedinidae,AUS
+Shovel-billed Kookaburra,Dacelo rex,,CORACIIFORMES,Alcedinidae,AUS
+Black-capped Kingfisher,Halcyon pileata,Rare/Accidental Vulnerable,CORACIIFORMES,Alcedinidae,AUS
+Blue-black Kingfisher,Todiramphus nigrocyaneus,Near-threatened,CORACIIFORMES,Alcedinidae,AUS
+Red-backed Kingfisher,Todiramphus pyrrhopygius,,CORACIIFORMES,Alcedinidae,AUS
+Forest Kingfisher,Todiramphus macleayii,,CORACIIFORMES,Alcedinidae,AUS
+New Britain Kingfisher,Todiramphus albonotatus,Near-threatened,CORACIIFORMES,Alcedinidae,AUS
+Ultramarine Kingfisher,Todiramphus leucopygius,,CORACIIFORMES,Alcedinidae,AUS
+Vanuatu Kingfisher,Todiramphus farquhari,Near-threatened,CORACIIFORMES,Alcedinidae,AUS
+Mewing Kingfisher,Todiramphus ruficollaris,,CORACIIFORMES,Alcedinidae,AUS
+Pacific Kingfisher,Todiramphus sacer,,CORACIIFORMES,Alcedinidae,AUS
+Pohnpei Kingfisher,Todiramphus reichenbachii,Rare/Accidental Vulnerable,CORACIIFORMES,Alcedinidae,AUS
+Colonist Kingfisher,Todiramphus colonus,,CORACIIFORMES,Alcedinidae,AUS
+Torresian Kingfisher,Todiramphus sordidus,,CORACIIFORMES,Alcedinidae,AUS
+Sacred Kingfisher,Todiramphus sanctus,,CORACIIFORMES,Alcedinidae,AUS
+Collared Kingfisher,Todiramphus chloris,,CORACIIFORMES,Alcedinidae,AUS
+Beach Kingfisher,Todiramphus saurophagus,,CORACIIFORMES,Alcedinidae,AUS
+Melanesian Kingfisher,Todiramphus tristrami,,CORACIIFORMES,Alcedinidae,AUS
+Hook-billed Kingfisher,Melidora macrorrhina,,CORACIIFORMES,Alcedinidae,AUS
+Moustached Kingfisher,Actenoides bougainvillei,,CORACIIFORMES,Alcedinidae,AUS
+Yellow-billed Kingfisher,Syma torotoro,,CORACIIFORMES,Alcedinidae,AUS
+Mountain Kingfisher,Syma megarhyncha,,CORACIIFORMES,Alcedinidae,AUS
+Little Paradise-Kingfisher,Tanysiptera hydrocharis,Data deficient,CORACIIFORMES,Alcedinidae,AUS
+Common Paradise-Kingfisher,Tanysiptera galatea,,CORACIIFORMES,Alcedinidae,AUS
+Kofiau Paradise-Kingfisher,Tanysiptera ellioti,Near-threatened,CORACIIFORMES,Alcedinidae,AUS
+Biak Paradise-Kingfisher,Tanysiptera riedelii,Near-threatened,CORACIIFORMES,Alcedinidae,AUS
+Numfor Paradise-Kingfisher,Tanysiptera carolinae,Near-threatened,CORACIIFORMES,Alcedinidae,AUS
+Red-breasted Paradise-Kingfisher,Tanysiptera nympha,,CORACIIFORMES,Alcedinidae,AUS
+Brown-headed Paradise-Kingfisher,Tanysiptera danae,,CORACIIFORMES,Alcedinidae,AUS
+Buff-breasted Paradise-Kingfisher,Tanysiptera sylvia,,CORACIIFORMES,Alcedinidae,AUS
+Black-capped Paradise-Kingfisher,Tanysiptera nigriceps,,CORACIIFORMES,Alcedinidae,AUS
+European Roller,Coracias garrulus,Rare/Accidental,CORACIIFORMES,Coraciidae,AUS
+Dollarbird,Eurystomus orientalis,,CORACIIFORMES,Coraciidae,AUS
+Collared Falconet,Microhierax caerulescens,Rare/Accidental,FALCONIFORMES,Falconidae,AUS
+Spotted Kestrel,Falco moluccensis,,FALCONIFORMES,Falconidae,AUS
+Nankeen Kestrel,Falco cenchroides,,FALCONIFORMES,Falconidae,AUS
+Amur Falcon,Falco amurensis,Rare/Accidental,FALCONIFORMES,Falconidae,AUS
+Eurasian Hobby,Falco subbuteo,Rare/Accidental,FALCONIFORMES,Falconidae,AUS
+Oriental Hobby,Falco severus,,FALCONIFORMES,Falconidae,AUS
+Australian Hobby,Falco longipennis,,FALCONIFORMES,Falconidae,AUS
+New Zealand Falcon,Falco novaeseelandiae,,FALCONIFORMES,Falconidae,AUS
+Brown Falcon,Falco berigora,,FALCONIFORMES,Falconidae,AUS
+Gray Falcon,Falco hypoleucos,Vulnerable,FALCONIFORMES,Falconidae,AUS
+Black Falcon,Falco subniger,,FALCONIFORMES,Falconidae,AUS
+Peregrine Falcon,Falco peregrinus,,FALCONIFORMES,Falconidae,AUS
+Kea,Nestor notabilis,Endangered,PSITTACIFORMES,Strigopidae,AUS
+Norfolk Island Kaka,Nestor productus,Extinct,PSITTACIFORMES,Strigopidae,AUS
+New Zealand Kaka,Nestor meridionalis,Vulnerable,PSITTACIFORMES,Strigopidae,AUS
+Kakapo,Strigops habroptilus,Critically endangered,PSITTACIFORMES,Strigopidae,AUS
+Yellow-tailed Black-Cockatoo,Zanda funerea,,PSITTACIFORMES,Cacatuidae,AUS
+Carnaby's Black-Cockatoo,Zanda latirostris,Endangered,PSITTACIFORMES,Cacatuidae,AUS
+Baudin's Black-Cockatoo,Zanda baudinii,Critically endangered,PSITTACIFORMES,Cacatuidae,AUS
+Red-tailed Black-Cockatoo,Calyptorhynchus banksii,,PSITTACIFORMES,Cacatuidae,AUS
+Glossy Black-Cockatoo,Calyptorhynchus lathami,Vulnerable,PSITTACIFORMES,Cacatuidae,AUS
+Cockatiel,Nymphicus hollandicus,,PSITTACIFORMES,Cacatuidae,AUS
+Palm Cockatoo,Probosciger aterrimus,Near-threatened,PSITTACIFORMES,Cacatuidae,AUS
+Gang-gang Cockatoo,Callocephalon fimbriatum,Vulnerable,PSITTACIFORMES,Cacatuidae,AUS
+Galah,Eolophus roseicapilla,Endemic,PSITTACIFORMES,Cacatuidae,AUS
+Pink Cockatoo,Cacatua leadbeateri,,PSITTACIFORMES,Cacatuidae,AUS
+Solomons Corella,Cacatua ducorpsii,,PSITTACIFORMES,Cacatuidae,AUS
+Western Corella,Cacatua pastinator,,PSITTACIFORMES,Cacatuidae,AUS
+Little Corella,Cacatua sanguinea,,PSITTACIFORMES,Cacatuidae,AUS
+Long-billed Corella,Cacatua tenuirostris,,PSITTACIFORMES,Cacatuidae,AUS
+Blue-eyed Cockatoo,Cacatua ophthalmica,Vulnerable,PSITTACIFORMES,Cacatuidae,AUS
+Sulphur-crested Cockatoo,Cacatua galerita,,PSITTACIFORMES,Cacatuidae,AUS
+Pesquet's Parrot,Psittrichas fulgidus,Vulnerable,PSITTACIFORMES,Psittaculidae,AUS
+Yellow-capped Pygmy-Parrot,Micropsitta keiensis,,PSITTACIFORMES,Psittaculidae,AUS
+Geelvink Pygmy-Parrot,Micropsitta geelvinkiana,,PSITTACIFORMES,Psittaculidae,AUS
+Buff-faced Pygmy-Parrot,Micropsitta pusio,,PSITTACIFORMES,Psittaculidae,AUS
+Red-breasted Pygmy-Parrot,Micropsitta bruijnii,,PSITTACIFORMES,Psittaculidae,AUS
+Meek's Pygmy-Parrot,Micropsitta meeki,,PSITTACIFORMES,Psittaculidae,AUS
+Finsch's Pygmy-Parrot,Micropsitta finschii,,PSITTACIFORMES,Psittaculidae,AUS
+Superb Parrot,Polytelis swainsonii,,PSITTACIFORMES,Psittaculidae,AUS
+Regent Parrot,Polytelis anthopeplus,,PSITTACIFORMES,Psittaculidae,AUS
+Princess Parrot,Polytelis alexandrae,Near-threatened,PSITTACIFORMES,Psittaculidae,AUS
+Australian King-Parrot,Alisterus scapularis,,PSITTACIFORMES,Psittaculidae,AUS
+Moluccan King-Parrot,Alisterus amboinensis,,PSITTACIFORMES,Psittaculidae,AUS
+Papuan King-Parrot,Alisterus chloropterus,,PSITTACIFORMES,Psittaculidae,AUS
+Red-winged Parrot,Aprosmictus erythropterus,,PSITTACIFORMES,Psittaculidae,AUS
+Papuan Eclectus,Eclectus polychloros,,PSITTACIFORMES,Psittaculidae,AUS
+Oceanic Eclectus,Eclectus infectus,Extirpated Extinct,PSITTACIFORMES,Psittaculidae,AUS
+Red-cheeked Parrot,Geoffroyus geoffroyi,,PSITTACIFORMES,Psittaculidae,AUS
+Blue-collared Parrot,Geoffroyus simplex,,PSITTACIFORMES,Psittaculidae,AUS
+Singing Parrot,Geoffroyus heteroclitus,,PSITTACIFORMES,Psittaculidae,AUS
+Rose-ringed Parakeet,Psittacula krameri,Introduced species,PSITTACIFORMES,Psittaculidae,AUS
+Painted Tiger-Parrot,Psittacella picta,,PSITTACIFORMES,Psittaculidae,AUS
+Brehm's Tiger-Parrot,Psittacella brehmii,,PSITTACIFORMES,Psittaculidae,AUS
+Modest Tiger-Parrot,Psittacella modesta,,PSITTACIFORMES,Psittaculidae,AUS
+Madarasz's Tiger-Parrot,Psittacella madaraszi,,PSITTACIFORMES,Psittaculidae,AUS
+Great-billed Parrot,Tanygnathus megalorynchos,,PSITTACIFORMES,Psittaculidae,AUS
+Ground Parrot,Pezoporus wallicus,,PSITTACIFORMES,Psittaculidae,AUS
+Night Parrot,Pezoporus occidentalis,Critically endangered,PSITTACIFORMES,Psittaculidae,AUS
+Bourke's Parrot,Neopsephotus bourkii,,PSITTACIFORMES,Psittaculidae,AUS
+Blue-winged Parrot,Neophema chrysostoma,Vulnerable,PSITTACIFORMES,Psittaculidae,AUS
+Elegant Parrot,Neophema elegans,,PSITTACIFORMES,Psittaculidae,AUS
+Rock Parrot,Neophema petrophila,,PSITTACIFORMES,Psittaculidae,AUS
+Orange-bellied Parrot,Neophema chrysogaster,Critically endangered,PSITTACIFORMES,Psittaculidae,AUS
+Turquoise Parrot,Neophema pulchella,,PSITTACIFORMES,Psittaculidae,AUS
+Scarlet-chested Parrot,Neophema splendida,,PSITTACIFORMES,Psittaculidae,AUS
+Swift Parrot,Lathamus discolor,Critically endangered,PSITTACIFORMES,Psittaculidae,AUS
+Crimson Shining-Parrot,Prosopeia splendens,Endemic Near-threatened,PSITTACIFORMES,Psittaculidae,AUS
+Red Shining-Parrot,Prosopeia tabuensis,Endemic,PSITTACIFORMES,Psittaculidae,AUS
+Masked Shining-Parrot,Prosopeia personata,Endemic Near-threatened,PSITTACIFORMES,Psittaculidae,AUS
+Horned Parakeet,Eunymphicus cornutus,Vulnerable,PSITTACIFORMES,Psittaculidae,AUS
+Ouvea Parakeet,Eunymphicus uvaeensis,Vulnerable,PSITTACIFORMES,Psittaculidae,AUS
+Antipodes Parakeet,Cyanoramphus unicolor,Vulnerable,PSITTACIFORMES,Psittaculidae,AUS
+Red-crowned Parakeet,Cyanoramphus novaezelandiae,,PSITTACIFORMES,Psittaculidae,AUS
+Reischek's Parakeet,Cyanoramphus hochstetteri,,PSITTACIFORMES,Psittaculidae,AUS
+New Caledonian Parakeet,Cyanoramphus saisseti,,PSITTACIFORMES,Psittaculidae,AUS
+Norfolk Island Parakeet,Cyanoramphus cookii,,PSITTACIFORMES,Psittaculidae,AUS
+Yellow-crowned Parakeet,Cyanoramphus auriceps,Near-threatened,PSITTACIFORMES,Psittaculidae,AUS
+Chatham Islands Parakeet,Cyanoramphus forbesi,Vulnerable,PSITTACIFORMES,Psittaculidae,AUS
+Malherbe's Parakeet,Cyanoramphus malherbi,Critically endangered,PSITTACIFORMES,Psittaculidae,AUS
+Australian Ringneck,Barnardius zonarius,Endemic,PSITTACIFORMES,Psittaculidae,AUS
+Green Rosella,Platycercus caledonicus,,PSITTACIFORMES,Psittaculidae,AUS
+Crimson Rosella,Platycercus elegans,,PSITTACIFORMES,Psittaculidae,AUS
+Northern Rosella,Platycercus venustus,,PSITTACIFORMES,Psittaculidae,AUS
+Eastern Rosella,Platycercus eximius,,PSITTACIFORMES,Psittaculidae,AUS
+Pale-headed Rosella,Platycercus adscitus,,PSITTACIFORMES,Psittaculidae,AUS
+Western Rosella,Platycercus icterotis,,PSITTACIFORMES,Psittaculidae,AUS
+Greater Bluebonnet,Northiella haematogaster,,PSITTACIFORMES,Psittaculidae,AUS
+Naretha Bluebonnet,Northiella narethae,,PSITTACIFORMES,Psittaculidae,AUS
+Red-rumped Parrot,Psephotus haematonotus,,PSITTACIFORMES,Psittaculidae,AUS
+Mulga Parrot,Psephotellus varius,,PSITTACIFORMES,Psittaculidae,AUS
+Hooded Parrot,Psephotellus dissimilis,,PSITTACIFORMES,Psittaculidae,AUS
+Golden-shouldered Parrot,Psephotellus chrysopterygius,Endangered,PSITTACIFORMES,Psittaculidae,AUS
+Paradise Parrot,Psephotellus pulcherrimus,Extinct,PSITTACIFORMES,Psittaculidae,AUS
+Red-capped Parrot,Purpureicephalus spurius,,PSITTACIFORMES,Psittaculidae,AUS
+Dusky-cheeked Fig-Parrot,Nannopsittacus melanogenia,,PSITTACIFORMES,Psittaculidae,AUS
+Blue-fronted Fig-Parrot,Nannopsittacus gulielmitertii,Endemic,PSITTACIFORMES,Psittaculidae,AUS
+Black-fronted Fig-Parrot,Nannopsittacus nigrifrons,,PSITTACIFORMES,Psittaculidae,AUS
+Double-eyed Fig-Parrot,Cyclopsitta diophthalma,,PSITTACIFORMES,Psittaculidae,AUS
+Large Fig-Parrot,Cyclopsitta desmarestii,,PSITTACIFORMES,Psittaculidae,AUS
+Edwards's Fig-Parrot,Cyclopsitta edwardsii,,PSITTACIFORMES,Psittaculidae,AUS
+Salvadori's Fig-Parrot,Cyclopsitta salvadorii,,PSITTACIFORMES,Psittaculidae,AUS
+Budgerigar,Melopsittacus undulatus,,PSITTACIFORMES,Psittaculidae,AUS
+Plum-faced Lorikeet,Oreopsittacus arfaki,,PSITTACIFORMES,Psittaculidae,AUS
+Pygmy Lorikeet,Charminetta wilhelminae,,PSITTACIFORMES,Psittaculidae,AUS
+Red-fronted Lorikeet,Hypocharmosyna rubronotata,,PSITTACIFORMES,Psittaculidae,AUS
+Red-flanked Lorikeet,Hypocharmosyna placentis,,PSITTACIFORMES,Psittaculidae,AUS
+Fairy Lorikeet,Charmosynopsis pulchella,,PSITTACIFORMES,Psittaculidae,AUS
+Striated Lorikeet,Charmosyna multistriata,,PSITTACIFORMES,Psittaculidae,AUS
+Josephine's Lorikeet,Charmosyna josefinae,,PSITTACIFORMES,Psittaculidae,AUS
+West Papuan Lorikeet,Charmosyna papou,Endemic,PSITTACIFORMES,Psittaculidae,AUS
+Stella's Lorikeet,Charmosyna stellae,,PSITTACIFORMES,Psittaculidae,AUS
+Duchess Lorikeet,Vini margarethae,,PSITTACIFORMES,Psittaculidae,AUS
+Meek's Lorikeet,Vini meeki,,PSITTACIFORMES,Psittaculidae,AUS
+New Caledonian Lorikeet,Vini diadema,Critically endangered (possibly extinct),PSITTACIFORMES,Psittaculidae,AUS
+Red-chinned Lorikeet,Vini rubrigularis,,PSITTACIFORMES,Psittaculidae,AUS
+Palm Lorikeet,Vini palmarum,Vulnerable,PSITTACIFORMES,Psittaculidae,AUS
+Red-throated Lorikeet,Vini amabilis,Endemic Critically endangered,PSITTACIFORMES,Psittaculidae,AUS
+Collared Lory,Vini solitaria,Endemic,PSITTACIFORMES,Psittaculidae,AUS
+Blue-crowned Lorikeet,Vini australis,,PSITTACIFORMES,Psittaculidae,AUS
+Yellow-billed Lorikeet,Neopsittacus musschenbroekii,,PSITTACIFORMES,Psittaculidae,AUS
+Orange-billed Lorikeet,Neopsittacus pullicauda,,PSITTACIFORMES,Psittaculidae,AUS
+White-naped Lory,Lorius albidinucha,Near-threatened,PSITTACIFORMES,Psittaculidae,AUS
+Yellow-bibbed Lory,Lorius chlorocercus,,PSITTACIFORMES,Psittaculidae,AUS
+Purple-bellied Lory,Lorius hypoinochrous,,PSITTACIFORMES,Psittaculidae,AUS
+Black-capped Lory,Lorius lory,,PSITTACIFORMES,Psittaculidae,AUS
+Varied Lorikeet,Psitteuteles versicolor,,PSITTACIFORMES,Psittaculidae,AUS
+Little Lorikeet,Psitteuteles pusillus,,PSITTACIFORMES,Psittaculidae,AUS
+Purple-crowned Lorikeet,Psitteuteles porphyrocephalus,,PSITTACIFORMES,Psittaculidae,AUS
+Dusky Lory,Chalcopsitta fuscata,,PSITTACIFORMES,Psittaculidae,AUS
+Cardinal Lory,Chalcopsitta cardinalis,,PSITTACIFORMES,Psittaculidae,AUS
+Brown Lory,Chalcopsitta duivenbodei,,PSITTACIFORMES,Psittaculidae,AUS
+Black Lory,Chalcopsitta atra,,PSITTACIFORMES,Psittaculidae,AUS
+Yellow-streaked Lory,Chalcopsitta scintillata,,PSITTACIFORMES,Psittaculidae,AUS
+Goldie's Lorikeet,Glossoptilus goldiei,,PSITTACIFORMES,Psittaculidae,AUS
+Musk Lorikeet,Trichoglossus concinnus,,PSITTACIFORMES,Psittaculidae,AUS
+Black-winged Lory,Trichoglossus cyanogenius,Near-threatened,PSITTACIFORMES,Psittaculidae,AUS
+Violet-necked Lory,Trichoglossus squamatus,,PSITTACIFORMES,Psittaculidae,AUS
+Scaly-breasted Lorikeet,Trichoglossus chlorolepidotus,,PSITTACIFORMES,Psittaculidae,AUS
+Coconut Lorikeet,Trichoglossus haematodus,,PSITTACIFORMES,Psittaculidae,AUS
+Biak Lorikeet,Trichoglossus rosenbergii,Endemic Vulnerable,PSITTACIFORMES,Psittaculidae,AUS
+Rainbow Lorikeet,Trichoglossus moluccanus,,PSITTACIFORMES,Psittaculidae,AUS
+Red-collared Lorikeet,Trichoglossus rubritorquis,,PSITTACIFORMES,Psittaculidae,AUS
+Papuan Hanging-Parrot,Loriculus aurantiifrons,,PSITTACIFORMES,Psittaculidae,AUS
+Green-fronted Hanging-Parrot,Loriculus tener,,PSITTACIFORMES,Psittaculidae,AUS
+Stephens Island Wren,Traversia lyalli,Extinct,PASSERIFORMES,Acanthisittidae,AUS
+Rifleman,Acanthisitta chloris,,PASSERIFORMES,Acanthisittidae,AUS
+Bush Wren,Xenicus longipes,Extinct,PASSERIFORMES,Acanthisittidae,AUS
+South Island Wren,Xenicus gilviventris,Endangered,PASSERIFORMES,Acanthisittidae,AUS
+North Moluccan Pitta,Erythropitta rufiventris,,PASSERIFORMES,Pittidae,AUS
+Papuan Pitta,Erythropitta macklotii,,PASSERIFORMES,Pittidae,AUS
+Bismarck Pitta,Erythropitta novaehibernicae,,PASSERIFORMES,Pittidae,AUS
+Louisiade Pitta,Erythropitta meeki,Data deficient,PASSERIFORMES,Pittidae,AUS
+Blue-winged Pitta,Pitta moluccensis,,PASSERIFORMES,Pittidae,AUS
+Fairy Pitta,Pitta nympha,Rare/Accidental Vulnerable,PASSERIFORMES,Pittidae,AUS
+Western Hooded Pitta,Pitta sordida,Rare/Accidental,PASSERIFORMES,Pittidae,AUS
+Eastern Hooded Pitta,Pitta novaeguineae,,PASSERIFORMES,Pittidae,AUS
+Biak Hooded Pitta,Pitta rosenbergii,Endemic Near-threatened,PASSERIFORMES,Pittidae,AUS
+Noisy Pitta,Pitta versicolor,,PASSERIFORMES,Pittidae,AUS
+Black-faced Pitta,Pitta anerythra,Near-threatened,PASSERIFORMES,Pittidae,AUS
+Superb Pitta,Pitta superba,Endangered,PASSERIFORMES,Pittidae,AUS
+Rainbow Pitta,Pitta iris,,PASSERIFORMES,Pittidae,AUS
+Thrush-like Antpitta,Myrmothera campanisona,Rare/Accidental,PASSERIFORMES,Grallariidae,AUS
+Albert's Lyrebird,Menura alberti,,PASSERIFORMES,Menuridae,AUS
+Superb Lyrebird,Menura novaehollandiae,,PASSERIFORMES,Menuridae,AUS
+Rufous Scrub-bird,Atrichornis rufescens,Endangered,PASSERIFORMES,Atrichornithidae,AUS
+Noisy Scrub-bird,Atrichornis clamosus,Endangered,PASSERIFORMES,Atrichornithidae,AUS
+White-eared Catbird,Ailuroedus buccoides,,PASSERIFORMES,Ptilonorhynchidae,AUS
+Ochre-breasted Catbird,Ailuroedus stonii,,PASSERIFORMES,Ptilonorhynchidae,AUS
+Tan-capped Catbird,Ailuroedus geislerorum,,PASSERIFORMES,Ptilonorhynchidae,AUS
+Spotted Catbird,Ailuroedus maculosus,Endemic,PASSERIFORMES,Ptilonorhynchidae,AUS
+Huon Catbird,Ailuroedus astigmaticus,Endemic,PASSERIFORMES,Ptilonorhynchidae,AUS
+Black-capped Catbird,Ailuroedus melanocephalus,Endemic,PASSERIFORMES,Ptilonorhynchidae,AUS
+Northern Catbird,Ailuroedus jobiensis,,PASSERIFORMES,Ptilonorhynchidae,AUS
+Arfak Catbird,Ailuroedus arfakianus,,PASSERIFORMES,Ptilonorhynchidae,AUS
+Black-eared Catbird,Ailuroedus melanotis,,PASSERIFORMES,Ptilonorhynchidae,AUS
+Green Catbird,Ailuroedus crassirostris,Endemic,PASSERIFORMES,Ptilonorhynchidae,AUS
+Tooth-billed Bowerbird,Scenopoeetes dentirostris,Near-threatened,PASSERIFORMES,Ptilonorhynchidae,AUS
+Archbold's Bowerbird,Archboldia papuensis,,PASSERIFORMES,Ptilonorhynchidae,AUS
+Vogelkop Bowerbird,Amblyornis inornata,,PASSERIFORMES,Ptilonorhynchidae,AUS
+MacGregor's Bowerbird,Amblyornis macgregoriae,,PASSERIFORMES,Ptilonorhynchidae,AUS
+Streaked Bowerbird,Amblyornis subalaris,,PASSERIFORMES,Ptilonorhynchidae,AUS
+Golden-fronted Bowerbird,Amblyornis flavifrons,,PASSERIFORMES,Ptilonorhynchidae,AUS
+Golden Bowerbird,Prionodura newtoniana,Near-threatened,PASSERIFORMES,Ptilonorhynchidae,AUS
+Masked Bowerbird,Sericulus aureus,,PASSERIFORMES,Ptilonorhynchidae,AUS
+Flame Bowerbird,Sericulus ardens,,PASSERIFORMES,Ptilonorhynchidae,AUS
+Fire-maned Bowerbird,Sericulus bakeri,Near-threatened,PASSERIFORMES,Ptilonorhynchidae,AUS
+Regent Bowerbird,Sericulus chrysocephalus,,PASSERIFORMES,Ptilonorhynchidae,AUS
+Satin Bowerbird,Ptilonorhynchus violaceus,,PASSERIFORMES,Ptilonorhynchidae,AUS
+Western Bowerbird,Chlamydera guttata,,PASSERIFORMES,Ptilonorhynchidae,AUS
+Spotted Bowerbird,Chlamydera maculata,,PASSERIFORMES,Ptilonorhynchidae,AUS
+Great Bowerbird,Chlamydera nuchalis,,PASSERIFORMES,Ptilonorhynchidae,AUS
+Yellow-breasted Bowerbird,Chlamydera lauterbachi,,PASSERIFORMES,Ptilonorhynchidae,AUS
+Fawn-breasted Bowerbird,Chlamydera cerviniventris,,PASSERIFORMES,Ptilonorhynchidae,AUS
+Papuan Treecreeper,Cormobates placens,,PASSERIFORMES,Climacteridae,AUS
+White-throated Treecreeper,Cormobates leucophaea,,PASSERIFORMES,Climacteridae,AUS
+White-browed Treecreeper,Climacteris affinis,,PASSERIFORMES,Climacteridae,AUS
+Red-browed Treecreeper,Climacteris erythrops,,PASSERIFORMES,Climacteridae,AUS
+Brown Treecreeper,Climacteris picumnus,,PASSERIFORMES,Climacteridae,AUS
+Black-tailed Treecreeper,Climacteris melanurus,,PASSERIFORMES,Climacteridae,AUS
+Rufous Treecreeper,Climacteris rufus,,PASSERIFORMES,Climacteridae,AUS
+Gray Grasswren,Amytornis barbatus,,PASSERIFORMES,Maluridae,AUS
+Pilbara Grasswren,Amytornis whitei,,PASSERIFORMES,Maluridae,AUS
+Sandhill Grasswren,Amytornis oweni,Endemic,PASSERIFORMES,Maluridae,AUS
+Opalton Grasswren,Amytornis rowleyi,,PASSERIFORMES,Maluridae,AUS
+Striated Grasswren,Amytornis striatus,,PASSERIFORMES,Maluridae,AUS
+White-throated Grasswren,Amytornis woodwardi,Endangered,PASSERIFORMES,Maluridae,AUS
+Carpentarian Grasswren,Amytornis dorotheae,Vulnerable,PASSERIFORMES,Maluridae,AUS
+Short-tailed Grasswren,Amytornis merrotsyi,Near-threatened,PASSERIFORMES,Maluridae,AUS
+Western Grasswren,Amytornis textilis,,PASSERIFORMES,Maluridae,AUS
+Thick-billed Grasswren,Amytornis modestus,,PASSERIFORMES,Maluridae,AUS
+Black Grasswren,Amytornis housei,,PASSERIFORMES,Maluridae,AUS
+Eyrean Grasswren,Amytornis goyderi,,PASSERIFORMES,Maluridae,AUS
+Dusky Grasswren,Amytornis purnelli,,PASSERIFORMES,Maluridae,AUS
+Kalkadoon Grasswren,Amytornis ballarae,Vulnerable,PASSERIFORMES,Maluridae,AUS
+Southern Emuwren,Stipiturus malachurus,,PASSERIFORMES,Maluridae,AUS
+Rufous-crowned Emuwren,Stipiturus ruficeps,,PASSERIFORMES,Maluridae,AUS
+Mallee Emuwren,Stipiturus mallee,Endangered,PASSERIFORMES,Maluridae,AUS
+Wallace's Fairywren,Sipodotus wallacii,,PASSERIFORMES,Maluridae,AUS
+Orange-crowned Fairywren,Clytomyias insignis,,PASSERIFORMES,Maluridae,AUS
+Broad-billed Fairywren,Chenorhamphus grayi,,PASSERIFORMES,Maluridae,AUS
+Campbell's Fairywren,Chenorhamphus campbelli,,PASSERIFORMES,Maluridae,AUS
+Emperor Fairywren,Malurus cyanocephalus,,PASSERIFORMES,Maluridae,AUS
+Purple-crowned Fairywren,Malurus coronatus,,PASSERIFORMES,Maluridae,AUS
+Red-winged Fairywren,Malurus elegans,,PASSERIFORMES,Maluridae,AUS
+Blue-breasted Fairywren,Malurus pulcherrimus,,PASSERIFORMES,Maluridae,AUS
+Purple-backed Fairywren,Malurus assimilis,,PASSERIFORMES,Maluridae,AUS
+Variegated Fairywren,Malurus lamberti,,PASSERIFORMES,Maluridae,AUS
+Lovely Fairywren,Malurus amabilis,,PASSERIFORMES,Maluridae,AUS
+Splendid Fairywren,Malurus splendens,,PASSERIFORMES,Maluridae,AUS
+Superb Fairywren,Malurus cyaneus,,PASSERIFORMES,Maluridae,AUS
+White-winged Fairywren,Malurus leucopterus,,PASSERIFORMES,Maluridae,AUS
+Red-backed Fairywren,Malurus melanocephalus,,PASSERIFORMES,Maluridae,AUS
+White-shouldered Fairywren,Malurus alboscapulatus,,PASSERIFORMES,Maluridae,AUS
+Eastern Spinebill,Acanthorhynchus tenuirostris,,PASSERIFORMES,Meliphagidae,AUS
+Western Spinebill,Acanthorhynchus superciliosus,,PASSERIFORMES,Meliphagidae,AUS
+Pied Honeyeater,Certhionyx variegatus,,PASSERIFORMES,Meliphagidae,AUS
+Plain Honeyeater,Pycnopygius ixoides,,PASSERIFORMES,Meliphagidae,AUS
+Marbled Honeyeater,Pycnopygius cinereus,,PASSERIFORMES,Meliphagidae,AUS
+Streak-headed Honeyeater,Pycnopygius stictocephalus,,PASSERIFORMES,Meliphagidae,AUS
+Tui,Prosthemadera novaeseelandiae,,PASSERIFORMES,Meliphagidae,AUS
+New Zealand Bellbird,Anthornis melanura,,PASSERIFORMES,Meliphagidae,AUS
+Chatham Islands Bellbird,Anthornis melanocephala,Extinct,PASSERIFORMES,Meliphagidae,AUS
+Puff-backed Honeyeater,Meliphaga aruensis,,PASSERIFORMES,Meliphagidae,AUS
+Yellow-spotted Honeyeater,Meliphaga notata,,PASSERIFORMES,Meliphagidae,AUS
+Lewin's Honeyeater,Meliphaga lewinii,,PASSERIFORMES,Meliphagidae,AUS
+Kimberley Honeyeater,Meliphaga fordiana,,PASSERIFORMES,Meliphagidae,AUS
+White-lined Honeyeater,Meliphaga albilineata,,PASSERIFORMES,Meliphagidae,AUS
+Orange-cheeked Honeyeater,Meliphaga chrysogenys,,PASSERIFORMES,Meliphagidae,AUS
+Forest Honeyeater,Meliphaga montana,,PASSERIFORMES,Meliphagidae,AUS
+Mottled Honeyeater,Meliphaga mimikae,,PASSERIFORMES,Meliphagidae,AUS
+Yellow-gaped Honeyeater,Meliphaga flavirictus,,PASSERIFORMES,Meliphagidae,AUS
+Mountain Honeyeater,Meliphaga orientalis,,PASSERIFORMES,Meliphagidae,AUS
+Scrub Honeyeater,Meliphaga albonotata,,PASSERIFORMES,Meliphagidae,AUS
+Mimic Honeyeater,Meliphaga analoga,,PASSERIFORMES,Meliphagidae,AUS
+Tagula Honeyeater,Meliphaga vicina,,PASSERIFORMES,Meliphagidae,AUS
+Graceful Honeyeater,Meliphaga gracilis,,PASSERIFORMES,Meliphagidae,AUS
+Cryptic Honeyeater,Meliphaga imitatrix,,PASSERIFORMES,Meliphagidae,AUS
+Elegant Honeyeater,Meliphaga cinereifrons,Endemic,PASSERIFORMES,Meliphagidae,AUS
+Yellow Honeyeater,Stomiopera flava,,PASSERIFORMES,Meliphagidae,AUS
+White-gaped Honeyeater,Stomiopera unicolor,,PASSERIFORMES,Meliphagidae,AUS
+White-fronted Honeyeater,Purnella albifrons,,PASSERIFORMES,Meliphagidae,AUS
+Yellow-faced Honeyeater,Caligavis chrysops,,PASSERIFORMES,Meliphagidae,AUS
+Black-throated Honeyeater,Caligavis subfrenata,,PASSERIFORMES,Meliphagidae,AUS
+Obscure Honeyeater,Caligavis obscura,,PASSERIFORMES,Meliphagidae,AUS
+Yellow-tufted Honeyeater,Lichenostomus melanops,,PASSERIFORMES,Meliphagidae,AUS
+Purple-gaped Honeyeater,Lichenostomus cratitius,,PASSERIFORMES,Meliphagidae,AUS
+Bell Miner,Manorina melanophrys,,PASSERIFORMES,Meliphagidae,AUS
+Noisy Miner,Manorina melanocephala,,PASSERIFORMES,Meliphagidae,AUS
+Yellow-throated Miner,Manorina flavigula,,PASSERIFORMES,Meliphagidae,AUS
+Black-eared Miner,Manorina melanotis,Introduced species Endangered,PASSERIFORMES,Meliphagidae,AUS
+Sooty Honeyeater,Melionyx fuscus,,PASSERIFORMES,Meliphagidae,AUS
+Short-bearded Honeyeater,Melionyx nouhuysi,,PASSERIFORMES,Meliphagidae,AUS
+Long-bearded Honeyeater,Melionyx princeps,Vulnerable,PASSERIFORMES,Meliphagidae,AUS
+Ornate Melidectes,Melidectes torquatus,,PASSERIFORMES,Meliphagidae,AUS
+Cinnamon-browed Melidectes,Melidectes ochromelas,,PASSERIFORMES,Meliphagidae,AUS
+Vogelkop Melidectes,Melidectes leucostephes,,PASSERIFORMES,Meliphagidae,AUS
+Huon Melidectes,Melidectes foersteri,,PASSERIFORMES,Meliphagidae,AUS
+Belford's Melidectes,Melidectes belfordi,,PASSERIFORMES,Meliphagidae,AUS
+Yellow-browed Melidectes,Melidectes rufocrissalis,,PASSERIFORMES,Meliphagidae,AUS
+Bridled Honeyeater,Bolemoreus frenatus,,PASSERIFORMES,Meliphagidae,AUS
+Eungella Honeyeater,Bolemoreus hindwoodi,Near-threatened,PASSERIFORMES,Meliphagidae,AUS
+Spiny-cheeked Honeyeater,Acanthagenys rufogularis,,PASSERIFORMES,Meliphagidae,AUS
+Little Wattlebird,Anthochaera chrysoptera,,PASSERIFORMES,Meliphagidae,AUS
+Western Wattlebird,Anthochaera lunulata,,PASSERIFORMES,Meliphagidae,AUS
+Regent Honeyeater,Anthochaera phrygia,Critically endangered,PASSERIFORMES,Meliphagidae,AUS
+Red Wattlebird,Anthochaera carunculata,,PASSERIFORMES,Meliphagidae,AUS
+Yellow Wattlebird,Anthochaera paradoxa,,PASSERIFORMES,Meliphagidae,AUS
+Varied Honeyeater,Gavicalis versicolor,,PASSERIFORMES,Meliphagidae,AUS
+Mangrove Honeyeater,Gavicalis fasciogularis,,PASSERIFORMES,Meliphagidae,AUS
+Singing Honeyeater,Gavicalis virescens,,PASSERIFORMES,Meliphagidae,AUS
+Yellow-plumed Honeyeater,Ptilotula ornata,,PASSERIFORMES,Meliphagidae,AUS
+White-plumed Honeyeater,Ptilotula penicillata,,PASSERIFORMES,Meliphagidae,AUS
+Yellow-tinted Honeyeater,Ptilotula flavescens,,PASSERIFORMES,Meliphagidae,AUS
+Fuscous Honeyeater,Ptilotula fusca,,PASSERIFORMES,Meliphagidae,AUS
+Gray-headed Honeyeater,Ptilotula keartlandi,,PASSERIFORMES,Meliphagidae,AUS
+Gray-fronted Honeyeater,Ptilotula plumula,,PASSERIFORMES,Meliphagidae,AUS
+Bougainville Honeyeater,Stresemannia bougainvillei,,PASSERIFORMES,Meliphagidae,AUS
+Brown-backed Honeyeater,Ramsayornis modestus,,PASSERIFORMES,Meliphagidae,AUS
+Bar-breasted Honeyeater,Ramsayornis fasciatus,,PASSERIFORMES,Meliphagidae,AUS
+Rufous-banded Honeyeater,Conopophila albogularis,,PASSERIFORMES,Meliphagidae,AUS
+Rufous-throated Honeyeater,Conopophila rufogularis,,PASSERIFORMES,Meliphagidae,AUS
+Gray Honeyeater,Conopophila whitei,,PASSERIFORMES,Meliphagidae,AUS
+Gibberbird,Ashbyia lovensis,,PASSERIFORMES,Meliphagidae,AUS
+Yellow Chat,Epthianura crocea,,PASSERIFORMES,Meliphagidae,AUS
+Crimson Chat,Epthianura tricolor,,PASSERIFORMES,Meliphagidae,AUS
+Orange Chat,Epthianura aurifrons,,PASSERIFORMES,Meliphagidae,AUS
+White-fronted Chat,Epthianura albifrons,,PASSERIFORMES,Meliphagidae,AUS
+Arfak Honeyeater,Melipotes gymnops,,PASSERIFORMES,Meliphagidae,AUS
+Smoky Honeyeater,Melipotes fumigatus,,PASSERIFORMES,Meliphagidae,AUS
+Foja Honeyeater,Melipotes carolae,,PASSERIFORMES,Meliphagidae,AUS
+Spangled Honeyeater,Melipotes ater,,PASSERIFORMES,Meliphagidae,AUS
+Macgregor's Honeyeater,Macgregoria pulchra,Vulnerable,PASSERIFORMES,Meliphagidae,AUS
+Long-billed Honeyeater,Melilestes megarhynchus,,PASSERIFORMES,Meliphagidae,AUS
+Olive Straightbill,Timeliopsis fulvigula,,PASSERIFORMES,Meliphagidae,AUS
+Tawny Straightbill,Timeliopsis griseigula,,PASSERIFORMES,Meliphagidae,AUS
+Black Honeyeater,Sugomel nigrum,,PASSERIFORMES,Meliphagidae,AUS
+Bismarck Honeyeater,Vosea whitemanensis,Near-threatened,PASSERIFORMES,Meliphagidae,AUS
+White-chinned Myzomela,Myzomela albigula,Data deficient,PASSERIFORMES,Meliphagidae,AUS
+Ruby-throated Myzomela,Myzomela eques,,PASSERIFORMES,Meliphagidae,AUS
+Ashy Myzomela,Myzomela cineracea,,PASSERIFORMES,Meliphagidae,AUS
+Red-tinged Myzomela,Myzomela rubrotincta,Endemic (country/region),PASSERIFORMES,Meliphagidae,AUS
+Biak Myzomela,Myzomela rubrobrunnea,,PASSERIFORMES,Meliphagidae,AUS
+Dusky Myzomela,Myzomela obscura,,PASSERIFORMES,Meliphagidae,AUS
+Red Myzomela,Myzomela cruentata,,PASSERIFORMES,Meliphagidae,AUS
+Reddish Myzomela,Myzomela erythrina,,PASSERIFORMES,Meliphagidae,AUS
+Papuan Black Myzomela,Myzomela nigrita,,PASSERIFORMES,Meliphagidae,AUS
+New Ireland Myzomela,Myzomela pulchella,,PASSERIFORMES,Meliphagidae,AUS
+Red-headed Myzomela,Myzomela erythrocephala,,PASSERIFORMES,Meliphagidae,AUS
+Elfin Myzomela,Myzomela adolphinae,,PASSERIFORMES,Meliphagidae,AUS
+New Caledonian Myzomela,Myzomela caledonica,,PASSERIFORMES,Meliphagidae,AUS
+Scarlet Myzomela,Myzomela sanguinolenta,,PASSERIFORMES,Meliphagidae,AUS
+Cardinal Myzomela,Myzomela cardinalis,,PASSERIFORMES,Meliphagidae,AUS
+Rotuma Myzomela,Myzomela chermesina,Endemic Vulnerable,PASSERIFORMES,Meliphagidae,AUS
+Sclater's Myzomela,Myzomela sclateri,,PASSERIFORMES,Meliphagidae,AUS
+Bismarck Black Myzomela,Myzomela pammelaena,,PASSERIFORMES,Meliphagidae,AUS
+Scarlet-naped Myzomela,Myzomela lafargei,,PASSERIFORMES,Meliphagidae,AUS
+Yellow-vented Myzomela,Myzomela eichhorni,,PASSERIFORMES,Meliphagidae,AUS
+Red-bellied Myzomela,Myzomela malaitae,Near-threatened,PASSERIFORMES,Meliphagidae,AUS
+Black-headed Myzomela,Myzomela melanocephala,,PASSERIFORMES,Meliphagidae,AUS
+Sooty Myzomela,Myzomela tristrami,,PASSERIFORMES,Meliphagidae,AUS
+Sulphur-breasted Myzomela,Myzomela jugularis,Endemic,PASSERIFORMES,Meliphagidae,AUS
+Black-bellied Myzomela,Myzomela erythromelas,,PASSERIFORMES,Meliphagidae,AUS
+Red-collared Myzomela,Myzomela rosenbergii,,PASSERIFORMES,Meliphagidae,AUS
+Long-billed Myzomela,Myzomela longirostris,,PASSERIFORMES,Meliphagidae,AUS
+Barred Honeyeater,Gliciphila undulata,,PASSERIFORMES,Meliphagidae,AUS
+Tawny-crowned Honeyeater,Gliciphila melanops,,PASSERIFORMES,Meliphagidae,AUS
+Vanuatu Honeyeater,Gliciphila notabilis,,PASSERIFORMES,Meliphagidae,AUS
+Green-backed Honeyeater,Glycichaera fallax,,PASSERIFORMES,Meliphagidae,AUS
+Leaden Honeyeater,Ptiloprora plumbea,,PASSERIFORMES,Meliphagidae,AUS
+Yellow-streaked Honeyeater,Ptiloprora meekiana,,PASSERIFORMES,Meliphagidae,AUS
+Rufous-sided Honeyeater,Ptiloprora erythropleura,,PASSERIFORMES,Meliphagidae,AUS
+Mayr's Honeyeater,Ptiloprora mayri,,PASSERIFORMES,Meliphagidae,AUS
+Rufous-backed Honeyeater,Ptiloprora guisei,,PASSERIFORMES,Meliphagidae,AUS
+Gray-streaked Honeyeater,Ptiloprora perstriata,,PASSERIFORMES,Meliphagidae,AUS
+Banded Honeyeater,Cissomela pectoralis,,PASSERIFORMES,Meliphagidae,AUS
+Olive Honeyeater,Lichmera argentauris,,PASSERIFORMES,Meliphagidae,AUS
+Brown Honeyeater,Lichmera indistincta,,PASSERIFORMES,Meliphagidae,AUS
+Dark-brown Honeyeater,Lichmera incana,,PASSERIFORMES,Meliphagidae,AUS
+Silver-eared Honeyeater,Lichmera alboauricularis,,PASSERIFORMES,Meliphagidae,AUS
+Crescent Honeyeater,Phylidonyris pyrrhopterus,,PASSERIFORMES,Meliphagidae,AUS
+New Holland Honeyeater,Phylidonyris novaehollandiae,,PASSERIFORMES,Meliphagidae,AUS
+White-cheeked Honeyeater,Phylidonyris niger,,PASSERIFORMES,Meliphagidae,AUS
+White-streaked Honeyeater,Trichodere cockerelli,,PASSERIFORMES,Meliphagidae,AUS
+White-eared Honeyeater,Nesoptilotis leucotis,,PASSERIFORMES,Meliphagidae,AUS
+Yellow-throated Honeyeater,Nesoptilotis flavicollis,,PASSERIFORMES,Meliphagidae,AUS
+Blue-faced Honeyeater,Entomyzon cyanotis,,PASSERIFORMES,Meliphagidae,AUS
+White-throated Honeyeater,Melithreptus albogularis,,PASSERIFORMES,Meliphagidae,AUS
+Gilbert's Honeyeater,Melithreptus chloropsis,,PASSERIFORMES,Meliphagidae,AUS
+White-naped Honeyeater,Melithreptus lunatus,,PASSERIFORMES,Meliphagidae,AUS
+Black-headed Honeyeater,Melithreptus affinis,,PASSERIFORMES,Meliphagidae,AUS
+Brown-headed Honeyeater,Melithreptus brevirostris,,PASSERIFORMES,Meliphagidae,AUS
+Black-chinned Honeyeater,Melithreptus gularis,,PASSERIFORMES,Meliphagidae,AUS
+Strong-billed Honeyeater,Melithreptus validirostris,Vulnerable,PASSERIFORMES,Meliphagidae,AUS
+Makira Honeyeater,Meliarchus sclateri,,PASSERIFORMES,Meliphagidae,AUS
+Guadalcanal Honeyeater,Guadalcanaria inexpectata,,PASSERIFORMES,Meliphagidae,AUS
+Kadavu Honeyeater,Meliphacator provocator,Endemic,PASSERIFORMES,Meliphagidae,AUS
+Yellow-billed Giant-Honeyeater,Gymnomyza viridis,Endemic,PASSERIFORMES,Meliphagidae,AUS
+Duetting Giant-Honeyeater,Gymnomyza brunneirostris,Endemic,PASSERIFORMES,Meliphagidae,AUS
+Crow Honeyeater,Gymnomyza aubryana,Critically endangered,PASSERIFORMES,Meliphagidae,AUS
+Western Wattled-Honeyeater,Foulehaio procerior,Endemic,PASSERIFORMES,Meliphagidae,AUS
+Eastern Wattled-Honeyeater,Foulehaio carunculatus,,PASSERIFORMES,Meliphagidae,AUS
+Northern Wattled-Honeyeater,Foulehaio taviunensis,,PASSERIFORMES,Meliphagidae,AUS
+Tawny-breasted Honeyeater,Xanthotis flaviventer,,PASSERIFORMES,Meliphagidae,AUS
+Spotted Honeyeater,Xanthotis polygrammus,,PASSERIFORMES,Meliphagidae,AUS
+Macleay's Honeyeater,Xanthotis macleayanus,,PASSERIFORMES,Meliphagidae,AUS
+Striped Honeyeater,Plectorhyncha lanceolata,,PASSERIFORMES,Meliphagidae,AUS
+Painted Honeyeater,Grantiella picta,,PASSERIFORMES,Meliphagidae,AUS
+Little Friarbird,Philemon citreogularis,,PASSERIFORMES,Meliphagidae,AUS
+Meyer's Friarbird,Philemon meyeri,,PASSERIFORMES,Meliphagidae,AUS
+Brass's Friarbird,Philemon brassi,,PASSERIFORMES,Meliphagidae,AUS
+New Ireland Friarbird,Philemon eichhorni,,PASSERIFORMES,Meliphagidae,AUS
+Helmeted Friarbird,Philemon buceroides,,PASSERIFORMES,Meliphagidae,AUS
+White-naped Friarbird,Philemon albitorques,,PASSERIFORMES,Meliphagidae,AUS
+New Britain Friarbird,Philemon cockerelli,,PASSERIFORMES,Meliphagidae,AUS
+Silver-crowned Friarbird,Philemon argenticeps,,PASSERIFORMES,Meliphagidae,AUS
+Noisy Friarbird,Philemon corniculatus,,PASSERIFORMES,Meliphagidae,AUS
+New Caledonian Friarbird,Philemon diemenensis,,PASSERIFORMES,Meliphagidae,AUS
+Western Bristlebird,Dasyornis longirostris,Endangered,PASSERIFORMES,Dasyornithidae,AUS
+Eastern Bristlebird,Dasyornis brachypterus,Vulnerable,PASSERIFORMES,Dasyornithidae,AUS
+Rufous Bristlebird,Dasyornis broadbenti,,PASSERIFORMES,Dasyornithidae,AUS
+Spotted Pardalote,Pardalotus punctatus,,PASSERIFORMES,Pardalotidae,AUS
+Forty-spotted Pardalote,Pardalotus quadragintus,Endangered,PASSERIFORMES,Pardalotidae,AUS
+Red-browed Pardalote,Pardalotus rubricatus,,PASSERIFORMES,Pardalotidae,AUS
+Striated Pardalote,Pardalotus striatus,,PASSERIFORMES,Pardalotidae,AUS
+Goldenface,Pachycare flavogriseum,,PASSERIFORMES,Acanthizidae,AUS
+Fernwren,Oreoscopus gutturalis,Endangered,PASSERIFORMES,Acanthizidae,AUS
+Pilotbird,Pycnoptilus floccosus,Vulnerable,PASSERIFORMES,Acanthizidae,AUS
+Redthroat,Pyrrholaemus brunneus,,PASSERIFORMES,Acanthizidae,AUS
+Speckled Warbler,Pyrrholaemus sagittatus,,PASSERIFORMES,Acanthizidae,AUS
+Shy Heathwren,Hylacola cauta,,PASSERIFORMES,Acanthizidae,AUS
+Chestnut-rumped Heathwren,Hylacola pyrrhopygia,,PASSERIFORMES,Acanthizidae,AUS
+Striated Fieldwren,Calamanthus fuliginosus,,PASSERIFORMES,Acanthizidae,AUS
+Rufous Fieldwren,Calamanthus campestris,,PASSERIFORMES,Acanthizidae,AUS
+Western Fieldwren,Calamanthus montanellus,,PASSERIFORMES,Acanthizidae,AUS
+Weebill,Smicrornis brevirostris,,PASSERIFORMES,Acanthizidae,AUS
+Yellow-throated Scrubwren,Neosericornis citreogularis,,PASSERIFORMES,Acanthizidae,AUS
+Mountain Mouse-Warbler,Origma robusta,,PASSERIFORMES,Acanthizidae,AUS
+Rusty Mouse-Warbler,Origma murina,,PASSERIFORMES,Acanthizidae,AUS
+Rockwarbler,Origma solitaria,,PASSERIFORMES,Acanthizidae,AUS
+Tasmanian Scrubwren,Sericornis humilis,,PASSERIFORMES,Acanthizidae,AUS
+White-browed Scrubwren,Sericornis frontalis,,PASSERIFORMES,Acanthizidae,AUS
+Spotted Scrubwren,Sericornis maculatus,,PASSERIFORMES,Acanthizidae,AUS
+Atherton Scrubwren,Sericornis keri,Vulnerable,PASSERIFORMES,Acanthizidae,AUS
+Tropical Scrubwren,Sericornis beccarii,,PASSERIFORMES,Acanthizidae,AUS
+Large-billed Scrubwren,Sericornis magnirostra,,PASSERIFORMES,Acanthizidae,AUS
+Large Scrubwren,Sericornis nouhuysi,,PASSERIFORMES,Acanthizidae,AUS
+Pale-billed Scrubwren,Aethomyias spilodera,,PASSERIFORMES,Acanthizidae,AUS
+Bicolored Mouse-Warbler,Aethomyias nigrorufus,,PASSERIFORMES,Acanthizidae,AUS
+Vogelkop Scrubwren,Aethomyias rufescens,,PASSERIFORMES,Acanthizidae,AUS
+Buff-faced Scrubwren,Aethomyias perspicillatus,,PASSERIFORMES,Acanthizidae,AUS
+Gray-green Scrubwren,Aethomyias arfakianus,,PASSERIFORMES,Acanthizidae,AUS
+Papuan Scrubwren,Aethomyias papuensis,,PASSERIFORMES,Acanthizidae,AUS
+Scrubtit,Acanthornis magna,,PASSERIFORMES,Acanthizidae,AUS
+Southern Whiteface,Aphelocephala leucopsis,Vulnerable,PASSERIFORMES,Acanthizidae,AUS
+Banded Whiteface,Aphelocephala nigricincta,,PASSERIFORMES,Acanthizidae,AUS
+Chestnut-breasted Whiteface,Aphelocephala pectoralis,Near-threatened,PASSERIFORMES,Acanthizidae,AUS
+Yellow-rumped Thornbill,Acanthiza chrysorrhoa,,PASSERIFORMES,Acanthizidae,AUS
+Gray Thornbill,Acanthiza cinerea,,PASSERIFORMES,Acanthizidae,AUS
+Papuan Thornbill,Acanthiza murina,,PASSERIFORMES,Acanthizidae,AUS
+Yellow Thornbill,Acanthiza nana,,PASSERIFORMES,Acanthizidae,AUS
+Striated Thornbill,Acanthiza lineata,,PASSERIFORMES,Acanthizidae,AUS
+Inland Thornbill,Acanthiza apicalis,,PASSERIFORMES,Acanthizidae,AUS
+Tasmanian Thornbill,Acanthiza ewingii,,PASSERIFORMES,Acanthizidae,AUS
+Mountain Thornbill,Acanthiza katherina,Vulnerable,PASSERIFORMES,Acanthizidae,AUS
+Brown Thornbill,Acanthiza pusilla,,PASSERIFORMES,Acanthizidae,AUS
+Slaty-backed Thornbill,Acanthiza robustirostris,,PASSERIFORMES,Acanthizidae,AUS
+Slender-billed Thornbill,Acanthiza iredalei,,PASSERIFORMES,Acanthizidae,AUS
+Chestnut-rumped Thornbill,Acanthiza uropygialis,,PASSERIFORMES,Acanthizidae,AUS
+Western Thornbill,Acanthiza inornata,,PASSERIFORMES,Acanthizidae,AUS
+Buff-rumped Thornbill,Acanthiza reguloides,,PASSERIFORMES,Acanthizidae,AUS
+Yellow-bellied Gerygone,Gerygone chrysogaster,,PASSERIFORMES,Acanthizidae,AUS
+Brown Gerygone,Gerygone mouki,,PASSERIFORMES,Acanthizidae,AUS
+Green-backed Gerygone,Gerygone chloronota,,PASSERIFORMES,Acanthizidae,AUS
+Fairy Gerygone,Gerygone palpebrosa,,PASSERIFORMES,Acanthizidae,AUS
+Large-billed Gerygone,Gerygone magnirostris,,PASSERIFORMES,Acanthizidae,AUS
+Biak Gerygone,Gerygone hypoxantha,Near-threatened,PASSERIFORMES,Acanthizidae,AUS
+White-throated Gerygone,Gerygone olivacea,,PASSERIFORMES,Acanthizidae,AUS
+Golden-bellied Gerygone,Gerygone sulphurea,,PASSERIFORMES,Acanthizidae,AUS
+Dusky Gerygone,Gerygone tenebrosa,,PASSERIFORMES,Acanthizidae,AUS
+Fan-tailed Gerygone,Gerygone flavolateralis,,PASSERIFORMES,Acanthizidae,AUS
+Rennell Gerygone,Gerygone citrina,Endemic,PASSERIFORMES,Acanthizidae,AUS
+Mangrove Gerygone,Gerygone levigaster,,PASSERIFORMES,Acanthizidae,AUS
+Western Gerygone,Gerygone fusca,,PASSERIFORMES,Acanthizidae,AUS
+Brown-breasted Gerygone,Gerygone ruficollis,,PASSERIFORMES,Acanthizidae,AUS
+Lord Howe Gerygone,Gerygone insularis,Extinct,PASSERIFORMES,Acanthizidae,AUS
+Norfolk Island Gerygone,Gerygone modesta,,PASSERIFORMES,Acanthizidae,AUS
+Gray Gerygone,Gerygone igata,,PASSERIFORMES,Acanthizidae,AUS
+Chatham Islands Gerygone,Gerygone albofrontata,,PASSERIFORMES,Acanthizidae,AUS
+Papuan Babbler,Garritornis isidorei,,PASSERIFORMES,Pomatostomidae,AUS
+Gray-crowned Babbler,Pomatostomus temporalis,,PASSERIFORMES,Pomatostomidae,AUS
+White-browed Babbler,Pomatostomus superciliosus,,PASSERIFORMES,Pomatostomidae,AUS
+Hall's Babbler,Pomatostomus halli,,PASSERIFORMES,Pomatostomidae,AUS
+Chestnut-crowned Babbler,Pomatostomus ruficeps,,PASSERIFORMES,Pomatostomidae,AUS
+Papuan Logrunner,Orthonyx novaeguineae,,PASSERIFORMES,Orthonychidae,AUS
+Australian Logrunner,Orthonyx temminckii,,PASSERIFORMES,Orthonychidae,AUS
+Chowchilla,Orthonyx spaldingii,,PASSERIFORMES,Orthonychidae,AUS
+Spotted Quail-thrush,Cinclosoma punctatum,Endemic,PASSERIFORMES,Cinclosomatidae,AUS
+Chestnut Quail-thrush,Cinclosoma castanotum,,PASSERIFORMES,Cinclosomatidae,AUS
+Copperback Quail-thrush,Cinclosoma clarum,,PASSERIFORMES,Cinclosomatidae,AUS
+Chestnut-breasted Quail-thrush,Cinclosoma castaneothorax,,PASSERIFORMES,Cinclosomatidae,AUS
+Western Quail-thrush,Cinclosoma marginatum,,PASSERIFORMES,Cinclosomatidae,AUS
+Cinnamon Quail-thrush,Cinclosoma cinnamomeum,,PASSERIFORMES,Cinclosomatidae,AUS
+Nullarbor Quail-thrush,Cinclosoma alisteri,,PASSERIFORMES,Cinclosomatidae,AUS
+Painted Quail-thrush,Cinclosoma ajax,,PASSERIFORMES,Cinclosomatidae,AUS
+Spotted Jewel-babbler,Ptilorrhoa leucosticta,,PASSERIFORMES,Cinclosomatidae,AUS
+Blue Jewel-babbler,Ptilorrhoa caerulescens,,PASSERIFORMES,Cinclosomatidae,AUS
+Dimorphic Jewel-babbler,Ptilorrhoa geislerorum,,PASSERIFORMES,Cinclosomatidae,AUS
+Chestnut-backed Jewel-babbler,Ptilorrhoa castanonota,,PASSERIFORMES,Cinclosomatidae,AUS
+Stout-billed Cuckooshrike,Coracina caeruleogrisea,,PASSERIFORMES,Campephagidae,AUS
+Hooded Cuckooshrike,Coracina longicauda,,PASSERIFORMES,Campephagidae,AUS
+Ground Cuckooshrike,Coracina maxima,,PASSERIFORMES,Campephagidae,AUS
+Barred Cuckooshrike,Coracina lineata,,PASSERIFORMES,Campephagidae,AUS
+Boyer's Cuckooshrike,Coracina boyeri,,PASSERIFORMES,Campephagidae,AUS
+Black-faced Cuckooshrike,Coracina novaehollandiae,,PASSERIFORMES,Campephagidae,AUS
+North Melanesian Cuckooshrike,Coracina welchmani,,PASSERIFORMES,Campephagidae,AUS
+White-bellied Cuckooshrike,Coracina papuensis,,PASSERIFORMES,Campephagidae,AUS
+Manus Cuckooshrike,Coracina ingens,,PASSERIFORMES,Campephagidae,AUS
+South Melanesian Cuckooshrike,Coracina caledonica,,PASSERIFORMES,Campephagidae,AUS
+Slaty Cuckooshrike,Coracina schistacea,,PASSERIFORMES,Campephagidae,AUS
+Golden Cuckooshrike,Campochaera sloetii,,PASSERIFORMES,Campephagidae,AUS
+Polynesian Triller,Lalage maculosa,,PASSERIFORMES,Campephagidae,AUS
+Long-tailed Triller,Lalage leucopyga,,PASSERIFORMES,Campephagidae,AUS
+White-shouldered Triller,Lalage sueurii,,PASSERIFORMES,Campephagidae,AUS
+White-winged Triller,Lalage tricolor,,PASSERIFORMES,Campephagidae,AUS
+Black-browed Triller,Lalage atrovirens,,PASSERIFORMES,Campephagidae,AUS
+Biak Triller,Lalage leucoptera,Endemic Near-threatened,PASSERIFORMES,Campephagidae,AUS
+Varied Triller,Lalage leucomela,,PASSERIFORMES,Campephagidae,AUS
+Mussau Triller,Lalage conjuncta,Vulnerable,PASSERIFORMES,Campephagidae,AUS
+White-rumped Triller,Lalage leucopygialis,,PASSERIFORMES,Campephagidae,AUS
+New Caledonian Cuckooshrike,Edolisoma anale,Near-threatened,PASSERIFORMES,Campephagidae,AUS
+Black-bellied Cicadabird,Edolisoma montanum,,PASSERIFORMES,Campephagidae,AUS
+Gray-headed Cicadabird,Edolisoma schisticeps,,PASSERIFORMES,Campephagidae,AUS
+Black Cicadabird,Edolisoma melas,,PASSERIFORMES,Campephagidae,AUS
+Solomons Cicadabird,Edolisoma holopolium,,PASSERIFORMES,Campephagidae,AUS
+Malaita Cicadabird,Edolisoma tricolor,Endemic,PASSERIFORMES,Campephagidae,AUS
+Makira Cicadabird,Edolisoma salomonis,Endemic,PASSERIFORMES,Campephagidae,AUS
+Manus Cicadabird,Edolisoma admiralitatis,,PASSERIFORMES,Campephagidae,AUS
+Sangihe Cicadabird,Edolisoma salvadorii,,PASSERIFORMES,Campephagidae,AUS
+Central Melanesian Cicadabird,Edolisoma erythropygium,,PASSERIFORMES,Campephagidae,AUS
+Geelvink Cicadabird,Edolisoma meyerii,,PASSERIFORMES,Campephagidae,AUS
+Papuan Cicadabird,Edolisoma incertum,,PASSERIFORMES,Campephagidae,AUS
+Bismarck Cicadabird,Edolisoma remotum,,PASSERIFORMES,Campephagidae,AUS
+Rossel Cicadabird,Edolisoma rostratum,Near-threatened,PASSERIFORMES,Campephagidae,AUS
+Sahul Cicadabird,Edolisoma tenuirostre,,PASSERIFORMES,Campephagidae,AUS
+Whitehead,Mohoua albicilla,,PASSERIFORMES,Mohouidae,AUS
+Yellowhead,Mohoua ochrocephala,Near-threatened,PASSERIFORMES,Mohouidae,AUS
+Pipipi,Mohoua novaeseelandiae,,PASSERIFORMES,Mohouidae,AUS
+Black Sittella,Daphoenositta miranda,,PASSERIFORMES,Neosittidae,AUS
+Papuan Sittella,Daphoenositta papuensis,,PASSERIFORMES,Neosittidae,AUS
+Varied Sittella,Daphoenositta chrysoptera,Endemic,PASSERIFORMES,Neosittidae,AUS
+Papuan Whipbird,Androphobus viridis,,PASSERIFORMES,Psophodidae,AUS
+Eastern Whipbird,Psophodes olivaceus,,PASSERIFORMES,Psophodidae,AUS
+Western Whipbird,Psophodes nigrogularis,,PASSERIFORMES,Psophodidae,AUS
+Chiming Wedgebill,Psophodes occidentalis,,PASSERIFORMES,Psophodidae,AUS
+Chirruping Wedgebill,Psophodes cristatus,,PASSERIFORMES,Psophodidae,AUS
+Wattled Ploughbill,Eulacestoma nigropectus,,PASSERIFORMES,Eulacestomatidae,AUS
+Crested Bellbird,Oreoica gutturalis,,PASSERIFORMES,Oreoicidae,AUS
+Rufous-naped Bellbird,Aleadryas rufinucha,,PASSERIFORMES,Oreoicidae,AUS
+Piping Bellbird,Ornorectes cristatus,,PASSERIFORMES,Oreoicidae,AUS
+Eastern Shrike-tit,Falcunculus frontatus,,PASSERIFORMES,Falcunculidae,AUS
+Western Shrike-tit,Falcunculus leucogaster,,PASSERIFORMES,Falcunculidae,AUS
+Northern Shrike-tit,Falcunculus whitei,,PASSERIFORMES,Falcunculidae,AUS
+Tit Berrypecker,Oreocharis arfaki,,PASSERIFORMES,Paramythiidae,AUS
+Western Crested Berrypecker,Paramythia olivacea,,PASSERIFORMES,Paramythiidae,AUS
+Eastern Crested Berrypecker,Paramythia montium,,PASSERIFORMES,Paramythiidae,AUS
+Rusty Pitohui,Pseudorectes ferrugineus,,PASSERIFORMES,Pachycephalidae,AUS
+White-bellied Pitohui,Pseudorectes incertus,,PASSERIFORMES,Pachycephalidae,AUS
+Sandstone Shrikethrush,Colluricincla woodwardi,,PASSERIFORMES,Pachycephalidae,AUS
+Bower's Shrikethrush,Colluricincla boweri,Vulnerable,PASSERIFORMES,Pachycephalidae,AUS
+Gray Shrikethrush,Colluricincla harmonica,,PASSERIFORMES,Pachycephalidae,AUS
+Sooty Shrikethrush,Colluricincla tenebrosa,,PASSERIFORMES,Pachycephalidae,AUS
+Variable Shrikethrush,Colluricincla fortis,,PASSERIFORMES,Pachycephalidae,AUS
+Waigeo Shrikethrush,Colluricincla affinis,Endemic,PASSERIFORMES,Pachycephalidae,AUS
+Mamberamo Shrikethrush,Colluricincla obscura,,PASSERIFORMES,Pachycephalidae,AUS
+Sepik-Ramu Shrikethrush,Colluricincla tappenbecki,,PASSERIFORMES,Pachycephalidae,AUS
+Arafura Shrikethrush,Colluricincla megarhyncha,,PASSERIFORMES,Pachycephalidae,AUS
+Tagula Shrikethrush,Colluricincla discolor,,PASSERIFORMES,Pachycephalidae,AUS
+Rufous Shrikethrush,Colluricincla rufogaster,,PASSERIFORMES,Pachycephalidae,AUS
+Black Pitohui,Melanorectes nigrescens,,PASSERIFORMES,Pachycephalidae,AUS
+Olive Whistler,Pachycephala olivacea,,PASSERIFORMES,Pachycephalidae,AUS
+Red-lored Whistler,Pachycephala rufogularis,Vulnerable,PASSERIFORMES,Pachycephalidae,AUS
+Gilbert's Whistler,Pachycephala inornata,,PASSERIFORMES,Pachycephalidae,AUS
+Regent Whistler,Pachycephala schlegelii,,PASSERIFORMES,Pachycephalidae,AUS
+Vanuatu Whistler,Pachycephala chlorura,,PASSERIFORMES,Pachycephalidae,AUS
+Vogelkop Whistler,Pachycephala meyeri,,PASSERIFORMES,Pachycephalidae,AUS
+Sclater's Whistler,Pachycephala soror,,PASSERIFORMES,Pachycephalidae,AUS
+White-throated Fiji Whistler,Pachycephala vitiensis,,PASSERIFORMES,Pachycephalidae,AUS
+Yellow-throated Fiji Whistler,Pachycephala graeffii,,PASSERIFORMES,Pachycephalidae,AUS
+New Caledonian Whistler,Pachycephala caledonica,Endemic,PASSERIFORMES,Pachycephalidae,AUS
+Guadalcanal Hooded Whistler,Pachycephala implicata,Endemic,PASSERIFORMES,Pachycephalidae,AUS
+Bougainville Hooded Whistler,Pachycephala richardsi,Endemic,PASSERIFORMES,Pachycephalidae,AUS
+Bismarck Whistler,Pachycephala citreogaster,,PASSERIFORMES,Pachycephalidae,AUS
+Louisiade Whistler,Pachycephala collaris,,PASSERIFORMES,Pachycephalidae,AUS
+Nendo Whistler,Pachycephala ornata,Endemic,PASSERIFORMES,Pachycephalidae,AUS
+Utupua Whistler,Pachycephala utupuae,Endemic,PASSERIFORMES,Pachycephalidae,AUS
+Vanikoro Whistler,Pachycephala vanikorensis,Endemic,PASSERIFORMES,Pachycephalidae,AUS
+Oriole Whistler,Pachycephala orioloides,,PASSERIFORMES,Pachycephalidae,AUS
+Rennell Whistler,Pachycephala feminina,Endemic Near-threatened,PASSERIFORMES,Pachycephalidae,AUS
+Tenggara Whistler,Pachycephala calliope,,PASSERIFORMES,Pachycephalidae,AUS
+Selayar Whistler,Pachycephala teysmanni,Endemic (country/region),PASSERIFORMES,Pachycephalidae,AUS
+Moluccan Whistler,Pachycephala macrorhyncha,,PASSERIFORMES,Pachycephalidae,AUS
+Black-chinned Whistler,Pachycephala mentalis,,PASSERIFORMES,Pachycephalidae,AUS
+Baliem Whistler,Pachycephala balim,,PASSERIFORMES,Pachycephalidae,AUS
+Golden Whistler,Pachycephala pectoralis,,PASSERIFORMES,Pachycephalidae,AUS
+Black-tailed Whistler,Pachycephala melanura,,PASSERIFORMES,Pachycephalidae,AUS
+Morningbird,Pachycephala tenebrosa,,PASSERIFORMES,Pachycephalidae,AUS
+Brown-backed Whistler,Pachycephala modesta,,PASSERIFORMES,Pachycephalidae,AUS
+Lorentz's Whistler,Pachycephala lorentzi,,PASSERIFORMES,Pachycephalidae,AUS
+Golden-backed Whistler,Pachycephala aurea,,PASSERIFORMES,Pachycephalidae,AUS
+Island Whistler,Pachycephala phaionota,,PASSERIFORMES,Pachycephalidae,AUS
+Biak Whistler,Pachycephala melanorhyncha,,PASSERIFORMES,Pachycephalidae,AUS
+Rusty Whistler,Pachycephala hyperythra,,PASSERIFORMES,Pachycephalidae,AUS
+Gray Whistler,Pachycephala simplex,,PASSERIFORMES,Pachycephalidae,AUS
+White-bellied Whistler,Pachycephala leucogastra,,PASSERIFORMES,Pachycephalidae,AUS
+Black-headed Whistler,Pachycephala monacha,,PASSERIFORMES,Pachycephalidae,AUS
+Rufous Whistler,Pachycephala rufiventris,,PASSERIFORMES,Pachycephalidae,AUS
+White-breasted Whistler,Pachycephala lanioides,,PASSERIFORMES,Pachycephalidae,AUS
+Hooded Pitohui,Pitohui dichrous,,PASSERIFORMES,Oriolidae,AUS
+Raja Ampat Pitohui,Pitohui cerviniventris,,PASSERIFORMES,Oriolidae,AUS
+Northern Variable Pitohui,Pitohui kirhocephalus,,PASSERIFORMES,Oriolidae,AUS
+Southern Variable Pitohui,Pitohui uropygialis,,PASSERIFORMES,Oriolidae,AUS
+Brown Oriole,Oriolus szalayi,,PASSERIFORMES,Oriolidae,AUS
+Olive-backed Oriole,Oriolus sagittatus,,PASSERIFORMES,Oriolidae,AUS
+Green Oriole,Oriolus flavocinctus,,PASSERIFORMES,Oriolidae,AUS
+Black-naped Oriole,Oriolus chinensis,Rare/Accidental,PASSERIFORMES,Oriolidae,AUS
+Australasian Figbird,Sphecotheres vieilloti,,PASSERIFORMES,Oriolidae,AUS
+North Island Piopio,Turnagra tanagra,Extinct,PASSERIFORMES,Oriolidae,AUS
+South Island Piopio,Turnagra capensis,Extinct,PASSERIFORMES,Oriolidae,AUS
+Black-breasted Boatbill,Machaerirhynchus nigripectus,,PASSERIFORMES,Machaerirhynchidae,AUS
+Yellow-breasted Boatbill,Machaerirhynchus flaviventer,,PASSERIFORMES,Machaerirhynchidae,AUS
+Fiji Woodswallow,Artamus mentalis,Endemic,PASSERIFORMES,Artamidae,AUS
+Great Woodswallow,Artamus maximus,,PASSERIFORMES,Artamidae,AUS
+White-breasted Woodswallow,Artamus leucorynchus,,PASSERIFORMES,Artamidae,AUS
+Bismarck Woodswallow,Artamus insignis,,PASSERIFORMES,Artamidae,AUS
+Masked Woodswallow,Artamus personatus,,PASSERIFORMES,Artamidae,AUS
+White-browed Woodswallow,Artamus superciliosus,,PASSERIFORMES,Artamidae,AUS
+Black-faced Woodswallow,Artamus cinereus,,PASSERIFORMES,Artamidae,AUS
+Dusky Woodswallow,Artamus cyanopterus,,PASSERIFORMES,Artamidae,AUS
+Little Woodswallow,Artamus minor,,PASSERIFORMES,Artamidae,AUS
+Mountain Peltops,Peltops montanus,,PASSERIFORMES,Artamidae,AUS
+Lowland Peltops,Peltops blainvillii,,PASSERIFORMES,Artamidae,AUS
+Black-backed Butcherbird,Cracticus mentalis,,PASSERIFORMES,Artamidae,AUS
+Gray Butcherbird,Cracticus torquatus,,PASSERIFORMES,Artamidae,AUS
+Silver-backed Butcherbird,Cracticus argenteus,,PASSERIFORMES,Artamidae,AUS
+Hooded Butcherbird,Cracticus cassicus,,PASSERIFORMES,Artamidae,AUS
+Tagula Butcherbird,Cracticus louisiadensis,Near-threatened,PASSERIFORMES,Artamidae,AUS
+Pied Butcherbird,Cracticus nigrogularis,,PASSERIFORMES,Artamidae,AUS
+Black Butcherbird,Melloria quoyi,,PASSERIFORMES,Artamidae,AUS
+Australian Magpie,Gymnorhina tibicen,,PASSERIFORMES,Artamidae,AUS
+Pied Currawong,Strepera graculina,,PASSERIFORMES,Artamidae,AUS
+Black Currawong,Strepera fuliginosa,,PASSERIFORMES,Artamidae,AUS
+Gray Currawong,Strepera versicolor,,PASSERIFORMES,Artamidae,AUS
+Mottled Berryhunter,Rhagologus leucostigma,,PASSERIFORMES,Rhagologidae,AUS
+Drongo Fantail,Chaetorhynchus papuensis,,PASSERIFORMES,Rhipiduridae,AUS
+Taveuni Silktail,Lamprolia victoriae,Endemic Near-threatened,PASSERIFORMES,Rhipiduridae,AUS
+Natewa Silktail,Lamprolia klinesmithi,Endemic Vulnerable,PASSERIFORMES,Rhipiduridae,AUS
+Black Fantail,Rhipidura atra,,PASSERIFORMES,Rhipiduridae,AUS
+White-winged Fantail,Rhipidura cockerelli,,PASSERIFORMES,Rhipiduridae,AUS
+White-gorgeted Fantail,Rhipidura coultasi,Endemic Near-threatened,PASSERIFORMES,Rhipiduridae,AUS
+Northern Fantail,Rhipidura rufiventris,,PASSERIFORMES,Rhipiduridae,AUS
+Sooty Thicket-Fantail,Rhipidura threnothorax,,PASSERIFORMES,Rhipiduridae,AUS
+Black Thicket-Fantail,Rhipidura maculipectus,,PASSERIFORMES,Rhipiduridae,AUS
+White-bellied Thicket-Fantail,Rhipidura leucothorax,,PASSERIFORMES,Rhipiduridae,AUS
+Willie-wagtail,Rhipidura leucophrys,,PASSERIFORMES,Rhipiduridae,AUS
+Rufous-backed Fantail,Rhipidura rufidorsa,,PASSERIFORMES,Rhipiduridae,AUS
+Dimorphic Fantail,Rhipidura brachyrhyncha,,PASSERIFORMES,Rhipiduridae,AUS
+Bismarck Fantail,Rhipidura dahli,,PASSERIFORMES,Rhipiduridae,AUS
+Mussau Fantail,Rhipidura matthiae,Near-threatened,PASSERIFORMES,Rhipiduridae,AUS
+Malaita Fantail,Rhipidura malaitae,Near-threatened,PASSERIFORMES,Rhipiduridae,AUS
+Manus Fantail,Rhipidura semirubra,,PASSERIFORMES,Rhipiduridae,AUS
+Supertramp Fantail,Rhipidura semicollaris,,PASSERIFORMES,Rhipiduridae,AUS
+Arafura Fantail,Rhipidura dryas,,PASSERIFORMES,Rhipiduridae,AUS
+Gilolo Fantail,Rhipidura torrida,,PASSERIFORMES,Rhipiduridae,AUS
+Australian Rufous Fantail,Rhipidura rufifrons,,PASSERIFORMES,Rhipiduridae,AUS
+Louisiade Fantail,Rhipidura louisiadensis,Endemic,PASSERIFORMES,Rhipiduridae,AUS
+Santa Cruz Fantail,Rhipidura melanolaema,,PASSERIFORMES,Rhipiduridae,AUS
+Solomons Rufous Fantail,Rhipidura rufofronta,,PASSERIFORMES,Rhipiduridae,AUS
+Friendly Fantail,Rhipidura albolimbata,,PASSERIFORMES,Rhipiduridae,AUS
+Chestnut-bellied Fantail,Rhipidura hyperythra,,PASSERIFORMES,Rhipiduridae,AUS
+Bougainville Fantail,Rhipidura drownei,Endemic,PASSERIFORMES,Rhipiduridae,AUS
+Guadalcanal Fantail,Rhipidura ocularis,Endemic,PASSERIFORMES,Rhipiduridae,AUS
+Vanuatu Streaked Fantail,Rhipidura spilodera,,PASSERIFORMES,Rhipiduridae,AUS
+Fiji Streaked Fantail,Rhipidura layardi,,PASSERIFORMES,Rhipiduridae,AUS
+New Caledonian Streaked Fantail,Rhipidura verreauxi,,PASSERIFORMES,Rhipiduridae,AUS
+Dusky Fantail,Rhipidura tenebrosa,Near-threatened,PASSERIFORMES,Rhipiduridae,AUS
+Rennell Fantail,Rhipidura rennelliana,,PASSERIFORMES,Rhipiduridae,AUS
+Kadavu Fantail,Rhipidura personata,Endemic Near-threatened,PASSERIFORMES,Rhipiduridae,AUS
+Gray Fantail,Rhipidura albiscapa,,PASSERIFORMES,Rhipiduridae,AUS
+Mangrove Fantail,Rhipidura phasiana,,PASSERIFORMES,Rhipiduridae,AUS
+New Zealand Fantail,Rhipidura fuliginosa,,PASSERIFORMES,Rhipiduridae,AUS
+Crow-billed Drongo,Dicrurus annectens,Rare/Accidental,PASSERIFORMES,Dicruridae,AUS
+Hair-crested Drongo,Dicrurus hottentottus,,PASSERIFORMES,Dicruridae,AUS
+Short-tailed Drongo,Dicrurus striatus,,PASSERIFORMES,Dicruridae,AUS
+Ribbon-tailed Drongo,Dicrurus megarhynchus,Near-threatened,PASSERIFORMES,Dicruridae,AUS
+Spangled Drongo,Dicrurus bracteatus,,PASSERIFORMES,Dicruridae,AUS
+Trumpet Manucode,Phonygammus keraudrenii,,PASSERIFORMES,Paradisaeidae,AUS
+Curl-crested Manucode,Manucodia comrii,,PASSERIFORMES,Paradisaeidae,AUS
+Crinkle-collared Manucode,Manucodia chalybatus,,PASSERIFORMES,Paradisaeidae,AUS
+Jobi Manucode,Manucodia jobiensis,,PASSERIFORMES,Paradisaeidae,AUS
+Glossy-mantled Manucode,Manucodia ater,,PASSERIFORMES,Paradisaeidae,AUS
+King-of-Saxony Bird-of-Paradise,Pteridophora alberti,,PASSERIFORMES,Paradisaeidae,AUS
+Carola's Parotia,Parotia carolae,,PASSERIFORMES,Paradisaeidae,AUS
+Bronze Parotia,Parotia berlepschi,Endemic,PASSERIFORMES,Paradisaeidae,AUS
+Western Parotia,Parotia sefilata,,PASSERIFORMES,Paradisaeidae,AUS
+Wahnes's Parotia,Parotia wahnesi,Near-threatened,PASSERIFORMES,Paradisaeidae,AUS
+Lawes's Parotia,Parotia lawesii,,PASSERIFORMES,Paradisaeidae,AUS
+Eastern Parotia,Parotia helenae,,PASSERIFORMES,Paradisaeidae,AUS
+Twelve-wired Bird-of-Paradise,Seleucidis melanoleucus,,PASSERIFORMES,Paradisaeidae,AUS
+Black-billed Sicklebill,Drepanornis albertisi,,PASSERIFORMES,Paradisaeidae,AUS
+Pale-billed Sicklebill,Drepanornis bruijnii,,PASSERIFORMES,Paradisaeidae,AUS
+Vogelkop Lophorina,Lophorina superba,,PASSERIFORMES,Paradisaeidae,AUS
+Greater Lophorina,Lophorina latipennis,,PASSERIFORMES,Paradisaeidae,AUS
+Lesser Lophorina,Lophorina minor,Endemic,PASSERIFORMES,Paradisaeidae,AUS
+Paradise Riflebird,Ptiloris paradiseus,,PASSERIFORMES,Paradisaeidae,AUS
+Victoria's Riflebird,Ptiloris victoriae,Vulnerable,PASSERIFORMES,Paradisaeidae,AUS
+Magnificent Riflebird,Ptiloris magnificus,,PASSERIFORMES,Paradisaeidae,AUS
+Growling Riflebird,Ptiloris intercedens,,PASSERIFORMES,Paradisaeidae,AUS
+Black Sicklebill,Epimachus fastosus,,PASSERIFORMES,Paradisaeidae,AUS
+Brown Sicklebill,Epimachus meyeri,,PASSERIFORMES,Paradisaeidae,AUS
+Long-tailed Paradigalla,Paradigalla carunculata,Near-threatened,PASSERIFORMES,Paradisaeidae,AUS
+Short-tailed Paradigalla,Paradigalla brevicauda,,PASSERIFORMES,Paradisaeidae,AUS
+Splendid Astrapia,Astrapia splendidissima,,PASSERIFORMES,Paradisaeidae,AUS
+Arfak Astrapia,Astrapia nigra,,PASSERIFORMES,Paradisaeidae,AUS
+Huon Astrapia,Astrapia rothschildi,,PASSERIFORMES,Paradisaeidae,AUS
+Stephanie's Astrapia,Astrapia stephaniae,,PASSERIFORMES,Paradisaeidae,AUS
+Ribbon-tailed Astrapia,Astrapia mayeri,,PASSERIFORMES,Paradisaeidae,AUS
+King Bird-of-Paradise,Cicinnurus regius,,PASSERIFORMES,Paradisaeidae,AUS
+Wilson's Bird-of-Paradise,Diphyllodes respublica,Near-threatened,PASSERIFORMES,Paradisaeidae,AUS
+Magnificent Bird-of-Paradise,Diphyllodes magnificus,,PASSERIFORMES,Paradisaeidae,AUS
+Blue Bird-of-Paradise,Paradisornis rudolphi,Near-threatened,PASSERIFORMES,Paradisaeidae,AUS
+Emperor Bird-of-Paradise,Paradisaea guilielmi,Near-threatened,PASSERIFORMES,Paradisaeidae,AUS
+Red Bird-of-Paradise,Paradisaea rubra,Near-threatened,PASSERIFORMES,Paradisaeidae,AUS
+Goldie's Bird-of-Paradise,Paradisaea decora,Vulnerable,PASSERIFORMES,Paradisaeidae,AUS
+Lesser Bird-of-Paradise,Paradisaea minor,,PASSERIFORMES,Paradisaeidae,AUS
+Raggiana Bird-of-Paradise,Paradisaea raggiana,,PASSERIFORMES,Paradisaeidae,AUS
+Greater Bird-of-Paradise,Paradisaea apoda,,PASSERIFORMES,Paradisaeidae,AUS
+Blue-capped Ifrita,Ifrita kowaldi,,PASSERIFORMES,Ifritidae,AUS
+Ogea Monarch,Mayrornis versicolor,Endemic Near-threatened,PASSERIFORMES,Monarchidae,AUS
+Slaty Monarch,Mayrornis lessoni,Endemic,PASSERIFORMES,Monarchidae,AUS
+Vanikoro Monarch,Mayrornis schistaceus,Vulnerable,PASSERIFORMES,Monarchidae,AUS
+Buff-bellied Monarch,Neolalage banksiana,,PASSERIFORMES,Monarchidae,AUS
+Southern Shrikebill,Clytorhynchus pachycephaloides,,PASSERIFORMES,Monarchidae,AUS
+Rennell Shrikebill,Clytorhynchus hamlini,Near-threatened,PASSERIFORMES,Monarchidae,AUS
+Fiji Shrikebill,Clytorhynchus vitiensis,,PASSERIFORMES,Monarchidae,AUS
+Black-throated Shrikebill,Clytorhynchus nigrogularis,Endemic Near-threatened,PASSERIFORMES,Monarchidae,AUS
+Santa Cruz Shrikebill,Clytorhynchus sanctaecrucis,Endemic Endangered,PASSERIFORMES,Monarchidae,AUS
+White-eared Monarch,Carterornis leucotis,,PASSERIFORMES,Monarchidae,AUS
+Golden Monarch,Carterornis chrysomela,,PASSERIFORMES,Monarchidae,AUS
+Island Monarch,Monarcha cinerascens,,PASSERIFORMES,Monarchidae,AUS
+White-capped Monarch,Monarcha richardsii,Near-threatened,PASSERIFORMES,Monarchidae,AUS
+Chestnut-bellied Monarch,Monarcha castaneiventris,,PASSERIFORMES,Monarchidae,AUS
+Black-faced Monarch,Monarcha melanopsis,,PASSERIFORMES,Monarchidae,AUS
+Black-winged Monarch,Monarcha frater,,PASSERIFORMES,Monarchidae,AUS
+Fan-tailed Monarch,Symposiachrus axillaris,,PASSERIFORMES,Monarchidae,AUS
+Rufous Monarch,Symposiachrus rubiensis,,PASSERIFORMES,Monarchidae,AUS
+Moluccan Spectacled Monarch,Symposiachrus bimaculatus,,PASSERIFORMES,Monarchidae,AUS
+Australian Spectacled Monarch,Symposiachrus trivirgatus,,PASSERIFORMES,Monarchidae,AUS
+Louisiade Spectacled Monarch,Symposiachrus melanopterus,,PASSERIFORMES,Monarchidae,AUS
+Kofiau Monarch,Symposiachrus julianae,Near-threatened,PASSERIFORMES,Monarchidae,AUS
+Biak Monarch,Symposiachrus brehmii,Near-threatened,PASSERIFORMES,Monarchidae,AUS
+Hooded Monarch,Symposiachrus manadensis,,PASSERIFORMES,Monarchidae,AUS
+Manus Monarch,Symposiachrus infelix,Near-threatened,PASSERIFORMES,Monarchidae,AUS
+Mussau Monarch,Symposiachrus menckei,Near-threatened,PASSERIFORMES,Monarchidae,AUS
+Bismarck Monarch,Symposiachrus verticalis,,PASSERIFORMES,Monarchidae,AUS
+Solomons Monarch,Symposiachrus barbatus,,PASSERIFORMES,Monarchidae,AUS
+Malaita Monarch,Symposiachrus malaitae,Endemic Near-threatened,PASSERIFORMES,Monarchidae,AUS
+Kolombangara Monarch,Symposiachrus browni,,PASSERIFORMES,Monarchidae,AUS
+Vella Lavella Monarch,Symposiachrus nigrotectus,,PASSERIFORMES,Monarchidae,AUS
+White-collared Monarch,Symposiachrus vidua,Near-threatened,PASSERIFORMES,Monarchidae,AUS
+Spot-winged Monarch,Symposiachrus guttula,,PASSERIFORMES,Monarchidae,AUS
+Frilled Monarch,Arses telescopthalmus,,PASSERIFORMES,Monarchidae,AUS
+Frill-necked Monarch,Arses lorealis,,PASSERIFORMES,Monarchidae,AUS
+Ochre-collared Monarch,Arses insularis,,PASSERIFORMES,Monarchidae,AUS
+Pied Monarch,Arses kaupi,,PASSERIFORMES,Monarchidae,AUS
+Magpie-lark,Grallina cyanoleuca,,PASSERIFORMES,Monarchidae,AUS
+Torrent-lark,Grallina bruijnii,,PASSERIFORMES,Monarchidae,AUS
+Biak Flycatcher,Myiagra atra,Near-threatened,PASSERIFORMES,Monarchidae,AUS
+Leaden Flycatcher,Myiagra rubecula,,PASSERIFORMES,Monarchidae,AUS
+Steel-blue Flycatcher,Myiagra ferrocyanea,,PASSERIFORMES,Monarchidae,AUS
+Ochre-headed Flycatcher,Myiagra cervinicauda,Near-threatened,PASSERIFORMES,Monarchidae,AUS
+Melanesian Flycatcher,Myiagra caledonica,,PASSERIFORMES,Monarchidae,AUS
+Vanikoro Flycatcher,Myiagra vanikorensis,,PASSERIFORMES,Monarchidae,AUS
+Azure-crested Flycatcher,Myiagra azureocapilla,Endemic Near-threatened,PASSERIFORMES,Monarchidae,AUS
+Chestnut-throated Flycatcher,Myiagra castaneigularis,,PASSERIFORMES,Monarchidae,AUS
+Broad-billed Flycatcher,Myiagra ruficollis,,PASSERIFORMES,Monarchidae,AUS
+Satin Flycatcher,Myiagra cyanoleuca,,PASSERIFORMES,Monarchidae,AUS
+Restless Flycatcher,Myiagra inquieta,,PASSERIFORMES,Monarchidae,AUS
+Paperbark Flycatcher,Myiagra nana,,PASSERIFORMES,Monarchidae,AUS
+Shining Flycatcher,Myiagra alecto,,PASSERIFORMES,Monarchidae,AUS
+Mussau Flycatcher,Myiagra hebetior,Vulnerable,PASSERIFORMES,Monarchidae,AUS
+Velvet Flycatcher,Myiagra eichhorni,,PASSERIFORMES,Monarchidae,AUS
+White-winged Chough,Corcorax melanorhamphos,,PASSERIFORMES,Corcoracidae,AUS
+Apostlebird,Struthidea cinerea,,PASSERIFORMES,Corcoracidae,AUS
+Lesser Melampitta,Melampitta lugubris,,PASSERIFORMES,Melampittidae,AUS
+Greater Melampitta,Megalampitta gigantea,,PASSERIFORMES,Melampittidae,AUS
+Tiger Shrike,Lanius tigrinus,Rare/Accidental,PASSERIFORMES,Laniidae,AUS
+Brown Shrike,Lanius cristatus,,PASSERIFORMES,Laniidae,AUS
+Long-tailed Shrike,Lanius schach,,PASSERIFORMES,Laniidae,AUS
+House Crow,Corvus splendens,,PASSERIFORMES,Corvidae,AUS
+New Caledonian Crow,Corvus moneduloides,,PASSERIFORMES,Corvidae,AUS
+Guadalcanal Crow,Corvus woodfordi,,PASSERIFORMES,Corvidae,AUS
+Bougainville Crow,Corvus meeki,,PASSERIFORMES,Corvidae,AUS
+Brown-headed Crow,Corvus fuscicapillus,,PASSERIFORMES,Corvidae,AUS
+Gray Crow,Corvus tristis,,PASSERIFORMES,Corvidae,AUS
+Rook,Corvus frugilegus,,PASSERIFORMES,Corvidae,AUS
+Torresian Crow,Corvus orru,,PASSERIFORMES,Corvidae,AUS
+Bismarck Crow,Corvus insularis,,PASSERIFORMES,Corvidae,AUS
+Little Crow,Corvus bennetti,,PASSERIFORMES,Corvidae,AUS
+Australian Raven,Corvus coronoides,,PASSERIFORMES,Corvidae,AUS
+Little Raven,Corvus mellori,,PASSERIFORMES,Corvidae,AUS
+Forest Raven,Corvus tasmanicus,,PASSERIFORMES,Corvidae,AUS
+Loria's Satinbird,Cnemophilus loriae,,PASSERIFORMES,Cnemophilidae,AUS
+Crested Satinbird,Cnemophilus macgregorii,,PASSERIFORMES,Cnemophilidae,AUS
+Yellow-breasted Satinbird,Loboparadisea sericea,,PASSERIFORMES,Cnemophilidae,AUS
+Obscure Berrypecker,Melanocharis arfakiana,,PASSERIFORMES,Melanocharitidae,AUS
+Black Berrypecker,Melanocharis nigra,,PASSERIFORMES,Melanocharitidae,AUS
+Mid-mountain Berrypecker,Melanocharis longicauda,,PASSERIFORMES,Melanocharitidae,AUS
+Fan-tailed Berrypecker,Melanocharis versteri,,PASSERIFORMES,Melanocharitidae,AUS
+Satin Berrypecker,Melanocharis citreola,Endemic,PASSERIFORMES,Melanocharitidae,AUS
+Streaked Berrypecker,Melanocharis striativentris,,PASSERIFORMES,Melanocharitidae,AUS
+Thick-billed Berrypecker,Melanocharis crassirostris,,PASSERIFORMES,Melanocharitidae,AUS
+Spotted Berrypecker,Melanocharis piperata,,PASSERIFORMES,Melanocharitidae,AUS
+Yellow-bellied Longbill,Toxorhamphus novaeguineae,,PASSERIFORMES,Melanocharitidae,AUS
+Slaty-chinned Longbill,Toxorhamphus poliopterus,,PASSERIFORMES,Melanocharitidae,AUS
+Spectacled Longbill,Oedistoma iliolophus,,PASSERIFORMES,Melanocharitidae,AUS
+Pygmy Longbill,Oedistoma pygmaeum,,PASSERIFORMES,Melanocharitidae,AUS
+North Island Kokako,Callaeas wilsoni,,PASSERIFORMES,Callaeidae,AUS
+South Island Kokako,Callaeas cinereus,Critically endangered (possibly extinct),PASSERIFORMES,Callaeidae,AUS
+North Island Saddleback,Philesturnus rufusater,Near-threatened,PASSERIFORMES,Callaeidae,AUS
+South Island Saddleback,Philesturnus carunculatus,,PASSERIFORMES,Callaeidae,AUS
+Huia,Heteralocha acutirostris,Extinct,PASSERIFORMES,Callaeidae,AUS
+Stitchbird,Notiomystis cincta,Vulnerable,PASSERIFORMES,Notiomystidae,AUS
+Greater Ground-Robin,Amalocichla sclateriana,,PASSERIFORMES,Petroicidae,AUS
+Lesser Ground-Robin,Amalocichla incerta,,PASSERIFORMES,Petroicidae,AUS
+White-eyed Robin,Pachycephalopsis poliosoma,,PASSERIFORMES,Petroicidae,AUS
+Green-backed Robin,Pachycephalopsis hattamensis,,PASSERIFORMES,Petroicidae,AUS
+Garnet Robin,Eugerygone rubra,,PASSERIFORMES,Petroicidae,AUS
+Tomtit,Petroica macrocephala,,PASSERIFORMES,Petroicidae,AUS
+Black Robin,Petroica traversi,Vulnerable,PASSERIFORMES,Petroicidae,AUS
+North Island Robin,Petroica longipes,,PASSERIFORMES,Petroicidae,AUS
+South Island Robin,Petroica australis,,PASSERIFORMES,Petroicidae,AUS
+Subalpine Robin,Petroica bivittata,,PASSERIFORMES,Petroicidae,AUS
+Snow Mountain Robin,Petroica archboldi,Near-threatened,PASSERIFORMES,Petroicidae,AUS
+Norfolk Robin,Petroica multicolor,Endangered,PASSERIFORMES,Petroicidae,AUS
+Red-capped Robin,Petroica goodenovii,,PASSERIFORMES,Petroicidae,AUS
+Solomons Robin,Petroica polymorpha,,PASSERIFORMES,Petroicidae,AUS
+Pacific Robin,Petroica pusilla,,PASSERIFORMES,Petroicidae,AUS
+Rose Robin,Petroica rosea,,PASSERIFORMES,Petroicidae,AUS
+Pink Robin,Petroica rodinogaster,,PASSERIFORMES,Petroicidae,AUS
+Flame Robin,Petroica phoenicea,,PASSERIFORMES,Petroicidae,AUS
+Scarlet Robin,Petroica boodang,Endemic,PASSERIFORMES,Petroicidae,AUS
+Canary Flyrobin,Devioeca papuana,,PASSERIFORMES,Petroicidae,AUS
+Olive Flyrobin,Kempiella flavovirescens,,PASSERIFORMES,Petroicidae,AUS
+Yellow-legged Flyrobin,Kempiella griseoceps,,PASSERIFORMES,Petroicidae,AUS
+Yellow-bellied Flyrobin,Cryptomicroeca flaviventris,,PASSERIFORMES,Petroicidae,AUS
+Torrent Flyrobin,Monachella muelleriana,,PASSERIFORMES,Petroicidae,AUS
+Lemon-bellied Flyrobin,Microeca flavigaster,,PASSERIFORMES,Petroicidae,AUS
+Jacky-winter,Microeca fascinans,,PASSERIFORMES,Petroicidae,AUS
+Southern Scrub-Robin,Drymodes brunneopygia,,PASSERIFORMES,Petroicidae,AUS
+Northern Scrub-Robin,Drymodes superciliaris,,PASSERIFORMES,Petroicidae,AUS
+Papuan Scrub-Robin,Drymodes beccarii,Endemic (country/region),PASSERIFORMES,Petroicidae,AUS
+Gray-headed Robin,Heteromyias cinereifrons,Near-threatened,PASSERIFORMES,Petroicidae,AUS
+Black-capped Robin,Heteromyias armiti,,PASSERIFORMES,Petroicidae,AUS
+Arfak Robin,Heteromyias albispecularis,Endemic,PASSERIFORMES,Petroicidae,AUS
+Black-chinned Robin,Leucophantes brachyurus,,PASSERIFORMES,Petroicidae,AUS
+Black-throated Robin,Plesiodryas albonotata,,PASSERIFORMES,Petroicidae,AUS
+Black-sided Robin,Poecilodryas hypoleuca,,PASSERIFORMES,Petroicidae,AUS
+White-browed Robin,Poecilodryas superciliosa,,PASSERIFORMES,Petroicidae,AUS
+Buff-sided Robin,Poecilodryas cerviniventris,,PASSERIFORMES,Petroicidae,AUS
+Dusky Robin,Melanodryas vittata,Vulnerable,PASSERIFORMES,Petroicidae,AUS
+Hooded Robin,Melanodryas cucullata,,PASSERIFORMES,Petroicidae,AUS
+White-rumped Robin,Melanodryas bimaculata,,PASSERIFORMES,Petroicidae,AUS
+Mangrove Robin,Melanodryas pulverulenta,,PASSERIFORMES,Petroicidae,AUS
+White-winged Robin,Melanodryas sigillata,,PASSERIFORMES,Petroicidae,AUS
+Blue-gray Robin,Melanodryas cyanus,,PASSERIFORMES,Petroicidae,AUS
+Smoky Robin,Melanodryas cryptoleuca,,PASSERIFORMES,Petroicidae,AUS
+Banded Yellow Robin,Eopsaltria placens,,PASSERIFORMES,Petroicidae,AUS
+Eastern Yellow Robin,Eopsaltria australis,,PASSERIFORMES,Petroicidae,AUS
+Western Yellow Robin,Eopsaltria griseogularis,,PASSERIFORMES,Petroicidae,AUS
+White-breasted Robin,Eopsaltria georgiana,,PASSERIFORMES,Petroicidae,AUS
+Pale-yellow Robin,Eopsaltria capito,,PASSERIFORMES,Petroicidae,AUS
+White-faced Robin,Eopsaltria leucops,,PASSERIFORMES,Petroicidae,AUS
+Singing Bushlark,Mirafra javanica,,PASSERIFORMES,Alaudidae,AUS
+Eurasian Skylark,Alauda arvensis,,PASSERIFORMES,Alaudidae,AUS
+Zitting Cisticola,Cisticola juncidis,,PASSERIFORMES,Cisticolidae,AUS
+Golden-headed Cisticola,Cisticola exilis,,PASSERIFORMES,Cisticolidae,AUS
+Oriental Reed Warbler,Acrocephalus orientalis,,PASSERIFORMES,Acrocephalidae,AUS
+Clamorous Reed Warbler,Acrocephalus stentoreus,,PASSERIFORMES,Acrocephalidae,AUS
+Australian Reed Warbler,Acrocephalus australis,,PASSERIFORMES,Acrocephalidae,AUS
+Gray's Grasshopper Warbler,Helopsaltes fasciolatus,Rare/Accidental,PASSERIFORMES,Locustellidae,AUS
+Sakhalin Grasshopper Warbler,Helopsaltes amnicola,,PASSERIFORMES,Locustellidae,AUS
+Pallas's Grasshopper Warbler,Helopsaltes certhiola,Rare/Accidental,PASSERIFORMES,Locustellidae,AUS
+Middendorff's Grasshopper Warbler,Helopsaltes ochotensis,Rare/Accidental,PASSERIFORMES,Locustellidae,AUS
+Fly River Grassbird,Poodytes albolimbatus,Vulnerable,PASSERIFORMES,Locustellidae,AUS
+Spinifexbird,Poodytes carteri,,PASSERIFORMES,Locustellidae,AUS
+Little Grassbird,Poodytes gramineus,,PASSERIFORMES,Locustellidae,AUS
+New Zealand Fernbird,Poodytes punctatus,,PASSERIFORMES,Locustellidae,AUS
+Chatham Islands Fernbird,Poodytes rufescens,Extinct,PASSERIFORMES,Locustellidae,AUS
+Brown Songlark,Cincloramphus cruralis,,PASSERIFORMES,Locustellidae,AUS
+Bismarck Thicketbird,Cincloramphus grosvenori,Vulnerable,PASSERIFORMES,Locustellidae,AUS
+Rusty Thicketbird,Cincloramphus rubiginosus,,PASSERIFORMES,Locustellidae,AUS
+Rufous Songlark,Cincloramphus mathewsi,,PASSERIFORMES,Locustellidae,AUS
+Tawny Grassbird,Cincloramphus timoriensis,,PASSERIFORMES,Locustellidae,AUS
+Papuan Grassbird,Cincloramphus macrurus,,PASSERIFORMES,Locustellidae,AUS
+Santo Thicketbird,Cincloramphus whitneyi,,PASSERIFORMES,Locustellidae,AUS
+Guadalcanal Thicketbird,Cincloramphus turipavae,Near-threatened,PASSERIFORMES,Locustellidae,AUS
+New Caledonian Grassbird,Cincloramphus mariae,,PASSERIFORMES,Locustellidae,AUS
+Long-legged Thicketbird,Cincloramphus rufus,Endemic Endangered,PASSERIFORMES,Locustellidae,AUS
+Bougainville Thicketbird,Cincloramphus llaneae,Near-threatened,PASSERIFORMES,Locustellidae,AUS
+White-backed Swallow,Cheramoeca leucosterna,,PASSERIFORMES,Hirundinidae,AUS
+Bank Swallow,Riparia riparia,,PASSERIFORMES,Hirundinidae,AUS
+Pacific Swallow,Hirundo javanica,,PASSERIFORMES,Hirundinidae,AUS
+Welcome Swallow,Hirundo neoxena,,PASSERIFORMES,Hirundinidae,AUS
+Barn Swallow,Hirundo rustica,,PASSERIFORMES,Hirundinidae,AUS
+Asian House-Martin,Delichon dasypus,Rare/Accidental,PASSERIFORMES,Hirundinidae,AUS
+Eastern Red-rumped Swallow,Cecropis daurica,,PASSERIFORMES,Hirundinidae,AUS
+Fairy Martin,Petrochelidon ariel,,PASSERIFORMES,Hirundinidae,AUS
+Tree Martin,Petrochelidon nigricans,,PASSERIFORMES,Hirundinidae,AUS
+Red-whiskered Bulbul,Pycnonotus jocosus,,PASSERIFORMES,Pycnonotidae,AUS
+Yellow-vented Bulbul,Pycnonotus goiavier,,PASSERIFORMES,Pycnonotidae,AUS
+Red-vented Bulbul,Pycnonotus cafer,Introduced species,PASSERIFORMES,Pycnonotidae,AUS
+Sooty-headed Bulbul,Pycnonotus aurigaster,,PASSERIFORMES,Pycnonotidae,AUS
+Yellow-browed Warbler,Phylloscopus inornatus,Rare/Accidental,PASSERIFORMES,Phylloscopidae,AUS
+Dusky Warbler,Phylloscopus fuscatus,Rare/Accidental,PASSERIFORMES,Phylloscopidae,AUS
+Willow Warbler,Phylloscopus trochilus,Rare/Accidental,PASSERIFORMES,Phylloscopidae,AUS
+Eastern Crowned Warbler,Phylloscopus coronatus,Rare/Accidental,PASSERIFORMES,Phylloscopidae,AUS
+Japanese Leaf Warbler,Phylloscopus xanthodryas,Rare/Accidental,PASSERIFORMES,Phylloscopidae,AUS
+Arctic Warbler,Phylloscopus borealis,,PASSERIFORMES,Phylloscopidae,AUS
+Kamchatka Leaf Warbler,Phylloscopus examinandus,Outlying islands only,PASSERIFORMES,Phylloscopidae,AUS
+Yellow-breasted Warbler,Phylloscopus montis,,PASSERIFORMES,Phylloscopidae,AUS
+Sulphur-breasted Warbler,Phylloscopus ricketti,,PASSERIFORMES,Phylloscopidae,AUS
+Mountain Leaf Warbler,Phylloscopus trivirgatus,,PASSERIFORMES,Phylloscopidae,AUS
+Makira Leaf Warbler,Phylloscopus makirensis,,PASSERIFORMES,Phylloscopidae,AUS
+Island Leaf Warbler,Phylloscopus poliocephalus,,PASSERIFORMES,Phylloscopidae,AUS
+Numfor Leaf Warbler,Phylloscopus maforensis,Near-threatened,PASSERIFORMES,Phylloscopidae,AUS
+Biak Leaf Warbler,Phylloscopus misoriensis,Endemic Near-threatened,PASSERIFORMES,Phylloscopidae,AUS
+Kolombangara Leaf Warbler,Phylloscopus amoenus,Near-threatened,PASSERIFORMES,Phylloscopidae,AUS
+Shade Warbler,Horornis parens,,PASSERIFORMES,Scotocercidae,AUS
+Odedi,Horornis haddeni,Endemic Near-threatened,PASSERIFORMES,Scotocercidae,AUS
+Fiji Bush Warbler,Horornis ruficapilla,Endemic,PASSERIFORMES,Scotocercidae,AUS
+Black-capped White-eye,Zosterops atricapilla,,PASSERIFORMES,Zosteropidae,AUS
+Lemon-bellied White-eye,Zosterops chloris,,PASSERIFORMES,Zosteropidae,AUS
+Black-crowned White-eye,Zosterops atrifrons,,PASSERIFORMES,Zosteropidae,AUS
+Black-fronted White-eye,Zosterops minor,,PASSERIFORMES,Zosteropidae,AUS
+Tagula White-eye,Zosterops meeki,Near-threatened,PASSERIFORMES,Zosteropidae,AUS
+Ashy-bellied White-eye,Zosterops citrinella,Outlying islands only,PASSERIFORMES,Zosteropidae,AUS
+Australian Yellow White-eye,Zosterops luteus,,PASSERIFORMES,Zosteropidae,AUS
+Silvereye,Zosterops lateralis,,PASSERIFORMES,Zosteropidae,AUS
+Banded White-eye,Zosterops vellalavella,Near-threatened,PASSERIFORMES,Zosteropidae,AUS
+Santa Cruz White-eye,Zosterops sanctaecrucis,,PASSERIFORMES,Zosteropidae,AUS
+Capped White-eye,Zosterops fuscicapilla,,PASSERIFORMES,Zosteropidae,AUS
+Yellow-fronted White-eye,Zosterops flavifrons,,PASSERIFORMES,Zosteropidae,AUS
+Bare-eyed White-eye,Zosterops superciliosus,,PASSERIFORMES,Zosteropidae,AUS
+Sanford's White-eye,Zosterops lacertosus,Near-threatened,PASSERIFORMES,Zosteropidae,AUS
+Vanikoro White-eye,Zosterops gibbsi,Endemic,PASSERIFORMES,Zosteropidae,AUS
+Fiji White-eye,Zosterops explorator,Endemic,PASSERIFORMES,Zosteropidae,AUS
+Black-headed White-eye,Zosterops hypoxanthus,,PASSERIFORMES,Zosteropidae,AUS
+Biak White-eye,Zosterops mysorensis,Near-threatened,PASSERIFORMES,Zosteropidae,AUS
+Bougainville White-eye,Zosterops hamlini,,PASSERIFORMES,Zosteropidae,AUS
+Guadalcanal White-eye,Zosterops oblitus,,PASSERIFORMES,Zosteropidae,AUS
+Makira White-eye,Zosterops rendovae,,PASSERIFORMES,Zosteropidae,AUS
+Yellow-throated White-eye,Zosterops metcalfii,,PASSERIFORMES,Zosteropidae,AUS
+Malaita White-eye,Zosterops stresemanni,,PASSERIFORMES,Zosteropidae,AUS
+New Guinea White-eye,Zosterops novaeguineae,,PASSERIFORMES,Zosteropidae,AUS
+Kai Besar White-eye,Zosterops grayi,,PASSERIFORMES,Zosteropidae,AUS
+Splendid White-eye,Zosterops luteirostris,Endemic Vulnerable,PASSERIFORMES,Zosteropidae,AUS
+Kai Kecil White-eye,Zosterops uropygialis,Near-threatened,PASSERIFORMES,Zosteropidae,AUS
+Ranongga White-eye,Zosterops splendidus,,PASSERIFORMES,Zosteropidae,AUS
+Solomons White-eye,Zosterops kulambangrae,,PASSERIFORMES,Zosteropidae,AUS
+Dark-eyed White-eye,Zosterops tetiparius,,PASSERIFORMES,Zosteropidae,AUS
+Christmas Island White-eye,Zosterops natalis,,PASSERIFORMES,Zosteropidae,AUS
+Louisiade White-eye,Zosterops griseotinctus,,PASSERIFORMES,Zosteropidae,AUS
+Kolombangara White-eye,Zosterops murphyi,,PASSERIFORMES,Zosteropidae,AUS
+Large Lifou White-eye,Zosterops inornatus,,PASSERIFORMES,Zosteropidae,AUS
+White-chested White-eye,Zosterops albogularis,Endemic Extinct,PASSERIFORMES,Zosteropidae,AUS
+Robust White-eye,Zosterops strenuus,Extinct,PASSERIFORMES,Zosteropidae,AUS
+Slender-billed White-eye,Zosterops tenuirostris,Vulnerable,PASSERIFORMES,Zosteropidae,AUS
+Small Lifou White-eye,Zosterops minutus,,PASSERIFORMES,Zosteropidae,AUS
+Green-backed White-eye,Zosterops xanthochroa,,PASSERIFORMES,Zosteropidae,AUS
+Rennell White-eye,Zosterops rennellianus,,PASSERIFORMES,Zosteropidae,AUS
+Metallic Starling,Aplonis metallica,,PASSERIFORMES,Sturnidae,AUS
+Yellow-eyed Starling,Aplonis mystacea,,PASSERIFORMES,Sturnidae,AUS
+Atoll Starling,Aplonis feadensis,Near-threatened,PASSERIFORMES,Sturnidae,AUS
+Rennell Starling,Aplonis insularis,,PASSERIFORMES,Sturnidae,AUS
+Long-tailed Starling,Aplonis magna,,PASSERIFORMES,Sturnidae,AUS
+White-eyed Starling,Aplonis brunneicapillus,Vulnerable,PASSERIFORMES,Sturnidae,AUS
+Brown-winged Starling,Aplonis grandis,,PASSERIFORMES,Sturnidae,AUS
+Makira Starling,Aplonis dichroa,,PASSERIFORMES,Sturnidae,AUS
+Rusty-winged Starling,Aplonis zelandica,,PASSERIFORMES,Sturnidae,AUS
+Striated Starling,Aplonis striata,,PASSERIFORMES,Sturnidae,AUS
+Singing Starling,Aplonis cantoroides,,PASSERIFORMES,Sturnidae,AUS
+Mountain Starling,Aplonis santovestris,Endangered,PASSERIFORMES,Sturnidae,AUS
+Moluccan Starling,Aplonis mysolensis,,PASSERIFORMES,Sturnidae,AUS
+Polynesian Starling,Aplonis tabuensis,,PASSERIFORMES,Sturnidae,AUS
+Tasman Starling,Aplonis fusca,Extinct,PASSERIFORMES,Sturnidae,AUS
+Yellow-faced Myna,Mino dumontii,,PASSERIFORMES,Sturnidae,AUS
+Golden Myna,Mino anais,,PASSERIFORMES,Sturnidae,AUS
+Long-tailed Myna,Mino kreffti,,PASSERIFORMES,Sturnidae,AUS
+Common Hill Myna,Gracula religiosa,,PASSERIFORMES,Sturnidae,AUS
+European Starling,Sturnus vulgaris,Introduced species,PASSERIFORMES,Sturnidae,AUS
+Rosy Starling,Pastor roseus,Rare/Accidental,PASSERIFORMES,Sturnidae,AUS
+Daurian Starling,Agropsar sturninus,Rare/Accidental,PASSERIFORMES,Sturnidae,AUS
+Chestnut-cheeked Starling,Agropsar philippensis,Rare/Accidental,PASSERIFORMES,Sturnidae,AUS
+Common Myna,Acridotheres tristis,,PASSERIFORMES,Sturnidae,AUS
+Jungle Myna,Acridotheres fuscus,,PASSERIFORMES,Sturnidae,AUS
+Javan Myna,Acridotheres javanicus,Introduced species Vulnerable,PASSERIFORMES,Sturnidae,AUS
+Scaly Thrush,Zoothera dauma,,PASSERIFORMES,Turdidae,AUS
+Makira Thrush,Zoothera margaretae,Near-threatened,PASSERIFORMES,Turdidae,AUS
+Guadalcanal Thrush,Zoothera turipavae,Near-threatened,PASSERIFORMES,Turdidae,AUS
+Bassian Thrush,Zoothera lunulata,Endemic,PASSERIFORMES,Turdidae,AUS
+New Britain Thrush,Zoothera talaseae,,PASSERIFORMES,Turdidae,AUS
+Bougainville Thrush,Zoothera atrigena,Endemic Near-threatened,PASSERIFORMES,Turdidae,AUS
+Russet-tailed Thrush,Zoothera heinei,Endemic,PASSERIFORMES,Turdidae,AUS
+Siberian Thrush,Geokichla sibirica,Rare/Accidental,PASSERIFORMES,Turdidae,AUS
+Song Thrush,Turdus philomelos,,PASSERIFORMES,Turdidae,AUS
+Eurasian Blackbird,Turdus merula,,PASSERIFORMES,Turdidae,AUS
+Eyebrowed Thrush,Turdus obscurus,Rare/Accidental,PASSERIFORMES,Turdidae,AUS
+Christmas Island-Thrush,Turdus erythropleurus,,PASSERIFORMES,Turdidae,AUS
+Papuan Island-Thrush,Turdus papuensis,,PASSERIFORMES,Turdidae,AUS
+Bismarck Island-Thrush,Turdus heinrothi,,PASSERIFORMES,Turdidae,AUS
+Bougainville Island-Thrush,Turdus bougainvillei,Endemic,PASSERIFORMES,Turdidae,AUS
+Solomons Island-Thrush,Turdus kulambangrae,,PASSERIFORMES,Turdidae,AUS
+Vanikoro Island-Thrush,Turdus vanikorensis,,PASSERIFORMES,Turdidae,AUS
+White-headed Island-Thrush,Turdus pritzbueri,,PASSERIFORMES,Turdidae,AUS
+New Caledonian Island-Thrush,Turdus xanthopus,,PASSERIFORMES,Turdidae,AUS
+Tasman Sea Island-Thrush,Turdus poliocephalus,,PASSERIFORMES,Turdidae,AUS
+Fiji Island-Thrush,Turdus ruficeps,,PASSERIFORMES,Turdidae,AUS
+Gray-streaked Flycatcher,Muscicapa griseisticta,,PASSERIFORMES,Muscicapidae,AUS
+Dark-sided Flycatcher,Muscicapa sibirica,Rare/Accidental,PASSERIFORMES,Muscicapidae,AUS
+Asian Brown Flycatcher,Muscicapa dauurica,Rare/Accidental,PASSERIFORMES,Muscicapidae,AUS
+Brown-streaked Flycatcher,Muscicapa williamsoni,Rare/Accidental,PASSERIFORMES,Muscicapidae,AUS
+Blue-and-white Flycatcher,Cyanoptila cyanomelana,Rare/Accidental,PASSERIFORMES,Muscicapidae,AUS
+Siberian Blue Robin,Larvivora cyane,Rare/Accidental,PASSERIFORMES,Muscicapidae,AUS
+Siberian Rubythroat,Calliope calliope,,PASSERIFORMES,Muscicapidae,AUS
+Narcissus Flycatcher,Ficedula narcissina,Rare/Accidental,PASSERIFORMES,Muscicapidae,AUS
+Mugimaki Flycatcher,Ficedula mugimaki,Rare/Accidental,PASSERIFORMES,Muscicapidae,AUS
+Blue Rock-Thrush,Monticola solitarius,,PASSERIFORMES,Muscicapidae,AUS
+Amur Stonechat,Saxicola stejnegeri,,PASSERIFORMES,Muscicapidae,AUS
+Pied Bushchat,Saxicola caprata,,PASSERIFORMES,Muscicapidae,AUS
+Northern Wheatear,Oenanthe oenanthe,Rare/Accidental,PASSERIFORMES,Muscicapidae,AUS
+Isabelline Wheatear,Oenanthe isabellina,Rare/Accidental,PASSERIFORMES,Muscicapidae,AUS
+Olive-crowned Flowerpecker,Dicaeum pectorale,,PASSERIFORMES,Dicaeidae,AUS
+Red-capped Flowerpecker,Dicaeum geelvinkianum,,PASSERIFORMES,Dicaeidae,AUS
+Louisiade Flowerpecker,Dicaeum nitidum,,PASSERIFORMES,Dicaeidae,AUS
+Red-banded Flowerpecker,Dicaeum eximium,,PASSERIFORMES,Dicaeidae,AUS
+Midget Flowerpecker,Dicaeum aeneum,,PASSERIFORMES,Dicaeidae,AUS
+Mottled Flowerpecker,Dicaeum tristrami,,PASSERIFORMES,Dicaeidae,AUS
+Mistletoebird,Dicaeum hirundinaceum,,PASSERIFORMES,Dicaeidae,AUS
+Black Sunbird,Leptocoma aspasia,,PASSERIFORMES,Nectariniidae,AUS
+Ornate Sunbird,Cinnyris ornatus,,PASSERIFORMES,Nectariniidae,AUS
+Sahul Sunbird,Cinnyris frenatus,,PASSERIFORMES,Nectariniidae,AUS
+Mamberamo Sunbird,Cinnyris idenburgi,,PASSERIFORMES,Nectariniidae,AUS
+Pictorella Munia,Heteromunia pectoralis,,PASSERIFORMES,Estrildidae,AUS
+Mountain Firetail,Oreostruthus fuliginosus,,PASSERIFORMES,Estrildidae,AUS
+Diamond Firetail,Stagonopleura guttata,Vulnerable,PASSERIFORMES,Estrildidae,AUS
+Red-eared Firetail,Stagonopleura oculata,,PASSERIFORMES,Estrildidae,AUS
+Beautiful Firetail,Stagonopleura bella,,PASSERIFORMES,Estrildidae,AUS
+Crimson Finch,Neochmia phaeton,,PASSERIFORMES,Estrildidae,AUS
+Red-browed Firetail,Neochmia temporalis,,PASSERIFORMES,Estrildidae,AUS
+Painted Firetail,Emblema pictum,,PASSERIFORMES,Estrildidae,AUS
+Star Finch,Emblema ruficauda,,PASSERIFORMES,Estrildidae,AUS
+Plum-headed Finch,Emblema modesta,,PASSERIFORMES,Estrildidae,AUS
+Double-barred Finch,Stizoptera bichenovii,,PASSERIFORMES,Estrildidae,AUS
+Zebra Finch,Taeniopygia guttata,,PASSERIFORMES,Estrildidae,AUS
+Masked Finch,Poephila personata,,PASSERIFORMES,Estrildidae,AUS
+Long-tailed Finch,Poephila acuticauda,,PASSERIFORMES,Estrildidae,AUS
+Black-throated Finch,Poephila cincta,,PASSERIFORMES,Estrildidae,AUS
+Java Sparrow,Padda oryzivora,Introduced species Endangered,PASSERIFORMES,Estrildidae,AUS
+Streak-headed Munia,Mayrimunia tristissima,,PASSERIFORMES,Estrildidae,AUS
+White-spotted Munia,Mayrimunia leucosticta,,PASSERIFORMES,Estrildidae,AUS
+Scaly-breasted Munia,Lonchura punctulata,,PASSERIFORMES,Estrildidae,AUS
+Black-faced Munia,Lonchura molucca,Endemic (country/region),PASSERIFORMES,Estrildidae,AUS
+Chestnut Munia,Lonchura atricapilla,,PASSERIFORMES,Estrildidae,AUS
+Pale-headed Munia,Lonchura pallida,Rare/Accidental,PASSERIFORMES,Estrildidae,AUS
+Grand Munia,Lonchura grandis,,PASSERIFORMES,Estrildidae,AUS
+Black-breasted Munia,Lonchura teerinki,,PASSERIFORMES,Estrildidae,AUS
+Snow Mountain Munia,Lonchura montana,,PASSERIFORMES,Estrildidae,AUS
+Alpine Munia,Lonchura monticola,,PASSERIFORMES,Estrildidae,AUS
+Gray-banded Munia,Lonchura vana,,PASSERIFORMES,Estrildidae,AUS
+Gray-crowned Munia,Lonchura nevermanni,,PASSERIFORMES,Estrildidae,AUS
+Gray-headed Munia,Lonchura caniceps,,PASSERIFORMES,Estrildidae,AUS
+Hooded Munia,Lonchura spectabilis,,PASSERIFORMES,Estrildidae,AUS
+New Ireland Munia,Lonchura forbesi,,PASSERIFORMES,Estrildidae,AUS
+Mottled Munia,Lonchura hunsteini,,PASSERIFORMES,Estrildidae,AUS
+New Hanover Munia,Lonchura nigerrima,,PASSERIFORMES,Estrildidae,AUS
+Yellow-rumped Munia,Lonchura flaviprymna,,PASSERIFORMES,Estrildidae,AUS
+Chestnut-breasted Munia,Lonchura castaneothorax,,PASSERIFORMES,Estrildidae,AUS
+Black Munia,Lonchura stygia,,PASSERIFORMES,Estrildidae,AUS
+Bismarck Munia,Lonchura melaena,,PASSERIFORMES,Estrildidae,AUS
+Gouldian Finch,Chloebia gouldiae,,PASSERIFORMES,Estrildidae,AUS
+Red-throated Parrotfinch,Erythrura psittacea,,PASSERIFORMES,Estrildidae,AUS
+Fiji Parrotfinch,Erythrura pealii,Endemic,PASSERIFORMES,Estrildidae,AUS
+Royal Parrotfinch,Erythrura cyaneovirens,,PASSERIFORMES,Estrildidae,AUS
+Pink-billed Parrotfinch,Erythrura kleinschmidti,Endemic Vulnerable,PASSERIFORMES,Estrildidae,AUS
+Papuan Parrotfinch,Erythrura papuana,,PASSERIFORMES,Estrildidae,AUS
+Blue-faced Parrotfinch,Erythrura trichroa,,PASSERIFORMES,Estrildidae,AUS
+Common Waxbill,Estrilda astrild,,PASSERIFORMES,Estrildidae,AUS
+Red Avadavat,Amandava amandava,,PASSERIFORMES,Estrildidae,AUS
+Dunnock,Prunella modularis,Introduced species,PASSERIFORMES,Prunellidae,AUS
+House Sparrow,Passer domesticus,Introduced species,PASSERIFORMES,Passeridae,AUS
+Eurasian Tree Sparrow,Passer montanus,Introduced species,PASSERIFORMES,Passeridae,AUS
+Forest Wagtail,Dendronanthus indicus,Rare/Accidental,PASSERIFORMES,Motacillidae,AUS
+Gray Wagtail,Motacilla cinerea,,PASSERIFORMES,Motacillidae,AUS
+Eastern Yellow Wagtail,Motacilla tschutschensis,,PASSERIFORMES,Motacillidae,AUS
+Citrine Wagtail,Motacilla citreola,,PASSERIFORMES,Motacillidae,AUS
+White Wagtail,Motacilla alba,,PASSERIFORMES,Motacillidae,AUS
+Australian Pipit,Anthus australis,,PASSERIFORMES,Motacillidae,AUS
+New Zealand Pipit,Anthus novaeseelandiae,,PASSERIFORMES,Motacillidae,AUS
+Paddyfield Pipit,Anthus rufulus,Rare/Accidental,PASSERIFORMES,Motacillidae,AUS
+Alpine Pipit,Anthus gutturalis,,PASSERIFORMES,Motacillidae,AUS
+Tree Pipit,Anthus trivialis,Rare/Accidental,PASSERIFORMES,Motacillidae,AUS
+Pechora Pipit,Anthus gustavi,Rare/Accidental,PASSERIFORMES,Motacillidae,AUS
+Red-throated Pipit,Anthus cervinus,,PASSERIFORMES,Motacillidae,AUS
+Common Chaffinch,Fringilla coelebs,Introduced species,PASSERIFORMES,Fringillidae,AUS
+European Greenfinch,Chloris chloris,Introduced species,PASSERIFORMES,Fringillidae,AUS
+Redpoll,Acanthis flammea,Introduced species,PASSERIFORMES,Fringillidae,AUS
+European Goldfinch,Carduelis carduelis,Introduced species,PASSERIFORMES,Fringillidae,AUS
+Cirl Bunting,Emberiza cirlus,Introduced species,PASSERIFORMES,Emberizidae,AUS
+Yellowhammer,Emberiza citrinella,Introduced species,PASSERIFORMES,Emberizidae,AUS
+Yellow-breasted Bunting,Emberiza aureola,Rare/Accidental Critically endangered,PASSERIFORMES,Emberizidae,AUS

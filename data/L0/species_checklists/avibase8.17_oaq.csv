@@ -1,0 +1,8 @@
+common_name,scientific_name,status,order,family,region
+Brown Skua,Stercorarius antarcticus,,CHARADRIIFORMES,Stercorariidae,oaq
+Chinstrap Penguin,Pygoscelis antarcticus,,SPHENISCIFORMES,Spheniscidae,oaq
+Antarctic Petrel,Thalassoica antarctica,,PROCELLARIIFORMES,Procellariidae,oaq
+Pintado Petrel,Daption capense,,PROCELLARIIFORMES,Procellariidae,oaq
+Westland Petrel,Procellaria westlandica,Endangered,PROCELLARIIFORMES,Procellariidae,oaq
+South Georgia Diving-Petrel,Pelecanoides georgicus,,PROCELLARIIFORMES,Procellariidae,oaq
+Magellanic Diving-Petrel,Pelecanoides magellani,,PROCELLARIIFORMES,Procellariidae,oaq
