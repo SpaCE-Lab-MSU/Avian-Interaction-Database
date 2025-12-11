@@ -883,7 +883,7 @@ int.raw.names.matches <- int.raw.names
 int.raw.names.matches[high_confidence_matches$row_number,]$scientific_name.edit<- high_confidence_matches$closest_scientific_name_match
 int.raw.names.matches[high_confidence_matches$row_number,]$edit_notes <- paste( edit_note, round(high_confidence_matches$scientific_name_match_score,3))
 
-# to review these assignments, run View(int.raw.names.matches) which includes all reslutions
+# to review these assignments, run View(int.raw.names.matches) which includes all resolutions
 ```
 
 Remaining species to resolve after high-confidence scientific name match:
@@ -1269,8 +1269,6 @@ for(r in 1:nrow(gbif_on_checklist)){
   gbif_note <- paste("GBIF: Match using taxadb/", gbif_on_checklist[r,]$scientific_id, " on checklist (Clements 2024)")
   int.raw.names.gbif[names_row, ]$edit_notes <- gbif_note
 }
-                  
-  
 ```
 
 Review outcome of applying GBIF
@@ -1461,7 +1459,7 @@ all of the name resolutions include those
 
 **TO-DO**
 
-1. complete the entries in this file - PLZ completed 10/5/2025
+1. complete the entries in this file - PLZ completed 10/5/2025; LM confirmed 12/11/2025
 3. read in the file and verify all rows are ok, filter out unfinished rows
 4. apply the edits in the file regardless if there is alread a note since 
    these may override the automatic resolutions
@@ -1561,42 +1559,7 @@ review data frame to make decisions
 ```{r}
 # make additional edits using int.raw.names <- add_name_edits(...)
 # re-run the block subset_check
-
 ```
-
-
-
-
-
-
-```{r}
-# # ... FINISH THIS LATER FOR OTHER non-BBS species
-# 
-# # For now, focus on BBS splist because need to get these data cleaned and
-# # aligned for merging with bbs.obs for network modeling. Return to the cleaning
-# # below after this is completed...
-# 
-# #******** BBS WORK **********# 
-# # Merge scientific_name in splist with scientific_name in int.checklist
-# # to check current common_name list and identify gaps and updates to
-# # scientific_name. This will update most of the BBS species, but not necessarily the ones
-# # outside of BBS. "scientific_name" = the names agreed upon by CHECKLIST and by
-# # the GBIF-screened species. common_name = the CHECKLIST common_name.
-# int.checklist <- subset(
-#   int.checklist,
-#   select = c("scientific_name", "common_name", "scientific_name.raw","scientific_name.edit")
-# )
-# dim(int.checklist)
-# # 4576; 29 May 2025: 4551
-# int.checklist <- int.checklist %>% 
-#   distinct()
-# dim(int.checklist)
-# # 3915 OK; May 29, 2025: 3891
-# length(unique(int.checklist$scientific_name.raw))
-# # 3913 OK; May 29, 2025: 3889
-
-```
-
 
 
 ### Subspecies
@@ -1654,6 +1617,7 @@ for(r in 1:nrow(int.raw.names)){
 
 Update the scientific names in the interactions data with our table as much 
 as possible
+@Lucas/Kelly: 12/11/2025: This is not working. It does not re-assign edited names from raw (incorrect) names in manual_taxonomic_resolutions_L1_2025-10.csv. This may be why the Northwestern Crow issue continues to pop up.
 
 ```{r}
 # make a copy of the database data frame so we can re-run if necessary
