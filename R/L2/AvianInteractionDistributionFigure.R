@@ -49,5 +49,5 @@ ggplot(type_summ_NA,
   geom_text(aes(label=n), hjust=-0.2, size=3.5) +
   theme(axis.text.x = element_text(angle=0)) +
   xlab("Interaction Type") +
-  labs(title = "Total Interactions in dataset") +
+  labs(title = "Total Interactions in North America") +
   coord_flip()

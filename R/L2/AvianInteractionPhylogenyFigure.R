@@ -14,12 +14,13 @@ library(ggtree)
 library(ggplot2)
 library(ggnewscale)
 library(taxize)
+library(clootl)
 
 inter <- read.csv("R/L1/AvianInteractionData_CanadaAKCONUS_L1.csv") #Original data
+#Loading phylotree from Cornell Lab of Ornithology's Open Tree of Life Avian Phylogeny
 
-#Loading phylotree from VertLife.org
-trees <- read.tree(file = "R/L2/AllBirdsEricson1.tre") #This step takes a minute, there are 1000 bootstrapped trees
-tree <- trees[[1]] #but we only need one
+full_tree <- extractTree(species = union(inter$species1_scientific, inter$species2_scientific), label_type = "scientific", taxonomy_year = 2024)
+NA_tree <- extractTree(species = inter$species1_scientific, label_type = "scientific", taxonomy_year = 2024)
 
 # -----------------------------------------------
 # Filtering interaction data - NA only
@@ -46,7 +47,7 @@ inter_NA <- inter %>%
 #sp1  int1
 #sp2  int1
 #sp1  int2
-#sp2  int2
+#sp3  int2
 
 #This duplicates our dataframe, so that every interaction: sp1  int1  sp2
 #is expressed in both sp1/sp2 permutations
@@ -102,10 +103,9 @@ head(inter_NA_working) #here is an example of what the data looks like now
 #This will also remove subspecies (Genus species subspecies). If we want
 #to generalize these up to the species for representation in the tree, we
 #will have to delete all subspecies earlier in the workflow.
-species_tree_NA <- intersect(inter_NA_working$species, tree$tip.label)
+species_tree_NA <- NA_tree$tip.label
 inter_NA_working_prune <- inter_NA_working %>%
   filter(species %in% species_tree_NA)
-tree_prune <- keep.tip(tree, species_tree_NA)
 
 #This is using taxize to assign each species a family. It is a few years outdated
 #so I will change this to reference the most recent clements soon. This won't cause
@@ -164,10 +164,9 @@ inter_working <- inter_dedup %>%
 head(inter_working)
 
 
-species_tree <- intersect(inter_working$species, tree$tip.label)
+species_tree <- full_tree$tip.label
 inter_working_prune <- inter_working %>%
   filter(species %in% species_tree)
-tree_prune <- keep.tip(tree, species_tree)
 
 
 classifications <- classification(inter_working_prune$species, db = "ncbi")
@@ -193,12 +192,12 @@ inter_working_prune$family <- species_family
 
 #TIPS COLORED
 #color by n interactions
-ggtree(tree_prune, layout = "circular") %<+% inter_NA_working_prune +
+ggtree(NA_tree, layout = "circular") %<+% inter_NA_working_prune +
   geom_tippoint(mapping = aes(color = n_int), size = 1) +
   ggtitle("Phylogenetic tree of # of interactions") +
   scale_color_viridis_c(trans = "log10")
 #color by n unique types
-ggtree(tree_prune, layout = "circular") %<+% inter_NA_working_prune +
+ggtree(NA_tree, layout = "circular") %<+% inter_NA_working_prune +
   geom_tippoint(mapping = aes(color = n_type), size = 1) +
   scale_color_viridis_c(trans = "log10")
 
@@ -206,14 +205,14 @@ ggtree(tree_prune, layout = "circular") %<+% inter_NA_working_prune +
 
 #Branches COLORED
 #color by n interactions
-ggtree(tree_prune, layout = "circular") %<+% inter_NA_working_prune +
+ggtree(NA_tree, layout = "circular") %<+% inter_NA_working_prune +
   geom_tree(mapping = aes(color = n_int)) +
   ggtitle("Phylogenetic tree of # of interactions - North America") +
   scale_color_gradientn(
     trans = "log10",
     colors = c("gold", "orange", "red", "darkred"))
 #color by n unique types
-ggtree(tree_prune, layout = "circular") %<+% inter_NA_working_prune +
+ggtree(NA_tree, layout = "circular") %<+% inter_NA_working_prune +
   geom_tree(mapping = aes(color = n_type)) +
   ggtitle("Phylogenetic tree of # of types of interactions  - North America") +
   scale_color_gradientn(
@@ -229,7 +228,7 @@ ggtree(tree_prune, layout = "circular") %<+% inter_NA_working_prune +
 
 #first we need to rename "species" to "label" to get the tip labels to work
 inter_NA_plot <- inter_NA_working_prune %>%
-  rename(label = species)   #
+  rename(label = species)
 
 #Randomly select one species to label the family
 rep_df <- inter_NA_plot %>%
@@ -238,7 +237,7 @@ rep_df <- inter_NA_plot %>%
   slice(1)
 
 #Plot family labels on the tree!
-ggtree(tree_prune, layout="circular") %<+% inter_NA_plot +
+ggtree(NA_tree, layout="circular") %<+% inter_NA_plot +
   geom_tiplab(aes(label = ifelse(label %in% rep_df$label, family, "")),
               size = 2.3, offset = 0.6, fontface = "bold") +
   ggtitle("North American Birds — Families Labelled at Representative Tips")
@@ -251,12 +250,12 @@ ggtree(tree_prune, layout="circular") %<+% inter_NA_plot +
 
 #TIPS COLORED
 #color by n interactions
-ggtree(tree_prune, layout = "circular") %<+% inter_working_prune +
+ggtree(full_tree, layout = "circular") %<+% inter_working_prune +
   geom_tippoint(mapping = aes(color = n_int), size = 1) +
   ggtitle("Phylogenetic tree of # of interactions - Full dataset") +
   scale_color_viridis_c(trans = "log10")
 #color by n unique types
-ggtree(tree_prune, layout = "circular") %<+% inter_working_prune +
+ggtree(full_tree, layout = "circular") %<+% inter_working_prune +
   geom_tippoint(mapping = aes(color = n_type), size = 1) +
   scale_color_viridis_c(trans = "log10")
 
@@ -264,14 +263,14 @@ ggtree(tree_prune, layout = "circular") %<+% inter_working_prune +
 
 #Branches COLORED
 #color by n interactions
-ggtree(tree_prune, layout = "circular") %<+% inter_working_prune +
+ggtree(full_tree, layout = "circular") %<+% inter_working_prune +
   geom_tree(mapping = aes(color = n_int)) +
   ggtitle("Phylogenetic tree of # of interactions - Full dataset") +
   scale_color_gradientn(
     trans = "log10",
     colors = c("gold", "orange", "red", "darkred"))
 #color by n unique types
-ggtree(tree_prune, layout = "circular") %<+% inter_working_prune +
+ggtree(full_tree, layout = "circular") %<+% inter_working_prune +
   geom_tree(mapping = aes(color = n_type)) +
   ggtitle("Phylogenetic tree of # of types of interactions - Full dataset") +
   scale_color_gradientn(
@@ -281,14 +280,14 @@ ggtree(tree_prune, layout = "circular") %<+% inter_working_prune +
 
 #Species label
 inter_plot <- inter_working_prune %>%
-  rename(label = species)   #
+  rename(label = species)
 
 rep_df <- inter_plot %>%
   filter(!is.na(family)) %>%
   group_by(family) %>%
   slice(1)
 
-ggtree(tree_prune, layout="circular") %<+% inter_plot +
+ggtree(full_tree, layout="circular") %<+% inter_plot +
   geom_tiplab(aes(label = ifelse(label %in% rep_df$label, family, "")),
               size = 2.3, offset = 0.6, fontface = "bold") +
   ggtitle("Full dataset — Families Labelled at Representative Tips")
