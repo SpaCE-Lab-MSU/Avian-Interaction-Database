@@ -22,3 +22,9 @@ diffs <- diffdf(d1, d2)
 # First difference of rows occurs with row 1124: Ross's goose -- df1 has it as
 # Chen rossii, but the more updated name is Anser rossii which is in the
 # new version of the data.
+
+
+d1 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L0/AvianInteractionData_L0_stitch_06oct25.csv"))
+d2 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L0/AvianInteractionData_L0_stitch_09dec25_plz.csv"))
+
+diffs <- diffdf(d1, d2)

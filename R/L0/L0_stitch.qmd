@@ -47,7 +47,7 @@ The code here saves the file in the Data folder in L0 in the configuration of `f
 *First set the file to save*
 
 ```{r}
-stitched_L0_file <- "AvianInteractionData_L0_stitch_06oct25.csv" 
+stitched_L0_file <- "AvianInteractionData_L0_stitch_20251209_kek.csv" 
 ```
 
 
@@ -239,6 +239,7 @@ export the data to become the current L0 interaction data, overwrite any existin
 
 ```{r}
 #| echo: false
+
 
 # this file name is set at the top of this script, BUT 
 # change the name here to save a test file or overwrite previous version
