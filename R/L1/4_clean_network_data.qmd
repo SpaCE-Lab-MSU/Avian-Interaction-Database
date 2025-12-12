@@ -191,8 +191,8 @@ See `R/L1/3_subset_species_lists.R`
 ```{r}
 
 current_species_list_filename <- "spp_joint_cac.csv"
-splist2024_filepath <- file.path(file_paths$L1,"species_checklists",current_species_list_filename )
-splist2024 <- read.csv(splist2024_filepath)
+splist2024_filepath <- file.path(file_paths$CHECKLIST_L1,current_species_list_filename )
+splist2024 <- read.csv(here::here(splist2024_filepath))
 print(paste("Read in ", nrow(splist2024), "entries from checklist file", splist2024_filepath))
 
 ```
@@ -206,7 +206,7 @@ Read in the full check list the official eBird/Clements v2024 checklist
 
 
 checklist_filename <- "spp_joint_all.csv"
-checklist.orig <- read.csv(file.path(file_paths$CHECKLIST_L0,checklist_filename))
+checklist.orig <- read.csv(here::here(file.path(file_paths$CHECKLIST_L0,checklist_filename)))
 print(paste("Read in ", nrow(checklist.orig), "entries from checklist file", checklist_filename))
 ```
 

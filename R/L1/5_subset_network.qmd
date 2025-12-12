@@ -112,8 +112,8 @@ See `R/L1/3_subset_species_lists.R`
 ```{r}
 
 current_species_list_filename <- "spp_joint_cac_colsubset.csv"
-splist_filepath <- file.path(file_paths$L1,"species_checklists",current_species_list_filename )
-splist <- read.csv(splist_filepath)
+splist_filepath <- file.path(file_paths$CHECKLIST_L1, current_species_list_filename )
+splist <- read.csv(here::here(splist_filepath))
 print(paste("Read in ", nrow(splist), "entries from checklist file", splist_filepath))
 
 ```
@@ -126,7 +126,7 @@ To use a different or test interaction files, edit this L1 filename:
 
 ```{r}
 intxns.db.file <- file.path(file_paths$L1,AvianInteractionData_L1_file)
-intxns.db <-read.csv(intxns.db.file)
+intxns.db <-read.csv(here::here(intxns.db.file))
 print(paste("read in ", nrow(intxns.db), "records from ", intxns.db.file))
 ```
 
