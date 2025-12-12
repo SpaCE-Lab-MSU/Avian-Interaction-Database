@@ -24,7 +24,10 @@ diffs <- diffdf(d1, d2)
 # new version of the data.
 
 
-d1 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L0/AvianInteractionData_L0_stitch_06oct25.csv"))
-d2 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L0/AvianInteractionData_L0_stitch_09dec25_plz.csv"))
+# d1 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L0/AvianInteractionData_L0_stitch_20251211_kek.csv"))
+# d1 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L0/AvianInteractionData_L0_stitch_LM.csv"))
+d1 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L0/AvianInteractionData_L0_stitch_11Dec2025_plz.csv"))
+d2 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L0/AvianInteractionData_L0_stitch_06oct25.csv"))
 
 diffs <- diffdf(d1, d2)
+diffs
