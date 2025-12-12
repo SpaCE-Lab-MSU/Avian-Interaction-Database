@@ -31,3 +31,10 @@ d2 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L0/AvianInteractionData_L0_stitc
 
 diffs <- diffdf(d1, d2)
 diffs
+
+
+d1 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L1/ain_all.csv"))
+d2 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L1/ain_all_20251212_LM.csv"))
+
+diffs <- diffdf(d1, d2)
+diffs
