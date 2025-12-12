@@ -1524,7 +1524,7 @@ for(r in 1:nrow(manual_taxonomic_resolutions)){
     not_found_msg <- paste(manual.edit$scientific_name.raw, ": this raw /L0 species in manual edits table no longer found in L0 data" )
     warning(not_found_msg)
   } else {
-    int.raw.names.manual[matching_rows,]$scientific_name.edit <- manual.edit$scientific_name.raw
+    int.raw.names.manual[matching_rows,]$scientific_name.edit <- manual.edit$scientific_name.edit
     int.raw.names.manual[matching_rows,]$edit_notes <- manual.edit$edit_notes
   }
 
