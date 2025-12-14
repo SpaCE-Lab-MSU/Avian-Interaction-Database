@@ -37,7 +37,7 @@ cleaning but taxonomic names as entered (older names, typos, etc)
 # Clear all existing data
 rm(list=ls())
 
-AvianInteractionData_L1_file <-  "AvianInteractionData_L1.csv"
+AvianInteractionData_L1_file <-  "AvianInteractionData_L1_20251212_kek.csv"
 
 ```
 
@@ -56,10 +56,10 @@ L1 Canada, Alaska, CONUS species from L1 Avian Interaction Database
   (`AvianInteractionData_L1.csv`); saved as:
 
 ```{r}
-AvianInteractionData_CanadaAKCONUS_L1_file <- "AvianInteractionData_CanadaAKCONUS_L1.csv"
-AvianInteractionData_CanadaAKCONUS_breeding_file <- "AvianInteractionData_CanadaAKCONUS_breeding_L1.csv"
+AvianInteractionData_CanadaAKCONUS_L1_file <- "AvianInteractionData_CanadaAKCONUS_L1_20251213.csv"
+AvianInteractionData_CanadaAKCONUS_breeding_file <- "AvianInteractionData_CanadaAKCONUS_breeding_L1_10151213.csv"
 AvianInteractionData_L1_not_CanadaAKCONUS_file <- 
-  "AvianInteractionData_L1_not_CanadaAKCONUS.csv"
+  "AvianInteractionData_L1_not_CanadaAKCONUS_20251213.csv"
 today_date_string <- format(Sys.Date(),"%Y-%m-%d")
 
 ```

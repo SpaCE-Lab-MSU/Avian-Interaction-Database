@@ -36,7 +36,7 @@ print(Sys.Date())
 ```{r}
 
 # TESTING FILE SET UP
-initials <- "kek"
+initials <- "kek2"
 test_folder_loc <- paste0("./TEST_STITCH", initials,"/")
 print(test_folder_loc)
 if(!file.exists(test_folder_loc)){dir.create(test_folder_loc)}
@@ -58,7 +58,7 @@ The code here saves the file in the Data folder in L0 in the configuration of `f
 
 ```{r}
 
-stitched_L0_file <- "AvianInteractionData_L0_stitch_20251211_kek.csv" 
+stitched_L0_file <- "AvianInteractionData_L0_stitch_20251213.csv" 
 ```
 
 
