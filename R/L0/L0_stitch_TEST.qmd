@@ -58,7 +58,7 @@ The code here saves the file in the Data folder in L0 in the configuration of `f
 
 ```{r}
 
-stitched_L0_file <- "AvianInteractionData_L0_stitch_20251213.csv" 
+stitched_L0_file <- "AvianInteractionData_L0_stitch_20251213_kek.csv" 
 ```
 
 
@@ -95,7 +95,7 @@ csv_file_group_name='checked'
 csv_file_path = file.path(file_paths$L0, "species")
 # filter or add in google drive files here
 checked_file_list <- list.files(path = csv_file_path , pattern = ".*\\.csv", 
-  full.names = TRUE)
+  full.names = TRUE) %>% sort()
 
 paste(csv_file_path, ":", csv_file_group_name, "files to process", length(checked_file_list))
 
