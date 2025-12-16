@@ -36,7 +36,7 @@ cleaning but taxonomic names as entered (older names, typos, etc)
 # Clear all existing data
 rm(list=ls())
 
-AvianInteractionData_L0_file <-  "AvianInteractionData_L0_stitch_20251211_kek.csv"
+AvianInteractionData_L0_file <-  "AvianInteractionData_L0_stitch_20251216_plz.csv"
 
 ```
 
@@ -75,7 +75,7 @@ Avian Interaction Database, cleaned and with taxonomic names resolved to
 match checklists listed above: `AvianInteractionData_L1.csv`
 
 ```{r}
-AvianInteractionData_L1_file <- "AvianInteractionData_L1_20251212_kek.csv" 
+AvianInteractionData_L1_file <- "AvianInteractionData_L1_20251216_plz.csv" 
 
 today_date_string <- format(Sys.Date(),"%Y-%m-%d")
 AvianInteractionData_L1_taxonomy_table_file <- "AvianInteractionData_L1_taxonomy_resolutions.csv"
@@ -1616,8 +1616,7 @@ for(r in 1:nrow(int.raw.names)){
 ```
 
 Update the scientific names in the interactions data with our table as much 
-as possible
-@Lucas/Kelly: 12/11/2025: This is not working. It does not re-assign edited names from raw (incorrect) names in manual_taxonomic_resolutions_L1_2025-10.csv. This may be why the Northwestern Crow issue continues to pop up.
+as possible:
 
 ```{r}
 # make a copy of the database data frame so we can re-run if necessary
@@ -1663,14 +1662,8 @@ print(length(updated_rows))
 
 Review the updated database using `View(int.raw.resolved)`  The original is still in `int.raw`
 
-11/6/2025: STILL NOT CHANGING Northwestern Crow to American Crow!!! I cannot figure this out. Hard-coding here.
+Some manual updates for Northwestern Crow (common name doesn't exist anymore but the data still contain the subspecies; re-assign to American Crow)
 ```{r}
-int.raw.resolved
-
-int.raw.resolved$species1_scientific[int.raw.resolved$species1_common == "Northwestern Crow"] <- "Corvus brachyrhynchos"
-int.raw.resolved$species1_common[int.raw.resolved$species1_common == "Northwestern Crow"] <- "American Crow"
-int.raw.resolved$species2_scientific[int.raw.resolved$species2_common == "Northwestern Crow"] <- "Corvus brachyrhynchos"
-int.raw.resolved$species2_common[int.raw.resolved$species2_common == "Northwestern Crow"] <- "American Crow"
 int.raw.resolved$species1_scientific[int.raw.resolved$species1_scientific == "Corvus brachyrhynchos caurinus"] <- "Corvus brachyrhynchos"
 int.raw.resolved$species1_common[int.raw.resolved$species1_scientific == "Corvus brachyrhynchos"] <- "American Crow"
 int.raw.resolved$species2_scientific[int.raw.resolved$species2_scientific == "Corvus brachyrhynchos caurinus"] <- "Corvus brachyrhynchos"
@@ -1692,9 +1685,9 @@ print(length(union(int.raw$species1_scientific, int.raw$species2_scientific)))
 
 
 print("unique types of interactions")
-print(length(unique(int.raw$interaction))) #36
+print(length(unique(int.raw$interaction))) #36 (37 with manual fixes)
 
-print("unique pairwise interactions") #19417
+print("unique pairwise interactions") #19417 (non-manual fixes); 19403 with manual fixes
 
 # if you want to ignore the order of species, we will need to create pairs and sort them
 # some sample code saved here to consider: 
