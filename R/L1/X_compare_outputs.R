@@ -49,3 +49,40 @@ d1 %>% arrange(species1_common) -> o1
 d2 %>% arrange(species1_common) -> o2
 
 diffdf(o1, o2)
+
+
+
+d1 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L1/AvianInteractionData_L1_20251215_plz.csv"))
+d2 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L1/AvianInteractionData_L1_20251215_kek.csv"))
+
+diffdf::diffdf(d1, d2)
+dplyr::all_equal(d1, d2, ignore_row_order=TRUE)
+
+
+d1 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L1/AvianInteractionData_CanadaAKCONUS_L1_20251215_plz.csv"))
+d2 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L1/AvianInteractionData_CanadaAKCONUS_L1_20251215_kek.csv"))
+
+diffdf::diffdf(d1, d2)
+dplyr::all_equal(d1, d2, ignore_row_order=TRUE)
+
+
+
+
+
+
+
+
+t <- read.csv("./R/L1/manual_taxonomic_resolutions_L1_2025-10.csv")
+
+t$scientific_name.raw %in% d2$species1_scientific
+t$scientific_name.raw %in% d2$species2_scientific
+
+temp <- t[which(t$scientific_name.raw %in% d2$species2_scientific),]
+
+
+
+t$scientific_name.edit %in% d2$species1_scientific
+t$scientific_name.edit %in% d2$species2_scientific
+
+
+
