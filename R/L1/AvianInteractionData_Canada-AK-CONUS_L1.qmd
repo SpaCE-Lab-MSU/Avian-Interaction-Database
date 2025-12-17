@@ -208,6 +208,7 @@ unique_counts_multi <- purrr::map_dfr(
         select(Column, Value, Count)
     )
 # Nicer format
+library(knitr)
     kable(unique_counts_multi,
           caption = "Breeding and Non-breeding Data: Summaries",
           col.names = c("Column", "Value", "Count"),
