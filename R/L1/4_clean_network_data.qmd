@@ -883,7 +883,7 @@ int.raw.names.matches <- int.raw.names
 int.raw.names.matches[high_confidence_matches$row_number,]$scientific_name.edit<- high_confidence_matches$closest_scientific_name_match
 int.raw.names.matches[high_confidence_matches$row_number,]$edit_notes <- paste( edit_note, round(high_confidence_matches$scientific_name_match_score,3))
 
-# to review these assignments, run View(int.raw.names.matches) which includes all reslutions
+# to review these assignments, run View(int.raw.names.matches) which includes all resolutions
 ```
 
 Remaining species to resolve after high-confidence scientific name match:
@@ -1461,7 +1461,7 @@ all of the name resolutions include those
 
 **TO-DO**
 
-1. complete the entries in this file - PLZ completed 10/5/2025
+1. complete the entries in this file - PLZ completed 10/5/2025; LM confirmed 12/11/2025
 3. read in the file and verify all rows are ok, filter out unfinished rows
 4. apply the edits in the file regardless if there is already a note since 
    these may override the automatic resolutions
@@ -1565,40 +1565,6 @@ review data frame to make decisions
 ```
 
 
-
-
-
-
-```{r}
-# # ... FINISH THIS LATER FOR OTHER non-BBS species
-# 
-# # For now, focus on BBS splist because need to get these data cleaned and
-# # aligned for merging with bbs.obs for network modeling. Return to the cleaning
-# # below after this is completed...
-# 
-# #******** BBS WORK **********# 
-# # Merge scientific_name in splist with scientific_name in int.checklist
-# # to check current common_name list and identify gaps and updates to
-# # scientific_name. This will update most of the BBS species, but not necessarily the ones
-# # outside of BBS. "scientific_name" = the names agreed upon by CHECKLIST and by
-# # the GBIF-screened species. common_name = the CHECKLIST common_name.
-# int.checklist <- subset(
-#   int.checklist,
-#   select = c("scientific_name", "common_name", "scientific_name.raw","scientific_name.edit")
-# )
-# dim(int.checklist)
-# # 4576; 29 May 2025: 4551
-# int.checklist <- int.checklist %>% 
-#   distinct()
-# dim(int.checklist)
-# # 3915 OK; May 29, 2025: 3891
-# length(unique(int.checklist$scientific_name.raw))
-# # 3913 OK; May 29, 2025: 3889
-
-```
-
-
-
 ### Subspecies
 
 check if there are any subspecies remaining that have interactions
@@ -1653,7 +1619,7 @@ for(r in 1:nrow(int.raw.names)){
 ```
 
 Update the scientific names in the interactions data with our table as much 
-as possible
+as possible: 
 
 ```{r}
 # make a copy of the database data frame so we can re-run if necessary
@@ -1699,17 +1665,15 @@ print(length(updated_rows))
 
 Review the updated database using `View(int.raw.resolved)`  The original is still in `int.raw`
 
-11/6/2025: STILL NOT CHANGING Northwestern Crow to American Crow!!! I cannot figure this out. Hard-coding here.
+Some manual updates for Northwestern Crow (common name doesn't exist anymore but the data still contain the subspecies; re-assign to American Crow)
 ```{r}
-int.raw.resolved
 
-int.raw.resolved$species1_scientific[int.raw.resolved$species1_common == "Northwestern Crow"] <- "Corvus brachyrhynchos"
-int.raw.resolved$species1_common[int.raw.resolved$species1_common == "Northwestern Crow"] <- "American Crow"
-int.raw.resolved$species2_scientific[int.raw.resolved$species2_common == "Northwestern Crow"] <- "Corvus brachyrhynchos"
-int.raw.resolved$species2_common[int.raw.resolved$species2_common == "Northwestern Crow"] <- "American Crow"
 int.raw.resolved$species1_scientific[int.raw.resolved$species1_scientific == "Corvus brachyrhynchos caurinus"] <- "Corvus brachyrhynchos"
+
 int.raw.resolved$species1_common[int.raw.resolved$species1_scientific == "Corvus brachyrhynchos"] <- "American Crow"
+
 int.raw.resolved$species2_scientific[int.raw.resolved$species2_scientific == "Corvus brachyrhynchos caurinus"] <- "Corvus brachyrhynchos"
+
 int.raw.resolved$species2_common[int.raw.resolved$species2_scientific == "Corvus brachyrhynchos"] <- "American Crow"
 ```
 
@@ -1728,9 +1692,9 @@ print(length(union(int.raw$species1_scientific, int.raw$species2_scientific)))
 
 
 print("unique types of interactions")
-print(length(unique(int.raw$interaction))) #36
+print(length(unique(int.raw$interaction))) #36 (37 with manual fixes)
 
-print("unique pairwise interactions") #19417
+print("unique pairwise interactions") #19417 (non-manual fixes); 19403 with manual fixes
 
 # if you want to ignore the order of species, we will need to create pairs and sort them
 # some sample code saved here to consider: 

@@ -22,7 +22,7 @@ date-format: iso
 -   DATA INPUT: Data entry CSV files in L0 folder
 -   DATA OUTPUT: L0 data: AvianInteractionData_L0.csv
 -   DATE: 20 Mar 2023 - AUGUST 2025
--   Next script to run: ....
+-   Next script to run: R/L1/3_subset_species_lists.R
 
 **Run Date** 
 
@@ -84,7 +84,7 @@ csv_file_group_name='checked'
 csv_file_path = file.path(file_paths$L0, "species")
 # filter or add in google drive files here
 checked_file_list <- list.files(path = csv_file_path , pattern = ".*\\.csv", 
-  full.names = TRUE)
+  full.names = TRUE) %>% sort()
 
 paste(csv_file_path, ":", csv_file_group_name, "files to process", length(checked_file_list))
 ```

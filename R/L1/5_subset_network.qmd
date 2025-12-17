@@ -76,7 +76,7 @@ today_date_string <- format(Sys.Date(),"%Y-%m-%d")
 
 ### NOTES
 
-This script is used to subset out only the species that occur in CONUS+Alaska+Canada.  
+This script is used to subset out only the species that occur in CONUS+Alaska+Canada plus some minor cleaning for the North American subset publication.  
 
 
 ## Data Set-up
@@ -137,26 +137,27 @@ Use scientific_name_clements2024 as the match for names.
 ```{r}
 length(unique(splist$scientific_name_clements2024)) #777
 dim(splist) #785
-dim(intxns.db) #31040
+dim(intxns.db)  #31040 (30776 in manual fix version)
 # Some duplicate rows; these are just the unids. so we can ignore them
 duplicate_indices <- duplicated(splist$scientific_name_clements2024)
 duplicate_clements <- splist[duplicate_indices, ]
 duplicate_clements
 
 intxns.db.subset <- intxns.db[intxns.db$species1_scientific %in% splist$scientific_name_clements2024 | intxns.db$species2_scientific %in% splist$scientific_name_clements2024,]
-dim(intxns.db.subset) #26200
+dim(intxns.db.subset)  #26200 (25958 in manual fix version)
 
 intxns.db.non.subset <- intxns.db[!(intxns.db$species1_scientific %in% splist$scientific_name_clements2024 | intxns.db$species2_scientific %in% splist$scientific_name_clements2024),]
-dim(intxns.db.non.subset)
+dim(intxns.db.non.subset) #4818 in manual fix version
 # Check that these equate to dim(intxns.db)
 dim(intxns.db.non.subset)+dim(intxns.db.subset)
-dim(intxns.db)
+dim(intxns.db)  #30776 in manual fix version
 
 usp1<-(unique(intxns.db.subset$species1_scientific))
 usp2<-(unique(intxns.db.subset$species2_scientific))
 usp1.2<-append(usp1,usp2)
 length(unique(usp1.2)) #2137 unique species in the interaction data
 
+# 2122 in manual fix version
 # Create a simplified Clements/eBird BBS AOU combo splist:
 splist<-splist %>%
       select(scientific_name_clements2024.combo, common_name_clements2024.combo,
@@ -187,6 +188,28 @@ intxns.db.subset <- intxns.db.subset %>%
 
 ```
 
+
+
+Assign all competition- to competition for this version (only a few of these exist; they will be kept specific in v2 of the data)
+
+```{r}
+
+sort(unique(intxns.db.subset$interaction))
+
+# List of characters to re-assign
+
+old3 <- c("competition-foraging","competition-nest site","competition-territory")
+
+new3 <- "competition"
+
+# Re-assign values 
+
+intxns.db.subset$interaction <- ifelse(intxns.db.subset$interaction %in% old3, new3, intxns.db.subset$interaction)
+
+sort(unique(intxns.db.subset$interaction))
+
+```
+
 Create summary information in a table
 ```{r}
 unique_counts_multi <- purrr::map_dfr(
@@ -210,8 +233,8 @@ Version with only breeding season interactions:
 # Subset rows where 'season' is "breeding"
 intxns.db.subset.breeding <- intxns.db.subset %>%
   filter(season == "breeding")
-dim(intxns.db.subset.breeding) #23164
-dim(intxns.db.subset) #26200
+dim(intxns.db.subset.breeding) #23164 (22969 in fixed manual version)
+dim(intxns.db.subset) #26200 (25958 in fixed manual version)
 
 # Summary table
 unique_counts_multi.b <- purrr::map_dfr(
