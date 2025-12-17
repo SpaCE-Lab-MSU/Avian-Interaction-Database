@@ -52,15 +52,15 @@ diffdf(o1, o2)
 
 
 
-d1 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L1/AvianInteractionData_L1_20251215_plz.csv"))
-d2 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L1/AvianInteractionData_L1_20251215_kek.csv"))
+d1 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L1/AvianInteractionData_L1_20251216_plz.csv"))
+d2 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L1/AvianInteractionData_L1_20251216_kek.csv"))
 
 diffdf::diffdf(d1, d2)
 dplyr::all_equal(d1, d2, ignore_row_order=TRUE)
 
 
-d1 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L1/AvianInteractionData_CanadaAKCONUS_L1_20251215_plz.csv"))
-d2 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L1/AvianInteractionData_CanadaAKCONUS_L1_20251215_kek.csv"))
+d1 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L1/AvianInteractionData_CanadaAKCONUS_breeding_L1_20251216_plz.csv"))
+d2 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L1/AvianInteractionData_CanadaAKCONUS_breeding_L1_20251216_kek.csv"))
 
 diffdf::diffdf(d1, d2)
 dplyr::all_equal(d1, d2, ignore_row_order=TRUE)
