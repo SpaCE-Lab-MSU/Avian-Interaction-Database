@@ -47,7 +47,7 @@ The code here saves the file in the Data folder in L0 in the configuration of `f
 *First set the file to save*
 
 ```{r}
-stitched_L0_file <- "AvianInteractionData_L0_stitch_20251213_kek.csv" 
+stitched_L0_file <- "AvianInteractionData_L0_stitch_20251217_kek.csv" 
 ```
 
 

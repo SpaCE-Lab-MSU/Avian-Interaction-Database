@@ -25,9 +25,9 @@ diffs <- diffdf(d1, d2)
 
 
 # d1 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L0/AvianInteractionData_L0_stitch_20251211_kek.csv"))
-d2 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L0/AvianInteractionData_L0_stitch_20251212_jbb.csv"))
+d2 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L0/AvianInteractionData_L0_stitch_20251216_plz.csv"))
 # d1 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L0/AvianInteractionData_L0_stitch_LM.csv"))
-d1 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L0/AvianInteractionData_L0_stitch_11Dec2025_plz.csv"))
+d1 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L0/AvianInteractionData_L0_stitch_20251217_kek.csv"))
 # d2 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L0/AvianInteractionData_L0_stitch_06oct25.csv"))
 
 start <- proc.time()
@@ -53,7 +53,7 @@ diffdf(o1, o2)
 
 
 d1 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L1/AvianInteractionData_L1_20251216_plz.csv"))
-d2 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L1/AvianInteractionData_L1_20251216_kek.csv"))
+d2 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L1/AvianInteractionData_L1_20251217_kek.csv"))
 
 diffdf::diffdf(d1, d2)
 dplyr::all_equal(d1, d2, ignore_row_order=TRUE)
