@@ -971,9 +971,9 @@ skip this because the histogram above shows this information.
 
 ```{r}
 
-today_date_string <- format(Sys.Date(),"%Y-%m-%d")
-rdata_file_name <- paste0("AvianInteractionData_L1_workspace", today_date_string, ".RData")
-save.image(file.path(file_paths$L1,rdata_file_name ))
+# today_date_string <- format(Sys.Date(),"%Y-%m-%d")
+# rdata_file_name <- paste0("AvianInteractionData_L1_workspace", today_date_string, ".RData")
+# save.image(file.path(file_paths$L1,rdata_file_name ))
 ```
 
 
@@ -1417,12 +1417,12 @@ print( nrow( filter(int.raw.names, is.na(edit_notes))))
 #| echo: false
 #| output: true
 
-today_date_string <- format(Sys.Date(),"%Y-%m-%d")
-rdata_file_name <- paste0("AvianInteractionData_L1_workspace", today_date_string, ".RData")
-f <- file.path(file_paths$L1,rdata_file_name )
-save.image(f)
-
-print(paste("whole enviroment saved as ", f))
+# today_date_string <- format(Sys.Date(),"%Y-%m-%d")
+# rdata_file_name <- paste0("AvianInteractionData_L1_workspace", today_date_string, ".RData")
+# f <- file.path(file_paths$L1,rdata_file_name )
+# save.image(f)
+# 
+# print(paste("whole enviroment saved as ", f))
 
 ```
 
