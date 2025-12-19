@@ -5,21 +5,23 @@
 
   - Only use GitHub or Google Sheets for data entry and editing of files. *Do not use Microsoft Excel* for data entry or any editing of files; it has text encoding that differs from GitHub and Google Sheets.
 
-## OVERVIEW: Data entry & checking on bird-bird interactions occurs within this L0 portion of the repository. The repository L0 folder contains the following files:
+## OVERVIEW: Data entry & checking on bird-bird interactions occurs within this L0 portion of the [Avian-Interaction-Data-Working](https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database-Working). The Working repository L0 folder contains the following files:
 
-### [**AvianInteractionData_L0.csv**](AvianInteractionData_L0.csv) 
-= Entry of all records stitched together with [../R/2_stitch_species.R](https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database/blob/a059edeba78e888432fa36b74948d3a8ac4aa192/R/AvianInteractionData_L0_stitch.R). Each record in this csv file is a unique interaction between 2 species. Note that 2 species can interact in more than one way (equating to multiple rows), and there may be duplicate entries of interactions, each from different species accounts.
+### [**ain_all_raw.csv**] = Entry of all records stitched together with [/R/2_stitch_species.qmd](https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database/blob/main/R/L0/2_stitch_species.qmd). Each record in this csv file is a unique interaction between 2 species. Note that 2 species can interact in more than one way (equating to multiple rows), and there may be duplicate entries of interactions, each from different species accounts.
 
-### [**AvianInteractionData_metadata.csv**](AvianInteractionData_metadata.csv) 
-= Metadata for columns in **AvianInteractionData_L0.csv**.
+### [**ain_metadata_colnames_v0.csv**](ain_metadata_v0.csv) 
+= Metadata for columns in original version of interaction data sheet. 
 
-### [**AvianInteractionData_SpeciesList.csv**](AvianInteractionData_SpeciesList.csv) 
-= Species look-up table and assignments for data entry, periodically copied from the Google Drive sheet **AvianInteractionData_SpeciesList** which contains the live updates and assignments of species entry progress.
+### [**ain_metadata_colnames_v1.csv**](ain_metadata_v1.csv) 
+= Metadata for columns in modified version of interaction data sheet. 
 
-### [**AvianInteractionData_metadata_interactiondefinitions.csv**](AvianInteractionData_metadata_interactiondefinitions.csv)
+### [**AvianInteractionData_SpeciesList**](https://docs.google.com/spreadsheets/d/1gT4ljF1yH1_WweINnAW4JfQ1Ytr6OFoXUu24a__qCqM/edit?usp=sharing) 
+= Species look-up table and assignments for data entry. Contains the live updates and assignments of species entry progress.(Note: This is a Google Sheet only accessible to those involved directly in the project.)
+
+### [**aux_interaction_defs.csv**](aux_interaction_defs.csv)
 = Metadata for interaction types.
 
-### [**AvianInteractionData_metadata_uncertain.csv**](AvianInteractionData_metadata_uncertain.csv)
+### [**aux_metadata_uncertain**](/aux_metadata_uncertain.csv)
 = Metadata for uncertain interaction keywords.
 
 
@@ -62,7 +64,7 @@ b) Go to **Birds of the World Online** (BOW, via the MSU Library electronic reso
 
 - In general, the best approach to entering the species' data is to open the BOW species account and just skim through it page by page (section by section, in order) for **capitalized species names (often Common Names)** and ***italicized species names (often Genus species)***; this should catch nearly all the entries and will add new ones we missed before. You may see other plain text terms like "passerines" or "corvids" and these refer to entire groups of species in an interaction - these are still important to record and should not be skipped.
 
-c) Enter interactions for the species you selected by designating the selected species in "species1_scientific" and "species1_common" in your file, and the species it interacts with in "species2_scientific" and "species2_common", based on evidence from Birds of the World Online. Refer to [**`AvianInteractionData_metadata.csv`**](AvianInteractionData_metadata.csv) for rules about how to enter each column, and the information below:
+c) Enter interactions for the species you selected by designating the selected species in "species1_scientific" and "species1_common" in your file, and the species it interacts with in "species2_scientific" and "species2_common", based on evidence from Birds of the World Online. Refer to [**`ain_metadata_colnames_v1.csv`**](ain_metadata_colnames_v1.csv) for rules about how to enter each column, and the information below:
 
 **Citations, Source URLs & Text Excerpts**
 - Add the BOW citation to the "citation" column. For BOW, this is found at the bottom of each BOW page (simply copy-paste it); it's the same citation for the entire account). For other non-BOW sources (see below for Web of Science / Google Scholar), use the MLA style citation.
@@ -209,7 +211,7 @@ You may drag the CSV file, or click the "choose your files" option to select it.
 
 ## Step 8: Notify us that file is ready by creating a GitHub issue
 
-*(Note: we are no longer using pull requests since we are using seperate species files for this process)*
+*(Note: we are no longer using pull requests since we are using separate species files for this process)*
 
 Open a new "issue" (which is like a task) and indicate that the file is waiting for review.  For more information on issues, see https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue
 

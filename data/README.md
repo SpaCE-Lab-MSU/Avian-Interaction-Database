@@ -11,7 +11,7 @@ DePasquale, G., I. Hirschowitz, C. Roche, E.G. Parker, P. Bills, P.L. Zarnetske.
 
 ## Location of data
 
-These data are stored in this repository, accessible by collaborators. Once published, the North American Avian Interaction Database will be made open access.
+To ensure that only the clean and quality controlled data are accessed, only the code and the species lists are stored in this repository. Once published, the North American Avian Interaction Database will be made open access.
 
 ## Workflow
 
@@ -21,19 +21,16 @@ The workflow for this repository follows the guidelines set out by the [Environm
 
 Order & description of scripts:
 
-### For BBS analysis in North America: 
-/R/bbs_specieslist_L0.R = reads in current BBS species list and adds any species that was split
-/R/bbs_specieslist_L1.R = cleans the BBS species list, e.g., combining subspecies into species 
-
 ### For entire database: 
-1. /R/AvianInteractionData_L0_stitch.R = stitches together all individual csvs in /L0/species and optionally /L0/species_in_review
-2. /R/AvianInteractionData_L1.R = fixes species names, interaction codes, checks species name discrepencies based on current and past BOW names.  
+* R/L0/1_generate_species_lists.R = Generates species lists used for taxonomic harmonization and regional subsetting
+* R/L0/2_stitch_species.qmd = stitches together all individual csvs in /L0/species
+* R/L1/3_subset_species_lists.R = generates regional taxonomic crosswalk species checklist for Canada, Alaska, and the Coninental United States (CONUS)
+* R/L1/4_clean_network_data.qmd = fixes species names, interaction codes, checks species name discrepencies based on current and past Clements names.  
+* R/L1/5_subset_network.qmd = subsets interaction network to only include focal species in the subset species list generated in script 3. 
 
 ## Description of subdirectories 
 
-- **L0**: L0 (raw) data files = CSV files containing entries in the database from 2012-present; data entry procedure follows [/L0/AvianInteractionData_ENTRY_INSTRUCTIONS.md](L0/AvianInteractionData_ENTRY_INSTRUCTIONS.md)
-- **L1**: L1 data; cleaned & edited L0 data. 
-- **L2**: Derived data from L1 data (e.g., pulling in & checking data from other sources including: Hurlbert Bird Diet Database for North America: https://www.nature.com/articles/s41597-021-01049-9 & https://github.com/hurlbertlab/dietdatabase)).
+- **data**: Directory containing instructions for interaction data entry, metadata, and species checklists (raw in L0, synthesized in L1). Note that species interaction data files are not directly available in this repository, but will be available for dowload from the Environmental Data Initiative upon publication. 
 - **R**: Code to create L0 and L1 data.
 
 ### docs
@@ -49,6 +46,7 @@ Funding is provided by Michigan State University (to P.L. Zarnetske), and by a M
 ## Collaborators
 * Emily Parker
 * Pat Bills
+* Kelly Kapsar
 * Sara Zonneveld
 
 ## Student Research Assistants
