@@ -1,0 +1,26 @@
+Variable,Definition
+species1_scientific,genus species subspecies (if present) for species1
+species2_scientific,genus species subspecies (if present) for species2
+species1_common,optional for entry: common name of species1 according to BOW; we will also fill in via R
+species2_common,optional for entry: common name of species2 according to BOW; we will also fill in via R
+effect_sp1_on_sp2,"the effect of species1 on species2: 1, -1 or 0"
+effect_sp2_on_sp1,"the effect of species2 on species1: 1, -1 or 0"
+interaction,"see AvianInteractionData_metadata_interactiondefinitions.csv for type of interaction: competition, predation, commensalism (where one species benefits and the other receives no effect), kleptoparasitism (e.g., steeling food or nest material), brood parasitism (where one species places its egg in another species' nest), other parasitism, nest takeover (where one species takes over the nest of another species), facilitation (e.g., where both species benefit, e.g., mixed flock), facilitation-comigration (where species migrate together), communal nesting (nesting together, usually during nonbreeding season), mobbing. Note that ""mobbing"" is usually indicative of predation, where the smaller bird mobs the bigger bird. If you come across ""mobbing"" the species doing the mobbing (usually potential prey) gets a 1 and the species receiving the mobbing gets a -1 (the potential predator). This is because mobbing is almost always deterring a predator, so the predator loses out. "
+BOW_evidence,"""weak"" or ""strong"" evidence of the interaction, gauged by qualitative description or quantitative "
+n_studies,"how many studies/personal communications/initials are cited for the interaction"
+sourceA_URL,"the BOW URL of the sourceA (copy-paste BOW URL for the specific page referring to this interaction (e.g., ""https://birdsoftheworld-org.proxy1.cl.msu.edu/bow/species/norgos/cur/introduction"")"
+sourceB_URL,"the BOW URL of the sourceB (copy-paste BOW URL for the specific page referring to this interaction (e.g., ""https://birdsoftheworld-org.proxy1.cl.msu.edu/bow/species/norgos/cur/introduction"")"
+sourceC_URL,"the BOW URL of the sourceC (copy-paste BOW URL for the specific page referring to this interaction (e.g., ""https://birdsoftheworld-org.proxy1.cl.msu.edu/bow/species/norgos/cur/introduction"")"
+sourceD_URL,"the BOW URL of the sourceD (copy-paste BOW URL for the specific page referring to this interaction (e.g., ""https://birdsoftheworld-org.proxy1.cl.msu.edu/bow/species/norgos/cur/introduction"")"
+notesA,"note column: copy-paste from BOW for sourceA including section headings with ':'. If there are multiple sections of text from the same page associated with sourceAupdatedURL, then include the section heading (e.g., ""Nonpredatory interactions"" ) followed by "":"" and separate the multiple sections of text with ""..."""
+notesB,"note column: copy-paste from BOW for sourceB including section headings with ':'. If there are multiple sections of text from the same page associated with sourceAupdatedURL, then include the section heading (e.g., ""Nonpredatory interactions"" ) followed by "":"" and separate the multiple sections of text with ""..."""
+notesC,"note-column: copy-paste from BOW for sourceC including section headings with ':'. If there are multiple sections of text from the same page associated with sourceAupdatedURL, then include the section heading (e.g., ""Nonpredatory interactions"" ) followed by "":"" and separate the multiple sections of text with ""..."""
+notesD,"note column: copy-paste from BOW for UsourceD including section headings with ':'. If there are multiple sections of text from the same page associated with sourceAupdatedURL, then include the section heading (e.g., ""Nonpredatory interactions"" ) followed by "":"" and separate the multiple sections of text with ""..."""
+nonbreedingseason,PLEASE ENTER 'yes' if the interaction occurs during the non-breeding (winter) season; if unsure add a description
+recorder,"the name of the person entering the data; when checking, add ""/"" between your names (e.g. Emily Parker/PLZ)"
+entry_date,"the date the recorder entered the record; if you are adding to an existing record, add "";"" between dates (e.g., 3/3/2014; 2/2/2022)"
+uncertain_interaction,use uncertain interaction keyword that best describes interaction (see AvianInteractionData_metadata_uncertain.csv); can add additional information to note that provides additional context
+entry_changes,"For checking/updating: IF the original entry was changed indicate who changed the original entry, what was changed, and the date. for example: ""PLZ changed interaction from competition to predation on 4/3/2022""."
+name_changes, for differences between scientific/common name of species in article and BOW; list name used in article and current name in BOW
+other_species1,"for multi-species interactions, enter yes when species1 is not the same as the species listed in the file name"
+DatabaseSearchURL, "the URL for the Web of Science or Scopus or Google Scholar Search results"

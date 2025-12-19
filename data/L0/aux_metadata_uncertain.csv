@@ -1,0 +1,7 @@
+uncertain_interaction_keyword,keep?,examples
+likely,yes,"""probable"""
+unlikely,no,"""not observed"", ""dubious"""
+uncertain species,no,"name changes, species splits"
+potential,no,"""possible"", ""potential"", ""maybe"""
+artificial,no,"""in captivity"", ""artificial"", experiments, ""domesticated"""
+uncertain subspecies,no,
