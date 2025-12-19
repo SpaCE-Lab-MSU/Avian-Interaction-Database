@@ -72,8 +72,8 @@ dplyr::all_equal(d1, d2, ignore_row_order=TRUE)
 
 
 
-d1 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L1/AvianInteractionData_CanadaAKCONUS_breeding_L1_20251216_plz.csv"))
-d2 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L1/AvianInteractionData_CanadaAKCONUS_breeding_L1_20251216_kek.csv"))
+d1 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L1/old_workflow_output/AvianInteractionData_CanadaAKCONUS_breeding_L1_20251216_plz.csv"))
+d2 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L1/ain_cac_breeding.csv"))
 
 diffdf::diffdf(d1, d2)
 dplyr::all_equal(d1, d2, ignore_row_order=TRUE)
@@ -96,5 +96,12 @@ temp <- t[which(t$scientific_name.raw %in% d2$species2_scientific),]
 
 t$scientific_name.edit %in% d2$species1_scientific
 t$scientific_name.edit %in% d2$species2_scientific
+
+
+d1 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L0/old_workflow_output/AvianInteractionData_L0_stitch_20251216_plz.csv"))
+d2 <- read.csv(paste0(file_paths$DATA_FOLDER, "/L0/ain_all_raw.csv"))
+
+diffdf::diffdf(d1, d2)
+dplyr::all_equal(d1, d2, ignore_row_order=TRUE)
 
 
