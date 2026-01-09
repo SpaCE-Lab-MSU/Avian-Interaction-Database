@@ -32,7 +32,10 @@ num_unique_intxns <- df %>%
 
 num_focal_spp <- length(unique(df$species1_scientific))
 
-num_total_spp <- length(unique(c(df$species1_scientific, df$species2_scientific)))
+unique_spp_list <- unique(c(df$species1_scientific, df$species2_scientific))
+num_total_spp <- length(unique_spp_list)
+
+num_new_spp2 <- length(setdiff(unique_spp_list, df$species1_scientific))
 
 ```
 
@@ -40,6 +43,7 @@ num_total_spp <- length(unique(c(df$species1_scientific, df$species2_scientific)
 Number of documented pairwise interactions: `r num_intxns`
 Number of unique pairwise interactions: `r num_unique_intxns`
 Number of focal species: `r num_focal_spp`
+Number of additional non-focal spp: `r num_new_spp2`
 Number of species (total): `r num_total_spp`
 Percent of world's bird spp (out of 11,1145 spp): `r round(num_total_spp/11145*100, 2)`
 Total number of migratory species: [Not sure how to calculate this]
