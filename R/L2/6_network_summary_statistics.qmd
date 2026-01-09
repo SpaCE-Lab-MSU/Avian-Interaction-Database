@@ -53,5 +53,10 @@ num_new_spp2 <- length(setdiff(unique_spp_list, df$species1_scientific))
 
 ```{r}
 
-unique_intxns %>% group_by(interaction) %>% summarize(n=n())
+unique_intxns %>% group_by(interaction) %>% summarize(n=n()) %>% arrange(-n)
+```
+
+
+
+
 
