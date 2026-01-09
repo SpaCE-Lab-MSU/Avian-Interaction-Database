@@ -1,0 +1,46 @@
+---
+title: "Summary Statistics for Avian Interaction Network: Canada/AK/CONUS Subset"
+author: 
+  - Kelly Kapsar
+  - Phoebe L. Zarnetske
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    embed-resources: true
+editor: source
+date: 9 January 2026
+date-format: iso
+---
+
+```{r}
+
+library(dplyr)
+
+df <- read.csv(here::here("../Avian-Interaction-Database-Working/L1/ain_cac.csv"))
+
+num_intxns <- nrow(df)
+
+num_unique_intxns <- df %>% 
+  dplyr::select(species1_scientific, 
+                species2_scientific, 
+                effect_sp1_on_sp2, 
+                effect_sp2_on_sp1, 
+                interaction) %>% 
+  filter(!duplicated(.)) %>% 
+  nrow(.)
+
+num_focal_spp <- length(unique(df$species1_scientific))
+
+num_total_spp <- length(unique(c(df$species1_scientific, df$species2_scientific)))
+
+```
+
+
+Number of documented pairwise interactions: `r num_intxns`
+Number of unique pairwise interactions: `r num_unique_intxns`
+Number of focal species: `r num_focal_spp`
+Number of species (total): `r num_total_spp`
+Percent of world's bird spp (out of 11,1145 spp): `r round(num_total_spp/11145*100, 2)`
+Total number of migratory species: [Not sure how to calculate this]
+Total number of interaction types: `r length(unique(df$interaction))`
