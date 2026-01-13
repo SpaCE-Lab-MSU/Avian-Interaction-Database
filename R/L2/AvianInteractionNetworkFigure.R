@@ -93,12 +93,14 @@ create_network <- function(data,
   if (curve_edges) {
     network_plot <- network_plot +
       geom_edge_fan(aes(color = interaction),
-                    strength = 0.75) +
+                    strength = 0.75,
+                    width = 0.75) +
       scale_edge_color_manual(values = setNames(interaction_categories$color,
                                                 interaction_categories$interaction))
   } else {
     network_plot <- network_plot +
-      geom_edge_link(aes(color = interaction)) +
+      geom_edge_link(aes(color = interaction),
+                     width = 0.75) +
       scale_edge_color_manual(values = setNames(interaction_categories$color,
                                                 interaction_categories$interaction))
   }
@@ -107,17 +109,22 @@ create_network <- function(data,
   network_plot <- network_plot +
     # Focal species as star
     geom_node_point(data = function(x) x[x$is_focal, ],
-                    shape = 8,
-                    size = 2,
-                    stroke = 1.5) +
+                    shape = 18,
+                    size = 6,  #STAR SIZE
+                    stroke = 1.5,
+                    color = "red") +
     # Other species as circles
     geom_node_point(data = function(x) x[!x$is_focal, ],
-                    size = 2) +
+                    size = 3) +  #NODE SIZE
     theme_void() +
     labs(edge_color = "Interaction Type",
          title = plot_title) +
     theme(legend.position = "right",
-          plot.title = element_text(size = 14, face = "bold", hjust = 0.5)) +
+          legend.text = element_text(size = 15),#LEGEND TEXT SIZE
+          legend.title = element_text(size = 16), #LEGEND TITLE SIZE
+          plot.title = element_text(size = 18,  #TITLE FONT SIZE
+                                    face = "bold",
+                                    hjust = 0.5)) +
     guides(edge_color = guide_legend(ncol = 1))
 
   # Add labels with enhanced focal species styling
@@ -127,14 +134,14 @@ create_network <- function(data,
       geom_node_text(data = function(x) x[x$is_focal, ],
                      aes(label = name),
                      repel = TRUE,
-                     size = 4,  # Larger size
+                     size = 5,  #FOCAL SPECIES LABEL SIZE
                      fontface = "bold",  # Bold text
                      color = "black") +
       # Other species labels - normal
       geom_node_text(data = function(x) x[!x$is_focal, ],
                      aes(label = name),
                      repel = TRUE,
-                     size = 3)
+                     size = 4) #OTHER SPECIES LABEL SIZE
   }
 
   # Create bird image
@@ -142,22 +149,22 @@ create_network <- function(data,
     draw_image(bird_info$url, x = 0, y = 0.2, width = 1, height = 0.8) +
     draw_label(
       bird_info$common_name,
-      x = 0.5, y = 0.25,
-      size = 16,
+      x = 0.5, y = 0.26,
+      size = 22, #COMMON NAME SIZE
       fontface = "bold",
       hjust = 0.5
     ) +
     draw_label(
       bird_info$scientific_name,
       x = 0.5, y = 0.22,
-      size = 14,
+      size = 20, #SCI NAME SIZE
       fontface = "italic",
       hjust = 0.5
     ) +
     draw_label(
       paste0("Photo: ", bird_info$photographer, " | ", toupper(bird_info$license)),
       x = 0.5, y = 0.18,
-      size = 10,
+      size = 18, #CITATION SIZE
       hjust = 0.5
     )
 
@@ -180,7 +187,7 @@ create_network <- function(data,
 # Test plotting
 # -----------------------------------------------
 
-oaktit <- create_network(inter_NA_only_int, "Baeolophus inornatus", curve_edges = T)
+oaktit <- create_network(inter_NA_only_int, "Baeolophus inornatus", curve_edges = T, show_labels = F)
 oaktit
 
 juntit <- create_network(inter_NA_only_int, "Baeolophus ridgwayi", curve_edges = T)

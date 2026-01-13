@@ -264,7 +264,8 @@ plot_phylo_combined <- function(tree,
                                 tip_size = 2,
                                 family_palette = NULL,
                                 title = "",
-                                min_species_for_label = 5) {
+                                min_species_for_label = 5,
+                                legend_title = "") {
 
   #name species column as "label" to match tips
   plot_data <- data %>%
@@ -326,7 +327,7 @@ plot_phylo_combined <- function(tree,
       colors = branch_colors,
       breaks = breaks,
       labels = breaks,
-      name = value_col
+      name = legend_title
     ) +
     #This allows us to add a new color scale for the tips
     ggnewscale::new_scale_color() +
@@ -334,8 +335,11 @@ plot_phylo_combined <- function(tree,
     geom_tippoint(aes(color = .data[[family_col]]), size = tip_size) +
     scale_color_manual(values = family_colors, na.value = "grey50", name = "Family", guide = "none") +
     ggtitle(title) +
-    theme(legend.position = c(0.6, 0.25),
-          legend.justification = c(1, 0))
+    theme(legend.position = c(0.705, 0.24),
+          legend.justification = c(1, 0),
+          legend.title = element_text(size = 14),      #LEGEND TITLE SIZE
+          legend.text = element_text(size = 13),       #LEGEND TEXT SIZE
+          plot.title = element_text(size = 18))        #PLOT TITLE SIZE
 
   #Add horizontal family labels with connecting lines
   if (layout == "circular") {
@@ -351,7 +355,7 @@ plot_phylo_combined <- function(tree,
       geom_segment(
         data = tree_data,
         aes(x = x, y = y, xend = x, yend = y),
-        size = 0.3,
+        size = 0.3,   #LABEL TEXT SIZE
         color = "gray40",
         lineend = "round"
       ) +
@@ -392,15 +396,16 @@ plot_phylo_combined(
   family_col = "family",
   value_col = "n_int",
   layout = "circular",
-  branch_colors = c("gold", "orange", "red", "darkred"),
+  branch_colors = c("gray80", "gray1"),
   breaks = c(min(inter_NA_working$n_int, na.rm = TRUE),
              5, 25, 100,
              max(inter_NA_working$n_int, na.rm = TRUE)),
   label_offset = 8,
-  label_size = 3.5,
+  label_size = 4.5,
   tip_size = 2,
   min_species_for_label = 25,
-  title = "Phylogenetic tree of # of interactions - North America"
+  title = "",
+  legend_title = "Number of interactions"
 )
 
 # Example usage for NA dataset with n_type coloring
