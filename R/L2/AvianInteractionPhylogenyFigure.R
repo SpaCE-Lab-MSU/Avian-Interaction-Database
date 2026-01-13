@@ -114,10 +114,10 @@ plot_phylo_by_family <- function(tree,
   if (is.null(color_palette)) {
     # Use a colorful palette with enough distinct colors
     if (n_families <= 12) {
-      color_palette <- RColorBrewer::brewer.pal(min(n_families, 12), "Set3")
+      color_palette <- RColorBrewer::brewer.pal(min(n_families, 12), "Greys")
     } else if (n_families <= 24) {
       color_palette <- c(
-        RColorBrewer::brewer.pal(12, "Set3"),
+        RColorBrewer::brewer.pal(12, "Greys"),
         RColorBrewer::brewer.pal(min(n_families - 12, 12), "Paired")
       )
     } else {
@@ -313,7 +313,12 @@ plot_phylo_combined <- function(tree,
       )
     } else {
       #For many families, use a diverse palette
-      family_palette <- rainbow(n_families, s = 0.8, v = 0.85)
+
+      family_palette <- colorRampPalette(c("grey20", "grey95"))(n_families)
+
+      #gray(seq(0, 1, length.out = n_families))
+      #rainbow(n_families, s = 0.8, v = 0.85)
+
     }
   }
 
@@ -389,24 +394,25 @@ plot_phylo_combined <- function(tree,
 }
 
 # Example usage for NA dataset with n_int coloring
-plot_phylo_combined(
+phyloplot <- plot_phylo_combined(
   tree = NA_tree,
   data = inter_NA_working,
   species_col = "species",
   family_col = "family",
   value_col = "n_int",
   layout = "circular",
-  branch_colors = c("gray80", "gray1"),
+  branch_colors = c("#440154FF", "#414487FF", "#2A788EFF", "#22A884FF", "#7AD151FF", "#FDE725FF"),
   breaks = c(min(inter_NA_working$n_int, na.rm = TRUE),
              5, 25, 100,
              max(inter_NA_working$n_int, na.rm = TRUE)),
   label_offset = 8,
   label_size = 4.5,
-  tip_size = 2,
+  tip_size = 1.5,
   min_species_for_label = 25,
   title = "",
   legend_title = "Number of interactions"
 )
+ggsave("phylo_plot.png", phyloplot, width = 16, height = 10, dpi = 600)
 
 # Example usage for NA dataset with n_type coloring
 plot_phylo_combined(

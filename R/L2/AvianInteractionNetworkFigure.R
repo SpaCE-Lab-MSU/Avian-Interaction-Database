@@ -189,6 +189,8 @@ create_network <- function(data,
 
 oaktit <- create_network(inter_NA_only_int, "Baeolophus inornatus", curve_edges = T, show_labels = F)
 oaktit
+ggsave("network_plot.png", oaktit, width = 16, height = 10, dpi = 600)
+
 
 juntit <- create_network(inter_NA_only_int, "Baeolophus ridgwayi", curve_edges = T)
 juntit
