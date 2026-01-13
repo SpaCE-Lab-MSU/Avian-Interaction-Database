@@ -194,20 +194,68 @@ Assign all competition- to competition for this version (only a few of these exi
 
 ```{r}
 
-sort(unique(intxns.db.subset$interaction))
+
+## COMPETITION 
 
 # List of characters to re-assign
-
-old3 <- c("competition-foraging","competition-nest site","competition-territory")
-
-new3 <- "competition"
-
+old_comp <- c("competition-foraging","competition-nest site","competition-territory")
+new_comp <- "competition"
 # Re-assign values 
+intxns.db.subset$interaction <- ifelse(intxns.db.subset$interaction %in% old_comp, 
+                                       new_comp, 
+                                       intxns.db.subset$interaction)
 
-intxns.db.subset$interaction <- ifelse(intxns.db.subset$interaction %in% old3, new3, intxns.db.subset$interaction)
 
-sort(unique(intxns.db.subset$interaction))
+## KLEPTOPARASITISM
 
+# List of characters to re-assign
+old_klepto <- c("kleptoparasitism-food","kleptoparasitism-nest material")
+new_klepto <- "kleptoparasitism"
+# Re-assign values 
+intxns.db.subset$interaction <- ifelse(intxns.db.subset$interaction %in% old_klepto, 
+                                       new_klepto, 
+                                       intxns.db.subset$interaction)
+
+
+
+## FACILITATION
+
+# List of characters to re-assign
+old_facil<- c("facilitation-creching","facilitation-distress calls")
+new_facil <- "facilitation"
+# Re-assign values 
+intxns.db.subset$interaction <- ifelse(intxns.db.subset$interaction %in% old_facil, 
+                                       new_facil, 
+                                       intxns.db.subset$interaction)
+
+
+
+## PREDATION
+
+# List of characters to re-assign
+old_pred<- c("nest predation")
+new_pred <- "predation"
+# Re-assign values 
+intxns.db.subset$interaction <- ifelse(intxns.db.subset$interaction %in% old_pred, 
+                                       new_pred, 
+                                       intxns.db.subset$interaction)
+
+
+
+## MOBBING
+
+# List of characters to re-assign
+old_mob<- c("shared scolding")
+new_mob <- "mobbing"
+# Re-assign values 
+intxns.db.subset$interaction <- ifelse(intxns.db.subset$interaction %in% old_mob, 
+                                       new_mob, 
+                                       intxns.db.subset$interaction)
+
+
+# Generate summary table of interactions by type 
+num_intxn_types <- intxns.db.subset %>% group_by(interaction) %>% summarize(n=n()) %>% arrange(-n) 
+knitr::kable(num_intxn_types)
 ```
 
 Create summary information in a table
