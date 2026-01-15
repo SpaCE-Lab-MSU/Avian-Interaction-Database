@@ -75,7 +75,8 @@ int_dist(inter)
 # Visualizing distribution of interactions - NA
 # -----------------------------------------------
 
-int_dist(inter_NA)
+int_NA_plot <- int_dist(inter_NA)
+ggsave("dist_plot.png", int_NA_plot, width = 16, height = 10, dpi = 600)
 
 # -----------------------------------------------
 # Visualizing distribution of interactions - NA ONLY

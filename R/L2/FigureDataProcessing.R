@@ -359,12 +359,12 @@ interaction_categories <- data.frame(
     "#4B0082", "#6A5ACD", "#6A5ACD", "#9370DB", "#BA55D3",
     # Parasitism (Oranges/Browns)
     "#D2691E", "#CD853F", "#DAA520", "#B8860B", "#DEB887", "#F4A460",
-    # Amenalism (Grays)
-    "#696969",
+    # Amenalism (Light blues)
+    "#AFEEEE",
     # Mobbing (Teal)
     "#008B8B",
-    # N/A (Light Blues/Neutrals)
-    "#B0C4DE", "#87CEEB", "#ADD8E6", "#87CEFA", "#AFEEEE", "#B0E0E6", "#E0F2FE"
+    # N/A (Grays)
+    "#808080", "#696880", "#373737", "#7C6E7F", "#333333", "#9897A9", "#787276"
   ),
   stringsAsFactors = FALSE
 )
