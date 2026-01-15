@@ -342,8 +342,8 @@ plot_phylo_combined <- function(tree,
     ggtitle(title) +
     theme(legend.position = c(0.705, 0.24),
           legend.justification = c(1, 0),
-          legend.title = element_text(size = 14),      #LEGEND TITLE SIZE
-          legend.text = element_text(size = 13),       #LEGEND TEXT SIZE
+          legend.title = element_text(size = 16),      #LEGEND TITLE SIZE
+          legend.text = element_text(size = 15),       #LEGEND TEXT SIZE
           plot.title = element_text(size = 18))        #PLOT TITLE SIZE
 
   #Add horizontal family labels with connecting lines
