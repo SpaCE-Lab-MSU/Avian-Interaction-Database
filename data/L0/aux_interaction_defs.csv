@@ -27,6 +27,7 @@ facilitation-feeding,no,1,1,"case of facilitation when both species feed togethe
 facilitation-foraging,no,1,1,shared foraging for food (seeking food); both species = 1
 facilitation-mixed flocking,no,1,1,"where both species benefit by being in a group, both species = 1"
 facilitation-pest reduction,no,1,1,"where one or both species contribute to pest reduction or consumption in a shared environment, both species = 1"
+facilitation-passive predator deterrence,no,1,1,"where one or both species contribute to predator deterrence by passive means (chemical secretions, intimidation through size, etc.) rather than mobbing, both species = 1"
 hybridization,no,0,0,when species successfully mate and produce hybrid offspring; includes intergrades (hybrids of subspecies). both species = 0
 kleptoparasitism-food,yes,1,-1,one species steals food from another species. species that steals and benefits = 1; species that is stolen from = -1
 kleptoparasitism-nest material,yes,1,-1,"when one species steals nest material from another species; species who steals = 1, species who loses nest material = -1."
