@@ -78,10 +78,10 @@ int_NA_plot
 source(here::here("../Avian-Interaction-Database/R/L2/PhylogenyFigure.R"))
 ```
 
-```{r, fig.width=16, fig.height=8, out.width="100%"} 
+```{r, fig.width=16, fig.height=8, out.width="100%"}
 #| warning: false
 
-phyloplot <- plot_phylo_combined(
+phyloplot_species <- plot_phylo_combined(
   tree = NA_tree,
   data = inter_NA_working,
   species_col = "species",
@@ -89,18 +89,17 @@ phyloplot <- plot_phylo_combined(
   value_col = "n_int",
   layout = "circular",
   branch_colors = c("#440154FF", "#414487FF", "#2A788EFF", "#22A884FF", "#7AD151FF", "#FDE725FF"),
-  breaks = c(min(inter_NA_working$n_int, na.rm = TRUE),
-             5, 25, 100,
+  breaks = c(min(inter_NA_working$n_int, na.rm = TRUE), 5, 25, 100,
              max(inter_NA_working$n_int, na.rm = TRUE)),
   label_offset = 8,
   label_size = 4.5,
-  tip_size = 1.5,
-  min_species_for_label = 25,
+  tip_size = 2,
+  min_species = 25,
+  family_palette = family_palette_master,  # Use master palette
   title = "",
   legend_title = "Number of interactions"
 )
-
-phyloplot
+phyloplot_species
 ```
 
 ### Interaction Network Figure
@@ -122,8 +121,6 @@ oaktit
 ```
 
 ```{r, fig.width=14, fig.height=6, out.width="100%"}
-plots <- create_multi_network(inter_NA_only_int, c("Baeolophus inornatus", "Dryobates nuttallii", "Glaucidium gnoma"), show_labels = F, curve_edges = T)
-plots[[1]]
-plots[[2]]
-plots[[3]]
+plot <- create_combined_network(inter_NA_only_int, c("Baeolophus inornatus", "Dryobates nuttallii", "Glaucidium gnoma"), show_labels = F, curve_edges = T)
+plot
 ```

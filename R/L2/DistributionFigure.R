@@ -11,18 +11,6 @@ library(tidyverse)
 library(stringr)
 source("C:/R MSU/Avian-Interaction-Database/R/L2/FigureDataProcessing.R")
 
-inter$interaction <- inter$interaction %>% #Removing alignment issue in uncertain interaction
-  str_replace("copulation\\?", "copulation") %>%
-  str_replace("commensalism-scavange", "commensalism-scavenge")
-
-inter_NA$interaction <- inter_NA$interaction %>%
-  str_replace("copulation\\?", "copulation") %>%
-  str_replace("commensalism-scavange", "commensalism-scavenge")
-
-inter_NA_only$interaction <- inter_NA_only$interaction %>%
-  str_replace("copulation\\?", "copulation") %>%
-  str_replace("commensalism-scavange", "commensalism-scavenge")
-
 # -----------------------------------------------
 # Functionalization of plot
 # -----------------------------------------------
@@ -69,17 +57,18 @@ int_dist <- function(dataset, colors = interaction_categories) {
 # Visualizing distribution of interactions - full dataset
 # -----------------------------------------------
 
-int_dist(inter)
+#int_dist(inter)
 
 # -----------------------------------------------
 # Visualizing distribution of interactions - NA
 # -----------------------------------------------
 
 int_NA_plot <- int_dist(inter_NA)
+int_NA_plot
 ggsave("dist_plot.png", int_NA_plot, width = 16, height = 10, dpi = 600)
 
 # -----------------------------------------------
 # Visualizing distribution of interactions - NA ONLY
 # -----------------------------------------------
 
-int_dist(inter_NA_only)
+#int_dist(inter_NA_only)
