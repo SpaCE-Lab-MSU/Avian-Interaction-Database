@@ -129,6 +129,12 @@ intxns.db.file <- file.path(file_paths$L1,AvianInteractionData_L1_file)
 intxns.db <-read.csv(here::here(intxns.db.file))
 print(paste("read in ", nrow(intxns.db), "records from ", intxns.db.file))
 ```
+#### Remove columns only relevant for non-NA species 
+
+```{r}
+intxns.db <- intxns.db %>% dplyr::select(-DatabaseSearchURL)
+```
+
 
 - get all interactions where either sp1 or sp2 is a species on the Canada/AK/CONUS list 
 - subset out a few relevant columns in the splist for use with BBS network and spatial analysis
