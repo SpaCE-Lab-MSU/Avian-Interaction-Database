@@ -308,8 +308,10 @@ inter_NA_only_working <- add_clements_family(inter_NA_only_working, species_col 
 # -----------------------------------------------
 interaction_categories <- data.frame(
   interaction = c(
-    # Trophic (Reds/Oranges)
+    # Trophic (Dark Red)
     "predation", "nest predation",
+    # Mobbing (Light Red)
+    "mobbing",
     # Competition (Dark Blues)
     "competition", "competition-foraging", "competition-nest site", "competition-territory",
     # Facilitation (Greens)
@@ -322,16 +324,16 @@ interaction_categories <- data.frame(
     # Parasitism (Oranges/Browns)
     "kleptoparasitism", "kleptoparasitism-nest material", "kleptoparasitism-food",
     "brood parasitism", "nest parasitism", "nest takeover",
-    # Amenalism (Grays)
+    # Amenalism (Black)
     "amensalism",
-    # Mobbing (Teals/Cyans)
-    "mobbing",
-    # N/A (Light Blues/Neutrals)
+    # N/A (Grays)
     "co-occur", "hybridization", "copulation", "courtship", "play", "shared scolding", "accidental killing"
   ),
   category = c(
     # Trophic
     rep("Trophic", 2),
+    # Mobbing
+    "Mobbing",
     # Competition
     rep("Competition", 4),
     # Facilitation
@@ -342,27 +344,25 @@ interaction_categories <- data.frame(
     rep("Parasitism", 6),
     # Amenalism
     "Amenalism",
-    # Mobbing
-    "Mobbing",
     # N/A
     rep("N/A", 7)
   ),
   color = c(
     # Trophic (Reds/Oranges)
-    "#8B0000", "#CD5C5C",
+    "#800000", "#CD5C5C",
+    # Mobbing (Teal)
+    "#E0115F",
     # Competition (Dark Blues)
     "#00008B", "#1E3A8A", "#2563EB", "#3B82F6",
     # Facilitation (Greens)
-    "#006400", "#228B22", "#32CD32", "#90EE90", "#98FB98",
+    "#006400", "#228B22", "#32CD32", "#00A86B", "#50C878",
     "#ADFF2F", "#7CFC00", "#66CDAA", "#3CB371",
     # Commensalism (Purples)
     "#4B0082", "#6A5ACD", "#6A5ACD", "#9370DB", "#BA55D3",
     # Parasitism (Oranges/Browns)
     "#D2691E", "#CD853F", "#DAA520", "#B8860B", "#DEB887", "#F4A460",
-    # Amenalism (Light blues)
-    "#AFEEEE",
-    # Mobbing (Teal)
-    "#008B8B",
+    # Amenalism (Black)
+    "#000000",
     # N/A (Grays)
     "#808080", "#696880", "#373737", "#7C6E7F", "#333333", "#9897A9", "#787276"
   ),
@@ -370,9 +370,9 @@ interaction_categories <- data.frame(
 )
 
 # Define category order for plotting
-category_order <- c("Trophic", "Competition", "Facilitation",
+category_order <- c("Trophic", "Mobbing", "Competition", "Facilitation",
                     "Commensalism", "Parasitism", "Amenalism",
-                    "Mobbing", "N/A")
+                    "N/A")
 
 interaction_categories$category <- factor(interaction_categories$category,
                                           levels = category_order)

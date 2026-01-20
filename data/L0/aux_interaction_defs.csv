@@ -2,10 +2,10 @@ type_of_interaction,asymmetric,species 1 or 2,species 2 or 1,definition
 amensalism,yes,-1,0,"one species causes harm to another species without any cost or benefits to itself (e.g. flushing from nest in response to perceived predator, accidental destruction of eggs); harmful species = 0, harmed species = -1"
 accidental killing,yes,-1,0,"when one species accidentally kills another, but has no intent on doing so (e.g., no intent on preying on the dead species or competing with the dead species); species killed = -1, species who cuases the death = 0"
 brood parasitism,yes,1,-1,one species places its egg in another species' nest so the nesting species has to raise a conspecific (includes egg-dumping). species that lays egg in another species nest = 1; species that has to care for the conspecific young = -1.
-brood parasitism defense-nest defense,yes,1,-1,host species shows aggression towards and defends its nest from parasite species. host species = 1; parasite species = -1.
-brood parasitism defense-egg ejection,yes,1,-1,host species removes eggs of brood parasite from its nest. host species = 1; parasite species = -1.
-brood parasitism defense-nest abandonment,yes,1,-1,host species abandons nest upon detection of brood parasite eggs and may re-nest. host species = 1; parasite species = -1.
-brood parasitism defense-feeding discrimination,yes,1,-1,host species avoids feeding chicks or young of brood parasite species. host species = 1; parasite species = -1.
+brood parasitism defense-nest defense,yes,-1,1,host species shows aggression towards and defends its nest from parasite species. host species = 1; parasite species = -1.
+brood parasitism defense-egg ejection,yes,-1,1,host species removes eggs of brood parasite from its nest. host species = 1; parasite species = -1.
+brood parasitism defense-nest abandonment,yes,-1,1,host species abandons nest upon detection of brood parasite eggs and may re-nest. host species = 1; parasite species = -1.
+brood parasitism defense-feeding discrimination,yes,-1,1,host species avoids feeding chicks or young of brood parasite species. host species = 1; parasite species = -1.
 co-occur,no,0,0,occur together but not clear what the interaction is. each species = 0. Two non-migratory species that co-occur can be assumed to do so year-round.
 commensalism,yes,1,0,"one species benefits and the other receives no effect (example: cavities are constructed by primary cavity nesting bird like a woodpecker, and later used by another bird for its own nest (without any conflict). species that benefits from the interaction = 1; species that provides the benefit = 0."
 commensalism-call mimicry,yes,0,1,"when one species copies the call/song of another; species that is mimicking = 1, species that is being mimicked = 0"
@@ -27,6 +27,7 @@ facilitation-feeding,no,1,1,"case of facilitation when both species feed togethe
 facilitation-foraging,no,1,1,shared foraging for food (seeking food); both species = 1
 facilitation-mixed flocking,no,1,1,"where both species benefit by being in a group, both species = 1"
 facilitation-pest reduction,no,1,1,"where one or both species contribute to pest reduction or consumption in a shared environment, both species = 1"
+facilitation-passive predator deterrence,no,1,1,"where one or both species contribute to predator deterrence by passive means (chemical secretions, intimidation through size, etc.) rather than mobbing, both species = 1"
 hybridization,no,0,0,when species successfully mate and produce hybrid offspring; includes intergrades (hybrids of subspecies). both species = 0
 kleptoparasitism-food,yes,1,-1,one species steals food from another species. species that steals and benefits = 1; species that is stolen from = -1
 kleptoparasitism-nest material,yes,1,-1,"when one species steals nest material from another species; species who steals = 1, species who loses nest material = -1."
