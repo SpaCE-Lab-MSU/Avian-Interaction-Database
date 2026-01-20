@@ -48,7 +48,7 @@ file_paths <- get_file_paths()
 clements2024<-read.csv("https://www.birds.cornell.edu/clementschecklist/wp-content/uploads/2024/10/eBird-Clements-v2024-integrated-checklist-October-2024-rev.csv")
 
 # Export this as its original filename for final cleaning in L1 script.
-write.csv(clements2024, file.path(file_paths$CHECKLIST_L0,"spp_joint_all.csv"), fileEncoding="UTF-8", row.names=F)
+write.csv(clements2024, file.path(file_paths$CHECKLIST_L0,"eBird-Clements-v2024-integrated-checklist-October-2024-rev.csv"), fileEncoding="UTF-8", row.names=F)
 
 #### (2) BBS List ####
 # Below section is modified from: https://rdrr.io/github/davharris/mistnet/src/extras/BBS-analysis/data_extraction/species-handling.R

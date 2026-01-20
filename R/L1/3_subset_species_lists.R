@@ -16,7 +16,7 @@
 # AUTHORS:        Phoebe Zarnetske
 # COLLABORATORS:  Vincent Miele, Stephane Dray, Emily Parker, Pat Bills
 # DATA INPUT:     L0 data: spp_avibase_cac_2024.csv,
-#                         spp_joint_all.csv,
+#                         eBird-Clements-v2024-integrated-checklist-October-2024-rev.csv,
 #                         spp_bbs_2024_clean.csv
 #                     all from 1_generate_species_lists.R
 # DATA OUTPUT:    L1 data: spp_joint_cac.csv; spp_joint_cac_colsubset.csv (column subset)
@@ -49,7 +49,7 @@ avibase <- avibase %>% arrange(scientific_name)
 head(avibase)
 
 #### Official 2024 eBird & Clements checklist
-clements2024<-read.csv(file.path(file_paths$CHECKLIST_L0,"spp_joint_all.csv"))
+clements2024<-read.csv(file.path(file_paths$CHECKLIST_L0,"eBird-Clements-v2024-integrated-checklist-October-2024-rev.csv"))
 
 # Clements List: Name the columns for merging later
 clements2024<-subset(clements2024, select=c("English.name","scientific.name",

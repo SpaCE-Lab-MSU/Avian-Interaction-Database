@@ -205,7 +205,7 @@ Read in the full check list the official eBird/Clements v2024 checklist
 #| label: read_clements
 
 
-checklist_filename <- "spp_joint_all.csv"
+checklist_filename <- "eBird-Clements-v2024-integrated-checklist-October-2024-rev.csv"
 checklist.orig <- read.csv(here::here(file.path(file_paths$CHECKLIST_L0,checklist_filename)))
 print(paste("Read in ", nrow(checklist.orig), "entries from checklist file", checklist_filename))
 ```
