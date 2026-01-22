@@ -26,11 +26,6 @@ int_dist <- function(dataset, colors = interaction_categories) {
   type_summ$interaction <- factor(type_summ$interaction,
                                   levels = rev(type_summ$interaction))
 
-  # Generating title
-  title <- ifelse(identical(dataset, inter), "Total Interactions in dataset",
-    "Total Interactions in North America")
-
-
   # Plotting
   ggplot(type_summ, aes(x = interaction, y = n, fill = interaction)) +
     theme_light() +
@@ -45,19 +40,10 @@ int_dist <- function(dataset, colors = interaction_categories) {
           legend.position = "none") +
     xlab("") +
     ylab("") +
-    labs(title = title) +
+    labs(title = "Total Interactions in North America") +
     coord_flip()
 }
 
-
-
-
-
-# -----------------------------------------------
-# Visualizing distribution of interactions - full dataset
-# -----------------------------------------------
-
-#int_dist(inter)
 
 # -----------------------------------------------
 # Visualizing distribution of interactions - NA
@@ -67,8 +53,3 @@ int_NA_plot <- int_dist(inter_NA)
 int_NA_plot
 ggsave("dist_plot.png", int_NA_plot, width = 16, height = 10, dpi = 600)
 
-# -----------------------------------------------
-# Visualizing distribution of interactions - NA ONLY
-# -----------------------------------------------
-
-#int_dist(inter_NA_only)

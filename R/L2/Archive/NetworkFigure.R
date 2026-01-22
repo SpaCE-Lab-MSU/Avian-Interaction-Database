@@ -14,12 +14,12 @@ library(tidyverse)
 library(igraph)
 library(ggraph)
 library(cowplot)
-source("C:/R MSU/Avian-Interaction-Database/R/L2/FigureDataProcessing.R")
+source("C:/R MSU/Avian-Interaction-Database/R/L2/Archive/FigureDataProcessing.R")
 source("C:/R MSU/Avian-Interaction-Database/website/code/avicommons_clem.r")
 avi <- jsonlite::fromJSON("C:/R MSU/Avian-Interaction-Database/website/code/avicommons_full.json")
 clem <- readr::read_csv("C:/R MSU/Avian-Interaction-Database/website/code/clemtax_2025.csv")
 
-inter_NA_only_int <- inter_NA_only_clean %>% #removing "non-interactions" and fixing "copulation?"
+inter_NA_only_int <- inter_NA_only_clean %>% #removing "non-interactions"
   filter(interaction != "co-occur" & interaction != "hybridization") %>%
   rowwise() %>% #This removes duplicate interactions (same sp pair and int type)
   mutate(       #by creating columns of the species pairs in alphabetical order
@@ -642,6 +642,9 @@ create_combined_network <- function(data,
   legend_data <- interaction_categories %>%
     filter(interaction %in% unique_interactions)
 
+  legend_data$interaction <- factor(legend_data$interaction,
+                                    levels = legend_data$interaction)
+
   # Create a standalone legend plot with LINES instead of points
   legend_plot <- ggplot(legend_data, aes(x = interaction, y = 1, color = interaction)) +
     geom_line(size = 2) +  # Changed from geom_point to geom_line
@@ -701,7 +704,6 @@ ints <- get_interactions(inter_NA_only_int, c("Baeolophus inornatus", "Dryobates
 intsinc <- get_interactions(inter_NA_only_int, c("Baeolophus inornatus", "Dryobates nuttallii", "Glaucidium gnoma"))
 View(intsinc)
 
-write.csv(intsinc, "intsinc.csv")
 # -----------------------------------------------
 # Generate networks for all species and save to PDF
 # Organized by phylogenetic order from clem

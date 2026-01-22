@@ -85,11 +85,10 @@ bidirectional_dedup <- function(data, #biderectionalization and deduplication fu
                                 species1_com = "species1_common",
                                 species2_com = "species2_common",
                                 interaction_col = "interaction",
-                                return_duplicates = FALSE,
-                                verbose = TRUE) {
+                                return_duplicates = FALSE) {
 
   n_start <- nrow(data)
-  if (verbose) message("Starting with ", n_start, " rows")
+  message("Starting with ", n_start, " rows")
 
   #Flip the species columns to create bidirectional representation
   data_flip <- data %>%
@@ -111,10 +110,9 @@ bidirectional_dedup <- function(data, #biderectionalization and deduplication fu
   n_full <- nrow(data_full)
   n_removed_union <- n_start + nrow(data_flip) - n_full
 
-  if (verbose) {
     message("After union: ", n_full, " rows (",
             n_removed_union, " full duplicates removed)")
-  }
+
   #However, we might still have some rows where the same interaction is being represented but the
   #rows aren't identical (different sources, etc). We will double-check this by comparing any rows that
   #are equivalent for species1, interaction AND species2.
@@ -126,7 +124,7 @@ bidirectional_dedup <- function(data, #biderectionalization and deduplication fu
     arrange(.data[[species1_sci]], .data[[species2_sci]], .data[[interaction_col]])
 
   n_dup <- nrow(data_dup)
-  if (verbose && n_dup > 0) {
+  if ( n_dup > 0) {
     message("Found ", n_dup, " rows representing identical interactions ",
             "(same species pair + interaction, different metadata)")
   }
@@ -144,11 +142,9 @@ bidirectional_dedup <- function(data, #biderectionalization and deduplication fu
   n_final <- nrow(data_dedup)
   n_removed_dedup <- n_full - n_final
 
-  if (verbose) {
     message("After deduplication: ", n_final, " rows (",
             n_removed_dedup, " partial duplicates removed)")
     message("Total reduction: ", n_start, " → ", n_final)
-  }
 
   return(data_dedup)
 }
@@ -198,8 +194,7 @@ inter_NA_only_working <- summarize_species_interactions(inter_NA_only_dedup)
 #Function to get family from Clements taxonomy via clootl
 get_clements_family <- function(species_vector,
                                 taxonomy_year = 2024,
-                                return_full_taxonomy = FALSE,
-                                verbose = TRUE) {
+                                return_full_taxonomy = FALSE) {
 
   #Access the taxonomy data from clootl_data
   taxonomy_name <- paste0("Year", taxonomy_year)
@@ -210,11 +205,9 @@ get_clements_family <- function(species_vector,
 
   clements <- clootl_data$taxonomy.files[[taxonomy_name]]
 
-  if (verbose) {
     message("Using Clements taxonomy year: ", taxonomy_year)
-    message("Clements columns: ", paste(names(clements), collapse = ", "))
     message("Looking up ", length(species_vector), " species...")
-  }
+
 
   #Clean species names (remove underscores if present)
   species_clean <- str_replace_all(species_vector, "_", " ")
@@ -258,7 +251,6 @@ get_clements_family <- function(species_vector,
     }
   }
 
-  if (verbose) {
     n_found <- sum(!is.na(results$family))
     n_missing <- sum(is.na(results$family))
     message("Found families for ", n_found, "/", length(species_vector), " species")
@@ -266,7 +258,7 @@ get_clements_family <- function(species_vector,
       message("Missing families for ", n_missing, " species")
       message("First few missing: ", paste(head(species_clean[is.na(results$family)], 3), collapse = ", "))
     }
-  }
+
 
   #Return appropriate format
   if (return_full_taxonomy) {
@@ -279,16 +271,14 @@ get_clements_family <- function(species_vector,
 #Function to add Clements family to a dataframe
 add_clements_family <- function(data,
                                 species_col = "species",
-                                taxonomy_year = 2024,
-                                verbose = TRUE) {
+                                taxonomy_year = 2024) {
 
-  if (verbose) message("Adding Clements family information...")
+  message("Adding Clements family information...")
 
   #Get families
   families <- get_clements_family(
     data[[species_col]],
-    taxonomy_year = taxonomy_year,
-    verbose = verbose
+    taxonomy_year = taxonomy_year
   )
 
   #Add to dataframe
@@ -310,7 +300,7 @@ interaction_categories <- data.frame(
   interaction = c(
     # Trophic (Dark Red)
     "predation", "nest predation",
-    # Mobbing (Light Red)
+    # Mobbing (Pink)
     "mobbing",
     # Competition (Dark Blues)
     "competition", "competition-foraging", "competition-nest site", "competition-territory",

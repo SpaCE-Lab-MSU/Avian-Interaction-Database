@@ -1,0 +1,120 @@
+---
+title: "Summary Vignette"
+format: html
+editor: visual
+---
+
+# Interaction Data Summary Statistics
+
+```{r, warnings=FALSE}
+
+library(dplyr)
+
+df <- read.csv(here::here("../Avian-Interaction-Database-Working/L1/ain_cac.csv"))
+spp <- read.csv(here::here("./data/L1/species_checklists/spp_joint_cac_colsubset.csv"))
+
+num_intxns <- nrow(df)
+
+unique_intxns <- df %>% 
+  dplyr::select(species1_scientific, 
+                species2_scientific, 
+                effect_sp1_on_sp2, 
+                effect_sp2_on_sp1, 
+                interaction) %>% 
+  filter(!duplicated(.)) 
+
+num_unique_intxns <- nrow(unique_intxns)
+
+num_focal_spp <- length(unique(df$species1_scientific))
+
+unique_spp_list <- unique(c(df$species1_scientific, df$species2_scientific))
+num_total_spp <- length(unique_spp_list)
+
+num_new_spp2 <- length(setdiff(unique_spp_list, df$species1_scientific))
+
+unique_spp_list_names <- unique(spp$scientific_name_clements2024)
+unique_spp1_ain_names <- unique(df$species1_scientific)
+
+
+
+```
+
+
+* Number of documented pairwise interactions: `r num_intxns`
+* Number of unique pairwise interactions: `r num_unique_intxns`
+* Number of focal species: `r num_focal_spp`
+* Number of additional non-focal spp: `r num_new_spp2`
+* Number of species (total): `r num_total_spp`
+* Percent of world's bird spp (out of 11,1145 spp): `r round(num_total_spp/11145*100, 2)`
+* Total number of migratory species: [Not sure how to calculate this]
+* Total number of interaction types: `r length(unique(df$interaction))`
+
+### Species list summary 
+* Total number of species in the North American Avian Interaction Species List: `r length(unique(spp$scientific_name_clements2024))`
+
+
+```{r}
+
+unique_intxns %>% group_by(interaction) %>% summarize(n=n()) %>% arrange(-n)
+```
+
+# Interaction Data Exploratory Figures
+
+Source `_figure_processing.R` which contains the data processing and plotting functions. See `5.5_figure_processing_vignette.qmd` for further explanation of the data processing and plot functions!
+
+```{r, warning=FALSE, message=FALSE}
+source(here::here("../Avian-Interaction-Database/R/L2/_figure_processing.R"))
+
+```
+
+
+### Interaction Distribution Figure
+
+```{r, fig.width=14, out.width="100%"}
+ggplot(type_summ, aes(x = interaction, y = n, fill = interaction)) +
+    theme_light() +
+    geom_bar(stat = "identity") +
+    scale_fill_manual(values = setNames(interaction_categories$color,
+                                        interaction_categories$interaction)) +
+    geom_text(aes(label = n), hjust = -0.2, size = 4.25) +
+    theme(axis.text.x = element_text(angle = 0, size = 14),  
+          axis.text.y = element_text(size = 14),             
+          axis.title = element_text(size = 16),              
+          plot.title = element_text(size = 18),              
+          legend.position = "none") +
+    xlab("") +
+    ylab("") +
+    labs(title = "Total Interactions in North America") +
+    coord_flip()
+```
+
+### Interaction Phylogeny Figure
+
+```{r, fig.width=16, fig.height=8, out.width="100%"}
+#| warning: false
+
+phyloplot_species <- plot_phylo_combined(
+  tree = NA_tree,
+  data = inter_NA_working,
+  value_col = "n_int",
+  label_offset = 8,
+  label_size = 4.5,
+  tip_size = 2,
+  min_species = 25,
+  legend_title = "Number of interactions"
+)
+phyloplot_species
+```
+
+### Interaction Network Figure
+
+```{r, fig.width=14, fig.height=6, out.width="100%"}
+create_network(inter_NA_int, "Baeolophus inornatus", curve_edges = T, show_labels = F)
+
+
+```
+
+```{r, message=F, fig.width=20, fig.height=15, out.width="100%"}
+create_combined_network(inter_NA_int, c("Baeolophus inornatus", "Dryobates nuttallii", "Glaucidium gnoma"), curve_edges = T)
+
+```
