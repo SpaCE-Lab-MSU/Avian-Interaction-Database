@@ -1,6 +1,8 @@
 ---
 title: "Summary Vignette"
-format: html
+format: 
+  html: 
+    self-contained: true
 editor: visual
 ---
 
