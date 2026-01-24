@@ -100,9 +100,35 @@ interaction_categories$category <- factor(interaction_categories$category,
                                           levels = category_order)
 ```
 
+One thing to note about the database is that it includes many rows with duplicate interactions (same species pair and interaction type). For example:
+
+```{r}
+print(inter_NA[1:2,1:10])
+```
+
+These are functionally the same, and only differ by their text excerpts!
+
+This was done such that each piece of evidence is reflected, but causes issues with determining the absolute amount of interactions present. Because of this, we will created a second version of `inter_NA` that removes interactions with the same species pair and interaction type. This will be tagged `inter_NA_slim`
+
+```{r}
+inter_NA_slim <- inter_NA %>% 
+  rowwise() %>% #This removes duplicate interactions (same sp pair and int type)
+  mutate(       #by creating columns of the species pairs in alphabetical order
+    sp_min = min(species1_scientific, species2_scientific),
+    sp_max = max(species1_scientific, species2_scientific)
+  ) %>%
+  ungroup() %>%
+  distinct(sp_min, sp_max, interaction, .keep_all = TRUE) %>% #removing duplicates
+  select(-sp_min, -sp_max) #and deleting the helper columns
+
+message("We removed ", nrow(inter_NA) - nrow(inter_NA_slim), " duplicate rows!")
+```
+
+
+
 ## Distribution of Interactions by Type (Figure 2)
 
-The distribution figure (fig. 2) summarizes the whole, raw dataset. The only further step is generating a summary dataframe that counts the number of instances of each interaction type:
+The distribution figure (fig. 2) summarizes the whole, raw dataset. The only further step is generating a summary dataframe that counts the number of instances of each interaction type. We will do this for both the slim and raw datasets:
 
 ```{r}
 type_summ <- inter_NA %>%
@@ -114,6 +140,17 @@ type_summ <- inter_NA %>%
 #Create factor for ordered plotting
 type_summ$interaction <- factor(type_summ$interaction,
                                   levels = rev(type_summ$interaction))
+
+#Repeat for slim dataset
+type_summ_slim <- inter_NA_slim %>%
+  group_by(interaction) %>%
+    summarize(n = n()) %>%
+    left_join(interaction_categories, by = "interaction") %>%
+    arrange(category, desc(n))
+type_summ_slim$interaction <- factor(type_summ_slim$interaction,
+                                  levels = rev(type_summ_slim$interaction))
+
+head(type_summ)
 ```
 
 Now, we can plot the distribution figure!
@@ -123,7 +160,7 @@ Now, we can plot the distribution figure!
 For both the phylogeny figure (Fig. 3) and network figure (Fig. 4), we do some further processing. Firstly, we remove non-specific taxa (unidentified species and hybrids) which won't map to tips on the phylogenetic tree. The same can be said for subspecies, so we generalize subspecies back to their species level identification. This causes some "self interactions" where a species reacts with its subspecies, so those are removed as well.
 
 ```{r}
-inter_NA_clean <- inter_NA %>%
+inter_NA_trim <- inter_NA_slim %>%
     filter(
       !str_detect(.data[["species1_scientific"]], regex("sp\\.|unid\\.|_x_", ignore_case = TRUE)),
       !str_detect(.data[["species2_scientific"]], regex("sp\\.|unid\\.|_x_", ignore_case = TRUE))
@@ -138,7 +175,24 @@ inter_NA_clean <- inter_NA %>%
     #Remove self interactions
     filter(.data[["species1_scientific"]] != .data[["species2_scientific"]])
 
-message("After initial cleaning, the data contains ", nrow(inter_NA_clean), " rows")
+message("After initial cleaning, the data contains ", nrow(inter_NA_trim), " rows")
+
+```
+
+We will also repeat the slimming step, as collapsing the subspecies to their larger species creates new duplicate rows (same species pair and interaction type). For example, `Acanthis flammea hornemanni/exilipes` is converted to `Acanthis flammea`, which may cause new duplicated interactions, where a species had separate interactions with both the species and subspecies.
+
+```{r}
+inter_NA_clean <- inter_NA_trim %>% 
+  rowwise() %>% #This removes duplicate interactions (same sp pair and int type)
+  mutate(       #by creating columns of the species pairs in alphabetical order
+    sp_min = min(species1_scientific, species2_scientific),
+    sp_max = max(species1_scientific, species2_scientific)
+  ) %>%
+  ungroup() %>%
+  distinct(sp_min, sp_max, interaction, .keep_all = TRUE) %>% #removing duplicates
+  select(-sp_min, -sp_max) #and deleting the helper columns
+
+message("We removed ", nrow(inter_NA_trim) - nrow(inter_NA_clean), " new duplicates caused by subspecies collapse")
 ```
 
 Currently, our data is formatted like this:
@@ -181,21 +235,13 @@ inter_NA_full <- dplyr::union(inter_NA_clean, inter_NA_flip)
 message("Now our database has increased to ", nrow(inter_NA_full), " rows, with duplicates automatically removed")
 ```
 
-However, we might still have some rows where the same interaction is being represented but the rows aren't identical (different sources, etc). We will double-check this by comparing any rows that are equivalent for species1, interaction AND species2.
+Union will automatically discard identical rows, and our initial cleanings ensure there are no species pair/interaction type duplicates left in the dataframe!
 
-```{r}
-
-inter_NA_dedup <- inter_NA_full %>%
-    distinct(.data[["species1_scientific"]], .data[["species2_scientific"]],
-             .data[["interaction"]], .keep_all = TRUE)
-
-message("After removing these duplicates, we are left with ", nrow(inter_NA_dedup), " rows")
-```
 
 Next, we simplify the dataframe for the phylogeny visualization. We create a new data frame with one row per species, column "n_int" for the total number of unique interactions that that species participates in, and "n_type" for the total number of distinct types of interactions per species.
 
 ```{r}
-inter_NA_working <- inter_NA_dedup %>%
+inter_NA_working <- inter_NA_full %>%
   group_by(.data[["species1_scientific"]]) %>%
   #Replace spaces with underscores to match tree tips
   mutate(species1_scientific = str_replace_all(.data[["species1_scientific"]], " ", "_")) %>%
@@ -423,25 +469,17 @@ plot_phylo_combined <- function(tree, #tree produced earlier, should be NA_tree
 
 The interaction figures use creative commons images sourced from AviCommons, using the following files: `avicommons_clem.r`, `avicommons_full.json` and `clemtax_2025.csv`. THese need to be sourced into the environment:
 
-```{r}
+```{r, warning=F, message=F}
 source(here::here("../Avian-Interaction-Database/website/code/avicommons_clem.r"))
 avi <- jsonlite::fromJSON(here::here("../Avian-Interaction-Database/website/code/avicommons_full.json"))
 clem <- readr::read_csv(here::here("../Avian-Interaction-Database/website/code/clemtax_2025.csv"))
 ```
 
-Next, we need edit `inter_NA_clean` to remove a few interaction types (co-occurrence and hybridization) that don't fit well into an ecological network, and perhaps are misrepresented across species. `inter_NA_clean`\` also contains a few duplicate interaction rows, primarily caused by the collapsing of subspecies (we prior removed self-interactions, but there are examples where one species interacts in the same way with multiple subspecies within another species, which we remove here).
+Next, we need edit `inter_NA_clean` to remove a few interaction types (co-occurrence and hybridization) that don't fit well into an ecological network.
 
 ```{r}
 inter_NA_int <- inter_NA_clean %>% #removing "non-interactions"
-  filter(interaction != "co-occur" & interaction != "hybridization") %>%
-  rowwise() %>% #This removes duplicate interactions (same sp pair and int type)
-  mutate(       #by creating columns of the species pairs in alphabetical order
-    sp_min = min(species1_scientific, species2_scientific),
-    sp_max = max(species1_scientific, species2_scientific)
-  ) %>%
-  ungroup() %>%
-  distinct(sp_min, sp_max, interaction, .keep_all = TRUE) %>% #removing duplicates
-  select(-sp_min, -sp_max) #and deleting the helper columns
+  filter(interaction != "co-occur" & interaction != "hybridization")
 ```
 
 Now we can plot! We provide two functions. the first plots a network for a single species, showing all of it's interacting species and the interactions between them.
@@ -802,3 +840,5 @@ create_combined_network <- function(data, #dataset (inter_NA_int)
   return(final_plot)
 }
 ```
+
+Now we have everything we need to generate the plots! See `6_summary_vignette.qmd`

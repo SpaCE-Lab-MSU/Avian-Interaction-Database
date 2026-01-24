@@ -6,7 +6,7 @@ editor: visual
 
 # Interaction Data Summary Statistics
 
-```{r, warnings=FALSE}
+```{r, warnings=FALSE, message=FALSE}
 
 library(dplyr)
 
@@ -34,9 +34,6 @@ num_new_spp2 <- length(setdiff(unique_spp_list, df$species1_scientific))
 
 unique_spp_list_names <- unique(spp$scientific_name_clements2024)
 unique_spp1_ain_names <- unique(df$species1_scientific)
-
-
-
 ```
 
 
@@ -84,9 +81,28 @@ ggplot(type_summ, aes(x = interaction, y = n, fill = interaction)) +
           legend.position = "none") +
     xlab("") +
     ylab("") +
-    labs(title = "Total Interactions in North America") +
+    labs(title = "Total Interactions Records(by entry) in North America") +
     coord_flip()
 ```
+
+```{r, fig.width=14, out.width="100%"}
+ggplot(type_summ_slim, aes(x = interaction, y = n, fill = interaction)) +
+    theme_light() +
+    geom_bar(stat = "identity") +
+    scale_fill_manual(values = setNames(interaction_categories$color,
+                                        interaction_categories$interaction)) +
+    geom_text(aes(label = n), hjust = -0.2, size = 4.25) +
+    theme(axis.text.x = element_text(angle = 0, size = 14),  
+          axis.text.y = element_text(size = 14),             
+          axis.title = element_text(size = 16),              
+          plot.title = element_text(size = 18),              
+          legend.position = "none") +
+    xlab("") +
+    ylab("") +
+    labs(title = "Total Interaction Records (by unique species and type) in North America") +
+    coord_flip()
+```
+
 
 ### Interaction Phylogeny Figure
 

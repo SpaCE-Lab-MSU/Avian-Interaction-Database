@@ -15,6 +15,9 @@ library(ggtree)
 library(ggplot2)
 library(ggnewscale)
 library(RColorBrewer)
+library(igraph)
+library(ggraph)
+library(cowplot)
 
 splist <- read.csv(here::here("../Avian-Interaction-Database/data/L1/species_checklists/spp_joint_cac_colsubset.csv")) #NA species list
 inter_NA <- read.csv(here::here("../Avian-Interaction-Database-Working/L1/ain_cac.csv")) #NA avian interaction data
@@ -94,7 +97,19 @@ category_order <- c("Trophic", "Mobbing", "Competition", "Facilitation",
 interaction_categories$category <- factor(interaction_categories$category,
                                           levels = category_order)
 
+# --------------------------------------------------------------------
+# Slimming dataset
+# --------------------------------------------------------------------
 
+inter_NA_slim <- inter_NA %>%
+  rowwise() %>% #This removes duplicate interactions (same sp pair and int type)
+  mutate(       #by creating columns of the species pairs in alphabetical order
+    sp_min = min(species1_scientific, species2_scientific),
+    sp_max = max(species1_scientific, species2_scientific)
+  ) %>%
+  ungroup() %>%
+  distinct(sp_min, sp_max, interaction, .keep_all = TRUE) %>% #removing duplicates
+  select(-sp_min, -sp_max) #and deleting the helper columns
 
 
 # --------------------------------------------------------------------
@@ -111,11 +126,20 @@ type_summ <- inter_NA %>%
 type_summ$interaction <- factor(type_summ$interaction,
                                 levels = rev(type_summ$interaction))
 
+#Repeat for slim dataset
+type_summ_slim <- inter_NA_slim %>%
+  group_by(interaction) %>%
+  summarize(n = n()) %>%
+  left_join(interaction_categories, by = "interaction") %>%
+  arrange(category, desc(n))
+type_summ_slim$interaction <- factor(type_summ_slim$interaction,
+                                     levels = rev(type_summ_slim$interaction))
+
 # --------------------------------------------------------------------
 # Phylogeny figure data processing, tree generation, and plot function
 # --------------------------------------------------------------------
 
-inter_NA_clean <- inter_NA %>%
+inter_NA_trim <- inter_NA_slim %>%
   filter(
     !str_detect(.data[["species1_scientific"]], regex("sp\\.|unid\\.|_x_", ignore_case = TRUE)),
     !str_detect(.data[["species2_scientific"]], regex("sp\\.|unid\\.|_x_", ignore_case = TRUE))
@@ -129,6 +153,16 @@ inter_NA_clean <- inter_NA %>%
   ) %>%
   #Remove self interactions
   filter(.data[["species1_scientific"]] != .data[["species2_scientific"]])
+
+inter_NA_clean <- inter_NA_trim %>%
+  rowwise() %>% #This removes duplicate interactions (same sp pair and int type)
+  mutate(       #by creating columns of the species pairs in alphabetical order
+    sp_min = min(species1_scientific, species2_scientific),
+    sp_max = max(species1_scientific, species2_scientific)
+  ) %>%
+  ungroup() %>%
+  distinct(sp_min, sp_max, interaction, .keep_all = TRUE) %>% #removing duplicates
+  select(-sp_min, -sp_max) #and deleting the helper columns
 
 inter_NA_flip <- inter_NA_clean %>%
   rename(
@@ -146,11 +180,7 @@ inter_NA_flip <- inter_NA_clean %>%
 
 inter_NA_full <- dplyr::union(inter_NA_clean, inter_NA_flip)
 
-inter_NA_dedup <- inter_NA_full %>%
-  distinct(.data[["species1_scientific"]], .data[["species2_scientific"]],
-           .data[["interaction"]], .keep_all = TRUE)
-
-inter_NA_working <- inter_NA_dedup %>%
+inter_NA_working <- inter_NA_full %>%
   group_by(.data[["species1_scientific"]]) %>%
   #Replace spaces with underscores to match tree tips
   mutate(species1_scientific = str_replace_all(.data[["species1_scientific"]], " ", "_")) %>%
@@ -366,15 +396,7 @@ avi <- jsonlite::fromJSON(here::here("../Avian-Interaction-Database/website/code
 clem <- readr::read_csv(here::here("../Avian-Interaction-Database/website/code/clemtax_2025.csv"))
 
 inter_NA_int <- inter_NA_clean %>% #removing "non-interactions"
-  filter(interaction != "co-occur" & interaction != "hybridization") %>%
-  rowwise() %>% #This removes duplicate interactions (same sp pair and int type)
-  mutate(       #by creating columns of the species pairs in alphabetical order
-    sp_min = min(species1_scientific, species2_scientific),
-    sp_max = max(species1_scientific, species2_scientific)
-  ) %>%
-  ungroup() %>%
-  distinct(sp_min, sp_max, interaction, .keep_all = TRUE) %>% #removing duplicates
-  select(-sp_min, -sp_max) #and deleting the helper columns
+  filter(interaction != "co-occur" & interaction != "hybridization")
 
 create_network <- function(data, #input dataset, should be inter_NA_int
                            focal_species, #scientific name of a species of interest
