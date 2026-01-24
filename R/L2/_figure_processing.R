@@ -19,7 +19,6 @@ library(igraph)
 library(ggraph)
 library(cowplot)
 
-splist <- read.csv(here::here("../Avian-Interaction-Database/data/L1/species_checklists/spp_joint_cac_colsubset.csv")) #NA species list
 inter_NA <- read.csv(here::here("../Avian-Interaction-Database-Working/L1/ain_cac.csv")) #NA avian interaction data
 
 # --------------------------------------------------------------------
