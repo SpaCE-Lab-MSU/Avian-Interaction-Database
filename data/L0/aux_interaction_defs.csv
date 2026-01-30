@@ -2,7 +2,7 @@ type_of_interaction,asymmetric,species 1 or 2,species 2 or 1,definition
 amensalism,yes,-1,0,"one species causes harm to another species without any cost or benefits to itself (e.g. flushing from nest in response to perceived predator, accidental destruction of eggs); harmful species = 0, harmed species = -1"
 accidental killing,yes,-1,0,"when one species accidentally kills another, but has no intent on doing so (e.g., no intent on preying on the dead species or competing with the dead species); species killed = -1, species who cuases the death = 0"
 brood parasitism,yes,1,-1,one species places its egg in another species' nest so the nesting species has to raise a conspecific (includes egg-dumping). species that lays egg in another species nest = 1; species that has to care for the conspecific young = -1.
-brood parasitism defense-nest defense,yes,-1,1,host species shows aggression towards and defends its nest from parasite species. host species = 1; parasite species = -1.
+brood parasitism defense-nest defense,yes,-1,1,host species shows aggression or appeasement towards parasite species with the goal of protecting its nest. host species = 1; parasite species = -1.
 brood parasitism defense-egg ejection,yes,-1,1,host species removes eggs of brood parasite from its nest. host species = 1; parasite species = -1.
 brood parasitism defense-nest abandonment,yes,-1,1,host species abandons nest upon detection of brood parasite eggs and may re-nest. host species = 1; parasite species = -1.
 brood parasitism defense-feeding discrimination,yes,-1,1,host species avoids feeding chicks or young of brood parasite species. host species = 1; parasite species = -1.
