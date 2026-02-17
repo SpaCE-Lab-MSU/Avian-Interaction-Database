@@ -746,8 +746,6 @@ for(r in 1:nrow(scientific_name_matches)) {
   scientific_name_matches[r,]$scientific_name_match_score <- fuzzy_match$score
 }
 
-# idea to improve speed: rewrite scientific_name_matches to accept a vector/list of names 
-# and return list of lists, then rbind/cbind
 
 tibble(scientific_name_matches)
 ```
@@ -808,7 +806,8 @@ Number of unique species with high confidence matches (scientific_name_match_sco
 high_confidence_matches <-  filter(scientific_name_matches, 
                                    scientific_name_match_score >= high_confidence_threshold
                                    )
-print(length(unique(high_confidence_matches$scientific_name.raw)))
+count_species_high_confidence_fuzzy_matched <- length(unique(high_confidence_matches$scientific_name.raw))
+print(count_species_high_confidence_fuzzy_matched )
 proportion_high_confidence = length(unique(high_confidence_matches$scientific_name.raw)) / length(unique(scientific_name_matches$scientific_name.raw))
 print(sprintf("%.2f%%", round(proportion_high_confidence*100,2)))
 ```
@@ -832,7 +831,7 @@ edit_note <- "high confidence str match to checklist (Clements 2024) "
 # make a copy
 int.raw.names.matches <- int.raw.names
 # fill the matching rows with the matched sci names
-# this assignment works becuase the match data frame contains the original row numbers
+# this assignment works because the match data frame contains the original row numbers
 int.raw.names.matches[high_confidence_matches$row_number,]$scientific_name.edit<- high_confidence_matches$closest_scientific_name_match
 int.raw.names.matches[high_confidence_matches$row_number,]$edit_notes <- paste( edit_note, round(high_confidence_matches$scientific_name_match_score,3))
 
@@ -847,9 +846,12 @@ Remaining species to resolve after high-confidence scientific name match:
 #| echo: false
 #| output: true
 print("unresolved rows in names table:")
-print(length(unresolved_species_rows(int.raw.names.matches)))
+count_rows_unresolved_after_high_confidence_fuzzy_match <-length(unresolved_species_rows(int.raw.names.matches))
+print(count_rows_unresolved_after_high_confidence_fuzzy_match)
+
 print("unresolved unique scientific names ")
-print(length(unique(unresolved_species(int.raw.names.matches)$scientific_name.raw)))
+count_species_unresolved_after_high_confidence_fuzzy_match <- length(unique(unresolved_species(int.raw.names.matches)$scientific_name.raw))
+print(count_species_unresolved_after_high_confidence_fuzzy_match)
 
 ```
 
@@ -951,6 +953,7 @@ Build the common name matching table
 
 ```{r}
 # create list of names to match from unresolved rows
+# this does include unresolved sp. (Anas sp.)
 name_matches<- unresolved_species(int.raw.names)
 # add new columns
 name_matches$row_number <- unresolved_species_rows(int.raw.names)
@@ -1012,8 +1015,12 @@ rows_with_non_empty_notes <- which(!is.na(int.raw.names$edit_notes))
 
 rows_to_update <- setdiff(high_confidence_common_matches$row_number, rows_with_non_empty_notes) # [!rows_high_confidence_match  %in% rows_with_non_empty_notes ]
 
-print(paste("updating", length(rows_to_update), "rows"))
+count_rows_updated_by_high_confidence_fuzzy_common_name_match <- length(rows_to_update)
 
+print(paste("updating", count_rows_updated_by_high_confidence_fuzzy_common_name_match, "rows"))
+
+count_species_names_updated_by_high_confidence_fuzzy_common_name_match <-  length(unique(int.raw.names[rows_to_update,]$scientific_name.raw))
+print(paste("updating",count_species_names_updated_by_high_confidence_fuzzy_common_name_match, "unique scientific names"))
 common_match_note <- "high confidence common name fuzzy match (Clements 2024) "
 
 # make a copy (since matching takes a while)
@@ -1433,8 +1440,22 @@ How to to add an edit/adjustment to the list:
 
 ```{r}
 #| label: apply_manual_resolutions
+#| echo: false
+#| output: true
 
 int.raw.names.manual <- int.raw.names
+
+print("unresolved rows in names table:")
+count_unresolved_rows_prior_to_manual_matches <- length(unresolved_species_rows(int.raw.names.manual))
+print(count_unresolved_rows_prior_to_manual_matches )
+count_unresolved_scientific_names_prior_to_manual_matches<- length(unique(unresolved_species(int.raw.names.manual)$scientific_name.raw))
+print("unresolved unique scientific names ")
+print(count_unresolved_scientific_names_prior_to_manual_matches)
+
+```
+
+
+```{r}
 for(r in 1:nrow(manual_taxonomic_resolutions)){
   manual.edit = manual_taxonomic_resolutions[r,]
   matching_rows = which(int.raw.names.manual$scientific_name.raw == manual.edit$scientific_name.raw)
@@ -1452,19 +1473,21 @@ for(r in 1:nrow(manual_taxonomic_resolutions)){
 
 ```
 
-Remaining species to manual resolve after fuzzy and gbif matching:
+### Check
+
+Remaining rows still needing resolution after all steps:
 
 ```{r}
 #| echo: false
 #| output: true
 print("unresolved rows in names table:")
-print(length(unresolved_species_rows(int.raw.names.manual)))
-print("unresolved unique scientific names ")
-print(length(unique(unresolved_species(int.raw.names.manual)$scientific_name.raw)))
+
+count_unresolved_rows_remaining <- length(unresolved_species_rows(int.raw.names.manual))
+print(count_unresolved_rows_remaining  )
 
 ```
 
-To view, run View(unresolved_species(int.raw.names.manual))
+To view unresolved remaining (if any), run View(unresolved_species(int.raw.names.manual))
 
 If updating the CSV, re-run from chunk `read_manual_resolutions`
 
@@ -1717,45 +1740,41 @@ print(paste("taxonomic_resolutions_file saved to ", f))
 
 ## Summary Counts
 
-
 These are counts of taxa from the full list extracted from the L0, cleaned database. 
 Each "taxa" on this list is a unique combination of (Scientific taxa + Common name), where 
-sometimes the common name entred may vary depending on the original source, creating unique combinations
+sometimes the common name entered may vary depending on the original source, creating unique combinations
 
-
-|taxa  |  count | description |
-+------+--------+-------------+
-| All  | 435    | number of unique taxa from cleaned data that were not in Clement's list |
-|      |        | matches found from high-confidence fuzzy search on Scientific Name |
-|      |        |
-
-
-
-
-Throughout the workflow, all species names were aligned with the Clements/eBird 2024 checklist (REF) for taxonomic harmonization, and any discrepancies were changed in code (Fig. 2 “Clean database”). To harmonize taxonomy for scientific names that did not exactly match species on the Clements/eBird checklist (425 taxa), we ran through a series of semi-automated steps to harmonize the taxonomy. First, we used fuzzy text search on scientific names with a threshold of 0.95 to automatically correct potential typos. For the remaining unresolved names, we used the rGBIF and taxaDB packages to identify known synonyms, resolving XXX taxa. Finally, for the remaining discrepancies (72 taxa), we manually evaluated the scientific names, referring to the Clements/eBird 2024 checklist (REF), Avibase (REF), the 2024 BBS species list (REF), and BOW (REF) to create a manual taxonomic cross-walk table (REF for this manual edit table). In code, all taxonomy changes were added to a master crosswalk table (REF FOR TABLE) and reviewed prior to altering the AvianMetaNetwork data.  
 
 ```{r}
-# first pass at printing the summary counts (ultimately should go into markdown table)
+# simple printing of summary counts
 
+print("Start: exact matches")
+print("Most counts exclude non-specific (e.g. Anas sp)")
 print(paste("count_L0_total_unique_species_unedited ", count_L0_total_unique_species_unedited))
 print(paste("count_L0_rows_scinames_already_on_checklist ", count_L0_rows_scinames_already_on_checklist))
 print(paste("count_L0_species_scinames_already_on_checklist ", count_L0_rows_scinames_already_on_checklist))
-
 print(paste("count_scinames_needing_to_be_matched after checklist match", count_scinames_needing_to_be_matched ))
-
 print(paste("count_rows_needing_matching_after_clements_match ", count_rows_needing_matching_after_clements_match ))
 
-
+print("Fuzzy Match on Scientific Name (high confidence)")
 print(paste("count_scinames_unresolved_prior_to_sciname_fuzzy_matching", count_scinames_unresolved_prior_to_sciname_fuzzy_matching))
 print(paste("high_confidence fuzzy match threshold", high_confidence_threshold))
+print(paste("count_species_high_confidence_fuzzy_matched ", count_species_high_confidence_fuzzy_matched))
+print(paste("count_species_unresolved_after_high_confidence_fuzzy_match", count_species_unresolved_after_high_confidence_fuzzy_match))
 
+print("Fuzzy Match on Common Name (high confidence)")
+print(paste("count_species_names_updated_by_high_confidence_fuzzy_common_name_match", count_species_names_updated_by_high_confidence_fuzzy_common_name_match))
+print(paste("count_rows_updated_by_high_confidence_fuzzy_common_name_match ", count_rows_updated_by_high_confidence_fuzzy_common_name_match))
+
+print("GBIF matching/updating")
 print(paste("count_names_matched_via_gbif ", count_names_matched_via_gbif))
 print(paste("count_rows_matched_via_gbif ",  count_rows_matched_via_gbif)) 
 print(paste("count_postGBIF_umatched_rows ", count_postGBIF_umatched_rows))
 print(paste("count_postGBIF_umatched_scinames", count_postGBIF_umatched_scinames))
 
+print("Manual matches (non-specifics, hybrids, no clear match)")
 
-
+print(paste("count_unresolved_scientific_names_requiring_manual_matches", count_unresolved_scientific_names_prior_to_manual_matches))
 ```
 
 ## Subset to the checklist 
