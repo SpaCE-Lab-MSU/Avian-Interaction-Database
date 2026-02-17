@@ -85,8 +85,7 @@ get_file_paths <- function(config_file = NULL){
     configFileMissingMessage <- paste("could not find file paths file ",
                                       config_file,
                                       "which must be set to find files")
-    simpleError(configFileMissingMessage)
-    stop()
+    stop(configFileMissingMessage)
   }
 
   source(config_file)
