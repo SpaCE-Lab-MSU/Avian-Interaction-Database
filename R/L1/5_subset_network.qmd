@@ -386,7 +386,8 @@ intxns.db.subset.edi <- intxns.db.subset.new %>%
     -name_changes,
     -entry_file,
     -source,
-    -other_species1
+    -other_species1,
+    -BOW_evidence
   ) %>% 
   relocate(
     taxa1_common, 
