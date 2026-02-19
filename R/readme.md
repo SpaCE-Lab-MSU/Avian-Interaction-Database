@@ -32,24 +32,24 @@ the "*reconcile taxonomy*" step below, in the data folder of this repository.
 
 ## Main database build scripts
 
-* R/L0/1_generate_species_lists.R = Generates species lists used for taxonomic harmonization and regional subsetting
-* R/L0/2_stitch_species.qmd = stitches together all individual csvs in /L0/species
-* R/L1/3_subset_species_lists.R = generates regional taxonomic crosswalk species checklist for Canada, Alaska, and the Continental United States (CONUS)
-* R/L1/4_clean_network_data.qmd = fixes species names, interaction codes, checks species name discrepancies based on current and past Clements names.  
-* R/L1/5_subset_network.qmd = subsets interaction network to only include focal species in the subset species list generated in script 3. 
-* R/L1/6_generate_final_network_checklist.R = creates final Clements list of all taxa in the AvianMetaNetwork
-* R/L2/7_figre_processing_vignette.qmd = provides centralized data loading, cleaning and utility functions that are used in the phylogeny, network and interaction distribution figures
-* R/L2/8_summary_vignette.qmd = counts of records by categories of final database 
+* `R/L0/1_generate_species_lists.R` = Generates species lists used for taxonomic harmonization and regional subsetting
+* `R/L0/2_stitch_species.qmd` = stitches together all individual csvs in /L0/species
+* `R/L1/3_subset_species_lists.R` = generates regional taxonomic crosswalk species checklist for Canada, Alaska, and the Continental United States (CONUS)
+* `R/L1/4_clean_network_data.qmd` = fixes species names, interaction codes, checks species name discrepancies based on current and past Clements names.  
+* `R/L1/5_subset_network.qmd` = subsets interaction network to only include focal species in the subset species list generated in script 3. 
+* `R/L1/6_generate_final_network_checklist.R` = creates final Clements list of all taxa in the AvianMetaNetwork
+* `R/L2/7_figure_processing_vignette.qmd` = provides centralized data loading, cleaning and utility functions that are used in the phylogeny, network and interaction distribution figures
+* `R/L2/8_summary_vignette.qmd` = counts of records by categories of final database 
 
 ## Folders
 
-- R/L0: code to examine, clean, and aggregate the version-controlled data entry files
-- R/L1: code to clean and harmonize taxonomic entries for the final database, 
+- `R/L0`: code to examine, clean, and aggregate the version-controlled data entry files
+- `R/L1`: code to clean and harmonize taxonomic entries for the final database, 
   and to create subsets for specific analyses
-- R/L2: code for creating simple summaries and visualizations of the data in the database
-- R/lib: scripts with shared functions used by main database build scripts
-- R/archive: code from previous versions saved for reference
-- R/auxiliary scripts: support scripts not used in the workflow, but helpful for evaluation, etc. 
+- `R/L2`: code for creating simple summaries and visualizations of the data in the database
+- `R/lib`: scripts with shared functions used by main database build scripts
+- `R/archive`: code from previous versions saved for reference
+- `R/auxiliary scripts`: support scripts not used in the workflow, but helpful for evaluation, etc. 
 
 ## Getting Started
 
