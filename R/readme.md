@@ -9,7 +9,7 @@ https://github.com/AvianMetaNetwork/AvianMetaNetwork
 ## Overview
 
 For an overview of the project, details about the database, its structure, and a protocol 
-for how the data are pulled from primary sources, see the [Project Readme file](../README.md) 
+for how the data are pulled from primary sources, see the [Project readme file](../readme.md) 
 in the root directory. 
 
 This documents the process and R code for cleaning and building
@@ -18,12 +18,12 @@ by contributors to the database, primarily workers in the
 [Spatial and Community Ecology Lab (SpaCE Lab)](https://www.communityecologylab.com)
 
 The build process and scripts in this section are for use by project collaborators only
-and provided as a reference.  For details about our workflow, see [Project Readme file](../README.md) 
+and provided as a reference.  For details about our workflow, see [Project readme file](../readme.md) 
 
 
 ## Location of data
 
-See the [main documentation for the project](../README.md) for a link to the finished 
+See the [main documentation for the project](../readme.md) for a link to the finished 
 database (the output of this process). 
 
 The R folders in this project do have some support data used to harmonize and update the
@@ -193,4 +193,4 @@ MSU Ecology Evolution, and Behavior SEED Grant (to P.L. Zarnetske).
 Original work on a subset of species was funded by the Yale Climate and Energy 
 Institute (to P.L. Zarnetske), Erasmus Mundus Fellowship (to S. Zonneveld).
 
-Please see main README for additional acknowledgments.
+Please see main readme for additional acknowledgments.

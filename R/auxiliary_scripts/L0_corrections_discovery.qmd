@@ -67,23 +67,23 @@ For major changes and cleaning requiring transparency, such as re-coding categor
 
 ```{r}
 
-#  get the file paths for this project. See README.md for how to set those up
+#  get the file paths for this project. See readme.md for how to set those up
 file_paths <- get_file_paths()
 print("File Paths used for this run:")
 print(file_paths)
 
 
 if(!dir.exists(file_paths$SYNC_DATA_FOLDER)) { 
-  warning("can't find SYNC_DATA_FOLDER, stopping program.  see README.md for how to set this")
+  warning("can't find SYNC_DATA_FOLDER, stopping program.  see readme.md for how to set this")
   stop()
 }
 if(!dir.exists(file_paths$DATA_FOLDER)) { 
-  warning("can't find DATA_FOLDER, stopping program. see README.md for how to set this")
+  warning("can't find DATA_FOLDER, stopping program. see readme.md for how to set this")
   stop()
 }
 
 if(!dir.exists(file_paths$L0)) { 
-  warning("can't find L0, stopping program. see README.md for how to set this")
+  warning("can't find L0, stopping program. see readme.md for how to set this")
   stop()
 }
 

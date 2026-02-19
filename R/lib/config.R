@@ -46,7 +46,7 @@
 #'       warning("the DATA_FOLDER in the config file can't be found")
 #'     }
 #'   } else {
-#'     warning("the configuration file config.yml must have an entry DATA_FOLDER See README.md for how to set-up")
+#'     warning("the configuration file config.yml must have an entry DATA_FOLDER See readme.md for how to set-up")
 #'   }
 #'
 #'   # these hard-coded paths are set by convention for the repository.
@@ -93,7 +93,7 @@ get_file_paths <- function(config_file = NULL){
   if(!exists("DATA_FOLDER")) {
     message = paste("the config file ",
                     config_file,
-                    "must set the variable DATA_FOLDER See README.md for how to set-up")
+                    "must set the variable DATA_FOLDER See readme.md for how to set-up")
     warning(message)
     stop()
   } else if(!dir.exists(here::here(DATA_FOLDER))){

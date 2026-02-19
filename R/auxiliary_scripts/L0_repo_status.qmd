@@ -54,7 +54,7 @@ library(stringr)
 ## Folder path configuration
 
 Setup the paths to the folders, requires the file 'config.yml' set in home directory and 
-the code will raise warnings if it isn't.  See [README](../../README.md) for details. 
+the code will raise warnings if it isn't.  See [readme](../../readme.md) for details. 
 
 To use this notebook on Mac, you have to allow full access to Rstudio and/or Terminal 
  in System Settings > Privacy & Security > Full Disk Access

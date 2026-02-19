@@ -6,7 +6,7 @@ From the [Spatial and Community Ecology Lab (SpaCE Lab)](https://www.communityec
 https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database
 
 
-Refer to the main [documentation (readme)](../README.md) file in the parent directory of this repository for information about the Workflow and subdirectory naming conventions.
+Refer to the main [documentation (readme)](../readme.md) file in the parent directory of this repository for information about the Workflow and subdirectory naming conventions.
 
 
 ## OVERVIEW

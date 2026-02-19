@@ -1,6 +1,6 @@
 # AvianMetaNet Data folder
 
-`/data/README.md`
+`/data/readme.md`
 
 These data are support files used for cleaning and building the database
 
