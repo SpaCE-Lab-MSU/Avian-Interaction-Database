@@ -1,10 +1,10 @@
-# AvianMetaNet 
+# AvianMetaNetwork 
 ###  [Spatial and Community Ecology Lab (SpaCE Lab)](https://www.communityecologylab.com)
 
 https://github.com/AvianMetaNetwork/AvianMetaNetwork
 
 This repository contains code, workflows, documentation, and support data to 
-build the AvianMetaNet.  
+build the AvianMetaNetwork (aka "AvianMetaNet").  
 
 The database is in preparation for publication as an open access data paper. 
 From 2012-2014, Zarnetske and Zonneveld compiled bird-bird interactions among cavity nesting birds 
@@ -13,7 +13,7 @@ and their interacting bird species, based on species accounts in the Birds of No
 North American cavity nesting bird species distributions 
 ([Belmaker and Zarnetske et al. 2015 GEB](https://onlinelibrary.wiley.com/doi/full/10.1111/geb.12311)). 
 
-Starting in 2019, a new protocol was established and the previous records were updated 
+Starting in 2019, a new protocol was established and all prior records were updated 
 and further bird-bird interactions were added in by Zarnetske and MSU SpaCE Lab undergraduates 
 (2019-present), initially focusing on North America. 
 
@@ -30,25 +30,20 @@ The workflow for this repository follows the guidelines set out by the [Environm
 
 ![main AMN workflowdiagram](docs/images/amn_generalized_workflow_diagram_2025.png)
 
-*Overview of AvianMetaNet data collection, data entry, aggregation and cleaning (K. Kapsar)*
+For Data entry workflow (L0), see our detailed [data entry protocol](/docs/AvianMetaNetwork_DATA_ENTRY_INSTRUCTIONS.md) we make available to all project members.
 
-For Data entry workflow (L0), see our detailed [data entry protocol](/docs/AvianMetaNetwork_DATA_ENTRY_INSTRUCTIONS.md) we make available to all project members
-
-For data cleaning and harmonizing workflow (L1), as well as summarizing and visualizing
-the database (L2) see [R script workflow](/R/readme.md)
+For data cleaning and harmonizing workflow (L1), as well as summarizing and visualizing the database (L2) see [R script workflow](/R/readme.md)
 
 
 ## Description of subdirectories 
 
 - **[data](/data/readme.md)**
-  Directory containing instructions for interaction data entry, metadata, and species checklists (raw in L0, synthesized in L1). Note that species interaction data files are not directly available in this repository, but 
-  available for dowload from the EDI repository (see above) upon publication. 
+  Directory containing instructions for interaction data entry, metadata, and species checklists (raw in L0, synthesized in L1). Note that species interaction data files are not directly available in this repository, but available for dowload from the EDI repository (see above) upon publication. 
 - **[R](/R/readme.md)**
-  Code and support files to build a clean and harmonized database from 
-  version-controlled data entry files. See [R code documentation](/R/readme.md)
-  for detailed descriptions and instructions for using Code/Workflows and descriptions of the files
-- website: code files to build the website for the database
-- docs: output of website
+  Code and support files to build a clean and harmonized database from version-controlled data entry files. See [R code documentation](/R/readme.md)
+  for detailed descriptions and instructions for using Code/Workflows and descriptions of the files.
+- website: code files to build the website for the database.
+- docs: output of website.
 
 <!-- 
 - reports:  notebooks in the R folder that are 'rendered' to HTML are saved here 
@@ -63,12 +58,17 @@ Funding is provided by Michigan State University (to P.L. Zarnetske), and by a M
 ## Authors of this repository
 
 * Phoebe L. Zarnetske, PI, [Spatial and Community Ecology Lab (SpaCE Lab)](https://www.communityecologylab.com)
-* Kelly Kapsar, Post-doctoral Faculty 2025-2026
-* Lucas Mansfield, PhD candidat 2025-
+* Kelly Kapsar, Post-doctoral Fellow 2025-
+* Lucas Mansfield, PhD student 2025-
+
+## Collaborators
+
+* Vincent Miele, CNRS France
+* Stephane Dray, University of Lyon and CNRS, France
 
 ## Previous Collaborators
 
-* Emily Parker, staff data manager 2022-24
+* Emily Parker, staff data manager 2022-2024
 * Patrick Bills, staff data scientist 2023-2025 [Institute for Cyber-enabled Research (ICER)](https://icer.msu.edu)
 
 ## Student Research Assistants
@@ -108,9 +108,15 @@ MSU Undergraduates led the presentation of a research poster at the
 2024 [MSU Undergraduate University Research and Arts Forum](https://urca.msu.edu/uuraf):
 *DePasquale, G., I. Hirschowitz, C. Roche, E.G. Parker, P. Bills, P.L. Zarnetske. April 2024. The North American AvianMetaNet. Michigan State University Undergraduate Research and Arts Forum (UURAF). East Lansing, MI. Poster Presentation.*
 
-In Prep: *The AvianMetaNet: biotic interactions among birds of the continental United States and Canada*, 
+In Prep: *AvianMetaNetwork: biotic interactions among birds of the continental United States and Canada*, 
 Phoebe Zarnetske, Patrick Bills, Kelly Kapsar, Lucas Mansfield, Emily G Parker
 Caroline Roche, India Hirschowitz, Giovanni DePasquale, Sara Zonneveld
+
+## Acknowledgements
+
+*Cornell Lab of Ornithology: Birds of The World, and especially insights from Brian Sullivan and Pam Rasmussen.
+
+*MSU undergraduates listed above
 
 
 ## References
