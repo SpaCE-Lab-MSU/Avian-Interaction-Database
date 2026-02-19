@@ -178,7 +178,7 @@ entry_changes_pct <- round(sum(!is.na(df$entry_changes))/length(df$entry_changes
 #### Unique taxa1/taxa2/interaction combinations by interaction type:
 
 ```{r}
-source(here::here("_interaction_categories_and_colors.R"))
+source(here::here("./R/lib/interaction_categories_and_colors.R"))
 
 unique_intxns %>% left_join(interaction_categories) %>% group_by(category) %>% summarize(n=n()) %>% arrange(-n)
 ```
@@ -195,10 +195,10 @@ df %>% left_join(interaction_categories) %>% group_by(category) %>% summarize(n=
 
 # Interaction Data Exploratory Figures
 
-Source `_figure_processing.R` which contains the data processing and plotting functions. See `7_figure_processing_vignette.qmd` for further explanation of the data processing and plot functions!
+Source `figure_processing.R` which contains the data processing and plotting functions. See `7_figure_processing_vignette.qmd` for further explanation of the data processing and plot functions!
 
 ```{r, warning=FALSE, message=FALSE}
-source(here::here("R/L2/_figure_processing.R"))
+source(here::here("R/lib/figure_processing.R"))
 ```
 
 ### Interaction Distribution Figure

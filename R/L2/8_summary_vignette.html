@@ -2385,7 +2385,7 @@ vertical-align: -.125em;
 <section id="unique-taxa1taxa2interaction-combinations-by-interaction-type" class="level4">
 <h4 class="anchored" data-anchor-id="unique-taxa1taxa2interaction-combinations-by-interaction-type">Unique taxa1/taxa2/interaction combinations by interaction type:</h4>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;_interaction_categories_and_colors.R&quot;</span>))</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;./R/lib/interaction_categories_and_colors.R&quot;</span>))</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>unique_intxns <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(interaction_categories) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(category) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="sc">-</span>n)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
@@ -2440,9 +2440,9 @@ vertical-align: -.125em;
 </section>
 <section id="interaction-data-exploratory-figures" class="level1">
 <h1>Interaction Data Exploratory Figures</h1>
-<p>Source <code>_figure_processing.R</code> which contains the data processing and plotting functions. See <code>7_figure_processing_vignette.qmd</code> for further explanation of the data processing and plot functions!</p>
+<p>Source <code>figure_processing.R</code> which contains the data processing and plotting functions. See <code>7_figure_processing_vignette.qmd</code> for further explanation of the data processing and plot functions!</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;R/L2/_figure_processing.R&quot;</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;R/lib/figure_processing.R&quot;</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="interaction-distribution-figure" class="level3">
 <h3 class="anchored" data-anchor-id="interaction-distribution-figure">Interaction Distribution Figure</h3>

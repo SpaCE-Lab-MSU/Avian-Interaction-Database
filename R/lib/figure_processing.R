@@ -25,7 +25,7 @@ inter_NA <- read.csv(here::here("../AvianMetaNetwork-Working/L1/amn_cac.csv")) #
 # Interaction color scheme and ordering
 # --------------------------------------------------------------------
 # Load in from separate script
-source(here::here("_interaction_categories_and_colors.R"))
+source(here::here("./R/lib/interaction_categories_and_colors.R"))
 
 # --------------------------------------------------------------------
 # Slimming dataset
@@ -296,9 +296,9 @@ plot_phylo_combined <- function(tree, #tree produced earlier, should be NA_tree
 # Network figure data processing and plot function
 # --------------------------------------------------------------------
 
-source(here::here("../AvianMetaNetwork/website/code/avicommons_clem.r"))
-avi <- jsonlite::fromJSON(here::here("../AvianMetaNetwork/website/code/avicommons_full.json"))
-clem <- readr::read_csv(here::here("../AvianMetaNetwork/website/code/clemtax_2025.csv"))
+source(here::here("R/lib/avicommons_clem.r"))
+avi <- jsonlite::fromJSON(here::here("data/L2/aux_avicommons_full.json"))
+clem <- readr::read_csv(here::here("data/L1/species_checklists/spp_clem_in_amn_cac.csv"))
 
 inter_NA_int <- inter_NA_clean %>% #removing "non-interactions"
   filter(interaction != "co-occur" & interaction != "hybridization")
