@@ -128,11 +128,6 @@ to check that they are set and the paths are found.
    (this is an R script and uses R syntax, not a config or environment file)
    - DATA_FOLDER : the path to the folder that has the L0 and L1 subfolders.
    - CHECKLIST_FOLDER : location of various checklist files in the repository.
-   
-**TO-DO: we have two checklists L0 = Clements etc and L1= PLZ Curated and this
-system does not accommodate for that**
-
-   
 
 Example `filepaths.R` contents (see also the content of the file `filepaths_example.R`)
 
