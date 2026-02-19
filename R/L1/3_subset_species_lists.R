@@ -13,12 +13,12 @@
 #                 (2) Clements-eBird 2024 list
 #                 (3) BBS 2024 release
 # DATA INPUT:     L0 data: spp_avibase_cac_2024.csv,
-#                         eBird-Clements-v2024-integrated-checklist-October-2024-rev.csv,
-#                         spp_bbs_2024_clean.csv
-#                     all from 1_generate_species_lists.R
+#                          eBird-Clements-v2024-integrated-checklist-October-2024-rev.csv,
+#                          spp_bbs_2024_clean.csv
+#                          (all above are from 1_generate_species_lists.R)
 # DATA OUTPUT:    L1 data: spp_joint_cac.csv; spp_joint_cac_colsubset.csv (column subset)
 # PROJECT:        AvianMetaNet & avian-meta-network
-# DATE:           17 January 2022 - 10 February 2026
+# DATE:           17 January 2022 - 19 February 2026
 
 # Clear all existing data
 rm(list=ls())

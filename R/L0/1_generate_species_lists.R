@@ -18,7 +18,7 @@
 #                   and formatted
 #                 (4) AviBase Global list, by region; version 8.17 Nov 2024 list
 # PROJECT:        AvianMetaNet & avian-meta-network
-# DATE:           17 January 2022 - 10 February 2026
+# DATE:           17 January 2022 - 19 February 2026
 # NOTES:          bbs_specieslist_2024_L1.csv is produced in bbs_specieslist_L1.R.
 #                 Check out this site for code w BBS:
 #                 https://rdrr.io/github/davharris/mistnet/src/extras/BBS-analysis/data_extraction/data-extraction.R

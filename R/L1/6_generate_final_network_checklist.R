@@ -11,7 +11,7 @@
 #                 amn_cac.csv
 # DATA OUTPUT:    spp_clem_in_amn_cac.csv
 # PROJECT:        AvianMetaNet & avian-meta-network
-# DATE:           17 January 2022 - 10 February 2026
+# DATE:           17 January 2022 - 19 February 2026
 
 
 # Load shared helper functions used across the project

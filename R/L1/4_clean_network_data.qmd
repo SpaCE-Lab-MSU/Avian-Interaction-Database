@@ -10,7 +10,7 @@ format:
     toc-depth: 2
     embed-resources: true
 editor: source
-date: 2026-02-06
+date: 2026-02-19
 date-format: iso
 ---
 
@@ -27,7 +27,7 @@ rm(list=ls())
 - COLLABORATORS: Vincent Miele, Stephane Dray
 - Run Date: `r Sys.Date()`
 - Next script to run: 5_subset_network.qmd
-  this cleans further (e.g., breeding/non-breeding) and some of that needs to go in general cleaning (either here or in another script).
+ (This cleans further (e.g., breeding/non-breeding) and some of that needs to go in general cleaning (either here or in another script)).
 
 This script is used to refine species name changes to align with the 
 Clements & eBird checklist to create an Rdata file.  

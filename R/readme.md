@@ -56,7 +56,7 @@ the "*reconcile taxonomy*" step below, in the data folder of this repository.
 Summary of the steps to be able to run these scripts and build the database. This 
 assumes the use of Rstudio 2025 version or above.
 
-1. setup 
+1. Setup 
    - clone the private git repository with the in-progress (aka 'raw') data  
      from https://github.com/AvianMetaNetwork/AvianMetaNetwork-Working.git
      to a folder on your computer.  Note the location of this folder for steps later. 
@@ -66,25 +66,25 @@ assumes the use of Rstudio 2025 version or above.
      pointing to data on your computer (details below). 
    - install packages as needed (details below)
    - clear R environment (scripts do not do this automatically)
-1. optional: check file paths/repository state
+1. Optional: check file paths/repository state
    - open `R/auxilliary_script/L0_repo_status.qmd` Quarto file
    - in Rstudio, in the upper-right "run" button, select
      "restart R and run all chunks"
    - if there are no errors, the data is available and you may proceed.
    - if there are errors, check if `dir.exists(DATA_FOLDER)` 
-1. optional/occasional: rebuild species lists
+1. Optional/occasional: rebuild species lists
    * `R/L0/1_generate_species_lists.R` = Generates species lists used for taxonomic harmonization and regional subsetting
    Recent species lists are in the [data folder](../data) of this repository and only need to be
    recreated if new lists are available from our primary sources
-1. aggregate (stitch) raw data into single file
-   - `R/L0/2_stitch_species.qmd` = stitches together all individual csvs in /L0/species
+1. Aggregate (stitch) raw data into single file
+   - `R/L0/2_stitch_species.qmd` = stitches together all individual CSVs in /L0/species
    - in the upper-right "run" button, select
      "restart R and run all chunks"
    - this will report the file that is saved
-1. build species checklist for current region of study 
-   -  `R/L1/3_subset_species_lists.R` = generates regional taxonomic crosswalk species checklist for Canada, Alaska, and the Coninental United States (CONUS)
+1. Build species checklist for current region of study 
+   -  `R/L1/3_subset_species_lists.R` = generates regional taxonomic crosswalk species checklist for Canada, Alaska, and the Continental United States (CONUS)
 
-1. build taxonomy edits, running one chunk at time
+1. Build taxonomy edits, running one chunk at time
    - open `R/L1/4_clean_network_data.qmd` = harmonizes species names, interaction codes, checks species name discrepencies based on current and past Clements names.  
    - edit the value for stitched_L0_file to match the L0 step above (near the top of file)
    - check the value for the main checklists 

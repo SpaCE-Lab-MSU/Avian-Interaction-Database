@@ -31,7 +31,7 @@ cleaning but taxonomic names as entered (older names, typos, etc)
 *Set the interactions L1 database file to read from here:*
 
 
-( output From `R/L1/AvianInteractionData_L1.R` )
+( output From `R/L1/4_clean_network_data.R` )
 
 ```{r}
 # Clear all existing data

@@ -21,8 +21,8 @@ date-format: iso
 -   AUTHORS: Phoebe Zarnetske, Pat Bills, Emily Parker, Kelly Kapsar
 -   COLLABORATORS: Vincent Miele, Stephane Dray
 -   DATA INPUT: Data entry CSV files in L0 folder
--   DATA OUTPUT: L0 data: AvianInteractionData_L0.csv
--   DATE: 20 Mar 2023 - AUGUST 2025
+-   DATA OUTPUT: L0 data: amn_all_raw.csv
+-   DATE: 20 Mar 2023 - 19 FEB 2026
 -   Next script to run: R/L1/3_subset_species_lists.R
 
 **Run Date** 
