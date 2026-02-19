@@ -6,12 +6,12 @@ From the [Spatial and Community Ecology Lab (SpaCE Lab)](https://www.communityec
 https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database
 
 
-Refer to the main [documentation (readme)](readme.md) file in the parent directory of this repository for information about the Workflow and subdirectory naming conventions.
+Refer to the main [documentation (readme)](../README.md) file in the parent directory of this repository for information about the Workflow and subdirectory naming conventions.
 
 
 ## OVERVIEW
 Data entry & checking on bird-bird interactions occurs within this 
-L0 portion of our private, in-progress data repository : [Avian-Interaction-Data-Working](https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database-Working). 
+L0 portion of our private, in-progress data repository : [AvianMetaNetwork-Working](https://github.com/AvianMetaNetwork/AvianMetaNetwork-Working). 
 
 Only use GitHub or Google Sheets for data entry and editing of files.
 *Do not use Microsoft Excel* for data entry or any editing of files;
@@ -19,35 +19,35 @@ it has text encoding that differs from GitHub and Google Sheets.
 
 ### The AvianMetaNetwork repository data/L0 folder contains the following files:
 
-### [**amn_metadata_colnames_v0.csv**](amn_metadata_v0.csv) 
+### [**amn_metadata_colnames_v0.csv**](../data/L0/amn_metadata_v0.csv) 
 Metadata for columns in original version of interaction data sheet. 
 
-### [**amn_metadata_colnames_v1.csv**](amn_metadata_v1.csv) 
+### [**amn_metadata_colnames_v1.csv**](../data/L0/amn_metadata_v1.csv) 
 Metadata for columns in modified version of interaction data sheet. 
 
 ### [**AvianInteractionData_SpeciesList**](https://docs.google.com/spreadsheets/d/1gT4ljF1yH1_WweINnAW4JfQ1Ytr6OFoXUu24a__qCqM/edit?usp=sharing) 
 Species look-up table and assignments for data entry. Contains the live updates and assignments of species entry progress.(Note: This is a Google Sheet only accessible to those involved directly in the project.)
 
-### [**aux_interaction_defs.csv**](aux_interaction_defs.csv)
+### [**aux_interaction_defs.csv**](../data/L0/aux_interaction_defs.csv)
 Metadata for interaction types.
 
-### [**aux_metadata_uncertain**](/aux_metadata_uncertain.csv)
+### [**aux_metadata_uncertain**](../data/L0/aux_metadata_uncertain.csv)
 Metadata for uncertain interaction keywords.
 
 ## Step 1: Get started in GitHub
 
 The first time you use GitHub, do the following: 
 
-- Sign into GitHub and navigate to: https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database. 
+- Sign into GitHub and navigate to: https://github.com/AvianMetaNetwork/AvianMetaNetwork. 
 
 - Install GitHub Desktop (or if you use GitHub command line or github.com, skip this step).
 
 - Clone this entire repository by clicking on the green "Code" button and selecting "Open with GitHub Desktop". Save the location of the repository on your computer (not inside a Google Drive or Dropbox or One Drive folder).
 
 ## Step 2: Pull the most recent version of the Database
-In GitHub Desktop, select Avian-Interaction-Database. Click "Fetch origin" to pull the most recent version of the database, which will save it to your GitHub location on your computer (established in Step 1). 
+In GitHub Desktop, select AvianMetaNetwork. Click "Fetch origin" to pull the most recent version of the database, which will save it to your GitHub location on your computer (established in Step 1). 
 
-## Step 3: Select a Species to Work on
+## Step 3: Select a species to work on
 Navigate to the Google Drive folder Avian_MetaNetwork/data/L0/avian_intxn_data and open the **AvianInteractionData_SpeciesList Google Sheet**.  
 
 Select a species that has not been entered yet, fill in your name or initials with that entry in the "recorder" column. 
@@ -115,7 +115,7 @@ c) Enter interactions for the species you selected by designating the selected s
 
 **effect_tx1_on_tx2, effect_tx2_on_tx1, Interaction**
 - Refer to the unique types of interactions found here:
-[**aux_interaction_defs.csv**](aux_interaction_defs.csv). 
+[**aux_interaction_defs.csv**](../data/L0/aux_interaction_defs.csv). 
 
 -Enter in the appropriate interaction type, as well as the direction of the interaction specific to each species. For the effects, you must enter either -1, 0, or 1, as entering another value will cause the sheet to error. Be careful to place the correct value in the effect columns. For the interaction types, there is a dropdown of options listing currently defined interaction types. Entering a value not on this list will pop up with a warning in that cell, which is usually caused by a typo. It is possible you will need to enter a value not on the list. For example, you may add the "-artificial" tag to an interaction, have "competition-" over a resource not defined in the interactions, or find a new interaction that has yet to be defined in the list. In this case, you may ignore the warning.
 
@@ -136,7 +136,7 @@ c) Enter interactions for the species you selected by designating the selected s
 - Enter the year that the interaction was observed in the study. *Note: this may differ from the year the study was published*.
 
 **Uncertain Interactions**
-- If there is any uncertainty about the interaction, enter the appropriate uncertain interaction keyword from [**aux_metadata_uncertain.csv**](aux_metadata_uncertain.csv). You may add additional information to the uncertain_interaction column, but make sure that the note includes an uncertain keyword that is spelled correctly (the R code will look for these keywords specifically in order to determine whether or not to keep the interaction in further analysis). If you are unsure which keyword to use, you can leave a comment and ping a reviewer, or make a note when you create an issue (Step 8).
+- If there is any uncertainty about the interaction, enter the appropriate uncertain interaction keyword from [**aux_metadata_uncertain.csv**](../data/L0/aux_metadata_uncertain.csv). You may add additional information to the uncertain_interaction column, but make sure that the note includes an uncertain keyword that is spelled correctly (the R code will look for these keywords specifically in order to determine whether or not to keep the interaction in further analysis). If you are unsure which keyword to use, you can leave a comment and ping a reviewer, or make a note when you create an issue (Step 8).
 
 - If there is an interaction that gives a list of potential, but uncertain, involved species, include rows for all species mentioned, rather than their shared genus or family. For example, when documenting "...who noted a pair refurbishing an old oriole nest, likely built by either Spot-breasted Oriole (Icterus pectoralis) or Altamira Oriole (Icterus gularis)," include rows for both the Spot-breasted Oriole and the Altamira Oriole.
 
@@ -155,7 +155,7 @@ c) Enter interactions for the species you selected by designating the selected s
 - If you encounter a 4-letter banding abbreviation (e.g. GHOW) or other acronym or code for mentioning a bird, copy and paste the text excerpt where the abbreviation is defined (e.g., "Great-horned Owl (GHOW)...") into the text_excerpt columns in every row where an interaction was derived from a text excerpt that includes an abbreviation.
 
 **Other**
-- Note that for species1, its interaction with species2 will become part of species2’s pairwise interactions. NOTE: if a duplicate entry occurs, it’s ok (we will edit in R). It takes too much time to avoid duplicates by manually searching for the species2 entries that already exist.
+- Note that for species1, its interaction with species2 will become part of species2’s pairwise interactions. NOTE: if a duplicate entry occurs, it’s ok (we will edit in R). It takes too much time to avoid duplicates by manually searching for the taxa2 entries that already exist.
 
 - Scientific names change more often than common names, and sometimes it is difficult to find which one is appropriate. If you don't know, please ask a reviewer (Phoebe or Caroline). 
 
@@ -207,11 +207,11 @@ When you've completed entering the all interactions in your google sheet, it nee
   
 In the future it will be possible to run a program to check your file for correctness, but for now you may upload as is. **IMPORTANT: Don't open and save the CSV file from Excel, which adds incompatible characters.**  
 
-## Step 7: Upload CSV to GitHub. 
+## Step 7: Upload CSV to GitHub 
 
-Open the repository https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database-Working/tree/main/L0/species_in_review and click the **[Add file]** button. That button has two choices, select "Upload files".   
+Open the [repository](https://github.com/AvianMetaNetwork/AvianMetaNetwork-Working/tree/main/L0/species_in_review) and click the **[Add file]** button. That button has two choices, select "Upload files".   
 
-Here is a shortcut link to that upload form: https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database-Working/upload/main/L0/species_in_review
+Here is a shortcut link to that upload form: https://github.com/AvianMetaNetwork/AvianMetaNetwork-Working/tree/main/L0/species_in_review
 
 You may drag the CSV file, or click the "choose your files" option to select it. 
 
@@ -219,7 +219,7 @@ You may drag the CSV file, or click the "choose your files" option to select it.
 
 `Passerina_cyanea_PLZ.csv ready for review`   
 
-- If there is anything that has happened that you need to note (e.g., you weren't able to complete all rows, or there is some data issue you can't overcome, add that to the "optional extendend description" box. Most likely you won't need this, but it's there to communicate anything about this file that you need to. 
+- If there is anything that has happened that you need to note (e.g., you weren't able to complete all rows, or there is some data issue you can't overcome, add that to the "optional extended description" box. Most likely you won't need this, but it's there to communicate anything about this file that you need to. 
 
 - Leave the option "Commit directly to the main branch" selected.
 
@@ -231,7 +231,7 @@ You may drag the CSV file, or click the "choose your files" option to select it.
 
 Open a new "issue" (which is like a task) and indicate that the file is waiting for review.  For more information on issues, see https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue
 
-The direct URL to create a new issue in this repository is:  https://github.com/SpaCE-Lab-MSU/Avian-Interaction-Database/issues/new
+The direct URL to create a new issue in this repository is:  https://github.com/AvianMetaNetwork/AvianMetaNetwork-Working/issues/new
 
 Otherwise, if you are in any folder in the GitHub Avian-Interaction-Database repository, click the "issues" link near the top left.   Once there, click the green "New Issue" button.
 
@@ -243,18 +243,18 @@ If you have an issue you want to make sure the reviewer sees, in the "assignees"
 
 ## Step 9: Entry checking
 
-All species files should be reviewed by a second person to look for errors and make sure there is consistent interpretation of the text. The reviewer will go into the original Google Sheets file, correct any errors, and add their name and date to the file. They will then reupload the new file into the species folder, and remove the old version. Reviewers, see below section for more details on checking process.
+All species files should be reviewed by a second person to look for errors and make sure there is consistent interpretation of the text. The reviewer will go into the original Google Sheets file, correct any errors, and add their name and date to the file. They will then reu-pload the new file into the species folder, and remove the old version. Reviewers, see below section for more details on checking process.
 
 ## Step 10: View changes made by the reviewer (changes usually made by Phoebe, Caroline, Jenna or Lucas)
 
-You will want to view any changes that were made by the reviewer to understand different interpretations and corrections. This will help with learning how to correctly enter the data in the first place, and also provide a way to discuss any discrepencies. To see what was changed between the species' CSV file placed into `/L0/species_in_review` folder and the fully reviewed version CSV placed into `/L0/species` folder, do the following: open the Google Sheet version of the species' file in the Google Shared Drive folder: [/avian_intxn_data/species_completed](https://drive.google.com/drive/u/0/folders/11NAIHD4Jfmd5qtQvKbYdiIXz7yTQu446). Open the species' Google Sheet, click on the edit history (usually an underlined phrase next to the "Help" menu stating, "Last edit was ...". This opens the edit history. Click on the "Version History" on the right to see what Emily or Phoebe changed. Changes show up in a color. Do not restore to a previous version! Once you're done viewing, click the ARROW pointing back to the current version and close the document. **They may also ping you in comments on documents, so be sure to check your email/Google Drive regularly.**
+You will want to view any changes that were made by the reviewer to understand different interpretations and corrections. This will help with learning how to correctly enter the data in the first place, and also provide a way to discuss any discrepancies. To see what was changed between the species' CSV file placed into `/L0/species_in_review` folder and the fully reviewed version CSV placed into `/L0/species` folder, do the following: open the Google Sheet version of the species' file in the Google Shared Drive folder: [/avian_intxn_data/species_completed](https://drive.google.com/drive/u/0/folders/11NAIHD4Jfmd5qtQvKbYdiIXz7yTQu446). Open the species' Google Sheet, click on the edit history (usually an underlined phrase next to the "Help" menu stating, "Last edit was ...". This opens the edit history. Click on the "Version History" on the right to see what Emily or Phoebe changed. Changes show up in a color. Do not restore to a previous version! Once you're done viewing, click the ARROW pointing back to the current version and close the document. **They may also ping you in comments on documents, so be sure to check your email/Google Drive regularly.**
 
 ## The below section is for Emily / Phoebe / Lucas / Jenna only and occurs after Step 9:
 
 When a file is ready to be reviewed:
 
 
-1) Make sure to Pull ("Fetch" on GitHub Desktop).  If you have files you've edited but not comitted you'll have to commit first (but not push).  This will download the new files from `L0/species_in_review` folder
+1) Make sure to Pull ("Fetch" on GitHub Desktop).  If you have files you've edited but not committed you'll have to commit first (but not push).  This will download the new files from `L0/species_in_review` folder
 
 2) If you have made other changes, push those now if you'd like.  
 
@@ -289,4 +289,4 @@ c) Be careful when entering species splits into the file. We use `bbsbow_names.c
 
 ## Draft Flow Diagram
 
-![avian-intxn-db-data-entry-flowchart.png](avian-intxn-db-data-entry-flowchart.png)
+![avian-intxn-db-data-entry-flowchart.png](../docs/images/avian-intxn-db-data-entry-flowchart.png)

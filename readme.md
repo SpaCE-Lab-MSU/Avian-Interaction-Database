@@ -33,12 +33,12 @@ The workflow for this repository follows the guidelines set out by the [Environm
 
 ## Description of subdirectories 
 
-- **[data](data/readme.md)**
+- **[data](/data/README.md)**
   Directory containing instructions for interaction data entry, metadata, and species checklists (raw in L0, synthesized in L1). Note that species interaction data files are not directly available in this repository, but 
   available for dowload from the EDI repository (see above) upon publication. 
-- **[R](R/readme.md)**
+- **[R](R/README.md)**
   code and support files to build a clean and harmonized database from 
-  version-controlled data entry files. See [R code documentation](R/readme.md)
+  version-controlled data entry files. See [R code documentation](R/README.md)
   for detailed descriptions and instructions for using Code/Workflows and descriptions of the files
 - website: code files to build the website for the database
 - docs: output of website
@@ -51,14 +51,14 @@ The workflow for this repository follows the guidelines set out by the [Environm
 
 ## Workflow
 
-![main AMN workflowdiagram](website/images/amn_generalized_workflow_diagram_2025.png)
+![main AMN workflowdiagram](docs/images/amn_generalized_workflow_diagram_2025.png)
 
 *Overview of AvianMetaNet data colleciton, data entry, aggregation and cleaning (K. Kapsar)*
 
-For Data entry workflow (L0), see our detailed [data entry protocol](./AvianMetaNetwork_DATA_ENTRY_INSTRUCTIONS.md) we make available to all project members
+For Data entry workflow (L0), see our detailed [data entry protocol](docs/AvianMetaNetwork_DATA_ENTRY_INSTRUCTIONS.md) we make available to all project members
 
 For data cleaning and harmonizing workflow (L1), as well as summarizing and visualizing
-the database (L2) see [R script workflow](R/readme.md)
+the database (L2) see [R script workflow](R/README.md)
 
 
 ## Funding 
