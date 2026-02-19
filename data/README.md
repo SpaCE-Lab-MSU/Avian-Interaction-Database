@@ -22,10 +22,9 @@ list of interaction types and codes with descriptions with the following columns
  - taxa 2 or 1: possible values for either interaction code
  - definition: long description of the interaction
 
- **[L0/AvianMetaNetwork_DATA_ENTRY_INSTRUCTIONS.md](AvianMetaNetwork_DATA_ENTRY_INSTRUCTIONS.md)**
+ **[AvianMetaNetwork_DATA_ENTRY_INSTRUCTIONS.md](../docs/AvianMetaNetwork_DATA_ENTRY_INSTRUCTIONS.md)**
  
- Detailed protocol for data entry, version control and validation, includes process flowchart
- avian-intxn-db-data-entry-flowchart.png
+ Detailed protocol for data entry, version control and validation.
  
 **L0/species_checklists**
 
@@ -33,7 +32,7 @@ This folder holds checklists downloaded and used by L0 scripts to build L1 check
 [Clements/eBird checklist of birds of the world](https://www.birds.cornell.edu/clementschecklist/) and 
 [Avibase World Bird database](https://avibase.bsc-eoc.org/)
 
-**~L1/aux_taxonomy_resolutions.csv**
+**L1/aux_taxonomy_resolutions.csv**
 
 List of changes to be applied to harmonize the taxonomic names from data entry files to ensure
 the database is compatible with current taxonomy based on Clements checklist of birds of the world.  

@@ -9,7 +9,7 @@ https://github.com/AvianMetaNetwork/AvianMetaNetwork
 ## Overview
 
 For an overview of the project, details about the database, its structure, and a protocol 
-for how the data are pulled from primary sources, see the [Project Readme file](../readme.md) 
+for how the data are pulled from primary sources, see the [Project Readme file](../README.md) 
 in the root directory. 
 
 This documents the process and R code for cleaning and building
@@ -18,12 +18,12 @@ by contributors to the database, primarily workers in the
 [Spatial and Community Ecology Lab (SpaCE Lab)](https://www.communityecologylab.com)
 
 The build process and scripts in this section are for use by project collaborators only
-and provided as a reference.  For details about our workflow, see [Project Readme file](../readme.md) 
+and provided as a reference.  For details about our workflow, see [Project Readme file](../README.md) 
 
 
 ## Location of data
 
-See the [main documentation for the project](../readme.md) for a link to the finished 
+See the [main documentation for the project](../README.md) for a link to the finished 
 database (the output of this process). 
 
 The R folders in this project do have some support data used to harmonize and update the
@@ -49,7 +49,7 @@ the "*reconcile taxonomy*" step below, in the data folder of this repository.
 - R/L2: code for creating simple summaries and visualizations of the data in the database
 - R/lib: scripts with shared functions used by main database build scripts
 - R/archive: code from previous versions saved for reference
-- R/auxiliary scripts: 
+- R/auxiliary scripts: support scripts not used in the workflow, but helpful for evaluation, etc. 
 
 ## Getting Started
 
@@ -73,7 +73,7 @@ assumes the use of Rstudio 2025 version or above.
    - if there are no errors, the data is available and you may proceed.
    - if there are errors, check if `dir.exists(DATA_FOLDER)` 
 1. optional/occasional: rebuild species lists
-   * R/L0/1_generate_species_lists.R = Generates species lists used for taxonomic harmonization and regional subsetting
+   * `R/L0/1_generate_species_lists.R` = Generates species lists used for taxonomic harmonization and regional subsetting
    Recent species lists are in the [data folder](../data) of this repository and only need to be
    recreated if new lists are available from our primary sources
 1. aggregate (stitch) raw data into single file
@@ -94,14 +94,17 @@ assumes the use of Rstudio 2025 version or above.
    - edit or add new taxonomic fixes to the edit list
 
 1. Subset for specific analysis
-   -  Some analyses only include focal species in the subset species list generated in script 3. 
-   -  R/L1/5_subset_network.qmd = subsets interaction network
+   -  some analyses only include focal species in the subset species list generated in script 3. 
+   - `R/L1/5_subset_network.qmd` = subsets interaction network
    
 1. Generate final taxa list with Clements names
+   - `R/L1/6_generate_final_network_checklist.R`: generate complete list of species in the database (including non-focal taxa) and their Clements/eBird checklist names
 
 1. Summarize and visualize results
+   - `7_figure_processing_vignette.qmd`: step-by-step instructions for generating phylogeny and other summary figures
+   - `8_summary_vignette.qmd`: summary statistics and overview of AvianMetaNetwork 
 
-![detailed AMN workflow diagram](../website/images/amn_detailed_workflow_diagram_2025.png)
+![detailed AMN workflow diagram](../docs/images/amn_detailed_workflow_diagram_2025.png)
 
 ## Detailed Set-up and Configuration for R code
 
@@ -166,71 +169,6 @@ See the file `renv.lock` for both the R version and package versions with
 which the code was developed and tested. 
 
 
-## Code Workflow
-
-See the main workflow document describing how data is collected, entered, 
-checked-in and reviewed. This describes how the code is used to build the final
-database with updated taxa from the data as entered.  
-
-The workflow for this repository follows the guidelines set out by the 
-[Environmental Data Initiative (EDI)]((https://edirepository.org/)). 
-Briefly, this involves aligning with FAIR data practices, and employing a 
-workflow that uses different levels for harmonization and derived data products. 
-The overall workflow aligns with this EDI diagram:
-
-<img src="https://edirepository.org/static/images/thematic-standardization-workflow.png" class="inline"/>
-
-First, Data are entered into individual files for logistics per the main workflow
-above.
-
-The data as entered by reading from primary or secondary sources (as 
-a meta analysis) may have typos or inconsistencies from data entry personnel, but
-we consider the "L0" data to be a reviewed, corrected, validated and 
-combined table based on our data entry process. The L0 data typically have 
-common and scientific names as they appear in the literature, and thus may need
-updating to current taxonomy (a step that occurs within a L1 step). 
-
-
-1) **Review**
-
-  - Data submitted for review can be checked using reviewing scripts  
-  - Outcome: CSV files in the "species" folder with mostly cleaned and corrected data but with potentially outdated taxonomic designations.
-  - Scripts/Notebooks:
-    - `lib/config.R` : functions for checking and setting the file paths in `file_paths.R`
-    - `lib/shared_functions.R` : contains functions for many  cleaning/data processing code
-    - `auxilliary_scripts/L0_repo_status.qmd` : count numbers of files in various states from sources
-    - `auxilliary_scripts/L0_corrections_discovery.qmd` : point out issues in files to be corrected
-
-2) **clean and combine**
-
-   - Outcome: single file with all interactions that are even more cleaned and made 
-   consistent for interaction names, effect values, etc.
-   - Scripts/Notebooks:
-      - L0/L0_functions.R = contains most cleaning/data processing code
-      - L0_stitch.qmd : read each file, clean (as above), and stitch together
-   
-3) **build checklist**
-   download latest checklists if necessary and build comprehensive checklist 
-   with 
-     
-   - 
-   
-4) **build taxonomic reconciliation table**
-   using checklists from step above and functions to examine / compare 
-   taxonomy in data as entered ('raw') and checklist to create an 'edited' version
-   of the scientific name or common name to correct for typos or taxonomic changes
-   to match the current checklist (typically Clements).
-   
-   - Outcome:  L1_taxonomonic_edits.csv
-
-
-   
-5) **reconcile taxonomy**
-
-  - apply a final cleaning, then use the taxonomic edits file to merge with current create a file that ...
-  - apply various methods matches the final 
-  - database with the taxonomic 
-  
 
 ## Additional scripts
 
@@ -242,10 +180,10 @@ sourcing.
   Using a script for functions helps to keep the quarto notebook files succinct. 
 - **R/lib/taxonomy_functions.R** functions used by `R/L1/4_clean_network_data.qmd` for taxonomic harmonization, 
   to keep that quarto notebook readable. 
-- **R/lib/compare_outputs.R** internal script specifically for comparing versions of databases created
-  during a transition in late 2024. 
-- **R/auxilliary_scripts** current or draft script fragements used by the database team
-- **R/archive** These are from previous iterations used by the database team and can ignored.  
+  - **R/lib/figure_processing.R** functions used by `R/L2/7_figure_processing_vignette.qmd` for generating data paper figures (e.g., phylogeny)
+    - **R/lib/interaction_categories_and_colors.R** functions used to standardize colors for interactions across L2 scripts
+- **R/auxiliary_scripts** current or draft script fragments used by the database team
+- **R/archive** scripts from previous iterations used by the database team and can ignored.  
 
 
 ## Acknowledgements 
@@ -255,58 +193,4 @@ MSU Ecology Evolution, and Behavior SEED Grant (to P.L. Zarnetske).
 Original work on a subset of species was funded by the Yale Climate and Energy 
 Institute (to P.L. Zarnetske), Erasmus Mundus Fellowship (to S. Zonneveld).
 
-Please see main readme for additional acknlowedgmens
-
----
-
-### OPTIONAL Google Drive Setup
-
-We use Google Sheets to facilitate data entry for each species (see protocol in
-[L0/AvianMetaNetwork_DATA_ENTRY_INSTRUCTIONS.md](https://github.com/AvianMetaNetwork/AvianMetaNetwork/L0/AvianMetaNetwork_DATA_ENTRY_INSTRUCTIONS.md). If, as part of using the R code, 
-you'd like to view and access the intermediate files in Google Drive, you must 
-ave Google Drive installed on your computer.  
-
-**This step is not necessary to build the database.** Use only if you are a data
-manager reviewing those in-process google drive sheets. 
-
-From Google Sheets, the raw data is saved as CSV in the working repository once the work
-(typically for a species) is finished. See our main readme for the workflow.  
-
-However you may want to check and read the google sheets before they have been saved to CSV. 
-If you want to so this, you must first have access to the AvianMetaNet working
-Google drive (collaborator only), set up Google drive to sync that folder to your computer, and
-possibly make changes to your google Drive setup on your computer. There is no code here to
-read directly from the Google Sheets files directly via the Google Cloud API due to restrictions
-and complexity of setting that up.  
-
-These steps are not necessary and only to check on work-in-progress that has not been 
-exported to CSV. 
-
-Use Google Drive on Windows:  section to be written
-
-To use Google Drive on MacOS15, you may have to grant 'full file access' to 
-Rstudio in the the MacOS System Settings - Privacy & Security - Full Disk Access - 
-select Rstudio and/or Positron.  
-
-Older installations of Google Drive may have it in different locations and these
-locations are not documented well. You may be able to find this by dragging a 
-file from an open Google Drive window into the terminal window.
-
-Note that you then must add the location of your Google Drive folder to the 
-`filepaths.R` file described above. The folder location of Google Drive on MacOS
-for most recent installations is in the `filepaths_example.R` file. 
-
-A technique for finding the location of your Google Drive folder on Mac is:
-
-1. open the Mac Finder and find the parent folder of where you sync your data
-2. open the terminal.app utility application (the Rstudio terminal doesn't work for this)
-3. drag the folder where your data is into the terminal.app window
-   this will then show the full path to the Google Drive folder.  
-4. highlight this folder and copy it (Command+c or rightclick and copy)
-5. paste this folder into `filepaths.R`
-
-For those who have an older install of Google Drive, it is in the `/Volumes..` 
-path but in newer installs the path is something like
-
-`/Users/YOURUSERID/Library/CloudStorage/GoogleDrive-youremail@someplace.com/`
- 
+Please see main README for additional acknowledgments.
