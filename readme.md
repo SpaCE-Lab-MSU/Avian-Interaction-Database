@@ -56,21 +56,6 @@ the database (L2) see [R script workflow](/R/readme.md)
 
 --> 
 
-<<<<<<< HEAD
-=======
-## Workflow
-
-![main AMN workflowdiagram](docs/images/amn_generalized_workflow_diagram_2025.png)
-
-*Overview of AvianMetaNet data colleciton, data entry, aggregation and cleaning (K. Kapsar)*
-
-For Data entry workflow (L0), see our detailed [data entry protocol](docs/AvianMetaNetwork_DATA_ENTRY_INSTRUCTIONS.md) we make available to all project members
-
-For data cleaning and harmonizing workflow (L1), as well as summarizing and visualizing
-the database (L2) see [R script workflow](R/readme.md)
-
-
->>>>>>> 00479651f050d7969383da2bda420b6d1c0e7dc2
 ## Funding 
 
 Funding is provided by Michigan State University (to P.L. Zarnetske), and by a MSU Ecology Evolution, and Behavior SEED Grant (to P.L. Zarnetske). Original work on a subset of species was funded by the Yale Climate and Energy Institute (to P.L. Zarnetske), Erasmus Mundus Fellowship (to S. Zonneveld). 
