@@ -72,5 +72,5 @@ sum(clem_for_amn_spp$scientific.name %in% amn_clem_names) == length(clem_for_amn
 # Write the filtered and annotated Clements checklist to disk
 write.csv(
   clem_for_amn_spp,
-  here::here("./data/L1/species_checklists/spp_clem_in_amn_cac.csv")
+  here::here("./data/L1/species_checklists/spp_clem_in_amn_cac.csv"), row.names = F
 )
