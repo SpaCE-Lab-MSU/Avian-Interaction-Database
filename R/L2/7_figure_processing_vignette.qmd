@@ -12,6 +12,7 @@ First, we load the packages and datasets required for all three figures
 
 ```{r}
 #| warning: false
+#| message: false
 
 rm(list=ls())
 # library(tidyverse)

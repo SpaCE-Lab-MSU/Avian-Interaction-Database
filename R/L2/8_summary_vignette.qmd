@@ -303,6 +303,6 @@ create_combined_network(inter_NA_int, c("Baeolophus inornatus", "Dryobates nutta
 
 ```{r, message=F, fig.width=20, fig.height=15, out.width="100%"}
 
-set.seed(22)
+set.seed(55)
 create_combined_network(inter_NA_int, c("Baeolophus inornatus", "Dryobates nuttallii", "Glaucidium gnoma"), curve_edges = T, cats = T, legend_text_size = 35, legend_line_size = 5)
 ```
