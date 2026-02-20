@@ -373,7 +373,7 @@ plot_phylo_combined <- function(tree, #tree produced earlier, should be NA_tree
 
 ## Interaction Network Figure (Fig. 4)
 
-The interaction figures use creative commons images sourced from AviCommons, using the following files:  `aux_avicommons_full.json` and `clemtax_2025.csv`. These need to be sourced into the environment and we need to define a couple of functions to create the images:
+The interaction figures use creative commons images sourced from AviCommons, using the following files: `aux_avicommons_full.json` and `clemtax_2025.csv`. These need to be sourced into the environment and we need to define a couple of functions to create the images:
 
 ```{r, warning=F, message=F}
 
