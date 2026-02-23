@@ -11,7 +11,7 @@ generate_interaction_table <- function(){
       "competition",
       # Facilitation (Greens)
       "facilitation", "facilitation-mixed flocking", "facilitation-comigration",
-      "facilitation-foraging", "communal nesting", "communal roosting",
+      "facilitation-feeding/foraging", "communal nesting", "communal roosting",
       # Commensalism (Purples)
       "commensalism", "commensalism-scavenge", "commensalism-chick adoption",
       "commensalism-call mimicry",
