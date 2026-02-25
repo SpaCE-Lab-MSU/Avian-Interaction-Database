@@ -115,6 +115,24 @@ intxnsL0sp <- L0_stitch(
 
 nrow(intxnsL0sp$intxns)
 ```
+Identify and report on missing fields: 
+
+```{r}
+df <- intxnsL0sp$intxns
+
+no_url_or_scholar <- df[is.na(df$sourceA_URL) &
+                        is.na(df$sourceB_URL) & 
+                        is.na(df$sourceC_URL) & 
+                        is.na(df$sourceD_URL) & 
+                        is.na(df$DatabaseSearchURL),]
+
+na_files <- unique(no_url_or_scholar$entry_file)
+```
+
+* Number of rows missing a source URL/Google Scholar URL: `r nrow(no_url_or_scholar)`
+* Number of unique files with at least one row missing a URL: `r length(unique(no_url_or_scholar$entry_file))`
+
+
 
 Transform 'long' format along sources from entered wide format.\
 See documentation for this function in shared_functions.R
