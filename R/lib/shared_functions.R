@@ -15,6 +15,7 @@ suppressMessages({
   library(readr)
   library(magrittr)
   library(stringr)
+  library(purrr)
 })
 
 # this sets file paths using config file. See readme for details
@@ -950,6 +951,104 @@ sources_wide_to_long<- function(intxnsL0.wide){
   return(intxnsL0)
 
 }
+
+
+
+############ CODE FOR CLEANING AND STANDARDIZING DATE COLUMNS
+# Extract date-like tokens with / or - separators
+extract_date_tokens <- function(x) {
+  # Matches M/D/YY(YY) and M-D-YY(YY), with optional whitespace around separators
+  # Examples matched: "1/2/23", "01-02-2023", "1 - 2 - 23"
+  str_extract_all(
+    x,
+    "\\b\\d{1,2}\\s*[-/]\\s*\\d{1,2}\\s*[-/]\\s*\\d{2,4}\\b"
+  )[[1]]
+}
+
+# Normalize ONE token to MM/DD/YYYY, and validate calendar correctness
+normalize_one_date <- function(token) {
+  token <- str_trim(str_replace_all(token, "[\"']", ""))
+
+  # Capture parts with either / or -
+  m <- str_match(token, "^(\\d{1,2})\\s*[-/]\\s*(\\d{1,2})\\s*[-/]\\s*(\\d{2}|\\d{4})$")
+  if (is.na(m[1, 1])) return(list(value = NA_character_, ok = FALSE))
+
+  mm <- as.integer(m[1, 2])
+  dd <- as.integer(m[1, 3])
+  yy <- m[1, 4]
+
+  yyyy <- if (nchar(yy) == 2) as.integer(paste0("20", yy)) else as.integer(yy)
+
+  # Build a date safely: YYYY-MM-DD (ISO) is easiest for validation
+  iso <- sprintf("%04d-%02d-%02d", yyyy, mm, dd)
+  d <- suppressWarnings(as.Date(iso, format = "%Y-%m-%d"))
+
+  if (is.na(d)) {
+    return(list(value = NA_character_, ok = FALSE))
+  }
+
+  list(value = format(d, "%m/%d/%Y"), ok = TRUE)
+}
+
+# Clean ONE messy cell; return cleaned string + flags
+clean_date_cell <- function(cell, today = Sys.Date()) {
+  if (is.na(cell) || !nzchar(str_trim(cell))) {
+    return(list(clean = NA_character_, flag = TRUE, flag_reason = "blank_or_na"))
+  }
+
+  cell2 <- str_replace_all(cell, "[\"']", "")
+  tokens <- extract_date_tokens(cell2)
+
+  if (length(tokens) == 0) {
+    return(list(clean = NA_character_, flag = TRUE, flag_reason = "no_dates_found"))
+  }
+
+  parsed <- map(tokens, normalize_one_date)
+  values <- map_chr(parsed, "value")
+  ok     <- map_lgl(parsed, "ok")
+
+  # Unique valid dates, keep original order
+  valid_values <- values[ok]
+  valid_values <- valid_values[!duplicated(valid_values)]
+
+  invalid_present <- any(!ok)
+
+  # Future-date detection (only for valid ones)
+  valid_dates <- suppressWarnings(as.Date(valid_values, format = "%m/%d/%Y"))
+  future_present <- any(valid_dates > today, na.rm = TRUE)
+
+  # Decide cleaned output
+  cleaned <- if (length(valid_values) == 0) NA_character_ else str_c(valid_values, collapse = "; ")
+
+  # Build flag + reason text (can be multiple reasons)
+  reasons <- c()
+  if (invalid_present) reasons <- c(reasons, "invalid_date_token")
+  if (future_present)  reasons <- c(reasons, "future_date")
+  if (is.na(cleaned))  reasons <- c(reasons, "no_valid_dates_after_cleaning")
+
+  flag <- length(reasons) > 0
+  flag_reason <- if (flag) str_c(unique(reasons), collapse = "|") else NA_character_
+
+  list(clean = cleaned, flag = flag, flag_reason = flag_reason)
+}
+
+# Vectorized helper that returns a tibble with clean + flags
+clean_date_column_with_flags <- function(x, today = Sys.Date(), flags = TRUE) {
+  res <- map(x, ~ clean_date_cell(.x, today = today))
+  if(flags == TRUE){
+    return(tibble(
+      dates_clean = map_chr(res, "clean"),
+      dates_flag  = map_lgl(res, "flag"),
+      dates_flag_reason = map_chr(res, "flag_reason")
+    ))
+  }
+  if(flags == FALSE){
+    return(tibble(
+      dates_clean = map_chr(res, "clean")
+    ))
+  }
+}
+
 
 
 

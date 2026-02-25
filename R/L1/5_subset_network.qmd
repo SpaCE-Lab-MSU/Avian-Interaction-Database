@@ -330,6 +330,25 @@ num_intxn_types <- intxns.db.subset.new %>% group_by(interaction) %>% summarize(
 knitr::kable(num_intxn_types)
 ```
 
+Clean and standardize date column 
+
+```{r}
+intxns.db.subset.new$entry_changes <- gsub('"', '', intxns.db.subset.new$entry_changes)
+
+# ID dates in need of manual fixes 
+# temp should be zero rows if there are no un-wrangleable dates left 
+temp <-  intxns.db.subset.new %>% 
+  bind_cols(clean_date_column_with_flags(intxns.db.subset.new$entry_date, flags = T)) %>%  
+  filter(dates_flag == TRUE)
+
+# Replace entry_date with standardized version
+intxns.db.subset.new <- intxns.db.subset.new %>% 
+  bind_cols(clean_date_column_with_flags(intxns.db.subset.new$entry_date, flags = F)) %>% 
+  select(-entry_date) %>% 
+  rename(entry_date = dates_clean)
+
+```
+
 
 Create summary information in a table
 ```{r}
