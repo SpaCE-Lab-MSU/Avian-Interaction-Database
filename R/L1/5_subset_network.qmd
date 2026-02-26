@@ -415,7 +415,14 @@ intxns.db.subset.edi <- intxns.db.subset.new %>%
     taxa2_common,
     taxa2_scientific,
     taxa2_clements,
-    interaction
+    interaction, 
+    effect_tx1_on_tx2,
+    effect_tx2_on_tx1,
+    season,
+    entry_date,
+    entry_changes,
+    source_URL, 
+    text_excerpt
   )
 
 ```
