@@ -931,7 +931,18 @@ sources_wide_to_long<- function(intxnsL0.wide){
       return(NA)
    }
 
+  # accommodate data format variance
+  # the format of the source CSVs varies
+  # at some point in early days, when adding more sources and notes,
+  # a noteB may be added but no sourceB was added.  I'm assuming that noteB
+  # came from sourceA, and this code inserts sourceA into sourceB in that case
+  missing_sourceB <- is.na(intxnsL0.wide$sourceB_URL) & not(is.na(intxnsL0.wide$notesB))
+  intxnsL0.wide[missing_sourceB,]$sourceB_URL <- intxnsL0.wide[missing_sourceB,]$sourceA_URL
 
+  # use tidyr::pivot_longer to convert wide columns to long,
+  # but first, rename columns to take advantage to how pivot_longer works
+  # outcome are columns 'source', 'source_URL' and 'text_excerpt' and
+  # repeated rows
   intxnsL0 <- intxnsL0.wide |>
       dplyr::rename(source_URLXsource1 = sourceA_URL,
                     source_URLXsource2 = sourceB_URL,
@@ -1050,6 +1061,29 @@ clean_date_column_with_flags <- function(x, today = Sys.Date(), flags = TRUE) {
 }
 
 
+#' test of empty data
+#'
+#' check multiple ways a string or files could be empty
+#' NA or the string "NA" or empty string means the field is empty
+#' zero 0 is not empty, that's a value
+#' the Rlang function is_empty says blank string is not empty
+#'
+#' @param x any value
+#' @returns True if empty, otherwise false
+no.data <-function(x){
+  suppressWarnings({
+    if(is_empty(x)) return(TRUE)
+    if( is.na(x))    return(TRUE)
+    if( is.null(x) ) return(TRUE)
+    if( x == '' )    return(TRUE)
+    if( length(x)== 0 )  return(TRUE)
+    if( x == 'NA') return(TRUE)
+    })
+
+  return(FALSE) # not empty
+}
+
+no.datas<-Vectorize(no.data, vectorize.args = c("x"), SIMPLIFY = TRUE, USE.NAMES = FALSE)
 
 
 ################################
