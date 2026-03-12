@@ -939,6 +939,12 @@ sources_wide_to_long<- function(intxnsL0.wide){
   missing_sourceB <- is.na(intxnsL0.wide$sourceB_URL) & not(is.na(intxnsL0.wide$notesB))
   intxnsL0.wide[missing_sourceB,]$sourceB_URL <- intxnsL0.wide[missing_sourceB,]$sourceA_URL
 
+  missing_sourceC <- is.na(intxnsL0.wide$sourceC_URL) & not(is.na(intxnsL0.wide$notesC))
+  intxnsL0.wide[missing_sourceC,]$sourceC_URL <- intxnsL0.wide[missing_sourceC,]$sourceA_URL
+
+  missing_sourceD <- is.na(intxnsL0.wide$sourceD_URL) & not(is.na(intxnsL0.wide$notesD))
+  intxnsL0.wide[missing_sourceD,]$sourceD_URL <- intxnsL0.wide[missing_sourceD,]$sourceA_URL
+
   # use tidyr::pivot_longer to convert wide columns to long,
   # but first, rename columns to take advantage to how pivot_longer works
   # outcome are columns 'source', 'source_URL' and 'text_excerpt' and
