@@ -1,0 +1,106 @@
+---
+title: "L0_stitching_debug"
+output:  notebook
+---
+
+## Avian Meta Network: debug file read
+
+This is to run the error correction on single files to debug either the code, 
+or the data, or both
+
+### Setup
+
+```{r}
+#| echo: false
+#| warnings: false
+
+source(here::here('R/lib/shared_functions.R'))
+
+# This uses functions in R/lib/shared_functions.R which also imports R/lib/config.R
+# which sets the locations of the data folders. 
+
+# this uses the files paths found in /filepaths.R
+# edit the code above, or specify a different configuration file to use a 
+# different location. 
+
+file_paths <- get_file_paths() 
+file_paths
+
+# or override file paths here if desired
+```
+
+### Set the file to check here manually. 
+
+**Include the species folder!**  But not the L0 folder (set above). For example, 
+
+ > `species/lanius_borealis.csv`
+ 
+This will allow you to run this on files to be checked
+
+```{r}
+L0_file <- "species/Calidris_ptilocnemis_EP_IH.csv"
+```
+
+Add path and check
+```{r}
+#| echo: false
+
+L0_file_path <- file.path(file_paths$L0, L0_file)
+print(L0_file_path)
+stopifnot(file.exists(L0_file_path))
+
+```
+
+### Test CSV read
+
+Examine the tibble for data in folders
+
+```{r}
+#| echo: false
+test.df <- read_csv(L0_file_path)
+tibble(test.df)
+```
+
+
+### Test Avian Meta Network Read 
+```{r}
+
+amn.df <- read_and_amend(L0_file_path,add_entry_file_column= TRUE, fix_errors_on_read = TRUE)
+print(names(amn.df))
+```
+
+```{r}
+#| echo: false
+tibble(amn.df)
+```
+
+
+test the 'stitch' on this one file.  this does essentially what the process above
+does, but combines files.  Since this is one file, should be the same. 
+
+```{r}
+intxnsL0sp <- L0_stitch(
+                csv_file_list = list(L0_file_path), 
+                csv_file_group_name = "debug",
+                add_entry_file_column = TRUE, 
+                fix_errors_on_read = TRUE
+                )
+
+nrow(intxnsL0sp$intxns)
+```
+
+debug wide-to-long conversion
+
+```{r}
+long.df <- sources_wide_to_long(intxnsL0sp$intxns)
+tibble(long.df)
+# tibble(intxnsL0sp$intxns)
+```
+```{r}
+nrow(dplyr::filter(long.df, is.na(source_URL)))
+```
+
+```{r}
+
+View(long.df)
+```
