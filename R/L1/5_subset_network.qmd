@@ -349,7 +349,6 @@ intxns.db.subset.new <- intxns.db.subset.new %>%
 
 ```
 
-
 Create summary information in a table
 ```{r}
 unique_counts_multi <- purrr::map_dfr(
@@ -427,13 +426,20 @@ intxns.db.subset.edi <- intxns.db.subset.new %>%
 
 ```
 
+Remove duplicated rows. 
+
+```{r}
+intxns.db.subset.new <- intxns.db.subset.new[!duplicated(intxns.db.subset.new),]
+intxns.db.subset.edi <- intxns.db.subset.edi[!duplicated(intxns.db.subset.edi),]
+intxns.db.subset.new.breeding <- intxns.db.subset.new.breeding[!duplicated(intxns.db.subset.new.breeding),]
+```
 
 Save the file with the file name defined in the OUTPUT section above
 this has the current date embedded in it
 
 ```{r}
 
-f <- file.path(file_paths$L1, AvianInteractionData_CanadaAKCONUS_L1_file )
+f <- file.path(file_paths$L1, AvianInteractionData_CanadaAKCONUS_L1_file)
 write_csv(intxns.db.subset.new, f)
 print(f)
 
@@ -442,7 +448,7 @@ fedi <- file.path(file_paths$L1, EDI_file)
 write_csv(intxns.db.subset.edi, fedi)
 print(fedi)
 
-fb <- file.path(file_paths$L1, AvianInteractionData_CanadaAKCONUS_breeding_file )
+fb <- file.path(file_paths$L1, AvianInteractionData_CanadaAKCONUS_breeding_file)
 write_csv(intxns.db.subset.new.breeding, fb)
 print(fb)
 
