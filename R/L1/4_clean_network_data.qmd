@@ -1684,6 +1684,14 @@ if(length(remaining_mismatch) > 0){
 
 ```
 
+## Remove any duplicated rows 
+
+```{r}
+
+int.raw <- int.raw[!duplicated(int.raw),]
+
+```
+
 
 ## Print Database Summary
 
