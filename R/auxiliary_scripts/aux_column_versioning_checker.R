@@ -51,7 +51,6 @@ to_rel <- function(d) {
     normalizePath(d, winslash = "/", mustWork = FALSE)
   )
 }
-
 root_rel <- to_rel(root_dir)
 review_rel <- to_rel(in_review_dir)
 
@@ -85,13 +84,6 @@ for (line in git_out) {
   }
 }
 
-# repo-relative path for each CSV so we can look it up in the map
-rel_paths <- sub(
-  paste0("^", repo_root, "/?"),
-  "",
-  normalizePath(csv_files, winslash = "/", mustWork = FALSE)
-)
-
 ## ---------------------------------------------------------------------------
 ## per-file schema + commit info
 ## ---------------------------------------------------------------------------
@@ -103,7 +95,8 @@ file_info <- do.call(
       file = csv_files[i],
       schema = if (all(is.na(cols))) NA else paste(cols, collapse = " | "),
       ncols = if (all(is.na(cols))) NA else length(cols),
-      latest_commit = latest_commit_map[[rel_paths[i]]] %||% NA_character_,
+      latest_commit = latest_commit_map[[to_rel(csv_files[i])]] %||%
+        NA_character_,
       stringsAsFactors = FALSE
     )
   })
@@ -115,7 +108,9 @@ file_info$latest_commit <- lubridate::ymd_hms(
 )
 
 valid <- subset(file_info, !is.na(schema))
-
+##############################################################################
+################# CODE USED TO GENERATE ORIGINAL SCHEMA LIST #################
+# To update schema_key, do not rerun this code. Just add a new
 ## ---------------------------------------------------------------------------
 ## give each unique schema a short name (ordered by how many files use it)
 ## ---------------------------------------------------------------------------
@@ -187,21 +182,21 @@ row.names(schema_key) <- NULL
 ## ---------------------------------------------------------------------------
 ## write outputs
 ## ---------------------------------------------------------------------------
-write.csv(
-  presence_df,
-  "./R/auxiliary_scripts/aux_schema_cols.csv",
-  row.names = FALSE
-)
-write.csv(
-  schema_key,
-  "./R/auxiliary_scripts/aux_schema_metadata.csv",
-  row.names = FALSE
-)
-write.csv(
-  file_info,
-  "./R/auxiliary_scripts/aux_files_with_schema.csv",
-  row.names = FALSE
-)
+# write.csv(
+#   presence_df,
+#   "./R/auxiliary_scripts/aux_schema_cols.csv",
+#   row.names = FALSE
+# )
+# write.csv(
+#   schema_key,
+#   "./R/auxiliary_scripts/aux_schema_metadata.csv",
+#   row.names = FALSE
+# )
+# write.csv(
+#   file_info,
+#   "./R/auxiliary_scripts/aux_files_with_schema.csv",
+#   row.names = FALSE
+# )
 
 presence_df
 
