@@ -98,11 +98,12 @@ s_9_8_6_4_1_5_2 <- load_schema(file_info, "schema_9") |>
 s_7_9_8_6_4_1_5_2 <- load_schema(file_info, "schema_7") |>
   mutate(
     version = "v4",
-    n_studies = "not_evaluated", # REMOVE
-    BOW_evidence = "not_evaluated", # REMOVE
+    n_studies = "not_evaluated",
+    BOW_evidence = "not_evaluated",
     breeding_migration = "not_evaluated"
   ) |>
-  rbind(s_9_8_6_4_1_5_2)
+  rbind(s_9_8_6_4_1_5_2) |>
+  dplyr::select(-BOW_evidence, -n_studies)
 
 # all(colnames(s_9_8_6_4_1_5_2) %in% colnames(s_7_9_8_6_4_1_5_2))
 # colnames(s_9_8_6_4_1_5_2)[which(
