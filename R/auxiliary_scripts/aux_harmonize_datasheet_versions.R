@@ -8,7 +8,12 @@ file_info <- read.csv(file_info_path)
 
 load_schema <- function(df, schema_num) {
   temp <- df |> dplyr::filter(schema_name == schema_num)
-  return(do.call(rbind, lapply(temp$file, read.csv)))
+  do.call(
+    rbind,
+    lapply(temp$file, function(f) {
+      read.csv(f) |> dplyr::mutate(source_file = basename(f))
+    })
+  )
 }
 
 concatenate_cols <- function(df, old_cols, new_col) {
@@ -21,7 +26,18 @@ concatenate_cols <- function(df, old_cols, new_col) {
         str_c(collapse = "; ")
     ) |>
     ungroup() |>
-    select(-all_of(old_cols))
+    select(-all_of(setdiff(old_cols, new_col)))
+}
+
+clean_na <- function(df) {
+  df[] <- lapply(df, function(x) {
+    if (is.character(x)) {
+      x <- trimws(x)
+      x[x %in% c("", "NA")] <- NA
+    }
+    x
+  })
+  df
 }
 
 has_content <- function(x) {
@@ -56,17 +72,23 @@ reshape_sources <- function(df, url_cols, notes_cols, id_cols = NULL) {
   rownames(result) <- NULL
   result
 }
+############################################################################################
 
-s_2 <- load_schema(file_info, "schema_2") |> mutate(name_changes = NA)
+s_2 <- load_schema(file_info, "schema_2") |>
+  mutate(name_changes = NA) |>
+  clean_na()
 s_5_2 <- load_schema(file_info, "schema_5") |>
   rbind(s_2) |>
-  mutate(other_species1 = NA)
+  mutate(other_species1 = NA) |>
+  clean_na()
 s_1_5_2 <- load_schema(file_info, "schema_1") |>
   rbind(s_5_2) |>
-  mutate(version = "v1", DatabaseSearchURL = "not_evaluated")
+  mutate(version = "v1", DatabaseSearchURL = "not_evaluated") |>
+  clean_na()
 s_4_1_5_2 <- load_schema(file_info, "schema_4") |>
   mutate(version = "v2") |>
-  rbind(s_1_5_2)
+  rbind(s_1_5_2) |>
+  clean_na()
 
 OLDsource_cols <- c("OLDsourceA", "OLDsourceB")
 
@@ -80,7 +102,9 @@ s_6_4_1_5_2 <- load_schema(file_info, "schema_6") |>
     sourceC_URL = sourceCupdatedURL,
     sourceD_URL = sourceDupdatedURL
   ) |>
-  concatenate_cols(OLDsource_cols, "sourceA_URL")
+  concatenate_cols(OLDsource_cols, "Oldsource") |>
+  concatenate_cols(c("Oldsource", "sourceA_URL"), "sourceA_URL") |>
+  clean_na()
 
 url_cols <- c("sourceA_URL", "sourceB_URL", "sourceC_URL", "sourceD_URL")
 notes_cols <- c("notesA", "notesB", "notesC", "notesD")
@@ -96,7 +120,8 @@ s_8_6_4_1_5_2 <- load_schema(file_info, "schema_8") |>
     source_citation = "not_evaluated",
     species1_lifestage = "not_evaluated",
     species2_lifestage = "not_evaluated"
-  )
+  ) |>
+  clean_na()
 
 s_9_8_6_4_1_5_2 <- load_schema(file_info, "schema_9") |>
   mutate(
@@ -125,7 +150,8 @@ s_9_8_6_4_1_5_2 <- load_schema(file_info, "schema_9") |>
     timing_location_excerpt = "not_evaluated",
     year = "not_evaluated",
   ) |>
-  dplyr::select(-other_species1)
+  dplyr::select(-other_species1) |>
+  clean_na()
 
 s_7_9_8_6_4_1_5_2 <- load_schema(file_info, "schema_7") |>
   mutate(
@@ -135,7 +161,8 @@ s_7_9_8_6_4_1_5_2 <- load_schema(file_info, "schema_7") |>
     breeding_migration = "not_evaluated"
   ) |>
   rbind(s_9_8_6_4_1_5_2) |>
-  dplyr::select(-BOW_evidence, -n_studies, -name_changes)
+  dplyr::select(-BOW_evidence, -n_studies, -name_changes) |>
+  clean_na()
 
 # all(colnames(s_9_8_6_4_1_5_2) %in% colnames(s_7_9_8_6_4_1_5_2))
 # colnames(s_9_8_6_4_1_5_2)[which(
