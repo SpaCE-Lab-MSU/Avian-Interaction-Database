@@ -83,7 +83,8 @@ s_5_2 <- load_schema(file_info, "schema_5") |>
   clean_na()
 s_1_5_2 <- load_schema(file_info, "schema_1") |>
   rbind(s_5_2) |>
-  mutate(version = "v1", DatabaseSearchURL = "not_evaluated") |>
+  # mutate(version = "v1", DatabaseSearchURL = "not_evaluated") |>
+  mutate(version = "v1", DatabaseSearchURL = NA) |>
   clean_na()
 s_4_1_5_2 <- load_schema(file_info, "schema_4") |>
   mutate(version = "v2") |>
@@ -114,20 +115,29 @@ s_8_6_4_1_5_2 <- load_schema(file_info, "schema_8") |>
   rbind(s_6_4_1_5_2) |>
   reshape_sources(url_cols, notes_cols) |>
   rename(breeding_migration = nonbreedingseason) |>
+  # mutate(
+  #   interaction_strength = "not_evaluated",
+  #   time_of_year = "not_evaluated",
+  #   source_citation = "not_evaluated",
+  #   species1_lifestage = "not_evaluated",
+  #   species2_lifestage = "not_evaluated"
+  # ) |>
   mutate(
-    interaction_strength = "not_evaluated",
-    time_of_year = "not_evaluated",
-    source_citation = "not_evaluated",
-    species1_lifestage = "not_evaluated",
-    species2_lifestage = "not_evaluated"
+    interaction_strength = NA,
+    time_of_year = NA,
+    source_citation = NA,
+    species1_lifestage = NA,
+    species2_lifestage = NA
   ) |>
   clean_na()
 
 s_9_8_6_4_1_5_2 <- load_schema(file_info, "schema_9") |>
   mutate(
     version = "v3",
-    n_studies = "not_evaluated",
-    BOW_evidence = "not_evaluated"
+    # n_studies = "not_evaluated",
+    # BOW_evidence = "not_evaluated"
+    n_studies = NA,
+    BOW_evidence = NA
   ) |>
   rename(source_citation = Citation) |>
   rbind(s_8_6_4_1_5_2) |>
@@ -142,13 +152,21 @@ s_9_8_6_4_1_5_2 <- load_schema(file_info, "schema_9") |>
     taxa2_lifestage = species2_lifestage,
     interaction_excerpt = text_excerpt
   ) |>
+  # mutate(
+  #   tx1_life_history_season = "not_evaluated",
+  #   tx2_life_history_season = "not_evaluated",
+  #   country = "not_evaluated",
+  #   location = "not_evaluated",
+  #   timing_location_excerpt = "not_evaluated",
+  #   year = "not_evaluated",
+  # ) |>
   mutate(
-    tx1_life_history_season = "not_evaluated",
-    tx2_life_history_season = "not_evaluated",
-    country = "not_evaluated",
-    location = "not_evaluated",
-    timing_location_excerpt = "not_evaluated",
-    year = "not_evaluated",
+    tx1_life_history_season = NA,
+    tx2_life_history_season = NA,
+    country = NA,
+    location = NA,
+    timing_location_excerpt = NA,
+    year = NA,
   ) |>
   dplyr::select(-other_species1) |>
   clean_na()
@@ -156,9 +174,12 @@ s_9_8_6_4_1_5_2 <- load_schema(file_info, "schema_9") |>
 s_7_9_8_6_4_1_5_2 <- load_schema(file_info, "schema_7") |>
   mutate(
     version = "v4",
-    n_studies = "not_evaluated",
-    BOW_evidence = "not_evaluated",
-    breeding_migration = "not_evaluated"
+    # n_studies = "not_evaluated",
+    # BOW_evidence = "not_evaluated",
+    # breeding_migration = "not_evaluated"
+    n_studies = NA,
+    BOW_evidence = NA,
+    breeding_migration = NA
   ) |>
   rbind(s_9_8_6_4_1_5_2) |>
   dplyr::select(
