@@ -24,6 +24,39 @@ concatenate_cols <- function(df, old_cols, new_col) {
     select(-all_of(old_cols))
 }
 
+has_content <- function(x) {
+  x <- trimws(as.character(x))
+  !is.na(x) & x != "" & x != "NA"
+}
+
+reshape_sources <- function(df, url_cols, notes_cols, id_cols = NULL) {
+  stopifnot(length(url_cols) == length(notes_cols))
+
+  if (is.null(id_cols)) {
+    id_cols <- setdiff(names(df), c(url_cols, notes_cols))
+  }
+
+  df$.orig_row <- seq_len(nrow(df))
+
+  pieces <- lapply(seq_along(url_cols), function(i) {
+    u <- df[[url_cols[i]]]
+    n <- df[[notes_cols[i]]]
+    keep <- has_content(u) | has_content(n)
+
+    out <- df[keep, id_cols, drop = FALSE]
+    out$source_URL <- ifelse(has_content(u[keep]), u[keep], NA)
+    out$text_excerpt <- ifelse(has_content(n[keep]), n[keep], NA)
+    out$.orig_row <- df$.orig_row[keep]
+    out
+  })
+
+  result <- do.call(rbind, pieces)
+  result <- result[order(result$.orig_row), ]
+  result$.orig_row <- NULL
+  rownames(result) <- NULL
+  result
+}
+
 s_2 <- load_schema(file_info, "schema_2") |> mutate(name_changes = NA)
 s_5_2 <- load_schema(file_info, "schema_5") |>
   rbind(s_2) |>
@@ -55,8 +88,7 @@ notes_cols <- c("notesA", "notesB", "notesC", "notesD")
 s_8_6_4_1_5_2 <- load_schema(file_info, "schema_8") |>
   mutate(version = "v2") |>
   rbind(s_6_4_1_5_2) |>
-  concatenate_cols(url_cols, "source_URL") |>
-  concatenate_cols(notes_cols, "text_excerpt") |>
+  reshape_sources(url_cols, notes_cols) |>
   rename(breeding_migration = nonbreedingseason) |>
   mutate(
     interaction_strength = "not_evaluated",
