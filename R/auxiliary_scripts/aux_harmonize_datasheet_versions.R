@@ -161,7 +161,13 @@ s_7_9_8_6_4_1_5_2 <- load_schema(file_info, "schema_7") |>
     breeding_migration = "not_evaluated"
   ) |>
   rbind(s_9_8_6_4_1_5_2) |>
-  dplyr::select(-BOW_evidence, -n_studies, -name_changes) |>
+  dplyr::select(
+    -BOW_evidence,
+    -n_studies,
+    -name_changes,
+    -DatabaseSearchURL,
+    -breeding_migration
+  ) |>
   clean_na()
 
 # all(colnames(s_9_8_6_4_1_5_2) %in% colnames(s_7_9_8_6_4_1_5_2))
