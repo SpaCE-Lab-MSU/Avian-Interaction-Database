@@ -1,0 +1,46 @@
+Group,Life stage,Description,Notes
+bird,egg,A bird embryo within a pre-born egg.,NA
+bird,nestling,A bird that remains in the nest until it is able to fly.,NA
+bird,fledgling,"A bird that has left the nest and is acquiring its first set of flight feathers, but is still dependent upon parent birds for food and care.",NA
+bird,juvenile,"A young bird, not yet capable of breeding, in its first plumage of non-downy feathers. This plumage is mostly soft feathers that quickly abrade and are replaced by a later molt.",NA
+bird,adult,A mature bird capable of breeding and in its definitive plumage.,NA
+bird,dead,"A deceased bird, adult or not.",NA
+mammal,newborn,"A recently born mammal, dependant on milk for nourishment.",NA
+mammal,juvenile,A mammal that has weaned off its mother but has not yet reached its adult form (sexual or physical maturity).,NA
+mammal,adult,A mature mammal capable of breeding.,NA
+mammal,dead,"A deceased mammal, adult or not.",NA
+plant,seed,"Embroyotic stage of a seeding plant; includes an embryo, endosperm (nutrient-rich tissue), and seed coat.",NA
+plant,seedling,"The earliest stage of plant growth after germination; includes root, stem, and its first set of leaves (cotyledons).",NA
+plant,juvenile,NA,NA
+plant,adult,NA,NA
+plant,vegetative,"A plant that focuses its growth on root system, stems, and leaves; not in reproductive stage.",NA
+plant,flowering,A plant that is flowering.,NA
+plant,fruiting,A plant that is fruiting and producing seeds.,NA
+plant,dead,"A deceased plant, adult or not.",NA
+arthropod,egg,An arthropod embryo within a pre-born egg.,NA
+arthropod,larva,"A young arthropod, newly hatched from its egg.",NA
+arthropod,pupa,NA,NA
+arthropod,adult,NA,NA
+arthropod,dead,A deceased arthropod at any lifestage.,NA
+fish,egg,A fish embryo within a pre-born egg membrane.,NA
+fish,larva,"A young and still developing fish, newly hatched from its egg",NA
+fish,juvenile,"A young fish that is mostly developed, but has not reached sexual or physical maturity.",NA
+fish,adult,A mature fish with the ability to reproduce.,NA
+fish,dead,A deceased fish at any lifestage.,NA
+reptile,egg,A reptile embryo within a pre-born egg.,NA
+reptile,juvenile,"A young reptile that is mostly developed, but has not reached sexual or physical maturity.",NA
+reptile,adult,A mature reptile with the ability to reproduce.,NA
+reptile,dead,"A deceased reptile, adult or not.",NA
+amphibian,egg,A reptile embryo within a pre-born egg.,NA
+amphibian,larva,"A young and still developing amphibian, newly hatched from its egg",NA
+amphibian,adult,A mature amphibian with the ability to reproduce.,NA
+amphibian,dead,"A deceased amphibian, adult or not.",NA
+fungus,spore,NA,NA
+fungus,mycelium,NA,NA
+fungus,fruiting,NA,NA
+fungus,dead,"A deceased fungus, adult or not.",NA
+worm,dead,"A deceased worm, adult or not.",2026-06-25T00:00:00Z
+mollusk,egg,NA,2026-06-25T00:00:00Z
+mollusk,larvae,NA,2026-06-25T00:00:00Z
+mollusk,adult,NA,2026-06-25T00:00:00Z
+mollusk,dead,"A deceased mollusk, adult or not.",2026-06-25T00:00:00Z
