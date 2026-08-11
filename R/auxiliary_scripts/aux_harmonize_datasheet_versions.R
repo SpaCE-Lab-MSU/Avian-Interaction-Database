@@ -236,7 +236,8 @@ s_9_8_6_4_1_5_2 <- load_schema(file_info, "schema_9") |>
     # n_studies = "not_evaluated",
     # BOW_evidence = "not_evaluated"
     n_studies = NA,
-    BOW_evidence = NA
+    BOW_evidence = NA,
+    source_url_backfilled = NA
   ) |>
   rename(source_citation = Citation) |>
   rbind(s_8_6_4_1_5_2) |>
@@ -282,7 +283,8 @@ s_7_9_8_6_4_1_5_2 <- load_schema(file_info, "schema_7") |>
     # breeding_migration = "not_evaluated"
     n_studies = NA,
     BOW_evidence = NA,
-    breeding_migration = NA
+    breeding_migration = NA,
+    source_url_backfilled = NA
   ) |>
   rbind(s_9_8_6_4_1_5_2) |>
   dplyr::select(
