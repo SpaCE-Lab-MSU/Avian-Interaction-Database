@@ -9,12 +9,15 @@
 #                   mandatory_col flags) and aux_text_corrections.csv (known
 #                   interaction-type typos)
 # DATA OUTPUT:      (1) cleaned csv: harmonized data with standardized column
-#                       types and corrected typos/inconsistencies; rows from
-#                       any file flagged ERROR are excluded
+#                       types and corrected typos/inconsistencies. Exclusion
+#                       is ROW-level: only rows missing a mandatory field are
+#                       dropped, not the whole file they came from.
 #                   (2) audit report csv: one row per source_file (wide
 #                       format), with a flag_<column> indicator for every
 #                       field that had at least one issue, an issue_summary
-#                       column, and an overall status (OK / WARNING / ERROR)
+#                       column, an overall status (OK / WARNING / ERROR),
+#                       and n_rows_excluded_error / excluded_rows_detail
+#                       showing exactly which rows were dropped and why
 # DATE:             initiated: 10 Aug 2026
 # OVERVIEW:         Runs AFTER harmonization, on the single combined data
 #                   frame -- not on raw per-file CSVs. All column names are
@@ -47,7 +50,7 @@
 # source("./R/auxiliary_scripts/aux_harmonize_datasheet_versions.R")
 stopifnot(exists("df"), "source_file" %in% names(df))
 
-schema_path <- "./R/auxiliary_scripts/aux_files_with_schema.csv"
+schema_path <- "./docs/interaction_metadata_schemas/column_names.csv"
 corrections_path <- "./R/L0/aux_text_corrections.csv"
 cleaned_output_path <- "./test_harmonized_output.csv"
 audit_report_path <- "./test_audit_report.csv"
@@ -92,20 +95,6 @@ clean_collapse_spaces <- function(df) {
     original <- df[[col]]
     cleaned <- gsub(" {2,}", " ", original)
 
-    changed <- which(!is.na(original) & original != cleaned)
-    if (length(changed)) {
-      issues <- rbind(
-        issues,
-        data.frame(
-          source_file = df$source_file[changed],
-          column = col,
-          row = changed,
-          issue = "double_space_collapsed",
-          detail = NA_character_,
-          stringsAsFactors = FALSE
-        )
-      )
-    }
     df[[col]] <- cleaned
   }
 
@@ -288,6 +277,44 @@ correct_known_typos <- function(df, corrections) {
   list(data = df, issues = issues)
 }
 
+#' Flag rows where source_url_backfilled was set during harmonization
+#'
+#' aux_harmonize_datasheet_versions.R's reshape_sources() backfills a blank
+#' sourceB/C/D_URL from sourceA_URL when the paired notes column has
+#' content but the URL doesn't. That substitution is data-affecting, so it
+#' gets logged here into the audit trail rather than passing through
+#' silently. The helper column itself is dropped from `data` afterward --
+#' it's bookkeeping for the audit, not part of the output schema.
+#' @param df harmonized data frame (must have a source_url_backfilled
+#'   logical column if reshape_sources() was used upstream; a no-op
+#'   otherwise)
+#' @returns list(data = df with source_url_backfilled column removed,
+#'   issues = issues log)
+flag_backfilled_urls <- function(df) {
+  issues <- empty_issues_log()
+  if (!"source_url_backfilled" %in% names(df)) {
+    return(list(data = df, issues = issues))
+  }
+
+  backfilled <- which(df$source_url_backfilled)
+  if (length(backfilled)) {
+    issues <- rbind(
+      issues,
+      data.frame(
+        source_file = df$source_file[backfilled],
+        column = "source_URL",
+        row = backfilled,
+        issue = "source_url_backfilled_from_sourceA",
+        detail = NA_character_,
+        stringsAsFactors = FALSE
+      )
+    )
+  }
+  df$source_url_backfilled <- NULL
+
+  list(data = df, issues = issues)
+}
+
 #' Flag implausible latitude/longitude values
 #'
 #' Runs BEFORE coerce_col_types(), while values are still the original
@@ -465,18 +492,76 @@ check_mandatory_fields <- function(df, mandatory_cols) {
 # AUDIT REPORT (wide, one row per file) + OUTPUT WRITING
 # ============================================================================
 
+#' Summarize which rows were excluded for missing mandatory fields, per file
+#'
+#' Produces one row per affected source_file with a count of excluded rows
+#' and a human-readable detail string listing each excluded row and which
+#' mandatory column(s) were missing on it, e.g. "row 45: taxa1_scientific;
+#' row 112: interaction, effect_tx2_on_tx1". Row numbers refer to the
+#' position in the harmonized data frame at the time this audit ran, not
+#' the original raw CSV's line number.
+#' @param mandatory_issues subset of the issues log where
+#'   issue == "missing_mandatory_field"
+#' @returns data frame: source_file, n_rows_excluded_error,
+#'   excluded_rows_detail
+summarize_excluded_rows <- function(mandatory_issues) {
+  if (nrow(mandatory_issues) == 0) {
+    return(data.frame(
+      source_file = character(),
+      n_rows_excluded_error = integer(),
+      excluded_rows_detail = character(),
+      stringsAsFactors = FALSE
+    ))
+  }
+
+  per_row <- aggregate(
+    column ~ source_file + row,
+    data = mandatory_issues,
+    FUN = function(x) paste(unique(x), collapse = ", ")
+  )
+
+  per_file <- do.call(
+    rbind,
+    lapply(split(per_row, per_row$source_file), function(d) {
+      d <- d[order(d$row), ]
+      data.frame(
+        source_file = unique(d$source_file),
+        n_rows_excluded_error = nrow(d),
+        excluded_rows_detail = paste0(
+          "row ",
+          d$row,
+          ": ",
+          d$column,
+          collapse = "; "
+        ),
+        stringsAsFactors = FALSE
+      )
+    })
+  )
+  rownames(per_file) <- NULL
+  per_file
+}
+
 #' Build the wide-format, one-row-per-file audit report
 #'
 #' status is ERROR if the file has any missing_mandatory_field issue,
-#' WARNING if it has any other issue but no ERROR, OK otherwise. A
-#' flag_<column> column is added for every column that had at least one
-#' issue anywhere in the data, with a count of affected rows for that file.
+#' WARNING if it has any other issue but no ERROR, OK otherwise. Note that
+#' ERROR here means "this file had at least one row excluded" -- exclusion
+#' itself is row-level (see write_clean_audit_outputs()), not file-level,
+#' so an ERROR file can still contribute its non-excluded rows to the
+#' cleaned output. n_rows_excluded_error and excluded_rows_detail make
+#' that row-level detail visible per file rather than collapsing it into a
+#' single ERROR flag. A flag_<column> column is added for every column
+#' that had at least one issue anywhere in the data, with a count of
+#' affected rows for that file.
 #' @param df cleaned + type-coerced data frame (for row counts)
 #' @param all_issues combined issues log from every cleaning step
+#'   (including check_mandatory_fields())
 #' @returns data frame, one row per source_file
 build_audit_report <- function(df, all_issues) {
   file_list <- unique(df$source_file)
-  n_rows <- table(df$source_file)
+  n_rows <- as.data.frame(table(df$source_file), stringsAsFactors = FALSE)
+  names(n_rows) <- c("source_file", "n_rows")
 
   if (nrow(all_issues) == 0) {
     flags <- data.frame(source_file = file_list, stringsAsFactors = FALSE)
@@ -499,19 +584,20 @@ build_audit_report <- function(df, all_issues) {
     }
   }
 
-  error_files <- unique(all_issues$source_file[
-    all_issues$issue == "missing_mandatory_field"
-  ])
+  mandatory_issues <- all_issues[
+    all_issues$issue == "missing_mandatory_field",
+  ]
+  error_files <- unique(mandatory_issues$source_file)
   warning_files <- unique(all_issues$source_file)
 
-  status <- ifelse(
-    flags$source_file %in% error_files,
+  base <- data.frame(source_file = file_list, stringsAsFactors = FALSE)
+  base$status <- ifelse(
+    base$source_file %in% error_files,
     "ERROR",
-    ifelse(flags$source_file %in% warning_files, "WARNING", "OK")
+    ifelse(base$source_file %in% warning_files, "WARNING", "OK")
   )
-
-  issue_summary <- vapply(
-    flags$source_file,
+  base$issue_summary <- vapply(
+    base$source_file,
     function(f) {
       f_issues <- unique(all_issues$issue[all_issues$source_file == f])
       paste(f_issues, collapse = "; ")
@@ -519,35 +605,53 @@ build_audit_report <- function(df, all_issues) {
     character(1)
   )
 
-  report <- data.frame(
-    source_file = flags$source_file,
-    n_rows = as.integer(n_rows[flags$source_file]),
-    status = status,
-    issue_summary = issue_summary,
-    stringsAsFactors = FALSE
-  )
+  excluded_detail <- summarize_excluded_rows(mandatory_issues)
 
-  flag_cols <- setdiff(names(flags), "source_file")
-  report <- cbind(report, flags[flag_cols])
+  report <- merge(base, n_rows, by = "source_file", all.x = TRUE)
+  report <- merge(report, excluded_detail, by = "source_file", all.x = TRUE)
+  report$n_rows_excluded_error[is.na(report$n_rows_excluded_error)] <- 0L
+  report$excluded_rows_detail[is.na(report$excluded_rows_detail)] <- ""
+  report <- merge(report, flags, by = "source_file", all.x = TRUE)
 
   status_order <- match(report$status, c("ERROR", "WARNING", "OK"))
-  report[order(status_order, report$source_file), ]
+  report <- report[order(status_order, report$source_file), ]
+
+  front_cols <- c(
+    "source_file",
+    "n_rows",
+    "status",
+    "issue_summary",
+    "n_rows_excluded_error",
+    "excluded_rows_detail"
+  )
+  report[, c(front_cols, setdiff(names(report), front_cols))]
 }
 
-#' Exclude ERROR-flagged files and write the two output CSVs
+#' Exclude rows missing a mandatory field and write the two output CSVs
+#'
+#' Exclusion is ROW-level, not file-level: only the specific rows flagged
+#' missing_mandatory_field are dropped from the cleaned output. A file with
+#' one bad row still contributes its other, valid rows -- the file's
+#' ERROR status in the report (see build_audit_report()) flags that it had
+#' exclusions, without discarding data that was actually fine.
 #' @param df cleaned + type-coerced data frame
+#' @param all_issues combined issues log from every cleaning step
+#'   (including check_mandatory_fields())
 #' @param report audit report from build_audit_report()
 #' @param cleaned_output_path file path to write the cleaned csv to
 #' @param audit_report_path file path to write the audit report csv to
 #' @returns invisibly, the cleaned data frame that was written
 write_clean_audit_outputs <- function(
   df,
+  all_issues,
   report,
   cleaned_output_path,
   audit_report_path
 ) {
-  error_files <- report$source_file[report$status == "ERROR"]
-  cleaned_df <- df[!df$source_file %in% error_files, ]
+  excluded_rows <- unique(all_issues$row[
+    all_issues$issue == "missing_mandatory_field"
+  ])
+  cleaned_df <- if (length(excluded_rows)) df[-excluded_rows, ] else df
 
   write.csv(
     cleaned_df,
@@ -600,9 +704,10 @@ run_clean_and_audit <- function(
   r2 <- clean_numeric_commas(r1$data, numeric_cols)
   r3 <- standardize_taxon_names(r2$data)
   r4 <- correct_known_typos(r3$data, corrections)
-  r5 <- validate_latlon(r4$data)
-  r6 <- coerce_col_types(r5$data, schema)
-  mandatory_issues <- check_mandatory_fields(r6$data, mandatory_cols)
+  r5 <- flag_backfilled_urls(r4$data)
+  r6 <- validate_latlon(r5$data)
+  r7 <- coerce_col_types(r6$data, schema)
+  mandatory_issues <- check_mandatory_fields(r7$data, mandatory_cols)
 
   all_issues <- do.call(
     rbind,
@@ -613,13 +718,15 @@ run_clean_and_audit <- function(
       r4$issues,
       r5$issues,
       r6$issues,
+      r7$issues,
       mandatory_issues
     )
   )
 
-  report <- build_audit_report(r6$data, all_issues)
+  report <- build_audit_report(r7$data, all_issues)
   cleaned <- write_clean_audit_outputs(
-    r6$data,
+    r7$data,
+    all_issues,
     report,
     cleaned_output_path,
     audit_report_path
@@ -635,7 +742,5 @@ result <- run_clean_and_audit(
   cleaned_output_path = cleaned_output_path,
   audit_report_path = audit_report_path
 )
-
 df_clean <- result$data
-issues <- result$issues
 audit <- result$report
