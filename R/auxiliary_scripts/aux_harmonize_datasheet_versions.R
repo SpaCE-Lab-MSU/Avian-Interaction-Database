@@ -98,7 +98,18 @@ has_content <- function(x) {
 # Reshape a wide data frame with multiple paired source-URL/notes columns
 # into a long format with one source_URL / text_excerpt pair per row,
 # dropping rows where both the URL and notes are empty; preserves original
-# row order via a temporary .orig_row index
+# row order via a temporary .orig_row index.
+#
+# BACKFILL: if a later source's URL column (e.g. sourceB_URL) is blank but
+# its paired notes column (e.g. notesB) has content, the URL is backfilled
+# from the FIRST url column (url_cols[1], e.g. sourceA_URL) -- this covers
+# entries where the same source was cited multiple times but the URL was
+# only typed once, in sourceA. Ported over from sources_wide_to_long() in
+# shared_functions.R, which had this logic but wasn't being used anywhere
+# in the schema-harmonization pipeline.
+# Backfilled rows are tagged source_url_backfilled = TRUE (rather than
+# silently substituting the value) so the downstream audit script can flag
+# and report on them instead of letting the substitution pass unnoticed.
 reshape_sources <- function(df, url_cols, notes_cols, id_cols = NULL) {
   stopifnot(length(url_cols) == length(notes_cols))
 
@@ -107,6 +118,7 @@ reshape_sources <- function(df, url_cols, notes_cols, id_cols = NULL) {
   }
 
   df$.orig_row <- seq_len(nrow(df))
+  primary_url <- df[[url_cols[1]]]
 
   pieces <- lapply(seq_along(url_cols), function(i) {
     u <- df[[url_cols[i]]]
@@ -114,8 +126,19 @@ reshape_sources <- function(df, url_cols, notes_cols, id_cols = NULL) {
     keep <- has_content(u) | has_content(n)
 
     out <- df[keep, id_cols, drop = FALSE]
-    out$source_URL <- ifelse(has_content(u[keep]), u[keep], NA)
-    out$text_excerpt <- ifelse(has_content(n[keep]), n[keep], NA)
+    u_keep <- u[keep]
+    n_keep <- n[keep]
+
+    backfilled <- rep(FALSE, length(u_keep))
+    if (i > 1) {
+      needs_backfill <- !has_content(u_keep) & has_content(n_keep)
+      u_keep[needs_backfill] <- primary_url[keep][needs_backfill]
+      backfilled[needs_backfill] <- TRUE
+    }
+
+    out$source_URL <- ifelse(has_content(u_keep), u_keep, NA)
+    out$text_excerpt <- ifelse(has_content(n_keep), n_keep, NA)
+    out$source_url_backfilled <- backfilled
     out$.orig_row <- df$.orig_row[keep]
     out
   })
@@ -270,3 +293,5 @@ s_7_9_8_6_4_1_5_2 <- load_schema(file_info, "schema_7") |>
     -breeding_migration
   ) |>
   clean_na()
+
+df <- s_7_9_8_6_4_1_5_2
