@@ -152,7 +152,7 @@ inter_NA_working <- inter_NA_working %>%
   mutate(species = str_replace_all(species, " ", "_"))
 
 inter_NA_list <- str_replace_all(inter_NA_working$species, "_", " ")
-NA_tree <- extractTree(species = inter_NA_list, label_type = "scientific", taxonomy_year = 2024)
+NA_tree <- extractTree(species = inter_NA_list, label_type = "scientific", taxonomy_year = 2025)
 
 plot_phylo_combined <- function(tree, #tree produced earlier, should be NA_tree
                                 data, #working dataset
@@ -749,3 +749,4 @@ create_combined_network <- function(data, #dataset (inter_NA_int)
 
   return(final_plot)
 }
+

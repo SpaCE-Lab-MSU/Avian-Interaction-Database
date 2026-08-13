@@ -290,7 +290,7 @@ plot_phylo_combined(
 
 ```{r, fig.width=14, fig.height=6, out.width="100%"}
 set.seed(44)
-create_network(inter_NA_int, "Baeolophus inornatus", curve_edges = T, show_labels = F, cats = T)
+create_network(inter_NA_int, "Baeolophus inornatus", curve_edges = T, show_labels = F, cats = T) 
 ```
 
 ```{r, message=F, fig.width=20, fig.height=15, out.width="100%"}
