@@ -17,30 +17,30 @@ Only use GitHub or Google Sheets for data entry and editing of files.
 *Do not use Microsoft Excel* for data entry or any editing of files;
 it has text encoding that differs from GitHub and Google Sheets.
 
-### The <code style="color : red">MetaNetwork repository data/L0 </code> folder contains the following files:
+### The <code style="color : red">MetaNetwork repository data/L0</code> folder contains the following files:
 
-### <code style="color : red">data/L0/metadata </code>
+### <code style="color : red">data/L0/metadata</code>
 Subfolder containing metadata for several column options, including definitions for those options.
 
-### <code style="color : red">metadata/interactions.csv </code>
+### <code style="color : red">metadata/interactions.csv</code>
 Metadata and definitions for interaction types.
 
-### <code style="color : red">metadata/resolutions.csv </code>
+### <code style="color : red">metadata/resolutions.csv</code>
 Metadata and definitions for taxonomic resolutions.
 
-### <code style="color : red">metadata/taxonomic_groups.csv </code>
+### <code style="color : red">metadata/taxonomic_groups.csv</code>
 Metadata and definitions for taxonomic groups.
 
-### <code style="color : red">metadata/interaction_confidence.csv </code>
+### <code style="color : red">metadata/interaction_confidence.csv</code>
 Metadata and definitions for interaction confidence keywords.
 
-### <code style="color : red">metadata/life_stages.csv </code>
+### <code style="color : red">metadata/life_stages.csv</code>
 Metadata and definitions for taxon life stages.
 
-### <code style="color : red">metadata/life_histories.csv </code>
+### <code style="color : red">metadata/life_histories.csv</code>
 Metadata and definitions for life history keywords.
 
-### <code style="color : red">jointproject_specieslist.csv </code>
+### <code style="color : red">jointproject_specieslist.csv</code>
 Species look-up table and assignments for data entry. Contains the updates and assignments of species entry progress. (Note: this is contained in a Google Sheet within the private project Google Drive and is periodically updated here). 
 
 ## Step 1: Get started in GitHub
@@ -54,7 +54,7 @@ The first time you use GitHub, do the following:
 - Clone this entire repository by clicking on the green "Code" button and selecting "Open with GitHub Desktop". Save the location of the repository on your computer (not inside a Google Drive or Dropbox or One Drive folder).
 
 ## Step 2: Pull the most recent version of the Database
-In GitHub Desktop, select <code style="color : red">MetaNetwork </code>. Click "Fetch origin" to pull the most recent version of the database, which will save it to your GitHub location on your computer (established in Step 1). 
+In GitHub Desktop, select <code style="color : red">MetaNetwork</code>. Click "Fetch origin" to pull the most recent version of the database, which will save it to your GitHub location on your computer (established in Step 1). 
 
 ## Step 3: Select a species to work on
 Navigate to the Google Drive folder `SpaCE_Lab_EcologicalNetworks/metanetwork_L0_entry` and open the `JointProject_SpeciesList` Google Sheet.
@@ -122,7 +122,7 @@ Enter interactions for the species you selected by designating the selected spec
 The entry sheet columns are color-coded based on the general type of information they carry. 
 - <code style="color : #31cae6">Light blue columns contain taxonomic information.</code>
 - <code style="color : #f1c955">Yellow columns contain information about the nature of the interaction, such as the type, effect and taxa life stages.</code> 
-- <code style="color : #946bf1">Purple columns contain information about the setting. </code> 
+- <code style="color : #946bf1">Purple columns contain information about the setting.</code> 
 - <code style="color : #fff2c">Gray columns contain administrative information, such as the source and recorder.</code> 
 
 The columns are described below based on the order we feel makes the most sense to complete them in.
@@ -155,7 +155,7 @@ The columns are described below based on the order we feel makes the most sense 
 ### <code style="color : #31cae6">taxa1_scientific</code>, <code style="color : #31cae6">taxa2_scientific</code>
 
 - Enter the binomial scientific names (*Genus species*) of the species involved in the interaction into these columns.
-- Recall that the taxa1 should be your focal taxon selected from <code style="color : red">jointproject_specieslist.csv </code>. Taxa2 are interacting taxa found in the text.
+- Recall that the taxa1 should be your focal taxon selected from <code style="color : red">jointproject_specieslist.csv</code>. Taxa2 are interacting taxa found in the text.
 - Usually the scientific names of species are italicized in the paper or database, and should be entered **exactly as written** into the datasheet. 
 - **IMPORTANT**: You will likely come across interactions between taxa that are NOT your focal taxa. For example, if your focal taxon was the Great Blue Heron, you might come across a source detailing the diets of all heron species in North America. In this case, you should record all interactions in order to fully check the source. You may select either taxon to be taxa1 and taxa2.
 - You may come across one of several rare cases for a species scientific name in the text:
@@ -167,7 +167,7 @@ The columns are described below based on the order we feel makes the most sense 
 
 ### <code style="color : #31cae6">taxa1_common</code>, <code style="color : #31cae6">taxa2_common</code>
 - Enter the primary English common name of the species involved in the interaction into these columns.
-- Recall that the taxa1 should be your focal taxon selected from <code style="color : red">jointproject_specieslist.csv </code>, and the common name should be copied from that sheet exactly. Taxa2 are interacting taxa found in the text.
+- Recall that the taxa1 should be your focal taxon selected from <code style="color : red">jointproject_specieslist.csv</code>, and the common name should be copied from that sheet exactly. Taxa2 are interacting taxa found in the text.
 - Usually the common names of species are capitalized in the paper or database, and should be entered **exactly as written** into the datasheet.
 - - You may come across one of several rare cases for a species common name in the text:
   - If multiple common names are used for a single taxon in the paper, select the first one mentioned or the main one used.
