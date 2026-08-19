@@ -295,6 +295,8 @@ The columns are described below based on the order we feel makes the most sense 
 **Pairwise interactions**
 - Note that for species1, its interaction with species2 will become part of species2’s pairwise interactions. NOTE: if a duplicate entry occurs, it’s ok (we will edit in R). It takes too much time to avoid duplicates by manually searching for the taxa2 entries that already exist.
 
+**Co-occurrence**
+- Co-occurrence is a weak "interaction" where two species are observed in the same location at the same time, with no specific interaction between them observed. We used to record this into the sheet, but to save time we now ignore these unless a more specific interaction is described.
 
 ## Step 7: Export/Download to CSV
 
