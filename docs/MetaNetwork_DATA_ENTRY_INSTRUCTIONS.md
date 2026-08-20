@@ -40,8 +40,8 @@ Metadata and definitions for taxon life stages.
 ### <code style="color : red">metadata/life_histories.csv</code>
 Metadata and definitions for life history keywords.
 
-### <code style="color : red">jointproject_specieslist.csv</code>
-Species look-up table and assignments for data entry. Contains the updates and assignments of species entry progress. (Note: this is contained in a Google Sheet within the private project Google Drive and is periodically updated here). 
+### <code style="color : red">jointproject_taxalist.csv</code>
+Taxa look-up table and assignments for data entry. Contains the updates and assignments of taxa entry progress. (Note: this is contained in a Google Sheet within the private project Google Drive and is periodically updated here). 
 
 ## Step 1: Get started in GitHub
 
@@ -57,7 +57,7 @@ The first time you use GitHub, do the following:
 In GitHub Desktop, select <code style="color : red">MetaNetwork</code>. Click "Fetch origin" to pull the most recent version of the database, which will save it to your GitHub location on your computer (established in Step 1). 
 
 ## Step 3: Select a species to work on
-Navigate to the Google Drive folder `SpaCE_Lab_EcologicalNetworks/metanetwork_L0_entry` and open the `JointProject_SpeciesList` Google Sheet.
+Navigate to the Google Drive folder `SpaCE_Lab_EcologicalNetworks/metanetwork_L0_entry` and open the `JointProject_TaxaList` Google Sheet.
 
 Select a taxa that has not been entered yet, fill in your name or initials with that entry in the "Recorder" column. If you are working on a specific project, ensure that the taxa is included in the target taxa for the project under the **Project_Code** column. Add the date you started this taxa in the **Start_Date** column. If you forget to add a start date, that cell will be highlighted <code style="color : #f4cccc">red</code> as a reminder. Once you claim a taxa, the row is highlighted <code style="color : #fce5cd">amber</code> so that other team members do not start processing the same taxa.
 
@@ -155,7 +155,7 @@ The columns are described below based on the order we feel makes the most sense 
 ### <code style="color : #31cae6">taxa1_scientific</code>, <code style="color : #31cae6">taxa2_scientific</code>
 
 - Enter the binomial scientific names (*Genus species*) of the species involved in the interaction into these columns.
-- Recall that the taxa1 should be your focal taxon selected from <code style="color : red">jointproject_specieslist.csv</code>. Taxa2 are interacting taxa found in the text.
+- Recall that the taxa1 should be your focal taxon selected from <code style="color : red">jointproject_taxalist.csv</code>. Taxa2 are interacting taxa found in the text.
 - Usually the scientific names of species are italicized in the paper or database, and should be entered **exactly as written** into the datasheet. 
 - **IMPORTANT**: You will likely come across interactions between taxa that are NOT your focal taxa. For example, if your focal taxon was the Great Blue Heron, you might come across a source detailing the diets of all heron species in North America. In this case, you should record all interactions in order to fully check the source. You may select either taxon to be taxa1 and taxa2.
 - You may come across one of several rare cases for a species scientific name in the text:
@@ -167,7 +167,7 @@ The columns are described below based on the order we feel makes the most sense 
 
 ### <code style="color : #31cae6">taxa1_common</code>, <code style="color : #31cae6">taxa2_common</code>
 - Enter the primary English common name of the species involved in the interaction into these columns.
-- Recall that the taxa1 should be your focal taxon selected from <code style="color : red">jointproject_specieslist.csv</code>, and the common name should be copied from that sheet exactly. Taxa2 are interacting taxa found in the text.
+- Recall that the taxa1 should be your focal taxon selected from <code style="color : red">jointproject_taxalist.csv</code>, and the common name should be copied from that sheet exactly. Taxa2 are interacting taxa found in the text.
 - Usually the common names of species are capitalized in the paper or database, and should be entered **exactly as written** into the datasheet.
 - - You may come across one of several rare cases for a species common name in the text:
   - If multiple common names are used for a single taxon in the paper, select the first one mentioned or the main one used.
@@ -177,7 +177,7 @@ The columns are described below based on the order we feel makes the most sense 
 ### <code style="color : #31cae6">taxa1_resolution</code>, <code style="color : #31cae6">taxa2_resolution</code>
 - These columns contain dropdowns with several taxonomic resolution levels (i.e. Kingdom, Family, Genus). Select the finest level resolution that taxa1 and taxa2 fall under. For the most part this will be species, but some taxa may be at broder or finer resolutions.
 - If you are unsure what resolution your taxa falls under, check with an experienced lab member.
-- If you need a refresher on what these terms mean, check the <code style="color : red">metadata/resolutions.csv</code> and <code style="color : red">resolutions_primer.md</code>
+- If you need a refresher on what these terms mean, check the <code style="color : red">metadata/resolutions.csv</code>
 
 ### <code style="color : #31cae6">taxa1_group</code>, <code style="color : #31cae6">taxa2_group</code>
 - These columns contain dropdowns with the names of colloquial "groups" of organisms. For the most part, these are at kindgom level (*plant*, *fungus*, *archaea*, *protist*, *bacteria*), but the animals are broken down further into *invertebrate*, *reptile*, *amphibian*, *fish*, *bird* and *mammal*.
@@ -185,13 +185,13 @@ The columns are described below based on the order we feel makes the most sense 
 - Be very careful that you select the correct groups here. These determine the dropdown options for future columns, so selecting the wrong group could cause later issues.
 - Each organism should fall into one of these groups, and therefore you should only select options available in the dropdown. If you enter another value, the cell will be flagged, indicating a potential mistake.
 - If you are unsure what group your taxa falls under, check with an experienced lab member.
-- If you need a refresher on what these terms mean, check the <code style="color : red">metadata/taxonomic_groups.csv</code> and  <code style="color : red">groups_primer.md</code>
+- If you need a refresher on what these terms mean, check the <code style="color : red">metadata/taxonomic_groups.csv</code>
 
 ### <code style="color : #f1c955">interaction</code>
 - This column contains a dropdown with a list of potential interaction types based on the entries in the group columns. If nothing appears in this column, or the interactions look incorrect, check your entries in <code style="color : #31cae6">taxa1_group</code> and <code style="color : #31cae6">taxa2_group</code>.
 - Enter in the appropriate interaction type, based on information from the text.
 - Entering a value not on the dropdown list will pop up with a warning in that cell, which is usually caused by a typo. It is possible you will need to enter a value not on the list. For example, you may have "competition-" over a resource not defined in the interactions, or find a new interaction that has yet to be defined in the list. In this case, you may ignore the warning. 
-- If you need a reminder about the interaction options, check <code style="color : red">metadata/interactions.csv</code> and  <code style="color : red">interactions_primer.md</code>
+- If you need a reminder about the interaction options, check <code style="color : red">metadata/interactions.csv</code>
 
 ### <code style="color : #f1c955">effect_tx1_on_tx2</code>, <code style="color : #f1c955">effect_tx2_on_tx1</code>
 - These columns contain dropdowns with options of -1, 0 and 1. These are the impacts that an interaction has on each species, with 1 indicating beneficial interactions, -1 indicating harmful interactions and 0 indicating neutral interactions.
@@ -302,7 +302,7 @@ The columns are described below based on the order we feel makes the most sense 
 
 When you've completed entering the all interactions in your Google Sheet, it needs to be incorporated into the collection of species files in GitHub.
 
-1) First, indicate that you finished the species by entering the date into the **End_Date** column of the relevant row in the `JointProject_SpeciesList` sheet. This should turn the row <code style="color : #d9ead3">green</code>, indicating it has been complete
+1) First, indicate that you finished the species by entering the date into the **End_Date** column of the relevant row in the `JointProject_TaxaList` sheet. This should turn the row <code style="color : #d9ead3">green</code>, indicating it has been complete
 
 2) Then, move your sheet from  **SpaCE_Lab_EcologicalNetworks/metanetwork_L0_entry/taxa_in_progress** to  **SpaCE_Lab_EcologicalNetworks/metanetwork_L0_entry/taxa_complete**. You can do this by using the "move" option within the sheet, or by cutting and pasting your sheet from one folder to the other.
 
